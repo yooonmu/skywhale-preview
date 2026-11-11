@@ -1,0 +1,19 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Ti
+
+SECTION go_late
+SECTION b10
+SHOT now_battle_1280x720.jpg
+SHOT now_battle_1600x720.jpg
+SHOT now_more_1280x720.jpg
+SHOT now_more_1600x720.jpg
+SHOT now_settings_1280x720.jpg
+SHOT now_settings_1600x720.jpg
+SHOT now_settings_30_1280x720.jpg
+SHOT now_credits_1280x720.jpg
+SHOT now_credits_1600x720.jpg
+SHOT now_sound_1280x720.jpg
+SHOT now_sound_1600x720.jpg
+SHOT now_sound_dev_1280x720.jpg
+SHOT now_power_1280x720.jpg
+FEEDBACK_DONE phase=late entries=13 failures=[]

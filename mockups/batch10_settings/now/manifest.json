@@ -1,0 +1,136 @@
+{
+  "entries": [
+    {
+      "file": "now_battle_1280x720.jpg",
+      "id": "now_battle",
+      "items": [
+        "batch10"
+      ],
+      "label": "전투 (시안 바탕)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "now_battle_1600x720.jpg",
+      "id": "now_battle",
+      "items": [
+        "batch10"
+      ],
+      "label": "전투 (시안 바탕)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "now_more_1280x720.jpg",
+      "id": "now_more",
+      "items": [
+        "batch10"
+      ],
+      "label": "메뉴 펼침",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "now_more_1600x720.jpg",
+      "id": "now_more",
+      "items": [
+        "batch10"
+      ],
+      "label": "메뉴 펼침",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "now_settings_1280x720.jpg",
+      "id": "now_settings",
+      "items": [
+        "batch10"
+      ],
+      "label": "설정",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "now_settings_1600x720.jpg",
+      "id": "now_settings",
+      "items": [
+        "batch10"
+      ],
+      "label": "설정",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "now_settings_30_1280x720.jpg",
+      "id": "now_settings_30",
+      "items": [
+        "batch10"
+      ],
+      "label": "설정 · 30 절전",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "now_credits_1280x720.jpg",
+      "id": "now_credits",
+      "items": [
+        "batch10"
+      ],
+      "label": "만든 사람들",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "now_credits_1600x720.jpg",
+      "id": "now_credits",
+      "items": [
+        "batch10"
+      ],
+      "label": "만든 사람들",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "now_sound_1280x720.jpg",
+      "id": "now_sound",
+      "items": [
+        "batch10"
+      ],
+      "label": "소리 설정 창",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "now_sound_1600x720.jpg",
+      "id": "now_sound",
+      "items": [
+        "batch10"
+      ],
+      "label": "소리 설정 창",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "now_sound_dev_1280x720.jpg",
+      "id": "now_sound_dev",
+      "items": [
+        "batch10"
+      ],
+      "label": "개발 · 사운드 테스트 · 진단",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "now_power_1280x720.jpg",
+      "id": "now_power",
+      "items": [
+        "batch10"
+      ],
+      "label": "방치 절전",
+      "phase": "late",
+      "resolution": "1280x720"
+    }
+  ],
+  "tool": "tools/feedback_capture.gd",
+  "updated": "2026-11-11T22:30:48"
+}
