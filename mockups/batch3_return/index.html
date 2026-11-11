@@ -288,6 +288,26 @@ body.w1600 .cut .school{background-image:url(assets/bg_s1_1600.jpg)}
 .rib .new{margin-left:10px;padding:1px 10px;border-radius:10px;font-size:16px;color:#fff;background:linear-gradient(90deg,#e0607c,#ffb07a)}
 .gC .ttl{top:30px}.gC .rib{top:156px}
 .nr .new,.nr .nrhide{display:none}
+/* ===== D3-3 새 시안 D · E · F (게임 그림 층으로 그린 캔버스 연출, 60fps) ===== */
+.scr canvas.cine{position:absolute;left:0;top:0;display:block}
+.vp .big{position:absolute;right:8px;bottom:8px;z-index:5;font:inherit;font-size:12px;font-weight:800;border:0;border-radius:12px;padding:3px 11px;background:rgba(43,31,92,.8);color:#fff;cursor:pointer}
+.cfr{display:flex;gap:5px;margin-top:6px}
+.cfr figure{margin:0;flex:1;min-width:0;font-size:11px;line-height:1.3;color:#7d7699;text-align:center}
+.cfr canvas{display:block;width:100%;border-radius:5px;background:#1c1638;margin-bottom:2px}
+.crops{margin-top:8px}
+.crops .tabs{display:flex;gap:6px;align-items:center;font-size:12px;color:#6d6590;margin-bottom:4px}
+.crops .tabs button{font:inherit;font-size:12px;font-weight:800;border:1.5px solid #c9bff0;background:#fff;color:var(--lav);border-radius:14px;padding:2px 10px;cursor:pointer}
+.crops .tabs button.on{background:var(--lav);color:#fff;border-color:var(--lav)}
+.crops canvas{display:block;width:100%;border-radius:6px;background:#1c1638}
+.pd{font-size:11px;font-weight:900;color:#fff;background:#3a2d6a;border-radius:10px;padding:1px 8px}
+.newtag{font-size:11px;font-weight:900;color:#3a2d6a;background:#ffe7a6;border-radius:10px;padding:1px 8px}
+details.old{margin-top:16px;border:1px dashed #d8d0ef;border-radius:12px;padding:8px 12px;background:#fbfaff}
+details.old summary{cursor:pointer;font-weight:800;color:#8a80a8}
+details.old .opt{cursor:default;opacity:.8}
+#cmodal{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(20,14,44,.88)}
+#cmodal[hidden]{display:none}
+#cmodal canvas{display:block;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+#cmodal p{margin:0;color:#e8e2ff;font-size:13px}
 /* 이어 보기 띠 */
 #strip .row{flex-wrap:nowrap;overflow-x:auto;align-items:center}
 #strip .vp{width:calc(var(--W) * .3);height:216px}
@@ -311,7 +331,7 @@ body.w1600 .cut .school{background-image:url(assets/bg_s1_1600.jpg)}
 <div class="row">
 <div class="now"><h3>지금</h3><img src="assets/now_ask_1280.jpg" alt="지금 복귀 확인"><div class="nn">가운데 흰 창 + 버튼 두 개. 무엇이 남고 무엇이 처음으로 돌아가는지가 한 줄 글에 묻혀 있음.</div></div>
 
-<div class="opt" data-choice="d31_a" data-choice-group="d31" data-choice-label="D3-1 A 승선권"><h3>A · 귀항 승선권 <span class="rec">추천</span><span class="pk">이걸로</span></h3>
+<div class="opt" data-choice="d31_a" data-choice-group="d31" data-choice-label="D3-1 A 승선권"><h3>A · 귀항 승선권 <span class="pk">이걸로</span></h3>
 <div class="vp"><div class="scr"><div class="bg"></div><div class="dim"></div><div class="orb hl"></div>
  <div class="tk"><div class="a"><div class="lbl">BOARDING PASS · 모항행</div><div class="h">구름고래 분교로 복귀</div>
   <div class="pr"><img src="assets/icon_pearl.png" alt=""><span>받는 진주</span><b>+1,240</b></div>
@@ -335,7 +355,7 @@ body.w1600 .cut .school{background-image:url(assets/bg_s1_1600.jpg)}
 <p class="cap">무게로 설득: 진주 쪽 접시가 늘 아래로 기울어 「남는 게 더 무겁다」. 처음 해 보는 사람에게 가장 설명적.</p>
 <p class="cost">비용: 낮음 — 판 1 + 막대 흔들림. 대신 글이 많아 매번 보는 창으로는 무거움.</p></div>
 
-<div class="opt" data-choice="d31_c" data-choice-group="d31" data-choice-label="D3-1 C 고래 그림 카드"><h3>C · 학교를 바라보는 고래 그림 카드 <span class="pk">이걸로</span></h3>
+<div class="opt" data-choice="d31_c" data-choice-group="d31" data-choice-label="D3-1 C 고래 그림 카드"><h3>C · 학교를 바라보는 고래 그림 카드 <span class="pd">PD 선택</span><span class="pk">이걸로</span></h3>
 <div class="vp"><div class="scr"><div class="bg"></div><div class="dim"></div><div class="orb hl"></div>
  <div class="pc"><div class="art"><i class="mid"></i><i class="glow"></i><i class="wh"></i><i class="fade"></i></div>
   <div class="tx"><div class="h">이제 분교로 돌아갈까?</div><p>STAGE 340까지 왔어요. 처음부터 다시 출항하지만 진주는 그대로.</p><div class="pr"><img src="assets/icon_pearl.png" alt=""> 진주 <b>+1,240</b></div></div>
@@ -352,7 +372,7 @@ body.w1600 .cut .school{background-image:url(assets/bg_s1_1600.jpg)}
 <div class="row">
 <div class="now"><h3>지금</h3><img src="assets/now_short_1280.jpg" alt="지금 복귀 불가"><div class="nn">확인 창과 같은 큰 창이 떠서 「안 된다」만 말함. 얼마나 더 가야 하는지 없음.</div></div>
 
-<div class="opt" data-choice="d32_a" data-choice-group="d32" data-choice-label="D3-2 A 버튼 위 말풍선"><h3>A · 버튼 위 말풍선 <span class="rec">추천</span><span class="pk">이걸로</span></h3>
+<div class="opt" data-choice="d32_a" data-choice-group="d32" data-choice-label="D3-2 A 버튼 위 말풍선"><h3>A · 버튼 위 말풍선 <span class="pk">이걸로</span></h3>
 <div class="vp"><div class="scr"><div class="bg"></div><div class="orb shake"></div>
  <div class="bub"><b>STAGE 4</b>부터 복귀할 수 있어요 · 지금 <b class="sv">STAGE 1</b><div class="seg"><i class="f"></i><i class="s2"></i><i class="s3"></i><i class="g"></i></div></div></div></div>
 <p class="cap">창 없이 누른 단추가 살짝 흔들리고 그 위에 뾰족 꼬리 말풍선. 네 칸 중 마지막 금 칸이 「복귀 가능」. 전투를 가리지 않음.</p>
@@ -366,7 +386,7 @@ body.w1600 .cut .school{background-image:url(assets/bg_s1_1600.jpg)}
 <p class="cap">위 가운데(알림 띠 아래)에 흰 유리 카드가 내려와 막대가 차오름. 몇 칸 남았는지 가장 또렷.</p>
 <p class="cost">비용: 중간 — 카드 1 + 막대 Tween. 화면 가운데를 잠깐 가림.</p></div>
 
-<div class="opt" data-choice="d32_c" data-choice-group="d32" data-choice-label="D3-2 C 유나 한마디"><h3>C · 유나 한마디 <span class="pk">이걸로</span></h3>
+<div class="opt" data-choice="d32_c" data-choice-group="d32" data-choice-label="D3-2 C 유나 한마디"><h3>C · 유나 한마디 <span class="pd">PD 선택</span><span class="pk">이걸로</span></h3>
 <div class="vp"><div class="scr"><div class="bg"></div><div class="orb"></div>
  <div class="yt"><i class="face"></i><div class="say"><span class="nm">유나</span>앗, 벌써? 아직 <b class="sv">STAGE 1</b>인데… <b>STAGE 4</b>까지만 가 보자!</div></div></div></div>
 <p class="cap">이미 쓰는 유나 토스트 결로 대답. 캐릭터 맛이 살고 새 부품이 거의 없음.</p>
@@ -374,18 +394,39 @@ body.w1600 .cut .school{background-image:url(assets/bg_s1_1600.jpg)}
 </div></section>
 
 <!-- ================= D3-3 ================= -->
-<section class="scn" data-scn="d33"><h2>D3-3 · 귀환 연출 띠 「모항으로 귀환」 <small>hud.gd return_banner · white_flash</small></h2>
-<div class="st">아래 네 칸 = 시작 · 가운데 · 흰 섬광 · 학교 도착 (큰 화면은 6초 반복)</div>
+<section class="scn" data-scn="d33"><h2>D3-3 · 귀환 연출 <span class="newtag">다시 그림 · D E F</span> <small>hud.gd return_banner · white_flash 자리 · 앞: D3-1 C 그림 카드 / 뒤: D3-4 C 기록 리본</small></h2>
+<div class="st">재생 속도 <button class="on" data-sp="1">1×</button><button data-sp="0.5">0.5×</button><button data-sp="0.25">0.25×</button> · 큰 화면은 반복 재생, 아래 칸 = 멈춘 장면, 그 아래 = 같은 장면 <b>2배 확대</b> · 「크게 보기」 = 실제 크기 재생</div>
 <div class="row">
-<div class="now"><h3>지금</h3><img src="assets/now_cut_f2.jpg" alt="지금 귀환 연출"><div class="nn">가로 띠에 글자, 흰 섬광 뒤 학교. 고래가 돌아서는 「항해 끝」 순간이 없음.</div></div>
+<div class="now"><h3>지금</h3><img src="assets/now_cut_f2.jpg" alt="지금 귀환 연출"><div class="nn">가로 띠에 글자, 흰 섬광 뒤 학교. 고래가 돌아서는 「항해 끝」 순간이 없음. 세 안 모두 흰 섬광 · 가로 띠 없이 게임 그림(고래 · 구름바다 층 · 섬 · 돛 조각 · 아이들)만으로 그림.</div></div>
 
-<div class="opt" data-choice="d33_a" data-choice-group="d33" data-choice-label="D3-3 A 붓 띠 제목"><h3>A · 붓 띠 제목 + 고래 뱃머리 돌림 <span class="rec">추천</span><span class="pk">이걸로</span></h3>
+<div class="opt" data-choice="d33_d" data-choice-group="d33" data-choice-label="D3-3 D 고래가 데려다줌"><h3>D · 고래가 집으로 데려다줌 <span class="rec">추천</span><span class="pk">이걸로</span></h3>
+<div class="vp"><div class="scr"><canvas class="cine" data-scene="D"></canvas></div><button class="big" type="button" data-big="D">크게 보기</button></div>
+<div class="cfr" data-scene="D"></div><div class="crops" data-scene="D"></div>
+<p class="cap">고래가 전환을 끌고 감: 전투가 앞 구름에 덮여 지나가고 → 고래가 구름 뒤에서 크게 뱃머리를 돌려 → 등 뒤로 새벽 해, 앞에서 모항 섬이 다가오며 멈춤 → 「모항 도착」 한 줄. 끝 장면이 보상 윗 그림 「새벽 구름바다」(왼쪽을 보는 고래 · 오른쪽 해)와 같은 구도라 그대로 이어짐.</p>
+<p class="cost">비용: 중간 — 새 그림 0장(기존 고래 · 구름층 · 섬 · 돛 조각 재사용), 층 6개 Tween + 빛 스프라이트. 4.5초라 하루 여러 번엔 길어 <b>화면 탭 = 건너뛰기</b>(오른쪽 아래 안내, 누른 순간 장면을 앞 구름이 덮고 0.6초 만에 분교 화면) — 위 큰 화면을 직접 눌러 보세요.</p></div>
+
+<div class="opt" data-choice="d33_e" data-choice-group="d33" data-choice-label="D3-3 E 종소리 아이들"><h3>E · 분교 종소리 · 아이들 <span class="pk">이걸로</span></h3>
+<div class="vp"><div class="scr"><canvas class="cine" data-scene="E"></canvas></div><button class="big" type="button" data-big="E">크게 보기</button></div>
+<div class="cfr" data-scene="E"></div><div class="crops" data-scene="E"></div>
+<p class="cap">아이들 눈높이: 고래 등 분교의 종이 울리면 네 아이가 폴짝 뛰며 집 쪽으로 돌아서고 유나가 「종소리다! 다들, 집에 가자~」. 카메라가 빠지면 고래가 지나온 구름 위에 무지개 물감 자국이 남음 = 「하늘을 물들이는 소녀들」.</p>
+<p class="cost">비용: 높음 — 아이 4명 뛰기 · 머리칼 늦게 따라오기(위쪽 기울임), 종 울림 고리, 무지개 자국 리본 1장 + 구름 물들임. 5초로 가장 김, 이야기 맛은 가장 진함.</p></div>
+
+<div class="opt" data-choice="d33_f" data-choice-group="d33" data-choice-label="D3-3 F 1.2초 구름 스침"><h3>F · 1.2초 구름 스침 <span class="pk">이걸로</span></h3>
+<div class="vp"><div class="scr"><canvas class="cine" data-scene="F"></canvas></div><button class="big" type="button" data-big="F">크게 보기</button></div>
+<div class="cfr" data-scene="F"></div><div class="crops" data-scene="F"></div>
+<p class="cap">하루 3~10번 복귀하는 사람용: 카메라 앞을 구름 한 덩이가 스치며 전투를 덮고 지나가면 바로 분교 화면이 밀려 들어와 자리 잡고, 위 가운데 알림 띠 「모항 도착」. 연출 전체 1.2초, 기다림 없음.</p>
+<p class="cost">비용: 가장 낮음 — 구름 판 1장(앞 · 뒤 조각) + 바람 줄기, 알림 띠는 hud_b2 그대로. 「고래가 돌아간다」 감정은 거의 없음.</p></div>
+</div>
+
+<details class="old"><summary>이전 시안 · 불채택 (A 붓 띠 제목 · B 항로 지도 접힘 · C 노을 하늘 전환) — 펼쳐 보기</summary>
+<div class="row">
+<div class="opt" data-old="d33_a"><h3>A · 붓 띠 제목 + 고래 뱃머리 돌림 <span class="pd">불채택</span></h3>
 <div class="vp"><div class="scr cut cA"><i class="sky"></i><i class="far"></i><i class="wh"></i><i class="near"></i><i class="battle"></i><div class="stroke"><i></i><i class="rim"></i></div><div class="tt ttxt"><small>VOYAGE END</small>모항으로 귀환</div><i class="flash"></i><i class="school"></i></div></div>
 <div class="fr4" data-frames></div>
 <p class="cap">전투가 걷히고 고래가 크게 뱃머리를 돌림 → 붓이 왼쪽에서 오른쪽으로 띠를 칠하며 제목. 끝이 붓결로 흐려져 잘린 단면 없음. 지금 띠·섬광 순서를 그대로 살림.</p>
 <p class="cost">비용: 낮음 — 지금 return_banner에 붓 마스크 셰이더 1개 + 고래 뒤집기 Tween.</p></div>
 
-<div class="opt" data-choice="d33_b" data-choice-group="d33" data-choice-label="D3-3 B 항로 지도 접힘"><h3>B · 항로 지도가 접힘 <span class="pk">이걸로</span></h3>
+<div class="opt" data-old="d33_b"><h3>B · 항로 지도가 접힘 <span class="pd">불채택</span></h3>
 <div class="vp"><div class="scr cut cB"><i class="sky"></i><i class="far"></i><i class="wh"></i><i class="near"></i><i class="battle"></i>
  <div class="map"><i></i><i></i><i></i></div>
  <div class="route"><svg viewBox="0 0 720 420"><path d="M640 120 C520 40 420 260 300 200 S140 300 80 282" fill="none" stroke="#6b55d8" stroke-width="5"/></svg><span class="lbl" style="left:560px;top:70px">STAGE 340</span><i class="home"></i><span class="lbl" style="left:110px;top:320px">분교</span></div>
@@ -394,12 +435,12 @@ body.w1600 .cut .school{background-image:url(assets/bg_s1_1600.jpg)}
 <p class="cap">이번 항로가 점선으로 분교까지 그려지고, 지도 양 날개가 접혀 닫힘 = 한 판 끝. 「여기까지 왔다」 기록 맛.</p>
 <p class="cost">비용: 중간 — 지도 판 3장 + 선 그리기. 새 그림 부품(종이) 필요, 1.5초 더 김.</p></div>
 
-<div class="opt" data-choice="d33_c" data-choice-group="d33" data-choice-label="D3-3 C 노을 하늘 전환"><h3>C · 노을 하늘 전환 <span class="pk">이걸로</span></h3>
+<div class="opt" data-old="d33_c"><h3>C · 노을 하늘 전환 <span class="pd">불채택</span></h3>
 <div class="vp"><div class="scr cut cC"><i class="sky"></i><i class="far"></i><i class="wh"></i><i class="near"></i><i class="battle"></i><i class="dusk"></i><i class="sun"></i><i class="wipe"></i><div class="tt ttxt"><small>VOYAGE END</small>모항으로 귀환</div><i class="flash"></i><i class="school"></i></div></div>
 <div class="fr4" data-frames></div>
 <p class="cap">하늘 전체가 노을빛으로 물들고 해가 수평선에 걸림, 제목은 왼쪽 아래에 조용히. 글보다 공기로 말하는 안. 보상 윗 그림(새벽)과 저녁→새벽으로 이어짐.</p>
 <p class="cost">비용: 중간 — 화면 전체 색 셰이더 1개(모바일 채움 비용). 띠가 없어 「귀환」 글자 존재감이 약함.</p></div>
-</div></section>
+</div></details></section>
 
 <!-- ================= D3-4 ================= -->
 <section class="scn" data-scn="d34"><h2>D3-4 · 귀환 보상 <small>main.gd return_to_school → RewardPopup</small></h2>
@@ -428,7 +469,7 @@ body.w1600 .cut .school{background-image:url(assets/bg_s1_1600.jpg)}
 <p class="cap">띠 왼쪽 유리 항아리에 진주가 차오름 = 쌓이는 영구 성장을 눈으로. 기록은 카드 1장.</p>
 <p class="cost">비용: 중간 — 항아리 셰이더(채움 높이) 1개. 카드가 날아가는 진주 칸과 항아리가 둘 다 「진주 모으는 곳」이라 겹침.</p></div>
 
-<div class="opt" data-choice="d34_c" data-choice-group="d34" data-choice-label="D3-4 C 기록 리본"><h3>C · 기록 리본 <span class="rec">추천</span><span class="pk">이걸로</span></h3>
+<div class="opt" data-choice="d34_c" data-choice-group="d34" data-choice-label="D3-4 C 기록 리본"><h3>C · 기록 리본 <span class="pd">PD 선택</span><span class="pk">이걸로</span></h3>
 <div class="vp"><div class="scr rw gC"><div class="bg s1"></div><i class="scrim"></i><i class="dawn"></i>
  <div class="da"><i class="sk"></i><i class="sn"></i><i class="fr"></i><i class="wl"></i><i class="cl"></i></div>
  <div class="ttl"><div class="big">RETURN</div><div class="pl ttxt">귀환 보상</div></div>
@@ -440,14 +481,320 @@ body.w1600 .cut .school{background-image:url(assets/bg_s1_1600.jpg)}
 <p class="cost">비용: 가장 낮음 — 리본 1 + 펼침 Tween. 「환영」 감정은 A보다 약함.</p></div>
 </div></section>
 </main>
+<div id="cmodal" hidden><canvas data-scene="D"></canvas><p>실제 크기 재생 · D는 화면을 누르면 건너뛰기 · 바깥을 누르면 닫힘</p></div>
+<script>
+/* ===== D3-3 D · E · F 연출: 게임 그림 층(하늘 · 구름바다 · 섬 · 고래 · 돛 조각 · 아이들)을 캔버스로 겹쳐 60fps 재생.
+   모든 움직임은 시간 t의 순수 함수 → 멈춘 칸 · 2배 확대가 재생 화면과 똑같은 그림. ===== */
+const CINE=(()=>{
+const H=720,AS='assets/';
+const SRC={sky:'x_sky.jpg',far:'x_far.png',near:'x_near.png',mid:'x_mid.png',whale:'x_whale.png',yuna:'x_yuna.png',karen:'x_karen.png',mio:'x_mio.png',ciel:'x_ciel.png',mast:'x_ret_mast.png',sail:'x_ret_sail.png',pen:'x_ret_pennant.png',spark:'x_sparkle4.png',ret:'side_return.png',bat1280:'bg_battle_1280.jpg',bat1600:'bg_battle_1600.jpg',s11280:'bg_s1_1280.jpg',s11600:'bg_s1_1600.jpg'};
+const I={},P={};
+const cl=(v,a=0,b=1)=>v<a?a:v>b?b:v,lr=(a,b,k)=>a+(b-a)*k,seg=(t,a,b)=>cl((t-a)/(b-a));
+const sm=k=>k*k*(3-2*k),eio=k=>k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2,eo=k=>1-Math.pow(1-k,3),eo5=k=>1-Math.pow(1-k,5),eob=k=>{const c=1.6;return 1+(c+1)*Math.pow(k-1,3)+c*Math.pow(k-1,2)};
+const hump=(t,a,b)=>Math.sin(Math.PI*seg(t,a,b));
+function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function cv(w,h){const c=document.createElement('canvas');c.width=Math.ceil(w);c.height=Math.ceil(h);return c}
+function integ(t,f){const n=Math.max(1,Math.ceil(t*60)),d=t/n;let s=0;for(let i=0;i<n;i++)s+=f((i+.5)*d)*d;return s}
+function load(){return Promise.all(Object.entries(SRC).map(([k,f])=>new Promise((ok,no)=>{const im=new Image();im.onload=()=>{I[k]=im;ok()};im.onerror=()=>no(new Error('그림을 못 읽음: '+f));im.src=AS+f;})))}
+
+/* ---------- 한 번만 굽는 조각 ---------- */
+function glowSpr(rgb){const c=cv(256,256),g=c.getContext('2d'),r=g.createRadialGradient(128,128,0,128,128,128);r.addColorStop(0,`rgba(${rgb},1)`);r.addColorStop(.2,`rgba(${rgb},.6)`);r.addColorStop(.5,`rgba(${rgb},.16)`);r.addColorStop(1,`rgba(${rgb},0)`);g.fillStyle=r;g.fillRect(0,0,256,256);return c}
+function blurred(src,px,pad=0){const c=cv(src.width+pad*2,src.height+pad*2),g=c.getContext('2d');g.filter=`blur(${px}px)`;g.drawImage(src,pad,pad);return c}
+function loopStrip(im,y0,y1){const w=im.width,h=y1-y0,c=cv(w*2,h),g=c.getContext('2d');g.drawImage(im,0,y0,w,h,0,0,w,h);g.translate(w*2,0);g.scale(-1,1);g.drawImage(im,0,y0,w,h,0,0,w,h);return c}
+function feather(c,px){const g=c.getContext('2d'),w=c.width,h=c.height;g.globalCompositeOperation='destination-in';let gr=g.createLinearGradient(0,0,w,0);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(px/w,'#000');gr.addColorStop(1-px/w,'#000');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(0,0,w,h);gr=g.createLinearGradient(0,0,0,h);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(px/h,'#000');gr.addColorStop(1-px/h,'#000');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(0,0,w,h);g.globalCompositeOperation='source-over';return c}
+function litWhale(mir){ // 해(오른쪽 위) 쪽 가장자리에 복숭아빛 테두리 + 반대쪽 라벤더 그늘
+  const im=I.whale,w=im.width,h=im.height,c=cv(w,h),g=c.getContext('2d');
+  g.save();if(mir){g.translate(w,0);g.scale(-1,1)}g.drawImage(im,0,0);g.restore();
+  g.globalCompositeOperation='source-atop';const gr=g.createLinearGradient(0,h,w,0);gr.addColorStop(0,'rgba(84,62,170,.16)');gr.addColorStop(.55,'rgba(255,220,200,0)');gr.addColorStop(1,'rgba(255,184,150,.22)');g.fillStyle=gr;g.fillRect(0,0,w,h);
+  const r=cv(w,h),rg=r.getContext('2d');rg.drawImage(c,0,0);rg.globalCompositeOperation='source-in';rg.fillStyle='rgb(255,226,194)';rg.fillRect(0,0,w,h);rg.globalCompositeOperation='destination-out';rg.drawImage(c,-11,10);
+  g.globalCompositeOperation='screen';g.globalAlpha=.9;g.filter='blur(1.4px)';g.drawImage(r,0,0);g.filter='none';g.globalAlpha=1;g.globalCompositeOperation='source-over';return c}
+function bake(){
+  let g,gr;const R=rng(7);
+  // 하늘: 원본을 좌우로 뒤집어 해가 오른쪽 위 = 귀환 보상 윗 그림과 같은 쪽. 새벽 색 입힌 판을 하나 더 구워 섞음
+  const sw=I.sky.width,sh=I.sky.height;
+  P.sky=cv(sw,sh);g=P.sky.getContext('2d');g.translate(sw,0);g.scale(-1,1);g.drawImage(I.sky,0,0);
+  P.dawn=cv(sw,sh);g=P.dawn.getContext('2d');g.drawImage(P.sky,0,0);
+  g.globalCompositeOperation='soft-light';gr=g.createLinearGradient(0,0,0,sh);gr.addColorStop(0,'#5a40c8');gr.addColorStop(.5,'#ff9c7a');gr.addColorStop(1,'#ffe0b8');g.fillStyle=gr;g.fillRect(0,0,sw,sh);
+  g.globalCompositeOperation='screen';gr=g.createRadialGradient(sw*.86,sh*.21,0,sw*.86,sh*.21,sw*.75);gr.addColorStop(0,'rgba(255,196,150,.6)');gr.addColorStop(.5,'rgba(255,170,160,.18)');gr.addColorStop(1,'rgba(255,170,160,0)');g.fillStyle=gr;g.fillRect(0,0,sw,sh);
+  P.far=loopStrip(I.far,640,941);P.near=loopStrip(I.near,612,941);
+  P.gW=glowSpr('255,204,160');P.gC=glowSpr('255,247,230');P.gL=glowSpr('190,170,255');P.gD=glowSpr('58,38,110');
+  P.gR=['255,150,186','255,196,140','255,236,150','160,236,186','150,206,255','186,160,255'].map(glowSpr);
+  // 빛줄기 부채: 해에서 왼쪽 아래로 비스듬히 (세로 기둥 아님)
+  const rc=cv(1024,512);g=rc.getContext('2d');
+  for(let i=0;i<12;i++){const a=(R()-.5)*.85,wa=.01+R()*.028,L=560+R()*460;g.save();g.translate(0,256);g.rotate(a);gr=g.createLinearGradient(0,0,L,0);gr.addColorStop(0,'rgba(255,242,220,.95)');gr.addColorStop(.3,'rgba(255,226,204,.42)');gr.addColorStop(1,'rgba(255,220,204,0)');g.fillStyle=gr;g.beginPath();g.moveTo(0,0);g.lineTo(L,-L*wa);g.lineTo(L,L*wa);g.closePath();g.fill();g.restore()}
+  P.rays=blurred(rc,7);
+  // 구름 덩이: 실제 앞 구름바다 그림에서 떼어 둥글게 흐림 (자른 단면 없음)
+  P.puffs=[[0,626,440,315],[380,652,470,289],[780,660,474,281],[150,690,560,251]].map(([x,y,w,h])=>{const pad=30,c=cv(w+pad*2,h+pad*2),g=c.getContext('2d');g.filter='blur(1.2px)';g.drawImage(I.near,x,y,w,h,pad,pad,w,h);g.filter='none';g.globalCompositeOperation='destination-in';g.save();g.translate(c.width/2,c.height*.52);g.scale(1,(h/w)*1.05);const r=g.createRadialGradient(0,0,0,0,0,w*.5);r.addColorStop(0,'#000');r.addColorStop(.45,'rgba(0,0,0,.95)');r.addColorStop(.82,'rgba(0,0,0,.25)');r.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=r;g.fillRect(-w,-w,w*2,w*2);g.restore();return c});
+  P.puffsB=P.puffs.map(p=>blurred(p,8,16));
+  // 섬: 모항(초록 마을) 2 · 전투 해역(폐허) 3. 맑은 판 + 안개 낀 판
+  const IS={hB:[8,236,404,392],hS:[386,446,262,268],rB:[1212,200,460,432],rM:[676,326,338,318],rS:[962,498,336,248]};
+  P.isl={};for(const[k,[x,y,w,h]] of Object.entries(IS)){const c=cv(w,h);c.getContext('2d').drawImage(I.mid,x,y,w,h,0,0,w,h);feather(c,18);const hz=cv(w,h),hg=hz.getContext('2d');hg.drawImage(c,0,0);hg.globalCompositeOperation='source-atop';hg.fillStyle='rgba(204,198,255,.58)';hg.fillRect(0,0,w,h);P.isl[k]=[c,hz]}
+  // 무지개 물감 자국 리본 (고래 쪽은 가늘게 시작, 멀어질수록 퍼지며 사라짐)
+  {const WW=1400,WH=170,c=cv(WW,WH);g=c.getContext('2d');g.lineCap='round';
+   ['255,150,186','255,196,140','255,236,150','160,236,186','150,206,255','186,160,255'].forEach((col,i)=>{g.strokeStyle=`rgb(${col})`;for(let x=0;x<WW;x+=5){const f=u=>WH/2+(i-2.5)*lr(2.5,12,Math.pow(u,.7))+Math.sin(u*8+i*.45)*lr(1,12,u);const u=x/WW,u2=(x+5)/WW;g.lineWidth=lr(2.5,13,Math.pow(u,.6));g.beginPath();g.moveTo(x,f(u));g.lineTo(x+5,f(u2));g.stroke()}});
+   g.globalCompositeOperation='destination-in';gr=g.createLinearGradient(0,0,WW,0);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(.04,'#000');gr.addColorStop(.45,'rgba(0,0,0,.85)');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(0,0,WW,WH);
+   P.wake=blurred(c,2.2,4);P.wakeG=blurred(c,14,4)}
+  {const c=cv(320,120);g=c.getContext('2d');P.gR.forEach((s,i)=>{g.globalAlpha=.55;g.drawImage(s,20+i*38,10+(i%2)*14,110,100)});P.stain=blurred(c,6,10)}
+  // 바람 줄기 (양 끝이 가늘어지는 렌즈 모양)
+  {const c=cv(512,10);g=c.getContext('2d');gr=g.createLinearGradient(0,0,512,0);gr.addColorStop(0,'rgba(255,255,255,0)');gr.addColorStop(.7,'rgba(255,250,240,.95)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.beginPath();g.moveTo(0,5);g.quadraticCurveTo(300,0,512,5);g.quadraticCurveTo(300,10,0,5);g.fill();P.streak=c}
+  P.whR=litWhale(false);P.whL=litWhale(true);
+  bakeVeil();
+}
+function bakeVeil(){ // 카메라 앞을 스치는 구름 한 덩이: 속은 실제 구름 결, 가장자리는 구름 덩이로 들쭉날쭉 + 비스듬
+  const VW=3000,R=rng(31),A0=700,B0=2300;let gr;
+  const t=cv(VW,H),g=t.getContext('2d');
+  gr=g.createLinearGradient(0,0,0,H);gr.addColorStop(0,'#e4d8fb');gr.addColorStop(.45,'#fbf1ee');gr.addColorStop(1,'#dccdf6');g.fillStyle=gr;g.fillRect(0,0,VW,H);
+  [[-70,300,.75],[120,320,.85],[300,330,.9],[470,330,1]].forEach(([y,h,a])=>{const tw=P.near.width*h/P.near.height;for(let x=-R()*tw;x<VW;x+=tw){g.globalAlpha=a;g.drawImage(P.near,x,y,tw,h)}});
+  g.globalAlpha=1;
+  const T=blurred(t,3);
+  const m=cv(VW,H),mg=m.getContext('2d');mg.fillStyle='#000';mg.beginPath();mg.moveTo(A0+60,0);mg.lineTo(B0-200,0);mg.lineTo(B0-40,H);mg.lineTo(A0+220,H);mg.fill();
+  const ex=(E,y)=>E+(y/H)*160;
+  for(let i=0;i<120;i++){const side=i%2,y=(i>>1)/59*H+(R()-.5)*40,p=P.puffs[i%4],s=.28+R()*.42,x=ex(side?B0-160:A0+180,y)+(side?1:-1)*(R()*280-60);mg.drawImage(p,x-p.width*s/2,y-p.height*s*.5,p.width*s,p.height*s)}
+  const o=cv(VW,H),og=o.getContext('2d');og.drawImage(T,0,0);og.globalCompositeOperation='destination-in';og.drawImage(m,0,0);
+  // 가장자리에 실제 구름 덩이를 또렷하게 얹어 부피감 (밋밋한 그라데이션 가장자리 방지)
+  og.globalCompositeOperation='source-over';
+  for(let i=0;i<44;i++){const side=i%2,y=(i>>1)/21*H+(R()-.5)*40,p=P.puffs[(i+1)%4],s=.3+R()*.35,x=ex(side?B0-120:A0+140,y)+(side?1:-1)*(R()*200-30);og.globalAlpha=.95;og.drawImage(p,x-p.width*s/2,y-p.height*s*.5,p.width*s,p.height*s)}
+  og.globalAlpha=1;og.globalCompositeOperation='source-atop';
+  gr=og.createLinearGradient(B0-420,0,B0+200,0);gr.addColorStop(0,'rgba(255,214,170,0)');gr.addColorStop(1,'rgba(255,206,160,.6)');og.fillStyle=gr;og.fillRect(0,0,VW,H);
+  gr=og.createLinearGradient(A0-160,0,A0+460,0);gr.addColorStop(0,'rgba(132,110,220,.42)');gr.addColorStop(1,'rgba(132,110,220,0)');og.fillStyle=gr;og.fillRect(0,0,VW,H);
+  P.veil=o;P.veilAB=[A0,B0];
+}
+
+/* ---------- 그리기 도구 ---------- */
+function glowE(c,s,x,y,rx,ry,a,op='lighter'){if(a<=0)return;c.globalCompositeOperation=op;c.globalAlpha=Math.min(1,a);c.drawImage(s,x-rx,y-ry,rx*2,ry*2);c.globalAlpha=1;c.globalCompositeOperation='source-over'}
+function spark(c,x,y,s,a,rot=0){if(a<=.01)return;c.save();c.globalCompositeOperation='lighter';c.globalAlpha=Math.min(1,a);c.translate(x,y);c.rotate(rot);c.drawImage(I.spark,-s/2,-s/2,s,s);c.restore()}
+function sky(c,W,o){const im=P.sky,s=Math.max(W/im.width,H/im.height)*1.14*(o.z||1),w=im.width*s,h=im.height*s,x=(W-w)/2-(o.pan||0)*.03,y=(H-h)*.42;
+  c.drawImage(P.sky,x,y,w,h);if(o.dawn>0){c.globalAlpha=Math.min(1,o.dawn);c.drawImage(P.dawn,x,y,w,h);c.globalAlpha=1}return[x+w*.859,y+h*.208]}
+function sun(c,x,y,t,k,rs=1){
+  glowE(c,P.gW,x,y,560*rs,560*rs,.42*k,'screen');
+  c.save();c.globalCompositeOperation='screen';c.globalAlpha=Math.min(1,.32*k);c.translate(x,y);c.rotate(2.45+Math.sin(t*.35)*.03);c.drawImage(P.rays,0,-330*rs,1300*rs,660*rs);c.restore();
+  glowE(c,P.gW,x,y,240,240,.35*k);glowE(c,P.gC,x,y,96,96,.55*k);glowE(c,P.gC,x,y,34,34,.8*k)}
+function strip(c,st,W,y,h,off,a=1){const s=h/st.height,tw=st.width*s;let x=-(((off%tw)+tw)%tw);c.globalAlpha=a;for(;x<W;x+=tw)c.drawImage(st,x,y,tw+1,h);c.globalAlpha=1}
+function isl(c,k,x,y,sc,clear,a=1){const[cl_,hz]=P.isl[k],w=cl_.width*sc,h=cl_.height*sc;c.globalAlpha=a;c.drawImage(hz,x-w/2,y-h/2,w,h);if(clear>0){c.globalAlpha=a*Math.min(1,clear);c.drawImage(cl_,x-w/2,y-h/2,w,h)}c.globalAlpha=1}
+function motes(c,W,t,n,seed,y0,y1,vx,spr,a,sz=1){const R=rng(seed);c.globalCompositeOperation='lighter';for(let i=0;i<n;i++){const bx=R()*(W+200),by=lr(y0,y1,R()),sp=.6+R()*.8,ph=R()*6.28,r=(2+R()*4.5)*sz,x=((bx+vx*sp*t)%(W+200)+W+200)%(W+200)-100,y=by+Math.sin(t*1.2*sp+ph)*14,tw=.5+.5*Math.sin(t*3*sp+ph);c.globalAlpha=a*(.3+.7*tw);c.drawImage(spr,x-r*3,y-r*3,r*6,r*6)}c.globalAlpha=1;c.globalCompositeOperation='source-over'}
+function streaks(c,W,pos,n,seed,y0,y1,a,len=1){if(a<=.01)return;const R=rng(seed);c.globalCompositeOperation='lighter';for(let i=0;i<n;i++){const L=(160+R()*340)*len,y=lr(y0,y1,R()),cyc=W+L*2+400,sp=.7+R()*.7,x=W+L-((((R()*cyc+pos*sp)%cyc)+cyc)%cyc);c.globalAlpha=a*(.3+R()*.7);c.drawImage(P.streak,x,y-2.5,L,5)}c.globalAlpha=1;c.globalCompositeOperation='source-over'}
+function vignette(c,W,a){if(!P['v'+W]){const v=cv(W,H),g=v.getContext('2d');g.translate(W/2,H/2);g.scale(1,H/W*1.2);const r=g.createRadialGradient(0,0,W*.3,0,0,W*.62);r.addColorStop(0,'rgba(36,22,84,0)');r.addColorStop(1,'rgba(36,22,84,.55)');g.fillStyle=r;g.fillRect(-W,-W,W*2,W*2);P['v'+W]=v}c.globalAlpha=a;c.drawImage(P['v'+W],0,0);c.globalAlpha=1}
+function kid(c,im,x,y,h,o){ // 발 기준. 머리 · 머리칼(위 46%)은 따로 기울어 몸보다 늦게 따라옴
+  const s=h/im.height,w=im.width*s,ih=im.height,sy=ih*.46;
+  glowE(c,P.gD,x,y,w*.42,h*.05,.3,'source-over');
+  c.save();c.translate(x,y-(o.hop||0));c.rotate(o.rot||0);c.scale((o.face??1)*(1+(o.sq||0)),1-(o.sq||0));
+  c.drawImage(im,0,sy,im.width,ih-sy,-w/2,-h+sy*s,w,(ih-sy)*s);
+  c.translate(0,-h+sy*s);c.transform(1,0,o.lag||0,1,0,0);c.drawImage(im,0,0,im.width,sy+3,-w/2,-sy*s,w,(sy+3)*s);c.restore()}
+function pennant(c,x,y,w,t){const im=I.pen,n=18,sw=im.width/n,h=w*im.height/im.width;for(let i=0;i<n;i++){const u=i/n,dy=Math.sin(t*8.5-u*5.5)*h*.34*u+Math.sin(t*3.1-u*2)*h*.12*u;c.drawImage(im,i*sw,0,sw+.8,im.height,x+u*w,y-h/2+dy,w/n+1.4,h)}}
+function rig(c,dir,t){ // 귀환 보상 윗 그림과 같은 돛대 · 돛 · 깃발 (순풍: 깃발은 가는 쪽으로)
+  const mh=420,mw=mh*.8;c.save();c.translate(300*dir,-112);c.scale(dir,1);
+  c.drawImage(I.mast,-mw/2,-mh,mw,mh);
+  pennant(c,6,-mh*.9,300,t);
+  const b=1+.045*Math.sin(t*2.6)+.02*Math.sin(t*5.3);c.translate(0,-mh*.5);c.scale(b,1+.012*Math.sin(t*2.6+.6));c.drawImage(I.sail,-mw/2,-mh*.5,mw,mh);
+  c.restore()}
+function whale(c,o){const dir=o.f>=0?1:-1,im=dir>0?P.whR:P.whL,s=o.w/im.width,af=Math.max(Math.abs(o.f),.03);
+  c.save();c.translate(o.x,o.y);c.rotate(o.rot||0);c.scale(af*s,s*(1+(1-af)*.06));
+  c.drawImage(im,-im.width/2,-im.height/2);
+  if(o.rig)rig(c,dir,o.t);
+  if(o.kids)o.kids.forEach(k=>kid(c,I[k.n],k.x*dir,k.y,o.kidH,k));
+  c.restore();
+  return(lx,ly)=>[o.x+lx*dir*af*s,o.y+ly*s]} // 고래 안 좌표 → 화면
+function bubble(c,x,y,txt,a,sc){if(a<=.01)return;c.save();c.globalAlpha=a;c.translate(x,y);c.scale(sc,sc);c.font='800 25px Pretendard';const tw=c.measureText(txt).width,w=tw+46,h=56,bx=-34,by=-h-30;
+  c.shadowColor='rgba(40,20,90,.35)';c.shadowBlur=14;c.shadowOffsetY=5;
+  c.fillStyle='#fff8ea';c.beginPath();c.roundRect(bx,by,w,h,18);c.fill();c.beginPath();c.moveTo(bx+22,by+h-2);c.lineTo(0,0);c.lineTo(bx+58,by+h-2);c.closePath();c.fill();c.shadowColor='transparent';
+  c.strokeStyle='rgba(214,176,98,.95)';c.lineWidth=2.4;c.beginPath();c.roundRect(bx,by,w,h,18);c.stroke();c.beginPath();c.moveTo(bx+22,by+h);c.lineTo(0,0);c.lineTo(bx+58,by+h);c.stroke();
+  c.fillStyle='#fff8ea';c.fillRect(bx+23.5,by+h-4,33,5);
+  c.fillStyle='#3a2d6a';c.textBaseline='middle';c.fillText(txt,bx+23,by+h/2+1);c.restore()}
+function title(c,x,y,a,u){if(a<=.01)return;glowE(c,P.gD,x+190,y-10,330,120,.42*a,'source-over');c.save();c.globalAlpha=a;c.translate(x,y+(1-u)*16);c.lineJoin='round';
+  c.font='800 16px Pretendard';c.letterSpacing='6px';c.fillStyle='#ffe7a6';c.shadowColor='rgba(30,16,70,.8)';c.shadowBlur=6;c.fillText('VOYAGE COMPLETE',4,-66);c.shadowColor='transparent';
+  c.letterSpacing=lr(12,1,eo(u))+'px';c.font='900 62px Pretendard';c.shadowColor='rgba(120,90,230,.65)';c.shadowBlur=22;c.lineWidth=7;c.strokeStyle='rgba(52,32,122,.92)';c.strokeText('모항 도착',0,0);c.shadowColor='transparent';
+  const g=c.createLinearGradient(0,-60,0,6);g.addColorStop(0,'#ffffff');g.addColorStop(1,'#fff0d4');c.fillStyle=g;c.fillText('모항 도착',0,0);
+  const L=lr(60,440,eo(u)),lg=c.createLinearGradient(0,0,L,0);lg.addColorStop(0,'rgba(255,231,166,0)');lg.addColorStop(.25,'rgba(255,231,166,.95)');lg.addColorStop(1,'rgba(255,231,166,0)');c.fillStyle=lg;c.beginPath();c.moveTo(0,22);c.quadraticCurveTo(L*.4,19,L,22);c.quadraticCurveTo(L*.4,25,0,22);c.fill();
+  c.letterSpacing='0px';c.font='700 19px Pretendard';c.shadowColor='rgba(30,16,70,.85)';c.shadowBlur=6;c.fillStyle='#fff8ea';c.fillText('STAGE 340까지 다녀왔어요',2,52);c.shadowColor='transparent';
+  c.restore();spark(c,x+L*.28,y+22+(1-u)*16,30,a*(.6+.4*Math.sin(u*9)),u*2)}
+function band(c,W,a,u){if(a<=.01)return;const w=640,h=58,x=W/2-w/2,y=84-(1-u)*18;c.save();c.globalAlpha=a;
+  let g=c.createLinearGradient(x,0,x+w,0);g.addColorStop(0,'rgba(43,31,92,0)');g.addColorStop(.14,'rgba(43,31,92,.92)');g.addColorStop(.86,'rgba(43,31,92,.92)');g.addColorStop(1,'rgba(43,31,92,0)');c.fillStyle=g;c.fillRect(x,y,w,h);
+  g=c.createLinearGradient(x,0,x+w,0);g.addColorStop(0,'rgba(255,231,166,0)');g.addColorStop(.5,'rgba(255,231,166,.6)');g.addColorStop(1,'rgba(255,231,166,0)');c.fillStyle=g;c.fillRect(x,y-1,w,1);c.fillRect(x,y+h,w,1);
+  c.font='900 24px Pretendard';const t1='모항 도착',t2=' · STAGE 1부터 다시 출항',w1=c.measureText(t1).width,w2=c.measureText(t2).width,tx=W/2-(w1+w2+52)/2;
+  c.drawImage(I.ret,tx,y+9,40,40);c.textBaseline='middle';c.fillStyle='#fff';c.fillText(t1,tx+52,y+h/2+1);c.fillStyle='#ffe7a6';c.fillText(t2,tx+52+w1,y+h/2+1);c.restore()}
+function veil(c,W,p,seed,drawOld,drawNew){ // 앞 구름이 오른쪽→왼쪽으로 스침. 지나간 자리(구름 속 가운데 뒤)는 새 장면
+  const k=W/1280,sw=P.veil.width*k,[A0,B0]=P.veilAB,x=lr(W+30,-sw-30,p),mid=x+(A0+B0)/2*k;
+  if(mid>0)drawOld();
+  if(mid<W){c.save();c.beginPath();c.rect(Math.max(0,mid),0,W,H);c.clip();drawNew();c.restore()}
+  if(p<=0||p>=1)return;
+  const R=rng(seed);
+  for(let i=0;i<9;i++){const pf=P.puffs[i%4],s=(.45+R()*.45)*k,ex=x+(i%2?A0:B0)*k+(R()-.5)*520*k+(p-.5)*320*k,y=R()*H;c.globalAlpha=.8;c.drawImage(pf,ex-pf.width*s/2,y-pf.height*s/2,pf.width*s,pf.height*s)}
+  c.globalAlpha=1;c.drawImage(P.veil,x,0,sw,H);
+  streaks(c,W,p*2600,9,seed+3,60,H-60,.45,.7);
+  for(let i=0;i<7;i++){const sx=x+B0*k+(R()-.2)*260*k,sy=R()*H;spark(c,sx,sy,(22+R()*34)*k,.85*Math.max(0,Math.sin(p*18+i*1.7)),R()*3)}
+  for(let i=0;i<5;i++){const pf=P.puffsB[i%4],s=(1.4+R()*1.1)*k,ex=x+lr(A0,B0,R())*k+(R()-.5)*900*k-(p-.5)*1100*k,y=R()*H;c.globalAlpha=.92;c.drawImage(pf,ex-pf.width*s/2,y-pf.height*s/2,pf.width*s,pf.height*s)}
+  c.globalAlpha=1}
+function arrive(c,W,u){ // 분교 화면에 내려앉음 (다음: D3-4 C 보상 판). 남은 새벽빛은 보상 판 dawn과 같은 쪽
+  const im=I['s1'+W],z=lr(1.05,1,eo(u));c.save();c.translate(W/2,H/2);c.scale(z,z);c.translate(-W/2,-H/2);c.drawImage(im,0,0,W,H);c.restore();
+  const g=c.createLinearGradient(W,0,W*.3,H);g.addColorStop(0,`rgba(255,196,160,${lr(.5,.16,sm(u))})`);g.addColorStop(1,'rgba(255,196,160,0)');c.globalCompositeOperation='screen';c.fillStyle=g;c.fillRect(0,0,W,H);c.globalCompositeOperation='source-over'}
+function battle(c,W,z,fx,fy,dx=0){const im=I['bat'+W];c.save();c.translate(fx,fy);c.scale(z,z);c.translate(-fx+dx,-fy);c.drawImage(im,0,0,W,H);c.restore()}
+
+/* ---------- D · 고래가 집으로 데려다줌 (5.4초 반복) ---------- */
+const VD=640;
+const velD=T=>VD*(1-2*eio(seg(T,1.05,1.95)))*(1-.9*sm(seg(T,2.9,4.1)));
+function kidsD(t){const w=sm(seg(t,3.5,3.8));return[['mio',150,-104,0],['ciel',520,-104,1],['karen',250,-38,2],['yuna',450,-38,3]].map(([n,x,y,i])=>{const hp=hump(t,3.45+i*.08,3.8+i*.08);return{n,x,y,face:1,hop:hp*34,sq:-.05*hp+.05*hump(t,3.8+i*.08,3.95+i*.08),rot:Math.sin(t*8+i*1.7)*.07*w,lag:.06*Math.sin(t*4+i)+.1*hp}})}
+function worldD(c,t,W){
+  const k=W/1280,scr=integ(t,velD),vel=velD(t)/VD,dawn=.1+.9*sm(seg(t,1.5,3.6)),zc=1+.04*sm(seg(t,3.2,5.2));
+  c.save();c.translate(W/2,H*.55);c.scale(zc,zc);c.translate(-W/2,-H*.55);
+  const[sx,sy]=sky(c,W,{pan:scr,dawn});
+  sun(c,sx,sy,t,.5+.6*dawn);
+  strip(c,P.far,W,412,340,scr*.18);
+  const ip=.42;
+  isl(c,'rB',1150*k-scr*ip,245+Math.sin(t*.7)*4,.64,.3);
+  isl(c,'rM',820*k-scr*ip,330+Math.sin(t*.8+1)*4,.46,.15,.92);
+  isl(c,'rS',1480*k-scr*ip,350+Math.sin(t*.6+2)*3,.42,.1,.85);
+  const ap=eo(seg(t,1.9,4.4)),cs=sm(seg(t,2.3,4.2));
+  isl(c,'hS',lr(-140,440*k,ap),402+Math.sin(t*.9)*3,lr(.34,.56,ap),cs*.85);
+  isl(c,'hB',lr(-260,215*k,ap),292+Math.sin(t*.75+.5)*4,lr(.5,.88,ap),cs);
+  glowE(c,P.gW,lr(-260,215*k,ap)+40,250,260,200,.28*cs,'screen');
+  strip(c,P.near,W,500,250,scr*.55,.82);
+  const turn=seg(t,1.2,1.9),f=Math.cos(Math.PI*eio(turn));
+  const wx=W*lr(.42,.57,eio(seg(t,1.4,3.4))),wy=414+Math.sin(t*1.7)*6+hump(t,1.15,2.0)*16;
+  const rot=-.035*hump(t,.85,1.35)+.016*Math.sin(t*1.7+.8)+.03*hump(t,1.2,1.9);
+  glowE(c,P.gD,wx,wy+178,380,44,.2,'source-over');
+  glowE(c,P.gW,wx+90,wy-40,560,280,.22*dawn,'screen');
+  const map=whale(c,{x:wx,y:wy,w:840,f,rot,t,rig:true,kids:kidsD(t),kidH:250});
+  // 고래 배의 무지개에서 흩어지는 색 가루 (돌아선 뒤, 지나온 쪽으로 흘러감)
+  for(let i=0;i<46;i++){const tb=1.9+i*.055,age=t-tb;if(age<0||age>1.7)continue;const R=rng(900+i),[ex,ey]=map(-560,105),x=ex+age*(170+R()*120)*k,y=ey+(R()-.5)*50+age*24+Math.sin(age*4+i)*8,a=(1-age/1.7)*.85;
+    glowE(c,P.gR[i%6],x,y,12+R()*12,12+R()*12,a);if(i%4==0)spark(c,x,y,18,a,age*3)}
+  strip(c,P.near,W,546,390,scr*1.1);
+  streaks(c,W,scr*2.3,8,5,160,560,.4*Math.abs(vel),.8);
+  // 뱃머리 돌릴 때 카메라 앞을 지나는 구름: 흐린 큰 덩이(초점 밖) + 또렷한 덩이(테두리빛)
+  const fp=seg(t,1.0,2.1);if(fp>0&&fp<1){[[P.puffsB[0],2.6,wy-70,0,.9],[P.puffs[1],1.55,wy+30,.1,1],[P.puffsB[2],2.0,wy+170,.2,.9]].forEach(([pf,s,y,lag,a])=>{const w=pf.width*s*k,h=pf.height*s*k,q=cl((fp-lag)/(1-lag));if(q<=0||q>=1)return;c.globalAlpha=a;c.drawImage(pf,lr(W+w*.1,-w*1.1,q),y-h/2,w,h)});c.globalAlpha=1}
+  {const g=c.createLinearGradient(0,0,0,H*.45);g.addColorStop(0,'rgba(58,38,140,.22)');g.addColorStop(1,'rgba(58,38,140,0)');c.globalCompositeOperation='multiply';c.fillStyle=g;c.fillRect(0,0,W,H*.45);c.globalCompositeOperation='source-over'}
+  motes(c,W,t,30,5,80,560,-scr*.02+18,P.gW,.5*dawn+.15);
+  c.restore();
+  vignette(c,W,.85);
+  const ta=sm(seg(t,3.55,3.95));title(c,72*k,600,ta,eo(seg(t,3.55,4.3)));
+}
+function skipChip(c,W,a){if(a<=.01)return;c.save();c.globalAlpha=a;c.font='800 17px Pretendard';const s='탭하면 건너뛰기  ▶▶',w=c.measureText(s).width+36,x=W-w-28,y=H-62;
+  c.fillStyle='rgba(36,22,84,.5)';c.beginPath();c.roundRect(x,y,w,36,18);c.fill();c.strokeStyle='rgba(255,231,166,.45)';c.lineWidth=1;c.stroke();c.fillStyle='#fff8ea';c.textBaseline='middle';c.fillText(s,x+18,y+19);c.restore()}
+function sceneD(c,t,W,ts){
+  if(ts!=null){ // 탭으로 건너뜀: 그 순간 장면을 앞 구름이 덮고 바로 분교 화면으로 (0.6초)
+    const tw=ts+(t-ts)*.3,p=seg(t,ts,ts+.6);
+    veil(c,W,lr(p,sm(p),.4),37,()=>{if(ts<.45)battle(c,W,1.05,W*.3,H*.55,-50);else worldD(c,tw,W)},()=>arrive(c,W,seg(t,ts+.25,ts+.9)));
+    if(t-ts<.35){const r=lr(10,70,eo(seg(t,ts,ts+.35)));glowE(c,P.gC,W-120,H-44,r,r,.8*(1-seg(t,ts,ts+.35)))}
+    return}
+  if(t<4.5)veil(c,W,lr(seg(t,.08,.85),sm(seg(t,.08,.85)),.4),11,()=>battle(c,W,1+.05*eio(seg(t,0,.8)),W*.3,H*.55,-eio(seg(t,0,.8))*50),()=>worldD(c,t,W));
+  else veil(c,W,lr(seg(t,4.5,5.2),sm(seg(t,4.5,5.2)),.4),23,()=>worldD(c,t,W),()=>arrive(c,W,seg(t,4.75,5.4)));
+  skipChip(c,W,sm(seg(t,.9,1.2))*(1-sm(seg(t,4.3,4.5))));
+}
+
+/* ---------- E · 분교 종소리 · 아이들 (5.6초 반복) ---------- */
+const KE=[['mio',170,-104,0],['ciel',520,-104,1],['karen',330,-28,2],['yuna',640,-28,3]];
+const BELL=[-335,-218];
+function kidsE(t){return KE.map(([n,x,y,i])=>{const hs=1.08+i*.09,u=seg(t,hs,hs+.42),af=t>hs+.42?t-hs-.42:-1,face=(u<.5?1:-1)*(1-.32*Math.sin(Math.PI*u)),wave=sm(seg(t,hs+.6,hs+.9))*(1-sm(seg(t,4.1,4.6)));
+  return{n,x,y,face,hop:Math.sin(Math.PI*u)*78,sq:.07*hump(t,hs-.13,hs)+.1*hump(t,hs+.42,hs+.6)+.012*Math.sin(t*3+i),rot:Math.sin(t*7.5+i*1.3)*.08*wave,lag:.18*Math.sin(Math.PI*u)+(af>0?.12*Math.exp(-5*af)*Math.sin(15*af):0)+.035*Math.sin(t*5+i)*wave}})}
+function worldE(c,t,W){
+  const k=W/1280,pull=eio(seg(t,2.4,3.75)),z=lr(1.3,1,pull),hz=lr(612,470,pull),scr=-t*420,dawn=.45+.55*sm(seg(t,.8,3.4));
+  const[sx,sy]=sky(c,W,{pan:scr,dawn,z:lr(1.1,1,pull)});
+  sun(c,sx,sy,t,.75+.45*dawn,lr(1.35,1,pull));
+  strip(c,P.far,W,hz-42*z,340*z,scr*.18);
+  isl(c,'rB',W*.9-scr*.06,lr(380,250,pull),.5*z,.05,.55);
+  const ha=eo(seg(t,2.5,4.6));
+  if(ha>0){isl(c,'hS',lr(-120,W*.27,ha),lr(470,395,pull),lr(.3,.5,ha),ha*.8);isl(c,'hB',lr(-240,W*.13,ha),lr(400,290,pull),lr(.46,.8,ha),ha)}
+  strip(c,P.near,W,hz+36*z,260*z,scr*.5,.82);
+  // 무지개 물감 자국: 고래 배 무지개에서 흘러나와 지나온 구름 위에 남음
+  const ws=lr(1700,700,pull),wx=lr(W/2+110*k,W*.52,pull),wy=lr(592,428,pull)+Math.sin(t*1.6)*lr(4,6,pull),rot=.012*Math.sin(t*1.6+.8);
+  const s=ws/1983,ex=wx+560*s,ey=wy+112*s,wl=lr(0,W*1.15,eo(seg(t,2.45,4.2))),wa=sm(seg(t,2.45,2.9));
+  if(wl>4){
+    for(let j=0;j<7;j++){const u=.12+j*.13,tp=2.45+u*1.6,a=.75*sm(seg(t,tp,tp+.7))*wa;c.globalAlpha=a*.35;const sx2=ex+wl*u,sy2=ey+wl*u*.08+Math.pow(u,1.6)*70*z+40*z,sw2=(300+u*200)*z,sh2=(110+u*60)*z;c.drawImage(P.stain,sx2-sw2/2,sy2-sh2/2,sw2,sh2);c.globalCompositeOperation='screen';c.globalAlpha=a*.7;c.drawImage(P.stain,sx2-sw2/2,sy2-sh2/2,sw2,sh2);c.globalCompositeOperation='source-over'}
+    c.globalCompositeOperation='source-over';
+    // 리본을 세로 조각으로 잘라 곡선을 따라 흐르게 (고래 쪽 위 → 멀리 구름에 내려앉음, 물결)
+    const wy2=u=>ey+wl*u*.08+Math.pow(u,1.6)*70*z+Math.sin(u*6-t*2.2)*10*u*z,n=36,sw=P.wake.width/n,hh=380*lr(.8,1,pull)*z/1.3;
+    const ribbon=(img,a,op)=>{c.globalCompositeOperation=op;c.globalAlpha=a;for(let i=0;i<n;i++){const u=i/n;c.drawImage(img,i*sw,0,sw+.6,img.height,ex+u*wl,wy2(u)-hh/2*(1+u*.8),wl/n+1.5,hh*(1+u*.8))}};
+    ribbon(P.wakeG,.8*wa,'screen');ribbon(P.wake,.45*wa,'source-over');ribbon(P.wake,.5*wa,'screen');
+    c.globalCompositeOperation='source-over';c.globalAlpha=1;
+    for(let j=0;j<14;j++){const R=rng(300+j),u=R(),x=ex+wl*u,y=wy2(u)+(R()-.5)*40*(1+u);spark(c,x,y,12+R()*16,wa*Math.max(0,Math.sin(t*4+j*2.1)),t+j)}}
+  glowE(c,P.gD,wx,wy+lr(330,150,pull),ws*.45,ws*.05,.1,'source-over');
+  glowE(c,P.gW,wx+ws*.2,wy-ws*.12,ws*.5,ws*.25,.3*dawn,'screen');
+  const map=whale(c,{x:wx,y:wy,w:ws,f:-1,rot,t,kids:kidsE(t),kidH:300});
+  // 종 울림: 고리 세 겹 + 종 빛 + 흩어지는 반짝임
+  const[bx,by]=map(BELL[0],BELL[1]),bs=s/0.857;
+  for(const t0 of[.95,1.75]){const big=t0<1?1:.6;for(let j=0;j<2;j++){const u=seg(t,t0+j*.22,t0+j*.22+1.0);if(u<=0||u>=1)continue;const rx=lr(30,240,eo(u))*bs*big,ry=rx*.58,a=(1-u)*(1-u)*big;c.save();c.globalCompositeOperation='lighter';c.shadowColor='rgba(255,200,120,.9)';c.shadowBlur=18*bs;
+      c.strokeStyle=`rgba(255,214,150,${a*.55})`;c.lineWidth=lr(16,4,u)*bs;c.beginPath();c.ellipse(bx,by,rx,ry,0,0,Math.PI*2);c.stroke();
+      c.shadowBlur=0;c.strokeStyle=`rgba(255,248,226,${a*.8})`;c.lineWidth=lr(3,1,u)*bs;c.beginPath();c.ellipse(bx,by,rx,ry,0,0,Math.PI*2);c.stroke();c.restore()}
+    glowE(c,P.gW,bx,by,90*bs,90*bs,.9*hump(t,t0-.05,t0+.6)*big);
+    for(let j=0;j<8;j++){const u=seg(t,t0,t0+.8),a=j/8*Math.PI*2+.3;spark(c,bx+Math.cos(a)*lr(10,150,eo(u))*bs*big,by+Math.sin(a)*lr(8,90,eo(u))*bs*big,22*bs,(1-u)*hump(t,t0,t0+.8)*1.2*big,a)}}
+  // 아이들 뒤 따뜻한 역광
+  glowE(c,P.gW,wx-ws*.25,wy-ws*.12,ws*.32,ws*.16,.22*(1-pull),'screen');
+  const[yx,yy]=map(KE[3][1]-30,KE[3][2]-300-10),ba=sm(seg(t,1.35,1.5))*(1-sm(seg(t,2.35,2.55)));
+  bubble(c,yx+16,yy-kidsE(t)[3].hop*s,'종소리다! 다들, 집에 가자~',ba,lr(.6,1,eob(seg(t,1.35,1.62)))*lr(1,.6,pull));
+  strip(c,P.near,W,lr(688,586,pull),lr(420,370,pull),scr*1.1);
+  {const pf=P.puffsB[1],ss=2.2*k,w=pf.width*ss,x=((W+w)-(((t*260)%(W+w*2))));c.globalAlpha=.85*(1-pull*.6);c.drawImage(pf,x,H-pf.height*ss*.42,w,pf.height*ss);c.globalAlpha=1}
+  streaks(c,W,t*900,12,9,100,620,.42);
+  motes(c,W,t,32,7,60,620,-30,P.gW,.4+.3*dawn);
+  vignette(c,W,.8);
+}
+function sceneE(c,t,W){
+  if(t<4.6)veil(c,W,lr(seg(t,.12,.85),sm(seg(t,.12,.85)),.4),13,()=>battle(c,W,1+.14*eio(seg(t,0,.85)),W*.17,H*.5),()=>worldE(c,t,W));
+  else veil(c,W,lr(seg(t,4.6,5.3),sm(seg(t,4.6,5.3)),.4),29,()=>worldE(c,t,W),()=>arrive(c,W,seg(t,4.85,5.6)));
+}
+
+/* ---------- F · 1.2초 구름 스침 (앞뒤 멈춤 포함 2.8초 반복, 연출은 0.6~1.8초) ---------- */
+function sceneF(c,t,W){
+  const u=t-.6,p=u<=0?0:lr(cl(u/.8),sm(cl(u/.8)),.35);
+  veil(c,W,p,41,()=>{const m=eio(seg(u,0,.7));battle(c,W,lr(1,1.08,m),W/2,H/2,-lr(0,W*.04,m))},
+    ()=>{const m=eo5(seg(u,.22,1.2)),z=lr(1.1,1,m),im=I['s1'+W];c.save();c.translate(W/2+lr(W*.05,0,m),H/2);c.scale(z,z);c.drawImage(im,-W/2,-H/2,W,H);c.restore();
+      const g=c.createLinearGradient(W,0,W*.3,H);g.addColorStop(0,`rgba(255,196,160,${lr(.5,.16,sm(seg(u,.4,1.2)))})`);g.addColorStop(1,'rgba(255,196,160,0)');c.globalCompositeOperation='screen';c.fillStyle=g;c.fillRect(0,0,W,H);c.globalCompositeOperation='source-over';
+      motes(c,W,t,18,21,120,520,-40,P.gC,.55*(1-sm(seg(u,.9,1.6))));});
+  band(c,W,sm(seg(u,.72,.95)),eo(seg(u,.72,1.05)));
+}
+
+/* ---------- 엔진 ---------- */
+const SC={
+  D:{len:5.4,fn:sceneD,fr:[[.42,'전투가 앞 구름에 덮임'],[.98,'바다 위 · 전투 쪽'],[1.55,'구름 뒤에서 뱃머리 돌림'],[2.75,'새벽빛 · 모항 섬 다가옴'],[4.1,'도착 · 「모항 도착」'],[5.35,'분교 화면 → D3-4 C'],[2.25,'탭 = 건너뛰기 (2초에 누름)',1.95]],
+    crops:W=>[{t:4.15,cx:W*.57-130,cy:290,l:'돛 · 깃발 물결 · 아이들 · 테두리빛'},{t:3.3,cx:W*.215*1+40,cy:300,l:'모항 섬 · 새벽빛 · 빛 알갱이'},{t:2.2,cx:W*.6,cy:430,l:'고래 배 무지개에서 흩어지는 색 가루'}]},
+  E:{len:5.6,fn:sceneE,fr:[[.4,'갑판 쪽으로 다가감'],[1.0,'분교 종이 울림'],[1.3,'폴짝 · 돌아섬'],[1.95,'손 흔들기 · 유나 한마디'],[3.6,'카메라 빠짐 · 무지개 자국'],[5.5,'분교 화면 → D3-4 C']],
+    crops:W=>[{t:1.32,cx:W/2-250,cy:400,l:'뛰며 돌아서는 아이들 · 머리칼 늦게 따라옴'},{t:1.12,cx:W/2+400,cy:380,l:'종 울림 고리 · 종 빛'},{t:4.3,cx:W*.52+340,cy:500,l:'구름 위에 남은 무지개 물감 자국'}]},
+  F:{len:2.8,fn:sceneF,fr:[[.55,'전투 (복귀 ▶ 누름)'],[.8,'0.2초 · 앞 구름 들어옴'],[1.0,'0.4초 · 구름 속'],[1.25,'0.65초 · 분교 밀려 들어옴'],[1.8,'1.2초 · 자리 잡음 · 알림 띠']],
+    crops:W=>[{t:.82,cx:W*.62,cy:380,l:'구름 가장자리 · 테두리빛 · 바람 줄기'},{t:1.9,cx:W/2,cy:150,l:'알림 띠 「모항 도착」'}]}
+};
+let W=1280,speed=1,clock=0,last=0,ready=false;
+const live=new Set();
+const io=new IntersectionObserver(es=>es.forEach(e=>{e.target._vis=e.isIntersecting}));
+function fit(cnv){const r=cnv.getBoundingClientRect(),res=cl((r.width||W*.5)/W*(devicePixelRatio||1),.2,2);cnv.width=Math.round(W*res);cnv.height=Math.round(H*res);cnv._res=res}
+function attach(cnv,big){if(!big){cnv.style.width=W+'px';cnv.style.height=H+'px'}fit(cnv);if(!live.has(cnv)){live.add(cnv);io.observe(cnv);if(cnv.dataset.scene==='D'&&!cnv._tap){cnv._tap=1;cnv.addEventListener('click',skip)}}}
+function skip(e){const cnv=e.currentTarget;if(cnv.dataset.scene!=='D'||cnv._skipAt!=null)return;const t=(clock+(cnv._off||0))%SC.D.len;if(t>4.4)return;cnv._skipAt=clock;cnv._skipT=t}
+function render(cnv,t,view,ts){const c=cnv.getContext('2d');c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,cnv.width,cnv.height);c.imageSmoothingEnabled=true;c.imageSmoothingQuality='high';
+  if(view){const z=cnv.width/view.w;c.setTransform(z,0,0,z,-view.x*z,-view.y*z)}else c.setTransform(cnv._res,0,0,cnv._res,0,0);
+  SC[cnv.dataset.scene].fn(c,t,W,ts)}
+function tick(now){const dt=Math.min(.05,(now-(last||now))/1000);last=now;clock+=dt*speed;
+  if(ready)for(const cnv of live){if(!cnv.isConnected){live.delete(cnv);io.unobserve(cnv);continue}if(!cnv._vis)continue;const len=SC[cnv.dataset.scene].len;
+    if(cnv._skipAt!=null){const l=clock-cnv._skipAt;if(l<1.6){render(cnv,cnv._skipT+l,null,cnv._skipT);continue}cnv._skipAt=null;cnv._off=len-(clock%len)}
+    render(cnv,(clock+(cnv._off||0))%len)}
+  requestAnimationFrame(tick)}
+function statics(){
+  document.querySelectorAll('.cfr[data-scene]').forEach(box=>{const sc=SC[box.dataset.scene];box.innerHTML='';sc.fr.forEach(([t,l])=>{const f=document.createElement('figure'),cnv=document.createElement('canvas');cnv.dataset.scene=box.dataset.scene;f.append(cnv,`${t.toFixed(2)}초 · ${l}`);box.appendChild(f)});
+    box.querySelectorAll('canvas').forEach((cnv,i)=>{const w=cnv.getBoundingClientRect().width*(devicePixelRatio||1)*1.5;cnv.width=Math.round(w);cnv.height=Math.round(w*H/W);render(cnv,sc.fr[i][0],{x:0,y:0,w:W},sc.fr[i][2])})});
+  document.querySelectorAll('.crops[data-scene]').forEach(box=>{const name=box.dataset.scene,list=SC[name].crops(W),cur=+(box.dataset.cur||0);
+    box.innerHTML='<div class="tabs">2배 확대:</div>';const tabs=box.firstChild,cnv=document.createElement('canvas');cnv.dataset.scene=name;
+    list.forEach((cr,i)=>{const b=document.createElement('button');b.type='button';b.textContent=cr.l;b.classList.toggle('on',i===cur);b.onclick=e=>{e.stopPropagation();box.dataset.cur=i;statics()};tabs.appendChild(b)});
+    box.appendChild(cnv);const cr=list[Math.min(cur,list.length-1)],vw=W/4,vh=180,dw=cnv.getBoundingClientRect().width*(devicePixelRatio||1);cnv.width=Math.round(dw);cnv.height=Math.round(dw*vh/vw);
+    render(cnv,cr.t,{x:cl(cr.cx-vw/2,0,W-vw),y:cl(cr.cy-vh/2,0,H-vh),w:vw});const n=document.createElement('div');n.style.cssText='font-size:11px;color:#7d7699;margin-top:2px';n.textContent=`${cr.t.toFixed(2)}초 장면의 ${Math.round(vw)}×${vh} 부분을 2배로 · 게임 그림 원본 해상도로 다시 그림`;box.appendChild(n)})}
+function setW(w){W=w;for(const cnv of live){if(cnv.closest('#cmodal'))bigSize(cnv);else attach(cnv)}if(ready)statics()}
+function bigSize(cnv){const w=Math.min(W,innerWidth*.94,(innerHeight-60)*W/H);cnv.style.width=w+'px';cnv.style.height=(w*H/W)+'px';fit(cnv)}
+function openBig(name){const m=document.getElementById('cmodal'),cnv=m.querySelector('canvas');cnv.dataset.scene=name;m.hidden=false;bigSize(cnv);cnv._off=SC[name].len-(clock%SC[name].len);cnv._skipAt=null;live.add(cnv);io.observe(cnv);
+  if(!cnv._tap){cnv._tap=1;cnv.addEventListener('click',e=>{if(cnv.dataset.scene==='D'){e.stopPropagation();skip(e)}})}}
+function init(){
+  document.querySelectorAll('canvas.cine').forEach(c=>attach(c));
+  document.querySelectorAll('[data-big]').forEach(b=>b.onclick=e=>{e.stopPropagation();openBig(b.dataset.big)});
+  document.getElementById('cmodal').onclick=()=>{const m=document.getElementById('cmodal'),cnv=m.querySelector('canvas');m.hidden=true;live.delete(cnv);io.unobserve(cnv)};
+  document.querySelectorAll('.st button[data-sp]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.st button[data-sp]').forEach(x=>x.classList.toggle('on',x===b));speed=+b.dataset.sp});
+  Promise.all([load(),document.fonts.load('900 70px Pretendard')]).then(()=>{bake();ready=true;statics()}).catch(e=>{console.error(e);throw e});
+  requestAnimationFrame(tick)}
+return{init,attach,setW,SC,render,get ready(){return ready}};
+})();
+</script>
 <script>
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 // 너비 전환
-$$('#wsel button').forEach(b=>b.onclick=()=>{$$('#wsel button').forEach(x=>x.classList.toggle('on',x===b));document.body.classList.toggle('w1600',b.dataset.w==='1600');});
+$$('#wsel button').forEach(b=>b.onclick=()=>{$$('#wsel button').forEach(x=>x.classList.toggle('on',x===b));document.body.classList.toggle('w1600',b.dataset.w==='1600');CINE.setW(+b.dataset.w);});
+CINE.init();
 // 상태 전환
 $$('section.scn[data-scn]').forEach(sec=>{
-  $$('.st button',sec).forEach(b=>b.onclick=()=>{
-    $$('.st button',sec).forEach(x=>x.classList.toggle('on',x===b));
+  $$('.st button[data-st]',sec).forEach(b=>b.onclick=()=>{
+    $$('.st button[data-st]',sec).forEach(x=>x.classList.toggle('on',x===b));
     $$('.scr',sec).forEach(s=>{s.classList.remove('q','s1','s3','rc','qd');if(b.dataset.st)s.classList.add(b.dataset.st);});
     applyState(sec);buildStrip();
   });
@@ -468,12 +815,14 @@ $$('[data-frames]').forEach(f=>{const src=f.previousElementSibling.querySelector
 const pick={};
 $$('.opt[data-choice]').forEach(o=>o.onclick=()=>{const g=o.dataset.choiceGroup;$$(`.opt[data-choice-group="${g}"]`).forEach(x=>x.classList.toggle('sel',x===o));pick[g]=o;save();buildStrip();});
 function save(){document.getElementById('pickinfo').textContent=Object.keys(pick).length+'/4 고름';}
+// PD가 고른 D3-1 C · D3-2 C · D3-4 C를 미리 골라 둠 (이어 보기 띠 앞뒤가 확정안)
+['d31_c','d32_c','d34_c'].forEach(id=>{const o=document.querySelector(`.opt[data-choice="${id}"]`);o.classList.add('sel');pick[o.dataset.choiceGroup]=o;});
 function chosen(g){return pick[g]||document.querySelector(`.opt[data-choice-group="${g}"] .rec`).closest('.opt');}
 function buildStrip(){const row=document.getElementById('stripRow');row.innerHTML='';
   [['d31','확인'],['d32','(짧은 항해일 때)'],['d33','연출'],['d34','보상']].forEach(([g,n],i)=>{const o=chosen(g);
     if(i)row.insertAdjacentHTML('beforeend','<span class="ar">→</span>');
     const fig=document.createElement('figure');const vp=document.createElement('div');vp.className='vp';vp.appendChild(o.querySelector('.vp .scr').cloneNode(true));fig.appendChild(vp);
-    fig.append(`${n} · ${o.dataset.choiceLabel}${pick[g]?'':' (추천)'}`);row.appendChild(fig);});}
+    fig.append(`${n} · ${o.dataset.choiceLabel}${pick[g]?'':' (추천)'}`);row.appendChild(fig);vp.querySelectorAll('canvas.cine').forEach(c=>CINE.attach(c));});}
 buildStrip();save();
 document.getElementById('copy').onclick=()=>{const lines=['묶음 3 복귀 루프 시안 선택 ('+(document.body.classList.contains('w1600')?'1600':'1280')+' 보고 고름)'];
   ['d31','d32','d33','d34'].forEach(g=>{const o=pick[g];lines.push(`${g.toUpperCase().replace('D3','D3-')}: ${o?o.dataset.choiceLabel+' ['+o.dataset.choice+']':'(미선택)'}`);});
