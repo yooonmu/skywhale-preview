@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>플로라 · 그림 움직임 테스트 (① 셰이더 · ② 파츠 리그)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f3effa;font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;color:#2b2140}
+header{position:sticky;top:0;z-index:5;background:rgba(243,239,250,.95);backdrop-filter:blur(6px);padding:14px 22px 10px;border-bottom:1px solid #e3dbf2}
+h1{font-size:19px;margin:0 0 6px}
+.lead{margin:0 0 10px;color:#5d5172;font-size:13px;line-height:1.55}
+.ai{display:inline-block;font-size:11px;padding:1px 8px;border-radius:10px;background:#fff3d6;color:#8a5a00;border:1px solid #f0d58f;margin-right:4px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.bar button{font:inherit;font-size:13px;padding:6px 14px;border-radius:20px;border:1px solid #cfc3ea;background:#fff;color:#4a3d6e;cursor:pointer}
+.bar button[aria-pressed=true]{background:#5b47a8;color:#fff;border-color:#5b47a8}
+.bar .sep{width:1px;height:22px;background:#d8cfee;margin:0 4px}
+button.sync{font:inherit;font-size:12px;padding:4px 10px;border-radius:12px;border:1px solid #cfc3ea;background:#fff;color:#5b47a8;cursor:pointer}
+.wrap{padding:16px 22px 40px;display:flex;flex-direction:column;gap:18px;max-width:1500px;margin:0 auto}
+.card{background:#fff;border:1px solid #e3dbf2;border-radius:14px;padding:14px}
+.card h2{font-size:15px;margin:0 0 4px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.card h2 em{font-style:normal;font-size:11px;padding:2px 8px;border-radius:10px;background:#efe9fb;color:#5b47a8}
+.card p,.card li{font-size:13px;color:#5d5172;line-height:1.55}
+.card p{margin:0 0 10px}
+.card ul{margin:4px 0 10px;padding-left:18px}
+video,.card img{width:100%;display:block;border-radius:8px;background:#2b2140}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+figure{margin:0}
+figcaption{font-size:12px;color:#7a6c94;margin-top:4px;line-height:1.45}
+figcaption b{color:#2b2140}
+figcaption a,.card a{color:#5b47a8;white-space:nowrap}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:8px;margin-right:4px;color:#fff}
+.t0{background:#665b80}.t1{background:#2b6b4c}.t2{background:#9a4f1a}
+table{border-collapse:collapse;width:100%;font-size:12.5px;margin:6px 0 10px}
+th,td{border:1px solid #e3dbf2;padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#f6f2fd;color:#4a3d6e;font-weight:600}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.note{font-size:12px;color:#7a6c94}
+.verdict{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.verdict>div{border-radius:10px;padding:10px 12px;background:#f8f6fc;border:1px solid #ebe4f7}
+.verdict h3{margin:0 0 4px;font-size:14px}
+@media (max-width:900px){.g3,.g2,.verdict{grid-template-columns:1fr}}
+</style></head><body>
+<header>
+<h1>플로라 · 그림 움직임 테스트 — 실제 게임 엔진 녹화</h1>
+<p class="lead"><span class="ai">AI 샘플 그림</span>OpenAI GPT Image 2로 만든 비교용 그림입니다(감은 눈 · 뒷머리 · 배경판 채움도 같은 도구). Godot 4.7.2 · gl_compatibility에서 실제 소환(픽업) 화면과 그림만 놓은 화면을 그대로 녹화했습니다. 게임 장면 · 스크립트는 바꾸지 않았고 테스트는 <code>scenes/test/art_motion/</code>에만 있습니다. 모든 영상은 7초 루프입니다.<br>
+<span class="tag t0">지금</span>정지 그림 · <span class="tag t1">①</span>한 장 그림 + 셰이더(칠한 마스크로 바람 · 숨, 감은 눈 판, 빛 띠, 꽃잎) · <span class="tag t2">②</span>파츠 분리 리그(Godot 내장 Skeleton2D + Polygon2D 무게, Spine 없음)</p>
+<div class="bar" role="group" aria-label="화면 폭">
+<button type="button" data-w="1280" aria-pressed="true">1280×720</button>
+<button type="button" data-w="1600" aria-pressed="false">1600×720</button>
+</div>
+</header>
+<div class="wrap">
+
+<div class="card"><h2>실제 픽업 화면 · 나란히 <em>지금(정지) · ① · ②</em></h2>
+<p>소환 탭의 플로라 픽업 화면에서 그림 칸만 새 그림으로 바꿔 찍었습니다. 페이지 효과(꽃잎 · 빛)는 게임 그대로입니다. 세 칸은 같은 7초 주기라 <button type="button" class="sync">처음부터 같이 재생</button>을 누르면 같은 순간끼리 맞춰 볼 수 있습니다. 시각을 정확히 맞춘 한 장짜리 영상: <a data-href="video/pick_side_{W}.mp4" href="video/pick_side_1280.mp4">pick_side mp4</a></p>
+<div class="g3">
+<figure><video data-v="pick_static" src="video/pick_static_1280.mp4" poster="poster/pick_static_1280.jpg" autoplay muted loop playsinline preload="auto"></video><figcaption><span class="tag t0">지금</span><b>정지</b> · 지금처럼 그림 한 장 · <a data-href="video/pick_static_{W}.mp4" href="video/pick_static_1280.mp4">mp4</a></figcaption></figure>
+<figure><video data-v="pick_flat" src="video/pick_flat_1280.mp4" poster="poster/pick_flat_1280.jpg" autoplay muted loop playsinline preload="auto"></video><figcaption><span class="tag t1">①</span><b>한 장 그림 + 셰이더</b> · 머리카락 · 땋은 머리 · 숄 · 치마 단 · 꽃가지 바람, 가슴 숨, 깜박임, 빛 띠, 앞뒤 꽃잎 · <a data-href="video/pick_flat_{W}.mp4" href="video/pick_flat_1280.mp4">mp4</a></figcaption></figure>
+<figure><video data-v="pick_rig" src="video/pick_rig_1280.mp4" poster="poster/pick_rig_1280.jpg" autoplay muted loop playsinline preload="auto"></video><figcaption><span class="tag t2">②</span><b>파츠 분리 리그</b> · 숨, 고개 기울임, 머리카락 · 땋은 머리 늦게 따라옴, 숄 · 치마, 팔 · 꽃가지, 깜박임 · <a data-href="video/pick_rig_{W}.mp4" href="video/pick_rig_1280.mp4">mp4</a></figcaption></figure>
+</div></div>
+
+<div class="card"><h2>크게 · 바꿔 보기 <em>같은 순간에서 방법만 바꿈</em></h2>
+<p>재생 중에 버튼을 누르면 같은 시각에서 다른 방법으로 넘어갑니다. 차이를 가장 잘 보는 방법입니다.</p>
+<div class="bar" style="margin-bottom:8px">
+<button type="button" data-m="static" aria-pressed="false">지금(정지)</button>
+<button type="button" data-m="flat" aria-pressed="true">① 셰이더</button>
+<button type="button" data-m="rig" aria-pressed="false">② 파츠 리그</button>
+<span class="sep"></span>
+<button type="button" data-c="pick" aria-pressed="true">픽업 화면</button>
+<button type="button" data-c="solo" aria-pressed="false">그림만</button>
+</div>
+<video id="big" src="video/pick_flat_1280.mp4" poster="poster/pick_flat_1280.jpg" autoplay muted loop playsinline preload="auto" controls></video>
+</div>
+
+<div class="card"><h2>그림만 (UI 없음) · 나란히</h2>
+<p>화면을 그림으로 덮어 놓고 UI 없이 찍었습니다. 움직임 자체를 보기 좋습니다. <button type="button" class="sync">처음부터 같이 재생</button> · 한 장짜리: <a data-href="video/solo_side_{W}.mp4" href="video/solo_side_1280.mp4">solo_side mp4</a></p>
+<div class="g3">
+<figure><video data-v="solo_static" src="video/solo_static_1280.mp4" poster="poster/solo_static_1280.jpg" autoplay muted loop playsinline preload="auto"></video><figcaption><span class="tag t0">지금</span>정지 · <a data-href="video/solo_static_{W}.mp4" href="video/solo_static_1280.mp4">mp4</a></figcaption></figure>
+<figure><video data-v="solo_flat" src="video/solo_flat_1280.mp4" poster="poster/solo_flat_1280.jpg" autoplay muted loop playsinline preload="auto"></video><figcaption><span class="tag t1">①</span>한 장 그림 + 셰이더 · <a data-href="video/solo_flat_{W}.mp4" href="video/solo_flat_1280.mp4">mp4</a></figcaption></figure>
+<figure><video data-v="solo_rig" src="video/solo_rig_1280.mp4" poster="poster/solo_rig_1280.jpg" autoplay muted loop playsinline preload="auto"></video><figcaption><span class="tag t2">②</span>파츠 분리 리그 · <a data-href="video/solo_rig_{W}.mp4" href="video/solo_rig_1280.mp4">mp4</a></figcaption></figure>
+</div></div>
+
+<div class="card"><h2>찢어지는 한계 <em>일부러 세게 · 1280</em></h2>
+<p>위 영상들은 아무것도 찢어지지 않는 세기(×1)입니다. 아래는 같은 움직임을 16초 동안 점점 키운 영상으로, 어디서부터 깨지는지 보여 줍니다(왼쪽 위에 지금 배율 표시). 정지 컷은 각 배율 순간입니다.</p>
+<div class="g2">
+<figure><video src="video/limit_flat_1280.mp4" poster="poster/limit_flat_1280_x3.jpg" autoplay muted loop playsinline preload="auto"></video><figcaption><span class="tag t1">①</span>×1 → ×6 · <a href="video/limit_flat_1280.mp4">mp4</a></figcaption></figure>
+<figure><video src="video/limit_rig_1280.mp4" poster="poster/limit_rig_1280_x4.jpg" autoplay muted loop playsinline preload="auto"></video><figcaption><span class="tag t2">②</span>×1 → ×4 · <a href="video/limit_rig_1280.mp4">mp4</a></figcaption></figure>
+</div>
+<div class="g3" style="margin-top:10px">
+<figure><img src="poster/limit_flat_1280_x1.jpg" alt="① ×1" loading="lazy"><figcaption><span class="tag t1">①</span><b>×1 (쓰는 세기)</b> · 깨진 곳 없음</figcaption></figure>
+<figure><img src="poster/limit_flat_1280_x3.jpg" alt="① ×3" loading="lazy"><figcaption><span class="tag t1">①</span><b>×3</b> · 꽃가지 자루가 덩굴 감긴 곳에서 꺾이고 내민 왼손 손가락이 물결처럼 휩니다. 딱딱한 물건이 천처럼 휘는 게 가장 먼저 보입니다.</figcaption></figure>
+<figure><img src="poster/limit_flat_1280_x6.jpg" alt="① ×6" loading="lazy"><figcaption><span class="tag t1">①</span><b>×6</b> · 자루가 조각나 끊기고 머리카락 끝이 하늘로 번집니다(뒤 배경까지 같이 끌림).</figcaption></figure>
+<figure><img src="poster/limit_rig_1280_x1.jpg" alt="② ×1" loading="lazy"><figcaption><span class="tag t2">②</span><b>×1 (쓰는 세기)</b> · 이음매 안 보임</figcaption></figure>
+<figure><img src="poster/limit_rig_1280_x2.jpg" alt="② ×2" loading="lazy"><figcaption><span class="tag t2">②</span><b>×2</b> · 그림이 찢어지지는 않지만 파츠 사이(오른쪽 어깨 · 팔 둘레)에 틈이 생기기 시작합니다.</figcaption></figure>
+<figure><img src="poster/limit_rig_1280_x4.jpg" alt="② ×4" loading="lazy"><figcaption><span class="tag t2">②</span><b>×4</b> · 오른쪽 어깨에 흰 틈, 왼팔 아래 어두운 틈이 뚜렷합니다. 파츠가 통째로 돌아서 ①처럼 녹아내리지는 않습니다.</figcaption></figure>
+</div>
+<p class="note">왼쪽 위 어두운 반투명 칸은 녹화용 이름표입니다(정수리 화관 위 어두운 부분은 그림이 아니라 이 칸).</p>
+</div>
+
+<div class="card"><h2>어떻게 만들었나</h2>
+<div class="g2">
+<figure><img src="img/flat_masks.jpg" alt="① 움직임 마스크" loading="lazy"><figcaption><span class="tag t1">①</span><b>움직임 마스크</b> (그림 절반 해상도 2장) · 빨강 머리카락 · 초록 천(숄 · 치마 단) · 파랑 꽃가지 끝 · 노랑 숨(가슴 · 어깨 · 머리, 등고선은 약해지는 정도). 셰이더가 이 무게만큼 그림 좌표를 밀어 바람과 숨을 만듭니다. 쥔 손 · 머리 뿌리는 0이라 고정.</figcaption></figure>
+<figure><img src="img/rig_parts.jpg" alt="② 파츠 나누기" loading="lazy"><figcaption><span class="tag t2">②</span><b>파츠 12개</b> · 머리 · 땋은 머리 · 뒷머리 · 몸통 · 양팔 · 양쪽 숄 · 치마 · 다리 · 지팡이 · 꽃가지. 각 파츠는 격자 메시 + 뼈 27개 무게(Polygon2D)로 붙입니다.</figcaption></figure>
+<figure><img src="img/blink_key.jpg" alt="① 깜박임 판" loading="lazy"><figcaption><span class="tag t1">①</span><b>깜박임</b> · 원본 / 반쯤 / 감음. 감은 눈은 GPT Image 2로 눈만 고치고, 눈 밖이 원본과 가장 잘 맞는 자리에 맞춘 뒤 눈 둘레만 부드럽게 오려 덮습니다.</figcaption></figure>
+<figure><img src="img/blink_cut.jpg" alt="② 깜박임 판" loading="lazy"><figcaption><span class="tag t2">②</span><b>깜박임</b> · 배경 없는 그림에서 같은 방법으로 만들어 머리 뼈에 붙였습니다.</figcaption></figure>
+<figure><img src="img/hair_inpaint.jpg" alt="② 뒷머리 채움" loading="lazy"><figcaption><span class="tag t2">②</span><b>가려진 곳 채우기</b> · 왼쪽: 다른 파츠에 가려 원본에 없는 곳(분홍). 오른쪽: AI로 채운 뒷머리. 작은 겹침은 번짐 채움으로 메웠습니다. 파츠가 움직일 때 틈으로만 보이는 부분입니다.</figcaption></figure>
+<figure><img src="img/plate.jpg" alt="② 배경판" loading="lazy"><figcaption><span class="tag t2">②</span><b>배경판</b> · 인물이 움직이면 뒤가 드러나므로 인물을 지운 배경을 따로 만들었습니다(AI 채움).</figcaption></figure>
+</div></div>
+
+<div class="card"><h2>성능 · 메모리 <em>측정: RTX 4060 Ti 데스크톱 · gl_compatibility(OpenGL 3.3) · 화면 동기 끔 · 8초 평균</em></h2>
+<p><b>그림만 무대</b> — 한 겹, 그리고 같은 그림 + 방법을 8겹 쌓아 한 겹 비용을 드러낸 값(8겹 − 1겹)/7.</p>
+<table>
+<tr><th></th><th>1280 · GPU / CPU / 프레임 (ms)</th><th>1600 · GPU / CPU / 프레임 (ms)</th><th>그리기 횟수</th><th>한 겹 늘 때 GPU / CPU (1280 · 1600)</th></tr>
+<tr><td><span class="tag t0">지금</span></td><td class="n">0.070 / 0.087 / 0.30</td><td class="n">0.068 / 0.084 / 0.26</td><td class="n">4</td><td class="n">0.017 / 0.000 · 0.023 / 0.001</td></tr>
+<tr><td><span class="tag t1">①</span></td><td class="n">0.071 / 0.105 / 0.36</td><td class="n">0.071 / 0.100 / 0.33</td><td class="n">6</td><td class="n">0.016 / 0.012 · 0.023 / 0.021</td></tr>
+<tr><td><span class="tag t2">②</span></td><td class="n">0.272 / 0.188 / 0.47</td><td class="n">0.246 / 0.231 / 0.54</td><td class="n">17–18</td><td class="n">0.213 / 0.098 · 0.218 / 0.164</td></tr>
+</table>
+<p><b>실제 픽업 화면</b> — 게임 전체가 올라간 상태(HDR 2D · 발광 · 페이지 효과 포함).</p>
+<table>
+<tr><th></th><th>1280 · 프레임 / GPU (ms) · 그리기</th><th>1600 · 프레임 / GPU (ms) · 그리기</th></tr>
+<tr><td><span class="tag t0">지금</span></td><td class="n">5.51 / 1.71 · 512</td><td class="n">5.45 / 1.57 · 501</td></tr>
+<tr><td><span class="tag t1">①</span></td><td class="n">6.35 / 2.09 · 536</td><td class="n">4.96 / 1.42 · 494</td></tr>
+<tr><td><span class="tag t2">②</span></td><td class="n">6.41 / 2.61 · 537</td><td class="n">6.22 / 2.19 · 535</td></tr>
+</table>
+<ul>
+<li><span class="tag t1">①</span>은 페이지 자체의 측정 흔들림(±0.5 ms) 안입니다(1600에서는 오히려 정지보다 낮게 나옴). 화면 한 장을 그리면서 마스크 · 깜박임 텍스처를 더 읽는 정도라, 무대에서도 정지와 GPU 차이가 없습니다.</li>
+<li><span class="tag t2">②</span>는 일관되게 더 듭니다: 무대 한 겹 GPU +0.2 ms · CPU +0.1–0.16 ms(뼈 27개 갱신), 픽업 화면 GPU +0.6–0.9 ms, 무대 그리기 +13–14회. 칠하는 넓이도 배경판 1장 + 파츠 0.69장 = 정지의 약 1.7배입니다.</li>
+<li><b>모바일 실기는 재지 않았습니다</b>(빌드는 이번 범위 밖). 상대 비용으로 보면 ①은 어느 기기에서도 정지와 거의 같고, ②는 픽업 화면에 한 명 띄우는 정도는 무리가 없어 보이지만 저사양 안드로이드에서 실기 확인이 필요합니다. 전투 화면이나 여러 명을 한꺼번에 띄우는 곳에는 ②를 권하지 않습니다.</li>
+</ul>
+<p><b>텍스처 메모리 (한 명 · 무손실 · 밉맵 포함)</b></p>
+<table>
+<tr><th></th><th>구성</th><th>메모리</th><th>내려받는 크기(PNG) · 63명</th></tr>
+<tr><td><span class="tag t0">지금</span></td><td>그림 1672×941 1장</td><td class="n">6.0 MB</td><td class="n">—</td></tr>
+<tr><td><span class="tag t1">①</span></td><td>그림 6.0 + 마스크 2장(836×471) 3.0 + 깜박임 0.16</td><td class="n">9.2 MB (+3.2)</td><td class="n">+0.24 MB/명 · +15 MB</td></tr>
+<tr><td><span class="tag t2">②</span></td><td>배경판 6.0 + 파츠 12장 12.2 + 깜박임 0.16</td><td class="n">18.3 MB (+12.3)</td><td class="n">+4.2 MB/명 · +265 MB</td></tr>
+</table>
+<p class="note">꽃잎(0.14 MB)은 모두가 함께 씁니다. ②의 +12.3 MB는 실행 중 렌더러 집계(무대 정지 23.6 → ② 35.9 MB)와 계산값이 맞습니다. 프로젝트에 켜진 VRAM 압축(ETC2/ASTC)을 그림에 쓰면 대략 ¼로 줄지만 그림 화질 확인이 필요합니다. ② 내려받는 크기는 원본 그림을 다른 화면용으로 함께 둘 때 기준이고, 뒷머리 파츠(961×918, 4.5 MB)가 가장 큽니다.</p>
+</div>
+
+<div class="card"><h2>캐릭터당 비용 <em>63명 기준 · 사람 작업 시간 추정</em></h2>
+<table>
+<tr><th></th><th>한 명</th><th>63명</th><th>무엇에 드나</th></tr>
+<tr><td><span class="tag t1">①</span></td><td class="n">약 2.5–4시간</td><td class="n">약 160–250시간<br>(한 사람 5–6주)</td><td>움직임 마스크 칠하기 1–2h · 감은 눈 판(AI 고침 + 맞춤 + 손질) 0.5–1h · 축 · 세기 맞춤과 한계 확인 0.5–1h. 셰이더 · 꽃잎 · 빛 띠는 공용이라 추가 없음. 배경 없는 컷(실루엣)이 있어야 빛 띠가 인물에만 걸립니다.</td></tr>
+<tr><td><span class="tag t2">②</span></td><td class="n">약 9–16시간</td><td class="n">약 570–1,000시간<br>(한 사람 3.5–6개월)</td><td>파츠 나누기 2–3h · 가려진 곳 채우기(뒷머리 AI 채움 + 손질, 배경판) 3–5h · 뼈 · 무게 2–4h · 움직임 맞춤 1–2h · 깜박임 0.5–1h · 1280/1600 이음매 확인 1h. 캐릭터마다 자세가 달라 파츠 칸 · 뼈 자리는 다시 잡아야 합니다(만드는 스크립트는 다시 씀).</td></tr>
+<tr><td><span class="tag t2">②'</span></td><td class="n">약 5–8시간</td><td class="n">약 320–500시간</td><td>원화가가 처음부터 파츠별 레이어(가려진 곳까지 그린 PSD)로 넘겨줄 때. 나누기 · 채우기가 거의 사라지는 대신 그림 한 장 그리는 비용이 늘어납니다.</td></tr>
+</table>
+<p class="note">이번 플로라 한 명은 위 단계를 모두 실제로 거쳤고, 시간은 같은 일을 사람이 도구로 할 때의 추정입니다. AI 이미지 비용은 한 명당 고침 몇 번(감은 눈 2 · 뒷머리 1 · 배경판 1 + 다시 뽑기) 수준입니다.</p>
+</div>
+
+<div class="card"><h2>판정</h2>
+<div class="verdict">
+<div><h3><span class="tag t1">①</span>한 장 그림 + 셰이더</h3>
+<ul>
+<li>원본 그림 픽셀을 그대로 써서 그림체 손상과 이음매가 없고, 깜박임도 자연스럽습니다. 정지보다 확실히 「살아 있는」 화면입니다.</li>
+<li>다만 움직임이 「그림이 바람에 일렁이는」 수준입니다. 고개 기울임 · 팔 움직임 같은 연기는 못 하고, 세게 하면 지팡이 · 손가락처럼 딱딱한 것부터 휩니다(×3).</li>
+<li>가장 싸고 가볍습니다. <b>63명 전체의 기본으로 권합니다.</b></li>
+</ul></div>
+<div><h3><span class="tag t2">②</span>파츠 분리 리그 (Godot 내장)</h3>
+<ul>
+<li>고개 기울임, 땋은 머리가 늦게 따라오는 움직임, 숄 · 치마 · 꽃가지가 따로 흔들려 ①보다 생동감이 분명히 큽니다. 인물과 배경이 나뉘어 깊이감도 생깁니다.</li>
+<li>×1에서는 이음매가 안 보이지만 ×2 무렵부터 어깨 · 팔 사이 틈이 보여 여유가 작고, 가려진 곳(뒷머리 · 배경판)은 AI 채움이라 손질이 필요합니다. 비용은 ①의 약 4배, 메모리는 3배입니다.</li>
+<li>Godot의 Polygon2D 무게 편집은 손으로 하기 어려워 이번에는 스크립트로 만들었습니다. <b>신화 · SS 픽업 몇 명에만</b> 쓰고, 그 이상이면 Spine이 낫습니다.</li>
+</ul></div>
+</div>
+<p style="margin-top:10px"><b>Spine · Live2D가 ②에 더해 주는 것</b></p>
+<ul>
+<li><b>Spine Professional</b>(1인 $379 한 번, 최근 12개월 매출 · 투자 $50만 이상이면 Enterprise): 무게 붓칠 편집기, 꼭짓점 단위 변형 키(머리카락 굽힘 · 천 부풂), IK, 물리 제약(4.2부터 머리카락 · 천 2차 움직임 자동 — ②는 손으로 맞춘 사인파), 애니메이션 겹치기(대기 + 깜박임 + 터치 반응). 공식 spine-godot(GDExtension)가 Godot 4.7.2 빌드를 지원합니다(GitHub 빌드 기록 기준). 값은 공식 구매 페이지 기준이니 살 때 다시 확인이 필요합니다. 파츠 나누기 · 가려진 곳 채우기 비용은 ②와 같습니다.</li>
+<li><b>Live2D Cubism</b>(편집기 PRO 인디 월 ¥2,080 · 기업 월 ¥9,620, 연매출 ¥1,000만 이상이면 SDK 출시 라이선스 별도): 변형기로 고개를 좌우 · 위아래로 돌리는 입체감, 눈 · 입 표정, 머리카락 물리 — ① · ②로는 못 하는 「얼굴이 돌아보는」 움직임(Spine도 메시 변형으로 흉내는 내지만 Live2D가 이 용도에 맞춰져 있음). 대신 파츠가 수십 개 이상으로 훨씬 잘게 나뉘어 한 명 비용이 가장 크고, Godot는 비공식 GDExtension(gd_cubism)뿐이며 안드로이드 · iOS는 실험 단계입니다.</li>
+</ul>
+</div>
+
+</div>
+<script>
+let W = "1280";
+const vids = () => document.querySelectorAll("video[data-v]");
+function setW(w) {
+  W = w;
+  vids().forEach((v) => { v.poster = `poster/${v.dataset.v}_${w}.jpg`; v.src = `video/${v.dataset.v}_${w}.mp4`; v.play().catch(() => {}); });
+  document.querySelectorAll("a[data-href]").forEach((a) => a.href = a.dataset.href.replace("{W}", w));
+  document.querySelectorAll("header .bar button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.w === w));
+  big.swap();
+}
+document.querySelectorAll("header .bar button").forEach((b) => b.onclick = () => setW(b.dataset.w));
+document.querySelectorAll("button.sync").forEach((b) => b.onclick = () => {
+  const vs = b.closest(".card").querySelectorAll("video");
+  vs.forEach((v) => { v.pause(); v.currentTime = 0; });
+  vs.forEach((v) => v.play().catch(() => {}));
+});
+const big = document.getElementById("big");
+let M = "flat", C = "pick";
+big.swap = () => {
+  const t = big.currentTime, run = !big.paused;
+  big.poster = `poster/${C}_${M}_${W}.jpg`;
+  big.src = `video/${C}_${M}_${W}.mp4`;
+  big.addEventListener("loadedmetadata", () => { big.currentTime = t; if (run) big.play().catch(() => {}); }, { once: true });
+};
+document.querySelectorAll("[data-m],[data-c]").forEach((b) => b.onclick = () => {
+  if (b.dataset.m) M = b.dataset.m; else C = b.dataset.c;
+  document.querySelectorAll("[data-m]").forEach((x) => x.setAttribute("aria-pressed", x.dataset.m === M));
+  document.querySelectorAll("[data-c]").forEach((x) => x.setAttribute("aria-pressed", x.dataset.c === C));
+  big.swap();
+});
+</script>
+</body></html>
