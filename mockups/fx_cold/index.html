@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>첫 실행 VFX 콜드 컴파일 · 신화 무대 나눠 만들기 (피드백70 fx_cold)</title>
+<style>
+:root{--lav:#6b55d8;--ink:#2b1f5c;--cream:#fff8ea;--gold:#e8c36a;--gold2:#c79a3a;--line:#e3dcf5;--soft:#6d6590;--red:#b3423f;--green:#23704a}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.6 "Pretendard","Malgun Gothic","Apple SD Gothic Neo",sans-serif;color:#2b2540;
+  background:radial-gradient(1100px 520px at 12% -12%,#ebe3ff 0,transparent 70%),radial-gradient(900px 420px at 100% -6%,#fff1d2 0,transparent 70%),#f5f2fb}
+header{position:sticky;top:0;z-index:20;display:flex;gap:14px;align-items:center;padding:10px 28px;background:rgba(255,252,246,.93);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+header h1{margin:0;font-size:19px;color:var(--ink)}
+header .tag{font-size:13px;font-weight:800;color:#fff;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:12px;padding:2px 10px}
+header nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+header nav a{font-size:13px;font-weight:800;color:var(--lav);text-decoration:none;border:1.5px solid #cfc5f3;border-radius:14px;padding:3px 11px;background:#fff}
+main{max-width:1500px;margin:0 auto;padding:22px 28px 70px}
+section{margin:0 0 26px;padding:20px 22px;border-radius:18px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 24px rgba(60,40,140,.06)}
+section>h2{margin:0 0 6px;font-size:21px;color:var(--ink);display:flex;gap:10px;align-items:baseline}
+section>h2 .no{font-size:14px;font-weight:900;color:#fff;background:var(--lav);border-radius:9px;padding:1px 9px;transform:skewX(-8deg);display:inline-block}
+.lead{margin:0 0 14px;color:var(--soft);font-size:14px}
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.chip{border-radius:14px;padding:12px 14px;background:var(--cream);border:1.5px solid #f0dfb8}
+.chip .t{font-size:13px;color:#8b6a2b;font-weight:800}
+.chip .v{font-size:21px;font-weight:900;color:var(--ink);line-height:1.3}
+.chip .v s{color:#6a6386;font-weight:700;font-size:15px;margin-right:4px}
+.chip .s{font-size:13px;color:var(--soft)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+figure{margin:0;border-radius:14px;border:1.5px solid var(--line);background:#fbfaff;padding:10px}
+figcaption{font-weight:800;color:var(--ink);margin:0 2px 6px;font-size:15px}
+figcaption small{display:block;font-weight:600;color:var(--soft);font-size:13px}
+video{width:100%;border-radius:10px;display:block;background:#1d1838}
+h3{margin:18px 0 8px;font-size:16px;color:var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--ink);background:#f7f4ff}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+tr.hot td{background:#fff4f5}
+.bad{color:var(--red);font-weight:800}.good{color:var(--green);font-weight:800}
+ul{margin:6px 0 0;padding-left:20px}li{margin:3px 0}
+code{background:#f3effc;border-radius:5px;padding:0 5px;font-size:13px}
+.verdict{border-radius:14px;padding:12px 16px;background:#effaf3;border:1.5px solid #bfe5cc}
+</style></head><body>
+<header><h1>첫 실행 VFX 콜드 컴파일</h1><span class="tag">PC 콜드 측정 · 1280×720</span>
+<nav><a href="#sum">요약</a><a href="#video">전/후 영상</a><a href="#compile">컴파일 표</a><a href="#motion">움직임 수치</a><a href="#pool">신화 무대</a><a href="#how">바꾼 것</a></nav></header>
+<main>
+
+<section id="sum"><h2><span class="no">1</span>요약</h2>
+<p class="lead">측정: RTX 4060 Ti · NVIDIA GL 3.3 (Compatibility), 매번 새 사용자 폴더(APPDATA · LOCALAPPDATA) + <code>__GL_SHADER_DISK_CACHE=0</code> + 새 <code>__GL_SHADER_DISK_CACHE_PATH</code> = 설치 직후 첫 실행. 도구 <code>tools/cold_start_probe.gd</code> (<code>COLD_PARTICLES=1</code>: 입자 처리 재질마다 첫 그리기 시간). 전 · 후 각 2회.</p>
+<div class="chips">
+ <div class="chip"><div class="t">입자 처리 셰이더 콜드 컴파일 합계 (32개 재질)</div><div class="v"><s>14.7~15.5초</s> 0.31~0.32초</div><div class="s">드라이버 컴파일 14번 → 1번 (모든 입자 설정이 같은 셰이더)</div></div>
+ <div class="chip"><div class="t">가장 긴 한 장</div><div class="v"><s>3.1~3.5초</s> 0.33초</div><div class="s">난류 재질 4개(깃털 · 음표 · 불티 · 재)가 각각 3.1~3.5초 → 「응답 없음」 위험 제거</div></div>
+ <div class="chip"><div class="t">신화 무대 만들기 (시작 로딩)</div><div class="v"><s>92.8ms 한 프레임</s> 프레임당 ≤10.7ms</div><div class="s">무대 12개를 3~4프레임에 나눔 · 그 구간 프레임 간격 16.7~18.9ms</div></div>
+ <div class="chip"><div class="t">모양</div><div class="v">거의 같음</div><div class="s">난류 없는 25개 = 픽셀 동일 · 난류 7개 = 퍼짐 반경 −4%~+7% (자연 편차 안)</div></div>
+</div></section>
+
+<section id="video"><h2><span class="no">2</span>전/후 영상 (1280×720, 같은 입자 seed)</h2>
+<p class="lead">왼쪽 = 예전 재질(ParticleProcessMaterial + 난류), 오른쪽 = 지금 저장소(공용 처리 셰이더 + 해시 흔들림). 같은 씬 · 같은 속성 색 · 같은 고정 seed, 60fps로 시뮬레이션해 30fps로 저장. 배경은 양쪽 같은 하늘(비교용으로 왼쪽 절반을 두 번).</p>
+<h3>난류를 쓰던 연출 (움직임이 바뀔 수 있는 곳)</h3>
+<div class="grid">
+ <figure><figcaption>음표 터짐 · motif_white<small>float_up — 흰 속성 표식</small></figcaption><video src="clips/motif_white.mp4" poster="clips/motif_white.jpg" controls loop muted playsinline></video></figure>
+ <figure><figcaption>흰 착탄 · impact_white<small>feather + float_up</small></figcaption><video src="clips/impact_white.mp4" poster="clips/impact_white.jpg" controls loop muted playsinline></video></figure>
+ <figure><figcaption>꽃잎 · motif_green<small>flutter</small></figcaption><video src="clips/motif_green.mp4" poster="clips/motif_green.jpg" controls loop muted playsinline></video></figure>
+ <figure><figcaption>초록 착탄 · impact_green<small>flutter + embers</small></figcaption><video src="clips/impact_green.mp4" poster="clips/impact_green.jpg" controls loop muted playsinline></video></figure>
+ <figure><figcaption>불꽃 표식 · motif_red<small>flames + embers</small></figcaption><video src="clips/motif_red.mp4" poster="clips/motif_red.jpg" controls loop muted playsinline></video></figure>
+ <figure><figcaption>큰 불티 · embers ×4 (궁극기 배경 크기)<small>embers</small></figcaption><video src="clips/embers_big.mp4" poster="clips/embers_big.jpg" controls loop muted playsinline></video></figure>
+ <figure><figcaption>재 · ashfall<small>ashfall</small></figcaption><video src="clips/ashfall.mp4" poster="clips/ashfall.jpg" controls loop muted playsinline></video></figure>
+ <figure><figcaption>세계수 · world_tree<small>leaves</small></figcaption><video src="clips/world_tree.mp4" poster="clips/world_tree.jpg" controls loop muted playsinline></video></figure>
+ <figure><figcaption>흰 휩쓸기 · sweep_white<small>spray_light</small></figcaption><video src="clips/sweep_white.mp4" poster="clips/sweep_white.jpg" controls loop muted playsinline></video></figure>
+</div>
+<h3>난류가 없던 연출 (같은 식으로 옮겼는지 확인)</h3>
+<p class="lead">입자만 따로 그려 비교하면 25개 재질 모두 왼쪽 · 오른쪽 픽셀 차 평균 ≤ 0.00005 (JPG 잡음 수준, 색종이는 가운데 선을 넘는 입자 탓 0.0008). 아래 모듈 영상의 작은 차이는 씬의 무작위 회전 등 입자 밖 요소다.</p>
+<div class="grid">
+ <figure><figcaption>불꽃 줄기 · sparks<small>sparks + glints (진행 방향 정렬) — 픽셀 차 0.0</small></figcaption><video src="clips/sparks.mp4" poster="clips/sparks.jpg" controls loop muted playsinline></video></figure>
+ <figure><figcaption>사탕 터짐 · candy_pop<small>sprinkle(고리) · confetti(색조) · glints · candy</small></figcaption><video src="clips/candy_pop.mp4" poster="clips/candy_pop.jpg" controls loop muted playsinline></video></figure>
+ <figure><figcaption>SS 마법진 · magic_circle_ss<small>rise · rise_narrow · prism 등 7개</small></figcaption><video src="clips/magic_circle_ss.mp4" poster="clips/magic_circle_ss.jpg" controls loop muted playsinline></video></figure>
+ <figure><figcaption>폭발 · explosion<small>sparks · glints · debris · embers</small></figcaption><video src="clips/explosion.mp4" poster="clips/explosion.jpg" controls loop muted playsinline></video></figure>
+ <figure><figcaption>물 착탄 · impact_blue<small>bubbles_out · splash</small></figcaption><video src="clips/impact_blue.mp4" poster="clips/impact_blue.jpg" controls loop muted playsinline></video></figure>
+</div></section>
+
+<section id="compile"><h2><span class="no">3</span>재질별 콜드 첫 그리기 (ms, 2회)</h2>
+<p class="lead">값 = 재질을 붙인 뒤 4프레임 중 가장 긴 그리기(수직 동기 16.7ms 포함). 16.6~16.8 = 컴파일 없음(앞 재질과 같은 셰이더). 맨 처음 그린 재질에는 입자 그리기용 공통 캔버스 변형 컴파일도 들어 있다(전: ashfall, 후: ashfall).</p>
+<table>
+<tr><th>재질</th><th>쓰는 곳</th><th>예전 셰이더 종류</th><th class="n">전 1</th><th class="n">전 2</th><th class="n">후 1</th><th class="n">후 2</th></tr>
+<tr class="hot"><td>feather</td><td>흰 착탄</td><td>난류 · 점</td><td class="n bad">3118.9</td><td class="n bad">3510.9</td><td class="n">16.6</td><td class="n">16.6</td></tr>
+<tr class="hot"><td>embers</td><td>불티 · 빨강/주황/초록 착탄 · 궁극기 배경</td><td>난류 · 구</td><td class="n bad">3212.8</td><td class="n bad">3359.9</td><td class="n">16.6</td><td class="n">16.6</td></tr>
+<tr class="hot"><td>ashfall</td><td>재</td><td>난류 · 상자</td><td class="n bad">3191.3</td><td class="n bad">3306.8</td><td class="n">329.0</td><td class="n">334.4</td></tr>
+<tr class="hot"><td>float_up</td><td>음표 · 흰 착탄</td><td>난류 · 크기 곡선</td><td class="n bad">3134.8</td><td class="n bad">3303.0</td><td class="n">16.6</td><td class="n">16.6</td></tr>
+<tr><td>flutter · leaves · spray_light</td><td>꽃잎 · 세계수 · 휩쓸기</td><td>위 난류 셰이더와 같은 종류</td><td class="n">16.8</td><td class="n">16.6</td><td class="n">16.6</td><td class="n">16.6</td></tr>
+<tr><td>inflow</td><td>기 모으기</td><td>고리 · 정렬 · 곡선</td><td class="n">243.3</td><td class="n">247.6</td><td class="n">16.6</td><td class="n">16.6</td></tr>
+<tr><td>flames</td><td>불꽃</td><td>구 · 곡선</td><td class="n">246.7</td><td class="n">235.3</td><td class="n">16.6</td><td class="n">16.6</td></tr>
+<tr><td>orbit</td><td>SS 위성 별</td><td>고리 · 궤도 · 색조</td><td class="n">234.9</td><td class="n">237.8</td><td class="n">16.6</td><td class="n">16.6</td></tr>
+<tr><td>sprinkle</td><td>사탕 가루</td><td>고리 · 색조</td><td class="n">234.7</td><td class="n">236.1</td><td class="n">16.6</td><td class="n">16.6</td></tr>
+<tr><td>rise</td><td>마법진 빛 알갱이</td><td>상자 · 곡선</td><td class="n">221.5</td><td class="n">241.8</td><td class="n">16.6</td><td class="n">16.6</td></tr>
+<tr><td>spray_water</td><td>물 휩쓸기</td><td>상자 · 정렬</td><td class="n">235.3</td><td class="n">225.5</td><td class="n">16.6</td><td class="n">16.6</td></tr>
+<tr><td>bubbles_out</td><td>물방울</td><td>점 · 곡선</td><td class="n">244.5</td><td class="n">212.0</td><td class="n">16.6</td><td class="n">16.6</td></tr>
+<tr><td>sparks</td><td>불꽃 줄기</td><td>점 · 정렬 · 곡선</td><td class="n">220.6</td><td class="n">226.2</td><td class="n">16.6</td><td class="n">16.6</td></tr>
+<tr><td>splash</td><td>물보라</td><td>점 · 정렬</td><td class="n">217.3</td><td class="n">218.5</td><td class="n">16.6</td><td class="n">16.6</td></tr>
+<tr><td>candy</td><td>사탕 조각</td><td>점 · 회전</td><td class="n">214.5</td><td class="n">214.4</td><td class="n">16.6</td><td class="n">16.6</td></tr>
+<tr><td>나머지 15개</td><td>trail · glints · prism · mist · nebula …</td><td>위와 같은 종류</td><td class="n">16.6~16.8</td><td class="n">16.6</td><td class="n">16.6~16.7</td><td class="n">16.6~16.7</td></tr>
+<tr><th colspan="3">합계 (32번 첫 그리기)</th><th class="n">15,272</th><th class="n">16,075</th><th class="n good">844</th><th class="n good">850</th></tr>
+<tr><th colspan="3">컴파일만 (16.7ms 뺀 합)</th><th class="n">14,738</th><th class="n">15,542</th><th class="n good">312</th><th class="n good">318</th></tr>
+</table>
+<p class="lead" style="margin-top:10px">전 2회는 지금 저장소에서 <code>vfx/particles/*.tres</code>만 예전 파일로 바꿔 읽은 실행(파일은 그대로, 프로세스 안 캐시 교체)이다.</p>
+</section>
+
+<section id="motion"><h2><span class="no">4</span>움직임 수치 — 큰 터짐 300개의 퍼짐 반경</h2>
+<p class="lead">재질마다 300개를 한 번에 터뜨려 0.2초마다 효과 픽셀 질량의 RMS 반경(px)을 잰 평균 (같은 seed · 같은 시각). 예전 난류는 TIME에 따라 노이즈가 바뀌어 같은 재질도 실행 시각만 달라지면 ±10% 흔들린다(음표 20.1~25.8).</p>
+<table>
+<tr><th>재질</th><th class="n">전 (난류)</th><th class="n">후 (해시 흔들림)</th><th class="n">차</th><th>판정</th></tr>
+<tr><td>feather</td><td class="n">20.2</td><td class="n">19.5</td><td class="n">−3.8%</td><td>같음 (가운데에서 일렁이며 머무는 덩어리)</td></tr>
+<tr><td>float_up</td><td class="n">20.1</td><td class="n">21.5</td><td class="n">+7.2%</td><td>같음 (자연 편차 ±10% 안)</td></tr>
+<tr><td>embers</td><td class="n">34.6</td><td class="n">34.2</td><td class="n">−1.2%</td><td>같음</td></tr>
+<tr><td>ashfall</td><td class="n">125.4</td><td class="n">124.0</td><td class="n">−1.1%</td><td>같음</td></tr>
+<tr><td>flutter</td><td class="n">30.9</td><td class="n">30.2</td><td class="n">−2.3%</td><td>같음</td></tr>
+<tr><td>leaves</td><td class="n">47.7</td><td class="n">47.5</td><td class="n">−0.5%</td><td>같음</td></tr>
+<tr><td>spray_light</td><td class="n">44.7</td><td class="n">44.5</td><td class="n">−0.3%</td><td>같음</td></tr>
+</table>
+<div class="verdict" style="margin-top:12px"><b>모양 판정 (솔직하게):</b> 난류 없던 25개 재질은 같은 식 · 같은 난수 순서라 그림이 같다. 난류 7개는 입자 하나하나의 길은 다르지만(난류 노이즈 대신 해시 방향이라 당연) 덩어리 크기 · 일렁임 · 가라앉는 속도는 같은 수준이고, 전/후 영상을 나란히 봐도 어느 쪽이 예전인지 가리기 어렵다. 다만 예전 난류는 이 설정(노이즈 칸 0.5~0.8px)에서 사실상 「매 프레임 무작위로 방향을 꺾는 흔들림」이라, 주석의 의도(깃털이 「좌우로 흔들리며 천천히 내려앉는다」)와 달리 터진 자리에 작게 뭉쳐 일렁인다. 이번 작업은 그 모습을 그대로 지켰다. 의도대로 넓게 하늘하늘 퍼지게 바꾸는 것은 모양 변경이라 PD 결정이 필요하다.</div>
+</section>
+
+<section id="pool"><h2><span class="no">5</span>신화 무대 · SS 층 묶음 — 프레임에 나눠 만들기</h2>
+<p class="lead">시작 로딩(타이틀 게이지) 중 <code>FxTier.prewarm</code>. 전: 신화 무대 12개(연출 6 × 2)와 SS 층 · 입자 묶음을 한 프레임에 만들었다. 후: 무대 · 층 · 입자를 하나씩 만들고 시작 프레임 예산(10ms, <code>main.startup_slice</code>)이 차면 다음 프레임으로. 다 만든 뒤 ShaderWarm이 그 노드들의 재질을 훑는 순서는 그대로.</p>
+<table>
+<tr><th>항목</th><th class="n">전</th><th class="n">후</th></tr>
+<tr><td>신화 무대 12개를 만든 프레임</td><td class="n bad">1프레임 92.8ms (새 노드 132개)</td><td class="n good">3~4프레임, 프레임당 만들기 5.8 / 10.7 / 10.2ms</td></tr>
+<tr><td>무대 하나 가장 무거운 것 (윤슬 궁극기)</td><td class="n">—</td><td class="n">6.4~8.1ms</td></tr>
+<tr><td>SS 층 27 · 입자 150여 개 (FxSS)</td><td class="n bad">한 번에 26.5ms</td><td class="n good">나눠 만듦 → 이후 예열 0.2ms</td></tr>
+<tr><td>이 구간 프레임 간격</td><td class="n">92.8ms</td><td class="n good">14.5~18.9ms</td></tr>
+<tr><td>나눠 만드는 중에 먼저 시전되면</td><td class="n">—</td><td class="n">모자란 무대 · 층만 그 자리에서 채움 (예전과 같은 동작)</td></tr>
+</table>
+</section>
+
+<section id="how"><h2><span class="no">6</span>바꾼 것 · 남은 것</h2>
+<ul>
+<li><code>vfx/shaders/vfx_particle_process.gdshader</code> (새 파일): 모든 입자 설정이 함께 쓰는 처리 셰이더. ParticleProcessMaterial(2D)이 만들던 식을 같은 난수 순서로 옮기고, 방출 모양(점 · 구 · 상자 · 고리) · 진행 방향 정렬 · 흔들림을 uniform으로 고른다. 난류는 칸 네 모서리의 해시 방향을 부드럽게 섞은 방향으로 바꾸고, 속도를 끄는 식(크기 유지 · 방향만 당김)은 그대로.</li>
+<li><code>vfx/particles/*.tres</code> 32개: ShaderMaterial(위 셰이더)로 변환. 씬 파일은 그대로(같은 경로).</li>
+<li><code>tools/vfx_build.gd</code>: 입자 설정은 계속 ParticleProcessMaterial 속성으로 적고 <code>process_shader()</code>가 셰이더 재질로 옮겨 저장. 셰이더가 모르는 기능을 켜면 오류로 알린다.</li>
+<li><code>scripts/fx_mythic.gd</code> · <code>scripts/fx_ss.gd</code> · <code>scripts/fx_tier.gd</code> · <code>scripts/main.gd</code>(한 줄: <code>await FxTier.prewarm(self)</code>): 무대 · 층 묶음을 프레임에 나눠 만들기.</li>
+<li>남은 긴 프레임(덮개 아래, fb-startup 몫): ShaderWarm의 기본 <code>ParticleProcessMaterial.new()</code>(입자 그리기 방식 예열용)가 콜드에서 280~320ms를 따로 컴파일한다 — 이 공용 셰이더 재질로 바꾸면 그 컴파일이 없어진다. <code>TURBULENCE_RANK</code> 분기는 이제 해당 재질이 없다.</li>
+</ul>
+</section>
+</main></body></html>
