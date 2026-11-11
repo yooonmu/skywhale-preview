@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 시안 · 「머리 쓰다듬기」 — 플로라 아이 정보창</title>
+<style>
+@font-face{font-family:"PDB";src:url(assets/Pretendard-Bold.otf) format("opentype");font-weight:100 900;font-display:swap}
+:root{--navy:#2e2350;--lav:#8b74e8;--gold:#d9a52b;--gl:#ffe7a6;--cream:#fff8ec;--el:#3fcf86;--eld:#127a49;--ell:#dcf9ea;--W:1280;--px:18px;--k:1;
+--ff:"PDB","Pretendard","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+:root[data-w="1600"]{--W:1600;--px:178px}
+*{box-sizing:border-box;word-break:keep-all}
+html,body{margin:0}
+body{background:#f3f0fa;color:var(--navy);font-family:var(--ff);line-height:1.45}
+button{font:inherit;color:inherit}
+
+/* ================= 문서 ================= */
+.page{max-width:1660px;margin:0 auto;padding:18px 16px 64px}
+.page>h1{font-size:22px;margin:0 0 4px}
+.lead{margin:0 0 10px;font-size:14px;color:#5a5180;font-weight:500;max-width:1240px}
+.ai{display:inline-block;font-size:12px;padding:2px 10px;border-radius:10px;background:#ffe9f2;color:#b0306a;border:1px solid #f5bfd6;margin-right:6px;vertical-align:1px}
+.bar{position:sticky;top:0;z-index:50;display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 12px;padding:8px 0;font-size:13px;background:rgba(243,240,250,.95);backdrop-filter:blur(6px)}
+.bar button{min-height:40px;padding:0 16px;border-radius:20px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.bar .play{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,#8ff0c0,#2fbf78);color:#fff;border-color:#27a968;text-shadow:0 1px 2px rgba(0,80,40,.4);box-shadow:0 3px 8px rgba(20,90,50,.25)}
+.bar .play i{width:0;height:0;border-left:10px solid #fff;border-top:6px solid transparent;border-bottom:6px solid transparent}
+.bar .play[aria-pressed=true]{background:linear-gradient(180deg,#5fd79c,#1f9a63)}
+.bar .sep{width:1px;height:24px;background:#d9cff0;margin:0 2px}
+.bar a{color:#5b47a8;text-decoration:none;padding:6px 8px}
+.vpw{position:relative;width:100%}
+.vp{position:relative;width:calc(var(--W) * 1px * var(--k));height:calc(720px * var(--k));overflow:hidden;border-radius:10px;box-shadow:0 12px 30px rgba(30,16,70,.28);background:#1d1838}
+.steps{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:8px;margin:12px 0 22px;max-width:calc(var(--W) * 1px * var(--k))}
+.st{position:relative;display:flex;flex-direction:column;gap:2px;padding:9px 12px 10px 42px;border-radius:14px;border:0;text-align:left;background:#fff;box-shadow:inset 0 0 0 1px #e2dbf5;cursor:pointer;font-size:13px;color:#4c4374;line-height:1.35}
+.st b{font-size:14px;color:var(--navy)}
+.st em{position:absolute;left:10px;top:10px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:13px;background:#efe9fb;color:#5b47a8}
+.st.on{box-shadow:inset 0 0 0 2px var(--el),0 0 0 3px rgba(63,207,134,.18)}
+.st.on em{background:linear-gradient(#8ff0c0,#2fbf78);color:#fff}
+.st.done em{background:#dcf9ea;color:#127a49}
+.cnt{display:flex;flex-direction:column;justify-content:center;align-items:center;min-width:96px;padding:6px 12px;border-radius:14px;background:var(--navy);color:#fff;font-size:12px}
+.cnt b{font-size:24px;line-height:1.1}
+.card{background:#fff;border:1px solid #e2dbf5;border-radius:14px;padding:16px;margin:0 0 20px}
+.card h2{font-size:19px;margin:0 0 6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.card h2 em{font-style:normal;font-size:12px;padding:2px 10px;border-radius:10px;background:#efe9fb;color:#5b47a8}
+.card ul{margin:0 0 6px;padding-left:18px;font-size:13.5px;color:#4c4374;font-weight:500}
+.card li{margin:3px 0}
+.card li.no{color:#a2401c}
+.stills{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+figure{margin:0}
+figcaption{font-size:13px;color:#4c4374;margin-top:5px;font-weight:600;line-height:1.35}
+figcaption small{display:block;font-weight:500;color:#6a6290}
+.stills img{display:block;width:100%;border-radius:8px;box-shadow:0 0 0 1px #e2dbf5}
+.who{display:grid;grid-template-columns:1fr 1.45fr;gap:16px}
+.pc{display:flex;gap:14px;align-items:flex-start}
+.pc .tx{flex:1;min-width:0}
+.pc h3{margin:0 0 4px;font-size:17px;display:flex;align-items:center;gap:8px}
+.pc h3 .tg{font-size:12px;padding:1px 9px;border-radius:9px;color:#fff}
+.pc p{margin:4px 0;font-size:13.5px;color:#4c4374;font-weight:500}
+.pc .ln{display:inline-block;margin:2px 0;padding:3px 10px;border-radius:10px;background:#fff8ec;box-shadow:inset 0 0 0 1px rgba(217,165,43,.5);color:var(--navy);font-size:13.5px}
+.snap{position:relative;flex:none;width:300px;height:246px;border-radius:12px;overflow:hidden;background:#2a1f5c center/cover no-repeat;box-shadow:0 0 0 1.5px #fff,0 0 0 2.5px rgba(217,165,43,.55),0 6px 14px rgba(30,16,70,.22)}
+.snap.k{background-image:url(assets/karen_head.jpg)}
+.snap.n{background-image:url(assets/nox_head.jpg)}
+.snap .lbl{position:absolute;left:8px;top:8px;z-index:3;padding:2px 9px;border-radius:9px;background:rgba(20,16,50,.72);color:#fff;font-size:12px}
+.snap .hd{position:absolute;width:52px;height:57px;z-index:2;filter:drop-shadow(0 3px 4px rgba(46,35,80,.35)) drop-shadow(0 0 6px rgba(255,255,255,.55))}
+.snap .bl{position:absolute;width:46px;height:22px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,110,140,.55),rgba(255,120,150,.22) 60%,transparent);mix-blend-mode:multiply;z-index:1}
+.snap .sw{position:absolute;z-index:2;pointer-events:none}
+.sbub{position:absolute;z-index:3}
+.sbub svg{position:absolute;left:-40px;top:-40px;overflow:visible;filter:drop-shadow(0 4px 5px rgba(26,15,64,.28))}
+.sbub span{position:relative;display:flex;align-items:center;justify-content:center;height:100%;font-size:15px;color:var(--navy);white-space:nowrap}
+.nx{display:flex;gap:10px}
+.nx .snap{width:250px;height:205px}
+.cost{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0 10px}
+.cost th,.cost td{padding:7px 10px;border-bottom:1px solid #eee8f8;text-align:left;vertical-align:top}
+.cost th{font-size:12.5px;color:#6a6290;font-weight:600;background:#faf8ff}
+.cost td b{color:#5b3fc0}
+.cost tr.tot td{background:#f3fff8;color:var(--navy)}
+.cost tr.tot td b{color:#127a49}
+.vid{display:grid;grid-template-columns:1.6fr 1fr;gap:16px;align-items:start}
+.vid video{width:100%;border-radius:10px;background:#000;box-shadow:0 0 0 1px #e2dbf5}
+.notes{columns:2;column-gap:28px}
+@media (max-width:980px){.stills{grid-template-columns:1fr 1fr}.who,.vid{grid-template-columns:1fr}.notes{columns:1}.steps{grid-template-columns:1fr 1fr}.pc{flex-direction:column}.nx{flex-direction:column}}
+body.solo{background:#000}
+body.solo .page>*:not(.vpw){display:none}
+body.solo .page{padding:0;max-width:none}
+body.solo .vp{border-radius:0;box-shadow:none}
+
+/* ================= 화면: 실제 게임 캡처(정보창 · 새 그림) 위에 그림 칸만 시안 ================= */
+.scr{position:absolute;left:0;top:0;width:calc(var(--W) * 1px);height:720px;transform-origin:0 0;transform:scale(var(--k));overflow:hidden;font-family:var(--ff);-webkit-user-select:none;user-select:none}
+.scr>.base{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
+.pan{position:absolute;left:var(--px);top:41px;width:646px;height:638px;overflow:hidden;border-radius:14px 0 0 14px;touch-action:none;contain:layout paint}
+.pan>*{position:absolute}
+#head{left:40px;top:0;width:420px;height:400px}
+#glow,#fx{left:0;top:0;width:646px;height:638px;pointer-events:none}
+#glow{mix-blend-mode:screen}
+.hit{left:0;top:0;width:646px;height:638px;pointer-events:none;overflow:visible}
+.hit .rim{fill:none;stroke:rgba(255,251,238,.95);stroke-width:1.6;stroke-dasharray:7 7;filter:drop-shadow(0 0 3px rgba(139,116,232,.9))}
+.hit .chev{fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 2px rgba(46,35,80,.6))}
+.hint{left:388px;top:16px;display:flex;align-items:center;gap:7px;height:34px;padding:0 14px 0 6px;border-radius:17px;background:rgba(255,248,236,.95);color:var(--navy);font-size:14px;white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(217,165,43,.6),0 4px 10px rgba(30,16,70,.28);pointer-events:none}
+.hint i{width:24px;height:24px;border-radius:50%;background:linear-gradient(#8ff0c0,#2fbf78);display:grid;place-items:center;box-shadow:0 0 0 1.5px #fff}
+.hint i svg{width:17px;height:17px}
+.hint small{font-size:13px;color:#6a6290}
+.bub{left:0;top:0;pointer-events:none;transform-origin:0 0;opacity:0;will-change:transform,opacity}
+.bub svg{position:absolute;left:-40px;top:-40px;overflow:visible;filter:drop-shadow(0 4px 5px rgba(26,15,64,.26))}
+.bub .tx{position:absolute;left:20px;top:12px;font-size:18px;line-height:23px;color:var(--navy);white-space:pre;text-align:center}
+.bub .tx span{display:inline-block;white-space:pre}
+.note{left:0;top:0;display:flex;align-items:center;gap:7px;height:32px;padding:0 13px 0 5px;border-radius:16px;background:linear-gradient(180deg,#fffdf6,#f0fff6);color:var(--navy);font-size:14px;white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(217,165,43,.65),inset 0 0 0 2.5px #fff,0 5px 12px rgba(30,16,70,.28);opacity:0;pointer-events:none}
+.note i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#9ff5c9,#22a865);box-shadow:0 0 0 1.5px #fff,0 0 8px rgba(63,207,134,.7)}
+.note i svg{width:14px;height:14px}
+.note b{color:#127a49}
+.note.muted b{color:#6a6290}
+.hand{left:0;top:0;width:74px;height:81px;pointer-events:none;opacity:0;transform-origin:42px 53px;filter:drop-shadow(0 3px 4px rgba(46,35,80,.38)) drop-shadow(0 0 7px rgba(255,255,255,.55));will-change:transform,opacity}
+.pan.hov{cursor:none}
+.aitag{right:14px;bottom:8px;font-size:12px;color:rgba(255,255,255,.86);text-shadow:0 1px 2px rgba(0,0,0,.65);pointer-events:none}
+.cap{position:absolute;top:5px;left:calc(var(--px) + 330px);transform:translateX(-50%);display:flex;align-items:center;gap:9px;height:32px;padding:0 16px 0 8px;border-radius:16px;background:rgba(30,22,64,.86);color:#fff;font-size:15px;white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(255,231,166,.55),0 6px 14px rgba(10,6,30,.35);opacity:0;pointer-events:none;transition:opacity .25s}
+.cap.on{opacity:1}
+.cap em{font-style:normal;min-width:22px;height:22px;padding:0 6px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(#8ff0c0,#2fbf78);font-size:13px;color:#fff}
+.nogl #head{display:none}
+</style>
+</head>
+<body>
+<div class="page">
+<h1>「머리 쓰다듬기」 시안 — 플로라 아이 정보창</h1>
+<p class="lead"><span class="ai">AI 생성 샘플 그림</span>플로라 그림과 표정 3장(놀람 · 기쁨 ^^ · 토라짐+헝클어진 머리)은 AI(OpenAI GPT Image 2)로 만든 비교용 샘플이며 게임에 없습니다. 바탕은 새 일반 비율 그림을 넣어 찍은 <b>실제 정보창 캡처</b>이고, 그림 칸 안(얼굴 · 머리카락 · 효과 · 말풍선)만 시안입니다. 게임 파일은 바꾸지 않았습니다.<br>그림 칸 위쪽, 머리 위를 <b>누른 채 좌우로 문지르면</b> 쓰다듬기입니다(마우스 끌기 · 터치 모두). 톡 누르기만 하면 특별한 반응은 없습니다.</p>
+<div class="bar" role="group" aria-label="보기">
+<button type="button" data-w="1280" aria-pressed="true">1280×720</button>
+<button type="button" data-w="1600" aria-pressed="false">1600×720</button>
+<span class="sep"></span>
+<button type="button" class="play" id="playBtn" aria-pressed="false"><i></i>자동 재생</button>
+<button type="button" id="resetBtn">처음부터</button>
+<span class="sep"></span>
+<a href="#stills">단계별 정지 화면</a><a href="#others">카렌 · 녹스</a><a href="#cost">63명 비용</a><a href="#video">영상</a>
+</div>
+
+<div class="vpw" id="vpw"><div class="vp" id="vp"><div class="scr" id="scr">
+<img class="base" id="base" alt="플로라 아이 정보창 — 실제 게임 캡처(새 그림)">
+<div class="cap" id="cap"><em id="capN">▶</em><span id="capT"></span></div>
+<div class="pan" id="pan">
+<canvas id="head" width="420" height="400"></canvas>
+<canvas id="glow" width="646" height="638"></canvas>
+<canvas id="fx" width="646" height="638"></canvas>
+<svg class="hit" id="hit" viewBox="0 0 646 638" aria-hidden="true">
+<defs><radialGradient id="hitg"><stop offset="0" stop-color="#fff" stop-opacity=".26"/><stop offset=".7" stop-color="#fff6e0" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+<ellipse cx="252" cy="68" rx="122" ry="62" fill="url(#hitg)"/>
+<ellipse class="rim" id="rim" cx="252" cy="68" rx="122" ry="62"/>
+<path class="chev" d="M118 60l-9 8 9 8M386 60l9 8-9 8"/>
+</svg>
+<div class="hint" id="hint"><i><svg viewBox="0 0 100 110"><g fill="#fff"><rect x="30" y="16" width="14" height="50" rx="7"/><rect x="44" y="9" width="14" height="57" rx="7"/><rect x="58" y="13" width="14" height="53" rx="7"/><rect x="72" y="25" width="12" height="42" rx="6"/><rect x="28" y="44" width="58" height="56" rx="24"/><rect x="-7.5" y="-19" width="15" height="38" rx="7.5" transform="translate(23 66) rotate(-38)"/></g></svg></i>좌우로 쓰다듬기 <small>↔</small></div>
+<div class="bub" id="bub"></div>
+<div class="note" id="note"><i><svg viewBox="0 0 20 20"><path d="M10 17.2C4.6 13.3 2 10.6 2 7.4 2 5 3.9 3.2 6.1 3.2c1.6 0 3 .9 3.9 2.2.9-1.3 2.3-2.2 3.9-2.2C16.1 3.2 18 5 18 7.4c0 3.2-2.6 5.9-8 9.8Z" fill="#fff"/></svg></i><span id="noteT"></span></div>
+<div class="aitag">AI 생성 샘플 그림</div>
+<div class="hand" id="hand"><svg viewBox="0 0 100 110" width="74" height="81"><defs><linearGradient id="hg" gradientUnits="userSpaceOnUse" x1="0" y1="8" x2="0" y2="104"><stop offset="0" stop-color="#ffffff"/><stop offset=".65" stop-color="#fff8ef"/><stop offset="1" stop-color="#ffe9dc"/></linearGradient></defs>
+<g fill="#5b47a8" stroke="#5b47a8" stroke-width="7" stroke-linejoin="round"><rect x="30" y="16" width="14" height="50" rx="7"/><rect x="44" y="9" width="14" height="57" rx="7"/><rect x="58" y="13" width="14" height="53" rx="7"/><rect x="72" y="25" width="12" height="42" rx="6"/><rect x="28" y="44" width="58" height="56" rx="24"/><rect x="-7.5" y="-19" width="15" height="38" rx="7.5" transform="translate(23 66) rotate(-38)"/></g>
+<g fill="url(#hg)"><rect x="30" y="16" width="14" height="50" rx="7"/><rect x="44" y="9" width="14" height="57" rx="7"/><rect x="58" y="13" width="14" height="53" rx="7"/><rect x="72" y="25" width="12" height="42" rx="6"/><rect x="28" y="44" width="58" height="56" rx="24"/><rect x="-7.5" y="-19" width="15" height="38" rx="7.5" transform="translate(23 66) rotate(-38)"/></g>
+<path d="M44 33v24M58 28v29M72 37v22" stroke="#cdbff3" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M35 20.5c1.6-2 4.2-2.3 5.8-.6M49 13.5c1.6-2 4.2-2.3 5.8-.6M63 17.5c1.6-2 4.2-2.3 5.8-.6" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none" opacity=".9"/>
+<ellipse cx="66" cy="76" rx="9" ry="6" fill="#ffd3dc" opacity=".55"/></svg></div>
+</div>
+</div></div></div>
+
+<div class="steps" id="steps">
+<button class="st" data-go="1"><em>1</em><b>첫 손길 · 놀람</b>눈이 동그래지고 「앗…!」</button>
+<button class="st" data-go="2"><em>2</em><b>계속 쓰다듬기 · 기쁨</b>눈 감고 ^^ · 홍조 · 머리카락 · 꽃관이 손을 따라 흔들림</button>
+<button class="st" data-go="3"><em>3</em><b>충분히 · 꽃이 핌</b>꽃 · 초록 물감 방울 · 「후후, 기분 좋아요…」 · 친밀도 +1</button>
+<button class="st" data-go="4"><em>4</em><b>너무 오래 · 헝클</b>머리가 헝클어지고 「머리 다 헝클어졌잖아요~!」</button>
+<div class="cnt">쓰다듬은 횟수<b id="cnt">0</b></div>
+</div>
+
+<section class="card" id="stills">
+<h2>단계별 정지 화면 <em>자동 재생에서 찍은 실제 프레임</em></h2>
+<div class="stills">
+<figure><img data-src="assets/still_1_{W}.jpg" alt="1단계 놀람"><figcaption>① 첫 손길 <small>좌우 한 번(약 30px 이상 문지름)부터 · 놀란 눈 · 「앗…!」</small></figcaption></figure>
+<figure><img data-src="assets/still_2_{W}.jpg" alt="2단계 기쁨"><figcaption>② 계속 · 4번째부터 <small>눈 감고 ^^ · 홍조 · 머리 위가 손 방향으로 기울고 눌림</small></figcaption></figure>
+<figure><img data-src="assets/still_3_{W}.jpg" alt="3단계 꽃"><figcaption>③ 충분히 · 14번째 <small>꽃 · 물감 방울이 머리 위에서 차례로 피어오름 · 친밀도 +1 · 오늘 1/1</small></figcaption></figure>
+<figure><img data-src="assets/still_4_{W}.jpg" alt="헝클"><figcaption>④ 너무 오래 · 30번째 <small>삐친 머리카락 · 토라진 얼굴 · 고개를 흔듦</small></figcaption></figure>
+</div>
+</section>
+
+<section class="card" id="others">
+<h2>다른 아이라면 <em>같은 규칙 · 성격만 다르게</em></h2>
+<div class="who">
+<div class="pc">
+<div class="snap k" id="snapK"><span class="lbl">카렌 · 츤데레</span></div>
+<div class="tx"><h3>카렌 <span class="tg" style="background:#ffb020">S</span><span class="tg" style="background:#ff6a5a">불꽃</span></h3>
+<p>첫 손길: 놀람 대신 <b>버럭</b> — 눈썹이 올라가고 얼굴이 빨개집니다.</p>
+<p><span class="ln">「애, 애 취급하지 마!」</span></p>
+<p>그런데 <b>손을 쳐내지 않습니다.</b> 계속 쓰다듬으면 고개를 돌린 채 홍조만 진해지고, 다 채우면 <span class="ln">「…조금만이야. 진짜 조금만.」</span></p>
+<p style="color:#6a6290">필요한 표정 칸: 버럭+홍조 · 시선 피하며 홍조 · 헝클. 정지 화면의 얼굴은 원래 그림 그대로(카렌 표정 칸은 이번에 만들지 않음) — 손 · 홍조 · 말풍선만 얹었습니다.</p></div>
+</div>
+<div class="pc">
+<div class="nx">
+<div class="snap n" id="snapN1"><span class="lbl">녹스 · 친밀도 낮음</span></div>
+<div class="snap n" id="snapN2"><span class="lbl">녹스 · 친밀도 높음</span></div>
+</div>
+<div class="tx"><h3>녹스 <span class="tg" style="background:linear-gradient(90deg,#ff6a8a,#ffb020,#3fcf86,#19b4ff,#9a6bff)">신화</span></h3>
+<p><b>친밀도가 낮으면</b> 첫 손길에서 손을 툭 쳐냅니다(손 아이콘이 옆으로 튕겨 나감) — <span class="ln">「…손, 치워.」</span> 단계가 오르지 않습니다.</p>
+<p><b>친밀도가 높으면</b> 가만히 눈을 내리깔고 있습니다 — <span class="ln">「…조금만이야.」</span> 꽃 대신 무지개 조각이 조용히 반짝입니다.</p>
+<p style="color:#6a6290">기준(가안): 친밀도 단계 3 미만 = 쳐냄 · 쳐낼 때는 오늘 1/1을 쓰지 않음. 정지 화면의 얼굴은 원래 그림(외치는 얼굴) 그대로 — 높은 친밀도용 「눈을 내리깐 얼굴」 칸이 따로 필요합니다.</p></div>
+</div>
+</div>
+</section>
+
+<section class="card" id="cost">
+<h2>63명에 넣는다면 · 아이 한 명당 비용 <em>이 시안에서 실제로 든 것 기준</em></h2>
+<table class="cost">
+<tr><th>항목</th><th>아이 한 명</th><th>63명</th><th>근거</th></tr>
+<tr><td>표정 칸 생성 (놀람 · 기쁨 ^^+홍조 · 토라짐 → 그 위에 헝클 머리)</td><td><b>4번</b> + 다시 뽑기 여유 1번</td><td>약 <b>315번</b> 생성</td><td>플로라는 4번 모두 첫 번째에 통과 (1번 약 20초). 「얼굴(헝클은 정수리 · 앞머리)만 바꾸라」는 같은 문장에 그림만 바꿔 씀</td></tr>
+<tr><td>맞추기 · 이음새 (자동 정렬 + 얼굴 칸 · 눈 칸 지정 + 확인)</td><td>약 <b>25분</b></td><td>약 <b>26시간</b></td><td>정렬 · 색 맞춤 · 가장자리는 스크립트. 사람은 눈 · 얼굴 칸 숫자 4개와 4배 확대 확인만</td></tr>
+<tr><td>머리카락 흔들림 지도 (정수리 · 머리 전체 · 헝클 칸)</td><td>약 <b>5분</b></td><td>약 <b>5시간</b></td><td>배경 없는 판의 모양에서 자동, 머리 · 목 위치만 지정 (레벨 원 자리는 공통)</td></tr>
+<tr><td>대사 (놀람 · 좋아요 · 헝클 + 성격 반응 1줄)</td><td><b>4줄</b></td><td><b>252줄</b></td><td>기존 아이별 말투표(hero_react_lines)와 같은 방식 · 성격 3갈래(보통 · 츤데레 · 쳐냄)</td></tr>
+<tr><td>게임 용량</td><td>머리 칸 3장 ≈ 0.17~0.35MB</td><td>≈ <b>11~22MB</b></td><td>머리 둘레만 잘라 WebP로 저장(이 시안 크기 실측 1장 55KB, 원래 그림 크기면 약 2배). 정보창을 연 아이만 불러옴</td></tr>
+<tr class="tot"><td>합계 (사람 시간)</td><td>약 <b>40분</b> + 대사</td><td>약 <b>5~6일</b> (1인)</td><td>생성 확인 10분 + 맞추기 25분 + 흔들림 지도 5분. 대사 쓰기 · 검수 별도. 그림을 새로 그리면 그 그림 기준으로 다시 만들어야 함</td></tr>
+</table>
+<ul>
+<li class="no">일반 비율 새 그림이 있는 아이는 지금 13명뿐입니다. 나머지 50명은 서 있는 SD 그림이라, 같은 방식으로 SD 얼굴에 표정 칸을 만들거나(더 작고 단순 — 빠름) 새 그림이 나온 뒤에 만들어야 합니다.</li>
+<li class="no">배경 있는 그림(정보창)과 배경 없는 판(컷인)이 같은 그림이 아니라 따로 그려진 판입니다(플로라: 평균 색 차 24). 이번 표정 칸은 배경 없는 판에서 만들어 정보창 그림에 맞춰 붙였습니다 — 실제로는 <b>게임이 보여 주는 그 그림 한 장</b>에서 만드는 것이 가장 깔끔합니다.</li>
+</ul>
+</section>
+
+<section class="card" id="video">
+<h2>자동 재생 녹화 <em>위 「자동 재생」과 같은 순서</em></h2>
+<div class="vid">
+<video id="vid" controls muted playsinline preload="metadata" data-src="pet_head_{W}x720.mp4" data-poster="assets/still_3_{W}.jpg"></video>
+<div class="notes" style="columns:1">
+<ul>
+<li><b>판정:</b> 머리 위 타원(점선) 안에서 누른 채 좌우로 30px 넘게 문지를 때마다 1번. 톡 누르기 · 머리 밖에서 끌기는 세지 않습니다(공용 터치 효과만 나옴).</li>
+<li><b>단계:</b> 1번 → 놀람 · 4번 → 기쁨 · 14번 → 꽃 + 친밀도 +1 (하루 1번) · 30번 → 헝클. 단계마다 최소 머무는 시간(0.9초 · 2초 · 3초)이 있어 빨리 문질러도 건너뛰지 않습니다. 손을 떼면 2~3초 뒤 처음으로.</li>
+<li><b>머리카락:</b> 그림 한 장 + 흔들림 지도(정수리 · 머리 전체 · 헝클 칸)로 화면을 살짝 비트는 방식 — 손 쪽으로 기울고, 손 아래가 눌리고, 뗀 뒤 한두 번 출렁입니다. 얼굴 · 레벨 원은 움직이지 않습니다.</li>
+<li><b>표정:</b> 머리 둘레 칸 3장을 겹쳐 바꿉니다(놀람 · 기쁨 0.11초). 놀람 · 기쁨은 얼굴만 다르고, 헝클 칸만 정수리 · 앞머리까지 달라서 0.32초 동안 머리카락을 손 방향으로 살짝 비틀며 바꿉니다. 꽃관 · 땋은 머리 · 테두리는 원래 그림 그대로.</li>
+<li><b>손 · 자국:</b> 손 아이콘은 그림 칸 안 머리 위에서만 보입니다. 끌 때 빛가루는 게임 공용 터치 효과(TouchFx 끌기 가루)와 같은 색으로 흉내 냈습니다.</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+
+<script src="assets/flora_head_tex.js"></script>
+<script>
+(()=>{
+'use strict';
+const $=s=>document.querySelector(s);
+const Q=new URLSearchParams(location.search);
+const REC=Q.has('rec');
+let W=Q.get('w')==='1600'?1600:1280;
+const rootEl=document.documentElement;
+const clamp=(v,a,b)=>v<a?a:v>b?b:v;
+const ss=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+let seed=11;const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646};
+const R=(a,b)=>a+(b-a)*rnd();
+
+// ---------- 게임과 같은 자리 계산 (hero_page.gd cover_art: rect 720×668, focus (0.28, 0.12), 1672×941) ----------
+const S=668/941,OFF=(1672-720/S)*0.28;
+const FACE={x:(375-OFF)*S,y:35*S,w:325*S,h:415*S};        // HeroReact.CUTIN_FACE.flora
+const AIM={x:FACE.x+FACE.w/2,y:FACE.y+FACE.h/2};
+const HX={x:40,y:0,w:420,h:400};                           // 머리 캔버스 (그림 칸 좌표)
+const PIVOT={x:(585-OFF)*S-HX.x,y:345*S};                   // 목 (머리 캔버스 좌표)
+const HIT={cx:252,cy:68,rx:122,ry:62};
+const AREA_R=650-12-10;                                      // 크림 판 왼쪽 - PANEL_MARGIN - SHADOW
+
+// ---------- 상태 ----------
+let T=0;
+const IN={down:false,x:300,y:200,vx:0,vy:0,t:0,dx0:0,dy0:0,dt0:0,moved:0,touch:false,over:false,src:'mouse'};
+const SW={dir:0,start:0,ext:0,counted:false};
+let strokes=0,lastStroke=-99,stage=0,stageT=0,todayDone=false,exprHoldUntil=0;
+const spring={sx:0,svx:0,sy:0,svy:0,tl:0,tv:0};
+let contact=0,ruffle=0;   // ruffle = 머리가 헝클어지는 / 털어 정리하는 순간의 짧은 비틀림 (그림이 바뀌는 동안만)
+let expr={from:'neutral',to:'neutral',t:-1,dur:.11};
+let handA=0,handTilt=0,handPress=0;
+const trail=[];const parts=[];const rings=[];let glows=[];
+let auto=null;
+
+// ---------- 그림 · 텍스처 ----------
+const EXPR=['neutral','surprised','happy','messy'];   // messy = 토라진 얼굴 + 헝클어진 앞머리 · 정수리 (표정 칸과 같은 방식으로 만든 한 장)
+const imgs={};
+const load=s=>new Promise((r,j)=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>j(new Error(s));i.src=s});
+const headC=$('#head'),fxC=$('#fx'),glC=$('#glow');
+const fx=fxC.getContext('2d'),gw=glC.getContext('2d');
+let gl=null,prog=null,tex={},U={};
+
+function initGL(){
+  try{gl=headC.getContext('webgl',{premultipliedAlpha:false,preserveDrawingBuffer:true,antialias:false,alpha:false})}catch(e){gl=null}
+  if(!gl){document.body.classList.add('nogl');return}
+  const vs=`attribute vec2 p;varying vec2 v;void main(){v=vec2(p.x*.5+.5,.5-p.y*.5);gl_Position=vec4(p,0.,1.);}`;
+  const fs=`precision highp float;varying vec2 v;
+uniform sampler2D tA,tB,tW;uniform float mixF,contact,messy,press,tilt;uniform vec2 size,hand,hvel,sway,pivot;
+float h21(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h21(i),h21(i+vec2(1.,0.)),f.x),mix(h21(i+vec2(0.,1.)),h21(i+vec2(1.,1.)),f.x),f.y);}
+void main(){
+ vec2 px=v*size;vec4 w=texture2D(tW,v);
+ float top=1.-smoothstep(10.,150.,px.y)*.55;
+ vec2 d=sway*w.r*top;
+ vec2 q=px-hand;float g=exp(-dot(q,q)/(2.*50.*50.));
+ d+=clamp(hvel*.0055,vec2(-3.5),vec2(3.5))*w.r*g*contact;
+ d.y+=press*2.4*w.r*g;
+ vec2 r=px-pivot;float c=cos(tilt),s=sin(tilt);
+ d+=(vec2(c*r.x-s*r.y,s*r.x+c*r.y)-r)*w.g;
+ // 헝클어지는 / 털어 정리하는 순간: 그림이 바뀌는 동안 정수리 · 앞머리를 손 방향으로 쓸고 결을 군데군데 비틀어 「확」 바뀌지 않게
+ vec2 n=vec2(vn(px*.06+3.1),vn(px*.06+17.7))-.5;vec2 n2=vec2(vn(px*.14+9.3),vn(px*.14+41.2))-.5;
+ float hi=1.-smoothstep(20.,135.,px.y);
+ d+=(vec2(3.2,.8)*hi+n*5.+n2*2.)*messy*w.b;
+ vec2 uv=(px-d)/size;
+ vec4 col=mix(texture2D(tA,uv),texture2D(tB,uv),mixF);
+ gl_FragColor=vec4(col.rgb,1.);}`;
+  const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);if(!gl.getShaderParameter(o,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(o));return o};
+  prog=gl.createProgram();gl.attachShader(prog,sh(gl.VERTEX_SHADER,vs));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(prog);gl.useProgram(prog);
+  const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  for(const n of ['tA','tB','tW','mixF','contact','messy','press','tilt','size','hand','hvel','sway','pivot'])U[n]=gl.getUniformLocation(prog,n);
+  const mk=src=>{const t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,src);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);return t};
+  for(const e of EXPR)tex[e]=mk(imgs[e]);
+  tex.w=mk(imgs.weight);
+  gl.uniform1i(U.tA,0);gl.uniform1i(U.tB,1);gl.uniform1i(U.tW,2);
+  gl.uniform2f(U.size,HX.w,HX.h);gl.uniform2f(U.pivot,PIVOT.x,PIVOT.y);
+  gl.viewport(0,0,HX.w,HX.h);
+}
+function drawHead(){
+  const m=expr.t<0?1:clamp((T-expr.t)/expr.dur,0,1);
+  if(!gl)return;
+  gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,tex[expr.from]);
+  gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,tex[expr.to]);
+  gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,tex.w);
+  gl.uniform1f(U.mixF,m);gl.uniform1f(U.contact,contact);gl.uniform1f(U.messy,ruffle*.8);gl.uniform1f(U.press,contact*handPress);gl.uniform1f(U.tilt,spring.tl);
+  gl.uniform2f(U.hand,IN.x-HX.x,IN.y-HX.y);gl.uniform2f(U.hvel,IN.vx,IN.vy);gl.uniform2f(U.sway,spring.sx,spring.sy);
+  gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+}
+
+// ---------- 입자 그림 (처음에 한 번만 그려 돌려 씀) ----------
+function spr(s,draw,blur){const c=document.createElement('canvas');c.width=s;c.height=s;const g=c.getContext('2d');draw(g,s);if(!blur)return c;const d=document.createElement('canvas');d.width=s;d.height=s;const h=d.getContext('2d');h.filter=`blur(${blur}px)`;h.drawImage(c,0,0);return d}
+function blossom(g,s,tip){g.translate(s/2,s/2);const r=s*.42;g.lineJoin='round';
+  for(let i=0;i<5;i++){g.save();g.rotate(i*Math.PI*2/5);g.beginPath();g.moveTo(0,-r*.16);g.bezierCurveTo(r*.58,-r*.34,r*.54,-r*.94,r*.17,-r*.99);g.lineTo(0,-r*.84);g.lineTo(-r*.17,-r*.99);g.bezierCurveTo(-r*.54,-r*.94,-r*.58,-r*.34,0,-r*.16);g.closePath();
+    const gr=g.createLinearGradient(0,-r*.15,0,-r);gr.addColorStop(0,'#fffef9');gr.addColorStop(.55,'#fff5f7');gr.addColorStop(1,tip);g.fillStyle=gr;g.fill();g.lineWidth=s*.034;g.strokeStyle='#6e3040';g.stroke();g.restore()}
+  g.strokeStyle='#f0b22e';g.lineWidth=s*.022;g.lineCap='round';for(let i=0;i<8;i++){const a=i*Math.PI/4+.2;g.beginPath();g.moveTo(0,0);g.lineTo(Math.cos(a)*r*.33,Math.sin(a)*r*.33);g.stroke()}
+  g.fillStyle='#ffd447';for(let i=0;i<8;i++){const a=i*Math.PI/4+.2;g.beginPath();g.arc(Math.cos(a)*r*.36,Math.sin(a)*r*.36,s*.03,0,7);g.fill()}
+  g.fillStyle='#ffe27a';g.beginPath();g.arc(0,0,s*.06,0,7);g.fill()}
+function droplet(g,s){g.translate(s/2,s*.58);const r=s*.25;g.beginPath();g.moveTo(0,-r*2.05);g.bezierCurveTo(r*.38,-r*1.3,r,-r*.62,r,0);g.arc(0,0,r,0,Math.PI,false);g.bezierCurveTo(-r,-r*.62,-r*.38,-r*1.3,0,-r*2.05);g.closePath();
+  const gr=g.createRadialGradient(-r*.35,-r*.4,r*.1,0,0,r*1.7);gr.addColorStop(0,'#e4fdef');gr.addColorStop(.35,'#7fe6b0');gr.addColorStop(.75,'#2fbf78');gr.addColorStop(1,'#16884f');g.fillStyle=gr;g.fill();g.lineWidth=s*.035;g.strokeStyle='#0f6b3e';g.stroke();
+  g.fillStyle='rgba(255,255,255,.9)';g.beginPath();g.ellipse(-r*.42,-r*.42,r*.18,r*.36,.5,0,7);g.fill();g.fillStyle='rgba(255,255,255,.5)';g.beginPath();g.arc(r*.42,r*.38,r*.12,0,7);g.fill()}
+function leaf(g,s){g.translate(s/2,s/2);const L=s*.42;g.beginPath();g.moveTo(0,L);g.bezierCurveTo(L*.72,L*.38,L*.56,-L*.56,0,-L);g.bezierCurveTo(-L*.56,-L*.56,-L*.72,L*.38,0,L);g.closePath();
+  const gr=g.createLinearGradient(-L,-L,L,L);gr.addColorStop(0,'#d2f58a');gr.addColorStop(.5,'#7ccc45');gr.addColorStop(1,'#3e9a2f');g.fillStyle=gr;g.fill();g.lineWidth=s*.034;g.strokeStyle='#2c6420';g.stroke();
+  g.beginPath();g.moveTo(0,L*.85);g.quadraticCurveTo(L*.08,0,0,-L*.72);g.lineWidth=s*.024;g.strokeStyle='rgba(44,100,32,.75)';g.stroke()}
+function sparkle(g,s){g.translate(s/2,s/2);const r=s*.42;g.shadowColor='rgba(255,236,170,.95)';g.shadowBlur=s*.18;g.fillStyle='#fffbe8';g.beginPath();g.moveTo(0,-r);g.bezierCurveTo(r*.08,-r*.34,r*.34,-r*.08,r,0);g.bezierCurveTo(r*.34,r*.08,r*.08,r*.34,0,r);g.bezierCurveTo(-r*.08,r*.34,-r*.34,r*.08,-r,0);g.bezierCurveTo(-r*.34,-r*.08,-r*.08,-r*.34,0,-r);g.fill()}
+function softglow(g,s,col){const gr=g.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);gr.addColorStop(0,`rgba(${col},1)`);gr.addColorStop(.32,`rgba(${col},.42)`);gr.addColorStop(1,`rgba(${col},0)`);g.fillStyle=gr;g.fillRect(0,0,s,s)}
+const SP={};
+function initSprites(){
+  SP.bl=[spr(64,(g,s)=>blossom(g,s,'#ffd3e2')),spr(64,(g,s)=>blossom(g,s,'#ffe9c9'))];
+  SP.blB=[spr(64,(g,s)=>blossom(g,s,'#ffd3e2'),2.2),spr(64,(g,s)=>blossom(g,s,'#ffe9c9'),2.2)];
+  SP.dr=spr(48,droplet);SP.drB=spr(48,droplet,1.8);
+  SP.lf=spr(48,leaf);SP.lfB=spr(48,leaf,1.8);
+  SP.sk=spr(48,sparkle);
+  SP.glow=spr(128,(g,s)=>softglow(g,s,'255,248,226'));
+  SP.gglow=spr(128,(g,s)=>softglow(g,s,'150,255,200'));
+  SP.dot=['255,244,214','180,155,255','255,196,79','143,211,255'].map(c=>spr(16,(g,s)=>softglow(g,s,c)));
+}
+
+// ---------- 말풍선 (HeroReact 말풍선과 같은 모양: 둥근 판 + 넓은 밑동의 뾰족한 꼬리 한 윤곽) ----------
+const BR=22,TH=16,FIL=11,TIP=32*Math.PI/180,EW=2,TILT=50*Math.PI/180,GAP=32,PAD={x:20,y:12};
+const MITER=EW*.5/Math.sin(TIP/2);
+const V=(x,y)=>({x,y}),add=(a,b)=>V(a.x+b.x,a.y+b.y),sub=(a,b)=>V(a.x-b.x,a.y-b.y),mul=(a,k)=>V(a.x*k,a.y*k),dot=(a,b)=>a.x*b.x+a.y*b.y;
+const rot=(a,t)=>V(a.x*Math.cos(t)-a.y*Math.sin(t),a.x*Math.sin(t)+a.y*Math.cos(t)),angleTo=(a,b)=>Math.atan2(a.x*b.y-a.y*b.x,dot(a,b)),norm=a=>{const l=Math.hypot(a.x,a.y)||1;return V(a.x/l,a.y/l)};
+const NRM={bottom:V(0,1),top:V(0,-1),left:V(-1,0),right:V(1,0)};
+function tailTip(w,h,side,aim){const n=NRM[side];let c;
+  if(side==='bottom'||side==='top')c=V(clamp(aim.x,BR+TH,w-BR-TH),side==='bottom'?h:0);
+  else c=V(side==='left'?0:w,clamp(aim.y,Math.min(BR,h/2),Math.max(h-BR,h/2)));
+  const ang=clamp(angleTo(n,sub(aim,c)),-TILT,TILT);return [c,add(c,mul(rot(n,ang),(GAP-2-MITER)/Math.cos(ang)))]}
+function edgeAt(w,h,r,side,u){let o,a,n=NRM[side],span;
+  if(side==='bottom'){o=V(0,h);a=V(1,0);span=w}else if(side==='top'){o=V(0,0);a=V(1,0);span=w}else if(side==='left'){o=V(0,0);a=V(0,1);span=h}else{o=V(w,0);a=V(0,1);span=h}
+  let d=0,dd=0;if(u<r){d=r-u;dd=-1}else if(u>span-r){d=u-(span-r);dd=1}d=Math.min(d,r-.5);const root=Math.sqrt(r*r-d*d);
+  return {p:sub(add(o,mul(a,u)),mul(n,r-root)),t:norm(sub(a,mul(n,d/root*dd)))}}
+let bid=0;
+function bubbleSVG(w,h,side,aim){const r=Math.min(BR,Math.min(w,h)/2);const n=NRM[side];
+  const body=`M${r} 0H${w-r}A${r} ${r} 0 0 1 ${w} ${r}V${h-r}A${r} ${r} 0 0 1 ${w-r} ${h}H${r}A${r} ${r} 0 0 1 0 ${h-r}V${r}A${r} ${r} 0 0 1 ${r} 0Z`;
+  const [c,tip]=tailTip(w,h,side,aim);const span=(side==='bottom'||side==='top')?w:h,uc=(side==='bottom'||side==='top')?c.x:c.y;
+  const foot=Math.min(TH+FIL,Math.min(uc,span-uc)-1),half=foot*TH/(TH+FIL);
+  const e1=edgeAt(w,h,r,side,uc-foot),e2=edgeAt(w,h,r,side,uc+foot);const len=Math.hypot(tip.x-c.x,tip.y-c.y);
+  const dir=rot(n,clamp(angleTo(n,sub(tip,c))*1.6,-80*Math.PI/180,80*Math.PI/180));let q=V(dir.y,-dir.x);if(dot(q,e1.t)<0)q=mul(q,-1);
+  const hs=TIP/2,v=add(mul(dir,Math.cos(hs)),mul(q,Math.sin(hs))),wv=add(mul(dir,-Math.cos(hs)),mul(q,Math.sin(hs)));
+  const p1=add(e1.p,mul(e1.t,FIL+half*.55)),p2=sub(tip,mul(v,len*.4)),p3=add(tip,mul(wv,len*.4)),p4=sub(e2.p,mul(e2.t,FIL+half*.55)),bk=sub(c,mul(n,10));
+  const f=x=>x.toFixed(2);
+  const tail=`M${f(e1.p.x)} ${f(e1.p.y)}C${f(p1.x)} ${f(p1.y)} ${f(p2.x)} ${f(p2.y)} ${f(tip.x)} ${f(tip.y)}C${f(p3.x)} ${f(p3.y)} ${f(p4.x)} ${f(p4.y)} ${f(e2.p.x)} ${f(e2.p.y)}L${f(bk.x)} ${f(bk.y)}Z`;
+  const id='bf'+(bid++);
+  return {tip,svg:`<svg width="${w+80}" height="${h+80}" viewBox="-40 -40 ${w+80} ${h+80}" aria-hidden="true"><defs><linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="${h}"><stop offset="0" stop-color="#fffcf5" stop-opacity=".97"/><stop offset="1" stop-color="#fff2de" stop-opacity=".97"/></linearGradient></defs><g fill="#ffe7a6" stroke="#ffe7a6" stroke-width="${EW*2}" stroke-linejoin="miter" stroke-miterlimit="12"><path d="${body}"/><path d="${tail}"/></g><g fill="url(#${id})"><path d="${body}"/><path d="${tail}"/></g></svg>`}}
+const mctx=document.createElement('canvas').getContext('2d');
+function measure(t,fs){mctx.font=`700 ${fs}px PDB,"Malgun Gothic","Apple SD Gothic Neo",sans-serif`;return mctx.measureText(t).width}
+function wrapWords(line,fs,maxw){const words=line.split(' ');const lines=[];let cur='';
+  for(const wd of words){const t=cur?cur+' '+wd:wd;if(cur&&measure(t,fs)>maxw){lines.push(cur);cur=wd}else cur=t}lines.push(cur);
+  if(lines.length<2||words.length>12)return lines;
+  let best=lines,bw=1e9;for(let k=1;k<words.length;k++){const a=words.slice(0,k).join(' '),b=words.slice(k).join(' ');const wv=Math.max(measure(a,fs),measure(b,fs));if(wv<=maxw&&wv<bw&&!(b.indexOf(' ')<0&&a.indexOf(' ')>=0&&measure(b,fs)<wv*.6)){bw=wv;best=[a,b]}}return best}
+const bubEl=$('#bub');
+let bub=null;      // {lines,w,h,x,y,tip,t0,hold,out}
+function say(text,hold){
+  const fs=18,room=AREA_R-(FACE.x+FACE.w+GAP),tw=Math.min(330,room-PAD.x*2);
+  const lines=wrapWords(text,fs,tw);const tw2=Math.ceil(Math.max(...lines.map(l=>measure(l,fs))))+4;
+  const w=tw2+PAD.x*2,h=lines.length*23+2+PAD.y*2;
+  const x=FACE.x+FACE.w+GAP,y=clamp(FACE.y+FACE.h*.3-h/2,14,638*.66-h);
+  const nb={lines,w,h,x,y,t0:T+(bub&&!bub.out?0.14:0),hold,out:false,text};
+  if(bub&&!bub.out){bub.out=true;bub.outT=T;bub.next=nb}else{bub=nb;buildBub()}
+}
+function buildBub(){const b=bub;const s=bubbleSVG(b.w,b.h,'left',sub(AIM,V(b.x,b.y)));b.tip=s.tip;
+  let i=0;const tx=b.lines.map(l=>[...l].map(ch=>`<span data-i="${i++}">${ch===' '?'&nbsp;':ch}</span>`).join('')).join('\n');
+  bubEl.innerHTML=s.svg+`<div class="tx" style="width:${b.w-PAD.x*2}px">${tx}</div>`;b.spans=[...bubEl.querySelectorAll('.tx span')];
+  bubEl.style.transformOrigin=`${b.tip.x}px ${b.tip.y}px`;b.built=true}
+function drawBub(){
+  if(!bub){bubEl.style.opacity=0;return}
+  const b=bub;let a=0,sc=1;
+  if(b.out){const k=clamp((T-b.outT)/0.14,0,1);a=1-k;sc=1-.06*k;if(k>=1){bub=b.next||null;if(bub)buildBub();return drawBub()}}
+  else{const e=T-b.t0;if(e<0){a=0}else{a=clamp((e-.0)/.1,0,1);const p=clamp(e/.14,0,1);sc=e<.14?lerp(.5,1.04,1-Math.pow(1-p,3)):e<.24?lerp(1.04,1,(e-.14)/.1):1;
+    if(e>b.hold){const k=clamp((e-b.hold)/.25,0,1);a=1-k;if(k>=1){bub=null;bubEl.style.opacity=0;return}}}
+    b.spans.forEach((sp,i)=>{const r=clamp((e-.1-i*.034)/.24,0,1);const q=1-Math.pow(1-r,2);sp.style.opacity=q.toFixed(3);sp.style.transform=`translateY(${((1-q)*5).toFixed(2)}px)`;sp.style.filter=q<1?`blur(${((1-q)*2.4).toFixed(2)}px)`:''})}
+  bubEl.style.opacity=a.toFixed(3);bubEl.style.transform=`translate(${b.x}px,${b.y}px) scale(${sc.toFixed(4)})`;
+}
+// 알림: 친밀도 +1 · 오늘 1/1
+const noteEl=$('#note');let note=null;
+function notice(html,muted,delay){note={t0:T+delay,hold:3.0};$('#noteT').innerHTML=html;noteEl.classList.toggle('muted',!!muted)}
+function drawNote(){if(!note){noteEl.style.opacity=0;return}const e=T-note.t0;let a=0,dy=8;
+  if(e>=0){a=clamp(e/.3,0,1);dy=8*(1-ss(0,.3,e));if(e>note.hold){a=1-clamp((e-note.hold)/.4,0,1);if(a<=0){note=null}}}
+  const x=bub&&!bub.out?bub.x+10:FACE.x+FACE.w+GAP+10,y=(bub&&!bub.out?bub.y+bub.h:150)+16;
+  noteEl.style.opacity=a.toFixed(3);noteEl.style.transform=`translate(${x}px,${(y+dy).toFixed(1)}px)`}
+
+// ---------- 단계 ----------
+const CAPS={tap:['톡','톡 누르기만 하면 — 특별한 반응 없음 (공용 터치 효과만)'],1:['1','첫 손길 — 놀란 눈 「앗…!」'],2:['2','계속 쓰다듬기 — 눈 감고 ^^ · 홍조 · 머리카락이 손을 따라 흔들림'],3:['3','충분히 — 꽃 · 초록 물감 방울 · 친밀도 +1 (하루 1번)'],4:['4','너무 오래 — 머리가 헝클어지고 토라짐'],0:['↺','손을 떼면 잠시 뒤 원래대로']};
+const NOCAP=Q.get('cap')==='0';   // 정지 화면용: 자막 없이 게임 화면만
+function caption(k){if(!auto||NOCAP)return;$('#capN').textContent=CAPS[k][0];$('#capT').textContent=CAPS[k][1];$('#cap').classList.add('on')}
+function setExpr(e,dur=.11){if(expr.to===e)return;expr={from:expr.to,to:e,t:T,dur}}
+function enter(k){
+  const prev=stage;stage=k;stageT=T;
+  if(k===0){strokes=0;exprHoldUntil=(prev===2||prev===3)?T+.7:T;if(prev===4){setExpr('neutral',.5);ruffle=.7;spring.tv-=.12}if(auto&&prev>0)caption(0)}
+  if(k===1){setExpr('surprised');say('앗…!',1.7);spring.svy-=40;spring.tv-=.06;caption(1)}
+  if(k===2){setExpr('happy');caption(2)}
+  if(k===3){setExpr('happy');bloom();say('후후, 기분 좋아요…',3.4);if(!todayDone){todayDone=true;notice('친밀도 <b>+1</b> · 오늘 1/1',false,.55)}else notice('오늘 친밀도 <b>1/1</b> · 내일 또 올라요',true,.55);caption(3)}
+  if(k===4){setExpr('messy',.32);ruffle=1;say('머리 다 헝클어졌잖아요~!',3.4);spring.tv+=.16;caption(4)}
+  syncSteps();
+}
+function stroke(){
+  strokes++;lastStroke=T;
+  if(stage>=2){for(let i=0;i<2;i++)parts.push(P('sk',IN.x+R(-30,30),IN.y+R(-22,10),R(-20,20),R(-40,-10),0,R(.5,.8),R(.5,.8),1));if(strokes%3===0)parts.push(P(rnd()<.5?'bl':'lf',IN.x+R(-20,20),IN.y-6,R(-30,30),R(-70,-40),25,R(.35,.5),R(1,1.4),R(0,2)|0))}
+  $('#cnt').textContent=strokes;
+}
+function update(dt){
+  const since=T-lastStroke;
+  if(stage===0&&strokes>=1)enter(1);
+  else if(stage===1){if(strokes>=4&&T-stageT>=.9)enter(2);else if(since>1.8)enter(0)}
+  else if(stage===2){if(strokes>=14&&T-stageT>=2)enter(3);else if(since>1.8)enter(0)}
+  else if(stage===3){if(strokes>=30&&T-stageT>=3)enter(4);else if(since>3.2)enter(0)}
+  else if(stage===4){if(since>3)enter(0)}
+  if(stage===0&&T>=exprHoldUntil&&expr.to!=='neutral')setExpr('neutral');
+  ruffle*=Math.exp(-dt*2.6);
+  // 접촉 · 손 속도
+  const on=IN.down&&onHead(IN.x,IN.y);
+  contact=lerp(contact,on?1:0,1-Math.exp(-dt*(on?14:5)));
+  // 머리카락 스프링: 손이 움직이는 쪽으로 쓸리고, 손 아래는 눌림. 떼면 한두 번 출렁
+  const tx=clamp(IN.vx*.011,-5.5,5.5)*contact,ty=contact*1.4;
+  spring.svx+=((tx-spring.sx)*150-spring.svx*11)*dt;spring.sx+=spring.svx*dt;
+  spring.svy+=((ty-spring.sy)*150-spring.svy*11)*dt;spring.sy+=spring.svy*dt;
+  const tt=contact*(clamp((IN.x-HIT.cx)/HIT.rx,-1,1)*.012+(stage>=2&&stage<4?.006:0));
+  spring.tv+=((tt-spring.tl)*55-spring.tv*5.2)*dt;spring.tl+=spring.tv*dt;
+  handPress=lerp(handPress,IN.down?1:0,1-Math.exp(-dt*12));
+  // 입자
+  for(const p of parts){p.age+=dt;if(p.age<0)continue;const dr=Math.exp(-p.drag*dt);p.vx*=dr;p.vy*=dr;p.vy+=p.g*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.r+=p.vr*dt}
+  for(let i=parts.length-1;i>=0;i--)if(parts[i].age>parts[i].life)parts.splice(i,1);
+  for(let i=rings.length-1;i>=0;i--){rings[i].age+=dt;if(rings[i].age>.5)rings.splice(i,1)}
+  glows=glows.filter(g=>(g.age+=dt)<g.life);
+  while(trail.length&&T-trail[0].t>.34)trail.shift();
+}
+function P(type,x,y,vx,vy,g,s,life,variant,layer=1,delay=0,drag=1.3,vr=R(-1.2,1.2)){return {type,x,y,vx,vy,g,s,life,variant,layer,age:-delay,drag,r:R(-.6,.6),vr}}
+function bloom(){
+  // 머리 위(꽃관 · 정수리)에서 차례로 피어오른다 — 터지는 한 번이 아니라 0.9초 동안 나눠서
+  // 그림 칸 위 끝(정보창 테두리)이 머리 바로 위라, 대부분 오른쪽 하늘로 떠오르게 기울인다
+  glows.push({x:292,y:62,r:170,life:2.3,age:0,peak:.58,spr:'glow'});
+  glows.push({x:340,y:90,r:140,life:2.1,age:-.3,peak:.38,spr:'gglow'});
+  const ARC=[[236,30],[266,36],[292,54],[308,80],[316,108]];
+  const org=()=>{const t=rnd()*(ARC.length-1),i=Math.floor(t),f=t-i,a=ARC[i],b=ARC[Math.min(ARC.length-1,i+1)];return V(lerp(a[0],b[0],f)+R(-5,5),lerp(a[1],b[1],f)+R(-3,5))};
+  for(let i=0;i<18;i++){const o=org(),left=i%6===3,a=(left?R(-140,-110):R(-58,8))*Math.PI/180,sp=R(48,118),lay=left?0:i%4===0?0:i%7===0?2:1;
+    parts.push(P('bl',o.x,o.y,Math.cos(a)*sp,Math.sin(a)*sp,R(3,14),lay===2?R(1,1.15):lay===0?R(.48,.6):R(.74,1.05),R(2.6,3.4),i%2,lay,i*.055+R(0,.05),.8))}
+  for(let i=0;i<10;i++){const o=org(),a=R(-80,-34)*Math.PI/180,sp=R(100,145),lay=i%4===1?0:i%6===0?2:1;
+    parts.push(P('dr',o.x,o.y,Math.cos(a)*sp,Math.sin(a)*sp,R(160,185),lay===2?R(.9,1.05):lay===0?R(.45,.55):R(.6,.85),R(1.7,2.2),0,lay,.08+i*.085+R(0,.05),.6,R(-.4,.4)))}
+  for(let i=0;i<6;i++){const o=org(),a=R(-62,2)*Math.PI/180,sp=R(40,80);parts.push(P('lf',o.x,o.y,Math.cos(a)*sp,Math.sin(a)*sp,R(4,14),R(.48,.72),R(2.4,3),0,i%3?1:0,.12+i*.12,.9,R(-2.2,2.2)))}
+  for(let i=0;i<12;i++){parts.push(P('sk',R(280,430),R(30,170),R(-8,8),R(-22,-4),0,R(.45,.85),R(.8,1.3),0,1,.1+i*.09,1))}
+}
+function onHead(x,y){return ((x-HIT.cx)/(HIT.rx+16))**2+((y-HIT.cy)/(HIT.ry+20))**2<=1}
+
+// ---------- 그리기 ----------
+const handEl=$('#hand'),hintEl=$('#hint'),hitEl=$('#hit'),rimEl=$('#rim'),panEl=$('#pan');
+let hintA=1;
+function render(){
+  drawHead();
+  fx.clearRect(0,0,646,638);gw.clearRect(0,0,646,638);
+  // 손끝 자국: 크림 빛 리본 + 공용 끌기 가루 색
+  if(trail.length>1){
+    for(let pass=0;pass<2;pass++){const g=pass?fx:gw;g.lineCap='round';g.lineJoin='round';
+      for(let i=1;i<trail.length;i++){const a=trail[i-1],b=trail[i];const k=1-(T-b.t)/.34;if(k<=0)continue;
+        g.strokeStyle=pass?`rgba(255,253,244,${(k*.8).toFixed(3)})`:`rgba(200,180,255,${(k*.42).toFixed(3)})`;g.lineWidth=pass?1.2+2.4*k:4+8*k;g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.stroke()}}}
+  for(const g of glows){if(g.age<0)continue;const k=g.age<.28?ss(0,.28,g.age):1-ss(.28,g.life,g.age);gw.globalAlpha=k*g.peak;const r=g.r*(0.8+.25*ss(0,g.life,g.age));gw.drawImage(SP[g.spr],g.x-r,g.y-r,r*2,r*2)}gw.globalAlpha=1;
+  for(const r of rings){const k=r.age/.5;fx.strokeStyle=`rgba(157,140,255,${(1-k)*.9})`;fx.lineWidth=3*(1-k)+.8;fx.beginPath();fx.arc(r.x,r.y,6+20*Math.sqrt(k),0,7);fx.stroke();fx.strokeStyle=`rgba(255,194,61,${(1-k)*.9})`;fx.lineWidth=1.6;fx.beginPath();fx.arc(r.x,r.y,9+22*Math.sqrt(k),-.6+k,.5+k);fx.stroke()}
+  for(let lay=0;lay<3;lay++)for(const p of parts){if(p.layer!==lay||p.age<0)continue;
+    const pop=p.age<.3?(()=>{const t=p.age/.3;return 1+2.2*Math.pow(t-1,3)+1.2*Math.pow(t-1,2)})():1;
+    const fade=p.age<.12?p.age/.12:p.age>p.life*.62?1-ss(p.life*.62,p.life,p.age):1;
+    let img,sz;
+    if(p.type==='bl'){img=(lay===1?SP.bl:SP.blB)[p.variant];sz=32}
+    else if(p.type==='dr'){img=lay===1?SP.dr:SP.drB;sz=24}
+    else if(p.type==='lf'){img=lay===1?SP.lf:SP.lfB;sz=24}
+    else if(p.type==='dot'){img=SP.dot[p.variant];sz=8;gw.globalAlpha=fade*.95;const s=sz*p.s;gw.drawImage(img,p.x-s/2,p.y-s/2,s,s);continue}
+    else{img=SP.sk;sz=22;const tw=Math.sin(Math.min(1,p.age/p.life)*Math.PI);fx.globalAlpha=tw*.95;const s=sz*p.s*(.6+.4*tw);fx.save();fx.translate(p.x,p.y);fx.rotate(p.age*.8);fx.drawImage(img,-s/2,-s/2,s,s);fx.restore();continue}
+    const s=sz*p.s*pop;fx.globalAlpha=fade*(lay===0?.72:lay===2?.9:1);
+    fx.save();fx.translate(p.x,p.y);fx.rotate(p.type==='dr'?Math.atan2(p.vy,p.vx)-Math.PI/2:p.r);if(p.type==='dr'){const st=clamp(Math.hypot(p.vx,p.vy)/260,0,.35);fx.scale(1-st*.3,1+st)}fx.drawImage(img,-s/2,-s/2,s,s);fx.restore()}
+  fx.globalAlpha=1;gw.globalAlpha=1;
+  // 손
+  const showHand=IN.over||IN.down;handA=lerp(handA,showHand&&(onHead(IN.x,IN.y)||IN.down)?1:0,.3);
+  handTilt=lerp(handTilt,clamp(IN.vx*.03,-16,16),.25);
+  const oy=IN.touch?-26:0;
+  handEl.style.opacity=handA.toFixed(3);handEl.style.transform=`translate(${(IN.x-42).toFixed(1)}px,${(IN.y-53+oy).toFixed(1)}px) rotate(${handTilt.toFixed(2)}deg) scale(${(1-.05*handPress).toFixed(3)})`;
+  panEl.classList.toggle('hov',handA>.5&&!IN.touch);
+  // 머리 위 판정 칸: 쓰다듬기 전에는 보이고, 쓰다듬는 동안은 옅게
+  const idle=stage===0&&T-lastStroke>1.2&&!IN.down;hintA=lerp(hintA,idle?1:0,.12);
+  hintEl.style.opacity=hintA.toFixed(3);hitEl.style.opacity=(.18+.82*hintA).toFixed(3);rimEl.style.strokeDashoffset=(-T*9).toFixed(1);
+  drawBub();drawNote();
+}
+
+// ---------- 입력 (마우스 끌기 · 터치 같은 길) ----------
+function inDown(x,y,touch){IN.down=true;IN.touch=touch;IN.x=x;IN.y=y;IN.dx0=x;IN.dy0=y;IN.dt0=T;IN.moved=0;IN.vx=0;IN.vy=0;SW.dir=0;SW.start=x;SW.ext=x;SW.counted=false;trail.length=0;trail.push({x,y,t:T})}
+function inMove(x,y,dt){const dx=x-IN.x,dy=y-IN.y;if(dt>0){IN.vx=lerp(IN.vx,dx/dt,.35);IN.vy=lerp(IN.vy,dy/dt,.35)}IN.x=x;IN.y=y;
+  if(!IN.down)return;IN.moved+=Math.hypot(dx,dy);
+  if(Math.hypot(dx,dy)>0)trail.push({x,y,t:T});
+  if(IN.moved>10&&rnd()<Math.min(1,Math.hypot(dx,dy)/6))parts.push(P('dot',x+R(-4,4),y+R(-4,4),R(-20,20),R(-10,20),70,R(.5,1.1),R(.5,.9),1+(rnd()*3|0),1,0,1.5));
+  if(!onHead(x,y))return;
+  if(SW.dir===0){if(Math.abs(x-SW.start)>8)SW.dir=Math.sign(x-SW.start),SW.ext=x}
+  else{if(SW.dir*(x-SW.ext)>0)SW.ext=x;else if(SW.dir*(SW.ext-x)>8){SW.start=SW.ext;SW.dir=-SW.dir;SW.ext=x;SW.counted=false}}
+  if(SW.dir!==0&&!SW.counted&&Math.abs(SW.ext-SW.start)>=30){SW.counted=true;stroke()}}
+function inUp(){if(!IN.down)return;IN.down=false;if(IN.moved<10&&T-IN.dt0<.45){rings.push({x:IN.x,y:IN.y,age:0});if(auto)caption('tap')}}
+const toPan=e=>{const r=panEl.getBoundingClientRect();const k=646/r.width;return [(e.clientX-r.left)*k,(e.clientY-r.top)*k]};
+let lastMoveT=0;
+panEl.addEventListener('pointerdown',e=>{if(auto)stopAuto();const [x,y]=toPan(e);panEl.setPointerCapture(e.pointerId);IN.over=true;inDown(x,y,e.pointerType!=='mouse');lastMoveT=T;e.preventDefault()});
+panEl.addEventListener('pointermove',e=>{if(auto)return;const [x,y]=toPan(e);IN.over=true;IN.touch=e.pointerType!=='mouse';inMove(x,y,Math.max(1/240,T-lastMoveT));lastMoveT=T});
+panEl.addEventListener('pointerup',e=>{if(auto)return;inUp()});
+panEl.addEventListener('pointercancel',()=>{if(auto)return;IN.down=false});
+panEl.addEventListener('pointerleave',e=>{if(auto)return;if(!IN.down)IN.over=false});
+
+// ---------- 자동 재생 (손이 들어와 → 톡 → 쓰다듬기 → 꽃 → 헝클 → 손을 뗌) ----------
+const AUTO_END=21;
+// 손 위치 = 중심 + 진폭 × sin(위상). 위상은 구간별 빠르기의 적분, 진폭 · 중심은 부드럽게 이어서 손이 튀지 않는다.
+// 꽃이 필 때(7.95~9.3초)는 손을 정수리 왼쪽에 얹은 채 멈춰 오른쪽 하늘로 오르는 꽃을 가리지 않는다
+const SEG=[[2.2,1.25],[7.95,.5],[9.3,.85],[10.6,1.75]];
+function phase(t){let p=0;for(let i=0;i<SEG.length;i++){const a=SEG[i][0],b=i+1<SEG.length?SEG[i+1][0]:1e9;if(t<=a)break;p+=(Math.min(t,b)-a)*SEG[i][1]}return p}
+function autoInput(t){
+  const cy=64;
+  if(t<.9)return {x:520,y:230,over:false,down:false};
+  if(t<1.65){const k=ss(.9,1.65,t);return {x:lerp(520,262,k),y:lerp(230,72,k)-Math.sin(k*Math.PI)*30,over:true,down:false}}
+  if(t<2.2)return {x:262,y:72,over:true,down:t>1.75&&t<1.84};
+  if(t>=14.8){const k=ss(14.8,15.7,t);return {x:lerp(270,560,k),y:lerp(70,250,k),over:k<.8,down:false}}
+  const rest=ss(7.95,8.4,t)-ss(9.3,9.7,t);
+  const A=52*ss(2.2,2.75,t)*(1-ss(7.95,8.4,t))+40*ss(9.3,9.7,t)+18*ss(10.6,11,t);
+  const cx=lerp(258,215,rest),ph=phase(t);
+  const x=cx+A*Math.sin(ph*Math.PI*2);
+  const y=lerp(cy+Math.pow((x-cx)/58,2)*9+Math.sin(ph*Math.PI*4)*1.5,62,rest);
+  return {x,y,over:true,down:true};
+}
+function stepAuto(dt){if(!auto)return;auto.t+=dt;const s=autoInput(auto.t);
+  if(s.down&&!IN.down)inDown(s.x,s.y,false);
+  inMove(s.x,s.y,dt);IN.over=s.over;
+  if(!s.down&&IN.down)inUp();
+  if(auto.t>AUTO_END)stopAuto()}
+function startAuto(){reset();auto={t:0};IN.x=520;IN.y=230;$('#playBtn').setAttribute('aria-pressed','true');$('#capN').textContent='▶';$('#capT').textContent='자동 재생 · 플로라 머리 쓰다듬기';$('#cap').classList.toggle('on',!NOCAP)}
+function stopAuto(){auto=null;IN.down=false;IN.over=false;$('#playBtn').setAttribute('aria-pressed','false');$('#cap').classList.remove('on')}
+function reset(){strokes=0;lastStroke=-99;stage=0;stageT=T;todayDone=false;exprHoldUntil=0;expr={from:'neutral',to:'neutral',t:-1,dur:.11};ruffle=0;
+  Object.assign(spring,{sx:0,svx:0,sy:0,svy:0,tl:0,tv:0});parts.length=0;rings.length=0;glows=[];trail.length=0;bub=null;note=null;IN.down=false;$('#cnt').textContent=0;syncSteps()}
+function syncSteps(){document.querySelectorAll('.st').forEach(b=>{const k=+b.dataset.go;b.classList.toggle('on',k===stage);b.classList.toggle('done',stage>k)})}
+// 단계 바로 보기: 그 단계에 막 들어간 순간으로 맞춘 뒤 이어서 움직인다
+function jump(k){if(auto)stopAuto();reset();strokes=[0,1,4,14,30][k];lastStroke=T+1.2;IN.x=262;IN.y=70;
+  if(k===4)todayDone=true;enter(k);
+  const n=k===3?54:12;for(let i=0;i<n;i++){T+=1/60;update(1/60)}
+  $('#cnt').textContent=strokes}
+
+// ---------- 화면 폭 · 크기 ----------
+function setW(w){W=w;rootEl.dataset.w=w;$('#base').src=`assets/flora_info_new_${w}x720.jpg`;
+  document.querySelectorAll('.bar [data-w]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.w===w));
+  document.querySelectorAll('img[data-src]').forEach(i=>i.src=i.dataset.src.replace('{W}',w));
+  const v=$('#vid');if(v){v.src=v.dataset.src.replace('{W}',w);v.poster=v.dataset.poster.replace('{W}',w)}fit()}
+function fit(){const k=REC?1:Math.min(1,$('#vpw').clientWidth/W);rootEl.style.setProperty('--k',k)}
+addEventListener('resize',fit);
+document.querySelectorAll('.bar [data-w]').forEach(b=>b.onclick=()=>setW(+b.dataset.w));
+$('#playBtn').onclick=()=>auto?stopAuto():startAuto();
+$('#resetBtn').onclick=()=>{stopAuto();reset()};
+document.querySelectorAll('.st').forEach(b=>b.onclick=()=>jump(+b.dataset.go));
+
+// ---------- 카렌 · 녹스 정지 화면 ----------
+const HAND_SVG=$('#hand svg').outerHTML.replace('id="hg"','id="hg2"').replace('url(#hg)','url(#hg2)');
+function sbub(host,text,x,y,side,aim,fs=15){const w=Math.ceil(measure(text,fs))+4+28,h=fs*1.3+2+18;const s=bubbleSVG(w,h,side,sub(aim,V(x,y)));
+  const d=document.createElement('div');d.className='sbub';d.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${h}px`;d.innerHTML=s.svg+`<span style="font-size:${fs}px">${text}</span>`;host.appendChild(d)}
+function hand(host,x,y,rotDeg,op=1){const d=document.createElement('div');d.className='hd';d.style.cssText=`left:${x-30}px;top:${y-37}px;transform:rotate(${rotDeg}deg);opacity:${op}`;d.innerHTML=HAND_SVG;d.querySelector('svg').setAttribute('width',52);d.querySelector('svg').setAttribute('height',57);host.appendChild(d)}
+function blush(host,x,y){const d=document.createElement('div');d.className='bl';d.style.left=(x-23)+'px';d.style.top=(y-11)+'px';host.appendChild(d)}
+function swish(host,x,y,w){const d=document.createElementNS('http://www.w3.org/2000/svg','svg');d.setAttribute('class','sw');d.setAttribute('viewBox','0 0 100 60');d.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${w*.6}px`;
+  d.innerHTML='<g fill="none" stroke="#fff" stroke-linecap="round" style="filter:drop-shadow(0 0 3px rgba(157,140,255,.95))"><path d="M8 44C30 18 62 10 92 14" stroke-width="4"/><path d="M18 54C40 34 64 28 88 30" stroke-width="2.6" opacity=".8"/><path d="M4 30C20 12 40 4 60 4" stroke-width="2" opacity=".6"/></g>';host.appendChild(d)}
+async function initSnaps(){await document.fonts.load('15px PDB').catch(()=>{});
+  const k=300/560,K=$('#snapK');hand(K,262*k,62*k,-12);blush(K,232*k,252*k);blush(K,330*k,243*k);sbub(K,'애, 애 취급하지 마!',58,176,'top',V(290*k,226*k));
+  const n=250/560,N1=$('#snapN1'),N2=$('#snapN2');swish(N1,150,20,92);hand(N1,236,40,34,.92);sbub(N1,'…손, 치워.',72,144,'top',V(338*n,270*n));
+  hand(N2,330*n,92*n,-6);blush(N2,292*n,268*n);blush(N2,380*n,262*n);sbub(N2,'…조금만이야.',62,144,'top',V(338*n,270*n))}
+
+// ---------- 시작 ----------
+let last=0;
+function frame(now){const dt=Math.min(.05,(now-last)/1000||0);last=now;tick(dt);requestAnimationFrame(frame)}
+function tick(dt){const n=Math.max(1,Math.round(dt/(1/60)));const h=dt/n;for(let i=0;i<n;i++){T+=h;stepAuto(h);update(h)}render()}
+window.__pet={tick,startAuto,jump,state:()=>({T,stage,strokes,auto:!!auto,autoT:auto?auto.t:null}),setW};
+(async()=>{
+  if(REC)document.body.classList.add('solo');
+  setW(W);
+  const L=await Promise.all([...EXPR.map(e=>load(FLORA_TEX[e])),load(FLORA_TEX.weight),document.fonts.load('18px PDB').catch(()=>{})]);
+  EXPR.forEach((e,i)=>imgs[e]=L[i]);imgs.weight=L[EXPR.length];
+  initSprites();initGL();initSnaps();syncSteps();render();
+  window.__ready=true;
+  if(!REC)requestAnimationFrame(frame);
+})();
+})();
+</script>
+</body>
+</html>

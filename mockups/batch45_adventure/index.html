@@ -257,12 +257,223 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 .HA .rose{left:auto!important;top:auto!important;margin:0!important;box-shadow:none!important;z-index:1}
 .HA .rose::before,.HA .rose::after,.HA .rose b{display:none!important}
 /*@CSS*/
+/* ===================== 2차 (PD 2차 결정 뒤) ===================== */
+.fixd>h2::after{content:"확정";order:-1;padding:1px 10px;border-radius:10px;background:#17706c;color:#fff;font-size:12.5px;font-weight:900}
+.vt{display:inline-flex;gap:0;margin:0 0 8px;border-radius:18px;box-shadow:0 0 0 1px #c9bff0;overflow:hidden}
+.vt button{font:inherit;font-size:13px;font-weight:800;min-height:34px;padding:0 16px;border:0;background:#fff;color:#4c4374;cursor:pointer}
+.vt button[aria-pressed=true]{background:#2e2350;color:#fff}
+.vp.v1h{display:none}
+/* 2차 화면: 보이는 글자 13px 이상 (1280 기준) */
+:is(.vp.v2,.opt[data-choice^=soul2],.opt[data-choice^=temple2]) :is(.rc small,.rc .gr,.new,.lock b,.gb2 small,.clk,.dl i,.rl li i,.info li i){font-size:13px}
+:is(.vp.v2,.opt[data-choice^=soul2],.opt[data-choice^=temple2]) .rc .gr{padding:0 7px}
+details.old{margin:0 0 16px;border:1px dashed #c9bff0;border-radius:12px;padding:8px 14px;background:#faf8ff}
+details.old>summary{cursor:pointer;font-weight:800;color:#6a6290;font-size:14px;min-height:32px;line-height:32px}
+.r2{display:inline-block;padding:1px 9px;border-radius:10px;background:#e0244a;color:#fff;font-size:12px;font-weight:900}
+/* 장면 바탕 (#55 A로 새로 짠 장소 그림) */
+.xb{position:absolute;inset:0;background:var(--bg) center/cover}
+.xb.dim{filter:brightness(.5) saturate(.85) blur(2.5px);transform:scale(1.04)}
+.fr.x{background:#cfd8ea}
+.fr.x>.xb{background:var(--bg) center/cover}
+.xv{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(30,18,60,.35))}
+.xash{position:absolute;inset:-40px 0 0;pointer-events:none;background:radial-gradient(circle,rgba(255,255,255,.8) 0 1.4px,transparent 2.2px) 0 0/130px 96px,radial-gradient(circle,rgba(230,226,240,.6) 0 1px,transparent 1.8px) 50px 34px/80px 66px;animation:fall 14s linear infinite}
+@keyframes fall{to{background-position:60px 480px,110px 400px}}
+.xmote{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle,rgba(255,244,210,.9) 0 1.6px,transparent 2.6px) 0 0/170px 140px,radial-gradient(circle,rgba(255,255,255,.8) 0 1.2px,transparent 2px) 80px 60px/120px 110px;animation:rise 18s linear infinite;mix-blend-mode:screen}
+@keyframes rise{to{background-position:30px -560px,120px -440px}}
+/* 크림 종이 판 · 금 실선 테 · 자두색 외곽 */
+.pz{position:absolute;border-radius:16px;background:linear-gradient(180deg,rgba(255,253,247,.96),rgba(249,242,228,.94));box-shadow:inset 0 1px 0 #fff,inset 0 0 0 5px rgba(255,255,255,.45),inset 0 0 0 6px rgba(201,169,94,.55),0 0 0 1.5px #4a2b45,0 16px 30px rgba(24,12,56,.32)}
+.pz::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;mix-blend-mode:multiply;opacity:.35;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='4'/%3E%3CfeColorMatrix values='0 0 0 0 .62 0 0 0 0 .55 0 0 0 0 .45 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)'/%3E%3C/svg%3E")}
+.pz>*{position:relative}
+.ttl{font:400 34px/1.1 "Gowun",serif;color:#2b1d3f;letter-spacing:-.5px;text-shadow:0 1px 0 #fff}
+.ttl.w{color:#fff;text-shadow:0 2px 0 rgba(43,29,63,.6),0 0 18px rgba(30,15,60,.5)}
+.sub{font-size:14px;font-weight:700;color:#5a4a72}
+.fl8{display:block;height:10px;margin:6px 0 10px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='10'%3E%3Cpath d='M0 5H100M140 5H240' stroke='%23c9a95e' stroke-width='1.2'/%3E%3Cpath d='M120 0L126 5L120 10L114 5Z' fill='%23e4b54a' stroke='%234a2b45' stroke-width='.8'/%3E%3Ccircle cx='106' cy='5' r='1.6' fill='%23c9a95e'/%3E%3Ccircle cx='134' cy='5' r='1.6' fill='%23c9a95e'/%3E%3C/svg%3E") left center/240px 10px no-repeat}
+/* 주황 단추 · 보조 단추 (상점 시안과 같은 결) */
+.xgo{position:absolute;z-index:4;display:grid;place-items:center;height:62px;padding:0 34px;transform:skewX(-10deg);border-radius:8px;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.5) 48%,transparent 66%) 0 0/260% 100% no-repeat,linear-gradient(180deg,var(--c1,#ffb070),var(--c2,#ff7a3d) 60%,var(--c3,#f0612a));color:#fff;font-size:23px;font-weight:900;letter-spacing:3px;box-shadow:inset 0 2px 0 rgba(255,255,255,.55),inset 0 -5px 0 rgba(120,30,0,.18),0 0 0 2px #fff7e6,0 0 0 3.5px #4a2b45,0 10px 18px rgba(40,15,50,.35);animation:sheen 3.6s ease-in-out infinite}
+.xgo>b{transform:skewX(10deg);text-shadow:0 2px 0 rgba(90,30,0,.25)}
+.xgo small{display:block;font-size:13px;letter-spacing:0;opacity:.95;text-align:center}
+.xgo.off{background:linear-gradient(180deg,#c9c3d6,#a59fb8);animation:none}
+.xsec{position:absolute;z-index:4;display:grid;place-items:center;height:48px;padding:0 20px;transform:skewX(-10deg);border-radius:7px;background:linear-gradient(180deg,#fffdf7,#f1e7d2);color:#2b1d3f;font-size:16px;font-weight:900;box-shadow:inset 0 1px 0 #fff,0 0 0 1.5px #c9a95e,0 0 0 3px #4a2b45,0 6px 12px rgba(30,15,60,.25)}
+.xsec>b{transform:skewX(10deg)}
+.xchip{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 11px;border-radius:13px;font-size:13px;font-weight:800;color:#fff;background:var(--cc,#5b44c8);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 0 0 1.5px rgba(74,43,69,.6)}
+/* 보석 메달 (아이콘 받침) */
+.md{position:relative;display:inline-grid;place-items:center;width:var(--s,52px);height:var(--s,52px);border-radius:50%;flex:none;background:radial-gradient(circle at 36% 30%,#fff 0,color-mix(in srgb,var(--ic) 35%,#fff) 40%,var(--ic) 78%,color-mix(in srgb,var(--ic) 60%,#2b1d3f));box-shadow:inset 0 0 0 2px rgba(255,255,255,.65),0 0 0 2.5px #e8c579,0 0 0 4px #4a2b45,0 5px 9px rgba(30,15,60,.35)}
+.md::after{content:"";position:absolute;left:18%;right:22%;top:8%;height:28%;border-radius:50%;background:linear-gradient(rgba(255,255,255,.85),rgba(255,255,255,0))}
+.md img{width:76%;height:76%;object-fit:contain;filter:drop-shadow(0 2px 2px rgba(40,20,60,.35))}
+</style>
+<style>
+/* ---------- 2차 허브 A ---------- */
+.H2 .xb{background-position:50% 40%}
+.H2 .chart{position:absolute;inset:0;z-index:1;pointer-events:none}
+.H2 .route{fill:none;stroke:#fff6d8;stroke-width:3.2;stroke-linecap:round;stroke-dasharray:1 13;animation:dash 2.4s linear infinite;filter:drop-shadow(0 0 3px rgba(255,214,120,.9))}
+@keyframes dash{to{stroke-dashoffset:-28}}
+.H2 .whl{position:absolute;left:36px;top:430px;width:250px;z-index:3;animation:bob 4.2s ease-in-out infinite;filter:drop-shadow(0 14px 10px rgba(30,40,80,.3))}
+.H2 .hdr{position:absolute;left:34px;top:18px;z-index:5}
+.H2 .hdr .ttl{font-size:36px}
+.H2 .hdr .sub{color:#fff;text-shadow:0 1px 3px rgba(20,20,60,.6)}
+.i2{position:absolute;z-index:2;width:var(--iw)}
+.i2>img.isl{display:block;width:100%;filter:drop-shadow(0 22px 14px rgba(30,40,90,.32));-webkit-mask:radial-gradient(closest-side,#000 80%,transparent);mask:radial-gradient(closest-side,#000 80%,transparent)}
+.mk8{-webkit-mask:radial-gradient(closest-side,#000 80%,transparent);mask:radial-gradient(closest-side,#000 80%,transparent)}
+.i2 .shd{position:absolute;left:12%;right:12%;top:86%;height:26px;border-radius:50%;background:radial-gradient(closest-side,rgba(60,50,120,.28),transparent);z-index:-1}
+.i2.today .halo{position:absolute;left:-16%;right:-16%;top:6%;height:84%;border-radius:50%;z-index:-1;background:radial-gradient(closest-side,rgba(255,248,214,.95),rgba(190,255,214,.45) 55%,transparent);animation:breath 3s ease-in-out infinite}
+@keyframes breath{50%{opacity:.6;transform:scale(1.05)}}
+.np{position:absolute;left:50%;top:calc(100% - 30px);z-index:3;display:flex;align-items:center;gap:10px;width:max-content;min-width:214px;margin-left:-107px;padding:8px 18px 22px 8px;border-radius:14px;background:linear-gradient(180deg,#fffdf6,#f5ead4);box-shadow:inset 0 1px 0 #fff,inset 0 0 0 4px rgba(255,255,255,.5),inset 0 0 0 5px rgba(201,169,94,.6),0 0 0 1.5px #4a2b45,0 10px 18px rgba(20,30,60,.35)}
+.np>div{display:flex;flex-direction:column;gap:1px}
+.np b{font:400 19px/1.15 "Gowun",serif;color:#2b1d3f}
+.np small{font-size:13px;color:#9a5d00;font-weight:800}
+.np em{font-style:normal;font-size:13px;color:#5a4a72;font-weight:700}
+.np .op{position:absolute;right:-14px;bottom:-18px;display:grid;place-items:center;height:36px;padding:0 18px;transform:skewX(-10deg);border-radius:6px;background:linear-gradient(180deg,#ffb070,#ff7a3d 60%,#f0612a);color:#fff;font-size:15px;font-weight:900;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 0 0 1.5px #fff7e6,0 0 0 3px #4a2b45,0 4px 8px rgba(40,15,50,.3)}
+.np .op>i{font-style:normal;transform:skewX(10deg)}
+.i2 .tag2{position:absolute;left:4%;top:-4px;z-index:4;display:flex;align-items:center;gap:6px;height:30px;padding:0 14px 0 10px;border-radius:15px;background:linear-gradient(180deg,#4fd18b,#1f9a5c);color:#fff;font-size:14px;font-weight:900;box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 0 0 2px #fff,0 0 0 3.5px #17704a,0 4px 8px rgba(0,0,0,.2)}
+.i2.ashy>img.isl{filter:grayscale(.85) brightness(.95) drop-shadow(0 22px 14px rgba(30,40,90,.32))}
+.i2.dim>img.isl{filter:grayscale(.9) brightness(1.05) opacity(.8)}
+.i2.dim .np{filter:saturate(.3)}
+.i2.dim .np .op{background:linear-gradient(180deg,#c9c3d6,#a59fb8)}
+.H2 .rose2{position:absolute;right:30px;bottom:56px;width:150px;height:150px;z-index:1;opacity:.92;animation:spin 90s linear infinite}
+.H2 .bon{position:absolute;left:24px;right:24px;bottom:12px;z-index:5;display:flex;align-items:center;gap:14px;height:36px;padding:0 18px;border-radius:18px;font-size:13.5px;font-weight:700;color:#3b2d55;background:linear-gradient(180deg,rgba(255,253,247,.94),rgba(246,238,222,.92));box-shadow:0 0 0 1.5px #c9a95e,0 0 0 3px rgba(74,43,69,.5),0 6px 12px rgba(20,20,60,.2)}
+.H2 .bon b{color:#17706c}.H2 .bon img{width:22px;height:22px;vertical-align:-6px;margin-right:3px}
+.scr.go .i2{animation:inUp .55s both}
+.scr.go .i2:nth-of-type(2){animation-delay:.07s}.scr.go .i2:nth-of-type(3){animation-delay:.14s}.scr.go .i2:nth-of-type(4){animation-delay:.21s}.scr.go .i2:nth-of-type(5){animation-delay:.28s}.scr.go .i2:nth-of-type(6){animation-delay:.35s}
+/* ---------- 2차 원소섬 A 회전판 ---------- */
+.E2 .wheel{position:absolute;left:34px;top:58px;width:560px;height:560px;z-index:2}
+.E2 .wheel svg.base{position:absolute;inset:0;filter:drop-shadow(0 18px 18px rgba(20,60,40,.35))}
+.E2 .dm{position:absolute;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;overflow:hidden;background:var(--sk,url(a/bg2/element.jpg)) center/360px auto;box-shadow:inset 0 0 0 3px rgba(255,255,255,.75),0 0 0 3px var(--e),0 0 0 5px #fff6dc,0 0 0 6.5px #4a2b45,0 6px 10px rgba(0,0,0,.3);filter:saturate(.55) brightness(.92)}
+.E2 .dm img{position:absolute;left:50%;top:52%;width:118%;transform:translate(-50%,-50%)}
+.E2 .dl{position:absolute;z-index:3;transform:translate(-50%,0);display:flex;align-items:center;gap:5px;padding:2px 10px 2px 3px;border-radius:12px;white-space:nowrap;background:#fffaf0;font-size:13px;font-weight:800;color:#3b2d55;box-shadow:0 0 0 1.5px #4a2b45,0 3px 5px rgba(0,0,0,.2)}
+.E2 .dl i{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--e);color:#fff;font-style:normal;font-size:12.5px;font-weight:900}
+.E2 .dm.on{width:128px;height:128px;margin:-64px 0 0 -64px;filter:none;box-shadow:inset 0 0 0 3px rgba(255,255,255,.8),0 0 0 4px var(--e),0 0 0 7px #ffe7a6,0 0 0 8.5px #4a2b45,0 0 30px 8px rgba(255,246,190,.9)}
+.scr[data-st=sun] .E2 .dm{filter:none}
+.scr[data-st=zero] .E2 .dm.on{filter:saturate(.4)}
+.E2 .orb{position:absolute;left:50%;top:50%;width:208px;height:208px;margin:-104px 0 0 -104px;border-radius:50%;z-index:2;overflow:hidden;background:radial-gradient(circle at 50% 38%,#fbfff4,#d6f3e2 55%,#8fd2ad);box-shadow:inset 0 -14px 30px rgba(23,112,74,.35),inset 0 10px 24px rgba(255,255,255,.9),0 0 0 4px #fff4d6,0 0 0 9px #c9963c,0 0 0 10.5px #4a2b45}
+.E2 .orb img{position:absolute;left:50%;top:50%;width:150%;transform:translate(-50%,-56%)}
+.E2 .orb::after{content:"";position:absolute;left:16%;right:30%;top:7%;height:30%;border-radius:50%;background:linear-gradient(rgba(255,255,255,.8),rgba(255,255,255,0))}
+.E2 .orb b{position:absolute;left:0;right:0;bottom:22px;text-align:center;font:400 17px/1 "Gowun",serif;color:#0f4a30;text-shadow:0 0 6px #fff,0 0 3px #fff}
+.E2 .ptr{position:absolute;left:50%;top:-30px;width:46px;height:64px;margin-left:-23px;z-index:4;filter:drop-shadow(0 4px 3px rgba(0,0,0,.35))}
+.scr.go .E2 .spin{animation:wspin 1.6s cubic-bezier(.2,.8,.25,1) both}
+@keyframes wspin{from{transform:rotate(-200deg)}}
+.E2 .rp2{left:612px;top:70px;width:500px;height:510px;padding:24px 26px}
+.E2 .lvp{position:relative;height:74px;margin:6px 0 8px}
+.E2 .lvp svg{position:absolute;inset:0}
+.E2 .lvp span{position:absolute;top:44px;transform:translateX(-50%);font-size:13px;font-weight:800;color:#5a4a72;white-space:nowrap;text-align:center}
+.E2 .lvp span.nx{color:#9a5d00}
+.E2 .rec3{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.E2 .rec3 b{font:400 46px/1 "Gowun",serif;color:#17704a}
+.E2 .rec3 span{font-size:14px;font-weight:800;color:#3b2d55}
+.E2 .rl{margin:12px 0 0;padding:0;list-style:none;font-size:13.5px;font-weight:700;color:#4c4374}
+.E2 .rl li{display:flex;gap:8px;align-items:center;margin-bottom:5px}
+.E2 .rl li i{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#2bb673;color:#fff;font-style:normal;font-size:12.5px;font-weight:900;flex:none}
+.E2 .res7{position:absolute;left:26px;right:26px;bottom:20px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:800;color:#3b2d55}
+.E2 .res7 .md{--s:34px}
+.E2 .res7 .md b{position:relative;z-index:1;color:#fff;font-size:15px;font-weight:900;text-shadow:0 0 2px #2b1d3f,0 1px 2px #2b1d3f,0 0 4px rgba(0,0,0,.5)}
+.E2 .res7>span{white-space:nowrap}
+.E2 .orb b{left:40px;right:40px;bottom:16px;padding:4px 0;border-radius:12px;background:rgba(255,253,247,.9);box-shadow:0 0 0 1.5px #17704a}
+.E2 .res7 .md.on{--s:40px;box-shadow:inset 0 0 0 2px rgba(255,255,255,.65),0 0 0 2.5px #ffe7a6,0 0 0 4px #4a2b45,0 0 14px #9cf0c0}
+/* ---------- 2차 원소섬 결과 A 달력 도장 ---------- */
+.ER2 .cal2{position:absolute;left:352px;top:24px;width:560px;height:392px;z-index:2;transform:rotate(-2.2deg);filter:drop-shadow(0 24px 26px rgba(10,5,40,.55))}
+.ER2 .cal2 .sh{position:absolute;inset:0;border-radius:6px 6px 4px 4px;background:linear-gradient(180deg,#fffdf6,#f6eedb);-webkit-mask:var(--torn);mask:var(--torn)}
+.ER2 .cal2 .sh::before{content:"";position:absolute;inset:0;mix-blend-mode:multiply;opacity:.4;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='4'/%3E%3CfeColorMatrix values='0 0 0 0 .6 0 0 0 0 .52 0 0 0 0 .4 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)'/%3E%3C/svg%3E")}
+.ER2 .cal2 .hd{position:absolute;left:0;right:0;top:0;height:74px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#3cc983,#1f9a5c);box-shadow:inset 0 -3px 0 rgba(0,0,0,.12)}
+.ER2 .cal2 .hd b{position:absolute;left:28px;top:18px;font:400 32px/1 "Gowun",serif;color:#fff;text-shadow:0 2px 0 rgba(15,74,48,.5)}
+.ER2 .cal2 .hd small{position:absolute;right:26px;top:28px;font-size:14px;font-weight:800;color:#eafff2}
+.ER2 .cal2 .rings{position:absolute;left:30px;right:30px;top:-14px;height:30px;background:radial-gradient(circle at 50% 60%,#4a2b45 0 5px,transparent 5.5px) 0 0/48px 30px repeat-x,radial-gradient(ellipse 7px 14px at 50% 40%,transparent 0 3.5px,#d9dbe6 4px 6.5px,#7d7f94 7px,transparent 7.5px) 0 0/48px 30px repeat-x}
+.ER2 .cal2 .win{position:absolute;left:28px;top:96px;width:300px;height:238px;border-radius:150px 150px 10px 10px;overflow:hidden;background:url(a/w/sky.jpg) center/cover;box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 4.5px #c9a95e,inset 0 -40px 40px rgba(255,255,255,.4),0 0 0 1.5px #4a2b45}
+.ER2 .cal2 .win img{position:absolute;left:50%;top:48%;width:250px;transform:translate(-50%,-50%);animation:bob 5s ease-in-out infinite;filter:drop-shadow(0 12px 10px rgba(20,60,40,.3))}
+.ER2 .cal2 .big{position:absolute;right:30px;top:94px;font:400 120px/1 "Gowun",serif;color:#1f9a5c;opacity:.16}
+.ER2 .cal2 .nt{position:absolute;left:350px;right:24px;bottom:42px;font-size:14px;font-weight:700;color:#4c4374;line-height:1.5}
+.ER2 .stp{position:absolute;left:340px;top:96px;width:210px;height:210px;z-index:3;transform:rotate(-14deg)}
+.scr.go .ER2 .stp{animation:stampIn .6s .45s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes stampIn{0%{transform:scale(2.2) rotate(-4deg);opacity:0}60%{opacity:1}100%{transform:scale(1) rotate(-14deg)}}
+.ER2 .stp.g{left:-40px;top:-6px;width:150px;height:150px;transform:rotate(10deg)}
+.scr.go .ER2 .stp.g{animation:stampG .6s .9s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes stampG{0%{transform:scale(2.2);opacity:0}100%{transform:scale(1) rotate(10deg)}}
+/* ---------- 2차 등급전 A ---------- */
+.R2 .lad3{position:absolute;left:18px;top:62px;width:196px;height:560px;z-index:2}
+.R2 .lad3 svg{position:absolute;inset:0;filter:drop-shadow(0 12px 14px rgba(40,10,40,.4))}
+.R2 .rg3{position:absolute;left:30px;display:flex;align-items:center;gap:8px;color:#fff}
+.R2 .rg3 img{width:46px;height:52px;object-fit:contain;filter:drop-shadow(0 3px 3px rgba(0,0,0,.35))}
+.R2 .rg3 b{display:block;font:400 17px/1 "Gowun",serif;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.R2 .rg3 small{font-size:13px;font-weight:700;color:#efe4ff}
+.R2 .rg3.off{opacity:.62}
+.R2 .rg3.me img{width:58px;height:64px;filter:drop-shadow(0 0 10px #ffd36b)}
+.R2 .mep{position:absolute;left:128px;top:448px;z-index:3;display:grid;place-items:center;height:30px;padding:0 12px;border-radius:15px;background:linear-gradient(180deg,#ff8cc4,#e0408f);color:#fff;font-size:14px;font-weight:900;box-shadow:0 0 0 2px #fff,0 0 0 3.5px #4a2b45,0 0 14px #ff9fd0}
+.R2 .rv3{position:absolute;left:236px;width:500px;height:150px;z-index:2;transform:skewX(-6deg);border-radius:12px;background:linear-gradient(105deg,rgba(255,253,247,.97),rgba(253,244,236,.95));box-shadow:inset 7px 0 0 var(--t),inset 0 0 0 5px rgba(255,255,255,.4),inset 0 0 0 6px rgba(201,169,94,.5),0 0 0 1.5px #4a2b45,0 12px 22px rgba(60,10,40,.28)}
+.R2 .rv3>*{transform:skewX(6deg)}
+.R2 .rv3 .em{position:absolute;left:22px;top:16px;width:56px;height:64px;object-fit:contain;filter:drop-shadow(0 3px 3px rgba(0,0,0,.3))}
+.R2 .rv3 .nm{position:absolute;left:90px;top:14px;font:400 21px/1 "Gowun",serif;color:#2b1d3f}
+.R2 .rv3 .ln{position:absolute;left:90px;top:44px;font-size:13.5px;font-weight:700;color:#5a4a72}
+.R2 .rv3 .pc{position:absolute;left:300px;top:14px}
+.R2 .rv3 .fs{position:absolute;left:28px;top:84px;display:flex;gap:8px}
+.R2 .rv3 .fs .fc{width:52px;height:52px;border-radius:12px;background-size:155% auto}
+.R2 .rv3 .xgo{right:20px;top:42px;height:56px;padding:0 26px;font-size:20px;--c1:#ff9ccb;--c2:#ff4fa3;--c3:#e0358a}
+.R2 .wk3{left:752px;top:62px;width:362px;height:494px;padding:18px 20px}
+.R2 .wk3 h5{margin:0;font:400 22px/1 "Gowun",serif;color:#2b1d3f}
+.R2 .wk3 .row{display:flex;align-items:center;gap:10px;height:44px;padding:0 10px;border-bottom:1px dashed rgba(122,90,140,.3);font-size:15px;font-weight:800;color:#3b2d55}
+.R2 .wk3 .row i{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;font-style:normal;font-size:14px;color:#fff;background:#a99bc8}
+.R2 .wk3 .row:nth-of-type(1) i{background:linear-gradient(#ffe07a,#d9a52b);color:#5a3b00}.R2 .wk3 .row:nth-of-type(2) i{background:linear-gradient(#f2f4f8,#a9b0c0);color:#3b3f55}.R2 .wk3 .row:nth-of-type(3) i{background:linear-gradient(#ffc79a,#c07a44)}
+.R2 .wk3 .row.me{border-radius:10px;border:0;background:linear-gradient(90deg,#ffe3f1,#fff2f8);box-shadow:inset 4px 0 0 #ff4fa3}
+.R2 .wk3 .row span{margin-left:auto;font-variant-numeric:tabular-nums}
+.R2 .dk3{position:absolute;left:236px;bottom:16px;z-index:3;display:flex;align-items:center;gap:8px;height:52px;padding:0 16px 0 10px;border-radius:26px;background:rgba(255,253,247,.94);box-shadow:0 0 0 1.5px #c9a95e,0 0 0 3px rgba(74,43,69,.5);font-size:13.5px;font-weight:800;color:#3b2d55}
+.R2 .dk3 .fc{width:40px;height:40px;border-radius:10px}
+/* ---------- 2차 주간 정산 C 증명서 ---------- */
+.W2 .rays{position:absolute;left:50%;top:210px;width:1500px;height:1500px;margin:-750px 0 0 -750px;z-index:1;background:repeating-conic-gradient(from 0deg,rgba(255,236,190,.16) 0 4deg,transparent 4deg 12deg);-webkit-mask:radial-gradient(closest-side,#000,transparent);mask:radial-gradient(closest-side,#000,transparent);animation:spin 70s linear infinite}
+.W2 .crt{position:absolute;left:50%;top:20px;width:660px;height:396px;margin-left:-330px;z-index:2;transform:rotate(-1.2deg);filter:drop-shadow(0 26px 30px rgba(5,2,30,.6))}
+.W2 .crt svg{position:absolute;inset:0}
+.W2 .crt .tx2{position:absolute;inset:0;text-align:center;color:#3b2448}
+.W2 .crt h6{margin:66px 0 0;font:400 30px/1 "Gowun",serif;letter-spacing:6px;color:#4a2b45}
+.W2 .crt .l1{margin-top:22px;font-size:14px;font-weight:700;color:#6a5070}
+.W2 .crt .pl3{margin-top:4px;font:400 92px/1 "Gowun",serif;color:#9a2d6b;text-shadow:0 2px 0 #fff,0 3px 0 rgba(154,45,107,.25)}
+.W2 .crt .pl3 small{font-size:40px}
+.W2 .crt .l2{font-size:15px;font-weight:800;color:#4a2b45}
+.W2 .crt .sgn{position:absolute;left:78px;bottom:58px;text-align:left;font:italic 400 26px/1 Georgia,serif;color:#3a2a6a;opacity:.85}
+.W2 .crt .sgn small{display:block;margin-top:6px;padding-top:5px;border-top:1px solid rgba(74,43,69,.4);font:700 13px/1 "Pre",sans-serif;color:#6a5070;font-style:normal}
+.W2 .crt .emb2{position:absolute;left:50%;top:-34px;width:84px;height:94px;margin-left:-42px;object-fit:contain;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35))}
+.W2 .crt .sl{position:absolute;right:54px;bottom:26px;width:118px;height:150px}
+.scr.go .W2 .crt{animation:crtIn .7s cubic-bezier(.2,1.2,.4,1) both}
+@keyframes crtIn{from{transform:translateY(-60px) rotate(-6deg);opacity:0}}
+.scr.go .W2 .sl{animation:stampG2 .5s .7s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes stampG2{from{transform:scale(2);opacity:0}}
+/* ---------- 2차 잿빛성 (C 페이지 · B 결과) 공통 성벽 ---------- */
+.K2 .wl{position:absolute;z-index:2}
+.K2 .wl svg{display:block;overflow:visible}
+.K2 .wl.ww{-webkit-mask:linear-gradient(90deg,transparent,#000 40px,#000 calc(100% - 40px),transparent);mask:linear-gradient(90deg,transparent,#000 40px,#000 calc(100% - 40px),transparent)}
+.K2 .rw{position:absolute;z-index:3;display:flex;flex-direction:column;align-items:center;gap:4px;transform:translateX(-50%)}
+.K2 .rw .md{--s:50px}
+.K2 .rw .md.off{filter:grayscale(1) brightness(1.05);opacity:.75}
+.K2 .rw b{font-size:14px;font-weight:900;color:#fff;text-shadow:0 1px 3px rgba(20,10,40,.8)}
+.K2 .rw b.dk{color:#2b1d3f;text-shadow:0 0 4px #fff,0 0 2px #fff}
+.K2 .nowp{position:absolute;z-index:4;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
+.K2 .nowp span{padding:3px 12px;border-radius:13px;background:linear-gradient(180deg,#fff,#f2ecff);font-size:13.5px;font-weight:900;color:#4a2b45;box-shadow:0 0 0 1.5px #4a2b45,0 0 12px rgba(255,236,190,.9);white-space:nowrap}
+.K2 .nowp i{width:2px;height:40px;background:linear-gradient(#fff,rgba(255,255,255,0))}
+.K2 .info{left:40px;bottom:26px;width:520px;padding:14px 18px}
+.K2 .info li{font-size:13.5px;font-weight:700;color:#4c4374;margin:0 0 4px;list-style:none;display:flex;gap:8px;align-items:center}
+.K2 .info li i{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#6f7d9c;color:#fff;font-style:normal;font-size:12.5px;font-weight:900;flex:none}
+.scr.go .K2 .sweep{animation:sweep 1.6s .2s cubic-bezier(.3,.8,.3,1) both}
+@keyframes sweep{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.scr.go .K2 .flg{animation:flgUp .6s both;animation-delay:calc(.5s + var(--d,0s))}
+@keyframes flgUp{from{transform:translateY(60px);opacity:0}}
+.K2 .flg{position:absolute;z-index:3;width:70px;height:120px;transform-origin:bottom}
+.K2 .flg svg{animation:wave 2.4s ease-in-out infinite;transform-origin:8px 10px}
+@keyframes wave{50%{transform:skewY(-4deg) scaleX(.94)}}
+.K2 .ttl2{position:absolute;left:50%;top:20px;z-index:5;transform:translateX(-50%);text-align:center}
+.K2 .ttl2 b{display:block;font:400 54px/1 "Gowun",serif;color:#fff;text-shadow:0 3px 0 rgba(43,29,63,.6),0 0 24px rgba(255,236,190,.6)}
+.K2 .cw{clip-path:inset(0 var(--rx,47.5%) 0 0)}
+.scr.go .K2 .cw{animation:sweep2 1.8s .2s cubic-bezier(.3,.8,.3,1) both}
+@keyframes sweep2{from{clip-path:inset(0 100% 0 0)}}
+.scr[data-st=b0] .K2,.scr[data-st=r0] .K2{--rx:100%}
+.scr[data-st=full] .K2,.scr[data-st=r180] .K2{--rx:0%}
+.K2 .seam{position:absolute;z-index:3;width:24px;margin-left:-12px;background:radial-gradient(closest-side,rgba(255,250,220,.95),rgba(255,220,240,.4) 60%,transparent);filter:blur(2px);animation:breath 2.2s ease-in-out infinite}
+.K2 .whs{position:absolute;z-index:4;width:120px;margin-left:-60px;animation:bob 3.6s ease-in-out infinite;filter:drop-shadow(0 8px 6px rgba(0,0,0,.35))}
+.K2 .hd2{position:absolute;left:34px;top:62px;z-index:5}
+.K2 .hd2 .sub{color:#eef;text-shadow:0 1px 3px rgba(10,5,30,.8);margin-top:6px;font-size:15px}
+.K2 .ttl2>span{display:inline-block;margin-top:8px;padding:5px 16px;border-radius:16px;background:rgba(30,20,60,.6);color:#fff;font-size:15px;font-weight:800;box-shadow:0 0 0 1px rgba(255,231,166,.6)}
+</style>
+<style>
 </style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute"><filter id="wcf"><feTurbulence type="fractalNoise" baseFrequency=".022" numOctaves="3" seed="4"/><feDisplacementMap in="SourceGraphic" scale="14"/><feGaussianBlur stdDeviation="1.4"/><feComponentTransfer><feFuncR type="discrete" tableValues=".1 .3 .5 .7 .85 1"/><feFuncG type="discrete" tableValues=".1 .3 .5 .7 .85 1"/><feFuncB type="discrete" tableValues=".15 .35 .55 .72 .88 1"/></feComponentTransfer></filter></svg>
 <main class="page">
 <h1>모험 허브 · 콘텐츠 (묶음 4) + 모험 결과 · 정산 (묶음 5) 시안</h1>
+<p class="ctx" style="background:#fff4e0;border:1px solid #f0c98a"><b>2차 (PD 결정 반영)</b> · 정한 시안에는 초록 <b>「확정」</b>, 품질을 올린 화면은 시안 안의 <b>「1차 ↔ 2차」</b> 단추로 같은 상태를 바꿔 볼 수 있어요(기본 2차). <b>기억의 회랑 · 신전은 새 시안 A / B</b>에서 골라 주세요(1차 반려안은 접어 둠). 고르지 않은 1차 시안은 각 자리에 접혀 있습니다. 등급전 결과 B · 겹침 · 도움말 B는 1차 그대로 확정, 잿빛성 「페이지 (D4-5) : B」 메모는 결과 화면(D5-1) B로 읽었습니다.</p>
 <p class="lead">design/feedback70/ui_inventory.html 의 D4-1 ~ D4-6 · D5-1 ~ D5-5 입니다. <b>콘텐츠마다 페이지 → 결과를 붙여서</b> 보여 줍니다(원소섬 = 달력 · 등급전 = 리그 · 회랑 = 복도 · 잿빛성 = 성벽 · 신전 = 신전). 화면마다 A · B · C 중 하나를 누르면 「고름」 표시가 붙고, 페이지에서 고른 글자와 같은 결과 시안에는 「페이지 시안과 짝」 표시가 붙습니다. 맨 위 「결과 복사」로 고른 것을 한 번에 복사합니다. <b>정해진 것은 그대로 썼습니다</b>: 오른쪽 책갈피 틀, 결과의 보상 띠 카드 날아옴 + 「받기」, 「등급 점수」 낱말, 잠김 배지 + Lv 꼬리표, 가이드 퀘스트가 짚는 「열기 · 입장 · 도전」 단추(이름 · 한 개씩 · 크게). 그림은 모두 게임 안 그림이고 수치 · 이름 조합은 예시입니다.</p>
 <div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button><button type="button" data-replay-all>▶ 등장 다시 보기</button><button type="button" class="copy" data-copy>결과 복사</button>
 <nav class="toc"><a href="#s-hub">허브</a><a href="#s-el">원소 구름섬</a><a href="#s-rank">항해사 등급전</a><a href="#s-soul">기억의 회랑</a><a href="#s-castle">잿빛성 #62</a><a href="#s-temple">신전</a><a href="#s-bg">#55 배경</a><a href="#s-help">#56 겹침 · 도움말</a></nav></div>
@@ -354,10 +565,33 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <figure><img class="w12" src="now/frame_adventure_1280.jpg" alt="지금 모험 허브 1280"><img class="w16" src="now/frame_adventure_1600.jpg" alt="지금 모험 허브 1600"><figcaption>now/frame_adventure_(1280|1600).jpg</figcaption></figure>
 <figure><img src="now/hub_guide_overlap.jpg" alt="가이드 겹침"><figcaption>가이드 말풍선 겹침 · now/hub_guide_overlap.jpg</figcaption></figure></div></section>
 
-<section class="opt" data-choice="hub_a" data-l="A" data-choice-group="hub" data-choice-label="A · 항해도 위 섬">
+<section class="opt fixd" data-choice="hub_a" data-l="A" data-choice-group="hub" data-choice-label="A · 항해도 위 섬">
 <h2>A · 항해도 위 여섯 섬 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">모험 = 「고래를 타고 섬으로」. 바다 지도 위에 <b>게임의 섬 그림</b>을 띄우고 고래에서 점선 항로가 이어집니다. 오늘 열린 섬은 발밑에 빛 고리가 돌고, 이름표는 섬마다 기울기가 달라 손으로 꽂은 느낌. 입장권이 0이면 섬이 잿빛으로 바래고, 잠긴 섬은 자물쇠 + Lv 꼬리표.</p>
 <p class="cost">섬 그림은 이미 있는 세계 레이어를 잘라 쓰면 됨(새 그림 0장). 자리가 고정이라 7번째 콘텐츠가 생기면 지도 자리를 다시 짜야 함.</p>
+<p class="cap"><span class="r2">2차</span> 빈 민트 종이 대신 <b>본편 하늘 · 구름 바다 그림</b>(#55 A로 새로 짠 허브 배경) 위에 섬을 띄우고, 섬마다 장소 그림을 다르게(축제 섬 · 잿빛 폐허 · 흰 돔 · 별 관측 섬), 이름표는 보석 메달 + 금 실선 크림 판, 항로는 반짝이며 흐르는 점선, 오른쪽 아래 놋쇠 나침반. 오늘 섬은 구름 위 빛 번짐, 잿빛성 섬엔 재가 날림.</p>
+<div class="vt"><button type="button" data-ver="1" aria-pressed="false">1차</button><button type="button" data-ver="2" aria-pressed="true">2차</button></div>
+<div class="vp v2"><div class="scr" data-st="base">
+<div class="bk soft" style="--b12:url(a/bt_element_1280.jpg);--b16:url(a/bt_element_1600.jpg)"></div>
+<div class="fr x H2"><i class="xb" style="--bg:url(a/bg2/hub.jpg)"></i><i class="xmote"></i>
+<svg class="chart" viewBox="0 0 1140 638"><g fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="1"><path d="M-20 520 Q570 380 1160 520"/><path d="M-20 380 Q570 240 1160 380"/><path d="M-20 240 Q570 100 1160 240"/><path d="M300 -10 Q260 320 300 650"/><path d="M800 -10 Q840 320 800 650"/></g>
+<path class="route" d="M200 500 C 260 470, 300 440, 410 430 S 560 450, 640 470 M410 430 C 470 360, 560 300, 620 230 S 800 290, 900 330 S 990 210, 1000 180 M410 430 C 330 380, 220 330, 170 260"/></svg>
+<img class="whl" src="a/w/whale_giant.png" alt="">
+<i class="rose2" data-g="rose"></i>
+<div class="hdr"><b class="ttl w">모험</b><div class="sub">오늘 열린 곳 · 남은 입장권이 섬마다 보여요</div></div>
+<div class="wal"><span><img src="a/i/icon_pearl.png" alt="">200a</span><span><img src="a/i/icon_gem.png" alt="">3</span></div><b class="qm">?</b>
+<div class="i2" style="left:80px;top:96px;--iw:190px"><i class="shd"></i><span class="new" style="right:18px;top:6px">NEW</span><img class="isl" src="a/w/isl1_1.png" alt=""><div class="np"><span class="md" style="--ic:#e46aa3"><img src="a/i/nav_school.png" alt=""></span><div><b>이야기</b><small>열린 장 0 / 6</small><em>장 보스 정화 · 아이 합류</em></div><span class="op"><i>열기</i></span></div></div>
+<div class="i2 today" style="left:300px;top:232px;--iw:240px" data-off="zero"><i class="halo"></i><span class="tag2">오늘 · 생명섬</span><img class="isl" src="a/w/isl4_0.png" alt=""><i class="spk" style="left:30px;top:50px"></i><i class="spk" style="left:200px;top:30px;animation-delay:.8s"></i><div class="np"><span class="md" style="--ic:#4fd18b"><img src="a/i/adv_element.png" alt=""></span><div><b>원소 구름섬</b><small>오늘 입장 2 / 2</small><em>수호신 연속전 · 원소석</em></div><span class="op"><i>열기</i></span></div></div>
+<div class="i2 dim hid" style="left:300px;top:232px;--iw:240px" data-on="zero"><i class="shd"></i><img class="isl" src="a/w/isl4_0.png" alt=""><div class="np"><span class="md" style="--ic:#9aa1ad"><img src="a/i/adv_element.png" alt=""></span><div><b>원소 구름섬</b><small style="color:#7a8296">오늘 입장 0 / 2</small><em>내일 노을섬 · 05:00에 채워져요</em></div><span class="op"><i>열기</i></span></div></div>
+<div class="i2" style="left:540px;top:44px;--iw:220px"><i class="shd"></i><img class="isl" src="a/w/isl2_3.png" alt="" data-off="zero"><img class="isl hid" src="a/w/isl2_3.png" alt="" style="filter:grayscale(.9)" data-on="zero"><span class="lock hid" style="left:86px;top:50px" data-on="zero"><i></i><b>Lv.8</b></span><div class="np"><span class="md" style="--ic:#ff4fa3"><img src="a/i/adv_arena.png" alt=""></span><div><b>항해사 등급전</b><small class="tx" data-x-zero="항해사 Lv.8에 열려요">브론즈 · 1,000점</small><em class="clk" data-off="zero">정산까지 4일 13시간</em></div><span class="op"><i>열기</i></span></div></div>
+<div class="i2" style="left:650px;top:318px;--iw:200px"><i class="shd"></i><img class="isl" src="a/w/isl3_4.png" alt="" style="filter:grayscale(.7) sepia(.2) hue-rotate(210deg) drop-shadow(0 22px 14px rgba(30,40,90,.32))"><div class="np"><span class="md" style="--ic:#9a6bff"><img src="a/i/adv_soul.png" alt=""></span><div><b>기억의 회랑</b><small>도전 3 / 3</small><em>잿빛 메아리 4단계까지</em></div><span class="op"><i>열기</i></span></div></div>
+<div class="i2 ashy" style="left:860px;top:186px;--iw:220px"><i class="shd"></i><img class="isl" src="a/w/isl1_0.png" alt=""><i class="xash" style="inset:-20px 0 40px;border-radius:50%"></i><div class="np"><span class="md" style="--ic:#6f7d9c"><img src="a/i/adv_tower.png" alt=""></span><div><b>잿빛성</b><small class="tx" data-x-zero="오늘 입장 0 / 3">최고 95초 / 180초</small><em>오래 버틸수록 장비</em></div><span class="op"><i>열기</i></span></div></div>
+<div class="i2" style="left:930px;top:30px;--iw:160px"><i class="shd"></i><img class="isl" src="a/w/isl3_3.png" alt="" style="filter:sepia(.25) drop-shadow(0 0 18px rgba(255,220,150,.8))"><div class="np" style="margin-left:-170px;top:calc(100% - 46px)"><span class="md" style="--ic:#ffb020"><img src="a/i/adv_temple.png" alt=""></span><div><b>신전 · 승급전</b><small>지금 견습 항해사</small></div><span class="op"><i>열기</i></span></div></div>
+<div class="bon">항해사 계급 <b>견습 항해사</b> (공격 · 보호막 +0%) · 장비 도감 공격 <b>+9.0%</b> · 성장 기록 공격 <b>+5.4%</b><span style="margin-left:auto"><img src="a/i/icon_crystal.png" alt="">기억 결정 150</span><span><img src="a/i/icon_dust.png" alt="">색가루 0</span></div>
+<div class="gd hid" style="left:536px;top:498px" data-on="guide"><i></i></div>
+<div class="gb2 lf hid" style="left:40px;top:300px;--tx:40px" data-on="guide"><i class="av"></i><div>오늘 열린 <b>원소 구름섬</b>부터 가 보자!<small>섬을 누르면 그 콘텐츠 페이지가 열려요</small></div></div>
+</div><i data-mk></i>
+</div></div>
 <div class="vp"><div class="scr" data-st="base">
 <div class="bk soft" style="--b12:url(a/bt_element_1280.jpg);--b16:url(a/bt_element_1600.jpg)"></div>
 <div class="fr HA"><i class="rose"></i>
@@ -377,7 +611,8 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 </div><i data-mk></i>
 </div></div></section>
 
-<section class="opt" data-choice="hub_b" data-l="B" data-choice-group="hub" data-choice-label="B · 여행 포스터 6장">
+<details class="old"><summary>1차 다른 시안 · B · 여행 포스터 6장 (고르지 않음)</summary>
+<section class="opt" data-choice="hub_b" data-l="B" data-og="hub" data-choice-label="B · 여행 포스터 6장">
 <h2>B · 여행 포스터 여섯 장 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">구름섬 항구 대합실에 걸린 <b>여행 포스터</b>. 장마다 하늘색 · 섬 · 상징(콘텐츠 아이콘)이 달라 한눈에 갈리고, 아래 절취선 표가 「열기」. 오늘 열린 포스터만 빛이 스치고, 잠긴 곳은 줄무늬 띠 「Lv.8에 열려요」로 감깁니다. 걸릴 때 살짝 흔들리며 내려옵니다.</p>
 <p class="cost">지금 6장 구조와 가장 가까워 바꾸기 쉬움. 포스터 결이 「종이」 하나라 화면이 다소 얌전함, 오늘 열린 곳의 강조가 A보다 약함.</p>
@@ -395,8 +630,10 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="gb2 tr hid" style="left:380px;top:20px;--tx:250px" data-on="guide"><i class="av"></i><div>초록 포스터가 오늘 열린 섬이야!<small>아래 표를 누르면 들어가요</small></div></div>
 </div><i data-mk></i>
 </div></div></section>
+</details>
 
-<section class="opt" data-choice="hub_c" data-l="C" data-choice-group="hub" data-choice-label="C · 오늘 추천 하나 크게 + 작은 다섯">
+<details class="old"><summary>1차 다른 시안 · C · 오늘 추천 하나 크게 + 작은 다섯 (고르지 않음)</summary>
+<section class="opt" data-choice="hub_c" data-l="C" data-og="hub" data-choice-label="C · 오늘 추천 하나 크게 + 작은 다섯">
 <h2>C · 오늘 추천 하나 크게 + 작은 다섯 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">들어오자마자 <b>「오늘 할 것」 하나</b>가 크게: 유나가 말풍선으로 오늘 섬을 알려 주고 수호신이 섬 뒤에서 내다봅니다. 나머지 다섯은 오른쪽 작은 칸(아이콘 · 상태 · 「열기」). 입장권이 0이면 큰 칸은 다음 할 일(잿빛성 · 회랑 등)로 바뀝니다.</p>
 <p class="cost">가장 빨리 고르게 해 줌. 「추천」 규칙(무엇을 크게 띄울지)을 새로 정해야 하고, 작은 다섯은 개성이 줄어 「같은 틀」 느낌이 남음.</p>
@@ -417,6 +654,7 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="gd hid" style="left:500px;top:532px" data-on="guide"><i></i></div>
 </div><i data-mk></i>
 </div></div></section>
+</details>
 
 <style>
 /* ---------- 콘텐츠 페이지 공통 작은 부품 ---------- */
@@ -579,10 +817,38 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <figure><img src="now/inv_result_element.jpg" alt="지금 원소섬 결과"><figcaption>결과 지금 · now/inv_result_element.jpg</figcaption></figure></div></section>
 
 <h4>페이지 (D4-2)</h4>
-<section class="opt e-gr" data-choice="el_a" data-l="A" data-pairs="el_res" data-choice-group="el_page" data-choice-label="A · 요일 회전판">
+<section class="opt e-gr fixd" data-choice="el_a" data-l="A" data-pairs="el_res" data-choice-group="el_page" data-choice-label="A · 요일 회전판">
 <h2>A · 요일 회전판 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">일곱 칸 <b>요일 회전판</b>이 들어올 때 한 바퀴 돌아 오늘 칸에서 멈춥니다. 칸마다 그 섬 그림, 가운데는 오늘의 수호신. 일요일엔 그늘이 걷혀 일곱 칸이 다 밝아지고 가운데에 수호신 여섯. 오른쪽은 관문 사다리(5레벨마다 마름모, 다음 첫 도달은 금빛) · 기록 · 도전 / 소탕.</p>
 <p class="cost">회전판 하나로 「오늘 · 이번 주」가 한 번에 읽힘. 원 안 글자가 작아 1280에서 섬 이름은 두 줄로만 씀. 회전 연출은 들어올 때 한 번(1.4초)만.</p>
+<p class="cap"><span class="r2">2차</span> 회전판을 <b>놋쇠 테 + 나무 고리 + 양피지 원판</b>으로 다시 그리고, 칸마다 섬 그림을 둥근 창(메달)에 담아 <b>요일 글자가 늘 똑바로</b> 서게 했습니다(1차의 거꾸로 글자 해결). 가운데는 유리 구슬 속 오늘의 수호신. 오른쪽은 크림 종이 판: 관문 마름모 길 · 큰 기록 숫자 · 도전 / 소탕 · 공명 보석 줄. 바탕은 새로 짠 원소섬 하늘(#55 A).</p>
+<div class="vt"><button type="button" data-ver="1" aria-pressed="false">1차</button><button type="button" data-ver="2" aria-pressed="true">2차</button></div>
+<div class="vp v2"><div class="scr" data-st="today">
+<div class="bk soft" style="--b12:url(a/bt_element_1280.jpg);--b16:url(a/bt_element_1600.jpg)"></div>
+<div class="fr x E2"><i class="xb" style="--bg:url(a/bg2/element.jpg)"></i><i class="xmote"></i><span class="back">모험</span><div class="dks"><span>덱 편성 · 원소섬</span><span class="rcm">추천 편성</span></div><b class="qm">?</b>
+<div class="wheel"><div class="spin" style="position:absolute;inset:0"><i data-g="wheel"></i>
+<i class="dm on" style="left:280px;top:58px;--e:#4fd18b"><img src="a/w/isl4_0.png" class="mk8" alt=""></i><span class="dl" style="left:280px;top:126px;--e:#4fd18b"><i>수</i>생명섬 · 오늘</span>
+<i class="dm" style="left:454px;top:142px;--e:#9a6bff"><img src="a/w/isl3_3.png" class="mk8" alt=""></i><span class="dl" style="left:454px;top:194px;--e:#9a6bff"><i>목</i>별의 섬</span>
+<i class="dm" style="left:496px;top:329px;--e:#f2c14e"><img src="a/w/isl1_1.png" class="mk8" alt=""></i><span class="dl" style="left:496px;top:381px;--e:#d9a52b"><i>금</i>빛의 섬</span>
+<i class="dm" style="left:376px;top:476px;--e:#ff9a3c"><img src="a/w/isl6_0.png" class="mk8" alt=""></i><span class="dl" style="left:376px;top:518px;--e:#ff9a3c"><i>토</i>노을섬</span>
+<i class="dm" style="left:184px;top:476px;--e:#e957bc"><img src="a/w/isl2_3.png" class="mk8" alt=""></i><span class="dl" style="left:184px;top:518px;--e:#e957bc"><i>일</i>여섯 섬</span>
+<i class="dm" style="left:64px;top:329px;--e:#ff5f4f"><img src="a/w/isl2_1.png" class="mk8" alt=""></i><span class="dl" style="left:64px;top:381px;--e:#ff5f4f"><i>월</i>불꽃섬</span>
+<i class="dm" style="left:106px;top:142px;--e:#3fa9ff"><img src="a/w/isl5_1.png" class="mk8" alt=""></i><span class="dl" style="left:106px;top:194px;--e:#3fa9ff"><i>화</i>물결섬</span>
+</div>
+<svg class="ptr" viewBox="0 0 46 64"><path d="M23 62 L6 26 A18 18 0 1 1 40 26 Z" fill="url(#gold)" stroke="#4a2b45" stroke-width="2.5" stroke-linejoin="round"/><circle cx="23" cy="20" r="8" fill="#4fd18b" stroke="#4a2b45" stroke-width="2"/><circle cx="20" cy="17" r="3" fill="#fff" opacity=".8"/></svg>
+<div class="orb" data-off="sun"><img src="a/e/guardian_green_sd.png" alt=""><b class="tx" data-x-zero="내일 · 노을섬">생명 수호신</b></div>
+<div class="orb hid" data-on="sun" style="background:radial-gradient(circle at 50% 38%,#fff,#f6e6ff 60%,#d9c2f5)"><div style="position:absolute;inset:26px 18px 50px;display:grid;grid-template-columns:repeat(3,1fr);place-items:center"><img src="a/e/g_red.png" style="position:static;width:54px;transform:none" alt=""><img src="a/e/g_blue.png" style="position:static;width:54px;transform:none" alt=""><img src="a/e/g_green.png" style="position:static;width:54px;transform:none" alt=""><img src="a/e/g_purple.png" style="position:static;width:54px;transform:none" alt=""><img src="a/e/g_white.png" style="position:static;width:54px;transform:none" alt=""><img src="a/e/g_orange.png" style="position:static;width:54px;transform:none" alt=""></div><b style="color:#5a2f9a">일요일 · 여섯 섬</b></div>
+</div>
+<div class="pz rp2"><div class="ttl tx" data-x-sun="일요일 · 원소 구름섬">생명섬 · 원소 구름섬</div><div class="sub">90초 동안 수호신 Lv.1부터 연속전 · 약점 불꽃 아이 ×1.6</div><i class="fl8"></i>
+<div class="lvp"><i data-g="lvpath"></i><span style="left:12px">Lv.1</span><span style="left:82px">5</span><span style="left:152px">10</span><span style="left:222px">15</span><span class="nx" style="left:292px">20 · 첫 도달<br>채색석 60</span><span style="left:362px">25</span><span style="left:436px">29</span></div>
+<div class="rec3"><b>Lv.17</b><span>최고 기록</span><span class="tx" data-x-zero="오늘 입장 0 / 2 · 05:00에 채워져요">오늘 입장 2 / 2</span></div>
+<ul class="rl"><li><i>1</i>쓰러뜨리면 바로 다음 레벨 · 5레벨마다 관문 수호신</li><li><i>2</i>시간 끝 · 보호막이 깨지면 도달한 만큼 원소석</li></ul>
+<b class="xgo" style="left:26px;top:330px;width:230px;--c1:#7ff0b4;--c2:#2bc47a;--c3:#17975a" data-off="zero"><b>도전</b></b><b class="xgo off hid" style="left:26px;top:330px;width:230px;font-size:19px" data-on="zero"><b>내일 다시</b></b>
+<b class="xsec" style="left:282px;top:337px"><b>소탕 · Lv.17</b></b>
+<div class="res7"><span>공명</span><i class="md" style="--ic:#ff5f4f"><b>3</b></i><i class="md" style="--ic:#3fa9ff"><b>1</b></i><i class="md on" style="--ic:#2bc47a"><b>5</b></i><i class="md" style="--ic:#9a6bff"><b>2</b></i><i class="md" style="--ic:#e0b030"><b>0</b></i><i class="md" style="--ic:#ff9a3c"><b>1</b></i><span style="margin-left:6px">생명 Lv.5 → 6 · 340 / 400 <b style="color:#17704a">강화</b></span></div>
+</div>
+</div><i data-mk></i>
+</div></div>
 <div class="vp"><div class="scr" data-st="today">
 <div class="bk soft" style="--b12:url(a/bt_element_1280.jpg);--b16:url(a/bt_element_1600.jpg)"></div>
 <div class="fr EA"><i data-scape="sundial"></i><span class="back">모험</span><div class="dks"><span>덱 편성 · 원소섬</span><span class="rcm">추천 편성</span></div><b class="qm">?</b>
@@ -611,7 +877,8 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 </div><i data-mk></i>
 </div></div></section>
 
-<section class="opt e-gr" data-choice="el_b" data-l="B" data-pairs="el_res" data-choice-group="el_page" data-choice-label="B · 세로 수호신 탑">
+<details class="old"><summary>1차 다른 시안 · B · 세로 수호신 탑 (고르지 않음)</summary>
+<section class="opt e-gr" data-choice="el_b" data-l="B" data-og="el_page" data-choice-label="B · 세로 수호신 탑">
 <h2>B · 세로 수호신 탑 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">왼쪽은 <b>뜯는 요일 달력</b>(오늘 장만 앞으로 나옴, 일요일엔 일곱 장이 다 나옴), 가운데는 Lv.1부터 쌓인 <b>수호신 탑</b>. 5층마다 관문층에 수호신 얼굴, 내 최고 층에 초록 깃발, 다음 첫 도달 층에 선물. 오른쪽에 기록과 도전 / 소탕.</p>
 <p class="cost">「얼마나 올라갔나」가 가장 잘 보임 · 결과(깃발이 올라감)와 바로 이어짐. 탑 위쪽 Lv.30+ 는 다음 업데이트 몫이라 잠김 층이 늘 보임.</p>
@@ -646,8 +913,10 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <b class="cta2" style="left:976px;top:478px"><b>소탕 · Lv.17</b></b>
 </div><i data-mk></i>
 </div></div></section>
+</details>
 
-<section class="opt e-gr" data-choice="el_c" data-l="C" data-pairs="el_res" data-choice-group="el_page" data-choice-label="C · 원소 공명 막대 중심">
+<details class="old"><summary>1차 다른 시안 · C · 원소 공명 막대 중심 (고르지 않음)</summary>
+<section class="opt e-gr" data-choice="el_c" data-l="C" data-og="el_page" data-choice-label="C · 원소 공명 막대 중심">
 <h2>C · 원소 공명 막대 중심 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">이 콘텐츠의 진짜 목적인 <b>원소 장비 공명</b>을 앞에: 여섯 유리관에 원소석이 차오르고, 오늘 섬 관만 크게 열려 「강화」. 오른쪽은 오늘 섬 카드 하나(그림 · 기록 · 도전 / 소탕), 요일은 위쪽 작은 칩 줄.</p>
 <p class="cost">「왜 매일 와야 하나」가 가장 분명. 대신 요일 · 섬 느낌이 약해 달력 주인공이 흐려지고 공명 수치 계산(다음 단계 필요량)을 새로 보여 줘야 함.</p>
@@ -667,13 +936,33 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <b class="cta2" style="left:928px;top:494px"><b>소탕 · Lv.17</b></b>
 </div><i data-mk></i>
 </div></div></section>
+</details>
 
 <h4>결과 (D5-2) <small>— 페이지 A 회전판 → 요일 도장 · B 탑 → 깃발 · C 공명 → 결정</small></h4>
 <div class="states" data-group="el_res"><span>결과 상태</span><button type="button" data-v="reach" aria-pressed="true">도달 Lv.17</button><button type="button" data-v="gate">관문 첫 돌파 (Lv.20)</button><button type="button" data-v="sweep">소탕</button><button type="button" data-v="fail">실패 (Lv.1 못 잡음)</button></div>
-<section class="opt e-gr" data-choice="elr_a" data-l="A" data-choice-group="el_res" data-choice-label="A · 요일 도장 (목록 B 섬 도장 카드)">
+<section class="opt e-gr fixd" data-choice="elr_a" data-l="A" data-choice-group="el_res" data-choice-label="A · 요일 도장 (목록 B 섬 도장 카드)">
 <h2>A · 요일 장에 도장 쾅 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">회전판의 오늘 칸이 <b>달력 한 장</b>으로 뜯겨 나오고 도달 레벨 도장이 찍힙니다(잉크 번짐 테). 관문 첫 돌파면 금빛 둘째 도장 「첫 돌파 · 채색석 60」. 소탕은 「소탕」 도장, 실패는 바랜 빈 도장 + 「입장권은 그대로예요」. 보상은 정해진 띠 카드.</p>
 <p class="cost">글자 도장 두 개뿐이라 만들기 쉬움. 도장 잉크 결은 CSS 가장자리 마스크로 표현(그림 0장).</p>
+<p class="cap"><span class="r2">2차</span> 달력 장을 <b>고리에서 뜯긴 종이</b>(종이결 · 들쭉날쭉한 아래 가장자리 · 기울기)로, 섬 그림은 아치 창 안에 통째로 담아 1차의 「잘린 섬 끝」을 없앴습니다. 도장은 <b>잉크가 번지고 빠진 둥근 고무 도장</b>(테두리 글자 · 도달 레벨)이 찍히는 연출, 관문 첫 돌파는 금빛 작은 도장이 하나 더.</p>
+<div class="vt"><button type="button" data-ver="1" aria-pressed="false">1차</button><button type="button" data-ver="2" aria-pressed="true">2차</button></div>
+<div class="vp v2"><div class="scr" data-st="reach">
+<div class="bk dk" style="--b12:url(a/bt_element_1280.jpg);--b16:url(a/bt_element_1600.jpg)"></div>
+<div class="cz ER2"><i class="xmote"></i>
+<div class="cal2"><div class="sh"></div><svg class="rg9" viewBox="0 0 500 40" width="500" height="40" style="position:absolute;left:30px;top:-18px;z-index:2;overflow:visible"><g id="rg1"><circle cx="20" cy="30" r="5" fill="#4a2b45"/><path d="M14 30 C14 8 26 8 26 22" fill="none" stroke="#4a2b45" stroke-width="6" stroke-linecap="round"/><path d="M14 30 C14 8 26 8 26 22" fill="none" stroke="#e8e6f0" stroke-width="3.5" stroke-linecap="round"/><path d="M15.5 24 C15.5 13 21 11 23.5 15" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></g><use href="#rg1" x="58"/><use href="#rg1" x="116"/><use href="#rg1" x="174"/><use href="#rg1" x="232"/><use href="#rg1" x="290"/><use href="#rg1" x="348"/><use href="#rg1" x="406"/><use href="#rg1" x="464"/></svg><div class="hd"><b class="tx" data-x-sweep="수요일 · 소탕">수요일</b><small>생명섬 · 원소 구름섬</small></div>
+<div class="win"><img src="a/w/isl4_0.png" class="mk8" alt=""></div><span class="big">17</span>
+<div class="nt tx" data-x-sweep="소탕 · 최고 기록 Lv.17 만큼 바로 받았어요" data-x-fail="Lv.1을 쓰러뜨리면 보상을 받아요 · 입장권은 그대로예요 (2 / 2)" data-x-gate="관문 Lv.20 첫 돌파! 다음 첫 도달은 Lv.25">90초 · 수호신 연속전 · 최고 기록 Lv.17 · 다음 첫 도달 Lv.20</div>
+<div class="stp" data-on="reach" data-g="stamp" data-col="#1f9a5c" data-t="도달" data-m="Lv.17" data-r="생명섬 · 원소 구름섬 · 수요일 · " data-id="a"></div>
+<div class="stp hid" data-on="gate" data-g="stamp" data-col="#1f9a5c" data-t="도달" data-m="Lv.21" data-r="생명섬 · 원소 구름섬 · 수요일 · " data-id="b"></div>
+<div class="stp hid" data-on="sweep" data-g="stamp" data-col="#2a6fc0" data-t="소탕" data-m="Lv.17" data-r="생명섬 · 최고 기록만큼 바로 · " data-id="c"></div>
+<div class="stp hid" data-on="fail" data-g="stamp" data-col="#9a94ae" data-t="도달" data-m="—" data-r="생명섬 · 입장권은 그대로 · " data-id="d" style="opacity:.6"></div>
+<div class="stp g hid" data-on="gate" data-g="stamp" data-col="#c98d2a" data-t="첫 돌파" data-m="Lv.20" data-r="관문 · 채색석 60 · 관문 · " data-id="e"></div>
+</div>
+<div class="band" style="top:430px"></div>
+<div class="cards" style="top:462px" data-off="fail"><span class="rc" style="--rr:#2bb673;--rl:#e7f8ee"><img src="a/i/res_element.png" alt=""><b class="tx" data-x-gate="80">55</b><small>생명 원소석</small></span><span class="rc" style="--rr:#3f8cff;--rl:#e6f0ff"><i class="gr" style="--gc:#3f8cff">희귀</i><img src="a/i/gear_weapon.png" alt=""><b>1</b><small>생명 무기 3단계</small></span><span class="rc hid" data-on="gate" style="--rr:#e957bc;--rl:#fbeefe"><img src="a/i/icon_gem.png" alt=""><b>60</b><small>채색석 · 첫 돌파</small></span></div>
+<div class="fail hid" style="top:520px" data-on="fail"><span>Lv.1도 못 잡았어요 · 입장권은 그대로예요 (2 / 2)</span></div>
+<div class="take"><b class="tx" data-x-fail="닫기">받기</b></div>
+</div></div></div>
 <div class="vp"><div class="scr" data-st="reach">
 <div class="bk dk" style="--b12:url(a/bt_element_1280.jpg);--b16:url(a/bt_element_1600.jpg)"></div>
 <div class="cz">
@@ -686,7 +975,8 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="take"><b class="tx" data-x-fail="닫기">받기</b></div>
 </div></div></div></section>
 
-<section class="opt e-gr" data-choice="elr_b" data-l="B" data-choice-group="el_res" data-choice-label="B · 탑 위로 깃발 (목록 C 레벨 사다리 깃발)">
+<details class="old"><summary>1차 다른 시안 · B · 탑 위로 깃발 (목록 C 레벨 사다리 깃발) (고르지 않음)</summary>
+<section class="opt e-gr" data-choice="elr_b" data-l="B" data-og="el_res" data-choice-label="B · 탑 위로 깃발 (목록 C 레벨 사다리 깃발)">
 <h2>B · 탑 위로 깃발이 올라감 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">페이지의 수호신 탑이 그대로 나와 <b>깃발이 이전 최고에서 새 층까지 올라갑니다</b>. 지나간 관문층은 선물이 열리고, 첫 돌파면 그 층이 금빛 테로 반짝. 소탕은 깃발이 이미 꽂힌 채(움직임 없이), 실패는 깃발이 1층에 머묾.</p>
 <p class="cost">페이지 B와 짝일 때만 자연스러움. 깃발 이동 길이를 기록 차이로 계산해야 함.</p>
@@ -709,8 +999,10 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="fail hid" style="top:510px" data-on="fail"><span>Lv.1도 못 잡았어요 · 입장권은 그대로예요 (2 / 2)</span></div>
 <div class="take"><b class="tx" data-x-fail="닫기">받기</b></div>
 </div></div></div></section>
+</details>
 
-<section class="opt e-gr" data-choice="elr_c" data-l="C" data-choice-group="el_res" data-choice-label="C · 속성 결정 (목록 A)">
+<details class="old"><summary>1차 다른 시안 · C · 속성 결정 (목록 A) (고르지 않음)</summary>
+<section class="opt e-gr" data-choice="elr_c" data-l="C" data-og="el_res" data-choice-label="C · 속성 결정 (목록 A)">
 <h2>C · 속성 결정이 맺힘 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">생명색 <b>결정</b>이 맺히며 도달 레벨이 새겨지고, 아래 공명 관에 이번에 얻은 원소석만큼 반짝이며 차오릅니다(「공명 Lv.6까지 60 남음」). 실패는 금 간 잿빛 결정.</p>
 <p class="cost">공명(페이지 C)과 바로 이어짐 · 결정 하나라 섬 그림이 없어도 됨. 화면 위쪽이 비어 보여 연출(결정 빛)을 계속 돌려야 함.</p>
@@ -725,6 +1017,7 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="fail hid" style="top:510px" data-on="fail"><span>입장권은 그대로예요 (2 / 2)</span></div>
 <div class="take"><b class="tx" data-x-fail="닫기">받기</b></div>
 </div></div></div></section>
+</details>
 
 <style>
 /* ---------- 등급전 공통 ---------- */
@@ -873,10 +1166,33 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <figure><img src="now/inv_rank_week.jpg" alt="지금 주간 정산"><figcaption>주간 정산 · now/inv_rank_week.jpg</figcaption></figure></div></section>
 
 <h4>페이지 (D4-3)</h4>
-<section class="opt" data-choice="rank_a" data-l="A" data-pairs="rank_res rank_week" data-choice-group="rank_page" data-choice-label="A · 순위 사다리 + 상대 카드">
+<section class="opt fixd" data-choice="rank_a" data-l="A" data-choice-group="rank_page" data-choice-label="A · 순위 사다리 + 상대 카드">
 <h2>A · 순위 사다리 + 상대 카드 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">왼쪽 짙은 기둥에 <b>계급 사다리</b>(브론즈 → 마스터, 내 자리 표시), 가운데 상대 세 장(기운 카드 · 계급 엠블럼 · 네 얼굴 · 상성 유리 / 불리 · 예상 승률 · 「도전」), 오른쪽 이번 주 순위와 정산 시계. 정산 직후엔 들어오자마자 「지난주 정산」 카드가 먼저 뜹니다.</p>
 <p class="cost">지금 정보 그대로 자리만 바꿈 → 가장 싸고 안전. 화면이 「표」에 가까워 결투 느낌은 B보다 약함.</p>
+<p class="cap"><span class="r2">2차</span> 바탕을 <b>노을 하늘 · 축제 섬</b>(#55 A로 새로 짠 등급전 배경)으로, 사다리는 <b>금실 수 놓은 벨벳 깃발천</b>에 계급 엠블럼, 상대 카드는 크림 종이 + 금 실선 + 계급 색 띠. 1차에서 겹치던 「전투력 · 예상 승률」 줄을 나눠 겹침을 없앴고, 순위 판은 1 · 2 · 3위 메달 동그라미 + 내 줄 분홍 띠.</p>
+<div class="vt"><button type="button" data-ver="1" aria-pressed="false">1차</button><button type="button" data-ver="2" aria-pressed="true">2차</button></div>
+<div class="vp v2"><div class="scr" data-st="base">
+<div class="bk soft" style="--b12:url(a/bt_duel_1280.jpg);--b16:url(a/bt_duel_1600.jpg)"></div>
+<div class="fr x R2"><i class="xb" style="--bg:url(a/bg2/rank.jpg)"></i><i class="xv"></i><span class="back">모험</span><div class="dks"><span>덱 편성 · 등급전</span><span>상대 바꾸기 ↻</span></div><b class="qm">?</b>
+<div class="lad3"><i data-g="banner"></i>
+<div class="rg3 off" style="top:36px"><img src="a/s/emb_ma.svg" alt=""><div><b>마스터</b><small>2,000</small></div></div>
+<div class="rg3 off" style="top:110px"><img src="a/s/emb_di.svg" alt=""><div><b>다이아</b><small>1,700</small></div></div>
+<div class="rg3 off" style="top:184px"><img src="a/s/emb_pl.svg" alt=""><div><b>플래티넘</b><small>1,450</small></div></div>
+<div class="rg3 off" style="top:258px"><img src="a/s/emb_go.svg" alt=""><div><b>골드</b><small>1,250</small></div></div>
+<div class="rg3" style="top:332px"><img src="a/s/emb_si.svg" alt=""><div><b>실버</b><small>1,100</small></div></div>
+<div class="rg3 me" style="top:420px;left:24px"><img src="a/s/emb_br.svg" alt=""><div><b>브론즈</b><small>지금 여기</small></div></div>
+</div><span class="mep tx" data-x-settled="1,040점">1,086점</span>
+<div class="rv3" style="top:62px;--t:#a9b4c8"><img class="em" src="a/s/emb_si.svg" alt=""><b class="nm">은빛날개 채원</b><span class="ln">실버 · 등급 점수 1,120 · 전투력 19.1a</span><span class="pc"><span class="xchip" style="--cc:#d04a6a">상대 상성 · 속성 2명</span></span><span class="xchip" style="position:absolute;left:90px;top:66px;--cc:#b02c4c">예상 승률 32% · 어려움</span><div class="fs" style="left:28px;top:94px"><i class="fc e-pu" style="background-image:url(a/c/serena.png)"></i><i class="fc e-wh" style="background-image:url(a/c/aria.png)"></i><i class="fc e-gr" style="background-image:url(a/c/flora.png)"></i><i class="fc e-re" style="background-image:url(a/c/suah.png)"></i></div><b class="xgo" data-off="zero"><b>도전</b></b><b class="xgo off hid" data-on="zero"><b>도전</b></b></div>
+<div class="rv3" style="top:220px;--t:#c98d5a"><img class="em" src="a/s/emb_br.svg" alt=""><b class="nm">구름항구 단비</b><span class="ln">브론즈 · 등급 점수 1,060 · 전투력 17.9a</span><span class="pc"><span class="xchip" style="--cc:#8a8aa6">상성 유리 없음</span></span><span class="xchip" style="position:absolute;left:90px;top:66px;--cc:#c07a10">예상 승률 55% · 팽팽</span><div class="fs" style="left:28px;top:94px"><i class="fc e-bl" style="background-image:url(a/c/dohee.png)"></i><i class="fc e-or" style="background-image:url(a/c/juhee.png)"></i><i class="fc e-wh" style="background-image:url(a/c/seoa.png)"></i><i class="fc e-pu" style="background-image:url(a/c/lumi.png)"></i></div><b class="xgo" data-off="zero"><b>도전</b></b><b class="xgo off hid" data-on="zero"><b>도전</b></b></div>
+<div class="rv3" style="top:378px;--t:#c98d5a"><img class="em" src="a/s/emb_br.svg" alt=""><b class="nm">새벽돛 유리</b><span class="ln">브론즈 · 등급 점수 980 · 전투력 15.2a</span><span class="pc"><span class="xchip" style="--cc:#17975a">내 상성 · 역할 2명</span></span><span class="xchip" style="position:absolute;left:90px;top:66px;--cc:#17975a">예상 승률 78% · 여유</span><div class="fs" style="left:28px;top:94px"><i class="fc e-gr" style="background-image:url(a/c/ciel.png)"></i><i class="fc e-wh" style="background-image:url(a/c/mio.png)"></i><i class="fc e-pu" style="background-image:url(a/c/noel.png)"></i><i class="fc e-bl" style="background-image:url(a/c/yuri.png)"></i></div><b class="xgo" data-off="zero"><b>도전</b></b><b class="xgo off hid" data-on="zero"><b>도전</b></b></div>
+<div class="dk3">등급전 덱<i class="fc e-re" style="background-image:url(a/c/karen.png)"></i><i class="fc e-pu" style="background-image:url(a/c/yuna.png)"></i><i class="fc e-wh" style="background-image:url(a/c/mio.png)"></i><i class="fc e-gr" style="background-image:url(a/c/ciel.png)"></i>전투력 18.3a · <b class="tx" data-x-zero="오늘 도전 0 / 5 · 05:00에 채워져요" style="color:#b02c6c">오늘 도전 5 / 5</b></div>
+<div class="pz wk3"><h5>이번 주 순위</h5><i class="fl8"></i><span class="clk" style="margin:0 0 8px">정산까지 4일 13시간</span>
+<div class="row"><i>1</i>노을함대 이안<span>1,912</span></div><div class="row"><i>2</i>폭풍섬 하랑<span>1,640</span></div><div class="row"><i>3</i>별빛선단 미르<span>1,388</span></div><div class="row" style="justify-content:center;color:#9a8ab0">· · ·</div><div class="row me"><i style="background:#ff4fa3">12</i>나 · 항해사<span class="tx" data-x-settled="1,040">1,086</span></div><div class="row"><i>13</i>구름항구 단비<span>1,060</span></div>
+<p style="font-size:13px;color:#6a5a80;font-weight:700;margin:10px 4px 0">이번 주 한 번이라도 도전해야 정산 보상</p></div>
+<div class="settle hid" data-on="settled"><b>지난주 정산 · 12위</b><small>채색석 300 받음 · 점수는 기본 1,000 위의 절반만 남고 새 주가 시작돼요 (1,172 → 1,086)</small></div>
+</div><i data-mk></i>
+</div></div>
 <div class="vp"><div class="scr" data-st="base">
 <div class="bk soft" style="--b12:url(a/bt_duel_1280.jpg);--b16:url(a/bt_duel_1600.jpg)"></div>
 <div class="fr RA"><i data-scape="fest"></i><span class="back">모험</span><div class="dks"><span>덱 편성 · 등급전</span><span>상대 바꾸기 ↻</span></div><b class="qm">?</b>
@@ -897,7 +1213,8 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 </div><i data-mk></i>
 </div></div></section>
 
-<section class="opt" data-choice="rank_b" data-l="B" data-pairs="rank_res rank_week" data-choice-group="rank_page" data-choice-label="B · 결투장 세 문">
+<details class="old"><summary>1차 다른 시안 · B · 결투장 세 문 (고르지 않음)</summary>
+<section class="opt" data-choice="rank_b" data-l="B" data-og="rank_page" data-choice-label="B · 결투장 세 문">
 <h2>B · 결투장 세 문 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">밤 결투장의 <b>아치 문 셋</b> — 문 안에 상대 대표 아이가 서 있고, 문 위 리본이 상성(초록 = 내가 유리 · 빨강 = 상대 유리 · 회색 = 없음). 위에 걸린 깃발에 내 계급 · 등급 점수 · 정산 시계. 「도전」은 문 아래 하나씩.</p>
 <p class="cost">고르는 맛이 가장 큼. 대표 아이 전신 그림을 문마다 읽어야 해 첫 진입 로딩이 늘고, 주간 순위는 「?」 옆 칩으로 밀려남.</p>
@@ -914,8 +1231,10 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="settle hid" data-on="settled"><b>지난주 정산 · 12위</b><small>채색석 300 받음 · 새 주가 시작돼요 (1,172 → 1,086)</small></div>
 </div><i data-mk></i>
 </div></div></section>
+</details>
 
-<section class="opt" data-choice="rank_c" data-l="C" data-pairs="rank_res rank_week" data-choice-group="rank_page" data-choice-label="C · 트레이딩 카드 셋">
+<details class="old"><summary>1차 다른 시안 · C · 트레이딩 카드 셋 (고르지 않음)</summary>
+<section class="opt" data-choice="rank_c" data-l="C" data-og="rank_page" data-choice-label="C · 트레이딩 카드 셋">
 <h2>C · 트레이딩 카드 셋 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">상대 셋이 <b>반짝이 카드</b>로 부채꼴로 놓입니다(카드 테 = 상대 계급 색, 그림 위로 무지개 박 반사가 지나감). 왼쪽엔 내 계급 엠블럼과 덱, 주간 순위는 오른쪽 끝 세로 책갈피 탭. 「도전」은 카드 아래.</p>
 <p class="cost">수집 게임다운 손맛 · 상대 바꾸기 때 카드 다시 돌리기 연출이 재미있음. 상성 · 승률 글자 자리가 좁아 작게 읽힘.</p>
@@ -932,10 +1251,12 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="settle hid" data-on="settled"><b>지난주 정산 · 12위</b><small>채색석 300 받음 · 새 주가 시작돼요 (1,172 → 1,086)</small></div>
 </div><i data-mk></i>
 </div></div></section>
+</details>
 
 <h4>등급전 결과 (D5-4) <small>— 페이지 A 사다리 → 점수 사다리 · B 세 문 → VS 결과판 · C 카드 → 이긴 아이 한 명</small></h4>
 <div class="states" data-group="rank_res"><span>결과</span><button type="button" data-v="win" aria-pressed="true">승리</button><button type="button" data-v="lose">패배</button></div>
-<section class="opt" data-choice="rr_a" data-l="A" data-choice-group="rank_res" data-choice-label="A · 점수 사다리 이동 (목록 B)">
+<details class="old"><summary>1차 다른 시안 · A · 점수 사다리 이동 (목록 B) (고르지 않음)</summary>
+<section class="opt" data-choice="rr_a" data-l="A" data-og="rank_res" data-choice-label="A · 점수 사다리 이동 (목록 B)">
 <h2>A · 점수 사다리 이동 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">페이지의 계급 사다리가 그대로 나와 <b>내 표시가 등급 점수만큼 올라가거나(승리) 내려갑니다(패배)</b>. 옆에 다음 계급까지 막대, 아래 정해진 보상 띠(채색석 · 등급 점수 카드).</p>
 <p class="cost">정보가 가장 정확(얼마 올랐고 다음까지 얼마). 화면이 조용한 편이라 승리 쾌감은 C보다 적음.</p>
@@ -951,8 +1272,9 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="cards" style="top:452px"><span class="rc" style="--rr:#e957bc;--rl:#fbeefe"><img src="a/i/icon_gem.png" alt=""><b class="tx" data-x-lose="5">30</b><small>채색석</small></span><span class="rc" style="--rr:#ff4fa3;--rl:#fff0f7"><img src="a/i/adv_arena.png" alt=""><b class="tx" data-x-lose="−12">+18</b><small>등급 점수</small></span></div>
 <div class="take"><b>받기</b></div>
 </div></div></div></section>
+</details>
 
-<section class="opt" data-choice="rr_b" data-l="B" data-choice-group="rank_res" data-choice-label="B · VS 결과판 (목록 A)">
+<section class="opt fixd" data-choice="rr_b" data-l="B" data-choice-group="rank_res" data-choice-label="B · VS 결과판 (목록 A)">
 <h2>B · VS 결과판 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">세 문 중 들어간 문의 연장 — 비스듬히 갈린 판에 <b>내 넷 vs 상대 넷</b>, 진 쪽 얼굴이 잿빛으로 바랩니다. 가운데 VS, 아래 등급 점수 변화와 보상 띠.</p>
 <p class="cost">대결 장면(색 영토) 직후 흐름이 자연스러움. 얼굴 8개를 읽어야 함(이미 장면에서 읽은 것 재사용).</p>
@@ -969,7 +1291,8 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="take"><b>받기</b></div>
 </div></div></div></section>
 
-<section class="opt" data-choice="rr_c" data-l="C" data-choice-group="rank_res" data-choice-label="C · 이긴 아이 한 명 포즈">
+<details class="old"><summary>1차 다른 시안 · C · 이긴 아이 한 명 포즈 (고르지 않음)</summary>
+<section class="opt" data-choice="rr_c" data-l="C" data-og="rank_res" data-choice-label="C · 이긴 아이 한 명 포즈">
 <h2>C · 이긴 아이 한 명 포즈 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">카드에서 튀어나온 듯 <b>이긴 쪽 대표 아이 한 명</b>이 크게, 뾰족 꼬리 말풍선으로 한마디. 패배면 상대 대표가 서고 내 대표는 작은 얼굴로 「다음엔 꼭!」.</p>
 <p class="cost">가장 화려하고 아이 매력이 삶. 아이마다 승리 대사가 필요(대사 데이터 추가), 점수 정보는 한 줄로 줄어듦.</p>
@@ -984,10 +1307,12 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="cards" style="top:452px"><span class="rc" style="--rr:#e957bc;--rl:#fbeefe"><img src="a/i/icon_gem.png" alt=""><b class="tx" data-x-lose="5">30</b><small>채색석</small></span><span class="rc" style="--rr:#ff4fa3;--rl:#fff0f7"><img src="a/i/adv_arena.png" alt=""><b class="tx" data-x-lose="−12">+18</b><small>등급 점수</small></span></div>
 <div class="take"><b>받기</b></div>
 </div></div></div></section>
+</details>
 
 <h4>주간 정산 (D5-5) <small>— 페이지 A 사다리 → 순위 리본 · B 결투장 → 시상대 · C 카드 → 리그 증명서</small></h4>
 <div class="states" data-group="rank_week"><span>지난주</span><button type="button" data-v="top" aria-pressed="true">상위권 3위</button><button type="button" data-v="low">하위 42위 (기본 보상)</button><button type="button" data-v="none">도전 안 한 주</button></div>
-<section class="opt" data-choice="rw_a" data-l="A" data-choice-group="rank_week" data-choice-label="A · 순위 리본 (목록 C)">
+<details class="old"><summary>1차 다른 시안 · A · 순위 리본 (목록 C) (고르지 않음)</summary>
+<section class="opt" data-choice="rw_a" data-l="A" data-og="rank_week" data-choice-label="A · 순위 리본 (목록 C)">
 <h2>A · 순위 리본 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">가운데서 양옆으로 <b>풀리는 리본</b>에 지난주 순위, 아래 점수 정리(남는 몫) 한 줄과 채색석 띠. 도전 안 한 주는 회색 리본 「보상 없음 · 점수만 정리돼요」.</p>
 <p class="cost">세 상태 모두 같은 틀이라 만들기 쉬움. 1위 · 3위의 특별함은 리본 색으로만.</p>
@@ -1001,8 +1326,10 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="fail hid" style="top:510px" data-on="none"><span>이번 주에 한 번 도전하면 정산 보상을 받아요</span></div>
 <div class="take"><b class="tx" data-x-none="확인">받기</b></div>
 </div></div></div></section>
+</details>
 
-<section class="opt" data-choice="rw_b" data-l="B" data-choice-group="rank_week" data-choice-label="B · 시상대 (목록 A)">
+<details class="old"><summary>1차 다른 시안 · B · 시상대 (목록 A) (고르지 않음)</summary>
+<section class="opt" data-choice="rw_b" data-l="B" data-og="rank_week" data-choice-label="B · 시상대 (목록 A)">
 <h2>B · 시상대 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">결투장 바닥에서 <b>1 · 2 · 3위 단</b>이 올라오고 각 단 위에 대표 아이 얼굴. 내가 3위면 그 단이 분홍 테로 빛남, 42위면 단 아래 작은 판에 「나 42위」, 도전 안 한 주는 나 없이 시상만.</p>
 <p class="cost">순위 경쟁이 가장 잘 느껴짐. 다른 사람 대표 아이 정보가 필요(지금은 기기 안 모형 순위라 가짜 데이터).</p>
@@ -1016,11 +1343,27 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="fail hid" style="top:530px" data-on="none"><span>지난주는 도전하지 않았어요 · 보상 없음</span></div>
 <div class="take"><b class="tx" data-x-none="확인">받기</b></div>
 </div></div></div></section>
+</details>
 
-<section class="opt" data-choice="rw_c" data-l="C" data-choice-group="rank_week" data-choice-label="C · 리그 증명서 (목록 B)">
+<section class="opt fixd" data-choice="rw_c" data-l="C" data-choice-group="rank_week" data-choice-label="C · 리그 증명서 (목록 B)">
 <h2>C · 리그 증명서 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">카드 수집 결의 <b>증명서 한 장</b>: 「이 항해사는 지난주 등급전 3위를 거두었음」, 계급 · 점수, 분홍 밀랍 도장. 도전 안 한 주는 바랜 빈 증명서.</p>
 <p class="cost">모아 볼 거리가 생김(나중에 「지난 증명서」 목록으로 확장 가능). 글자가 많아 1280에서 빠르게 넘기기엔 무거움.</p>
+<p class="cap"><span class="r2">2차</span> 증명서를 <b>가장자리가 들쭉날쭉한 양피지</b>(얼룩 · 종이결) + 금 이중 테 + 네 모서리 금 장식으로, 위에 계급 엠블럼, 오른쪽 아래 <b>리본 꼬리 달린 밀랍 도장</b>(위에서 찍힘). 「3위」는 명조 큰 숫자, 서명 줄은 필기체. 뒤로 천천히 도는 빛살.</p>
+<div class="vt"><button type="button" data-ver="1" aria-pressed="false">1차</button><button type="button" data-ver="2" aria-pressed="true">2차</button></div>
+<div class="vp v2"><div class="scr" data-st="top">
+<div class="bk dk" style="--b12:url(a/bt_duel_1280.jpg);--b16:url(a/bt_duel_1600.jpg)"></div>
+<div class="cz W2"><i class="rays"></i><i class="xmote"></i>
+<div class="crt"><i data-g="cert"></i><img class="emb2" src="a/s/emb_go.svg" alt="" data-off="none"><img class="emb2 hid" src="a/s/emb_br.svg" alt="" data-on="none" style="filter:grayscale(1) opacity(.6)">
+<div class="tx2"><h6>항해사 리그 증명서</h6><div class="l1 tx" data-x-none="지난주에는 기록이 없어요">이 항해사는 지난주 등급전에서</div><div class="pl3"><span class="tx" data-x-low="42" data-x-none="—">3</span><small>위</small></div><div class="l2 tx" data-x-low="브론즈 · 1,040점으로 마쳤음" data-x-none="이번 주에 한 번 도전해 보세요">골드 · 1,388점을 거두었음</div></div>
+<div class="sgn">Cloud Whale<small>구름고래 분교 항해사 리그 · 11월 2주</small></div>
+<div class="sl" data-off="none" data-g="seal" data-col="#d0407a"></div>
+</div>
+<div class="band" style="top:436px"></div>
+<div class="cards" style="top:468px" data-off="none"><span class="rc" style="--rr:#e957bc;--rl:#fbeefe"><img src="a/i/icon_gem.png" alt=""><b class="tx" data-x-low="150">1,000</b><small>채색석</small></span></div>
+<div class="fail hid" style="top:526px" data-on="none"><span>보상 없음 · 점수만 정리돼요</span></div>
+<div class="take"><b class="tx" data-x-none="확인">받기</b></div>
+</div></div></div>
 <div class="vp"><div class="scr" data-st="top">
 <div class="bk dk" style="--b12:url(a/bt_duel_1280.jpg);--b16:url(a/bt_duel_1600.jpg)"></div>
 <div class="cz">
@@ -1132,13 +1475,182 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 </style>
 <h3 id="s-soul">4. 기억의 회랑 — 주인공: 복도 (D4-4 → D5-4)</h3>
 <p class="ctx">잿빛이 된 기억 속 아이들과 전투력으로 겨루는 10단계(잿빛 교실 → 기억의 끝). 이기든 지든 도전 1회, 2시간마다 1회 충전(최대 3). 이기면 기억 결정, 처음 이기면 다음 단계가 열림. 예시: 3단계까지 깸 · 4단계 「꺼진 등불 거리」 도전 중. <b>「도전 (1회 사용)」 단추 하나</b>는 세 시안 모두 오른쪽 아래.</p>
-<div class="states" data-group="soul_page"><span>페이지 상태</span><button type="button" data-v="full" aria-pressed="true">충전 3 / 3</button><button type="button" data-v="empty">0 / 3 · 다음 충전 1:24:10</button></div>
 <section class="ref"><h2>지금</h2><p class="cap">위 배너 + 왼쪽 10단계 목록 + 오른쪽 상세. 결과는 공용 팝업.</p><div class="refs">
 <figure><img class="w12" src="now/adv_soul_1280.jpg" alt="지금 회랑 1280"><img class="w16" src="now/adv_soul_1600.jpg" alt="지금 회랑 1600"><figcaption>now/adv_soul_(1280|1600).jpg</figcaption></figure>
 <figure><img src="now/inv_result_soul.jpg" alt="지금 회랑 결과"><figcaption>결과 · now/inv_result_soul.jpg</figcaption></figure></div></section>
 
+<style>
+/* ---------- 2차 회랑: 잿빛 메아리(상대)가 주인공 ---------- */
+.mono{filter:grayscale(1) contrast(1.06) brightness(1.06) drop-shadow(0 0 1.5px rgba(255,255,255,.9)) drop-shadow(0 12px 12px rgba(10,6,30,.45))}
+.ech{position:absolute;z-index:3;height:var(--h,300px);animation:flick 4s ease-in-out infinite}
+@keyframes flick{0%,100%{opacity:1}47%{opacity:1}50%{opacity:.82}53%{opacity:1}}
+.ech.c2{animation-delay:-1.1s}.ech.c3{animation-delay:-2.2s}.ech.c4{animation-delay:-3.1s}
+.enm{position:absolute;z-index:4;transform:translateX(-50%);padding:3px 12px;border-radius:12px;background:rgba(30,24,52,.78);color:#e9e6f2;font-size:13px;font-weight:800;white-space:nowrap;box-shadow:0 0 0 1px rgba(220,214,240,.45)}
+.SA2 .mf{position:absolute;left:66px;top:92px;width:610px;height:370px;z-index:1}
+.SA2 .mf .ph{position:absolute;inset:14px;background:url(a/b/observatory.jpg) center/cover;filter:grayscale(1) brightness(.85) contrast(1.05)}
+.SA2 .mf .ph::after{content:"";position:absolute;inset:0;background:radial-gradient(70% 70% at 50% 40%,transparent 40%,rgba(20,14,40,.55))}
+.SA2 .mf .fm{position:absolute;inset:0;border-radius:6px;box-shadow:inset 0 0 0 2px #2b1d3f,inset 0 0 0 4px #f2f0f6,inset 0 0 0 11px #a7a2ba,inset 0 0 0 13px #e9e6f2,inset 0 0 0 15px #2b1d3f,0 0 0 1px rgba(255,255,255,.4),0 16px 20px rgba(0,0,0,.5)}
+.SA2 .lvt{position:absolute;left:371px;top:74px;z-index:4;transform:translateX(-50%);padding:6px 26px;border-radius:6px;background:linear-gradient(180deg,#5a4c80,#3a2d5c);color:#fff;font:400 22px/1.2 "Gowun",serif;box-shadow:0 0 0 1.5px #c9c3e0,0 0 0 3px #2b1d3f,0 6px 12px rgba(0,0,0,.4);white-space:nowrap}
+.SA2 .flr{position:absolute;left:40px;width:660px;top:478px;height:70px;z-index:2;border-radius:50%;background:radial-gradient(closest-side,rgba(220,214,240,.5),rgba(150,140,190,.25) 60%,transparent)}
+.lv10{position:absolute;z-index:4;display:flex;gap:9px;align-items:center}
+.lv10 i{position:relative;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;font-style:normal;font-size:14px;font-weight:900;color:#fff;background:radial-gradient(circle at 35% 30%,#c9b6ff,#7a5ad8 70%,#4a3090);box-shadow:inset 0 0 0 2px rgba(255,255,255,.5),0 0 0 2px #e8c579,0 0 0 3.5px #2b1d3f}
+.lv10 i.cur{width:54px;height:54px;font-size:17px;background:radial-gradient(circle at 35% 30%,#f2f0f6,#a6a1b8 70%,#6c6784);box-shadow:inset 0 0 0 2px #fff,0 0 0 3px #ffd36b,0 0 0 4.5px #2b1d3f,0 0 16px 4px rgba(255,236,190,.8)}
+.lv10 i.lk{background:radial-gradient(circle at 35% 30%,#7c7690,#4a4560);color:#b9b4cc;box-shadow:0 0 0 2px #6c6784,0 0 0 3.5px #2b1d3f}
+.lv10 i.lk::after{content:"";position:absolute;right:-3px;bottom:-3px;width:14px;height:14px;border-radius:50%;background:#2b1d3f url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4.5 6V4.5a2.5 2.5 0 015 0V6' fill='none' stroke='%23fff' stroke-width='1.4'/%3E%3Crect x='3.5' y='6' width='7' height='5' rx='1' fill='%23ffd36b'/%3E%3C/svg%3E") center/12px no-repeat}
+.lv10 small{font-size:13px;font-weight:800;color:#e9e6f2;margin-left:6px;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.vsx{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;margin:10px 0 6px}
+.vsx div{text-align:center}
+.vsx b{display:block;font:400 26px/1 "Gowun",serif}
+.vsx small{font-size:13px;font-weight:800;color:#5a4a72}
+.vsx em{font-style:normal;font:400 30px/1 "Gowun",serif;color:#9a6bff}
+.fcs4{display:flex;gap:5px;justify-content:center;margin-top:6px}.fcs4 .fc{width:34px;height:34px;border-radius:9px}
+.fcs4.g .fc{filter:grayscale(1) brightness(1.05);box-shadow:0 0 0 2px #8d8aa0,0 3px 6px rgba(0,0,0,.2)}
+.wbar{position:relative;height:16px;border-radius:8px;background:#e7e1f0;box-shadow:inset 0 1px 2px rgba(0,0,0,.2),0 0 0 1.5px #2b1d3f;overflow:hidden}
+.wbar i{position:absolute;left:0;top:0;bottom:0;width:var(--p);background:linear-gradient(180deg,#c9b6ff,#8b6ae8);box-shadow:inset 0 2px 0 rgba(255,255,255,.5)}
+.chg{display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:800;color:#3b2d55}
+.chg img{width:28px;height:28px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}
+.chg img.e{filter:grayscale(1) opacity(.45)}
+.SA2 .rp3{left:740px;top:70px;width:372px;height:520px;padding:20px 22px}
+.SA2 .rp3 h5{margin:0;font:400 22px/1.15 "Gowun",serif;color:#2b1d3f}
+.rl2{font-size:13px;font-weight:700;color:#5a4a72;line-height:1.45}
+/* 회랑 결과 A: 메아리에 색이 돌아옴 */
+.SRA .ech{--h:330px}
+.scr.go[data-st=win] .SRA .ech,.scr.go[data-st=win2] .SRA .ech{animation:colorBack 1.1s both}
+.scr[data-st=win] .SRA .ech,.scr[data-st=win2] .SRA .ech{filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 18px rgba(255,236,190,.7)) drop-shadow(0 12px 12px rgba(10,6,30,.45))}
+.scr.go .SRA .ech.c2{animation-delay:.25s}.scr.go .SRA .ech.c3{animation-delay:.5s}.scr.go .SRA .ech.c4{animation-delay:.75s}
+@keyframes colorBack{0%,20%{filter:grayscale(1) contrast(1.06) brightness(1.06) drop-shadow(0 12px 12px rgba(10,6,30,.45))}}
+.SRA .glo{position:absolute;left:50%;top:60px;width:900px;height:420px;margin-left:-450px;z-index:1;border-radius:50%;background:radial-gradient(closest-side,rgba(255,236,200,.35),rgba(190,160,255,.18) 50%,transparent)}
+.scr[data-st=lose] .SRA .glo{background:radial-gradient(closest-side,rgba(200,196,214,.18),transparent)}
+.unl{position:absolute;z-index:5;display:flex;align-items:center;gap:10px;padding:8px 18px 8px 8px;border-radius:24px;background:linear-gradient(180deg,#fffdf6,#f2eaff);box-shadow:0 0 0 1.5px #c9a95e,0 0 0 3px #2b1d3f,0 8px 16px rgba(0,0,0,.4);font-size:15px;font-weight:800;color:#2b1d3f}
+.unl .md{--s:40px}
+/* 회랑 B: 기억 사진첩 */
+.SB2 .alb{position:absolute;left:24px;top:56px;width:1092px;height:560px;z-index:1;border-radius:18px;background:linear-gradient(180deg,#6a4880,#4a2f60);box-shadow:inset 0 0 0 6px #5a3a70,inset 0 0 0 7.5px #c9a95e,0 0 0 2px #2b1d3f,0 20px 34px rgba(0,0,0,.5)}
+.SB2 .alb::before{content:"";position:absolute;inset:12px;border-radius:12px;border:2px dashed rgba(232,197,121,.55)}
+.SB2 .pg2{position:absolute;top:22px;bottom:22px;z-index:2;background:linear-gradient(90deg,#f3e9d6,#fffaf0 12%,#fffaf0);box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.SB2 .pg2.l{left:40px;width:514px;border-radius:8px 2px 2px 8px;background:linear-gradient(270deg,#e6d9bd,#fffaf0 10%,#fffaf0)}
+.SB2 .pg2.r{left:560px;width:518px;border-radius:2px 8px 8px 2px}
+.SB2 .pg2::after{content:"";position:absolute;inset:0;border-radius:inherit;mix-blend-mode:multiply;opacity:.35;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='4'/%3E%3CfeColorMatrix values='0 0 0 0 .62 0 0 0 0 .55 0 0 0 0 .45 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none}
+.SB2 .pg2 h5{position:absolute;left:30px;top:22px;margin:0;font:400 26px/1 "Gowun",serif;color:#3b2448}
+.SB2 .pg2 .sub{position:absolute;left:30px;top:56px}
+.th{position:absolute;width:86px;height:100px;padding:6px 6px 22px;background:#fff;transform:rotate(var(--r,0deg));box-shadow:0 0 0 1px rgba(0,0,0,.08),0 4px 8px rgba(40,20,60,.25)}
+.th i{display:block;width:100%;height:100%;background:var(--im) center/cover}
+.th b{position:absolute;left:0;right:0;bottom:3px;text-align:center;font-size:13px;font-weight:800;color:#3b2448}
+.th.g i{filter:grayscale(1) brightness(.95)}
+.th.cur{box-shadow:0 0 0 2px #ffd36b,0 0 16px rgba(255,210,120,.8),0 4px 8px rgba(40,20,60,.25)}
+.th.cur::before{content:"";position:absolute;left:50%;top:-10px;width:44px;height:16px;margin-left:-22px;background:rgba(255,226,140,.8);transform:rotate(-4deg);box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.th.lk{background:#efe8da}.th.lk i{background:repeating-linear-gradient(135deg,#e2d9c6 0 6px,#ebe3d2 6px 12px);display:grid;place-items:center;color:#a99c80;font-style:normal;font-size:22px;font-weight:900}
+.pol{position:absolute;z-index:3;padding:12px 12px 56px;background:#fffdf8;transform:rotate(var(--r,2deg));box-shadow:0 0 0 1px rgba(0,0,0,.08),0 14px 24px rgba(30,15,60,.35)}
+.pol .ph2{position:relative;width:100%;height:100%;overflow:hidden;background:url(a/b/observatory.jpg) center/cover}
+.pol .ph2.g{filter:grayscale(1) contrast(1.05) brightness(.98)}
+.pol .ph2 img{position:absolute;bottom:-6px;height:62%}
+.pol .cap2{position:absolute;left:0;right:0;bottom:14px;text-align:center;font:400 22px/1 "Gowun",serif;color:#3b2448}
+.pol .cn{position:absolute;width:30px;height:30px;background:linear-gradient(135deg,#e8c579 50%,transparent 50%)}
+.scr.go[data-st=win] .SRB .ph2,.scr.go[data-st=win2] .SRB .ph2{animation:develop 1.8s .3s both}
+@keyframes develop{0%{filter:grayscale(1) brightness(1.6) contrast(.6)}40%{filter:grayscale(1) brightness(1.15)}100%{filter:none}}
+.scr[data-st=lose] .SRB .ph2{filter:grayscale(1) contrast(1.05) brightness(.9)}
+.flash{position:absolute;inset:0;z-index:6;background:#fff;opacity:0;pointer-events:none}
+.scr.go[data-st=win] .flash,.scr.go[data-st=win2] .flash{animation:fl .7s .2s both}
+@keyframes fl{0%{opacity:0}20%{opacity:.85}100%{opacity:0}}
+</style>
+<h4>페이지 (D4-4) <span class="r2">2차 새 시안</span> <small>— 코드: adventure_pages.gd _soul · 상대 = SOUL_LEVELS[n].team 네 명을 잿빛(modulate)으로, 이기면 기억 결정 · 처음 이기면 다음 단계</small></h4>
+<div class="states" data-group="soul_page"><span>페이지 상태</span><button type="button" data-v="full" aria-pressed="true">도전 3 / 3</button><button type="button" data-v="empty">0 / 3 · 다음 충전 1:24:10</button></div>
+<section class="opt" data-choice="soul2_a" data-l="A" data-pairs="soul_res" data-choice-group="soul_page" data-choice-label="2차 A · 잿빛 메아리 넷 (상대 줄 세우기)">
+<h2>A · 잿빛 메아리 넷 — 기억 액자에서 걸어 나온 상대 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cap">회랑의 상대는 <b>잿빛이 된 기억 속 아이들(메아리)</b>입니다. 그 넷을 <b>흑백 전신으로 크게</b> 세운 것이 화면의 주인공: 잿빛 액자(그 단계 장소 그림) 앞 안개 무대에 서서 가끔 깜빡이고, 이름표는 「메아리 · 하린」. 아래 열 개의 기억 구슬이 단계(깬 곳은 보라 결정 · 지금 단계는 잿빛 구슬 · 잠김), 오른쪽 크림 판에 메아리 전투력 vs 내 회랑 덱 · 승률 · 도전 횟수 결정 3개 · 「도전」.</p>
+<p class="cost">상대를 「적」으로 똑바로 보여 줘 무엇과 싸우는지 가장 분명. 아이 전신 그림을 그대로 흑백 처리(새 그림 0장). 단계마다 상대 넷이 바뀌어 화면이 늘 새로움 · 10단계 이름이 구슬 안엔 안 들어가 지금 단계만 글자로.</p>
+<div class="vp"><div class="scr" data-st="full">
+<div class="bk soft" style="--b12:url(a/bt_duel_1280.jpg);--b16:url(a/bt_duel_1600.jpg)"></div>
+<div class="fr x SA2"><i class="xb" style="--bg:url(a/bg2/soul.jpg)"></i><i class="xmote" style="opacity:.6"></i><span class="back">모험</span><div class="dks"><span>덱 편성 · 회랑</span><span class="rcm">추천 편성</span></div><b class="qm">?</b>
+<div class="mf"><i class="ph"></i><i class="fm"></i></div><span class="lvt">5단계 · 얼어붙은 천문대</span><i class="flr"></i>
+<img class="ech mono" src="a/c/harin.png" alt="" style="left:76px;top:188px">
+<img class="ech mono c2" src="a/c/noa.png" alt="" style="left:228px;top:176px;--h:310px">
+<img class="ech mono c3" src="a/c/gyeol.png" alt="" style="left:382px;top:184px">
+<img class="ech mono c4" src="a/c/rina.png" alt="" style="left:532px;top:190px;--h:296px">
+<span class="enm" style="left:178px;top:496px">메아리 · 하린</span><span class="enm" style="left:330px;top:496px">메아리 · 노아</span><span class="enm" style="left:484px;top:496px">메아리 · 결</span><span class="enm" style="left:630px;top:496px">메아리 · 리나</span>
+<div class="lv10" style="left:46px;top:556px"><i>1</i><i>2</i><i>3</i><i>4</i><i class="cur">5</i><i class="lk">6</i><i class="lk">7</i><i class="lk">8</i><i class="lk">9</i><i class="lk">10</i><small>깬 단계는 보라 결정</small></div>
+<div class="pz rp3"><h5>5단계 · 얼어붙은 천문대</h5><i class="fl8"></i>
+<div class="vsx"><div><b style="color:#6c6784">25.5a</b><small>메아리 전투력</small><div class="fcs4 g"><i class="fc" style="background-image:url(a/c/harin.png)"></i><i class="fc" style="background-image:url(a/c/noa.png)"></i><i class="fc" style="background-image:url(a/c/gyeol.png)"></i><i class="fc" style="background-image:url(a/c/rina.png)"></i></div></div><em>vs</em><div><b style="color:#b07a10">31.2a</b><small>내 회랑 덱</small><div class="fcs4"><i class="fc e-re" style="background-image:url(a/c/karen.png)"></i><i class="fc e-pu" style="background-image:url(a/c/yuna.png)"></i><i class="fc e-wh" style="background-image:url(a/c/mio.png)"></i><i class="fc e-gr" style="background-image:url(a/c/ciel.png)"></i></div></div></div>
+<div style="display:flex;justify-content:space-between;font-size:13.5px;font-weight:800;color:#3b2d55;margin:10px 0 4px"><span>이길 확률</span><span>64% · 내 상성 속성 1명</span></div><div class="wbar" style="--p:64%"><i></i></div>
+<div class="chg" style="margin-top:14px"><img src="a/i/icon_crystal.png" alt="" data-off="empty"><img src="a/i/icon_crystal.png" alt="" data-off="empty"><img src="a/i/icon_crystal.png" alt="" data-off="empty"><img class="e hid" src="a/i/icon_crystal.png" alt="" data-on="empty"><img class="e hid" src="a/i/icon_crystal.png" alt="" data-on="empty"><img class="e hid" src="a/i/icon_crystal.png" alt="" data-on="empty"><span class="tx" data-x-empty="도전 0 / 3 · 다음 충전 1:24:10">도전 3 / 3 · 2시간마다 1회</span></div>
+<b class="xgo" style="left:22px;top:330px;width:328px;--c1:#c9b6ff;--c2:#8b6ae8;--c3:#6a4ad0" data-off="empty"><b>도전<small>1회 사용 · 이기든 지든</small></b></b><b class="xgo off hid" style="left:22px;top:330px;width:328px;font-size:19px" data-on="empty"><b>충전 기다리는 중<small>1:24:10 뒤 1회</small></b></b>
+<div class="rl2" style="position:absolute;left:22px;right:22px;top:414px">이기면 기억 결정 6 · 처음 이기면 6단계 「시든 정원」이 열려요</div>
+</div>
+</div><i data-mk></i>
+</div></div></section>
+
+<section class="opt" data-choice="soul2_b" data-l="B" data-pairs="soul_res" data-choice-group="soul_page" data-choice-label="2차 B · 기억 사진첩">
+<h2>B · 기억 사진첩 — 흑백 사진 속 메아리 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cap">회랑을 <b>펼친 사진첩</b>으로: 왼쪽 장은 열 단계가 사진 한 장씩(깬 단계 = 색을 되찾은 사진 · 지금 단계 = 금빛 테이프 붙은 흑백 · 잠김 = 빈 자리), 오른쪽 장엔 지금 단계의 <b>흑백 폴라로이드</b> — 그 장소 그림 속에 메아리 넷이 찍혀 있습니다. 사진 옆에 전투력 비교 · 승률 · 도전. 「잃어버린 기억을 사진으로 되찾는다」는 모으는 재미가 주인공.</p>
+<p class="cost">10단계 진행이 한눈에 보이고 결과(사진에 색이 번짐)와 바로 이어짐. 메아리가 사진 안이라 A보다 작게 보이고, 단계마다 장소 그림 10장(이야기 배경 재사용 · 부족분은 장소 재조합)이 필요.</p>
+<div class="vp"><div class="scr" data-st="full">
+<div class="bk soft" style="--b12:url(a/bt_duel_1280.jpg);--b16:url(a/bt_duel_1600.jpg)"></div>
+<div class="fr x SB2"><i class="xb" style="--bg:url(a/bg2/soul.jpg)"></i><span class="back" style="z-index:6">모험</span><b class="qm" style="z-index:6">?</b>
+<div class="alb"></div>
+<div class="pg2 l"><h5>기억 사진첩</h5><span class="sub">잿빛이 된 기억 속 메아리와 겨뤄 사진의 색을 되찾아요</span>
+<span class="th" style="left:30px;top:100px;--r:-3deg;--im:url(a/b/garden.jpg)"><i></i><b>1 잿빛 교실</b></span>
+<span class="th" style="left:126px;top:96px;--r:2deg;--im:url(a/b/sundial.jpg)"><i></i><b>2 운동장</b></span>
+<span class="th" style="left:222px;top:102px;--r:-1deg;--im:url(a/b/bell_tower.jpg)"><i></i><b>3 도서관</b></span>
+<span class="th" style="left:318px;top:96px;--r:3deg;--im:url(a/b/festival.jpg)"><i></i><b>4 등불 거리</b></span>
+<span class="th g cur" style="left:414px;top:104px;--r:-2deg;--im:url(a/b/observatory.jpg)"><i></i><b>5 천문대</b></span>
+<span class="th lk" style="left:30px;top:226px;--r:2deg"><i>6</i><b>시든 정원</b></span>
+<span class="th lk" style="left:126px;top:232px;--r:-2deg"><i>7</i><b>잠든 등대</b></span>
+<span class="th lk" style="left:222px;top:226px;--r:1deg"><i>8</i><b>잊힌 항구</b></span>
+<span class="th lk" style="left:318px;top:232px;--r:-3deg"><i>9</i><b>잿빛 왕좌</b></span>
+<span class="th lk" style="left:414px;top:226px;--r:2deg"><i>10</i><b>기억의 끝</b></span>
+<div style="position:absolute;left:30px;right:30px;top:368px" class="chg"><img src="a/i/icon_crystal.png" alt="" data-off="empty"><img src="a/i/icon_crystal.png" alt="" data-off="empty"><img src="a/i/icon_crystal.png" alt="" data-off="empty"><img class="e hid" src="a/i/icon_crystal.png" alt="" data-on="empty"><img class="e hid" src="a/i/icon_crystal.png" alt="" data-on="empty"><img class="e hid" src="a/i/icon_crystal.png" alt="" data-on="empty"><span class="tx" data-x-empty="도전 0 / 3 · 다음 충전 1:24:10">도전 3 / 3 · 2시간마다 1회 충전</span></div>
+<div class="rl2" style="position:absolute;left:30px;right:30px;top:412px">깬 사진은 다시 겨뤄도 기억 결정을 받아요 · 높은 단계일수록 결정이 많아요</div>
+</div>
+<div class="pg2 r">
+<div class="pol" style="left:28px;top:40px;width:286px;height:330px;--r:-2.5deg"><div class="ph2 g"><img class="mono" src="a/c/harin.png" alt="" style="left:2%"><img class="mono" src="a/c/noa.png" alt="" style="left:26%;height:58%"><img class="mono" src="a/c/gyeol.png" alt="" style="left:50%"><img class="mono" src="a/c/rina.png" alt="" style="left:72%;height:57%"></div><span class="cap2">얼어붙은 천문대 · 5</span><i class="cn" style="left:-6px;top:-6px"></i><i class="cn" style="right:-6px;top:-6px;transform:rotate(90deg)"></i></div>
+<div style="position:absolute;left:330px;right:20px;top:46px"><div class="vsx" style="grid-template-columns:1fr;gap:6px"><div><b style="color:#6c6784">25.5a</b><small>메아리 전투력</small></div><em style="font-size:22px">vs</em><div><b style="color:#b07a10">31.2a</b><small>내 회랑 덱</small></div></div>
+<div style="font-size:13.5px;font-weight:800;color:#3b2d55;margin:12px 0 4px">이길 확률 64%</div><div class="wbar" style="--p:64%"><i></i></div></div>
+<b class="xgo" style="left:330px;top:300px;width:170px;padding:0 10px;--c1:#c9b6ff;--c2:#8b6ae8;--c3:#6a4ad0" data-off="empty"><b>도전<small>1회 사용</small></b></b><b class="xgo off hid" style="left:330px;top:300px;width:170px;padding:0 10px;font-size:17px" data-on="empty"><b>1:24:10</b></b>
+<div class="rl2" style="position:absolute;left:28px;right:24px;top:420px">이기면 기억 결정 6 · 처음 이기면 6단계 사진 자리가 열려요</div>
+</div>
+</div><i data-mk></i>
+</div></div></section>
+
+<h4>회랑 결과 (D5-4) <span class="r2">2차 새 시안</span> <small>— 대결 장면(정해진 「색 영토」) 뒤에 나오는 화면 · 페이지와 같은 글자끼리 짝</small></h4>
+<div class="states" data-group="soul_res"><span>결과</span><button type="button" data-v="win" aria-pressed="true">승리 · 처음 (6단계 열림)</button><button type="button" data-v="win2">승리 · 다시 깬 단계</button><button type="button" data-v="lose">패배</button></div>
+<section class="opt" data-choice="soul2_ra" data-l="A" data-choice-group="soul_res" data-choice-label="2차 A · 메아리에 색이 돌아옴">
+<h2>A · 메아리 넷에 색이 돌아옴 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cap">페이지의 그 넷이 그대로 서 있다가, 이기면 <b>왼쪽부터 한 명씩 흑백 → 제 색</b>으로 돌아오며 빛이 감돌고(「되찾은 기억」), 처음 이긴 단계면 다음 단계 구슬이 열리는 꼬리표. 지면 넷이 잿빛 그대로 남고 「도전 1회 사용 · 남은 도전」. 보상은 정해진 띠 카드(기억 결정).</p>
+<p class="cost">흑백 → 색 한 가지 연출로 게임 주제(색을 되찾기)와 바로 이어짐 · 필터만 바꾸면 돼서 가벼움. 넷이 같은 높이로 서 있어 단조로울 수 있어 등장 순서 · 빛으로 리듬을 줌.</p>
+<div class="vp"><div class="scr" data-st="win">
+<div class="bk dk" style="--b12:url(a/bt_duel_1280.jpg);--b16:url(a/bt_duel_1600.jpg)"></div>
+<div class="cz SRA"><i class="glo"></i><i class="xmote"></i>
+<div class="K2" style="position:absolute;inset:0"><div class="ttl2" style="top:10px"><b class="tx" data-x-lose="아직 잿빛이에요">되찾은 기억</b><span class="tx" data-x-lose="5단계 · 얼어붙은 천문대 · 승률 64% · 도전 1회 사용" data-x-win2="5단계 · 얼어붙은 천문대 · 다시 깬 단계">5단계 · 얼어붙은 천문대 · 승률 64%</span></div></div>
+<img class="ech mono" src="a/c/harin.png" alt="" style="left:250px;top:110px">
+<img class="ech mono c2" src="a/c/noa.png" alt="" style="left:450px;top:100px;--h:340px">
+<img class="ech mono c3" src="a/c/gyeol.png" alt="" style="left:640px;top:108px">
+<img class="ech mono c4" src="a/c/rina.png" alt="" style="left:830px;top:114px;--h:320px">
+<div class="unl" style="left:900px;top:84px" data-on="win"><i class="md" style="--ic:#9a6bff"><img src="a/i/adv_soul.png" alt=""></i>6단계 「시든 정원」이 열렸어요</div>
+<div class="band" style="top:436px"></div>
+<div class="cards" style="top:468px" data-off="lose"><span class="rc" style="--rr:#9a6bff;--rl:#f2ecff"><img src="a/i/icon_crystal.png" alt=""><b>6</b><small>기억 결정</small></span></div>
+<div class="fail hid" style="top:526px" data-on="lose"><span>도전 1회 사용 · 남은 도전 2 / 3 · 다음 충전 1:59:40</span></div>
+<div class="take"><b class="tx" data-x-lose="닫기">받기</b></div>
+</div></div></div></section>
+
+<section class="opt" data-choice="soul2_rb" data-l="B" data-choice-group="soul_res" data-choice-label="2차 B · 사진에 색이 번짐">
+<h2>B · 흑백 사진에 색이 번짐 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cap">사진첩의 그 폴라로이드가 크게 떠서, 이기면 <b>사진기 플래시 → 현상되듯 흑백에서 색이 번져</b> 장소와 아이들이 제 색을 되찾습니다. 아래 「되찾은 사진」 글씨 · 처음이면 다음 사진 자리 열림. 지면 사진이 흐린 흑백 그대로 「아직 흐릿한 기억」.</p>
+<p class="cost">사진 한 장으로 끝나 짧고 예쁨 · 페이지 B와 짝. 아이들이 사진 속이라 「누구를 이겼나」는 A보다 덜 보임.</p>
+<div class="vp"><div class="scr" data-st="win">
+<div class="bk dk" style="--b12:url(a/bt_duel_1280.jpg);--b16:url(a/bt_duel_1600.jpg)"></div>
+<div class="cz SRB"><i class="xmote"></i>
+<div class="pol" style="left:424px;top:14px;width:432px;height:400px;--r:-2deg"><div class="ph2"><img src="a/c/harin.png" alt="" style="left:4%"><img src="a/c/noa.png" alt="" style="left:27%;height:58%"><img src="a/c/gyeol.png" alt="" style="left:50%"><img src="a/c/rina.png" alt="" style="left:72%;height:57%"></div><span class="cap2 tx" data-x-lose="아직 흐릿한 기억 · 천문대">되찾은 사진 · 얼어붙은 천문대</span><i class="cn" style="left:-6px;top:-6px"></i><i class="cn" style="right:-6px;top:-6px;transform:rotate(90deg)"></i></div>
+<div class="unl" style="left:880px;top:120px" data-on="win"><i class="md" style="--ic:#9a6bff"><img src="a/i/adv_soul.png" alt=""></i>6단계 사진 자리가 열렸어요</div>
+<i class="flash"></i>
+<div class="band" style="top:436px"></div>
+<div class="cards" style="top:468px" data-off="lose"><span class="rc" style="--rr:#9a6bff;--rl:#f2ecff"><img src="a/i/icon_crystal.png" alt=""><b>6</b><small>기억 결정</small></span></div>
+<div class="fail hid" style="top:526px" data-on="lose"><span>도전 1회 사용 · 남은 도전 2 / 3 · 다음 충전 1:59:40</span></div>
+<div class="take"><b class="tx" data-x-lose="닫기">받기</b></div>
+</div></div></div></section>
+
+<details class="old"><summary>1차 시안 보기 (PD가 모두 반려 · 위 2차로 다시 그림)</summary>
+<div class="states" data-group="soul_page_old"><span>페이지 상태</span><button type="button" data-v="full" aria-pressed="true">충전 3 / 3</button><button type="button" data-v="empty">0 / 3 · 다음 충전 1:24:10</button></div>
 <h4>페이지 (D4-4)</h4>
-<section class="opt" data-choice="soul_a" data-l="A" data-pairs="soul_res" data-choice-group="soul_page" data-choice-label="A · 원근 복도">
+<section class="opt" data-choice="soul_a" data-l="A" data-og="soul_page_old" data-choice-label="A · 원근 복도">
 <h2>A · 원근 복도에 걸린 기억 액자 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">소실점으로 뻗은 <b>보랏빛 복도</b>, 양쪽 벽에 1~10단계 액자가 가까운 것부터 걸려 있습니다. 깬 단계는 색이 돌아온 액자, 지금 단계는 빛나는 액자, 잠긴 단계는 천이 덮인 액자. 복도 끝에 빛(기억의 끝). 도전 횟수는 오른쪽 위 구슬 셋.</p>
 <p class="cost">「기억 속을 걷는다」는 이야기와 가장 잘 맞음. 먼 액자(7~10)는 작아서 이름은 숨기고 누르면 상세에만 보임.</p>
@@ -1160,7 +1672,7 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 </div><i data-mk></i>
 </div></div></section>
 
-<section class="opt" data-choice="soul_b" data-l="B" data-pairs="soul_res" data-choice-group="soul_page" data-choice-label="B · 책장 (책 등 = 단계)">
+<section class="opt" data-choice="soul_b" data-l="B" data-og="soul_page_old" data-choice-label="B · 책장 (책 등 = 단계)">
 <h2>B · 기억의 책장 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">나무 책장에 <b>책 열 권</b>, 책 등 제목이 단계 이름. 깬 책은 색 표지, 지금 책은 살짝 빠져 나와 리본 책갈피, 잠긴 책은 자물쇠 장식. 오른쪽에 그 책이 펼쳐져 잿빛 삽화(상대 대표) · 상대 넷 · 승률.</p>
 <p class="cost">10단계가 한 줄에 다 보여 고르기 쉬움 · 단계가 늘어도 책만 꽂으면 됨. 「복도」 주인공은 아니라 회랑 이름과는 조금 멀어짐.</p>
@@ -1175,7 +1687,7 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 </div><i data-mk></i>
 </div></div></section>
 
-<section class="opt" data-choice="soul_c" data-l="C" data-pairs="soul_res" data-choice-group="soul_page" data-choice-label="C · 원형 회랑 10칸">
+<section class="opt" data-choice="soul_c" data-l="C" data-og="soul_page_old" data-choice-label="C · 원형 회랑 10칸">
 <h2>C · 원형 회랑 열 칸 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">둥근 회랑을 위에서 본 모양: <b>아치 열 개</b>가 원을 두르고 가운데 둥근 판에 고른 단계와 상대 넷. 지금 단계 아치가 빛나고, 잠긴 아치는 줄무늬 천.</p>
 <p class="cost">한 화면에 10단계 + 상세가 다 들어감. 원 둘레 글자는 짧게(번호만) 써야 하고, 단계가 10개를 넘으면 원을 다시 나눠야 함.</p>
@@ -1195,8 +1707,8 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 </div></div></section>
 
 <h4>회랑 결과 (D5-4) <small>— 페이지 A 복도 → 다음 액자가 열림 · B 책장 → 이긴 아이 한 명(책 삽화) · C 원형 → VS 원</small></h4>
-<div class="states" data-group="soul_res"><span>결과</span><button type="button" data-v="win" aria-pressed="true">승리 · 5단계 열림</button><button type="button" data-v="lose">패배</button></div>
-<section class="opt" data-choice="sr_a" data-l="A" data-choice-group="soul_res" data-choice-label="A · 액자 색 되찾기 + 다음 액자 (목록 B 단계 이동)">
+<div class="states" data-group="soul_res_old"><span>결과</span><button type="button" data-v="win" aria-pressed="true">승리 · 5단계 열림</button><button type="button" data-v="lose">패배</button></div>
+<section class="opt" data-choice="sr_a" data-l="A" data-og="soul_res_old" data-choice-label="A · 액자 색 되찾기 + 다음 액자 (목록 B 단계 이동)">
 <h2>A · 액자에 색이 돌아오고 다음 액자가 열림 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">복도의 4단계 액자가 앞으로 나와 <b>잿빛 → 색이 붓질처럼 번지고</b>, 옆 5단계 액자의 천이 흘러내립니다. 패배면 액자는 잿빛 그대로, 「도전 1회 사용 · 2 / 3 남음」.</p>
 <p class="cost">「기억을 되찾는다」는 회랑 이야기를 결과에서 완성. 색 번짐은 마스크 이동 하나라 가벼움.</p>
@@ -1212,7 +1724,7 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="take"><b class="tx" data-x-lose="닫기">받기</b></div>
 </div></div></div></section>
 
-<section class="opt" data-choice="sr_b" data-l="B" data-choice-group="soul_res" data-choice-label="B · 이긴 아이 한 명 (책 삽화, 목록 C)">
+<section class="opt" data-choice="sr_b" data-l="B" data-og="soul_res_old" data-choice-label="B · 이긴 아이 한 명 (책 삽화, 목록 C)">
 <h2>B · 책 삽화의 아이가 색을 되찾음 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">펼친 책 한가운데 <b>상대 대표 아이 한 명</b>이 색을 되찾고 뾰족 꼬리 말풍선으로 회복 대사(게임 안 회복 대사 재사용: 「색이 돌아왔어!」). 패배면 삽화가 잿빛 그대로, 내 대표 아이가 작게 「다음엔 꼭!」.</p>
 <p class="cost">대사 데이터는 이미 있음(game_data 회복 대사). 단계마다 대표 아이 한 명을 정해야 함.</p>
@@ -1229,7 +1741,7 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="take"><b class="tx" data-x-lose="닫기">받기</b></div>
 </div></div></div></section>
 
-<section class="opt" data-choice="sr_c" data-l="C" data-choice-group="soul_res" data-choice-label="C · VS 원 (목록 A VS 결과판)">
+<section class="opt" data-choice="sr_c" data-l="C" data-og="soul_res_old" data-choice-label="C · VS 원 (목록 A VS 결과판)">
 <h2>C · 둥근 VS 판 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">원형 회랑 그대로 — 원 왼쪽 반에 내 넷, 오른쪽 반에 잿빛 넷, 가운데 승패. 이기면 <b>잿빛 넷이 차례로 색을 되찾음</b>.</p>
 <p class="cost">등급전 VS(B)와 결이 달라 헷갈리지 않음. 얼굴 8개 읽기(대결 장면 재사용).</p>
@@ -1245,6 +1757,8 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="fail hid" style="top:530px" data-on="lose"><span>다음 충전 1:59:58</span></div>
 <div class="take"><b class="tx" data-x-lose="닫기">받기</b></div>
 </div></div></div></section>
+
+</details>
 
 <style>
 /* ---------- 잿빛성 공통 ---------- */
@@ -1338,7 +1852,8 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <figure><img src="now/inv_result_castle.jpg" alt="지금 잿빛성 결과"><figcaption>결과 (#62) · now/inv_result_castle.jpg</figcaption></figure></div></section>
 
 <h4>페이지 (D4-5)</h4>
-<section class="opt cs" data-choice="castle_a" data-l="A" data-pairs="castle_res" data-choice-group="castle_page" data-choice-label="A · 모래시계 + 보상 눈금">
+<details class="old"><summary>1차 다른 시안 · A · 모래시계 + 보상 눈금 (고르지 않음)</summary>
+<section class="opt cs" data-choice="castle_a" data-l="A" data-og="castle_page" data-choice-label="A · 모래시계 + 보상 눈금">
 <h2>A · 모래시계 + 보상 눈금 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">놋쇠 뚜껑 · 꼬인 나무 기둥의 <b>모래시계</b>에 3분이 담겨 있고(최고 기록만큼 모래가 내려와 있음), 옆 금빛 눈금 30초마다 장비 메달. 최고 기록 위로는 아직 못 받은 장비가 잿빛.</p>
 <p class="cost">「시간을 버틴다」가 바로 읽힘. 성(장소) 느낌은 바탕 그림에만 기대고, 모래 양 계산(기록 비율)을 따로 그려야 함.</p>
@@ -1354,8 +1869,10 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <b class="cta" style="left:700px;top:500px;width:340px;--c1:#9aa6c4;--c2:#5e6a8a" data-off="zero"><b>입장</b></b><b class="cta off hid" style="left:700px;top:500px;width:340px;font-size:18px" data-on="zero"><b>오늘 입장 끝 · 05:00</b></b>
 </div><i data-mk></i>
 </div></div></section>
+</details>
 
-<section class="opt cs" data-choice="castle_b" data-l="B" data-pairs="castle_res" data-choice-group="castle_page" data-choice-label="B · 버틴 만큼 색이 오르는 성벽">
+<details class="old"><summary>1차 다른 시안 · B · 버틴 만큼 색이 오르는 성벽 (고르지 않음)</summary>
+<section class="opt cs" data-choice="castle_b" data-l="B" data-og="castle_page" data-choice-label="B · 버틴 만큼 색이 오르는 성벽">
 <h2>B · 버틴 만큼 색이 오르는 성벽 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">잿빛 하늘의 섬 위 <b>성벽이 30초 한 칸씩 여섯 칸</b>. 내 최고 기록만큼 벽돌이 무지개 파스텔로 물들어 있고(물든 끝에 반짝임), 칸 위 망루 깃발마다 그 칸의 장비 메달. 가운데 성문 앞이 「입장」. 게임 주제(잿빛 세상 물들이기)와 그대로 이어집니다.</p>
 <p class="cost">페이지 · 결과(#62)가 같은 성벽 부품(칸 SVG 7장 + 문 + 깃발)으로 끝남. 칸이 6개 고정(구간이 늘면 칸 폭을 줄임).</p>
@@ -1370,11 +1887,39 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <b class="cta" style="left:440px;top:552px;width:260px;--c1:#9aa6c4;--c2:#5e6a8a" data-off="zero"><b>입장</b></b><b class="cta off hid" style="left:440px;top:552px;width:260px;font-size:18px" data-on="zero"><b>오늘 입장 끝</b></b>
 </div><i data-mk></i>
 </div></div></section>
+</details>
 
-<section class="opt cs" data-choice="castle_c" data-l="C" data-pairs="castle_res" data-choice-group="castle_page" data-choice-label="C · 가로 타임라인">
+<section class="opt cs fixd" data-choice="castle_c" data-l="C"data-choice-group="castle_page" data-choice-label="C · 가로 타임라인">
 <h2>C · 가로 타임라인 (성곽 길) <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">해 저문 잿빛 하늘을 가로지르는 <b>3분짜리 성곽 돌다리</b>, 30초마다 망루 정거장과 장비 메달. 다리 위에 무지개 리본이 내 최고 기록까지 깔려 있고 고래가 그 끝에 떠 있습니다. 지난 기록은 다리 아래 흐린 눈금.</p>
 <p class="cost">가장 단순하고 1600에서 길게 펼치기 좋음. 「성벽」보다 장소 개성이 약하고 가로로 길어 글자가 작아짐.</p>
+<p class="cap"><span class="r2">2차</span> 평평한 다리 대신 <b>빛을 받는 돌 성곽</b>: 벽돌마다 밝기가 다르고 가장자리가 닳았으며 금 · 성가퀴 · 아치 통로가 있습니다. 30초마다 <b>슬레이트 지붕 망루</b>(지난 망루는 창에 불), 그 위에 장비 보석 메달. 내 최고 기록까지 <b>벽돌이 무지개 파스텔로 물들어</b> 있고 경계에서 빛이 숨 쉬며, 고래가 그 자리에 떠 있습니다. 바탕은 새로 짠 잿빛성 하늘 + 떨어지는 재.</p>
+<div class="vt"><button type="button" data-ver="1" aria-pressed="false">1차</button><button type="button" data-ver="2" aria-pressed="true">2차</button></div>
+<div class="vp v2"><div class="scr" data-st="b95">
+<div class="bk soft" style="--b12:url(a/bt_castle_1280.jpg);--b16:url(a/bt_castle_1600.jpg)"></div>
+<div class="fr x K2"><i class="xb" style="--bg:url(a/bg2/castle.jpg)"></i><i class="xash"></i><i class="xv"></i><span class="back">모험</span><div class="dks"><span>덱 편성 · 잿빛성</span><span class="rcm">추천 편성</span></div><b class="qm">?</b>
+<div class="hd2"><b class="ttl w">잿빛성</b><div class="sub tx" data-x-b0="30초마다 장비 1개 · 3분을 다 버티면 2개 더" data-x-full="180초 완주 · 매번 장비 6 + 완주 보너스 2" data-x-zero="오늘 입장 0 / 3 · 05:00에 채워져요">최고 95초 · 다음 장비(120초)까지 25초 · 오늘 입장 3 / 3</div></div>
+<div class="wl ww" style="left:30px;top:330px"><i data-g="wall" data-w="1080" data-h="150" data-s="21"></i></div>
+<div class="wl ww cw" style="left:30px;top:330px"><i data-g="wall" data-w="1080" data-h="150" data-c="1" data-s="21"></i></div>
+<i class="seam" data-on="b95 zero" style="left:597px;top:322px;height:162px"></i>
+<div class="wl" style="left:208px;top:280px"><i data-g="tower" data-h="200" data-c="1" data-l="1" data-s="3"></i></div>
+<div class="wl" style="left:368px;top:280px"><i data-g="tower" data-h="200" data-c="1" data-l="1" data-s="4"></i></div>
+<div class="wl" style="left:528px;top:280px"><i data-g="tower" data-h="200" data-c="1" data-l="1" data-s="5"></i></div>
+<div class="wl" style="left:688px;top:280px"><i data-g="tower" data-h="200" data-s="6"></i></div>
+<div class="wl" style="left:848px;top:280px"><i data-g="tower" data-h="200" data-s="7"></i></div>
+<div class="wl" style="left:1008px;top:280px"><i data-g="tower" data-h="200" data-s="8"></i></div>
+<span class="rw" style="left:250px;top:196px"><i class="md" style="--ic:#9aa6bc"><img src="a/i/gear_badge.png" alt=""></i><b>30초</b></span>
+<span class="rw" style="left:410px;top:196px"><i class="md" style="--ic:#3f8cff"><img src="a/i/gear_ribbon.png" alt=""></i><b>60초</b></span>
+<span class="rw" style="left:570px;top:196px"><i class="md" style="--ic:#9a6bff"><img src="a/i/gear_charm.png" alt=""></i><b>90초</b></span>
+<span class="rw" style="left:730px;top:196px"><i class="md off" style="--ic:#3f8cff"><img src="a/i/gear_weapon.png" alt=""></i><b>120초</b></span>
+<span class="rw" style="left:890px;top:196px"><i class="md off" style="--ic:#9a6bff"><img src="a/i/gear_charm.png" alt=""></i><b>150초</b></span>
+<span class="rw" style="left:1050px;top:196px"><i class="md off" style="--ic:#ffb020"><img src="a/i/gear_weapon.png" alt=""></i><b>180초 +2</b></span>
+<span class="nowp" style="left:597px;top:130px" data-on="b95 zero"><span>최고 95초</span><i></i></span>
+<img class="whs" src="a/w/whale_sd.png" alt="" style="left:620px;top:286px" data-on="b95 zero">
+<ul class="pz info"><li><i>1</i>시간이 갈수록 잿빛이 단단하고 많아져요</li><li><i>2</i>보호막이 0이 되면 그때까지 버틴 시간으로 장비</li><li><i>3</i>30초마다 장비 1개 · 3분 완주면 2개 더</li></ul>
+<b class="xgo" style="left:760px;top:520px;width:300px;--c1:#b9c3dc;--c2:#7480a8;--c3:#5a6690" data-off="zero"><b>입장<small>오늘 3 / 3</small></b></b><b class="xgo off hid" style="left:760px;top:520px;width:300px;font-size:19px" data-on="zero"><b>오늘 입장 끝</b></b>
+</div><i data-mk></i>
+</div></div>
 <div class="vp"><div class="scr" data-st="b95">
 <div class="bk soft" style="--b12:url(a/bt_castle_1280.jpg);--b16:url(a/bt_castle_1600.jpg)"></div>
 <div class="fr CC"><i data-scape="ashdark"></i><span class="back">모험</span><div class="dks"><span>덱 편성 · 잿빛성</span><span class="rcm">추천 편성</span></div><b class="qm">?</b>
@@ -1390,7 +1935,8 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 
 <h4>결과 (D5-1 · #62) <small>— A 모래시계 기록 · B 성벽 위 깃발 · C 타임라인 보상 띠 (페이지와 같은 글자끼리 짝)</small></h4>
 <div class="states" data-group="castle_res"><span>결과</span><button type="button" data-v="r95" aria-pressed="true">95초 (장비 3)</button><button type="button" data-v="rec">95초 · 최고 기록 갱신</button><button type="button" data-v="r180">180초 완주 (6 + 보너스 2)</button><button type="button" data-v="r0">0초 (보상 없음)</button></div>
-<section class="opt cs" data-choice="cr_a" data-l="A" data-choice-group="castle_res" data-choice-label="A · 모래시계 기록">
+<details class="old"><summary>1차 다른 시안 · A · 모래시계 기록 (고르지 않음)</summary>
+<section class="opt cs" data-choice="cr_a" data-l="A" data-og="castle_res" data-choice-label="A · 모래시계 기록">
 <h2>A · 모래시계 기록 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">페이지의 모래시계가 왼쪽에 서고 <b>큰 초 숫자</b>, 그 아래 금빛 막대 위 30초 메달 여섯 개 중 지난 것만 켜지고 「다음 장비까지 25초」. 보상 띠 카드에는 장비마다 「30초 · 60초 · 90초」 꼬리표.</p>
 <p class="cost">숫자 중심이라 가장 빨리 읽힘. 성 · 색 이야기는 약함.</p>
@@ -1407,11 +1953,40 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="fail hid" style="top:510px" data-on="r0"><span>0초 · 보상 없음</span></div>
 <div class="take"><b class="tx" data-x-r0="닫기">받기</b></div>
 </div></div></div></section>
+</details>
 
-<section class="opt cs" data-choice="cr_b" data-l="B" data-choice-group="castle_res" data-choice-label="B · 성벽 위 깃발">
+<section class="opt cs fixd" data-choice="cr_b" data-l="B" data-choice-group="castle_res" data-choice-label="B · 성벽 위 깃발">
 <h2>B · 성벽이 물들고 망루에 깃발 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">페이지의 그 성벽이 그대로: 버틴 초만큼 <b>벽돌이 왼쪽부터 칸칸이 물들고</b>, 지난 30초 망루마다 색 깃발이 오르며 장비 메달이 빛난 뒤 보상 띠로 날아갑니다. 갱신이면 리본, 완주면 금빛 보너스 둘, 0초면 잿빛 벽 + 「30초부터 물들어요」.</p>
 <p class="cost">#62 해법이 가장 분명(눈금 = 깃발 = 받은 장비). 페이지 B를 고르지 않으면 이 결과만 따로 놀게 됨.</p>
+<p class="cap"><span class="r2">2차</span> PD 메모 「페이지 (D4-5) : B 퀄리티」는 이 결과 화면(D5-1 B)으로 읽었습니다. 페이지 C와 <b>같은 돌 성곽 · 망루 부품</b>을 가까이 당겨, 버틴 초만큼 벽돌이 물드는 쓸기 연출 → 지난 망루마다 <b>천 깃발이 차례로 올라 펄럭임</b>(못 간 망루는 해진 잿빛 깃발) → 정해진 보상 띠 카드. 「다음 장비까지 25초」는 경계의 빛 + 꼬리표.</p>
+<div class="vt"><button type="button" data-ver="1" aria-pressed="false">1차</button><button type="button" data-ver="2" aria-pressed="true">2차</button></div>
+<div class="vp v2"><div class="scr" data-st="r95">
+<div class="bk dk" style="--b12:url(a/bt_castle_1280.jpg);--b16:url(a/bt_castle_1600.jpg)"></div>
+<div class="cz K2"><i style="position:absolute;inset:-60px -200px;background:radial-gradient(55% 45% at 50% 38%,rgba(18,12,40,.6),transparent)"></i><i class="xash"></i>
+<div class="ttl2"><b><span class="tx" data-x-r180="180" data-x-r0="0">95</span>초 버팀</b><span class="tx" data-x-r180="3분을 다 버텼어요 · 장비 6 + 완주 보너스 2" data-x-r0="30초부터 벽이 물들어요 · 보상 없음 · 입장권 1장 사용" data-x-rec="최고 기록 갱신! 60 → 95초 · 다음 장비(120초)까지 25초">다음 장비(120초)까지 25초</span></div>
+<div class="wl ww" style="left:70px;top:226px"><i data-g="wall" data-w="1140" data-h="140" data-s="31"></i></div>
+<div class="wl ww cw" style="left:70px;top:226px"><i data-g="wall" data-w="1140" data-h="140" data-c="1" data-s="31"></i></div>
+<i class="seam" data-on="r95 rec" style="left:659px;top:218px;height:150px"></i>
+<div class="wl" style="left:235px;top:216px"><i data-g="tower" data-h="150" data-c="1" data-l="1" data-s="13"></i></div>
+<div class="wl" style="left:411px;top:216px"><i data-g="tower" data-h="150" data-c="1" data-l="1" data-s="14"></i></div>
+<div class="wl" style="left:588px;top:216px"><i data-g="tower" data-h="150" data-c="1" data-l="1" data-s="15"></i></div>
+<div class="wl" style="left:765px;top:216px"><i data-g="tower" data-h="150" data-s="16"></i></div>
+<div class="wl" style="left:941px;top:216px"><i data-g="tower" data-h="150" data-s="17"></i></div>
+<div class="wl" style="left:1118px;top:216px"><i data-g="tower" data-h="150" data-s="18"></i></div>
+<span class="flg" style="left:270px;top:104px;--d:0s" data-off="r0" data-g="flag" data-col="#f28ab4"></span><span class="flg hid" style="left:270px;top:104px" data-on="r0" data-g="flag" data-ash="1"></span>
+<span class="flg" style="left:446px;top:104px;--d:.25s" data-off="r0" data-g="flag" data-col="#ffb070"></span><span class="flg hid" style="left:446px;top:104px" data-on="r0" data-g="flag" data-ash="1"></span>
+<span class="flg" style="left:623px;top:104px;--d:.5s" data-off="r0" data-g="flag" data-col="#f2cf5c"></span><span class="flg hid" style="left:623px;top:104px" data-on="r0" data-g="flag" data-ash="1"></span>
+<span class="flg hid" style="left:800px;top:104px;--d:.75s" data-on="r180" data-g="flag" data-col="#8fd98a"></span><span class="flg" style="left:800px;top:104px" data-off="r180" data-g="flag" data-ash="1"></span>
+<span class="flg hid" style="left:976px;top:104px;--d:1s" data-on="r180" data-g="flag" data-col="#7cc4f0"></span><span class="flg" style="left:976px;top:104px" data-off="r180" data-g="flag" data-ash="1"></span>
+<span class="flg hid" style="left:1153px;top:104px;--d:1.25s" data-on="r180" data-g="flag" data-col="#b59cf0"></span><span class="flg" style="left:1153px;top:104px" data-off="r180" data-g="flag" data-ash="1"></span>
+<span class="rw" style="left:277px;top:376px"><b>30초</b></span><span class="rw" style="left:453px;top:376px"><b>60초</b></span><span class="rw" style="left:630px;top:376px"><b>90초</b></span><span class="rw" style="left:807px;top:376px"><b>120초</b></span><span class="rw" style="left:983px;top:376px"><b>150초</b></span><span class="rw" style="left:1160px;top:376px"><b>180초</b></span>
+<span class="nowp" style="left:700px;top:176px" data-on="r95 rec"><span>여기까지 · 25초 더</span></span>
+<div class="band" style="top:430px"></div>
+<div class="cards c8" style="top:462px" data-off="r0"><span class="rc gr-n"><i class="gr">30초</i><img src="a/i/gear_badge.png" alt=""><b>1</b><small>일반 배지</small></span><span class="rc gr-r"><i class="gr">60초</i><img src="a/i/gear_ribbon.png" alt=""><b>1</b><small>희귀 리본</small></span><span class="rc gr-h"><i class="gr">90초</i><img src="a/i/gear_charm.png" alt=""><b>1</b><small>영웅 부적</small></span><span class="rc gr-r hid" data-on="r180"><i class="gr">120초</i><img src="a/i/gear_weapon.png" alt=""><b>1</b><small>희귀 무기</small></span><span class="rc gr-h hid" data-on="r180"><i class="gr">150초</i><img src="a/i/gear_charm.png" alt=""><b>1</b><small>영웅 부적</small></span><span class="rc gr-l hid" data-on="r180"><i class="gr">180초</i><img src="a/i/gear_weapon.png" alt=""><b>1</b><small>전설 무기</small></span><span class="rc gr-h hid" data-on="r180"><i class="gr" style="background:#e0a020">보너스</i><img src="a/i/gear_ribbon.png" alt=""><b>1</b><small>영웅 리본</small></span><span class="rc gr-r hid" data-on="r180"><i class="gr" style="background:#e0a020">보너스</i><img src="a/i/gear_badge.png" alt=""><b>1</b><small>희귀 배지</small></span></div>
+<div class="fail hid" style="top:520px" data-on="r0"><span>0초 · 보상 없음 · 입장권 1장 사용</span></div>
+<div class="take"><b class="tx" data-x-r0="닫기">받기</b></div>
+</div></div></div>
 <div class="vp"><div class="scr" data-st="r95">
 <div class="bk dk" style="--b12:url(a/bt_castle_1280.jpg);--b16:url(a/bt_castle_1600.jpg)"></div>
 <div class="cz">
@@ -1425,7 +2000,8 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="take"><b class="tx" data-x-r0="닫기">받기</b></div>
 </div></div></div></section>
 
-<section class="opt cs" data-choice="cr_c" data-l="C" data-choice-group="castle_res" data-choice-label="C · 타임라인 보상 띠">
+<details class="old"><summary>1차 다른 시안 · C · 타임라인 보상 띠 (고르지 않음)</summary>
+<section class="opt cs" data-choice="cr_c" data-l="C" data-og="castle_res" data-choice-label="C · 타임라인 보상 띠">
 <h2>C · 타임라인이 곧 보상 띠 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">정해진 보라 보상 띠 <b>윗단에 성곽 길을 그대로 깔고</b>, 리본이 왼쪽부터 깔리며 30초 정거장의 장비 카드가 하나씩 뒤집힙니다. 못 간 정거장은 잿빛 카드로 남아 「다음엔 여기까지」.</p>
 <p class="cost">화면 하나로 끝나 가장 짧은 연출. 정해진 「카드가 날아옴」과 달리 「제자리에서 뒤집힘」이라 다른 결과와 결이 조금 다름.</p>
@@ -1440,6 +2016,7 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="sline" style="top:580px"><span class="tx" data-x-r180="3분 완주 · 장비 6 + 보너스 2" data-x-r0="0초 · 30초를 버티면 첫 장비">잿빛 카드 = 다음에 받을 수 있는 장비 · 120초까지 <b>25초</b></span></div>
 <div class="take"><b class="tx" data-x-r0="닫기">받기</b></div>
 </div></div></div></section>
+</details>
 <style>
 /* 상태별 채움: 페이지 */
 .scr[data-st=b0]{--f1:0%;--f2:0%;--f3:0%;--f4:0%;--f5:0%;--f6:0%;--tp:0%}
@@ -1550,13 +2127,157 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 </style>
 <h3 id="s-temple">6. 신전 · 항해사 승급전 — 주인공: 신전 (D4-6 → D5-3)</h3>
 <p class="ctx">시련의 키잡이를 60초 안에 쓰러뜨리면 계급이 하나 오르고, 계급마다 <b>모든 아이 공격 +6% · 고래 보호막 +6%</b>. 견습 → 3등 → 2등 → 1등 → 부선장 → 선장 → 대선장 → 전설의 항해사(8계급). 지금 결과는 별 하나와 「3등 항해사」 글자뿐. PD 규칙대로 <b>빛기둥 안은 빼고</b> 결과 B 자리를 「문이 열리며 장미창이 물듦」으로 바꿨고, 성화(C)도 세로 기둥이 아닌 <b>둥근 불꽃</b>입니다. 단추는 「도전」 하나.</p>
-<div class="states" data-group="temple_page"><span>페이지 상태</span><button type="button" data-v="base" aria-pressed="true">견습 → 3등 (지금 · 다음)</button><button type="button" data-v="fail">실패 직후</button></div>
 <section class="ref"><h2>지금</h2><p class="cap">계급 여덟 칸 표 + 「다음 시련」 칸. 결과는 별 하나 + 글자.</p><div class="refs">
 <figure><img class="w12" src="now/adv_temple_1280.jpg" alt="지금 신전 1280"><img class="w16" src="now/adv_temple_1600.jpg" alt="지금 신전 1600"><figcaption>now/adv_temple_(1280|1600).jpg</figcaption></figure>
 <figure><img src="now/inv_result_temple.jpg" alt="지금 신전 결과"><figcaption>결과 · now/inv_result_temple.jpg</figcaption></figure></div></section>
 
+<style>
+/* ---------- 2차 신전: 시련의 키잡이 · 등대 항로 ---------- */
+.TA2 .hlm{position:absolute;left:20px;top:64px;width:680px;z-index:2;filter:drop-shadow(0 18px 20px rgba(40,20,10,.45));animation:hum 5s ease-in-out infinite}
+@keyframes hum{50%{transform:translateY(-6px)}}
+.TA2 .hlo{position:absolute;left:96px;top:30px;width:500px;height:470px;z-index:1;border-radius:50%;background:radial-gradient(closest-side,rgba(255,226,160,.55),rgba(255,200,120,.2) 55%,transparent)}
+.rkb{position:absolute;z-index:3;display:flex;flex-direction:column;align-items:center;transform:translate(-50%,-50%);gap:2px}
+.rkb img{width:56px;height:56px;object-fit:contain;filter:drop-shadow(0 4px 4px rgba(30,15,10,.4))}
+.rkb b{padding:2px 9px;border-radius:10px;background:rgba(255,253,247,.94);color:#3b2448;font-size:13px;font-weight:800;white-space:nowrap;box-shadow:0 0 0 1.5px #c9a95e,0 0 0 2.5px rgba(74,43,69,.5)}
+.rkb.off img{filter:grayscale(1) brightness(.75) opacity(.75)}
+.rkb.off b{color:#7a7090;background:rgba(240,236,246,.9)}
+.rkb.nx img{animation:nxp 1.6s ease-in-out infinite}
+@keyframes nxp{50%{filter:drop-shadow(0 0 12px #ffd36b) drop-shadow(0 0 4px #fff)}}
+.rkb.nx b{background:linear-gradient(180deg,#ffe9a6,#ffc94a);color:#4a2b00}
+.TA2 .rp4{left:720px;top:72px;width:392px;height:500px;padding:20px 24px}
+.tmr{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:15px;background:#2b1d3f;color:#ffe7a6;font-size:14px;font-weight:900}
+.bon2{display:flex;align-items:center;gap:10px;margin:12px 0;padding:10px 12px;border-radius:12px;background:linear-gradient(90deg,#fff4d6,#fffaf0);box-shadow:inset 0 0 0 1.5px #e8c579}
+.bon2 b{font:400 28px/1 "Gowun",serif;color:#b07a10}
+.bon2 span{font-size:13.5px;font-weight:800;color:#4a3a20}
+/* 결과 A */
+.TRA .hlm{position:absolute;left:350px;top:-10px;width:580px;z-index:2;filter:grayscale(.2) drop-shadow(0 18px 20px rgba(0,0,0,.5))}
+.scr[data-st=up] .TRA .hlm{filter:sepia(.55) saturate(1.5) hue-rotate(-12deg) brightness(1.08) drop-shadow(0 0 30px rgba(255,210,120,.65)) drop-shadow(0 18px 20px rgba(0,0,0,.5))}
+.scr.go[data-st=up] .TRA .hlm{animation:turn 1.4s .2s cubic-bezier(.3,1.3,.5,1) both}
+@keyframes turn{0%{transform:rotate(-45deg);filter:grayscale(1) drop-shadow(0 18px 20px rgba(0,0,0,.5))}55%{filter:grayscale(.6) drop-shadow(0 18px 20px rgba(0,0,0,.5))}}
+.scr.go[data-st=fail] .TRA .hlm{animation:shake .5s .3s both}
+@keyframes shake{20%{transform:translateX(-8px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+.TRA .glo2{position:absolute;left:390px;top:-40px;width:500px;height:460px;z-index:1;border-radius:50%;background:radial-gradient(closest-side,rgba(255,220,140,.6),rgba(255,180,90,.2) 55%,transparent);animation:breath 2.6s ease-in-out infinite}
+.scr[data-st=fail] .TRA .glo2{background:radial-gradient(closest-side,rgba(180,176,200,.3),transparent)}
+.rbn2{position:absolute;left:50%;top:306px;z-index:4;width:600px;height:96px;margin-left:-300px;background:url(a/s/lv_ribbon.svg) center/100% 100% no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:14px;color:#fff;text-shadow:0 2px 0 #4a2b45;filter:drop-shadow(0 8px 10px rgba(0,0,0,.45))}
+.rbn2 b{font:400 30px/1 "Gowun",serif}
+.rbn2 small{font-size:14px;font-weight:800;margin-top:4px}
+.scr[data-st=fail] .rbn2{filter:grayscale(1) brightness(.9) drop-shadow(0 8px 10px rgba(0,0,0,.45))}
+.scr.go .rbn2{animation:pop .5s .9s both}
+/* 신전 B 등대 항로 */
+.TB2 .lh{position:absolute;z-index:2;transform:translateX(-50%)}
+.TB2 .lh img{display:block;width:100%}
+.TB2 .lh.off img{filter:grayscale(.9) brightness(.9) blur(var(--bl,0px))}
+.TB2 .lh .lt{position:absolute;left:var(--lx,50%);top:var(--ly,20%);width:var(--lw,60px);height:var(--lw,60px);margin:calc(var(--lw,60px)/-2) 0 0 calc(var(--lw,60px)/-2);border-radius:50%;background:radial-gradient(closest-side,#fff8d0,rgba(255,214,110,.6) 40%,transparent);mix-blend-mode:screen;animation:breath 2.4s ease-in-out infinite}
+.TB2 .lh b{position:absolute;left:50%;top:100%;transform:translateX(-50%);padding:3px 10px;border-radius:11px;background:rgba(255,253,247,.94);color:#3b2448;font-size:13px;font-weight:800;white-space:nowrap;box-shadow:0 0 0 1.5px #c9a95e}
+.TB2 .lh.off b{background:rgba(236,232,244,.88);color:#6a6290}
+.TB2 .lh.nx b{background:linear-gradient(180deg,#ffe9a6,#ffc94a);color:#4a2b00}
+.TB2 .fog{position:absolute;z-index:3;border-radius:50%;background:radial-gradient(closest-side,rgba(226,222,236,.85),rgba(210,206,226,.4) 60%,transparent);filter:blur(4px);animation:drift 9s ease-in-out infinite alternate}
+.TB2 .ghost{position:absolute;z-index:2;filter:grayscale(1) brightness(1.1) opacity(.55) blur(1px)}
+.TB2 .beam{position:absolute;z-index:1;height:70px;transform-origin:0 50%;background:linear-gradient(90deg,rgba(255,244,200,.75),rgba(255,236,180,0));clip-path:polygon(0 42%,100% 0,100% 100%,0 58%);animation:sweepB 6s ease-in-out infinite;mix-blend-mode:screen}
+@keyframes sweepB{0%,100%{transform:rotate(-6deg);opacity:.6}50%{transform:rotate(4deg);opacity:1}}
+.TB2 .rp5{left:742px;top:96px;width:370px;height:470px;padding:20px 22px}
+.TRB .fog{transition:none}
+.scr.go[data-st=up] .TRB .fog{animation:fogOut 1.6s .3s both}
+@keyframes fogOut{to{opacity:0;transform:scale(1.4)}}
+.scr[data-st=up] .TRB .fog,.scr[data-st=up] .TRB .ghost{opacity:0}
+.scr[data-st=up] .TRB .lh.nx img{filter:none}
+.scr[data-st=fail] .TRB .lh.nx .lt,.scr[data-st=fail] .TRB .beam.nb{display:none}
+</style>
+<h4>페이지 (D4-6) <span class="r2">2차 새 시안</span> <small>— 코드: adventure_pages.gd _temple · 보스 「멈춘 키잡이」(helm) 60초 · 계급 8 · 계급마다 공격 · 보호막 +6%</small></h4>
+<div class="states" data-group="temple_page"><span>페이지 상태</span><button type="button" data-v="base" aria-pressed="true">견습 → 3등 (다음 시련)</button><button type="button" data-v="fail">실패 직후</button></div>
+<section class="opt" data-choice="temple2_a" data-l="A" data-pairs="temple_res" data-choice-group="temple_page" data-choice-label="2차 A · 멈춘 키잡이의 여덟 손잡이">
+<h2>A · 멈춘 키잡이 — 여덟 손잡이마다 계급 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cap">시련의 보스 <b>「멈춘 키잡이」(돌 키 · 게임 그림 그대로)</b>가 화면 주인공. 키의 <b>여덟 손잡이 = 여덟 계급</b>: 단 계급장은 금빛으로 켜져 있고 다음 계급(3등 항해사) 손잡이가 숨 쉬듯 빛납니다. 「이기면 키가 한 칸 돈다」. 오른쪽 크림 판에 다음 계급 · 60초 · 지금 → 다음 보너스(+6%) · 「도전」.</p>
+<p class="cost">보스 · 계급 · 보너스가 한 그림에 묶여 「왜 싸우나」가 바로 읽힘 · 새 그림 0장(보스 그림 + 계급장). 계급이 8개를 넘으면 손잡이 비유가 깨짐(지금 데이터 8개 고정).</p>
+<div class="vp"><div class="scr" data-st="base">
+<div class="bk soft" style="--b12:url(a/bt_temple_1280.jpg);--b16:url(a/bt_temple_1600.jpg)"></div>
+<div class="fr x TA2"><i class="xb" style="--bg:url(a/bg2/temple.jpg)"></i><i class="xmote"></i><span class="back">모험</span><div class="dks"><span>덱 편성 · 신전</span><span class="rcm">추천 편성</span></div><b class="qm">?</b>
+<i class="hlo"></i><img class="hlm" src="a/e/helm_sd.png" alt="">
+<span class="rkb" style="left:346px;top:44px"><img src="a/s/rank_0.svg" alt=""><b>견습 · 지금</b></span>
+<span class="rkb nx" style="left:500px;top:110px"><img src="a/s/rank_1.svg" alt=""><b>3등 · 다음</b></span>
+<span class="rkb off" style="left:566px;top:262px"><img src="a/s/rank_2.svg" alt=""><b>2등</b></span>
+<span class="rkb off" style="left:500px;top:414px"><img src="a/s/rank_3.svg" alt=""><b>1등</b></span>
+<span class="rkb off" style="left:346px;top:480px"><img src="a/s/rank_4.svg" alt=""><b>부선장</b></span>
+<span class="rkb off" style="left:192px;top:414px"><img src="a/s/rank_5.svg" alt=""><b>선장</b></span>
+<span class="rkb off" style="left:126px;top:262px"><img src="a/s/rank_6.svg" alt=""><b>대선장</b></span>
+<span class="rkb off" style="left:192px;top:110px"><img src="a/s/rank_7.svg" alt=""><b>전설</b></span>
+<div class="pz rp4"><div class="sub">다음 시련</div><div class="ttl" style="font-size:32px">3등 항해사</div><i class="fl8"></i>
+<span class="tmr">⏱ 60초 안에 멈춘 키잡이를 쓰러뜨려요</span>
+<div class="bon2"><b>+0% → +6%</b><span>모든 아이 공격<br>고래 보호막</span></div>
+<div class="rl2">시련 1단계 · 계급마다 +6%씩, 전설의 항해사까지 여덟 계급<br>실패해도 입장권은 그대로예요</div>
+<div class="hid" data-on="fail" style="margin-top:10px"><span class="xchip" style="--cc:#d04a6a">지난 도전 실패 · 아이들을 더 키워 다시</span></div>
+<b class="xgo" style="left:24px;top:340px;width:344px;--c1:#ffd27a;--c2:#ffa62b;--c3:#e08410"><b>도전<small>보스 「멈춘 키잡이」 · 60초</small></b></b>
+</div>
+</div><i data-mk></i>
+</div></div></section>
+
+<section class="opt" data-choice="temple2_b" data-l="B" data-pairs="temple_res" data-choice-group="temple_page" data-choice-label="2차 B · 등대 항로 (계급 = 등대 여덟)">
+<h2>B · 등대 항로 — 계급마다 등대 하나씩 켜기 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cap">구름 바다 위로 <b>멀어지는 등대 섬 여덟 개</b>(가까운 것이 지금 계급, 멀수록 높은 계급). 단 계급의 등대는 불이 켜져 수평으로 빛을 쓸고, 다음 등대는 짙은 안개 속에 <b>멈춘 키잡이의 그림자</b>가 서 있습니다. 「안개를 걷고 다음 등대를 켠다」 = 승급. 오른쪽 판은 A와 같은 정보.</p>
+<p class="cost">원근이 깊어 장소감이 가장 강하고 결과(안개가 걷히며 등대 점등)가 자연스러움. 먼 등대 6개는 작아 계급 이름은 꼬리표로만 · 등대 섬 그림을 본편 섬(등대 섬)에서 재사용.</p>
+<div class="vp"><div class="scr" data-st="base">
+<div class="bk soft" style="--b12:url(a/bt_temple_1280.jpg);--b16:url(a/bt_temple_1600.jpg)"></div>
+<div class="fr x TB2"><i class="xb" style="--bg:url(a/bg2/temple.jpg);filter:saturate(.9) brightness(.92)"></i><span class="back">모험</span><div class="dks"><span>덱 편성 · 신전</span><span class="rcm">추천 편성</span></div><b class="qm">?</b>
+<span class="lh off" style="left:690px;top:92px;width:70px;--bl:1.4px"><img class="mk8" src="a/w/isl5_2.png" alt=""><b>전설</b></span>
+<span class="lh off" style="left:610px;top:118px;width:84px;--bl:1.2px"><img class="mk8" src="a/w/isl5_0.png" alt=""><b>대선장</b></span>
+<span class="lh off" style="left:520px;top:146px;width:100px;--bl:1px"><img class="mk8" src="a/w/isl5_2.png" alt=""><b>선장</b></span>
+<span class="lh off" style="left:420px;top:176px;width:120px;--bl:.6px"><img class="mk8" src="a/w/isl5_0.png" alt=""><b>부선장</b></span>
+<span class="lh off" style="left:640px;top:226px;width:140px;--bl:.3px"><img class="mk8" src="a/w/isl5_2.png" alt=""><b>1등</b></span>
+<span class="lh off" style="left:250px;top:200px;width:160px"><img class="mk8" src="a/w/isl5_0.png" alt=""><b>2등</b></span>
+<img class="ghost" src="a/e/helm_sd.png" alt="" style="left:420px;top:250px;width:250px">
+<i class="fog" style="left:360px;top:250px;width:380px;height:220px"></i>
+<span class="lh nx off" style="left:540px;top:330px;width:200px"><img class="mk8" src="a/w/isl5_0.png" alt=""><b>3등 · 다음 시련</b></span>
+<i class="beam" style="left:150px;top:350px;width:520px"></i>
+<span class="lh" style="left:150px;top:330px;width:250px;--lx:47%;--ly:12%;--lw:90px"><img class="mk8" src="a/w/isl5_3.png" alt=""><i class="lt"></i><b>견습 항해사 · 지금</b></span>
+<div class="pz rp5"><div class="sub">다음 시련</div><div class="ttl" style="font-size:30px">3등 항해사</div><i class="fl8"></i>
+<span class="tmr">⏱ 60초 · 멈춘 키잡이</span>
+<div class="bon2"><b>+0% → +6%</b><span>모든 아이 공격<br>고래 보호막</span></div>
+<div class="rl2">안개 속 키잡이를 쓰러뜨리면 다음 등대에 불이 켜져요 · 실패해도 입장권은 그대로</div>
+<div class="hid" data-on="fail" style="margin-top:10px"><span class="xchip" style="--cc:#d04a6a">지난 도전 실패 · 안개가 그대로예요</span></div>
+<b class="xgo" style="left:22px;top:370px;width:326px;--c1:#ffd27a;--c2:#ffa62b;--c3:#e08410"><b>도전<small>60초 시련</small></b></b>
+</div>
+</div><i data-mk></i>
+</div></div></section>
+
+<h4>결과 (D5-3) <span class="r2">2차 새 시안</span> <small>— 페이지와 같은 글자끼리 짝 · 빛기둥 없음</small></h4>
+<div class="states" data-group="temple_res"><span>결과</span><button type="button" data-v="up" aria-pressed="true">승급 (3등 항해사)</button><button type="button" data-v="fail">실패</button></div>
+<section class="opt" data-choice="temple2_ra" data-l="A" data-choice-group="temple_res" data-choice-label="2차 A · 키가 한 칸 돌아감">
+<h2>A · 키가 한 칸 돌고 손잡이에 색 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cap">이기면 <b>멈춰 있던 돌 키가 「쿵」 한 칸(45°) 돌아가며</b> 잿빛 돌에 호박빛이 번지고, 아래로 계급 리본 「3등 항해사 승급!」 + 「모든 아이 공격 · 보호막 +6%」. 보상 띠 카드는 계급장. 지면 키가 덜컥 흔들리기만 하고 잿빛 그대로 「입장권은 그대로예요」.</p>
+<p class="cost">페이지 A와 같은 그림이 「움직여서」 결과가 됨 · 회전 + 색 필터뿐이라 가벼움. 망토까지 함께 돌아 0.4초 넘게 보이면 어색 → 짧게.</p>
+<div class="vp"><div class="scr" data-st="up">
+<div class="bk dk" style="--b12:url(a/bt_temple_1280.jpg);--b16:url(a/bt_temple_1600.jpg)"></div>
+<div class="cz TRA"><i style="position:absolute;inset:-60px -200px;background:radial-gradient(55% 50% at 50% 35%,rgba(18,12,40,.62),rgba(18,12,40,.25) 70%,transparent)"></i><i class="glo2"></i><i class="xmote"></i><img class="hlm" src="a/e/helm_sd.png" alt="">
+<div class="rbn2"><b class="tx" data-x-fail="시련 실패">3등 항해사 승급!</b><small class="tx" data-x-fail="아이들을 더 키워 다시 · 입장권은 그대로예요">모든 아이 공격 · 고래 보호막 +6%</small></div>
+<div class="band" style="top:436px"></div>
+<div class="cards" style="top:468px" data-off="fail"><span class="rc" style="--rr:#ffb020;--rl:#fff4d6"><img src="a/s/rank_1.svg" alt=""><b style="font-size:20px">3등</b><small>항해사 계급</small></span><span class="rc" style="--rr:#ffb020;--rl:#fff4d6"><img src="a/i/nav_formation.png" alt=""><b>+6%</b><small>공격 · 보호막</small></span></div>
+<div class="fail hid" style="top:526px" data-on="fail"><span>시련 실패 · 입장권은 그대로예요</span></div>
+<div class="take"><b class="tx" data-x-fail="닫기">받기</b></div>
+</div></div></div></section>
+
+<section class="opt" data-choice="temple2_rb" data-l="B" data-choice-group="temple_res" data-choice-label="2차 B · 안개가 걷히고 등대 점등">
+<h2>B · 안개가 걷히고 다음 등대에 불 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cap">페이지 B의 항로 그대로 가까이: 이기면 <b>안개가 흩어지고 키잡이 그림자가 사라지며</b> 3등 등대에 불이 들어와 수평 빛이 바다를 쓸고, 리본 「3등 항해사 승급!」. 지면 안개가 그대로 남고 등대는 꺼진 채.</p>
+<p class="cost">장소 이야기가 가장 예쁨 · 페이지 B와 짝. 결과 글자(보너스 +6%)가 그림보다 작게 읽혀 리본에 꼭 넣어야 함.</p>
+<div class="vp"><div class="scr" data-st="up">
+<div class="bk dk" style="--b12:url(a/bt_temple_1280.jpg);--b16:url(a/bt_temple_1600.jpg)"></div>
+<div class="cz TRB TB2"><i style="position:absolute;inset:-60px -200px;background:radial-gradient(55% 50% at 50% 35%,rgba(18,12,40,.62),rgba(18,12,40,.25) 70%,transparent)"></i><i class="xmote"></i>
+<span class="lh" style="left:300px;top:150px;width:150px"><img class="mk8" src="a/w/isl5_3.png" alt=""><b>견습</b></span>
+<i class="beam nb" style="left:640px;top:120px;width:520px"></i>
+<span class="lh nx off" style="left:640px;top:40px;width:300px;--lx:47%;--ly:12%;--lw:110px"><img class="mk8" src="a/w/isl5_3.png" alt=""><i class="lt"></i></span>
+<img class="ghost" src="a/e/helm_sd.png" alt="" style="left:520px;top:80px;width:300px;z-index:3">
+<i class="fog" style="left:440px;top:40px;width:460px;height:300px;z-index:4"></i>
+<div class="rbn2"><b class="tx" data-x-fail="안개가 그대로예요">3등 항해사 승급!</b><small class="tx" data-x-fail="아이들을 더 키워 다시 · 입장권은 그대로예요">모든 아이 공격 · 고래 보호막 +6%</small></div>
+<div class="band" style="top:436px"></div>
+<div class="cards" style="top:468px" data-off="fail"><span class="rc" style="--rr:#ffb020;--rl:#fff4d6"><img src="a/s/rank_1.svg" alt=""><b style="font-size:20px">3등</b><small>항해사 계급</small></span><span class="rc" style="--rr:#ffb020;--rl:#fff4d6"><img src="a/i/nav_formation.png" alt=""><b>+6%</b><small>공격 · 보호막</small></span></div>
+<div class="fail hid" style="top:526px" data-on="fail"><span>시련 실패 · 입장권은 그대로예요</span></div>
+<div class="take"><b class="tx" data-x-fail="닫기">받기</b></div>
+</div></div></div></section>
+
+<details class="old"><summary>1차 시안 보기 (PD가 모두 반려 · 위 2차로 다시 그림)</summary>
+<div class="states" data-group="temple_page_old"><span>페이지 상태</span><button type="button" data-v="base" aria-pressed="true">견습 → 3등 (지금 · 다음)</button><button type="button" data-v="fail">실패 직후</button></div>
 <h4>페이지 (D4-6)</h4>
-<section class="opt" data-choice="temple_a" data-l="A" data-pairs="temple_res" data-choice-group="temple_page" data-choice-label="A · 계단 위 신전 문">
+<section class="opt" data-choice="temple_a" data-l="A" data-og="temple_page_old" data-choice-label="A · 계단 위 신전 문">
 <h2>A · 계단 위 신전 문 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">구름 위 <b>여덟 계단</b>(한 단 = 한 계급)이 신전 문까지 이어지고, 내 아이가 지금 계단에 서 있습니다. 다음 계단은 따뜻한 빛, 문 안엔 시련의 키잡이(잿빛 키 그림). 실패 직후엔 유나가 뾰족 꼬리 말풍선으로 「아까 키잡이 체력 18% 남았어」.</p>
 <p class="cost">「오른다」가 한눈에 보임 · 결과의 문 열림과 바로 이어짐. 계단 8단이 화면 높이를 다 써서 계급 효과 글자는 오른쪽 칸으로.</p>
@@ -1579,7 +2300,7 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 </div><i data-mk></i>
 </div></div></section>
 
-<section class="opt" data-choice="temple_b" data-l="B" data-pairs="temple_res" data-choice-group="temple_page" data-choice-label="B · 계급장 진열장">
+<section class="opt" data-choice="temple_b" data-l="B" data-og="temple_page_old" data-choice-label="B · 계급장 진열장">
 <h2>B · 계급장 진열장 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">밤 신전 안 <b>유리 진열장</b>에 계급장 여덟 칸. 받은 것은 빛나고, 다음 것은 조명 아래 떠 있고, 나머지는 빈 홈. 오른쪽에 다음 시련과 「도전」.</p>
 <p class="cost">모으는 맛 · 무엇을 더 받을 수 있는지 분명. 계급장 그림 8종이 필요(지금은 CSS 원판에 글자로 대신).</p>
@@ -1594,7 +2315,7 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 </div><i data-mk></i>
 </div></div></section>
 
-<section class="opt" data-choice="temple_c" data-l="C" data-pairs="temple_res" data-choice-group="temple_page" data-choice-label="C · 커지는 성화 (둥근 불꽃)">
+<section class="opt" data-choice="temple_c" data-l="C" data-og="temple_page_old" data-choice-label="C · 커지는 성화 (둥근 불꽃)">
 <h2>C · 계급만큼 커지는 성화 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">신전 가운데 <b>성화 그릇</b>: 계급이 오를수록 둥근 불꽃이 한 겹씩 커지고, 그릇 둘레 여덟 불씨 중 받은 만큼 켜집니다. 위로 솟는 기둥이 아니라 그릇 안에서 넘실대는 불꽃 + 작은 불티. 실패 직후엔 불꽃이 잦아들며 「18% 남음」.</p>
 <p class="cost">「내 계급 = 힘」을 감각으로 줌. 계급 이름 · 효과는 오른쪽 글자에 기대야 해 정보 전달은 A보다 약함.</p>
@@ -1609,8 +2330,8 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <style>.scr[data-st=fail] .TC .flame{--lv:.4!important;filter:saturate(.6)}</style>
 
 <h4>결과 (D5-3) <small>— A 문 + 장미창(빛기둥 대신) · B 메달 수여 · C 계급 리본</small></h4>
-<div class="states" data-group="temple_res"><span>결과</span><button type="button" data-v="up" aria-pressed="true">승급 (3등 항해사)</button><button type="button" data-v="fail">실패</button></div>
-<section class="opt" data-choice="tr_a" data-l="A" data-choice-group="temple_res" data-choice-label="A · 문이 열리고 장미창이 물듦 (빛기둥 대체)">
+<div class="states" data-group="temple_res_old"><span>결과</span><button type="button" data-v="up" aria-pressed="true">승급 (3등 항해사)</button><button type="button" data-v="fail">실패</button></div>
+<section class="opt" data-choice="tr_a" data-l="A" data-og="temple_res_old" data-choice-label="A · 문이 열리고 장미창이 물듦 (빛기둥 대체)">
 <h2>A · 신전 문이 열리고 장미창이 물듦 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">목록의 「신전 빛기둥」 대신: 계단 끝 <b>문이 양쪽으로 열리고</b>, 그 안 원형 <b>장미창</b>이 가운데서 바깥으로 무지개 파스텔로 물들며 새 계급 이름이 떠오릅니다. 세로 빛 없이 원이 번지는 연출. 실패면 문이 닫힌 채 잿빛 창.</p>
 <p class="cost">페이지 A와 그대로 이어짐 · 원형 마스크 한 번이라 가벼움. 장미창 그림을 손그림으로 바꾸면 더 고급(지금은 CSS 유리 조각).</p>
@@ -1625,7 +2346,7 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="take"><b class="tx" data-x-fail="닫기">받기</b></div>
 </div></div></div></section>
 
-<section class="opt" data-choice="tr_b" data-l="B" data-choice-group="temple_res" data-choice-label="B · 메달 수여 (목록 A)">
+<section class="opt" data-choice="tr_b" data-l="B" data-og="temple_res_old" data-choice-label="B · 메달 수여 (목록 A)">
 <h2>B · 메달 수여 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">진열장의 다음 칸에 들어갈 <b>계급장이 리본에 매달려 내려와</b> 분홍 방석 위에 놓입니다. 실패면 빈 방석 위 흐린 계급장 그림자.</p>
 <p class="cost">페이지 B와 짝. 메달 그림 8종이 필요(지금은 CSS 원판).</p>
@@ -1640,7 +2361,7 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="take"><b class="tx" data-x-fail="닫기">받기</b></div>
 </div></div></div></section>
 
-<section class="opt" data-choice="tr_c" data-l="C" data-choice-group="temple_res" data-choice-label="C · 계급 리본 (성화)">
+<section class="opt" data-choice="tr_c" data-l="C" data-og="temple_res_old" data-choice-label="C · 계급 리본 (성화)">
 <h2>C · 성화가 한 겹 커지고 계급 리본 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">페이지 C의 성화 그릇이 그대로 나와 <b>불꽃이 한 겹 커지고</b>, 그 앞으로 금빛 테 리본이 풀리며 「3등 항해사」. 실패면 불꽃이 잦아들고 리본 없음.</p>
 <p class="cost">페이지 C와 짝 · 리본은 다른 결과(주간 정산 A)와 결이 겹칠 수 있어 색을 신전 호박색으로 구분.</p>
@@ -1656,6 +2377,8 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="take"><b class="tx" data-x-fail="닫기">받기</b></div>
 </div></div></div></section>
 <style>.scr[data-st=fail] .cz .flame{--lv:.6!important;filter:saturate(.5) brightness(.8)}</style>
+
+</details>
 
 <style>
 /* ---------- #55 배경 ---------- */
@@ -1685,10 +2408,18 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <figure><img src="a/page_temple.jpg" alt="신전 배경 지금"><figcaption>assets/adventure/page_temple.png</figcaption></figure>
 <figure><img src="a/page_rank.jpg" alt="등급전 배경 지금"><figcaption>assets/adventure/page_rank.png</figcaption></figure></div></section>
 
-<section class="opt" data-choice="bg_a" data-l="A" data-choice-group="bg55" data-choice-label="A · 게임 세계 레이어 재조합">
+<section class="opt fixd" data-choice="bg_a" data-l="A" data-choice-group="bg55" data-choice-label="A · 게임 세계 레이어 재조합">
 <h2>A · 게임 세계 그림을 다시 짜 맞춤 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">본편 하늘 레이어 + 본편 섬 레이어(assets/world/ch*/layer_mid.png에서 잘라 낸 섬)로 장소를 짓고, 콘텐츠 색으로 은은하게 물들임. 잿빛성은 같은 섬의 잿빛판, 신전은 흰 돔 섬. <b>본편과 같은 붓결</b>이라 튀지 않습니다.</p>
 <p class="cost">새 그림 0장 · 오늘 바로 가능(섬 30조각 잘라 둠: batch45_adventure/a/w/). 섬 종류가 본편과 같아 「새 장소」 느낌은 약함 → 콘텐츠 주인공(회전판 · 성벽 …)이 그 몫을 짐.</p>
+<p class="cap"><span class="r2">2차</span> PD 요청대로 <b>배경이 없던 곳마다 한 장씩</b> 같은 방법으로 짰습니다(1600×720, 1280은 가운데 자름). 재료는 모두 본편 그림: 장마다 다른 하늘(assets/world/ch1~ch6/layer_sky) + 먼 구름 바다(layer_far) + 그 장의 섬 조각(a/w/) + 가까운 구름(layer_near) + 종이결. 섬 가장자리 잘린 조각은 둥근 마스크로 지웠습니다. 위 2차 화면들이 모두 이 배경을 씁니다.</p>
+<div class="refs" style="grid-template-columns:repeat(3,1fr);margin-bottom:10px">
+<figure><img src="a/bg2/hub.jpg" alt="허브 배경"><figcaption>모험 허브 · 낮 하늘 + 여러 장 섬 · a/bg2/hub.jpg</figcaption></figure>
+<figure><img src="a/bg2/element.jpg" alt="원소섬 배경"><figcaption>원소 구름섬 · 맑은 하늘 + 온실 섬 · a/bg2/element.jpg</figcaption></figure>
+<figure><img src="a/bg2/rank.jpg" alt="등급전 배경"><figcaption>항해사 등급전 · 노을 + 축제 섬 · a/bg2/rank.jpg</figcaption></figure>
+<figure><img src="a/bg2/soul.jpg" alt="회랑 배경"><figcaption>기억의 회랑 · 밤 오로라 + 잿빛 관측 섬 · a/bg2/soul.jpg</figcaption></figure>
+<figure><img src="a/bg2/castle.jpg" alt="잿빛성 배경"><figcaption>잿빛성 · 흐린 하늘 + 폐허 섬 + 재 · a/bg2/castle.jpg</figcaption></figure>
+<figure><img src="a/bg2/temple.jpg" alt="신전 배경"><figcaption>신전 · 호박빛 하늘 + 흰 돔 섬 · a/bg2/temple.jpg</figcaption></figure></div>
 <div class="vp"><div class="scr" data-st="x">
 <div class="bgw"><h6>A · 같은 섬, 콘텐츠 색으로</h6>
 <div class="vg" style="left:40px;--sky:url(a/w/sky.jpg);--tn:linear-gradient(180deg,rgba(79,209,139,.5),transparent)"><i class="sk"></i><i class="tint"></i><img class="il" src="a/w/isl4_0.png" alt="" style="left:30px;top:120px;width:320px;animation:bob 5s ease-in-out infinite"><img class="il" src="a/w/isl4_3.png" alt="" style="left:240px;top:40px;width:120px"><i class="haze"></i><b>원소 구름섬 · 생명<small>본편 하늘 + 생명섬 조각 · 초록 물들임</small></b></div>
@@ -1696,7 +2427,8 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="vg" style="left:860px;--sky:url(a/w/sky5.jpg);--tn:linear-gradient(180deg,rgba(255,200,110,.5),transparent)"><i class="sk"></i><i class="tint"></i><img class="il" src="a/w/isl3_1.png" alt="" style="left:30px;top:100px;width:330px;animation:bob 6s ease-in-out infinite"><i class="haze"></i><b>신전<small>흰 돔 섬 · 호박빛 물들임</small></b></div>
 </div></div></div></section>
 
-<section class="opt" data-choice="bg_b" data-l="B" data-choice-group="bg55" data-choice-label="B · 수채 번짐 + 실루엣 (새로 그림)">
+<details class="old"><summary>1차 다른 시안 · B · 수채 번짐 + 실루엣 (새로 그림) (고르지 않음)</summary>
+<section class="opt" data-choice="bg_b" data-l="B" data-og="bg55" data-choice-label="B · 수채 번짐 + 실루엣 (새로 그림)">
 <h2>B · 수채 번짐 + 한 색 실루엣 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">그림책처럼 <b>종이결 위 수채 번짐 두세 겹 + 한 색 실루엣</b>(섬 · 성벽 · 돔). 디테일을 일부러 빼서 손으로 칠한 맛, 글자가 얹혀도 잘 읽힘. 아래는 CSS로 흉내 낸 방향 견본(실제는 손그림 6~7장).</p>
 <p class="cost">가장 「손그림」답고 UI가 잘 보임. 그림을 새로 그려야 함(장소당 1장, 6~7장) · 본편 그림보다 단순해져 결이 갈릴 위험.</p>
@@ -1706,8 +2438,10 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="vg" style="left:450px"><div class="wc"><i class="img" style="--wi:url(a/b/bell_tower.jpg);filter:url(#wcf) grayscale(.8)"></i><i class="brush" style="top:360px"></i><i class="sil" style="left:30px;top:200px;width:320px;height:140px;clip-path:polygon(0 30%,8% 30%,8% 15%,16% 15%,16% 30%,30% 30%,30% 0,40% 0,40% 30%,60% 30%,60% 10%,70% 10%,70% 30%,84% 30%,84% 15%,92% 15%,92% 30%,100% 30%,100% 100%,0 100%)"></i></div><i class="ashfx"></i><b>잿빛성<small>회색 번짐 + 성벽 실루엣</small></b></div>
 <div class="vg" style="left:860px"><div class="wc"><i class="img" style="--wi:url(a/b/sundial.jpg)"></i><i class="brush" style="top:330px"></i><i class="sil" style="left:90px;top:150px;width:200px;height:190px;clip-path:polygon(50% 0,70% 10%,80% 30%,80% 45%,100% 45%,100% 100%,0 100%,0 45%,20% 45%,20% 30%,30% 10%)"></i></div><b>신전<small>호박 번짐 + 돔 실루엣</small></b></div>
 </div></div></div></section>
+</details>
 
-<section class="opt" data-choice="bg_c" data-l="C" data-choice-group="bg55" data-choice-label="C · 배경 그림 없이 무늬 + 주인공 오브제">
+<details class="old"><summary>1차 다른 시안 · C · 배경 그림 없이 무늬 + 주인공 오브제 (고르지 않음)</summary>
+<section class="opt" data-choice="bg_c" data-l="C" data-og="bg55" data-choice-label="C · 배경 그림 없이 무늬 + 주인공 오브제">
 <h2>C · 배경 그림을 빼고 무늬 + 주인공 오브제 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">배경은 <b>콘텐츠마다 다른 무늬</b>(항해도 격자 · 수채 동심원 · 벽돌 줄 · 별 점)만, 그림 역할은 화면 주인공(회전판 · 성벽 · 성화)이 맡음. AI 같다는 말이 나올 그림 자체가 없음.</p>
 <p class="cost">가장 가볍고(텍스처 0장) 화질 걱정 없음. 허브 · 결과에서 「장소에 간다」는 맛이 줄어 화면이 UI 같아질 수 있음.</p>
@@ -1717,6 +2451,7 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="vg" style="left:450px"><div class="pt" style="background:repeating-linear-gradient(0deg,rgba(0,0,0,.12) 0 2px,transparent 2px 30px),repeating-linear-gradient(90deg,rgba(0,0,0,.08) 0 2px,transparent 2px 58px),linear-gradient(180deg,#b9c0d0,#8f97aa)"></div><i class="ashfx"></i><b>잿빛성<small>벽돌 줄 · 성벽이 주인공</small></b></div>
 <div class="vg" style="left:860px"><div class="pt TC"></div><b>신전<small>별 점 · 성화가 주인공</small></b></div>
 </div></div></div></section>
+</details>
 
 <style>
 /* ---------- #56 겹침 · 도움말 ---------- */
@@ -1749,7 +2484,8 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <figure><img src="now/adv_element_1280.jpg" alt="규칙 겹침"><figcaption>규칙 끝 줄 ↔ 「관문 구간」 제목 겹침 · now/adv_element_1280.jpg</figcaption></figure>
 <figure><img src="now/hub_guide_overlap.jpg" alt="가이드 겹침"><figcaption>가이드 말풍선이 카드 덮음 · now/hub_guide_overlap.jpg</figcaption></figure></div></section>
 
-<section class="opt" data-choice="help_a" data-l="A" data-choice-group="help56" data-choice-label="A · ? 서랍 (규칙 전부 오른쪽 서랍으로)">
+<details class="old"><summary>1차 다른 시안 · A · ? 서랍 (규칙 전부 오른쪽 서랍으로) (고르지 않음)</summary>
+<section class="opt" data-choice="help_a" data-l="A" data-og="help56" data-choice-label="A · ? 서랍 (규칙 전부 오른쪽 서랍으로)">
 <h2>A · 「?」 서랍 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">본문엔 한 줄 요약만. 오른쪽 위 「?」를 누르면 <b>오른쪽에서 서랍</b>이 나와 규칙 · 보상 표 전부. 서랍이 열리면 본문은 그대로(겹치는 건 서랍뿐, 닫기 쉬움).</p>
 <p class="cost">본문이 가장 깨끗. 규칙을 아예 안 보는 사람이 늘 수 있음(첫 입장 때 한 번 자동으로 열어 주면 보완).</p>
@@ -1762,8 +2498,9 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="drawer"><span class="x">×</span><h6>잿빛성 규칙</h6><ul style="padding-left:18px;margin:0"><li>시간이 갈수록 잿빛이 단단해지고 더 자주 몰려와요</li><li>고래 보호막이 0이 되면 그때까지 버틴 시간으로 보상</li><li>3분을 버티면 최고 보상을 받고 자동으로 나와요</li><li>장비는 「장비」에서 분해해 색가루로 바꿀 수 있어요</li></ul><h6 style="margin-top:14px">버틴 시간 → 장비</h6><table><tr><td>30초</td><td>× 1</td></tr><tr><td>60초</td><td>× 2</td></tr><tr><td>90초</td><td>× 3</td></tr><tr><td>120초</td><td>× 4</td></tr><tr><td>150초</td><td>× 5</td></tr><tr><td>180초</td><td>× 6 (+2 완주 보너스)</td></tr></table></div>
 </div><i data-mk></i>
 </div></div></section>
+</details>
 
-<section class="opt" data-choice="help_b" data-l="B" data-choice-group="help56" data-choice-label="B · 요약 두 줄 + 「규칙」 칩 말풍선">
+<section class="opt fixd" data-choice="help_b" data-l="B" data-choice-group="help56" data-choice-label="B · 요약 두 줄 + 「규칙」 칩 말풍선">
 <h2>B · 요약 두 줄 + 「규칙」 칩 말풍선 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">본문엔 <b>번호 붙은 두 줄</b>만 고정 자리에(다른 칸과 겹칠 수 없게 높이 고정), 나머지는 「? 규칙」 칩 → 칩 바로 아래 <b>뾰족 꼬리 말풍선</b>. 화면 밖을 누르면 닫힘. 위 콘텐츠 시안들이 모두 이 방식입니다.</p>
 <p class="cost">핵심 두 줄은 늘 보여 신규 이해에 좋고, 말풍선 하나라 만들기 쉬움. 두 줄로 줄이는 문구 정리가 콘텐츠마다 필요.</p>
@@ -1779,7 +2516,8 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 </div><i data-mk></i>
 </div></div></section>
 
-<section class="opt" data-choice="help_c" data-l="C" data-choice-group="help56" data-choice-label="C · 첫 입장 코치마크 1회">
+<details class="old"><summary>1차 다른 시안 · C · 첫 입장 코치마크 1회 (고르지 않음)</summary>
+<section class="opt" data-choice="help_c" data-l="C" data-og="help56" data-choice-label="C · 첫 입장 코치마크 1회">
 <h2>C · 첫 입장 때 한 번만 코치마크 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
 <p class="cap">처음 들어올 때만 화면이 어두워지고 <b>두 곳만 뚫린 채</b> 번호 말풍선 「① 버틴 만큼 성벽이 물들어요 → ② 여기서 입장」. 그 뒤엔 본문에 도움말 글자가 없음(「?」로 다시 보기).</p>
 <p class="cost">처음 이해도는 가장 높음. 가이드 퀘스트 손가락과 같은 때 뜨면 겹칠 수 있어 「가이드가 있으면 코치마크 생략」 규칙이 필요.</p>
@@ -1794,9 +2532,92 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pre","Pretendard","Noto S
 <div class="cm up" style="left:640px;top:580px;animation-delay:.4s"><i>2</i>준비됐으면 여기서 입장</div>
 </div><i data-mk></i>
 </div></div></section>
+</details>
 
 </main>
 <div class="toast" id="toast"></div>
+<script>
+/* ===== 2차 그림 부품 생성 (SVG): 돌 · 천 · 종이 · 잉크 결 ===== */
+(()=>{
+let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646};
+const R=(a,b)=>a+(b-a)*rnd();
+const OL='#4a2b45';
+// 빛 받는 돌: 벽돌마다 밝기 다름 + 가장자리 닳음(변위) + 돌 결(난류 조명)
+const DEFS=`<svg width="0" height="0" style="position:absolute"><defs>
+<filter id="stn" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency=".25" numOctaves="2" seed="7" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="1.6" result="d"/><feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="5" seed="2" result="n"/><feDiffuseLighting in="n" surfaceScale="3.4" lighting-color="#fff" result="l"><feDistantLight azimuth="235" elevation="48"/></feDiffuseLighting><feComposite in="d" in2="l" operator="arithmetic" k1="1.35" k2="0" k3="0" k4="0" result="lit"/><feComposite in="lit" in2="d" operator="in"/></filter>
+<filter id="ink" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="turbulence" baseFrequency=".9" numOctaves="2" seed="5" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="3.5" result="d"/><feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" seed="9" result="s"/><feColorMatrix in="s" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.4 2.0" result="m"/><feComposite in="d" in2="m" operator="in"/></filter>
+<filter id="deckle" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="3" seed="3" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="9"/></filter>
+<filter id="paper"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" seed="4" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 .55 0 0 0 0 .45 0 0 0 0 .32 0 0 0 .22 0" result="c"/><feComposite in="c" in2="SourceGraphic" operator="in" result="g"/><feBlend in="SourceGraphic" in2="g" mode="multiply"/></filter>
+<filter id="cloth"><feTurbulence type="fractalNoise" baseFrequency=".9 .02" numOctaves="2" seed="8" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .18 0" result="c"/><feComposite in="c" in2="SourceGraphic" operator="in" result="g"/><feBlend in="g" in2="SourceGraphic" mode="screen"/></filter>
+<linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3c4"/><stop offset=".35" stop-color="#f2c75c"/><stop offset=".7" stop-color="#c98d2a"/><stop offset="1" stop-color="#8a5a1a"/></linearGradient>
+<linearGradient id="goldH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9a6a20"/><stop offset=".3" stop-color="#ffe9a0"/><stop offset=".55" stop-color="#e4ad44"/><stop offset="1" stop-color="#8a5a1a"/></linearGradient>
+<radialGradient id="glass" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<linearGradient id="towerSh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset=".35" stop-color="#fff" stop-opacity="0"/><stop offset=".75" stop-color="#1c1236" stop-opacity=".18"/><stop offset="1" stop-color="#1c1236" stop-opacity=".45"/></linearGradient>
+<linearGradient id="ao" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".25"/><stop offset=".18" stop-color="#fff" stop-opacity="0"/><stop offset=".7" stop-color="#1c1236" stop-opacity="0"/><stop offset="1" stop-color="#1c1236" stop-opacity=".45"/></linearGradient>
+<pattern id="slate" width="16" height="12" patternUnits="userSpaceOnUse"><rect width="16" height="12" fill="#5d4f8f"/><path d="M0 12 Q4 3 8 12 Q12 3 16 12" fill="#7a6bb0" stroke="#3a2d62" stroke-width="1"/><path d="M-8 6 Q-4 -3 0 6 Q4 -3 8 6 Q12 -3 16 6 Q20 -3 24 6" fill="none" stroke="#3a2d62" stroke-width=".8" opacity=".6"/></pattern>
+<pattern id="slateC" width="16" height="12" patternUnits="userSpaceOnUse"><rect width="16" height="12" fill="#c45a8c"/><path d="M0 12 Q4 3 8 12 Q12 3 16 12" fill="#e98bb5" stroke="#7a2a55" stroke-width="1"/></pattern>
+</defs></svg>`;
+document.body.insertAdjacentHTML('afterbegin',DEFS);
+const RB=['#f590b8','#ffb27e','#ffd66a','#a8e08c','#8ccbf2','#b79cf0'];
+function mix(a,b,t){const p=x=>[1,3,5].map(i=>parseInt(x.substr(i,2),16));const A=p(a),B=p(b);return '#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join('')}
+function rbAt(f){const n=RB.length-1,i=Math.min(n-1,Math.floor(f*n));return mix(RB[i],RB[i+1],f*n-i)}
+// 성벽 한 장 (colored = 무지개 파스텔 벽돌, 아니면 잿빛)
+function wall(w,h,colored,s){seed=s||11;let o='';const row=21,top=30;
+ o+=`<rect x="0" y="${top}" width="${w}" height="${h-top}" fill="${colored?'#8b6a8e':'#4d4862'}"/>`;
+ // 성가퀴
+ for(let x=6;x<w-20;x+=58){const L=colored?R(.9,1.05):R(.9,1.05);o+=`<rect x="${x}" y="2" width="34" height="${top+2}" rx="3" fill="${colored?rbAt(x/w):mix('#8f8aa6','#b9b4cc',R(0,1))}"/>`}
+ for(let y=top+2,r=0;y<h-4;y+=row,r++){let x=r%2?-26:-2;while(x<w){const bw=R(40,66);const base=colored?rbAt(Math.max(0,x)/w):mix('#8a85a2','#bdb8cf',R(0,1));const c=colored?mix(base,'#ffffff',R(0,.25)):base;o+=`<rect x="${x+1.5}" y="${y+1.5}" width="${bw-3}" height="${row-3}" rx="3" fill="${c}"/>`;x+=bw}}
+ const arches=[];for(let x=90;x<w-60;x+=180)arches.push(x);
+ let ar='';arches.forEach(x=>{ar+=`<path d="M${x-30} ${h} V${h-34} A30 30 0 0 1 ${x+30} ${h-34} V${h} Z" fill="${colored?'#5a3f6a':'#2e2944'}"/><path d="M${x-30} ${h-34} A30 30 0 0 1 ${x+30} ${h-34}" fill="none" stroke="${colored?'#ffe7c0':'#a9a4bd'}" stroke-width="2" opacity=".6"/>`});
+ let cr='';if(!colored){for(let k=0;k<5;k++){let x=R(40,w-40),y=R(top+10,h-30);let d=`M${x} ${y}`;for(let j=0;j<4;j++){x+=R(-10,12);y+=R(6,14);d+=` L${x} ${y}`}cr+=`<path d="${d}" fill="none" stroke="#2e2944" stroke-width="1.6" opacity=".7"/>`}}
+ return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><g filter="url(#stn)">${o}</g>${ar}${cr}<rect x="0" y="0" width="${w}" height="${h}" fill="url(#ao)"/><rect x="0" y="${top}" width="${w}" height="2" fill="#fff" opacity=".35"/></svg>`}
+// 망루
+function tower(h,colored,lit,s){seed=s||5;const w=64;let o='';const top=58;
+ for(let y=top,r=0;y<h;y+=16,r++){let x=r%2?-10:0;while(x<w){const bw=R(18,26);const c=colored?mix('#f0a8c8','#ffd2a0',R(0,1)):mix('#8a85a2','#bdb8cf',R(0,1));o+=`<rect x="${x+1}" y="${y+1}" width="${bw-2}" height="14" rx="2" fill="${c}"/>`;x+=bw}}
+ const roof=`<path d="M-8 ${top+2} L${w/2} 0 L${w+8} ${top+2} Z" fill="url(#${colored?'slateC':'slate'})" stroke="${OL}" stroke-width="2" stroke-linejoin="round"/><path d="M${w/2} 0 L${w+8} ${top+2} L${w/2+6} ${top+2} Z" fill="#1c1236" opacity=".25"/><rect x="-10" y="${top}" width="${w+20}" height="7" rx="2" fill="url(#goldH)" stroke="${OL}" stroke-width="1.5"/>`;
+ const win=`<path d="M${w/2-9} ${top+46} V${top+30} A9 9 0 0 1 ${w/2+9} ${top+30} V${top+46} Z" fill="${lit?'#ffd36b':'#2e2944'}" stroke="${OL}" stroke-width="1.5"/>${lit?`<circle cx="${w/2}" cy="${top+36}" r="22" fill="#ffd36b" opacity=".25"/>`:''}`;
+ return `<svg width="${w+20}" height="${h+4}" viewBox="-10 -2 ${w+20} ${h+4}"><rect x="0" y="${top}" width="${w}" height="${h-top}" fill="${colored?'#8b6a8e':'#4d4862'}"/><g filter="url(#stn)">${o}</g><rect x="0" y="${top}" width="${w}" height="${h-top}" fill="url(#towerSh)"/><rect x="0" y="${top}" width="${w}" height="${h-top}" fill="none" stroke="${OL}" stroke-width="2"/>${win}${roof}<circle cx="${w/2}" cy="-1" r="4" fill="url(#gold)" stroke="${OL}" stroke-width="1.5"/></svg>`}
+// 깃발
+function flag(col,ash){const c2=ash?'#8a859c':mix(col,'#000000',.25);return `<svg width="70" height="120" viewBox="0 0 70 120"><rect x="5" y="6" width="4" height="114" rx="2" fill="url(#goldH)" stroke="${OL}" stroke-width="1.2"/><circle cx="7" cy="6" r="5" fill="url(#gold)" stroke="${OL}" stroke-width="1.2"/><path d="M9 12 C30 8 44 18 66 12 L56 30 L66 48 C44 54 30 44 9 48 Z" fill="${ash?'#b8b3c8':col}" stroke="${OL}" stroke-width="1.8" stroke-linejoin="round" filter="url(#cloth)" ${ash?'opacity=".85"':''}/><path d="M9 34 C30 30 44 40 62 36 L66 48 C44 54 30 44 9 48 Z" fill="${c2}" opacity=".45"/><path d="M12 16 C30 13 40 20 58 16" stroke="#fff" stroke-width="2" opacity=".55" fill="none"/>${ash?'<path d="M50 40 l6 6 l-4 2z M30 46 l3 4 l-4 0z" fill="#4d4862"/>':''}</svg>`}
+// 나침반 장미 (허브)
+function rose(){let p='';for(let i=0;i<8;i++){const a=i*45,L=i%2?46:68,c1=i%2?'#fff3d0':'#ffe39a',c2=i%2?'#d8c39a':'#c98d2a';p+=`<g transform="rotate(${a} 75 75)"><path d="M75 75 L75 ${75-L} L${75+ (i%2?7:11)} 75 Z" fill="${c1}" stroke="${OL}" stroke-width="1.3"/><path d="M75 75 L75 ${75-L} L${75-(i%2?7:11)} 75 Z" fill="${c2}" stroke="${OL}" stroke-width="1.3"/></g>`}
+ let tk='';for(let i=0;i<72;i++){tk+=`<line x1="75" y1="5" x2="75" y2="${i%9?10:14}" stroke="${OL}" stroke-width="${i%9?.8:1.6}" transform="rotate(${i*5} 75 75)"/>`}
+ return `<svg viewBox="0 0 150 150" width="150" height="150"><circle cx="75" cy="75" r="72" fill="rgba(255,250,236,.55)" stroke="url(#goldH)" stroke-width="3"/><circle cx="75" cy="75" r="72" fill="none" stroke="${OL}" stroke-width="1"/><circle cx="75" cy="75" r="58" fill="none" stroke="#c9a95e" stroke-width="1.2"/>${tk}${p}<circle cx="75" cy="75" r="8" fill="url(#gold)" stroke="${OL}" stroke-width="1.5"/><text x="75" y="31" text-anchor="middle" font-family="Gowun" font-size="13" fill="${OL}">N</text></svg>`}
+// 원소 회전판 바탕 (놋쇠 테 · 나무 고리 · 양피지 원판)
+function wheel(){let o='';const c=280;
+ const cols=['#4fd18b','#9a6bff','#f2c14e','#ff9a3c','#e957bc','#ff5f4f','#3fa9ff'];
+ for(let i=0;i<7;i++){const a0=(-90-25.7+i*51.43)*Math.PI/180,a1=a0+51.43*Math.PI/180,r=196;o+=`<path d="M${c} ${c} L${c+r*Math.cos(a0)} ${c+r*Math.sin(a0)} A${r} ${r} 0 0 1 ${c+r*Math.cos(a1)} ${c+r*Math.sin(a1)} Z" fill="${mix(cols[i],'#fffaf0',.78)}" stroke="#c9a95e" stroke-width="1.5"/>`}
+ let rv='';for(let i=0;i<21;i++){const a=i*360/21*Math.PI/180;rv+=`<circle cx="${c+262*Math.cos(a)}" cy="${c+262*Math.sin(a)}" r="5" fill="url(#gold)" stroke="${OL}" stroke-width="1.2"/>`}
+ let gr='';for(let r=204;r<248;r+=R(3,6))gr+=`<circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="#5a3418" stroke-width="${R(.4,1.4)}" opacity="${R(.15,.4)}"/>`;
+ return `<svg class="base" viewBox="0 0 560 560" width="560" height="560"><circle cx="${c}" cy="${c}" r="274" fill="url(#gold)" stroke="${OL}" stroke-width="2.5"/><circle cx="${c}" cy="${c}" r="252" fill="#a8693a" stroke="${OL}" stroke-width="2"/><circle cx="${c}" cy="${c}" r="252" fill="none" stroke="#e0a868" stroke-width="10" opacity=".35"/>${gr}<circle cx="${c}" cy="${c}" r="200" fill="#fff8ea" stroke="${OL}" stroke-width="2" filter="url(#paper)"/>${o}<circle cx="${c}" cy="${c}" r="200" fill="none" stroke="url(#goldH)" stroke-width="5"/><circle cx="${c}" cy="${c}" r="270" fill="none" stroke="#fff" stroke-width="2" opacity=".6"/>${rv}</svg>`}
+// 레벨 길 (원소섬)
+function lvpath(){const xs=[12,82,152,222,292,362,436];let o=`<path d="M12 22 H436" stroke="#e9e2d0" stroke-width="10" stroke-linecap="round"/><path d="M12 22 H436" stroke="${OL}" stroke-width="12" stroke-linecap="round" opacity=".18"/><path d="M12 22 H261" stroke="#2bb673" stroke-width="8" stroke-linecap="round"/><path d="M14 19 H259" stroke="#bff3d6" stroke-width="2" stroke-linecap="round"/>`;
+ xs.forEach((x,i)=>{const done=i<4,nx=i===4;const s=nx?14:11;o+=`<path d="M${x} ${22-s} L${x+s} 22 L${x} ${22+s} L${x-s} 22 Z" fill="${done?'#2bb673':nx?'url(#gold)':'#fffaf0'}" stroke="${OL}" stroke-width="1.6"/>${done?`<path d="M${x-4} ${22-5} L${x} ${22-9} L${x+4} ${22-5}" stroke="#fff" stroke-width="1.6" fill="none" opacity=".8"/>`:''}`});
+ o+=`<g transform="translate(261 22)"><circle r="13" fill="#fff" stroke="#17704a" stroke-width="3"/><circle r="5" fill="#17704a"/></g>`;
+ return `<svg viewBox="0 0 448 44" width="448" height="44" overflow="visible">${o}</svg>`}
+// 등급전 사다리 깃발천
+function banner(){return `<svg viewBox="0 0 196 560" width="196" height="560"><defs><linearGradient id="vel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a2470"/><stop offset=".18" stop-color="#5a3a9a"/><stop offset=".32" stop-color="#43297e"/><stop offset=".55" stop-color="#5c3d9e"/><stop offset=".8" stop-color="#3f2678"/><stop offset="1" stop-color="#2b1a58"/></linearGradient></defs><rect x="2" y="6" width="192" height="12" rx="6" fill="url(#goldH)" stroke="${OL}" stroke-width="2"/><circle cx="6" cy="12" r="9" fill="url(#gold)" stroke="${OL}" stroke-width="2"/><circle cx="190" cy="12" r="9" fill="url(#gold)" stroke="${OL}" stroke-width="2"/><path d="M14 18 H182 V528 L98 500 L14 528 Z" fill="url(#vel)" stroke="${OL}" stroke-width="2.5" stroke-linejoin="round" filter="url(#cloth)"/><path d="M24 26 H172 V516 L98 490 L24 516 Z" fill="none" stroke="#e8c579" stroke-width="2" stroke-dasharray="6 4"/><path d="M14 18 H182 V40 H14 Z" fill="#1c1236" opacity=".25"/><path d="M60 64 V460" stroke="#e8c579" stroke-width="3" opacity=".55"/><path d="M60 64 V460" stroke="#fff" stroke-width="1" opacity=".3"/></svg>`}
+// 증명서 양피지 · 금 테 · 모서리 장식
+function cert(){const w=660,h=396;let cn='';[[0,0,1,1],[w,0,-1,1],[0,h,1,-1],[w,h,-1,-1]].forEach(([x,y,sx,sy])=>{cn+=`<g transform="translate(${x} ${y}) scale(${sx} ${sy})"><path d="M30 30 C30 60 46 74 74 74 M30 30 C60 30 74 46 74 74" fill="none" stroke="#b07a2a" stroke-width="2"/><path d="M28 28 L48 34 L34 48 Z" fill="url(#gold)" stroke="${OL}" stroke-width="1.2"/><circle cx="74" cy="74" r="4" fill="url(#gold)" stroke="${OL}" stroke-width="1"/></g>`});
+ return `<svg viewBox="-10 -10 ${w+20} ${h+20}" width="${w}" height="${h}" overflow="visible"><defs><radialGradient id="parch" cx=".5" cy=".45" r=".7"><stop offset="0" stop-color="#fffaea"/><stop offset=".7" stop-color="#f6e7c4"/><stop offset="1" stop-color="#e2c48e"/></radialGradient></defs><g filter="url(#deckle)"><rect x="0" y="0" width="${w}" height="${h}" fill="url(#parch)"/></g><rect x="0" y="0" width="${w}" height="${h}" fill="#000" opacity="0" filter="url(#paper)"/><ellipse cx="120" cy="320" rx="70" ry="40" fill="#c99a52" opacity=".12"/><ellipse cx="560" cy="80" rx="90" ry="40" fill="#c99a52" opacity=".1"/><rect x="22" y="22" width="${w-44}" height="${h-44}" fill="none" stroke="url(#goldH)" stroke-width="4"/><rect x="22" y="22" width="${w-44}" height="${h-44}" fill="none" stroke="${OL}" stroke-width="1" opacity=".6"/><rect x="32" y="32" width="${w-64}" height="${h-64}" fill="none" stroke="#b07a2a" stroke-width="1" stroke-dasharray="2 4"/>${cn}<path d="M220 108 H440" stroke="#b07a2a" stroke-width="1.2"/><path d="M330 102 l6 6 l-6 6 l-6 -6z" fill="url(#gold)" stroke="${OL}" stroke-width="1"/></svg>`}
+// 밀랍 도장 + 리본 꼬리
+function seal(col){return `<svg viewBox="0 0 118 150" width="118" height="150"><path d="M40 70 L22 146 L40 132 L50 148 L60 78 Z" fill="${mix(col,'#ffffff',.15)}" stroke="${OL}" stroke-width="2" stroke-linejoin="round" filter="url(#cloth)"/><path d="M78 70 L96 146 L78 132 L68 148 L58 78 Z" fill="${mix(col,'#000000',.15)}" stroke="${OL}" stroke-width="2" stroke-linejoin="round" filter="url(#cloth)"/><g filter="url(#deckle)"><circle cx="59" cy="58" r="50" fill="${col}"/></g><circle cx="59" cy="58" r="50" fill="none" stroke="${OL}" stroke-width="2" opacity=".0"/><circle cx="59" cy="58" r="36" fill="${mix(col,'#000000',.18)}"/><circle cx="59" cy="58" r="36" fill="none" stroke="${mix(col,'#ffffff',.4)}" stroke-width="2.5"/><path d="M59 34 L64 52 L82 58 L64 64 L59 82 L54 64 L36 58 L54 52 Z" fill="${mix(col,'#ffffff',.55)}" stroke="${mix(col,'#000000',.35)}" stroke-width="1"/><ellipse cx="42" cy="34" rx="16" ry="8" fill="#fff" opacity=".35" transform="rotate(-30 42 34)"/></svg>`}
+// 잉크 도장 (글자 2줄 + 둥근 테 글자)
+function stamp(col,top,mid,ring,id){return `<svg viewBox="0 0 210 210" width="100%" height="100%"><defs><path id="rp${id}" d="M105 105 m-78 0 a78 78 0 1 1 156 0 a78 78 0 1 1 -156 0"/></defs><g filter="url(#ink)" fill="${col}" stroke="${col}"><circle cx="105" cy="105" r="98" fill="none" stroke-width="7"/><circle cx="105" cy="105" r="86" fill="none" stroke-width="2.5"/><circle cx="105" cy="105" r="60" fill="none" stroke-width="2"/><text font-family="Pre" font-weight="800" font-size="15" letter-spacing="3" stroke="none"><textPath href="#rp${id}">${ring}</textPath></text><text x="105" y="88" text-anchor="middle" font-family="Pre" font-weight="900" font-size="17" stroke="none">${top}</text><text x="105" y="134" text-anchor="middle" font-family="Gowun" font-size="44" stroke="none">${mid}</text></g></svg>`}
+window.ART={wall,tower,flag,rose,wheel,lvpath,banner,cert,seal,stamp,rbAt};
+document.querySelectorAll('[data-g]').forEach(e=>{const a=e.dataset;let s='';switch(a.g){
+ case 'wall':s=wall(+a.w,+a.h,a.c==='1',+a.s||11);break;
+ case 'tower':s=tower(+a.h,a.c==='1',a.l==='1',+a.s||5);break;
+ case 'flag':s=flag(a.col,a.ash==='1');break;
+ case 'rose':s=rose();break;case 'wheel':s=wheel();break;case 'lvpath':s=lvpath();break;case 'banner':s=banner();break;case 'cert':s=cert();break;
+ case 'seal':s=seal(a.col);break;
+ case 'stamp':s=stamp(a.col,a.t,a.m,a.r,a.id);break}
+ e.innerHTML=s});
+// 뜯긴 달력 아래 가장자리
+let d='M0 0 H560 V372';for(let x=560;x>0;x-=14)d+=` L${x-7} ${376+Math.round(R(-4,6))} L${x-14} ${372+Math.round(R(-3,4))}`;d+=' Z';
+document.querySelectorAll('.cal2 .sh').forEach(e=>e.style.setProperty('--torn',`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='560' height='392'><path d='${d}'/></svg>`)}")`));
+})();
+</script>
 <script>
 const GROUPS={hub:'D4-1 모험 허브',el_page:'D4-2 원소 구름섬',el_res:'D5-2 원소섬 도달 · 소탕 결과',rank_page:'D4-3 항해사 등급전',rank_res:'D5-4 등급전 승패 결과',rank_week:'D5-5 등급전 주간 정산',soul_page:'D4-4 기억의 회랑',soul_res:'D5-4 회랑 승패 결과',castle_page:'D4-5 잿빛성',castle_res:'D5-1 잿빛성 결과 (#62)',temple_page:'D4-6 신전 · 승급전',temple_res:'D5-3 신전 승급 결과',bg55:'#55 모험 배경 그림',help56:'#56 겹침 · 도움말'};
 // 정해진 오른쪽 책갈피 틀 (hub_frame.gd): 모험이 골라진 상태
@@ -1823,7 +2644,7 @@ const play=s=>{s.classList.remove('go');void s.offsetWidth;s.classList.add('go')
 document.querySelectorAll('[data-replay]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();b.closest('.opt').querySelectorAll('.scr').forEach(play)}));
 document.querySelector('[data-replay-all]').addEventListener('click',()=>document.querySelectorAll('.scr').forEach(play));
 // 상태: 묶음의 모든 화면에 data-st, [data-on] 보이기, .tx 글자 바꾸기
-function setState(group,v,anim){document.querySelectorAll(`.opt[data-choice-group="${group}"] .scr`).forEach(s=>{s.dataset.st=v;s.querySelectorAll('[data-on]').forEach(e=>e.classList.toggle('hid',!e.dataset.on.split(' ').includes(v)));s.querySelectorAll('[data-off]').forEach(e=>e.classList.toggle('hid',e.dataset.off.split(' ').includes(v)));s.querySelectorAll('.tx').forEach(e=>{const t=e.getAttribute('data-x-'+v);e.textContent=t!==null?t:e.dataset.x0});if(anim)play(s)})}
+function setState(group,v,anim){document.querySelectorAll(`.opt[data-choice-group="${group}"] .scr,.opt[data-og="${group}"] .scr`).forEach(s=>{s.dataset.st=v;s.querySelectorAll('[data-on]').forEach(e=>e.classList.toggle('hid',!e.dataset.on.split(' ').includes(v)));s.querySelectorAll('[data-off]').forEach(e=>e.classList.toggle('hid',e.dataset.off.split(' ').includes(v)));s.querySelectorAll('.tx').forEach(e=>{const t=e.getAttribute('data-x-'+v);e.textContent=t!==null?t:e.dataset.x0});if(anim)play(s)})}
 document.querySelectorAll('.tx').forEach(e=>e.dataset.x0=e.textContent);
 document.querySelectorAll('.states').forEach(bar=>{bar.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{bar.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));bar.dataset.group.split(' ').forEach(g=>setState(g,b.dataset.v,true))}));const p=bar.querySelector('button[aria-pressed=true]');if(p)bar.dataset.group.split(' ').forEach(g=>setState(g,p.dataset.v,false))});
 // 고르기 + 짝 표시 (같은 콘텐츠 안에서 페이지 글자 = 결과 글자)
@@ -1836,6 +2657,12 @@ const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){play
 document.querySelectorAll('.vp').forEach(v=>io.observe(v));
 const secs=[...document.querySelectorAll('.page>h3')];
 addEventListener('scroll',()=>{let cur=secs[0];secs.forEach(h=>{if(h.getBoundingClientRect().top<160)cur=h});document.querySelectorAll('.toc a').forEach(a=>a.classList.toggle('cur',a.getAttribute('href')==='#'+cur.id))},{passive:true});
+// 1차 ↔ 2차: 확정 시안 안에서 같은 상태 그대로 바꿔 봄 (기본 2차)
+document.querySelectorAll('.vt').forEach(t=>{const o=t.closest('.opt');const v1=[...o.querySelectorAll(':scope>.vp:not(.v2)')],v2=[...o.querySelectorAll(':scope>.vp.v2')];v1.forEach(v=>v.classList.add('v1h'));
+t.querySelectorAll('button').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const two=b.dataset.ver==='2';t.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));v1.forEach(v=>v.classList.toggle('v1h',two));v2.forEach(v=>v.classList.toggle('v1h',!two));fit();o.querySelectorAll(':scope>.vp:not(.v1h) .scr').forEach(play)}))});
+document.querySelectorAll('details.old').forEach(d=>d.addEventListener('toggle',fit));
+// PD 2차에서 정한 것: 확정 표시 + 고름
+document.querySelectorAll('.opt.fixd').forEach(o=>{o.classList.add('sel');if(o.dataset.pairs)o.dataset.pairs.split(' ').forEach(rg=>document.querySelectorAll(`.opt[data-choice-group="${rg}"]`).forEach(x=>x.classList.toggle('pair',x.dataset.l===o.dataset.l)))});
 updToc();fit();
 </script>
 </body>
