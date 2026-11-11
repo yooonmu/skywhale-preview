@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 시안 · 배치 2 접속 · 레벨 업 알림 (출석 · 항해일지 · 레벨 업 · 완료 알림)</title>
+<style>
+:root{--navy:#2e2350;--lav:#8b74e8;--gold:#d9a52b;--line:#e2dbf5;--w:1280}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;line-height:1.45}
+.page{max-width:1180px;margin:0 auto;padding:20px 16px 64px}
+.page>h1{font-size:22px;margin:0 0 4px}
+.page>h3{font-size:18px;margin:30px 0 8px;padding-top:10px;border-top:2px solid var(--line)}
+.lead{margin:0 0 14px;font-size:14px;color:#4c4374}
+.lead b,.ctx b{color:var(--navy)}
+.bar{position:sticky;top:0;z-index:30;display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 16px;padding:8px 0;font-size:13px;background:rgba(243,240,250,.94)}
+.bar button,.rp,.states button{font:inherit;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true],.states button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.states{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:0 0 12px;font-size:13px}
+.states>span{font-weight:800;color:#4c4374;margin:0 2px 0 8px}
+.states>span:first-child{margin-left:0}
+.ctx{font-size:13px;color:#4c4374;background:#f6f2ff;border-radius:10px;padding:8px 12px;margin:0 0 12px}
+.ref,.opt{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 18px}
+.opt{cursor:pointer}
+.opt.sel{border-color:#6b55d8;box-shadow:0 0 0 3px rgba(107,85,216,.35)}
+.opt h2,.ref h2{font-size:17px;margin:0 0 2px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.opt h2 .rp{margin-left:auto;font-size:13px;min-height:36px}
+.cap{margin:0 0 10px;font-size:14px;color:#4c4374}
+.cap b{color:#5b3fc0}
+.vp{position:relative;width:100%;overflow:hidden;border-radius:8px;background:#1d1838}
+.scr{position:absolute;left:0;top:0;width:calc(var(--w)*1px);height:720px;transform-origin:0 0;overflow:hidden;font-size:16px;color:var(--navy)}
+.refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.refs figure{margin:0}.refs img{width:100%;display:block;border-radius:8px}.refs figcaption{overflow-wrap:anywhere;font-size:12px;color:#4c4374;margin-top:4px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* 상태 단추: 맞지 않는 상태의 요소는 숨김 */
+.scr[data-day="1"] .xd:not(.d1),.scr[data-day="7"] .xd:not(.d7),
+.scr[data-mon="0"] .xm:not(.m0),.scr[data-mon="1"] .xm:not(.m1),
+.scr[data-t="10"] .xt:not(.t10),.scr[data-t="3"] .xt:not(.t3),.scr[data-t="8"] .xt:not(.t8),
+.scr[data-lv="up"] .xl:not(.up),.scr[data-lv="c1"] .xl:not(.c1),.scr[data-lv="c2"] .xl:not(.c2),.scr[data-lv="two"] .xl:not(.two),
+.scr[data-kind="ok1"] .xk:not(.ok1),.scr[data-kind="ok2"] .xk:not(.ok2),.scr[data-kind="lim"] .xk:not(.lim),.scr[data-kind="bat"] .xk:not(.bat){display:none!important}
+
+/* ================= 보상 판 B 「수집 카드 줄」 바탕 (rewards_b와 같음) ================= */
+.bgc{position:absolute;inset:0;background:url(img/artifacts_feedback70_after_hud_mid_1280x720.jpg) left top/auto 100% no-repeat}
+:root[data-w="1600"] .bgc{background-image:url(img/artifacts_feedback70_after_hud_mid_1600x720.jpg)}
+.bgm{position:absolute;inset:0;background:url(img/artifacts_feedback70_after_formation_1280x720.jpg) left top/auto 100% no-repeat}
+:root[data-w="1600"] .bgm{background-image:url(img/artifacts_feedback70_after_formation_1600x720.jpg)}
+.scrim{position:absolute;inset:0;background:radial-gradient(ellipse 72% 66% at 50% 48%,rgba(40,26,92,.42),rgba(13,8,36,.82))}
+.rays{position:absolute;left:50%;top:var(--ray-y,380px);width:1600px;height:1600px;margin:-800px 0 0 -800px;background:repeating-conic-gradient(from 0deg,rgba(255,236,190,.12) 0 4deg,transparent 4deg 15deg);-webkit-mask:radial-gradient(circle,#000 6%,transparent 44%);mask:radial-gradient(circle,#000 6%,transparent 44%);animation:spin 90s linear infinite}
+.motes{position:absolute;inset:0;background-image:radial-gradient(circle,#fff4cf 0 1.6px,transparent 2.6px),radial-gradient(circle,#dccfff 0 1.1px,transparent 2px),radial-gradient(circle,#ffd6ea 0 1px,transparent 1.8px);background-size:190px 170px,130px 150px,90px 110px;background-position:0 0,50px 70px,20px 30px;animation:drift 18s linear infinite;opacity:.75;-webkit-mask:linear-gradient(transparent,#000 20%,#000 80%,transparent);mask:linear-gradient(transparent,#000 20%,#000 80%,transparent)}
+@keyframes drift{to{background-position:0 -170px,50px -80px,20px -190px}}
+.bglow{position:absolute;left:0;right:0;top:calc(var(--bt) - 40px);height:calc(var(--bh) + 80px);transform:skewY(-3deg);background:radial-gradient(ellipse 46% 50% at 50% 50%,var(--glowc,rgba(139,116,232,.5)),transparent 72%)}
+.band{position:absolute;left:-90px;right:-90px;top:var(--bt);height:var(--bh);transform:skewY(-3deg);background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,0) 32%),repeating-linear-gradient(118deg,rgba(255,255,255,.035) 0 2px,transparent 2px 15px),linear-gradient(180deg,#3b2b80,#271c5e 60%,#1d154c);-webkit-mask:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent);mask:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent)}
+.band::before,.band::after{content:"";position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 6%,#ffe7a6 26%,#e0b44a 50%,#ffe7a6 74%,transparent 94%)}
+.band::before{top:10px}.band::after{bottom:10px}
+.band>i{position:absolute;inset:0;background:linear-gradient(100deg,transparent 42%,rgba(255,255,255,.13) 50%,transparent 58%) 0 0/260% 100% no-repeat;animation:bsw 7s ease-in-out infinite}
+@keyframes bsw{0%,35%{background-position:130% 0}100%{background-position:-130% 0}}
+.ttl{position:absolute;left:calc(50% - 580px);top:var(--tt,96px);z-index:4;filter:drop-shadow(0 6px 10px rgba(8,4,28,.45))}
+.ttl .big{position:absolute;left:-18px;top:-40px;font:italic 900 98px/1 "Pretendard","Malgun Gothic",sans-serif;letter-spacing:3px;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.26);white-space:nowrap;pointer-events:none}
+.ttl .pl{position:relative;display:inline-flex;align-items:center;gap:12px;padding:8px 30px 10px 24px;color:#fff;font-size:30px;font-weight:900;letter-spacing:1px;white-space:nowrap;background:linear-gradient(90deg,#ffe7a6,#d9a52b) bottom/100% 3px no-repeat,linear-gradient(100deg,var(--p1,#7a63e0),var(--p2,#5240b8));clip-path:polygon(3% 0,100% 0,97% 100%,0 100%)}
+.ttl .pl .n{display:inline-grid;place-items:center;min-width:38px;height:32px;padding:0 10px;border-radius:16px;background:#fff;color:#4b36b0;font-size:19px}
+.ttl .sub{margin:8px 0 0 6px;color:#fff;font-size:16px;font-weight:700;white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+.take{position:absolute;right:calc(50% - 600px);bottom:52px;z-index:4;filter:drop-shadow(0 0 14px rgba(255,231,166,.55)) drop-shadow(0 6px 8px rgba(8,4,28,.5))}
+.take span{display:grid;place-items:center;width:230px;height:68px;font-size:27px;font-weight:900;color:var(--navy);letter-spacing:2px;background:linear-gradient(90deg,#ffe7a6,#d9a52b) bottom/100% 5px no-repeat,linear-gradient(180deg,#fff,#efe8ff);clip-path:polygon(7% 0,100% 0,93% 100%,0 100%)}
+/* 카드 */
+.row{position:absolute;left:0;right:0;top:var(--ry);display:flex;justify-content:center;align-items:flex-start;gap:var(--gap,14px);z-index:3}
+.n2{--cw:184px;--ch:262px;--ic:120px;--af:36px;--nf:15px;--gap:28px}
+.n3{--cw:176px;--ch:252px;--ic:114px;--af:34px;--nf:15px;--gap:26px}
+.sl{position:relative;flex:none;width:var(--cw);height:var(--ch);margin-top:calc(var(--i) * -10px);transform:skewX(-6deg)}
+.sl::after{content:"";position:absolute;left:6%;right:6%;bottom:-18px;height:20px;border-radius:50%;background:radial-gradient(closest-side,rgba(6,3,20,.6),transparent);pointer-events:none}
+.fc{position:absolute;inset:0;border-radius:11px;overflow:hidden;display:flex;flex-direction:column;align-items:center;padding-top:calc(var(--ch) * .13);background:linear-gradient(90deg,var(--c),var(--c2,var(--c))) top/100% 8px no-repeat,radial-gradient(120% 60% at 50% 0,#fff,rgba(255,255,255,0) 70%),linear-gradient(175deg,#fffdf7,#f6f0ff 60%,var(--tint,#e8deff));box-shadow:inset 0 0 0 1.5px rgba(201,149,42,.65),inset 0 0 0 4.5px #fff,inset 0 0 0 5.5px rgba(139,116,232,.22),0 14px 22px rgba(6,3,24,.4)}
+.fc::before{content:"";position:absolute;left:50%;top:calc(var(--ch) * .13 + var(--ic) / 2);width:calc(var(--ic) * 1.9);height:calc(var(--ic) * 1.9);margin:calc(var(--ic) * -.95) 0 0 calc(var(--ic) * -.95);border-radius:50%;background:radial-gradient(circle,var(--g) 0,transparent 58%),repeating-conic-gradient(var(--g) 0 5deg,transparent 5deg 18deg);-webkit-mask:radial-gradient(circle,#000 22%,transparent 68%);mask:radial-gradient(circle,#000 22%,transparent 68%);animation:spin 18s linear infinite}
+.fc::after{content:"";position:absolute;inset:0;background:linear-gradient(112deg,transparent 40%,rgba(255,255,255,.8) 49%,rgba(255,255,255,0) 58%) 0 0/300% 100% no-repeat;animation:sheen 7s ease-in-out infinite;animation-delay:calc(var(--i) * .3s + 1.2s);pointer-events:none}
+@keyframes sheen{0%,72%{background-position:130% 0}100%{background-position:-130% 0}}
+.fc .ic{position:relative;z-index:1;width:var(--ic);height:var(--ic);filter:drop-shadow(0 6px 6px rgba(46,35,80,.28))}
+.fc b{position:relative;z-index:1;margin-top:calc(var(--ch) * .035);font-size:var(--af);font-weight:900;color:var(--navy);letter-spacing:-.5px;line-height:1.1;white-space:nowrap;text-shadow:0 2px 0 #fff}
+.fc small{position:relative;z-index:1;margin-top:3px;font-size:var(--nf);font-weight:800;color:#4c4374;white-space:nowrap}
+.fc .tg{position:absolute;left:10px;top:13px;z-index:2;font-size:11px;font-weight:900;letter-spacing:.5px;color:#5e4e96;white-space:nowrap}
+.fc .cnt{position:absolute;right:9px;top:13px;z-index:2;padding:0 8px;border-radius:9px;background:linear-gradient(#fff2c4,#e0b44a);color:#4a2e00;font-size:12px;font-weight:900;box-shadow:0 0 0 1.5px #fff,0 2px 4px rgba(120,80,0,.3);white-space:nowrap}
+.fc .rib{position:absolute;right:-34px;top:22px;z-index:3;width:130px;padding:2px 0;transform:rotate(38deg);background:linear-gradient(90deg,#6b55d8,#9a84f0);color:#fff;font-size:12px;font-weight:900;text-align:center;box-shadow:0 2px 4px rgba(0,0,0,.25)}
+.fc .tag-s{position:absolute;right:8px;top:12px;z-index:3;padding:1px 8px;border-radius:8px;background:#2e2350;color:#ffe08a;font-size:11px;font-weight:900;box-shadow:0 0 0 1.5px #ffe08a;white-space:nowrap}
+.fc .lockoff{position:absolute;right:16px;top:30px;z-index:3;width:30px;height:34px;animation:lockk 4s ease-in infinite}
+.fc .lockoff::before{content:"";position:absolute;left:5px;top:0;width:20px;height:20px;border:4px solid #8b80c0;border-bottom:0;border-radius:12px 12px 0 0}
+.fc .lockoff::after{content:"";position:absolute;left:0;bottom:0;width:30px;height:20px;border-radius:5px;background:#8b80c0}
+@keyframes lockk{0%,30%{transform:none;opacity:1}55%{transform:translate(30px,-40px) rotate(40deg);opacity:0}100%{opacity:0}}
+.k-gem{--c:#ff8fc4;--c2:#b58bff;--g:rgba(255,150,205,.6);--tint:#f8dcff}
+.k-mon{--c:#9a84f0;--c2:#ffd36b;--g:rgba(154,132,240,.55);--tint:#ece4ff}
+.k-gold{--c:#ffcc4d;--c2:#ffe7a6;--g:rgba(255,204,77,.6);--tint:#fff0c8}
+.k-paint{--c:#d2477f;--c2:#ff9ac8;--g:rgba(210,71,127,.4);--tint:#ffe0ee}
+.k-open{--c:#ffcc4d;--c2:#fff2c4;--g:rgba(255,220,120,.7);--tint:#fff3d2}
+/* 등장 (.go) */
+.scr.go .band,.scr.go .bglow{animation:bandin .55s cubic-bezier(.2,.9,.3,1) backwards}
+@keyframes bandin{from{transform:skewY(-3deg) scaleY(0);opacity:0}}
+.scr.go .ttl{animation:ttlin .5s .12s cubic-bezier(.2,1.3,.4,1) backwards}
+@keyframes ttlin{from{transform:translateX(-80px);opacity:0}}
+.scr.go .sl{animation:deal .72s cubic-bezier(.2,1.2,.4,1) backwards;animation-delay:calc(var(--i) * .085s + .25s)}
+@keyframes deal{0%{opacity:0;transform:translate(320px,-70px) rotate(14deg) skewX(-6deg) scale(.82)}62%{opacity:1;transform:translate(-8px,6px) rotate(-1.5deg) skewX(-6deg)}100%{transform:skewX(-6deg)}}
+.scr.go .fc .ic{animation:ipop .6s cubic-bezier(.3,1.9,.5,1) backwards;animation-delay:calc(var(--i) * .085s + .55s)}
+@keyframes ipop{from{transform:scale(.2) rotate(-18deg);opacity:0}}
+.scr.go .take{animation:takein .45s .7s cubic-bezier(.2,1.3,.4,1) backwards}
+@keyframes takein{from{transform:translateY(40px);opacity:0}}
+.tap{position:absolute;width:44px;height:44px;border-radius:50%;border:4px solid #fff;box-shadow:0 0 14px #fff;z-index:9;opacity:0;pointer-events:none}
+
+/* ================= 1. 출석 ================= */
+.petals{position:absolute;inset:0;z-index:2;pointer-events:none}
+.petals i{position:absolute;top:-20px;width:14px;height:10px;border-radius:70% 0 70% 0;background:#ffd6e6;opacity:.9;animation:pfall linear infinite}
+@keyframes pfall{to{transform:translate(-160px,760px) rotate(540deg)}}
+/* A 출석부 */
+.book{position:absolute;right:calc(50% - 596px);top:30px;z-index:4;width:476px;height:244px;padding:10px;display:flex;border-radius:12px;background:radial-gradient(120% 80% at 30% 0,#7d68e0,transparent 70%),linear-gradient(160deg,#5b47c4,#35277f);box-shadow:inset 0 0 0 2px #e0b44a,inset 0 0 0 5px #35277f,inset 0 0 0 6px rgba(224,180,74,.6),0 16px 28px rgba(6,3,24,.55);transform:rotate(-2.5deg)}
+.book .pg{position:relative;flex:1;background:repeating-linear-gradient(180deg,transparent 0 27px,rgba(91,68,200,.16) 27px 28px) 0 34px,linear-gradient(180deg,#fdfcff,#ebe5fb)}
+.book .lp{border-radius:6px 0 0 6px;box-shadow:inset -14px 0 16px -10px rgba(46,35,80,.35);padding:12px 14px 12px 40px}
+.book .lp::before{content:"";position:absolute;left:30px;top:0;bottom:0;width:1.5px;background:rgba(210,71,127,.45)}
+.book .rpg{border-radius:0 6px 6px 0;box-shadow:inset 14px 0 16px -10px rgba(46,35,80,.35);padding:12px 10px 10px 16px}
+.book .bt{display:block;font-size:13px;font-weight:900;color:#5b44c8;letter-spacing:2px}
+.book .dn{display:flex;align-items:baseline;gap:4px;margin:20px 0 0 4px;font:italic 900 88px/1 "Pretendard","Malgun Gothic",sans-serif;color:#c2306f;transform:rotate(-6deg)}
+.book .dn i{font-style:inherit}
+.book .dn small{font-size:24px;color:var(--navy)}
+.book .who{position:absolute;left:44px;bottom:14px;font-size:14px;font-weight:800;color:#4c4374;border-bottom:1.5px solid #8b74e8;padding:0 30px 2px 2px}
+.cells{display:grid;grid-template-columns:repeat(4,44px);gap:8px 6px;margin-top:16px}
+.cell{position:relative;width:44px;height:52px;border-radius:8px;border:1.5px dashed #a898e0;background:rgba(255,255,255,.65)}
+.cell em{position:absolute;left:4px;top:1px;font-style:normal;font-size:11px;font-weight:900;color:#5b44c8}
+.cell.fl{border:0;background:url(img/assets_ui_kit_flower.png) center/36px no-repeat}
+.stp{position:absolute;left:50%;top:56%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:11.5px;font-weight:900;color:#b0215f;border:2.5px solid #d2477f;box-shadow:inset 0 0 0 2px #fff,inset 0 0 0 3.5px rgba(210,71,127,.7);background:rgba(255,143,196,.2);transform:rotate(-14deg)}
+.stp.gold{color:#7a4c00;border-color:#d9a52b;box-shadow:inset 0 0 0 2px #fff,inset 0 0 0 3.5px rgba(217,165,43,.8),0 0 14px rgba(255,214,110,.9);background:rgba(255,214,110,.35)}
+.stp.now{animation:slam 4s cubic-bezier(.3,1.6,.5,1) infinite}
+.stp.now::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:3px solid rgba(232,85,143,.6);opacity:0;animation:inkr 4s ease-out infinite}
+@keyframes slam{0%,8%{transform:scale(2.6) rotate(-30deg);opacity:0}18%{transform:scale(.88) rotate(-12deg);opacity:1}24%,100%{transform:scale(1) rotate(-14deg);opacity:1}}
+@keyframes inkr{0%,17%{transform:scale(.6);opacity:0}20%{opacity:1}42%,100%{transform:scale(1.9);opacity:0}}
+.book .kg{position:absolute;right:-16px;bottom:18px;z-index:2;padding:4px 20px 5px;background:linear-gradient(90deg,#c2306f,#e8558f);color:#fff;font-weight:900;font-size:15px;transform:rotate(-7deg);box-shadow:0 4px 8px rgba(0,0,0,.3);clip-path:polygon(0 0,100% 0,94% 50%,100% 100%,0 100%,6% 50%);animation:kgk 4s ease-out infinite}
+@keyframes kgk{0%,22%{opacity:0;transform:rotate(-7deg) scale(.6)}30%,100%{opacity:1;transform:rotate(-7deg)}}
+.book .bm{position:absolute;right:46px;top:-16px;z-index:3;width:40px;height:104px;padding-top:8px;display:flex;justify-content:center;background:linear-gradient(#b79cff,#6b55d8);clip-path:polygon(0 0,100% 0,100% 100%,50% 86%,0 100%);writing-mode:vertical-rl;color:#fff;font-size:12.5px;font-weight:900;letter-spacing:1px;filter:drop-shadow(0 3px 3px rgba(0,0,0,.3))}
+/* B 고래 우편 */
+.mail{position:absolute;right:calc(50% - 590px);top:30px;z-index:4;width:360px;height:262px;perspective:900px}
+.mail .wh{position:absolute;left:0;top:0;width:170px;height:58px;background:url(img/assets_world_whale_sd.png) center/contain no-repeat;filter:drop-shadow(0 6px 8px rgba(0,0,0,.4));animation:mwh 6s ease-in-out infinite}
+@keyframes mwh{0%{transform:translate(560px,-6px) scaleX(-1)}30%{transform:translate(120px,4px) scaleX(-1)}42%{transform:translate(90px,0) scaleX(-1)}100%{transform:translate(-760px,-40px) scaleX(-1)}}
+.env{position:absolute;left:46px;top:82px;width:280px;height:172px;animation:envd 6s cubic-bezier(.3,1.3,.5,1) infinite}
+@keyframes envd{0%,22%{transform:translate(90px,-90px) scale(.45) rotate(-12deg);opacity:0}25%{opacity:1}38%,94%{transform:rotate(-4deg);opacity:1}100%{transform:rotate(-4deg);opacity:0}}
+.env .bk2{position:absolute;inset:0;border-radius:8px;background:linear-gradient(170deg,#ffc9df,#ee96bf);box-shadow:0 12px 20px rgba(6,3,24,.45)}
+.env .flap{position:absolute;left:0;right:0;top:0;height:98px;background:linear-gradient(180deg,#f7a9cb,#e07aaa);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:50% 0;z-index:5;animation:flap 6s ease-in-out infinite}
+@keyframes flap{0%,42%{transform:rotateX(0);z-index:5}47%{z-index:5}48%{z-index:1}52%,94%{transform:rotateX(180deg);z-index:1}100%{transform:rotateX(0);z-index:5}}
+.env .lt{position:absolute;left:18px;right:18px;top:14px;height:152px;z-index:2;border-radius:6px;padding:12px 16px;background:repeating-linear-gradient(180deg,transparent 0 25px,rgba(91,68,200,.14) 25px 26px) 0 40px,linear-gradient(#fff,#f1ecfd);box-shadow:0 2px 6px rgba(0,0,0,.2);animation:ltu 6s cubic-bezier(.3,1.3,.5,1) infinite}
+@keyframes ltu{0%,50%{transform:translateY(20px)}62%,94%{transform:translateY(-96px)}100%{transform:translateY(20px)}}
+.env .lt b{display:block;font:italic 900 21px/1.25 "Pretendard","Malgun Gothic",sans-serif;color:#b0215f;transform:rotate(-2deg)}
+.env .lt small{display:block;margin-top:6px;font-size:13px;font-weight:800;color:#4c4374}
+.env .pk{position:absolute;inset:0;z-index:4;border-radius:8px;background:linear-gradient(170deg,#ffd6e7,#f3a3c7);clip-path:polygon(0 36%,50% 70%,100% 36%,100% 100%,0 100%)}
+.env .seal{position:absolute;left:50%;top:96px;z-index:6;width:54px;height:54px;margin-left:-27px;border-radius:48% 52% 50% 46%;display:grid;place-items:center;color:#fff;font-weight:900;font-size:21px;background:radial-gradient(circle at 40% 35%,#ff8fc4,#b0215f 72%);box-shadow:0 0 0 4px rgba(176,33,95,.35),0 4px 6px rgba(0,0,0,.3)}
+.env .seal.mo{margin-left:12px;top:108px;width:44px;height:44px;font-size:15px;background:radial-gradient(circle at 40% 35%,#c9b6ff,#5b44c8 72%);box-shadow:0 0 0 4px rgba(91,68,200,.35),0 4px 6px rgba(0,0,0,.3)}
+/* C 띠 아래 7칸 */
+.t7{position:absolute;left:50%;bottom:16px;width:640px;height:40px;margin-left:-320px}
+.t7 .ln{position:absolute;left:20px;right:20px;top:19px;height:2px;background:rgba(224,180,74,.55)}
+.t7 .ln u{display:block;height:100%;background:linear-gradient(90deg,#ff8fc4,#ffe08a);box-shadow:0 0 8px #ff8fc4;width:0}
+.scr[data-day="7"] .t7 .ln u{width:100%;animation:lnk 4s ease-out infinite}
+@keyframes lnk{0%,10%{width:83%}24%,100%{width:100%}}
+.dm{position:absolute;left:calc(var(--k) * 100px);top:0;width:40px;height:40px;display:grid;place-items:center;color:#fff;font-size:12px;font-weight:900}
+.dm::before{content:"";position:absolute;inset:9px;transform:rotate(45deg);border:2px solid #e0b44a;background:#2a1f66}
+.dm span{position:relative}
+.scr[data-day="7"] .dm.f7::before{background:linear-gradient(135deg,#ffb3d1,#d2477f);border-color:#fff}
+.scr[data-day="1"] .dm.n1,.scr[data-day="7"] .dm.n7{z-index:2}
+.scr[data-day="1"] .dm.n1::before,.scr[data-day="7"] .dm.n7::before{inset:1px;background:linear-gradient(135deg,#ffe08a,#d2477f);border-color:#fff;box-shadow:0 0 20px #ffb3d1;animation:bloom 4s cubic-bezier(.3,1.7,.5,1) infinite}
+.scr[data-day="1"] .dm.n1::after,.scr[data-day="7"] .dm.n7::after{content:"";position:absolute;inset:-14px;border-radius:50%;background:radial-gradient(circle,rgba(255,179,209,.8) 0 18%,transparent 19%) 8px 4px/14px 14px no-repeat,radial-gradient(circle,rgba(255,224,138,.9) 0 30%,transparent 32%) 52px 10px/12px 12px no-repeat,radial-gradient(circle,rgba(255,143,196,.85) 0 30%,transparent 32%) 6px 50px/10px 10px no-repeat,radial-gradient(circle,rgba(255,143,196,.85) 0 30%,transparent 32%) 54px 52px/9px 9px no-repeat;animation:splash 4s ease-out infinite}
+@keyframes bloom{0%,8%{transform:rotate(45deg) scale(0)}20%{transform:rotate(45deg) scale(1.25)}28%,100%{transform:rotate(45deg) scale(1)}}
+@keyframes splash{0%,12%{transform:scale(.3);opacity:0}20%{opacity:1}40%,100%{transform:scale(1.3);opacity:0}}
+.t7 .today{position:absolute;top:-30px;left:calc(var(--k) * 100px - 16px);width:72px;text-align:center;color:#ffd6e6;font-size:13px;font-weight:900;white-space:nowrap}
+.t7 .mo7{position:absolute;right:-150px;top:7px;padding:2px 10px;border-radius:10px;background:#5b44c8;color:#fff;font-size:12px;font-weight:900;box-shadow:0 0 0 1.5px #c9b6ff;white-space:nowrap}
+
+/* ================= 2. 항해일지 ================= */
+/* A 가죽 일지 */
+.jr{position:absolute;right:calc(50% - 590px);top:28px;z-index:4;width:450px;height:252px;padding:12px 12px 12px 28px;border-radius:10px 14px 14px 10px;background:radial-gradient(80% 60% at 30% 20%,rgba(255,200,140,.18),transparent 70%),linear-gradient(160deg,#7a4a2a,#4f2c17);box-shadow:inset 0 0 0 4px #4f2c17,inset 0 0 0 5.5px rgba(255,214,150,.35),0 16px 28px rgba(0,0,0,.5);transform:rotate(2deg)}
+.jr::before{content:"";position:absolute;inset:7px;border:1.5px dashed rgba(255,214,150,.45);border-radius:8px;pointer-events:none}
+.jr .pp{position:relative;height:100%;border-radius:4px 8px 8px 4px;padding:12px 18px 10px 24px;color:#4a3218;background:radial-gradient(60% 40% at 82% 86%,rgba(160,110,40,.2),transparent 70%),repeating-linear-gradient(180deg,transparent 0 33px,rgba(120,80,30,.22) 33px 34px) 0 42px,linear-gradient(180deg,#f8efdc,#ecdcba);overflow:hidden}
+.jr h5{margin:0 0 8px;font-size:15px;font-weight:900;letter-spacing:2px;color:#6e3f1f}
+.jr p{display:flex;align-items:baseline;gap:10px;margin:0;height:34px;font-size:15px;white-space:nowrap;overflow:hidden;width:0;animation:wr 6s steps(16,end) infinite}
+.jr p span{min-width:112px;color:#5e4224;font-weight:800}
+.jr p b{font:italic 900 24px/1 "Pretendard","Malgun Gothic",sans-serif;color:#1f4f9e}
+.jr p em{font-style:normal;font-size:12px;font-weight:900;color:#fff;background:#b8323a;border-radius:8px;padding:0 7px}
+.jr .l2{animation-delay:1.2s}.jr .l3{animation-delay:2.4s}
+@keyframes wr{0%,3%{width:0}18%,94%{width:100%}100%{width:100%}}
+.jr .pen{position:absolute;left:0;top:0;width:10px;height:58px;transform-origin:50% 100%;background:linear-gradient(180deg,#2b2f6b 0 68%,#d9a52b 68% 78%,#c9c9d6 78%);clip-path:polygon(0 0,100% 0,100% 80%,50% 100%,0 80%);filter:drop-shadow(2px 3px 2px rgba(0,0,0,.3));animation:penm 6s linear infinite}
+@keyframes penm{0%{transform:translate(130px,14px) rotate(35deg)}3%{transform:translate(130px,14px) rotate(35deg)}18%{transform:translate(330px,14px) rotate(35deg)}23%{transform:translate(130px,48px) rotate(35deg)}38%{transform:translate(330px,48px) rotate(35deg)}43%{transform:translate(130px,82px) rotate(35deg)}58%{transform:translate(330px,82px) rotate(35deg)}66%,94%{transform:translate(360px,110px) rotate(25deg)}100%{transform:translate(130px,14px) rotate(35deg)}}
+.jr .full{position:absolute;right:22px;bottom:14px;width:98px;height:98px;border-radius:50%;display:grid;place-items:center;text-align:center;font-size:15px;font-weight:900;line-height:1.15;color:#a0222c;border:4px double #b8323a;background:rgba(255,140,140,.14);transform:rotate(-14deg);animation:slam2 6s cubic-bezier(.3,1.6,.5,1) infinite}
+@keyframes slam2{0%,58%{transform:scale(2.4) rotate(-30deg);opacity:0}66%{transform:scale(.9) rotate(-12deg);opacity:1}72%,100%{transform:scale(1) rotate(-14deg);opacity:1}}
+.jr .strap{position:absolute;right:-12px;top:100px;width:46px;height:32px;border-radius:6px;background:linear-gradient(#6a3d22,#4a2a14);box-shadow:inset 0 0 0 2px rgba(255,214,150,.3),0 3px 5px rgba(0,0,0,.35)}
+.jr .strap::after{content:"";position:absolute;left:8px;top:7px;width:18px;height:18px;border-radius:50%;border:3px solid #e0b44a}
+/* B 항로 지도 */
+.map{position:absolute;left:calc(50% - 90px);top:34px;z-index:4;width:700px;height:250px}
+.scr[data-t="10"] .map{--end:9%;--endn:9;--frac:.025}
+.scr[data-t="3"] .map{--end:42%;--endn:42;--frac:.4}
+.scr[data-t="8"] .map{--end:100%;--endn:100;--frac:1}
+.map svg{position:absolute;left:0;top:20px;width:540px;height:200px;overflow:visible}
+.map .rt0{fill:none;stroke:rgba(255,243,207,.55);stroke-width:3;stroke-dasharray:.6 2.2;stroke-linecap:round}
+.map .rt1{fill:none;stroke:#fff3cf;stroke-width:5;stroke-linecap:round;stroke-dasharray:var(--endn) 200;stroke-dashoffset:0;animation:rtd 5s ease-in-out infinite;filter:drop-shadow(0 0 6px rgba(124,199,255,.9))}
+@keyframes rtd{0%{stroke-dashoffset:var(--endn)}40%,100%{stroke-dashoffset:0}}
+.map .wh2{position:absolute;left:0;top:20px;width:104px;height:35px;background:url(img/assets_world_whale_sd.png) center/contain no-repeat;offset-path:path("M20 160 C 120 60, 220 190, 320 110 S 470 40, 530 70");offset-rotate:auto;offset-anchor:50% 70%;animation:sail2 5s ease-in-out infinite;filter:drop-shadow(0 4px 6px rgba(0,0,0,.45))}
+@keyframes sail2{0%{offset-distance:0%}40%,100%{offset-distance:var(--end)}}
+.map .st0{position:absolute;left:-6px;top:196px;padding:2px 10px;border-radius:10px;background:rgba(255,255,255,.16);color:#fff;font-size:13px;font-weight:800;white-space:nowrap}
+.map .flag{position:absolute;left:514px;top:40px;padding:2px 10px 2px 12px;background:#e8558f;color:#fff;font-size:13px;font-weight:900;clip-path:polygon(0 0,100% 0,88% 50%,100% 100%,0 100%);animation:flagk 5s ease-out infinite}
+@keyframes flagk{0%,36%{transform:scale(0);opacity:0}44%,100%{transform:none;opacity:1}}
+.map .rose{position:absolute;left:30px;top:16px;width:58px;height:58px;opacity:.75;background:conic-gradient(from 0deg,#fff3cf 0 6deg,transparent 6deg 84deg,#fff3cf 84deg 96deg,transparent 96deg 174deg,#fff3cf 174deg 186deg,transparent 186deg 264deg,#fff3cf 264deg 276deg,transparent 276deg);-webkit-mask:radial-gradient(circle,#000 0 60%,transparent 62%);mask:radial-gradient(circle,#000 0 60%,transparent 62%)}
+.map .rose::after{content:"N";position:absolute;left:0;right:0;top:-18px;text-align:center;color:#fff3cf;font-size:12px;font-weight:900}
+@property --fa{syntax:'<number>';inherits:false;initial-value:0}
+.map .dial{position:absolute;left:566px;top:40px;width:126px;height:126px;border-radius:50%;display:grid;place-items:center;text-align:center;color:#fff;--fa:var(--frac);background:radial-gradient(circle,#231a5a 0 56%,transparent 57%),repeating-conic-gradient(rgba(255,255,255,.5) 0 1.2deg,transparent 1.2deg 45deg),conic-gradient(#7cc7ff calc(var(--fa) * 360deg),rgba(255,255,255,.14) 0);box-shadow:0 0 0 3px #fff3cf,0 8px 16px rgba(0,0,0,.45);animation:dialf 5s ease-in-out infinite}
+@keyframes dialf{0%{--fa:0}40%,100%{--fa:var(--frac)}}
+.map .dial b{display:block;font-size:20px;line-height:1.1;white-space:nowrap}
+.map .dial small{display:block;font-size:12px;font-weight:800;color:#cfe8ff}
+.map .cap8{position:absolute;left:556px;top:178px;width:150px;text-align:center;color:#ffd6e6;font-size:13px;font-weight:900}
+/* C 고래 그림 액자 */
+.pf{position:absolute;right:calc(50% - 570px);top:34px;z-index:4;width:370px;transform-origin:50% -26px;animation:swing 5s ease-in-out infinite}
+@keyframes swing{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.pf::before{content:"";position:absolute;left:50%;top:-30px;width:140px;height:34px;margin-left:-70px;background:linear-gradient(to top right,transparent calc(50% - 1.5px),#e0b44a calc(50% - 1.5px) calc(50% + 1.5px),transparent calc(50% + 1.5px)) left/50% 100% no-repeat,linear-gradient(to top left,transparent calc(50% - 1.5px),#e0b44a calc(50% - 1.5px) calc(50% + 1.5px),transparent calc(50% + 1.5px)) right/50% 100% no-repeat}
+.pf .bow{position:absolute;left:50%;top:-40px;z-index:2;width:34px;height:20px;margin-left:-17px;background:radial-gradient(circle,#e8558f 0 30%,transparent 32%),linear-gradient(90deg,#ff8fc4,#d2477f 40%,#d2477f 60%,#ff8fc4);clip-path:polygon(0 0,50% 40%,100% 0,100% 100%,50% 60%,0 100%)}
+.pf .fr{position:relative;height:214px;padding:12px;border-radius:4px;background:linear-gradient(135deg,#fff1b8,#d9a52b 30%,#fff1b8 50%,#b07a1a 75%,#ffe7a6);box-shadow:0 14px 26px rgba(0,0,0,.5)}
+.pf .cv{position:relative;height:100%;overflow:hidden;box-shadow:inset 0 0 0 2px rgba(80,50,0,.45)}
+.pf .cv::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0 1px,transparent 1px 4px),repeating-linear-gradient(-45deg,rgba(0,0,0,.05) 0 1px,transparent 1px 4px);box-shadow:inset 0 0 22px rgba(0,0,0,.35);pointer-events:none}
+.pf .sk{position:absolute;inset:0}
+.pf .sk.t10{background:linear-gradient(180deg,#5fb0f0,#bfe4ff 70%,#eaf7ff)}
+.pf .sk.t3{background:linear-gradient(180deg,#6d6fcf,#ff9e8a 55%,#ffd59a)}
+.pf .sk.t8{background:radial-gradient(circle,#fff 0 1px,transparent 1.6px) 0 0/37px 29px,radial-gradient(circle,#dfe6ff 0 1px,transparent 1.6px) 12px 9px/53px 41px,linear-gradient(180deg,#141c4f,#3a2f86 62%,#7a5fb8)}
+.pf .sun{position:absolute;border-radius:50%}
+.pf .sun.t10{right:30px;top:18px;width:46px;height:46px;background:radial-gradient(circle,#fffbe0,#ffe27a 60%,rgba(255,226,122,0) 72%)}
+.pf .sun.t3{left:50%;top:96px;width:84px;height:84px;margin-left:-42px;background:radial-gradient(circle,#fff1c8,#ff9a4a 55%,rgba(255,154,74,0) 72%)}
+.pf .sun.t8{right:34px;top:20px;width:40px;height:40px;background:radial-gradient(circle at 65% 40%,transparent 0 38%,#fff6d6 40%);filter:drop-shadow(0 0 10px #fff6d6)}
+.pf .wl{position:absolute;left:46px;top:46px;width:250px;height:100px;background:url(img/assets_world_whale_v4.png) center/contain no-repeat;animation:wfl 5s ease-in-out infinite}
+.scr[data-t="8"] .pf .wl{filter:brightness(.72) saturate(.85) hue-rotate(-10deg)}
+.scr[data-t="3"] .pf .wl{filter:sepia(.2) saturate(1.1)}
+@keyframes wfl{0%,100%{transform:translate(0,0) rotate(-1deg)}50%{transform:translate(10px,-6px) rotate(1deg)}}
+.pf .cl{position:absolute;left:-10%;right:-10%;bottom:-24px;height:76px;background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,255,255,0)) 0 20px/120px 60px repeat-x,radial-gradient(closest-side,rgba(255,255,255,.85),rgba(255,255,255,0)) 50px 0/150px 70px repeat-x;animation:clm 9s linear infinite}
+.scr[data-t="8"] .pf .cl{opacity:.35}
+@keyframes clm{to{background-position:-120px 20px,-100px 0}}
+.pf .lbl{position:relative;width:max-content;margin:-10px auto 0;padding:7px 20px;border-radius:18px;background:#2e2350;color:#fff;font-weight:900;font-size:18px;box-shadow:0 0 0 2px #e0b44a,0 6px 12px rgba(0,0,0,.4);white-space:nowrap}
+.pf .lbl em{font-style:normal;color:#ffe08a}
+.scr.go .pf .cv{animation:paintin 1.6s .3s ease-out backwards}
+@keyframes paintin{from{filter:grayscale(1) brightness(.85)}}
+
+/* ================= 3. 연달아 ================= */
+.wk{position:absolute;right:calc(50% - 590px);top:var(--wy,96px);z-index:4;display:flex;gap:10px;align-items:center}
+.wk i{position:relative;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:900;font-size:14px;color:#fff;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 2px rgba(255,255,255,.4)}
+.wk i.ok{color:transparent;background:radial-gradient(circle at 40% 35%,#ffb3d1,#d2477f);box-shadow:0 0 0 2px #fff}
+.wk i.ok::after{content:"";position:absolute;inset:13px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round' d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E") center/contain no-repeat}
+.wk i.td{width:66px;height:66px;font-size:12px;line-height:1;text-align:center;background:radial-gradient(circle at 40% 35%,#ffd36b,#d2477f 70%,#a8205e);box-shadow:0 0 0 3px #fff,0 0 22px #ffb3d1;animation:slam 4s cubic-bezier(.3,1.6,.5,1) infinite}
+.wk i.td b{display:block;font-size:22px}
+.mrt{position:absolute;right:calc(50% - 600px);top:var(--ry2,150px);z-index:4;width:520px;height:120px}
+.mrt svg{position:absolute;inset:0;overflow:visible}
+.mrt .wh3{position:absolute;left:0;top:0;width:96px;height:32px;background:url(img/assets_world_whale_sd.png) center/contain no-repeat;offset-path:path("M10 96 C 120 20, 250 120, 380 50 S 480 30, 500 34");offset-rotate:auto;offset-anchor:50% 70%;animation:sail3 5s ease-in-out infinite;filter:drop-shadow(0 4px 6px rgba(0,0,0,.45))}
+@keyframes sail3{0%{offset-distance:0%}60%,100%{offset-distance:100%}}
+.mrt .tm{position:absolute;right:-10px;top:-6px;padding:5px 14px;border-radius:16px;background:#24549e;color:#fff;font-weight:900;font-size:16px;box-shadow:0 0 0 2px #bfe4ff,0 6px 12px rgba(0,0,0,.35);white-space:nowrap}
+.ch1{--fx:450px}
+:root[data-w="1600"] .ch1{--fx:610px}
+.ch1 .ph{position:absolute;inset:0}
+.ch1 .ph1{--p1:#e0558f;--p2:#a8205e;--glowc:rgba(255,143,196,.5);animation:ph1 10s infinite}
+.ch1 .ph2{--p1:#3f8fd8;--p2:#24549e;--glowc:rgba(124,199,255,.45);opacity:0;animation:ph2 10s infinite}
+@keyframes ph1{0%,40%{opacity:1}46%,100%{opacity:0}}
+@keyframes ph2{0%,46%{opacity:0}52%,90%{opacity:1}96%,100%{opacity:0}}
+.ch1 .ph1 .row{animation:fly1 10s cubic-bezier(.5,0,.8,.4) infinite}
+@keyframes fly1{0%,37%{transform:none;opacity:1}44%{transform:translate(var(--fx),-400px) scale(.15);opacity:.3}45%,100%{transform:translate(var(--fx),-400px) scale(.15);opacity:0}}
+.ch1 .ph2 .row{animation:deal2 10s cubic-bezier(.2,1.2,.4,1) infinite}
+@keyframes deal2{0%,47%{transform:translate(300px,-60px) rotate(8deg);opacity:0}55%,83%{transform:none;opacity:1}90%{transform:translate(var(--fx),-400px) scale(.15);opacity:.3}91%,100%{opacity:0}}
+.ch1 .tap{left:calc(50% + 463px);top:612px;animation:tap2 10s ease-out infinite}
+@keyframes tap2{0%,33%{opacity:0;transform:scale(.4)}34%{opacity:1;transform:scale(.4)}39%{opacity:0;transform:scale(1.5)}79%{opacity:0;transform:scale(.4)}80%{opacity:1;transform:scale(.4)}85%,100%{opacity:0;transform:scale(1.5)}}
+.ch1 .ping{position:absolute;right:160px;top:6px;z-index:8;width:64px;height:64px;border-radius:50%;border:3px solid #ffe08a;box-shadow:0 0 18px #ffe08a;opacity:0;animation:ping 10s ease-out infinite}
+@keyframes ping{0%,42%{opacity:0;transform:scale(.5)}45%{opacity:1;transform:scale(1)}50%{opacity:0;transform:scale(1.5)}88%{opacity:0;transform:scale(.5)}91%{opacity:1;transform:scale(1)}96%,100%{opacity:0;transform:scale(1.5)}}
+.steps{position:absolute;left:calc(50% - 590px);bottom:62px;z-index:6;display:flex;gap:8px}
+.steps span{padding:6px 16px;border-radius:16px;font-size:15px;font-weight:900;color:#fff;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.4);white-space:nowrap}
+.steps .s1{animation:st1 10s infinite}.steps .s2{animation:st2 10s infinite}
+@keyframes st1{0%,44%{background:#c2306f;box-shadow:0 0 0 2px #fff}46%,100%{background:rgba(255,255,255,.14)}}
+@keyframes st2{0%,46%{background:rgba(255,255,255,.14)}48%,94%{background:#24549e;box-shadow:0 0 0 2px #fff}96%,100%{background:rgba(255,255,255,.14)}}
+.grp{position:relative;display:flex;gap:22px}
+.grp .gl{position:absolute;left:4px;top:-40px;z-index:4;display:flex;align-items:center;gap:6px;padding:4px 14px 4px 6px;border-radius:16px;color:#fff;font-size:15px;font-weight:900;white-space:nowrap;box-shadow:0 0 0 2px #fff,0 4px 8px rgba(0,0,0,.35)}
+.grp .gl.pk{background:#b0215f}.grp .gl.sk2{background:#24549e}
+.grp .gl i{width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#ffd36b,#d2477f 70%);box-shadow:0 0 0 2px #fff}
+.grp .gl i.w{width:44px;border-radius:0;background:url(img/assets_world_whale_sd.png) center/contain no-repeat;box-shadow:none}
+.dv{flex:none;align-self:stretch;width:2px;margin:-10px 6px 0;background:repeating-linear-gradient(180deg,#e0b44a 0 8px,transparent 8px 14px)}
+
+/* ================= 4. 레벨 업 ================= */
+/* A 금빛 계급장 */
+.crw{position:absolute;right:calc(50% - 600px);top:20px;z-index:4;width:430px;height:276px}
+.pillars{position:absolute;inset:0;z-index:1;pointer-events:none}
+.pillars i{position:absolute;bottom:0;width:var(--pw,60px);height:100%;background:linear-gradient(0deg,rgba(255,231,166,0),rgba(255,231,166,.4) 40%,rgba(255,255,255,0));-webkit-mask:linear-gradient(90deg,transparent,#000 40%,#000 60%,transparent);mask:linear-gradient(90deg,transparent,#000 40%,#000 60%,transparent);animation:pill 3.2s ease-in-out infinite}
+@keyframes pill{0%{transform:translateY(100%);opacity:0}30%{opacity:1}100%{transform:translateY(-30%);opacity:0}}
+.crw .cr{position:absolute;left:0;right:0;top:16px;height:162px;background:url(img/assets_ui_kit_crest.png) center/contain no-repeat;filter:drop-shadow(0 8px 14px rgba(0,0,0,.45))}
+.crw .who{position:absolute;left:0;right:0;top:50px;text-align:center;color:#5a3600;font-size:14px;font-weight:900;letter-spacing:3px}
+.crw .num{position:absolute;left:0;right:0;top:82px;display:flex;justify-content:center;align-items:baseline;gap:10px;color:#fff;font-weight:900;white-space:nowrap}
+.crw .num s{text-decoration:none;font-size:22px;opacity:.8}
+.crw .num b{position:relative;display:inline-block;min-width:64px;font-size:58px;line-height:1;text-align:center;text-shadow:0 3px 0 #4a1a8a,0 0 18px #ffe7a6;animation:lvpop 4s cubic-bezier(.3,1.7,.5,1) infinite}
+@keyframes lvpop{0%,12%{transform:scale(.3);opacity:0}24%,100%{transform:scale(1);opacity:1}}
+.crw .num b.dbl{animation:none}
+.crw .num b.dbl i{font-style:normal;display:block}
+.crw .num b.dbl i:first-child{animation:dbl1 4s cubic-bezier(.3,1.7,.5,1) infinite}
+.crw .num b.dbl i:last-child{position:absolute;left:0;right:0;top:0;animation:dbl2 4s cubic-bezier(.3,1.7,.5,1) infinite}
+@keyframes dbl1{0%,8%{transform:scale(.3);opacity:0}18%,40%{transform:scale(1);opacity:1}48%,100%{transform:translateY(-30px) scale(.6);opacity:0}}
+@keyframes dbl2{0%,46%{transform:scale(.3);opacity:0}58%,100%{transform:scale(1);opacity:1}}
+.crw .chev{position:absolute;left:50%;top:182px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px}
+.crw .chev i{width:74px;height:18px;background:linear-gradient(180deg,#fff2c4,#d9a52b);clip-path:polygon(0 0,50% 55%,100% 0,100% 45%,50% 100%,0 45%);filter:drop-shadow(0 2px 2px rgba(0,0,0,.3));animation:chev 4s ease-out infinite}
+.crw .chev i+i{animation-delay:.25s}
+@keyframes chev{0%,20%{transform:translateY(-14px);opacity:0}32%,100%{transform:none;opacity:1}}
+.crw .gain{position:absolute;left:50%;top:232px;transform:translateX(-50%);padding:4px 16px;border-radius:14px;background:rgba(255,231,166,.16);box-shadow:inset 0 0 0 1.5px #ffe7a6;color:#fff;font-size:16px;font-weight:900;white-space:nowrap}
+.crw .gain b{color:#ffe08a}
+/* B 새 콘텐츠 문 */
+.dr{position:absolute;right:calc(50% - 570px);top:16px;z-index:4;width:310px;height:282px}
+.dr .arch{position:absolute;left:24px;right:24px;top:34px;bottom:0;border-radius:132px 132px 6px 6px;overflow:hidden;background:radial-gradient(60% 50% at 50% 55%,#fffbe6,#ffe08a 45%,#e0a92a 75%,#8a5a10);box-shadow:0 0 0 8px #e0b44a,0 0 0 11px #7a4c08,0 0 46px rgba(255,214,110,.55);perspective:700px}
+.dr .dray{position:absolute;left:50%;top:55%;width:500px;height:500px;margin:-250px 0 0 -250px;background:repeating-conic-gradient(rgba(255,255,255,.5) 0 5deg,transparent 5deg 20deg);-webkit-mask:radial-gradient(circle,#000 10%,transparent 50%);mask:radial-gradient(circle,#000 10%,transparent 50%);animation:spin 20s linear infinite}
+.dr .ico{position:absolute;left:0;right:0;top:86px;display:flex;justify-content:center;gap:16px}
+.dr .ico img{width:76px;height:76px;filter:drop-shadow(0 4px 8px rgba(120,70,0,.45));animation:icf 6s ease-in-out infinite}
+.dr .ico img+img{animation-delay:-.4s}
+@keyframes icf{0%,28%{transform:scale(.4) translateY(20px);opacity:0}40%{transform:scale(1.12);opacity:1}48%,100%{transform:none;opacity:1}}
+.dr .ico span{position:absolute;left:0;right:0;top:86px;text-align:center;color:#5a3600;font-size:17px;font-weight:900;text-shadow:0 1px 0 #fff6d6}
+.dr .lf{position:absolute;top:0;bottom:0;width:50%;z-index:2;background:linear-gradient(90deg,rgba(0,0,0,.18),transparent 20%,transparent 80%,rgba(0,0,0,.18)),linear-gradient(180deg,#8b74e8,#5b44c8);box-shadow:inset 0 0 0 2px rgba(255,231,166,.55)}
+.dr .lf.l{left:0;transform-origin:0 50%}
+.dr .lf.r{right:0;transform-origin:100% 50%}
+.dr .lf::before{content:"";position:absolute;left:14px;right:14px;top:46px;height:80px;border:2px solid rgba(255,231,166,.7);border-radius:50px 50px 4px 4px}
+.dr .lf.l::before{border-radius:70px 8px 4px 4px}
+.dr .lf.r::before{border-radius:8px 70px 4px 4px}
+.dr .lf::after{content:"";position:absolute;left:14px;right:14px;top:140px;bottom:16px;border:2px solid rgba(255,231,166,.7);border-radius:4px}
+.dr .lf i{position:absolute;top:128px;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff2c4,#c98a12);box-shadow:0 2px 3px rgba(0,0,0,.35)}
+.dr .lf.l i{right:8px}.dr .lf.r i{left:8px}
+.scr[data-lv="c1"] .dr .lf.l,.scr[data-lv="c2"] .dr .lf.l{animation:dl 6s cubic-bezier(.5,0,.3,1) infinite}
+.scr[data-lv="c1"] .dr .lf.r,.scr[data-lv="c2"] .dr .lf.r{animation:drr 6s cubic-bezier(.5,0,.3,1) infinite}
+@keyframes dl{0%,14%{transform:rotateY(0)}34%,92%{transform:rotateY(-100deg)}100%{transform:rotateY(0)}}
+@keyframes drr{0%,14%{transform:rotateY(0)}34%,92%{transform:rotateY(100deg)}100%{transform:rotateY(0)}}
+.dr .seam{position:absolute;left:50%;top:6px;bottom:6px;width:4px;margin-left:-2px;z-index:3;background:linear-gradient(180deg,transparent,#fffbe6 20%,#fffbe6 80%,transparent);box-shadow:0 0 16px 4px rgba(255,236,170,.9);animation:seam 2.4s ease-in-out infinite}
+@keyframes seam{50%{opacity:.4}}
+.dr .lvp{position:absolute;left:50%;top:0;z-index:4;transform:translateX(-50%);padding:6px 26px 7px;background:linear-gradient(#fff2c4,#d9a52b);color:#4a2e00;font-weight:900;font-size:20px;white-space:nowrap;clip-path:polygon(8% 0,92% 0,100% 50%,92% 100%,8% 100%,0 50%);filter:drop-shadow(0 3px 3px rgba(0,0,0,.35))}
+.dr .shut{position:absolute;left:50%;top:160px;z-index:4;transform:translateX(-50%);padding:5px 14px;border-radius:12px;background:rgba(46,35,80,.88);box-shadow:0 0 0 1.5px #ffe7a6;color:#fff;font-size:14px;font-weight:900;white-space:nowrap}
+.dr .shut b{color:#ffe08a}
+/* C 메뉴 아이콘이 풀림 */
+.covernav{position:absolute;left:10px;bottom:2px;width:452px;height:86px;background:rgba(200,210,240,.95);border-radius:16px}
+.navx{position:absolute;left:16px;bottom:8px;z-index:2;width:440px;height:74px;display:flex;justify-content:space-around;align-items:center;border-radius:14px;background:linear-gradient(180deg,#fff,#f4f0ff);box-shadow:0 0 0 2px #fff,0 4px 0 rgba(46,35,80,.18)}
+.navx .nv{position:relative;width:64px;display:flex;flex-direction:column;align-items:center;font-size:13px;font-weight:800;color:var(--navy)}
+.navx .nv img{width:36px;height:36px}
+.navx .nv::after{content:"";position:absolute;right:4px;top:-4px;width:24px;height:24px;border-radius:50%;background:#2e2350 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M7 10V8a5 5 0 0110 0v2h1v10H6V10h1zm2 0h6V8a3 3 0 00-6 0v2z'/%3E%3C/svg%3E") center/16px no-repeat;box-shadow:0 0 0 2px #fff;opacity:0}
+.navx .nv::before{content:"";position:absolute;left:50%;top:18px;width:80px;height:80px;margin:-40px 0 0 -40px;border-radius:50%;border:3px solid #ffe08a;opacity:0}
+.navx .nw{position:absolute;left:50%;top:-14px;transform:translateX(-50%);padding:0 6px;border-radius:8px;background:#e23a55;color:#fff;font-size:11px;font-weight:900;font-style:normal;opacity:0;white-space:nowrap}
+.C3[data-lv="c2"] :is(.nv.a,.nv.sc) img{filter:grayscale(1) brightness(1.15) opacity(.55)}
+.C3[data-lv="c2"] :is(.nv.a,.nv.sc){color:#8a849f}
+.C3[data-lv="c2"] :is(.nv.a,.nv.sc)::after{opacity:1}
+.C3[data-lv="c1"] .nv.a img,.C3[data-lv="c2"] :is(.nv.f,.nv.s) img{animation:unl 8s infinite}
+.C3[data-lv="c1"] .nv.a::after,.C3[data-lv="c2"] :is(.nv.f,.nv.s)::after{animation:lockgo 8s ease-in infinite}
+.C3[data-lv="c1"] .nv.a::before,.C3[data-lv="c2"] :is(.nv.f,.nv.s)::before{animation:burst 8s ease-out infinite}
+.C3[data-lv="c1"] .nv.a .nw,.C3[data-lv="c2"] :is(.nv.f,.nv.s) .nw{animation:nwp 8s cubic-bezier(.3,1.7,.5,1) infinite}
+@keyframes unl{0%,64%{filter:grayscale(1) brightness(1.15) opacity(.55)}70%{filter:brightness(1.6) drop-shadow(0 0 8px #ffe08a)}76%,100%{filter:none}}
+@keyframes lockgo{0%,63%{opacity:1;transform:none}70%,100%{opacity:0;transform:translate(16px,-34px) rotate(50deg) scale(1.2)}}
+@keyframes burst{0%,64%{opacity:0;transform:scale(.3)}68%{opacity:1}78%,100%{opacity:0;transform:scale(1.3)}}
+@keyframes nwp{0%,70%{opacity:0;transform:translateX(-50%) scale(0)}76%,100%{opacity:1;transform:translateX(-50%) scale(1)}}
+.C3 .pop{position:absolute;inset:0;z-index:3;animation:popc 8s infinite}
+@keyframes popc{0%{opacity:0}4%,44%{opacity:1}52%,100%{opacity:0}}
+.C3 .tap{left:calc(50% + 463px);top:612px;animation:tap3 8s ease-out infinite}
+@keyframes tap3{0%,37%{opacity:0;transform:scale(.4)}38%{opacity:1;transform:scale(.4)}44%,100%{opacity:0;transform:scale(1.5)}}
+.fly{position:absolute;z-index:7;width:60px;height:60px;left:var(--x0);top:var(--y0);opacity:0;filter:drop-shadow(0 0 10px #ffe08a);animation:flyk 8s cubic-bezier(.5,0,.6,1) infinite}
+.fly img{display:block;width:100%;height:100%}
+@keyframes flyk{0%,48%{left:var(--x0);top:var(--y0);opacity:0;transform:scale(1)}52%{opacity:1;transform:scale(1.15)}64%{left:var(--x1);top:var(--y1);opacity:1;transform:scale(.62)}68%,100%{left:var(--x1);top:var(--y1);opacity:0;transform:scale(.62)}}
+.hring{position:absolute;left:10px;top:8px;z-index:6;width:324px;height:124px;border-radius:18px;box-shadow:0 0 0 4px #ffe08a,0 0 30px #ffe08a;opacity:0;animation:hring 8s ease-out infinite}
+@keyframes hring{0%,62%{opacity:0}68%,92%{opacity:1}100%{opacity:0}}
+.lvchip{position:absolute;left:96px;top:138px;z-index:6;padding:5px 14px;border-radius:14px;background:linear-gradient(160deg,#fff2c4,#d9a52b);color:#4a2e00;font-size:15px;font-weight:900;box-shadow:0 0 0 2px #fff,0 6px 12px rgba(0,0,0,.35);white-space:nowrap;opacity:0;animation:lvc 8s cubic-bezier(.3,1.7,.5,1) infinite}
+@keyframes lvc{0%,64%{opacity:0;transform:translateY(-14px) scale(.6)}72%,94%{opacity:1;transform:none}100%{opacity:0}}
+
+/* ================= 5. 완료 알림 ================= */
+.T .tt{position:absolute;z-index:6}
+.T[data-kind="ok1"] .tt{left:236px;top:366px}
+:root[data-w="1600"] .T[data-kind="ok1"] .tt{left:396px}
+.T[data-kind="ok2"] .tt{right:96px;top:404px}
+:root[data-w="1600"] .T[data-kind="ok2"] .tt{right:258px}
+.T[data-kind="lim"] .tt{left:540px;top:388px}
+:root[data-w="1600"] .T[data-kind="lim"] .tt{left:694px}
+.T[data-kind="bat"] .tt{left:50%;top:136px;translate:-50% 0}
+.T .tap{display:none;animation:tapt 4.5s ease-out infinite}
+@keyframes tapt{0%{opacity:1;transform:scale(.4)}9%{opacity:0;transform:scale(1.5)}100%{opacity:0}}
+.T[data-kind="ok2"] .tap{display:block;left:1032px;top:507px}
+:root[data-w="1600"] .T[data-kind="ok2"] .tap{left:1190px;top:506px}
+.T[data-kind="lim"] .tap{display:block;left:653px;top:538px}
+:root[data-w="1600"] .T[data-kind="lim"] .tap{left:806px;top:534px}
+.T .wash{position:absolute;inset:0;background:rgba(20,14,48,.12)}
+.tt b{display:block;font-size:18px;font-weight:900;line-height:1.3;white-space:nowrap}
+.tt small{display:block;font-size:13px;font-weight:700;line-height:1.35;white-space:nowrap}
+/* A 메모지 */
+.T .tt.ma{filter:drop-shadow(0 10px 14px rgba(6,3,24,.4))}
+.ma .tc{position:relative;display:flex;align-items:center;gap:12px;min-width:250px;padding:16px 30px 14px 14px;color:#2e2350;background:linear-gradient(175deg,#fff7cf,#ffe48a);clip-path:polygon(0 -24px,100% -24px,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%);transform-origin:50% 0;animation:mslap 4.5s cubic-bezier(.3,1.5,.5,1) infinite}
+.ma .tc::after{content:"";position:absolute;right:0;bottom:0;width:20px;height:20px;background:linear-gradient(135deg,#e2bd4e 50%,transparent 50%)}
+.ma .tape{position:absolute;left:50%;top:-12px;width:88px;height:24px;margin-left:-44px;background:repeating-linear-gradient(90deg,rgba(185,160,240,.8) 0 6px,rgba(255,255,255,.8) 6px 12px);transform:rotate(-4deg)}
+.ma small{color:#5a4210}
+.ma .ic{flex:none;width:40px;height:40px;background:linear-gradient(135deg,#fff2b0,#d9a52b 60%,#b07a1a);clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.ma .icx{flex:none;width:36px;height:36px;border-radius:50%;background:linear-gradient(45deg,transparent 42%,#fff 42% 58%,transparent 58%) center/18px 18px no-repeat,linear-gradient(-45deg,transparent 42%,#fff 42% 58%,transparent 58%) center/18px 18px no-repeat,#77718f}
+.T[data-kind="lim"] .ma .tc{background:linear-gradient(175deg,#f3f1f7,#d6d2e2);color:#3b3166}
+.T[data-kind="lim"] .ma .tc::after{background:linear-gradient(135deg,#aaa5bb 50%,transparent 50%)}
+.T[data-kind="lim"] .ma small{color:#4c4374}
+.T[data-kind="lim"] .ma .tape{background:repeating-linear-gradient(90deg,rgba(170,165,190,.85) 0 6px,rgba(255,255,255,.8) 6px 12px)}
+@keyframes mslap{0%{opacity:0;transform:scale(1.3) rotate(-9deg)}8%{opacity:1;transform:scale(.97) rotate(-2deg)}12%,78%{opacity:1;transform:scale(1) rotate(-2.5deg)}90%{opacity:0;transform:translate(16px,-26px) rotate(8deg) scale(.96)}100%{opacity:0}}
+/* B 붓 한 획 */
+.mb .tc{position:relative;display:flex;align-items:center;gap:12px;min-width:300px;padding:16px 50px 16px 28px;color:#fff;text-shadow:0 1px 2px rgba(30,15,70,.7)}
+.mb .pt{position:absolute;inset:-4px -8px;background:linear-gradient(90deg,#4f3bb8,#7b4fd0 70%,#a0582a);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 80' preserveAspectRatio='none'%3E%3Cpath fill='%23fff' fill-rule='evenodd' d='M8 20C40 9 92 15 140 10C200 5 262 13 318 8C352 5 380 9 394 18C399 30 391 44 397 57C381 70 340 73 300 70C240 75 180 68 120 73C80 75 40 71 12 64C2 52 9 36 8 20ZM70 27L210 25L210 27.5L70 29.5ZM150 55L330 52L330 54L150 57ZM250 38L360 36L360 37.5L250 39.5Z'/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 80' preserveAspectRatio='none'%3E%3Cpath fill='%23fff' fill-rule='evenodd' d='M8 20C40 9 92 15 140 10C200 5 262 13 318 8C352 5 380 9 394 18C399 30 391 44 397 57C381 70 340 73 300 70C240 75 180 68 120 73C80 75 40 71 12 64C2 52 9 36 8 20ZM70 27L210 25L210 27.5L70 29.5ZM150 55L330 52L330 54L150 57ZM250 38L360 36L360 37.5L250 39.5Z'/%3E%3C/svg%3E") center/100% 100% no-repeat;filter:drop-shadow(0 6px 10px rgba(6,3,24,.4));animation:mbpaint 4.5s cubic-bezier(.3,.8,.3,1) infinite}
+@keyframes mbpaint{0%{clip-path:inset(0 100% 0 0);opacity:1}14%,80%{clip-path:inset(0 0 0 0);opacity:1}94%,100%{clip-path:inset(0 0 0 0);opacity:0}}
+.mb .tc>div,.mb .ic2{position:relative;animation:mbtxt 4.5s infinite}
+@keyframes mbtxt{0%,9%{opacity:0;transform:translateX(-10px)}18%,80%{opacity:1;transform:none}92%,100%{opacity:0}}
+.mb small{color:#f1eaff}
+.mb .ic2{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:900;font-size:19px;color:#5a3600;background:radial-gradient(circle at 40% 35%,#fff6d6,#e0b44a);text-shadow:none}
+.mb .drop{position:absolute;right:-18px;top:50%;width:12px;height:12px;border-radius:50%;background:#a0582a;animation:drp 4.5s ease-out infinite}
+.mb .drop+.drop{right:-32px;top:30%;width:7px;height:7px;animation-delay:.08s}
+@keyframes drp{0%,12%{transform:scale(0);opacity:0}16%,80%{transform:none;opacity:1}92%,100%{opacity:0}}
+.T[data-kind="lim"] .mb .pt{background:linear-gradient(90deg,#3d3852,#5d5873)}
+.T[data-kind="lim"] .mb .drop{background:#5d5873}
+.T[data-kind="lim"] .mb .ic2{background:radial-gradient(circle at 40% 35%,#f1eff5,#a9a4bd);color:#3b3166}
+/* C 유나 얼굴 + 한 줄 */
+.mc .tc{display:flex;align-items:center}
+.mc .fa{position:relative;flex:none;z-index:2;width:74px;height:74px;border-radius:50%;background:url(img/assets_chars_yuna_idle.png) 50% 7%/250% auto no-repeat,radial-gradient(circle at 50% 30%,#fff,#e6dcff);box-shadow:0 0 0 3px #fff,0 0 0 6px #8b6bff,0 8px 14px rgba(6,3,24,.4);animation:fpop 4.5s cubic-bezier(.3,1.7,.5,1) infinite}
+.mc .bb{position:relative;margin-left:-4px;padding:12px 22px 12px 24px;border-radius:22px;background:#fff;color:#2e2350;box-shadow:0 0 0 2.5px #8b6bff,0 10px 18px rgba(6,3,24,.35);transform-origin:0 50%;animation:bbk 4.5s cubic-bezier(.3,1.4,.5,1) infinite}
+.mc .bb::before{content:"";position:absolute;left:-7px;top:calc(50% - 7px);width:14px;height:14px;background:inherit;transform:rotate(45deg);box-shadow:-2.5px 2.5px 0 0 #8b6bff}
+.mc small{color:#4c4374}
+.mc .sp{position:absolute;width:16px;height:16px;background:#ffe08a;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:spk 4.5s ease-out infinite}
+@keyframes spk{0%,8%{transform:scale(0) rotate(0)}14%{transform:scale(1.3) rotate(45deg)}30%,100%{transform:scale(0) rotate(90deg)}}
+.mc .sw{position:absolute;right:-2px;top:2px;width:14px;height:20px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:linear-gradient(#cfe8ff,#5fa8e8);transform:rotate(20deg);animation:swk 4.5s ease-in infinite}
+@keyframes swk{0%,14%{opacity:0;transform:rotate(20deg) translateY(-6px)}22%,70%{opacity:1;transform:rotate(20deg)}80%,100%{opacity:0;transform:rotate(20deg) translateY(8px)}}
+@keyframes fpop{0%{transform:scale(0)}8%{transform:scale(1.1)}12%,80%{transform:scale(1)}90%,100%{transform:scale(0)}}
+@keyframes bbk{0%,6%{transform:scaleX(0);opacity:0}16%,80%{transform:none;opacity:1}88%,100%{transform:scaleX(.2);opacity:0}}
+.T[data-kind="lim"] .mc .bb{background:#eeedf3;color:#3b3166;box-shadow:0 0 0 2.5px #9d97b4,0 10px 18px rgba(6,3,24,.35)}
+.T[data-kind="lim"] .mc .bb::before{box-shadow:-2.5px 2.5px 0 0 #9d97b4}
+.T[data-kind="lim"] .mc .fa{box-shadow:0 0 0 3px #fff,0 0 0 6px #9d97b4,0 8px 14px rgba(6,3,24,.4)}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>접속 · 레벨 업 알림 — 배치 2 시안 (출석 · 항해일지 · 레벨 업 · 완료 알림)</h1>
+<p class="lead">UI 목록(design/feedback70/ui_inventory.html)의 배치 2, 화면 4개(D2-1 ~ D2-4)와 「출석 → 항해일지 연달아」 흐름입니다. <b>PD 결정</b>에 따라 출석 · 항해일지 · 레벨 업은 따로 판을 만들지 않고, PD가 고른 <b>보상 판 B 「수집 카드 줄」</b>(rewards_b 수정판: 기운 남색 띠 + 카드 + 받기)을 그대로 쓰고 <b>띠 위쪽 장식과 제목 판 색만</b> 순간마다 바꿨습니다. 시안 A · B · C는 그 「장식」의 방향이 다릅니다. 완료 알림(D2-4)은 보상 판이 아니라 짧은 알림이라 모양부터 따로 고릅니다. 묶음마다 시안을 하나씩 누르면 고름 표시가 되고, 묶음 위 단추로 상태(1일째 · 7일째, 10분 · 8시간 등)를 바꿀 수 있습니다. 그림은 모두 게임에 있는 것이고 숫자 · 이름 조합은 예시입니다(규칙 수치 출석 100 · 월정액 90 · 레벨 업 30 · 레벨마다 공격 +1% · 방치 최대 8시간은 코드 그대로). 소리 창(D10-4)은 배치 10이라 이 페이지에 없습니다.</p>
+<div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button><span style="width:12px"></span><button type="button" data-replay-all>▶ 등장 다시 보기 (전체)</button></div>
+
+<section class="ref">
+  <h2>지금 게임</h2>
+  <p class="cap">출석 · 항해일지 · 레벨 업은 제목만 다른 같은 흰 판 + 크림 칸 하나이고, 완료 알림은 잠금 안내와 같은 짙은 알약이 화면 가운데 아래쪽에 뜹니다.</p>
+  <div class="refs">
+    <figure><img src="img/design_feedback70_img_after_start_popup_1_1280x720.jpg" alt="지금 출석 보상"><figcaption>출석 · design/feedback70/img/after/start_popup_1_1280x720.jpg</figcaption></figure>
+    <figure><img src="img/design_feedback70_img_inventory_inv_logbook_1280x720.jpg" alt="지금 항해일지"><figcaption>항해일지 · design/feedback70/img/inventory/inv_logbook_1280x720.jpg</figcaption></figure>
+    <figure><img src="img/design_feedback70_img_inventory_inv_acct_levelup_1280x720.jpg" alt="지금 항해사 레벨 업"><figcaption>레벨 업 · design/feedback70/img/inventory/inv_acct_levelup_1280x720.jpg</figcaption></figure>
+    <figure><img src="img/design_feedback70_img_inventory_inv_toast_ok_1280x720.jpg" alt="지금 완료 알림"><figcaption>완료 알림 · design/feedback70/img/inventory/inv_toast_ok_1280x720.jpg</figcaption></figure>
+  </div>
+</section>
+
+<!-- ================= 1 ================= -->
+<h3>1. 출석 보상 (D2-1)</h3>
+<p class="ctx">하루 첫 접속에 채색석 <b>100</b>, 월정액이 남아 있으면 <b>90</b>이 더 붙습니다(코드 그대로). 지금 게임엔 「7일째 보너스」가 없어서 7일째는 칸이 다 차는 것만 보여 줍니다 — 보너스를 붙일지는 PD 결정.</p>
+<div class="states" data-group="attend"><span>날</span><button type="button" data-k="day" data-v="1" aria-pressed="true">1일째</button><button type="button" data-k="day" data-v="7">7일째</button><span>월정액</span><button type="button" data-k="mon" data-v="0">없음</button><button type="button" data-k="mon" data-v="1" aria-pressed="true">월정액 몫 포함</button></div>
+
+<section class="opt" data-choice="att_a" data-choice-group="attend" data-choice-label="A · 출석부 도장">
+  <h2>A · 펼친 출석부에 도장 쾅 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">띠 위 오른쪽에 <b>라벤더 표지 출석부</b>가 펼쳐지고, 오늘 칸에 분홍 도장이 쾅 찍히며 잉크 고리가 퍼집니다. 왼쪽 쪽에는 손글씨 「N일째」. 7일째는 마지막 칸이 금빛 「개근」 도장 + 리본, 월정액은 책갈피로 남은 날을 보여 줍니다.</p>
+  <div class="vp"><div class="scr" data-day="1" data-mon="1" style="--bt:300px;--bh:272px;--ry:310px;--p1:#e0558f;--p2:#a8205e;--glowc:rgba(255,143,196,.5)">
+    <div class="bgc"></div><div class="scrim"></div><div class="rays"></div><div class="motes"></div><div class="bglow"></div><div class="band"><i></i></div>
+    <div class="petals"><i style="left:22%;animation-duration:7s"></i><i style="left:46%;animation-duration:9s;animation-delay:-3s"></i><i style="left:64%;animation-duration:8s;animation-delay:-5s"></i><i style="left:83%;animation-duration:10s;animation-delay:-1s"></i><i style="left:96%;animation-duration:7.5s;animation-delay:-6s"></i></div>
+    <div class="book">
+      <div class="pg lp"><span class="bt">분교 출석부</span><b class="dn"><i class="xd d1">1</i><i class="xd d7">7</i><small>일째</small></b><span class="who">항해사</span></div>
+      <div class="pg rpg"><div class="cells">
+        <span class="cell"><em>1</em><i class="stp now xd d1">출석</i><i class="stp xd d7">출석</i></span>
+        <span class="cell"><em>2</em><i class="stp xd d7">출석</i></span>
+        <span class="cell"><em>3</em><i class="stp xd d7">출석</i></span>
+        <span class="cell"><em>4</em><i class="stp xd d7">출석</i></span>
+        <span class="cell"><em>5</em><i class="stp xd d7">출석</i></span>
+        <span class="cell"><em>6</em><i class="stp xd d7">출석</i></span>
+        <span class="cell"><em>7</em><i class="stp now gold xd d7">개근</i></span>
+        <span class="cell fl"></span>
+      </div></div>
+      <span class="kg xd d7">일주일 개근!</span>
+      <span class="bm xm m1">월정액 18일</span>
+    </div>
+    <div class="ttl"><div class="big">DAILY</div><div class="pl">출석 보상</div><div class="sub"><span class="xm m1">월정액 몫이 함께 들어 있어요</span><span class="xm m0"><span class="xd d1">오늘도 들러 줘서 고마워요</span><span class="xd d7">일주일 내내 와 줬어요</span></span></div></div>
+    <div class="row n2">
+      <div class="sl k-gem" style="--i:0"><div class="fc"><span class="tg">출석</span><img class="ic" src="img/assets_ui_icon_gem.png" alt="채색석"><b>100</b><small>채색석</small></div></div>
+      <div class="sl k-mon xm m1" style="--i:1"><div class="fc"><span class="rib">18일 남음</span><span class="tg">월정액</span><img class="ic" src="img/assets_ui_icon_gem.png" alt="채색석"><b>90</b><small>채색석 · 월정액 몫</small></div></div>
+    </div>
+    <div class="take"><span>받기</span></div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="att_b" data-choice-group="attend" data-choice-label="B · 고래 우편">
+  <h2>B · 고래가 물어 온 출석 편지 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">작은 구름고래가 오른쪽에서 날아와 <b>분홍 봉투</b>를 떨어뜨리고 지나갑니다. 봉투가 열리면 편지가 올라와 「첫날 출석, 반가워요!」, 밀랍 도장에는 오늘이 며칠째인지. 월정액이 있으면 보라 도장이 하나 더 찍히고 편지 끝에 한 줄. 날마다 편지 문구만 바뀝니다.</p>
+  <div class="vp"><div class="scr" data-day="1" data-mon="1" style="--bt:300px;--bh:272px;--ry:310px;--p1:#e0558f;--p2:#a8205e;--glowc:rgba(255,143,196,.5)">
+    <div class="bgc"></div><div class="scrim"></div><div class="rays"></div><div class="motes"></div><div class="bglow"></div><div class="band"><i></i></div>
+    <div class="mail"><i class="wh"></i>
+      <div class="env"><i class="bk2"></i><i class="flap"></i>
+        <div class="lt"><b class="xd d1">첫날 출석, 반가워요!</b><b class="xd d7">일주일 내내 와 줬어요!</b><small class="xm m1">P.S. 월정액 몫 90도 넣었어요</small><small class="xm m0">— 분교 고래 우체국</small></div>
+        <i class="pk"></i><i class="seal"><span class="xd d1">1</span><span class="xd d7">7</span></i><i class="seal mo xm m1">월</i>
+      </div>
+    </div>
+    <div class="ttl"><div class="big">DAILY</div><div class="pl">출석 보상</div><div class="sub"><span class="xd d1">출석 1일째</span><span class="xd d7">출석 7일째</span><span class="xm m1"> · 월정액 18일 남음</span></div></div>
+    <div class="row n2">
+      <div class="sl k-gem" style="--i:0"><div class="fc"><span class="tg">출석</span><img class="ic" src="img/assets_ui_icon_gem.png" alt="채색석"><b>100</b><small>채색석</small></div></div>
+      <div class="sl k-mon xm m1" style="--i:1"><div class="fc"><span class="rib">18일 남음</span><span class="tg">월정액</span><img class="ic" src="img/assets_ui_icon_gem.png" alt="채색석"><b>90</b><small>채색석 · 월정액 몫</small></div></div>
+    </div>
+    <div class="take"><span>받기</span></div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="att_c" data-choice-group="attend" data-choice-label="C · 띠에 새긴 7칸">
+  <h2>C · 띠 아래 금줄이 곧 출석부 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">장식을 더하지 않고 <b>띠 아래 금줄에 마름모 7칸</b>을 새겼습니다. 오늘 칸이 분홍 물감으로 피어나며 물방울이 튀고, 지나온 날만큼 금줄이 분홍으로 물듭니다. 카드가 가장 크게 보이는 조용한 안 — 매일 보는 창이라 짧게 끝납니다.</p>
+  <div class="vp"><div class="scr" data-day="1" data-mon="1" style="--bt:300px;--bh:318px;--ry:310px;--p1:#e0558f;--p2:#a8205e;--glowc:rgba(255,143,196,.5)">
+    <div class="bgc"></div><div class="scrim"></div><div class="rays"></div><div class="motes"></div><div class="bglow"></div>
+    <div class="band"><i></i>
+      <div class="t7"><i class="ln"><u></u></i>
+        <span class="today xd d1" style="--k:0">오늘 · 1일째</span><span class="today xd d7" style="--k:6">오늘 · 7일째</span>
+        <span class="dm f7 n1" style="--k:0"><span>1</span></span><span class="dm f7" style="--k:1"><span>2</span></span><span class="dm f7" style="--k:2"><span>3</span></span><span class="dm f7" style="--k:3"><span>4</span></span><span class="dm f7" style="--k:4"><span>5</span></span><span class="dm f7" style="--k:5"><span>6</span></span><span class="dm n7" style="--k:6"><span>7</span></span>
+        <span class="mo7 xm m1">월정액 18일 남음</span>
+      </div>
+    </div>
+    <div class="ttl"><div class="big">DAILY</div><div class="pl">출석 보상 <span class="n"><span class="xd d1">1</span><span class="xd d7">7</span> / 7</span></div><div class="sub"><span class="xm m1">월정액 몫이 함께 들어 있어요</span><span class="xm m0">하루 한 번, 첫 접속에</span></div></div>
+    <div class="row n2">
+      <div class="sl k-gem" style="--i:0"><div class="fc"><span class="tg">출석</span><img class="ic" src="img/assets_ui_icon_gem.png" alt="채색석"><b>100</b><small>채색석</small></div></div>
+      <div class="sl k-mon xm m1" style="--i:1"><div class="fc"><span class="rib">18일 남음</span><span class="tg">월정액</span><img class="ic" src="img/assets_ui_icon_gem.png" alt="채색석"><b>90</b><small>채색석 · 월정액 몫</small></div></div>
+    </div>
+    <div class="take"><span>받기</span></div>
+  </div></div>
+</section>
+
+<!-- ================= 2 ================= -->
+<h3>2. 항해일지 · 방치 보상 (D2-2)</h3>
+<p class="ctx">자리를 비운 동안 고래가 모은 <b>바람 조각</b>(최대 8시간, 코드 그대로). 「빛물감」 카드는 비운 동안 색 지도 물감통에 쌓인 몫을 함께 보여 주자는 <b>제안</b>입니다(rewards_b · 색 지도 시안과 같은 제안). 금액은 예시.</p>
+<div class="states" data-group="logbook"><span>비운 시간</span><button type="button" data-k="t" data-v="10">12분</button><button type="button" data-k="t" data-v="3" aria-pressed="true">3시간 12분</button><button type="button" data-k="t" data-v="8">11시간 (8시간 상한)</button></div>
+
+<section class="opt" data-choice="log_a" data-choice-group="logbook" data-choice-label="A · 가죽 일지">
+  <h2>A · 가죽 일지에 펜으로 적어 줌 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">띠 위에 <b>가죽 항해 일지</b>가 펼쳐지고 펜이 「비운 시간 · 모은 바람 조각 · 스며든 빛물감」을 한 줄씩 적어 내려갑니다. 8시간을 넘겨 비웠으면 마지막에 빨간 <b>「가득」 도장</b> — 더 비워도 늘지 않는다는 걸 글 대신 도장으로.</p>
+  <div class="vp"><div class="scr" data-t="3" style="--bt:300px;--bh:272px;--ry:310px;--p1:#3f8fd8;--p2:#24549e;--glowc:rgba(124,199,255,.45)">
+    <div class="bgc"></div><div class="scrim"></div><div class="rays"></div><div class="motes"></div><div class="bglow"></div><div class="band"><i></i></div>
+    <div class="jr"><div class="pp">
+      <h5>항해 일지</h5>
+      <p class="l1"><span>비운 시간</span><b class="xt t10">12분</b><b class="xt t3">3시간 12분</b><b class="xt t8">8시간</b><em class="xt t8">최대</em></p>
+      <p class="l2"><span>모은 바람 조각</span><b class="xt t10">2.4a</b><b class="xt t3">41.0a</b><b class="xt t8">109a</b></p>
+      <p class="l3"><span>스며든 빛물감</span><b class="xt t10">+6</b><b class="xt t3">+96</b><b class="xt t8">+240</b></p>
+      <i class="pen"></i>
+      <i class="full xt t8">8시간<br>가득</i>
+    </div><i class="strap"></i></div>
+    <div class="ttl"><div class="big">LOG</div><div class="pl">항해일지</div><div class="sub">고래는 <span class="xt t10">12분</span><span class="xt t3">3시간 12분</span><span class="xt t8">8시간</span> 동안 항해했어요</div></div>
+    <div class="row n2">
+      <div class="sl k-gold" style="--i:0"><div class="fc"><span class="tg">항해</span><img class="ic" src="img/assets_ui_icon_gold.png" alt="바람 조각"><b class="xt t10">2.4a</b><b class="xt t3">41.0a</b><b class="xt t8">109a</b><small>바람 조각</small></div></div>
+      <div class="sl k-paint" style="--i:1"><div class="fc"><span class="tag-s">제안</span><span class="tg">색 지도</span><img class="ic" src="img/assets_ui_kit_side_palette.png" alt="빛물감"><b class="xt t10">+6</b><b class="xt t3">+96</b><b class="xt t8">+240</b><small>빛물감</small></div></div>
+    </div>
+    <div class="take"><span>받기</span></div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="log_b" data-choice-group="logbook" data-choice-label="B · 항로 지도">
+  <h2>B · 점선 항로 + 8시간 시계 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">하늘 지도 위에 <b>고래가 지나간 만큼만 금빛 항로</b>가 그어지고, 오른쪽 <b>8시간 시계</b>가 비운 시간만큼 찹니다. 12분이면 조금, 8시간이면 항로 끝 「가득」 깃발까지. 「얼마나 더 모일 수 있었나」가 한눈에 보여 오래 비우지 않게 유도합니다.</p>
+  <div class="vp"><div class="scr" data-t="3" style="--bt:300px;--bh:272px;--ry:310px;--p1:#3f8fd8;--p2:#24549e;--glowc:rgba(124,199,255,.45)">
+    <div class="bgc"></div><div class="scrim"></div><div class="rays"></div><div class="motes"></div><div class="bglow"></div><div class="band"><i></i></div>
+    <div class="map">
+      <i class="rose"></i>
+      <svg viewBox="0 0 540 200" aria-hidden="true"><path class="rt0" pathLength="100" d="M20 160 C 120 60, 220 190, 320 110 S 470 40, 530 70"/><path class="rt1" pathLength="100" d="M20 160 C 120 60, 220 190, 320 110 S 470 40, 530 70"/><circle cx="20" cy="160" r="7" fill="#fff"/><circle cx="530" cy="70" r="6" fill="none" stroke="#fff3cf" stroke-width="2"/></svg>
+      <i class="wh2"></i>
+      <span class="st0">떠날 때</span>
+      <span class="flag xt t8">가득</span>
+      <div class="dial"><div><b class="xt t10">12분</b><b class="xt t3">3시간 12분</b><b class="xt t8">8시간</b><small>/ 최대 8시간</small></div></div>
+      <span class="cap8 xt t8">11시간 비웠지만<br>8시간까지만 모여요</span>
+    </div>
+    <div class="ttl"><div class="big">LOG</div><div class="pl">항해일지</div><div class="sub">고래는 <span class="xt t10">12분</span><span class="xt t3">3시간 12분</span><span class="xt t8">8시간</span> 동안 항해했어요</div></div>
+    <div class="row n2">
+      <div class="sl k-gold" style="--i:0"><div class="fc"><span class="tg">항해</span><img class="ic" src="img/assets_ui_icon_gold.png" alt="바람 조각"><b class="xt t10">2.4a</b><b class="xt t3">41.0a</b><b class="xt t8">109a</b><small>바람 조각</small></div></div>
+      <div class="sl k-paint" style="--i:1"><div class="fc"><span class="tag-s">제안</span><span class="tg">색 지도</span><img class="ic" src="img/assets_ui_kit_side_palette.png" alt="빛물감"><b class="xt t10">+6</b><b class="xt t3">+96</b><b class="xt t8">+240</b><small>빛물감</small></div></div>
+    </div>
+    <div class="take"><span>받기</span></div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="log_c" data-choice-group="logbook" data-choice-label="C · 고래 그림 액자">
+  <h2>C · 고래가 그려 온 하늘 한 장 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">금 액자에 걸린 <b>고래 그림</b>이 잿빛에서 색으로 칠해지며 등장하고, 아래 한 줄에 항해 시간만. 비운 시간에 따라 <b>그림 속 하늘이 바뀝니다</b>: 12분은 한낮, 3시간은 노을, 8시간은 별밤. 숫자를 읽지 않아도 「오래 다녀왔구나」가 그림으로 전해지는 안.</p>
+  <div class="vp"><div class="scr" data-t="3" style="--bt:300px;--bh:272px;--ry:310px;--p1:#3f8fd8;--p2:#24549e;--glowc:rgba(124,199,255,.45)">
+    <div class="bgc"></div><div class="scrim"></div><div class="rays"></div><div class="motes"></div><div class="bglow"></div><div class="band"><i></i></div>
+    <div class="pf"><i class="bow"></i>
+      <div class="fr"><div class="cv"><i class="sk xt t10"></i><i class="sk xt t3"></i><i class="sk xt t8"></i><i class="sun xt t10"></i><i class="sun xt t3"></i><i class="sun xt t8"></i><i class="wl"></i><i class="cl"></i></div></div>
+      <div class="lbl"><em class="xt t10">12분</em><em class="xt t3">3시간 12분</em><em class="xt t8">8시간 (최대)</em> 항해</div>
+    </div>
+    <div class="ttl"><div class="big">LOG</div><div class="pl">항해일지</div><div class="sub">항해사님이 없는 동안 고래가 다녀왔어요</div></div>
+    <div class="row n2">
+      <div class="sl k-gold" style="--i:0"><div class="fc"><span class="tg">항해</span><img class="ic" src="img/assets_ui_icon_gold.png" alt="바람 조각"><b class="xt t10">2.4a</b><b class="xt t3">41.0a</b><b class="xt t8">109a</b><small>바람 조각</small></div></div>
+      <div class="sl k-paint" style="--i:1"><div class="fc"><span class="tag-s">제안</span><span class="tg">색 지도</span><img class="ic" src="img/assets_ui_kit_side_palette.png" alt="빛물감"><b class="xt t10">+6</b><b class="xt t3">+96</b><b class="xt t8">+240</b><small>빛물감</small></div></div>
+    </div>
+    <div class="take"><span>받기</span></div>
+  </div></div>
+</section>
+
+<!-- ================= 3 ================= -->
+<h3>3. 출석 → 항해일지가 연달아 뜰 때</h3>
+<p class="ctx">하루 첫 접속은 보통 출석과 항해일지가 함께 옵니다(지금은 같은 판이 두 번). 장식은 위 1 · 2번에서 고른 것이 그대로 들어가고, 여기서는 <b>두 번 받게 할지, 한 번에 받게 할지</b>만 고릅니다. 예시: 출석 3일째 + 3시간 12분.</p>
+
+<section class="opt" data-choice="chain_a" data-choice-group="chain" data-choice-label="가 · 띠는 남고 장식만 바뀜">
+  <h2>가 · 띠는 그대로, 「받기」마다 장 넘김 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">「받기」를 누르면 출석 카드가 오른쪽 위 지갑으로 날아가고, <b>띠는 닫히지 않은 채</b> 제목 판이 분홍 → 하늘색으로 바뀌며 항해일지 카드가 들어옵니다. 왼쪽 아래 「① 출석 ② 항해일지」 표시로 몇 장 남았는지 압니다(10초 반복).</p>
+  <div class="vp"><div class="scr ch1" style="--bt:300px;--bh:272px;--ry:310px">
+    <div class="bgc"></div><div class="scrim"></div><div class="rays"></div><div class="motes"></div><div class="band"><i></i></div>
+    <div class="ph ph1"><div class="bglow"></div>
+      <div class="wk"><i class="ok">1</i><i class="ok">2</i><i class="td"><span><b>3</b>일째</span></i><i>4</i><i>5</i><i>6</i><i>7</i></div>
+      <div class="ttl"><div class="big">DAILY</div><div class="pl">출석 보상 <span class="n">1 / 2</span></div><div class="sub">출석 3일째</div></div>
+      <div class="row n2"><div class="sl k-gem" style="--i:0"><div class="fc"><span class="tg">출석</span><img class="ic" src="img/assets_ui_icon_gem.png" alt="채색석"><b>100</b><small>채색석</small></div></div></div>
+    </div>
+    <div class="ph ph2"><div class="bglow"></div>
+      <div class="mrt" style="--ry2:70px"><svg viewBox="0 0 520 120" aria-hidden="true"><path d="M10 96 C 120 20, 250 120, 380 50 S 480 30, 500 34" fill="none" stroke="#fff3cf" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round" opacity=".85"/><circle cx="10" cy="96" r="7" fill="#fff"/></svg><i class="wh3"></i><span class="tm">3시간 12분</span></div>
+      <div class="ttl"><div class="big">LOG</div><div class="pl">항해일지 <span class="n">2 / 2</span></div><div class="sub">고래는 3시간 12분 동안 항해했어요</div></div>
+      <div class="row n2"><div class="sl k-gold" style="--i:0"><div class="fc"><span class="tg">항해</span><img class="ic" src="img/assets_ui_icon_gold.png" alt="바람 조각"><b>41.0a</b><small>바람 조각</small></div></div><div class="sl k-paint" style="--i:1"><div class="fc"><span class="tag-s">제안</span><span class="tg">색 지도</span><img class="ic" src="img/assets_ui_kit_side_palette.png" alt="빛물감"><b>+96</b><small>빛물감</small></div></div></div>
+    </div>
+    <div class="take"><span>받기</span></div>
+    <div class="steps"><span class="s1">① 출석</span><span class="s2">② 항해일지</span></div>
+    <i class="ping"></i><i class="tap"></i>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="chain_b" data-choice-group="chain" data-choice-label="나 · 한 장으로 합침">
+  <h2>나 · 「어서 와요」 한 장에 둘 다 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">둘이 함께 오는 날은 <b>판을 하나로 합쳐</b> 출석 묶음 | 항해 묶음을 금 점선으로 나눠 한 줄에 놓고, 「받기」 한 번으로 끝냅니다. 위쪽 장식도 출석 칸 + 항로를 작게 나란히. 누르는 횟수가 가장 적은 안.</p>
+  <div class="vp"><div class="scr" style="--bt:300px;--bh:272px;--ry:330px;--glowc:rgba(190,160,255,.5)">
+    <div class="bgc"></div><div class="scrim"></div><div class="rays"></div><div class="motes"></div><div class="bglow"></div><div class="band"><i></i></div>
+    <div class="wk" style="--wy:40px"><i class="ok">1</i><i class="ok">2</i><i class="td"><span><b>3</b>일째</span></i><i>4</i><i>5</i><i>6</i><i>7</i></div>
+    <div class="mrt" style="--ry2:132px;width:480px"><svg viewBox="0 0 480 120" aria-hidden="true"><path d="M10 96 C 120 20, 250 120, 380 50 S 450 30, 470 34" fill="none" stroke="#fff3cf" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round" opacity=".85"/><circle cx="10" cy="96" r="7" fill="#fff"/></svg><i class="wh3"></i><span class="tm">3시간 12분</span></div>
+    <div class="ttl"><div class="big">WELCOME</div><div class="pl">어서 와요, 항해사님!</div><div class="sub">출석 3일째 · 고래는 3시간 12분 동안 항해했어요</div></div>
+    <div class="row n3">
+      <div class="grp"><span class="gl pk"><i></i>출석 3일째</span><div class="sl k-gem" style="--i:0"><div class="fc"><span class="tg">출석</span><img class="ic" src="img/assets_ui_icon_gem.png" alt="채색석"><b>100</b><small>채색석</small></div></div></div>
+      <i class="dv"></i>
+      <div class="grp"><span class="gl sk2"><i class="w"></i>항해 3시간 12분</span><div class="sl k-gold" style="--i:1"><div class="fc"><span class="tg">항해</span><img class="ic" src="img/assets_ui_icon_gold.png" alt="바람 조각"><b>41.0a</b><small>바람 조각</small></div></div><div class="sl k-paint" style="--i:2"><div class="fc"><span class="tag-s">제안</span><span class="tg">색 지도</span><img class="ic" src="img/assets_ui_kit_side_palette.png" alt="빛물감"><b>+96</b><small>빛물감</small></div></div></div>
+    </div>
+    <div class="take"><span>모두 받기</span></div>
+  </div></div>
+</section>
+
+<!-- ================= 4 ================= -->
+<h3>4. 항해사 레벨 업 · 새 콘텐츠 열림 (D2-3)</h3>
+<p class="ctx">레벨마다 채색석 <b>30</b> + 모든 아이 공격 <b>+1%</b>, 정해진 레벨에 콘텐츠가 열립니다(Lv.2 소환 · 편성, Lv.7 모험 등 코드 그대로). 「두 레벨 연속」은 지금 게임에선 판이 두 번 뜨는데, <b>한 장으로 합치자는 제안</b>입니다(채색석 60).</p>
+<div class="states" data-group="acctlv"><span>레벨 업</span><button type="button" data-k="lv" data-v="up">레벨 업만 (Lv.12)</button><button type="button" data-k="lv" data-v="c1" aria-pressed="true">새 콘텐츠 1개 (Lv.7 모험)</button><button type="button" data-k="lv" data-v="c2">새 콘텐츠 2개 (Lv.2 소환 · 편성)</button><button type="button" data-k="lv" data-v="two">두 레벨 연속 (Lv.11 → 13)</button></div>
+
+<section class="opt" data-choice="lv_a" data-choice-group="acctlv" data-choice-label="A · 금빛 계급장">
+  <h2>A · 금빛 계급장 + 솟는 빛기둥 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">띠 위에 <b>금빛 계급장</b>(게임의 문장 그림)이 걸리고 새 레벨 숫자가 튀어나오며, 아래에서 빛기둥이 솟습니다. 오른 레벨 수만큼 <b>금 갈매기 표</b>가 쌓이고(두 레벨이면 두 줄, 숫자도 12 → 13으로 한 번 더 넘어감), 열린 콘텐츠는 자물쇠가 튕겨 나가는 카드.</p>
+  <div class="vp"><div class="scr" data-lv="c1" style="--bt:300px;--bh:272px;--ry:310px;--p1:#c17f12;--p2:#8a4a06;--glowc:rgba(255,214,110,.5)">
+    <div class="bgc"></div><div class="scrim"></div><div class="rays"></div><div class="pillars"><i style="left:12%;--pw:70px"></i><i style="left:30%;--pw:40px;animation-delay:-1.1s"></i><i style="left:52%;--pw:90px;animation-delay:-.5s"></i><i style="left:70%;--pw:50px;animation-delay:-2s"></i><i style="left:86%;--pw:70px;animation-delay:-1.5s"></i></div><div class="motes"></div><div class="bglow"></div><div class="band"><i></i></div>
+    <div class="crw"><i class="cr"></i><span class="who">항해사</span>
+      <div class="num"><s>Lv.<i class="xl up" style="font-style:normal">11</i><i class="xl c1" style="font-style:normal">6</i><i class="xl c2" style="font-style:normal">1</i><i class="xl two" style="font-style:normal">11</i></s>→<b class="xl up">12</b><b class="xl c1">7</b><b class="xl c2">2</b><b class="dbl xl two"><i>12</i><i>13</i></b></div>
+      <div class="chev"><i></i><i class="xl two"></i></div>
+      <span class="gain">모든 아이 공격 <b class="xl up">+11%</b><b class="xl c1">+6%</b><b class="xl c2">+1%</b><b class="xl two">+12%</b></span>
+    </div>
+    <div class="ttl"><div class="big">LEVEL UP</div><div class="pl"><span class="xl up">항해사 Lv.12</span><span class="xl c1">새 콘텐츠 열림!</span><span class="xl c2">새 콘텐츠 2개!</span><span class="xl two">2레벨 업!</span></div><div class="sub"><span class="xl up">레벨마다 모든 아이가 조금씩 강해져요</span><span class="xl c1">「모험」을 쓸 수 있어요</span><span class="xl c2">「소환」 · 「편성」을 쓸 수 있어요</span><span class="xl two">레벨 2개를 한 번에 받아요</span></div></div>
+    <div class="row n3">
+      <div class="sl k-gem" style="--i:0"><div class="fc"><span class="cnt xl two">×2</span><span class="tg">재화</span><img class="ic" src="img/assets_ui_icon_gem.png" alt="채색석"><b class="xl up c1 c2">30</b><b class="xl two">60</b><small>채색석</small></div></div>
+      <div class="sl k-open xl c1" style="--i:1"><div class="fc"><span class="tg">새 콘텐츠</span><i class="lockoff"></i><img class="ic" src="img/assets_ui_kit_nav_adventure.png" alt="모험"><b>모험</b><small>열림!</small></div></div>
+      <div class="sl k-open xl c2" style="--i:1"><div class="fc"><span class="tg">새 콘텐츠</span><i class="lockoff"></i><img class="ic" src="img/assets_ui_kit_nav_summon.png" alt="소환"><b>소환</b><small>열림!</small></div></div>
+      <div class="sl k-open xl c2" style="--i:2"><div class="fc"><span class="tg">새 콘텐츠</span><i class="lockoff"></i><img class="ic" src="img/assets_ui_kit_nav_formation.png" alt="편성"><b>편성</b><small>열림!</small></div></div>
+    </div>
+    <div class="take"><span>받기</span></div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="lv_b" data-choice-group="acctlv" data-choice-label="B · 새 콘텐츠 문">
+  <h2>B · 아틀리에 문이 열림 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">띠 위에 금 테 <b>아치 문</b>이 서 있고, 새 콘텐츠가 열리는 레벨이면 문짝이 활짝 열리며 빛 속에서 그 콘텐츠 아이콘이 떠오릅니다. 열 것이 없는 레벨(9 이상)은 문이 닫힌 채 <b>틈으로 빛만</b> 새어 나오고 문패에 레벨. 「레벨 업 = 새 방이 열림」을 가장 크게 말하는 안.</p>
+  <div class="vp"><div class="scr" data-lv="c1" style="--bt:300px;--bh:272px;--ry:310px;--p1:#c17f12;--p2:#8a4a06;--glowc:rgba(255,214,110,.5)">
+    <div class="bgc"></div><div class="scrim"></div><div class="rays"></div><div class="motes"></div><div class="bglow"></div><div class="band"><i></i></div>
+    <div class="dr">
+      <div class="arch"><i class="dray"></i>
+        <div class="ico"><img class="xl c1" src="img/assets_ui_kit_nav_adventure.png" alt="모험"><img class="xl c2" src="img/assets_ui_kit_nav_summon.png" alt="소환"><img class="xl c2" src="img/assets_ui_kit_nav_formation.png" alt="편성"><span class="xl c1">모험</span><span class="xl c2">소환 · 편성</span></div>
+        <i class="lf l"><i></i></i><i class="lf r"><i></i></i><i class="seam xl up two"></i>
+      </div>
+      <span class="lvp"><span class="xl up">Lv.12</span><span class="xl c1">Lv.7</span><span class="xl c2">Lv.2</span><span class="xl two">Lv.13</span></span>
+      <span class="shut xl up two">모든 아이 공격 <b class="xl up">+11%</b><b class="xl two">+12%</b></span>
+    </div>
+    <div class="ttl"><div class="big">LEVEL UP</div><div class="pl"><span class="xl up">항해사 Lv.12</span><span class="xl c1">항해사 Lv.7</span><span class="xl c2">항해사 Lv.2</span><span class="xl two">항해사 Lv.13</span></div><div class="sub"><span class="xl up">모든 아이 공격 +11%</span><span class="xl c1">새 문이 열렸어요 · 모든 아이 공격 +6%</span><span class="xl c2">새 문 2개 · 모든 아이 공격 +1%</span><span class="xl two">Lv.11 → 13 · 모든 아이 공격 +12%</span></div></div>
+    <div class="row n3">
+      <div class="sl k-gem" style="--i:0"><div class="fc"><span class="cnt xl two">×2</span><span class="tg">재화</span><img class="ic" src="img/assets_ui_icon_gem.png" alt="채색석"><b class="xl up c1 c2">30</b><b class="xl two">60</b><small>채색석</small></div></div>
+      <div class="sl k-open xl c1" style="--i:1"><div class="fc"><span class="tg">새 콘텐츠</span><i class="lockoff"></i><img class="ic" src="img/assets_ui_kit_nav_adventure.png" alt="모험"><b>모험</b><small>열림!</small></div></div>
+      <div class="sl k-open xl c2" style="--i:1"><div class="fc"><span class="tg">새 콘텐츠</span><i class="lockoff"></i><img class="ic" src="img/assets_ui_kit_nav_summon.png" alt="소환"><b>소환</b><small>열림!</small></div></div>
+      <div class="sl k-open xl c2" style="--i:2"><div class="fc"><span class="tg">새 콘텐츠</span><i class="lockoff"></i><img class="ic" src="img/assets_ui_kit_nav_formation.png" alt="편성"><b>편성</b><small>열림!</small></div></div>
+    </div>
+    <div class="take"><span>받기</span></div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="lv_c" data-choice-group="acctlv" data-choice-label="C · 메뉴 아이콘이 풀림">
+  <h2>C · 받으면 아래 메뉴의 자물쇠가 풀림 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">판은 A와 같고 장식을 줄인 대신, 「받기」를 누른 <b>뒤</b>가 연출입니다: 열린 콘텐츠 아이콘이 아래 메뉴의 제자리로 날아가 <b>자물쇠가 튕겨 나가고 흑백 → 색</b>으로 바뀌며 「NEW」. 열 것이 없으면 채색석이 지갑으로 날아가고 왼쪽 위 항해사 판이 금빛으로 한 번 빛납니다. 「어디로 가면 되는지」까지 알려 주는 안(8초 반복).</p>
+  <div class="vp"><div class="scr C3" data-lv="c1" style="--bt:300px;--bh:272px;--ry:310px;--p1:#c17f12;--p2:#8a4a06;--glowc:rgba(255,214,110,.5)">
+    <div class="bgc"></div><div class="covernav"></div>
+    <div class="navx"><div class="nv h"><img src="img/assets_ui_kit_nav_heroes.png" alt=""><span>아이들</span></div><div class="nv f"><img src="img/assets_ui_kit_nav_formation.png" alt=""><span>편성</span><i class="nw">NEW</i></div><div class="nv s"><img src="img/assets_ui_kit_nav_summon.png" alt=""><span>소환</span><i class="nw">NEW</i></div><div class="nv a"><img src="img/assets_ui_kit_nav_adventure.png" alt=""><span>모험</span><i class="nw">NEW</i></div><div class="nv sc"><img src="img/assets_ui_kit_nav_school.png" alt=""><span>분교</span></div><div class="nv sh"><img src="img/assets_ui_kit_nav_shop.png" alt=""><span>상점</span></div></div>
+    <i class="hring xl up two"></i><span class="lvchip xl up two"><span class="xl up">레벨 업! · 공격 +11%</span><span class="xl two">2레벨 업! · 공격 +12%</span></span>
+    <div class="pop">
+      <div class="scrim"></div><div class="rays"></div><div class="motes"></div><div class="bglow"></div><div class="band"><i></i></div>
+      <div class="ttl"><div class="big">LEVEL UP</div><div class="pl"><span class="xl up">항해사 Lv.12</span><span class="xl c1">항해사 Lv.7 · 새 콘텐츠!</span><span class="xl c2">항해사 Lv.2 · 새 콘텐츠 2개!</span><span class="xl two">항해사 Lv.13 · 2레벨 업!</span></div><div class="sub"><span class="xl up">모든 아이 공격 +11%</span><span class="xl c1">모든 아이 공격 +6% · 받으면 아래 메뉴에 생겨요</span><span class="xl c2">모든 아이 공격 +1% · 받으면 아래 메뉴에 생겨요</span><span class="xl two">모든 아이 공격 +12%</span></div></div>
+      <div class="row n3">
+        <div class="sl k-gem" style="--i:0"><div class="fc"><span class="cnt xl two">×2</span><span class="tg">재화</span><img class="ic" src="img/assets_ui_icon_gem.png" alt="채색석"><b class="xl up c1 c2">30</b><b class="xl two">60</b><small>채색석</small></div></div>
+        <div class="sl k-open xl c1" style="--i:1"><div class="fc"><span class="tg">새 콘텐츠</span><img class="ic" src="img/assets_ui_kit_nav_adventure.png" alt="모험"><b>모험</b><small>열림!</small></div></div>
+        <div class="sl k-open xl c2" style="--i:1"><div class="fc"><span class="tg">새 콘텐츠</span><img class="ic" src="img/assets_ui_kit_nav_summon.png" alt="소환"><b>소환</b><small>열림!</small></div></div>
+        <div class="sl k-open xl c2" style="--i:2"><div class="fc"><span class="tg">새 콘텐츠</span><img class="ic" src="img/assets_ui_kit_nav_formation.png" alt="편성"><b>편성</b><small>열림!</small></div></div>
+      </div>
+      <div class="take"><span>받기</span></div>
+    </div>
+    <span class="fly xl c1" style="--x0:calc(50% + 71px);--y0:360px;--x1:243px;--y1:636px"><img src="img/assets_ui_kit_nav_adventure.png" alt=""></span>
+    <span class="fly xl c2" style="--x0:calc(50% - 30px);--y0:360px;--x1:169px;--y1:636px"><img src="img/assets_ui_kit_nav_summon.png" alt=""></span>
+    <span class="fly xl c2" style="--x0:calc(50% + 172px);--y0:350px;--x1:96px;--y1:636px"><img src="img/assets_ui_kit_nav_formation.png" alt=""></span>
+    <span class="fly xl up two" style="--x0:calc(50% - 30px);--y0:370px;--x1:calc(100% - 220px);--y1:4px"><img src="img/assets_ui_icon_gem.png" alt=""></span>
+    <i class="tap"></i>
+  </div></div>
+</section>
+
+<!-- ================= 5 ================= -->
+<h3>5. 완료 알림 (D2-4)</h3>
+<p class="ctx">추천 편성 · 새 덱 탭 · 되돌림 · 신화 1명 제한 · 이야기 열림처럼 <b>해낸 일 / 막힌 일</b>을 짧게 알리는 띠. 잠금 안내(rewards 시안 #11)처럼 <b>누른 자리 가까이</b> 뜨고 크기(제목 18 · 설명 13)도 맞춥니다. 전투 중에는 지금처럼 위 HUD 바로 아래 가운데. 해낸 일 = 금빛 · 보라, 막힌 일 = 회색. 문구는 코드 그대로(신화 제한만 짧게 줄임).</p>
+<div class="states" data-group="toast"><span>알림</span><button type="button" data-k="kind" data-v="ok1">해낸 일 한 줄 (새 덱 탭)</button><button type="button" data-k="kind" data-v="ok2" aria-pressed="true">해낸 일 + 이유 (추천 편성)</button><button type="button" data-k="kind" data-v="lim">막힌 일 (신화 1명)</button><button type="button" data-k="kind" data-v="bat">전투 위 (이야기 열림)</button></div>
+
+<section class="opt" data-choice="toast_a" data-choice-group="toast" data-choice-label="A · 메모지">
+  <h2>A · 붙였다 떼는 메모지 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">누른 자리 옆에 <b>마스킹 테이프로 붙인 메모</b>가 탁 붙고, 잠시 뒤 귀퉁이부터 떼어져 날아갑니다. 해낸 일은 노란 메모 + 금별 스티커, 막힌 일은 회색 메모 + ✕. 아틀리에 벽에 붙은 메모 느낌으로, 짙은 알약과 확실히 다릅니다.</p>
+  <div class="vp"><div class="scr T" data-kind="ok2">
+    <div class="bgm xk ok1 ok2 lim"></div><div class="bgc xk bat"></div><div class="wash"></div>
+    <div class="tt ma"><div class="tc"><i class="tape"></i><i class="ic xk ok1 ok2 bat"></i><i class="icx xk lim"></i><div><b><span class="xk ok1">새 덱 탭 · 등급전 덱</span><span class="xk ok2">추천 편성 · 항해 덱</span><span class="xk lim">신화 아이는 덱마다 1명만</span><span class="xk bat">미오의 이야기가 열렸어요</span></b><small class="xk ok2 lim bat"><span class="xk ok2">광역 딜러 1 · 보스 딜러 1 · 수호/지원 2</span><span class="xk lim">기존 신화 아이와 바꿔 주세요</span><span class="xk bat">「이야기」를 누르면 볼 수 있어요</span></small></div></div></div>
+    <i class="tap"></i>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="toast_b" data-choice-group="toast" data-choice-label="B · 붓 한 획">
+  <h2>B · 붓 한 획 띠 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">붓이 <b>물감 한 획</b>을 왼쪽에서 오른쪽으로 쓱 긋고 그 위에 글이 떠오른 뒤, 물감이 마르듯 흐려지며 사라집니다. 해낸 일은 보라 → 호박색 물감 + 끝에 튄 방울, 막힌 일은 먹빛 회색 한 획. 「색을 칠하는 게임」 정체성에 가장 가까운 안.</p>
+  <div class="vp"><div class="scr T" data-kind="ok2">
+    <div class="bgm xk ok1 ok2 lim"></div><div class="bgc xk bat"></div><div class="wash"></div>
+    <div class="tt mb"><div class="tc"><i class="pt"></i><i class="ic2"><span class="xk ok1 ok2 bat">✦</span><span class="xk lim">!</span></i><div><b><span class="xk ok1">새 덱 탭 · 등급전 덱</span><span class="xk ok2">추천 편성 · 항해 덱</span><span class="xk lim">신화 아이는 덱마다 1명만</span><span class="xk bat">미오의 이야기가 열렸어요</span></b><small class="xk ok2 lim bat"><span class="xk ok2">광역 딜러 1 · 보스 딜러 1 · 수호/지원 2</span><span class="xk lim">기존 신화 아이와 바꿔 주세요</span><span class="xk bat">「이야기」를 누르면 볼 수 있어요</span></small></div><i class="drop"></i><i class="drop"></i></div></div>
+    <i class="tap"></i>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="toast_c" data-choice-group="toast" data-choice-label="C · 유나 얼굴 + 한 줄">
+  <h2>C · 유나가 한 줄로 알려 줌 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">둥근 테 안의 <b>유나 얼굴</b>이 톡 튀어나오고 옆으로 말풍선이 펼쳐집니다. 해낸 일은 흰 풍선 + 반짝이, 막힌 일은 회색 풍선 + 땀방울. 안내 캐릭터가 말해 주는 느낌이라 가이드 · 퀘스트 말풍선과 한 식구가 됩니다(얼굴은 게임의 유나 SD를 잘라 씀).</p>
+  <div class="vp"><div class="scr T" data-kind="ok2">
+    <div class="bgm xk ok1 ok2 lim"></div><div class="bgc xk bat"></div><div class="wash"></div>
+    <div class="tt mc"><div class="tc"><i class="fa"><i class="sp xk ok1 ok2 bat" style="left:-10px;top:-6px"></i><i class="sp xk ok1 ok2 bat" style="right:-8px;top:-12px;animation-delay:.1s"></i><i class="sp xk ok1 ok2 bat" style="left:-4px;bottom:-8px;animation-delay:.2s"></i><i class="sw xk lim"></i></i><div class="bb"><b><span class="xk ok1">새 덱 탭 · 등급전 덱</span><span class="xk ok2">추천 편성 · 항해 덱</span><span class="xk lim">신화 아이는 덱마다 1명만</span><span class="xk bat">미오의 이야기가 열렸어요</span></b><small class="xk ok2 lim bat"><span class="xk ok2">광역 딜러 1 · 보스 딜러 1 · 수호/지원 2</span><span class="xk lim">기존 신화 아이와 바꿔 주세요</span><span class="xk bat">「이야기」를 누르면 볼 수 있어요</span></small></div></div></div>
+    <i class="tap"></i>
+  </div></div>
+</section>
+</main>
+<script>
+const fit=()=>document.querySelectorAll('.vp').forEach(v=>{const s=v.querySelector('.scr');const k=v.clientWidth/s.offsetWidth;s.style.transform=`scale(${k})`;v.style.height=s.offsetHeight*k+'px'});
+addEventListener('resize',fit);
+document.querySelectorAll('.bar [data-res]').forEach(b=>b.addEventListener('click',()=>{document.documentElement.style.setProperty('--w',b.dataset.res);document.documentElement.dataset.w=b.dataset.res;document.querySelectorAll('.bar [data-res]').forEach(x=>x.setAttribute('aria-pressed',x===b));fit()}));
+const play=s=>{s.classList.remove('go');void s.offsetWidth;s.classList.add('go')};
+document.querySelectorAll('[data-replay]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();b.closest('.opt').querySelectorAll('.scr').forEach(play)}));
+document.querySelector('[data-replay-all]').addEventListener('click',()=>document.querySelectorAll('.scr').forEach(play));
+// 상태 단추: 그 묶음의 모든 화면에 data-<k>=<v>
+function setState(group,k,v){document.querySelectorAll(`.opt[data-choice-group="${group}"] .scr`).forEach(s=>{s.dataset[k]=v;play(s)})}
+document.querySelectorAll('.states').forEach(bar=>bar.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{bar.querySelectorAll(`button[data-k="${b.dataset.k}"]`).forEach(x=>x.setAttribute('aria-pressed',x===b));setState(bar.dataset.group,b.dataset.k,b.dataset.v)})));
+// 시안 고르기 (묶음마다 하나)
+document.querySelectorAll('.opt[data-choice-group]').forEach(o=>o.addEventListener('click',()=>document.querySelectorAll(`.opt[data-choice-group="${o.dataset.choiceGroup}"]`).forEach(x=>x.classList.toggle('sel',x===o))));
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){play(en.target.querySelector('.scr'));io.unobserve(en.target)}}),{threshold:.35});
+document.querySelectorAll('.vp').forEach(v=>io.observe(v));
+fit();
+</script>
+</body>
+</html>

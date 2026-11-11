@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>구름고래 분교 · 스킬 이펙트 피드백</title>
+<style>
+:root{--navy:#28305a;--lav:#6551c4;--line:#e4def5;--bg:#f6f3ff;--cream:#fffaf0;
+--SS:#b92a70;--S:#8f5a00;--A:#5a37c8;--B:#14679c;--ok:#1f7a52;--fix:#b23d1c}
+*{box-sizing:border-box}body{margin:0;font-family:"Pretendard","Malgun Gothic",sans-serif;background:var(--bg);color:var(--navy);line-height:1.5}
+header{position:sticky;top:0;z-index:5;background:rgba(246,243,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:12px 16px}
+h1{font-size:20px;margin:0 0 2px}.sub{font-size:13px;color:#4f5683;margin:0 0 8px}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.grp{display:flex;flex-wrap:wrap;gap:5px;align-items:center}.grp b{font-size:12px;margin-right:2px}
+.grp button,.tools button{font:inherit;font-size:13px;min-height:32px;padding:3px 11px;border:1px solid #c9bff2;background:#fff;color:var(--navy);border-radius:16px;cursor:pointer}
+.grp button.on{background:var(--lav);color:#fff;border-color:var(--lav)}
+input[type=search]{font:inherit;font-size:13px;min-height:32px;padding:4px 10px;border:1px solid #c9bff2;border-radius:16px;width:150px}
+.stat{font-size:13px;margin-left:auto}
+main{max-width:1400px;margin:0 auto;padding:14px 16px 90px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(560px,1fr));gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px;border-left:5px solid #ccc}
+.card.ok{border-left-color:var(--ok)}.card.fix{border-left-color:var(--fix)}
+.hd{display:flex;align-items:center;gap:8px;margin-bottom:8px}.hd h2{font-size:17px;margin:0}
+.tier{display:inline-block;min-width:30px;text-align:center;font-size:12px;font-weight:700;color:#fff;border-radius:9px;padding:1px 7px}
+.t-신화{background:linear-gradient(90deg,#c0306a,#b5651d,#3d8a3d,#2b6fb0,#6a3fc0)}
+.meta{font-size:12px;color:#5b6290}
+.clips{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.clip{display:flex;flex-direction:column;gap:4px}
+.clip video{width:100%;aspect-ratio:16/9;background:#222;border-radius:5px;cursor:pointer;display:block}
+.ct{font-size:13px;font-weight:700}.cd{font-size:12px;color:#4f5683;min-height:34px}
+.fb{display:flex;gap:5px;flex-wrap:wrap}
+.fb button{font:inherit;font-size:12px;min-height:30px;padding:2px 10px;border:1px solid #cfc6f3;background:#fff;border-radius:15px;cursor:pointer;color:var(--navy)}
+.fb button.sel-ok,.fb button[data-choice-selected][data-v="ok"]{background:var(--ok);color:#fff;border-color:var(--ok)}
+.fb button.sel-fix,.fb button[data-choice-selected][data-v="fix"]{background:var(--fix);color:#fff;border-color:var(--fix)}
+.fb button.done{margin-left:auto;border-color:#9fd0b8;color:var(--ok)}
+.clip textarea{width:100%;min-height:44px;font:inherit;font-size:12px;padding:6px;border:1px solid #d9d2f5;border-radius:4px;resize:vertical}
+.bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:9px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;z-index:6}
+.bar button{font:inherit;font-weight:700;min-height:38px;padding:6px 14px;border:0;background:var(--lav);color:#fff;border-radius:4px;cursor:pointer}
+.bar .msg{font-size:13px}
+#out{display:none;width:100%;min-height:100px;font:inherit;font-size:12px}
+dialog{border:0;border-radius:8px;padding:0;max-width:96vw;background:#111}
+dialog video{width:min(1280px,94vw);display:block}
+dialog p{color:#fff;margin:8px 12px;font-size:14px}
+@media (max-width:620px){.grid{grid-template-columns:1fr}.clips{grid-template-columns:1fr}}
+</style></head><body>
+<header>
+<h1>스킬 · 궁극기 이펙트 피드백</h1>
+<p class="sub">실제 게임 연출을 그대로 녹화했어요(스킬 미리보기 무대, 피해 없음, 각성 0단계). 영상을 누르면 크게, 다시 누르면 재생/멈춤. 칸마다 「좋음 / 수정 필요」와 메모를 남겨 주세요.</p>
+<div class="ctrl">
+<div class="grp" id="g-tier"><b>등급</b></div>
+<div class="grp" id="g-role"><b>역할</b></div>
+<div class="grp" id="g-fb"><b>피드백</b></div>
+<input type="search" id="q" placeholder="이름 찾기" aria-label="이름 찾기">
+<span class="stat" id="stat"></span>
+</div>
+</header>
+<main><div class="grid" id="grid"></div></main>
+<div class="bar"><button type="button" id="copy">피드백 모아서 복사</button><span class="msg" id="msg">선택·메모는 자동 저장돼요. 다 쓰면 눌러서 채팅에 붙여넣어 주세요.</span><textarea id="out" readonly aria-label="모은 피드백"></textarea></div>
+<dialog id="dlg"><video id="big" controls loop muted playsinline></video><p id="bigt"></p></dialog>
+<script src="data.js"></script>
+<script src="versions.js"></script>
+<script>
+// 영상 파일 이름이 같아도 다시 녹화하면 새로 받도록 수정 시각을 붙인다 (tools/publish_preview.mjs가 versions.js 생성)
+const VER = window.CLIP_VER || {}, vq = p => VER[p] ? `${p}?v=${VER[p]}` : p;
+const S = (window.SKILLS || []).map(c => ({...c, clip: vq(c.clip), poster: vq(c.poster)}));
+const TIERS = ["신화","SS","S","A","B"], ROLES = ["광역 딜러","단일 딜러","수호","회복·지원"];
+const EL = {purple:"보라",white:"하양",green:"초록",red:"빨강",blue:"파랑",orange:"주황",rainbow:"무지개"};
+const KEY = "skywhale-skillfx-v1";
+const fb = JSON.parse(localStorage.getItem(KEY) || "{}");
+const save = () => localStorage.setItem(KEY, JSON.stringify(fb));
+const heroes = [];
+for (const s of S) { let h = heroes.find(x => x.id === s.id); if (!h) heroes.push(h = {id:s.id,name:s.name,tier:s.tier,role:s.role,element:s.element,clips:[]}); h.clips.push(s); }
+heroes.sort((a,b)=>TIERS.indexOf(a.tier)-TIERS.indexOf(b.tier)||ROLES.indexOf(a.role)-ROLES.indexOf(b.role));
+const st = {tier:new Set(TIERS), role:new Set(ROLES), fb:"all", q:""};
+function chips(id, items, on, click){const g=document.getElementById(id);for(const [v,l] of items){const b=document.createElement("button");b.type="button";b.textContent=l;b.dataset.v=v;b.addEventListener("click",()=>{click(v);sync();render();});g.appendChild(b);}g._on=on;}
+function sync(){for(const id of ["g-tier","g-role","g-fb"]){const g=document.getElementById(id);g.querySelectorAll("button").forEach(b=>b.classList.toggle("on",g._on(b.dataset.v)));}}
+const toggle=(set,v)=>{set.has(v)&&set.size>1?set.delete(v):set.add(v)};
+chips("g-tier",TIERS.map(t=>[t,t]),v=>st.tier.has(v),v=>toggle(st.tier,v));
+chips("g-role",ROLES.map(r=>[r,r]),v=>st.role.has(v),v=>toggle(st.role,v));
+chips("g-fb",[["all","전체"],["none","아직"],["fix","수정 필요"],["ok","좋음"]],v=>st.fb===v,v=>st.fb=v);
+document.getElementById("q").addEventListener("input",e=>{st.q=e.target.value.trim();render();});
+const io = new IntersectionObserver(es=>{for(const e of es){const v=e.target;if(e.isIntersecting){if(!v.src)v.src=v.dataset.src;v.play().catch(()=>{});}else v.pause();}},{rootMargin:"100px"});
+function heroState(h){const ks=h.clips.map(c=>fb[c.id+"_"+c.kind]?.v);return ks.includes("fix")?"fix":ks.every(k=>k==="ok")?"ok":ks.some(Boolean)?"part":"none";}
+function render(){
+  const grid=document.getElementById("grid");io.disconnect();grid.innerHTML="";
+  let shown=0;
+  for(const h of heroes){
+    const hs=heroState(h);
+    if(!st.tier.has(h.tier)||!st.role.has(h.role)||(st.q&&!h.name.includes(st.q)))continue;
+    if(st.fb!=="all"&&!(st.fb==="none"?hs==="none"||hs==="part":hs===st.fb))continue;
+    shown++;
+    const card=document.createElement("section");card.className="card "+(hs==="fix"?"fix":hs==="ok"?"ok":"");
+    card.innerHTML=`<div class="hd"><span class="tier ${h.tier==="신화"?"t-신화":""}" style="${h.tier!=="신화"?`background:var(--${h.tier})`:""}">${h.tier}</span><h2>${h.name}</h2><span class="meta">${h.role} · ${EL[h.element]||h.element}</span></div><div class="clips"></div>`;
+    const wrap=card.querySelector(".clips");
+    for(const c of h.clips){
+      const k=c.id+"_"+c.kind, f=fb[k]||{};
+      const el=document.createElement("div");el.className="clip";
+      el.innerHTML=`<video muted loop playsinline preload="none" poster="${c.poster}" data-src="${c.clip}" aria-label="${h.name} ${c.kind==="ult"?"궁극기":"스킬"} 영상"></video>
+        <div class="ct">${c.kind==="ult"?"궁극기":"스킬"} · ${c.title}</div><div class="cd">${c.desc}</div>
+        <div class="fb"><button type="button" data-v="ok" data-choice="${k}:ok" data-choice-group="${k}" data-choice-label="${h.name} ${c.kind==="ult"?"궁극기":"스킬"} 좋음" class="${f.v==="ok"?"sel-ok":""}">좋음</button><button type="button" data-v="fix" data-choice="${k}:fix" data-choice-group="${k}" data-choice-label="${h.name} ${c.kind==="ult"?"궁극기":"스킬"} 수정 필요" class="${f.v==="fix"?"sel-fix":""}">수정 필요</button>${f.v||f.t?.trim()?`<button type="button" class="done" data-done aria-label="${h.name} ${c.kind==="ult"?"궁극기":"스킬"} 확인 완료 — 피드백 지우기">확인 완료</button>`:""}</div>
+        <textarea placeholder="무엇을 어떻게 바꾸면 좋을지 (선택)" aria-label="${h.name} ${c.kind==="ult"?"궁극기":"스킬"} 메모">${f.t||""}</textarea>`;
+      const v=el.querySelector("video");io.observe(v);
+      v.addEventListener("click",()=>{const d=document.getElementById("dlg"),b=document.getElementById("big");b.src=c.clip;document.getElementById("bigt").textContent=`${h.name} · ${c.kind==="ult"?"궁극기":"스킬"} · ${c.title}`;d.showModal();b.play().catch(()=>{});});
+      el.querySelector("[data-done]")?.addEventListener("click",()=>{delete fb[k];save();render();});
+      el.querySelectorAll(".fb button[data-v]").forEach(b=>b.addEventListener("click",()=>{fb[k]={...(fb[k]||{}),v:b.dataset.v};save();el.querySelectorAll(".fb button[data-v]").forEach(x=>x.className="");b.className=b.dataset.v==="ok"?"sel-ok":"sel-fix";card.className="card "+({fix:"fix",ok:"ok"}[heroState(h)]||"");stat();if(!el.querySelector("[data-done]"))render();}));
+      el.querySelector("textarea").addEventListener("input",e=>{fb[k]={...(fb[k]||{}),t:e.target.value};save();});
+      el.querySelector("textarea").addEventListener("change",()=>{if(!el.querySelector("[data-done]")!==!(fb[k]?.v||fb[k]?.t?.trim()))render();});
+      wrap.appendChild(el);
+    }
+    grid.appendChild(card);
+  }
+  stat(shown);
+}
+function stat(shown){const all=S.length,done=S.filter(c=>fb[c.id+"_"+c.kind]?.v).length,fix=S.filter(c=>fb[c.id+"_"+c.kind]?.v==="fix").length;document.getElementById("stat").textContent=`${heroes.length}명 · 영상 ${all}개 · 확인 ${done}/${all} · 수정 필요 ${fix}`+(shown!==undefined?` · 표시 ${shown}명`:"");}
+document.getElementById("dlg").addEventListener("click",e=>{if(e.target.id==="dlg"){e.target.close();document.getElementById("big").pause();}});
+document.getElementById("copy").addEventListener("click",async()=>{
+  const lines=[];for(const h of heroes)for(const c of h.clips){const f=fb[c.id+"_"+c.kind];if(f&&(f.v||f.t?.trim()))lines.push(`${h.name} ${c.kind==="ult"?"궁극기":"스킬"}: ${f.v==="ok"?"좋음":f.v==="fix"?"수정 필요":"-"}${f.t?.trim()?" / "+f.t.trim():""}`);}
+  const text=lines.join("\n")||"(아직 피드백 없음)",out=document.getElementById("out"),msg=document.getElementById("msg");out.value=text;out.style.display="block";
+  try{await navigator.clipboard.writeText(text);msg.textContent="복사했어요. 채팅에 붙여넣어 주세요.";}catch(e){out.select();msg.textContent="아래 글을 선택해 복사(Ctrl+C)해 주세요.";}
+});
+sync();render();
+</script></body></html>

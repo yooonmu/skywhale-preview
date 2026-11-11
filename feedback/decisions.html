@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 · 지금 정할 것</title>
+<style>
+:root{--lav:#7a68c8;--lav2:#efeafd;--navy:#2e2350;--gold:#c99a2e;--cream:#fffaf0;--ink:#3a3352;--mute:#6b6488}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:linear-gradient(180deg,#f6f2ff,#fffaf0 40%);color:var(--ink);line-height:1.5}
+main{max-width:1080px;margin:0 auto;padding:28px 20px 160px}
+h1{margin:0 0 6px;font-size:26px;color:var(--navy)}
+.lead{margin:0 0 22px;color:var(--mute)}
+section.q{background:#fff;border-radius:16px;box-shadow:0 0 0 1.5px #e3dbf7,0 6px 18px rgba(60,40,120,.06);padding:18px 18px 16px;margin:0 0 18px}
+section.q>h2{margin:0 0 4px;font-size:19px;color:var(--navy)}
+section.q>p{margin:0 0 12px;color:var(--mute);font-size:14px}
+section.q>p a{color:var(--lav);font-weight:700}
+.sub{margin:14px 0 8px;font-size:15px;font-weight:800;color:var(--navy)}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.opt{position:relative;border:0;text-align:left;font:inherit;color:inherit;background:var(--cream);border-radius:12px;padding:12px 14px;min-height:64px;cursor:pointer;box-shadow:0 0 0 1.5px #e8dfc6}
+.opt:hover{box-shadow:0 0 0 2px var(--lav)}
+.opt b{display:block;font-size:15px;color:var(--navy)}
+.opt small{display:block;margin-top:3px;font-size:13px;color:var(--mute)}
+.opt img{display:block;width:100%;height:96px;object-fit:contain;margin:0 0 8px;background:linear-gradient(160deg,#3b2f6b,#6a5bb0);border-radius:8px;padding:6px}
+.opt .rec{position:absolute;right:10px;top:10px;font-size:11px;font-weight:900;color:#6b4a12;background:#ffe9a8;border-radius:8px;padding:1px 7px}
+.opt[data-choice-selected],.opt.sel{background:var(--lav2);box-shadow:0 0 0 3px var(--lav),0 4px 12px rgba(122,104,200,.25)}
+.opt[data-choice-selected]::after,.opt.sel::after{content:"✓ 선택";position:absolute;right:10px;bottom:8px;font-size:12px;font-weight:900;color:var(--lav)}
+#sum{position:fixed;left:0;right:0;bottom:0;background:var(--navy);color:#fff;padding:12px 20px;box-shadow:0 -6px 18px rgba(0,0,0,.2)}
+#sum .in{max-width:1080px;margin:0 auto;display:flex;gap:12px;align-items:center}
+#sumtxt{flex:1;font-size:13px;max-height:66px;overflow:auto;white-space:pre-wrap}
+#copy,#rec{border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:800;cursor:pointer}
+#copy{background:#ffe08a;color:#3a2a00}
+#rec{background:#fff;color:var(--navy)}
+#count{font-weight:900;color:#ffe08a;white-space:nowrap}
+@media (max-width:600px){#sum{padding:8px 12px}#sum .in{flex-wrap:wrap;gap:8px}#sumtxt{flex-basis:100%;order:3;max-height:36px;font-size:12px}#copy,#rec{padding:8px 10px;font-size:13px}main{padding-bottom:200px}}
+</style>
+</head>
+<body>
+<main>
+<h1>지금 정할 것 — 눌러서 고르기</h1>
+<p class="lead">칸을 누르면 그 줄에서 하나가 골라집니다. 다 고르면 아래 「결과 복사」를 눌러 채팅에 붙여 주세요(옆 패널에서 보고 계시면 고른 것이 자동으로 전달됩니다). 「추천대로 채우기」는 추천 표시가 있는 칸만 채웁니다. 시안은 각 줄의 「시안 보기」에서 크게 볼 수 있어요.</p>
+
+<section class="q">
+<h2>1. 미리보기 저장소 용량 (지금 1.17GB)</h2>
+<p>GitHub는 저장소를 1GB 아래로 권장하고, 공개 페이지도 1GB 제한이 있어 반영이 늦어지거나 실패할 수 있어요.</p>
+<div class="opts" data-group="저장소">
+<button class="opt" data-choice="repo_clean" data-choice-group="저장소" data-choice-label="① 기록 정리" data-rec><span class="rec">추천</span><b>① 기록 정리</b><small>주소 그대로 · 지금 페이지만 남기고 예전 버전 기록을 원격에서 지움 · 용량 절반쯤</small></button>
+<button class="opt" data-choice="repo_new" data-choice-group="저장소" data-choice-label="② 새 저장소"><b>② 새 저장소</b><small>기존 저장소는 그대로 · 미리보기 주소가 바뀜</small></button>
+</div>
+</section>
+
+<section class="q">
+<h2>2. 레벨 업 보상 오른쪽 위 그림</h2>
+<p><a href="https://yooonmu.github.io/skywhale-preview/mockups/rewards_b/" target="_blank" rel="noopener">시안 보기 (맨 위 0번)</a></p>
+<div class="opts">
+<button class="opt" data-choice="lv_a" data-choice-group="레벨 업 그림" data-choice-label="A 날개 메달" data-rec><span class="rec">추천</span><b>A · 날개 메달</b><small>칠보 메달이 돌며 떨어지고 날개가 펼쳐짐 · 숫자가 바뀌는 순간 금빛 고리</small></button>
+<button class="opt" data-choice="lv_b" data-choice-group="레벨 업 그림" data-choice-label="B 타륜 계급장"><b>B · 타륜 계급장</b><small>금 타륜이 돌다 멈추고 방패에 금줄 하나 더</small></button>
+<button class="opt" data-choice="lv_c" data-choice-group="레벨 업 그림" data-choice-label="C 월계 숫자"><b>C · 월계 숫자</b><small>월계 가지 + 큰 금빛 숫자 · 가장 가벼움</small></button>
+</div>
+</section>
+
+<section class="q">
+<h2>3. 귀환 보상 오른쪽 위 그림</h2>
+<p><a href="https://yooonmu.github.io/skywhale-preview/mockups/rewards_b/" target="_blank" rel="noopener">시안 보기 (맨 위 0번)</a></p>
+<div class="opts">
+<button class="opt" data-choice="ret_a" data-choice-group="귀환 그림" data-choice-label="A 새벽 구름바다"><b>A · 새벽 구름바다</b><small>해 뜨는 구름바다로 고래가 돌아오고 돛이 부풂</small></button>
+<button class="opt" data-choice="ret_b" data-choice-group="귀환 그림" data-choice-label="B 바람을 안은 돛" data-rec><span class="rec">추천</span><b>B · 바람을 안은 돛</b><small>해를 등진 큰 돛 + 바람 결 · 「무사 귀항 · 어서 와요」 리본</small></button>
+<button class="opt" data-choice="ret_c" data-choice-group="귀환 그림" data-choice-label="C 리본 항적"><b>C · 리본 항적</b><small>고래 꼬리에 천 리본 두 줄과 빛가루 항적</small></button>
+</div>
+</section>
+
+<section class="q">
+<h2>4. 타이틀 로고 마크 (글씨는 B1 물감 붓글씨로 확정)</h2>
+<p><a href="https://yooonmu.github.io/skywhale-preview/mockups/title_font/" target="_blank" rel="noopener">시안 보기 (타이틀 위 · 아이콘 48px · 배너)</a></p>
+<div class="opts">
+<button class="opt" data-choice="mark_none" data-choice-group="로고 마크" data-choice-label="C0 마크 없음"><img src="img/marks/logo_brush.svg" alt="B1 글씨만"><b>C0 · 마크 없음</b><small>글씨만 · 아이콘 같은 작은 자리에 쓸 그림이 없음</small></button>
+<button class="opt" data-choice="mark_crest" data-choice-group="로고 마크" data-choice-label="C1 고래 문장" data-rec><span class="rec">추천</span><img src="img/marks/lockup_mark_crest_b1.svg" alt="C1 고래 문장 + B1"><b>C1 · 고래 문장</b><small>보라 방패 속 고래가 무지개를 뚫고 헤엄 · 48px에서도 또렷</small></button>
+<button class="opt" data-choice="mark_palette" data-choice-group="로고 마크" data-choice-label="C2 팔레트 고래"><img src="img/marks/lockup_mark_palette_b1.svg" alt="C2 팔레트 고래 + B1"><b>C2 · 팔레트 고래</b><small>팔레트 위 한 붓 무지개가 고래가 됨 · 가장 귀여움</small></button>
+<button class="opt" data-choice="mark_seal" data-choice-group="로고 마크" data-choice-label="C3 레아 인장"><img src="img/marks/lockup_mark_seal_b1.svg" alt="C3 레아 인장 + B1"><b>C3 · 레아 인장</b><small>둥근 도장 안 붓글씨 「레아」</small></button>
+<button class="opt" data-choice="mark_brush" data-choice-group="로고 마크" data-choice-label="C4 붓과 리본"><img src="img/marks/lockup_mark_brush_b1.svg" alt="C4 붓과 리본 + B1"><b>C4 · 붓과 리본</b><small>붓이 무지개를 긋고 리본이 가로지름</small></button>
+</div>
+</section>
+
+<section class="q">
+<h2>5. 전투 2묶음</h2>
+<p><a href="https://yooonmu.github.io/skywhale-preview/mockups/battle_b2/" target="_blank" rel="noopener">시안 보기</a> · 요소마다 하나씩 골라 주세요. 모두 확정한 전투 상단 B · 1묶음과 같은 재료입니다.</p>
+<div class="sub">① 재화 줄 + 메뉴</div><div class="opts">
+<button class="opt" data-choice="b2_cur_A" data-choice-group="전투2 재화 줄" data-choice-label="A"><b>A</b><small>크림 지갑 판 + 남색 메뉴 끝칸</small></button>
+<button class="opt" data-choice="b2_cur_B" data-choice-group="전투2 재화 줄" data-choice-label="B"><b>B</b><small>남색 유리 지갑 + 메뉴 구슬</small></button>
+<button class="opt" data-choice="b2_cur_C" data-choice-group="전투2 재화 줄" data-choice-label="C"><b>C</b><small>재화마다 꼬리표 + 메뉴 구슬</small></button></div>
+<div class="sub">② 왼쪽 버튼</div><div class="opts">
+<button class="opt" data-choice="b2_side_A" data-choice-group="전투2 왼쪽 버튼" data-choice-label="A"><b>A</b><small>금테 구슬 + 이름표</small></button>
+<button class="opt" data-choice="b2_side_B" data-choice-group="전투2 왼쪽 버튼" data-choice-label="B"><b>B</b><small>화면 끝 책갈피 탭</small></button>
+<button class="opt" data-choice="b2_side_C" data-choice-group="전투2 왼쪽 버튼" data-choice-label="C"><b>C</b><small>퀘스트 판 아래 가로 칩</small></button></div>
+<div class="sub">③ 콤보</div><div class="opts">
+<button class="opt" data-choice="b2_combo_A" data-choice-group="전투2 콤보" data-choice-label="A"><b>A</b><small>숫자 + 폭주까지 기운 막대</small></button>
+<button class="opt" data-choice="b2_combo_B" data-choice-group="전투2 콤보" data-choice-label="B"><b>B</b><small>남색 유리 꼬리판 + 칸 막대</small></button>
+<button class="opt" data-choice="b2_combo_C" data-choice-group="전투2 콤보" data-choice-label="C"><b>C</b><small>작은 꼬리표 → 달아오르면 금 꼬리표</small></button></div>
+<div class="sub">④ 피해 숫자 (세 안 모두 보스 근처 숫자 겹침은 해결)</div><div class="opts">
+<button class="opt" data-choice="b2_dmg_A" data-choice-group="전투2 피해 숫자" data-choice-label="A"><b>A</b><small>단계마다 모양 + 보스 숫자 천장</small></button>
+<button class="opt" data-choice="b2_dmg_B" data-choice-group="전투2 피해 숫자" data-choice-label="B"><b>B</b><small>때린 아이 속성 색 테 + 보스 누적 꼬리표</small></button>
+<button class="opt" data-choice="b2_dmg_C" data-choice-group="전투2 피해 숫자" data-choice-label="C"><b>C</b><small>평타는 작게, 궁극기는 합계 하나 + 보호막 회복 +N</small></button></div>
+<div class="sub">④-2 보호막이 회복될 때 「보호막 회복 +N」 숫자도 띄울까요?</div><div class="opts">
+<button class="opt" data-choice="heal_yes" data-choice-group="보호막 회복 숫자" data-choice-label="띄움"><b>띄움</b><small>고래 보호막 위에 초록빛 +N (고른 피해 숫자 안에 맞춰 넣음)</small></button>
+<button class="opt" data-choice="heal_no" data-choice-group="보호막 회복 숫자" data-choice-label="안 띄움"><b>안 띄움</b><small>보호막 막대가 차오르는 것만 보여 줌</small></button></div>
+<div class="sub">⑤ 적 체력 막대</div><div class="opts">
+<button class="opt" data-choice="b2_hp_A" data-choice-group="전투2 적 막대" data-choice-label="A"><b>A</b><small>기운 미니 막대 + 약점 점</small></button>
+<button class="opt" data-choice="b2_hp_B" data-choice-group="전투2 적 막대" data-choice-label="B"><b>B</b><small>맞을 때만 얇은 선 + 황금 왕관</small></button>
+<button class="opt" data-choice="b2_hp_C" data-choice-group="전투2 적 막대" data-choice-label="C"><b>C</b><small>무리 막대 하나 (보스 판 자리)</small></button></div>
+<div class="sub">⑥ 보스 경고</div><div class="opts">
+<button class="opt" data-choice="b2_intro_A" data-choice-group="전투2 보스 경고" data-choice-label="A"><b>A</b><small>남색 띠가 화면을 가로지름</small></button>
+<button class="opt" data-choice="b2_intro_B" data-choice-group="전투2 보스 경고" data-choice-label="B"><b>B</b><small>남색 두루마리 + 금 축</small></button>
+<button class="opt" data-choice="b2_intro_C" data-choice-group="전투2 보스 경고" data-choice-label="C"><b>C</b><small>보스 판이 먼저 크게 떨어짐</small></button></div>
+<div class="sub">⑦ 알림 띠</div><div class="opts">
+<button class="opt" data-choice="b2_band_A" data-choice-group="전투2 알림 띠" data-choice-label="A"><b>A</b><small>하늘 띠 + 할 일 꼬리표</small></button>
+<button class="opt" data-choice="b2_band_B" data-choice-group="전투2 알림 띠" data-choice-label="B"><b>B</b><small>크림 판 + 색 구슬</small></button>
+<button class="opt" data-choice="b2_band_C" data-choice-group="전투2 알림 띠" data-choice-label="C"><b>C</b><small>위쪽 얇은 남색 알림 줄</small></button></div>
+<div class="sub">⑧ 모험 전투 화면 (#61)</div><div class="opts">
+<button class="opt" data-choice="b2_adv_A" data-choice-group="전투2 모험 전투" data-choice-label="A"><b>A</b><small>아래 줄이 남색 모험 띠로</small></button>
+<button class="opt" data-choice="b2_adv_B" data-choice-group="전투2 모험 전투" data-choice-label="B"><b>B</b><small>같은 자리 + 잠김 꼬리표 + 이유</small></button>
+<button class="opt" data-choice="b2_adv_C" data-choice-group="전투2 모험 전투" data-choice-label="C"><b>C</b><small>안 되는 건 숨기고 집중</small></button></div>
+<div class="sub">⑨ 대결 장면</div><div class="opts">
+<button class="opt" data-choice="b2_duel_A" data-choice-group="전투2 대결" data-choice-label="A"><b>A</b><small>위쪽 마주 선 두 판 + VS 구슬</small></button>
+<button class="opt" data-choice="b2_duel_B" data-choice-group="전투2 대결" data-choice-label="B"><b>B</b><small>아래 줄다리기 띠</small></button>
+<button class="opt" data-choice="b2_duel_C" data-choice-group="전투2 대결" data-choice-label="C"><b>C</b><small>상대 판만 보스 판처럼</small></button></div>
+</section>
+
+<section class="q">
+<h2>6. 아이들 허브 1묶음 (성장 탭 뺀 수정판)</h2>
+<p><a href="https://yooonmu.github.io/skywhale-preview/mockups/batch1_heroes/" target="_blank" rel="noopener">시안 보기</a> · 화면마다 하나씩 골라 주세요.</p>
+<div class="sub">① 메뉴 틀 (모든 허브 공통 골격)</div><div class="opts">
+<button class="opt" data-choice="frame_a" data-choice-group="허브 메뉴 틀" data-choice-label="A"><b>A</b><small>오른쪽 세로 책갈피</small></button>
+<button class="opt" data-choice="frame_b" data-choice-group="허브 메뉴 틀" data-choice-label="B"><b>B</b><small>위 띠 + 허브별 무늬</small></button>
+<button class="opt" data-choice="frame_c" data-choice-group="허브 메뉴 틀" data-choice-label="C"><b>C</b><small>아래 메뉴가 시트로</small></button></div>
+<div class="sub">② 아이들 목록</div><div class="opts">
+<button class="opt" data-choice="list_a" data-choice-group="허브 아이들 목록" data-choice-label="A"><b>A</b><small>폴라로이드 앨범</small></button>
+<button class="opt" data-choice="list_b" data-choice-group="허브 아이들 목록" data-choice-label="B"><b>B</b><small>등급 선반 진열</small></button>
+<button class="opt" data-choice="list_c" data-choice-group="허브 아이들 목록" data-choice-label="C"><b>C</b><small>큰 미리보기 + 목록</small></button></div>
+<div class="sub">③ 아이 상세의 키우기 자리 (레벨 업 · 승급 · 각성)</div><div class="opts">
+<button class="opt" data-choice="grow_a" data-choice-group="허브 키우기 자리" data-choice-label="A"><b>A</b><small>오른쪽 패널 아래 「키우기 줄」</small></button>
+<button class="opt" data-choice="grow_b" data-choice-group="허브 키우기 자리" data-choice-label="B"><b>B</b><small>그림 위에서 바로 (Lv 메달 = 레벨 업, 별 줄 = 승급)</small></button>
+<button class="opt" data-choice="grow_c" data-choice-group="허브 키우기 자리" data-choice-label="C (탭 이름 「키우기」)"><b>C</b><small>패널 안 네 번째 탭 「키우기」</small></button></div>
+<div class="sub">④ 장비 목록</div><div class="opts">
+<button class="opt" data-choice="gear_a" data-choice-group="허브 장비 목록" data-choice-label="A"><b>A</b><small>마네킹 + 서랍</small></button>
+<button class="opt" data-choice="gear_b" data-choice-group="허브 장비 목록" data-choice-label="B"><b>B</b><small>페그보드 벽</small></button>
+<button class="opt" data-choice="gear_c" data-choice-group="허브 장비 목록" data-choice-label="C"><b>C</b><small>가방 격자 + 착용 띠</small></button></div>
+<div class="sub">⑤ 각성 화면</div><div class="opts">
+<button class="opt" data-choice="awaken_a" data-choice-group="허브 각성" data-choice-label="A"><b>A</b><small>별자리</small></button>
+<button class="opt" data-choice="awaken_b" data-choice-group="허브 각성" data-choice-label="B"><b>B</b><small>각성 계단</small></button>
+<button class="opt" data-choice="awaken_c" data-choice-group="허브 각성" data-choice-label="C"><b>C</b><small>카드 뒷면 각인</small></button></div>
+<div class="sub">⑥ 연성 결과</div><div class="opts">
+<button class="opt" data-choice="merge_a" data-choice-group="허브 연성" data-choice-label="A"><b>A</b><small>팔레트 물감 섞기</small></button>
+<button class="opt" data-choice="merge_b" data-choice-group="허브 연성" data-choice-label="B"><b>B</b><small>가마에서 꺼낸 카드</small></button>
+<button class="opt" data-choice="merge_c" data-choice-group="허브 연성" data-choice-label="C"><b>C</b><small>창 없이 리본 알림</small></button></div>
+</section>
+</main>
+<div id="sum"><div class="in"><span id="count"></span><div id="sumtxt"></div><button id="rec" type="button">추천대로 채우기</button><button id="copy" type="button">결과 복사</button></div></div>
+<script>
+const groups=[...new Set([...document.querySelectorAll('[data-choice-group]')].map(e=>e.dataset.choiceGroup))];
+const picks={};
+function pick(el){
+  const g=el.dataset.choiceGroup;
+  document.querySelectorAll('[data-choice-group="'+g+'"]').forEach(o=>{o.classList.remove('sel');});
+  el.classList.add('sel');picks[g]=el.dataset.choiceLabel;render();
+}
+function render(){
+  const n=Object.keys(picks).length;
+  document.getElementById('count').textContent=n+' / '+groups.length;
+  document.getElementById('sumtxt').textContent=groups.map(g=>g+': '+(picks[g]||'—')).join(' · ');
+}
+document.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>pick(o)));
+document.getElementById('rec').addEventListener('click',()=>{document.querySelectorAll('.opt[data-rec]').forEach(o=>{if(!picks[o.dataset.choiceGroup])pick(o);});});
+document.getElementById('copy').addEventListener('click',async()=>{
+  const t='[결정]\n'+groups.map(g=>'- '+g+': '+(picks[g]||'(안 고름)')).join('\n');
+  try{await navigator.clipboard.writeText(t);document.getElementById('copy').textContent='복사됨 ✓';}
+  catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();document.getElementById('copy').textContent='복사됨 ✓';}
+  setTimeout(()=>document.getElementById('copy').textContent='결과 복사',1600);
+});
+render();
+</script>
+</body>
+</html>

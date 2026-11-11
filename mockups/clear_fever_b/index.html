@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 수정 시안 · 정화 / 채색 폭주 / 순풍 가속 B 「하늘 날씨」 (#15 #17 #30)</title>
+<style>
+:root{--navy:#2e2350;--lav:#8b74e8;--gold:#d9a52b;--line:#e2dbf5;--w:1280}
+@property --r{syntax:'<length>';inherits:false;initial-value:0px}
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@property --sw{syntax:'<angle>';inherits:false;initial-value:0deg}
+@property --t{syntax:'<angle>';inherits:false;initial-value:360deg}
+@property --s{syntax:'<integer>';inherits:false;initial-value:59}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;line-height:1.45}
+.page{max-width:1180px;margin:0 auto;padding:20px 16px 64px}
+.page>h1{font-size:22px;margin:0 0 4px}
+.page>h3{font-size:18px;margin:30px 0 8px;padding-top:10px;border-top:2px solid var(--line)}
+.lead{margin:0 0 14px;font-size:14px;color:#5a5180}
+.bar{position:sticky;top:0;z-index:30;display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 16px;padding:8px 0;font-size:13px;background:rgba(243,240,250,.94)}
+.bar button,.rp{font:inherit;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.ref,.opt{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 18px}
+.opt h2,.ref h2{font-size:17px;margin:0 0 2px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.opt h2 .rp{margin-left:auto;font-size:13px;min-height:36px}
+.cap{margin:0 0 10px;font-size:14px;color:#4c4374}
+.cap b{color:#5b3fc0}
+.vp{position:relative;width:100%;overflow:hidden;border-radius:8px;background:#1d1838}
+.scr{position:absolute;left:0;top:0;width:calc(var(--w)*1px);height:720px;transform-origin:0 0;overflow:hidden;font-size:16px}
+.refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.refs figure{margin:0}.refs img{width:100%;display:block;border-radius:8px}.refs figcaption{overflow-wrap:anywhere;font-size:12px;color:#6a6290;margin-top:4px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
+.g3 p{margin:4px 0 0;font-size:13px;font-weight:700;color:#3b3166}
+.g3 p small{display:block;font-weight:400;color:#655c8c}
+.w16{display:none}:root[data-w="1600"] .w12{display:none}:root[data-w="1600"] .w16{display:block}
+.beats{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 0;padding:0;list-style:none}
+.beats li{font-size:12.5px;background:#f6f2ff;border-radius:8px;padding:4px 10px;color:#4c4374}
+.beats li b{color:var(--navy)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* 실제 전투 화면 (STAGE 33) */
+.bgc{position:absolute;inset:0;background:url(img/artifacts_feedback70_after_hud_late_1280x720.jpg) left top/auto 100% no-repeat}
+:root[data-w="1600"] .bgc{background-image:url(img/artifacts_feedback70_after_hud_late_1600x720.jpg)}
+.fx{position:absolute;inset:0;pointer-events:none}
+
+/* ===================== A. 스테이지 정화 = 햇살 (금 · 흰빛, 위에서 아래로) ===================== */
+.A .ash{-webkit-backdrop-filter:saturate(.45) brightness(.92);backdrop-filter:saturate(.45) brightness(.92);-webkit-mask:radial-gradient(circle at 56% 0%,transparent var(--r),#000 calc(var(--r) + 180px));mask:radial-gradient(circle at 56% 0%,transparent var(--r),#000 calc(var(--r) + 180px))}
+.A .sun{position:absolute;left:56%;top:-120px;width:340px;height:340px;margin-left:-170px;border-radius:50%;background:radial-gradient(circle,#fffdf2 0 12%,rgba(255,240,180,.9) 20%,rgba(255,214,120,.38) 40%,transparent 68%);mix-blend-mode:screen;opacity:0}
+.A .rays{background:repeating-conic-gradient(from var(--a) at 56% -3%,rgba(255,240,190,0) 0deg,rgba(255,240,190,.5) 2.2deg,rgba(255,240,190,0) 5deg,transparent 5deg 10.5deg);-webkit-mask:radial-gradient(ellipse 75% 100% at 56% 0%,#000 8%,rgba(0,0,0,.45) 46%,transparent 82%);mask:radial-gradient(ellipse 75% 100% at 56% 0%,#000 8%,rgba(0,0,0,.45) 46%,transparent 82%);mix-blend-mode:screen;opacity:0}
+.A .cl{position:absolute;top:58px;width:560px;height:190px;background:radial-gradient(ellipse 30% 42% at 26% 52%,rgba(232,228,248,.92),transparent 70%),radial-gradient(ellipse 30% 40% at 52% 40%,rgba(222,218,242,.92),transparent 70%),radial-gradient(ellipse 30% 44% at 78% 56%,rgba(210,206,234,.9),transparent 70%);filter:blur(7px)}
+.A .cl.l{left:calc(56% - 540px)}.A .cl.r{left:calc(56% - 20px)}
+.A .wash{background:linear-gradient(112deg,transparent 40%,rgba(255,236,180,.22) 47%,rgba(255,255,255,.42) 50%,rgba(255,236,180,.22) 53%,transparent 60%) 0 0/300% 100% no-repeat;mix-blend-mode:screen}
+.A .motes{background-image:radial-gradient(circle,#fff3c4 0 1.8px,transparent 2.8px),radial-gradient(circle,#ffe08a 0 1.3px,transparent 2.2px),radial-gradient(circle,#fff 0 1px,transparent 1.8px);background-size:170px 150px,120px 130px,80px 90px;background-position:0 0,40px 60px,10px 20px;-webkit-mask:radial-gradient(ellipse 70% 90% at 56% 10%,#000 20%,transparent 80%);mask:radial-gradient(ellipse 70% 90% at 56% 10%,#000 20%,transparent 80%);mix-blend-mode:screen;opacity:0}
+.slipw{position:absolute;left:50%;top:76px;z-index:6;transform:translateX(-50%);filter:drop-shadow(0 0 16px rgba(255,214,110,.6)) drop-shadow(0 8px 10px rgba(40,20,0,.35));opacity:0}
+.slip{display:flex;align-items:center;gap:14px;padding:8px 30px 10px 16px;background:linear-gradient(90deg,#ffe7a6,#d9a52b) bottom/100% 4px no-repeat,linear-gradient(100deg,rgba(255,253,244,.97),rgba(255,240,204,.96));clip-path:polygon(3% 0,100% 0,97% 100%,0 100%)}
+.sunm{position:relative;width:54px;height:54px;flex:none;border-radius:50%;background:radial-gradient(circle,#fff8d8 0 30%,#ffd36b 31% 52%,transparent 53%)}
+.sunm::before{content:"";position:absolute;inset:-4px;border-radius:50%;background:repeating-conic-gradient(#f2b54a 0 10deg,transparent 10deg 30deg);-webkit-mask:radial-gradient(circle,transparent 52%,#000 54%);mask:radial-gradient(circle,transparent 52%,#000 54%);animation:spin 6s linear infinite}
+.slip .tx{line-height:1.05}
+.slip .tx small{display:block;font-size:13px;font-weight:900;letter-spacing:2px;color:#8a6a2a}
+.slip .tx b{font:italic 900 34px/1 "Pretendard","Malgun Gothic",sans-serif;letter-spacing:2px;background:linear-gradient(180deg,#c98a12,#7a4e00);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+.slip .pt{display:flex;align-items:center;gap:6px;padding:3px 12px 3px 4px;border-radius:16px;background:linear-gradient(90deg,#ff8fc4,#d2477f);color:#fff;font-size:15px;font-weight:900;white-space:nowrap;box-shadow:0 0 0 2px #fff}
+.slip .pt img{width:28px;height:28px}
+/* STAGE 숫자 넘김 (HUD 판 위에 덮어 그림) */
+.stg{position:absolute;left:207px;top:24px;width:114px;height:38px;z-index:5;overflow:hidden;opacity:0;clip-path:polygon(6% 0,100% 0,94% 100%,0 100%);background:linear-gradient(100deg,#8f7cf0,#5f4bd0);box-shadow:inset 0 0 0 2px rgba(255,255,255,.7);display:flex;align-items:center;gap:8px;padding-left:18px;color:#fff}
+.stg small{font-size:11.5px;font-weight:900;letter-spacing:1px}
+.stg .nn{position:relative;height:38px;width:44px;overflow:hidden}
+.stg .nn i{position:absolute;left:0;font:900 27px/38px "Pretendard","Malgun Gothic",sans-serif;font-style:normal}
+.stg .nn i+i{top:38px}
+.stgfl{position:absolute;left:190px;top:8px;width:150px;height:70px;z-index:6;border-radius:50%;background:radial-gradient(ellipse,rgba(255,240,190,.95),transparent 65%);mix-blend-mode:screen;opacity:0}
+/* 빛물감 방울이 색 지도 버튼으로 */
+.pd{position:absolute;left:0;top:0;z-index:7;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#ff8fc4 45%,#c45bd6);box-shadow:0 0 14px #ff8fc4;offset-path:path('M 640 130 C 460 70, 200 190, 50 322');offset-rotate:0deg;opacity:0}
+:root[data-w="1600"] .pd{offset-path:path('M 800 130 C 560 70, 220 190, 50 322')}
+.pd b{position:absolute;left:24px;top:-6px;font-size:15px;font-weight:900;color:#fff;white-space:nowrap;text-shadow:0 0 6px #d2477f,0 1px 2px #6a1a45}
+.cmr{position:absolute;left:22px;top:294px;width:56px;height:56px;border-radius:14px;box-shadow:0 0 0 3px #ff8fc4,0 0 18px #ff8fc4;opacity:0;z-index:6}
+.go.A .ash{animation:ashk 4.8s linear infinite}
+@keyframes ashk{0%,8%{--r:0px;opacity:1}55%,88%{--r:1500px;opacity:1}90%{--r:1500px;opacity:0}92%{--r:0px;opacity:0}100%{--r:0px;opacity:1}}
+.go.A .sun{animation:sunk 4.8s ease-out infinite}
+@keyframes sunk{0%,6%{opacity:0;transform:scale(.4)}20%{opacity:1;transform:scale(1.08)}70%{opacity:.9;transform:scale(1)}94%,100%{opacity:0}}
+.go.A .rays{animation:raysk 4.8s ease-in-out infinite}
+@keyframes raysk{0%,8%{opacity:0;--a:84deg}26%{opacity:1}72%{opacity:.8;--a:94deg}94%,100%{opacity:0;--a:96deg}}
+.go.A .cl.l{animation:cll 4.8s cubic-bezier(.3,.6,.3,1) infinite}
+.go.A .cl.r{animation:clr 4.8s cubic-bezier(.3,.6,.3,1) infinite}
+@keyframes cll{0%,8%{transform:none;opacity:.95}46%,88%{transform:translateX(-360px);opacity:.25}92%{opacity:0}100%{transform:none;opacity:.95}}
+@keyframes clr{0%,8%{transform:none;opacity:.95}46%,88%{transform:translateX(360px);opacity:.25}92%{opacity:0}100%{transform:none;opacity:.95}}
+.go.A .wash{animation:washk 4.8s ease-in-out infinite}
+@keyframes washk{0%,18%{background-position:120% 0}62%,100%{background-position:-20% 0}}
+.go.A .motes{animation:motek 4.8s linear infinite}
+@keyframes motek{0%,12%{opacity:0;background-position:0 0,40px 60px,10px 20px}30%,80%{opacity:.9}96%,100%{opacity:0;background-position:0 -150px,40px -70px,10px -160px}}
+.go.A .slipw{animation:slipk 4.8s cubic-bezier(.2,1.3,.4,1) infinite}
+@keyframes slipk{0%,16%{opacity:0;transform:translate(-50%,-70px)}26%,82%{opacity:1;transform:translate(-50%,0)}90%,100%{opacity:0;transform:translate(-50%,-40px)}}
+.go.A .stg{animation:stgk 4.8s ease infinite}
+@keyframes stgk{0%,28%{opacity:0}31%,88%{opacity:1}94%,100%{opacity:0}}
+.go.A .stg .nn i{animation:nnk 4.8s cubic-bezier(.3,1.4,.5,1) infinite}
+@keyframes nnk{0%,34%{transform:none}42%,100%{transform:translateY(-38px)}}
+.go.A .stgfl{animation:flk 4.8s ease-out infinite}
+@keyframes flk{0%,34%{opacity:0;transform:scale(.5)}40%{opacity:1;transform:scale(1.1)}56%,100%{opacity:0;transform:scale(1.3)}}
+.go.A .pd{animation:pdk 4.8s cubic-bezier(.5,0,.4,1) infinite}
+@keyframes pdk{0%,44%{opacity:0;offset-distance:0%}47%{opacity:1}62%{opacity:1;offset-distance:100%}65%,100%{opacity:0;offset-distance:100%}}
+.go.A .cmr{animation:cmrk 4.8s ease-out infinite}
+@keyframes cmrk{0%,61%{opacity:0;transform:scale(.8)}64%{opacity:1;transform:scale(1)}78%,100%{opacity:0;transform:scale(1.35)}}
+
+/* ===================== B. 채색 폭주 = 무지개 소나기 (프리즘 · 자홍, 8초) ===================== */
+.B .tint{background:radial-gradient(ellipse 70% 60% at 72% 34%,rgba(255,120,200,.42),transparent 70%),linear-gradient(180deg,rgba(255,90,170,.32),rgba(150,90,255,.2) 55%,rgba(255,180,90,.14));mix-blend-mode:overlay;opacity:0}
+.B .arc{background:radial-gradient(circle at 50% 120%,transparent 612px,rgba(255,255,255,.5) 620px,rgba(255,70,120,.78) 634px,rgba(255,160,60,.78) 648px,rgba(255,232,90,.72) 662px,rgba(90,220,130,.68) 676px,rgba(70,165,255,.68) 690px,rgba(150,90,255,.68) 704px,transparent 720px);-webkit-mask:conic-gradient(from -90deg at 50% 120%,#000 var(--sw),transparent calc(var(--sw) + 3deg)),linear-gradient(180deg,#000 28%,transparent 50%);mask:conic-gradient(from -90deg at 50% 120%,#000 var(--sw),transparent calc(var(--sw) + 3deg)),linear-gradient(180deg,#000 28%,transparent 50%);-webkit-mask-composite:source-in;mask-composite:intersect;filter:blur(2.5px);opacity:0}
+:root[data-w="1600"] .B .arc{background:radial-gradient(circle at 50% 120%,transparent 752px,rgba(255,255,255,.5) 760px,rgba(255,70,120,.78) 774px,rgba(255,160,60,.78) 788px,rgba(255,232,90,.72) 802px,rgba(90,220,130,.68) 816px,rgba(70,165,255,.68) 830px,rgba(150,90,255,.68) 844px,transparent 860px)}
+.B .frame{background:conic-gradient(from var(--a),#ff4f8b,#ffa33d,#ffe45c,#5fe08a,#4fb8ff,#a273ff,#ff4f8b);-webkit-mask:linear-gradient(90deg,#000,transparent 5%,transparent 95%,#000),linear-gradient(180deg,#000,transparent 8%,transparent 92%,#000);mask:linear-gradient(90deg,#000,transparent 5%,transparent 95%,#000),linear-gradient(180deg,#000,transparent 8%,transparent 92%,#000);opacity:0}
+.go.B .frame{filter:opacity(.72)}
+.B .rain{opacity:0}
+.rd{position:absolute;top:-80px;width:4px;height:46px;border-radius:2px;background:linear-gradient(180deg,transparent,var(--c) 60%,#fff);transform:rotate(14deg);box-shadow:0 0 6px var(--c);animation:fallk var(--d,1.1s) linear infinite}
+@keyframes fallk{to{transform:translate(-200px,880px) rotate(14deg)}}
+.B .splat{position:absolute;width:120px;height:120px;margin:-60px;border-radius:50%;background:radial-gradient(circle,var(--c) 0 22%,transparent 24%),repeating-conic-gradient(var(--c) 0 8deg,transparent 8deg 30deg);-webkit-mask:radial-gradient(circle,#000 30%,transparent 62%);mask:radial-gradient(circle,#000 30%,transparent 62%);mix-blend-mode:screen;opacity:0;animation:splk 1.3s ease-out infinite}
+@keyframes splk{0%{opacity:0;transform:scale(.2) rotate(0)}20%{opacity:.95}100%{opacity:0;transform:scale(1.25) rotate(40deg)}}
+.ribw{position:absolute;left:50%;top:150px;z-index:6;transform:translateX(-50%);opacity:0;filter:drop-shadow(0 0 18px rgba(255,120,200,.7)) drop-shadow(0 8px 10px rgba(40,10,40,.4))}
+.rib{padding:8px 46px 12px 40px;text-align:center;clip-path:polygon(4% 0,100% 0,96% 100%,0 100%);background:linear-gradient(90deg,#ff6fb5,#ffc23d,#5fe08a,#4fb8ff,#a273ff) bottom/100% 5px no-repeat,linear-gradient(100deg,rgba(46,26,90,.94),rgba(90,30,110,.94))}
+.rib b{display:block;font:italic 900 50px/1.05 "Pretendard","Malgun Gothic",sans-serif;letter-spacing:3px;background:linear-gradient(90deg,#ff8fc4,#ffd36b 30%,#8ff0b0 55%,#8fd0ff 75%,#c9a3ff);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+.rib small{display:block;margin-top:2px;font-size:16px;font-weight:800;color:#fff;white-space:nowrap}
+.bdg{position:absolute;right:46px;top:64px;z-index:6;width:128px;height:150px;opacity:0}
+.bdg .rg{position:absolute;left:0;top:0;width:128px;height:128px;border-radius:50%;background:conic-gradient(from var(--a),#ff4f8b,#ffa33d,#ffe45c,#5fe08a,#4fb8ff,#a273ff,#ff4f8b);-webkit-mask:conic-gradient(#000 var(--t),transparent 0),radial-gradient(circle,transparent 54px,#000 55px);mask:conic-gradient(#000 var(--t),transparent 0),radial-gradient(circle,transparent 54px,#000 55px);-webkit-mask-composite:source-in;mask-composite:intersect;filter:drop-shadow(0 0 8px rgba(255,140,210,.9))}
+.bdg .in{position:absolute;left:12px;top:12px;width:104px;height:104px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 40% 30%,rgba(90,50,150,.95),rgba(30,16,70,.96));box-shadow:inset 0 0 0 2px rgba(255,255,255,.45),0 6px 14px rgba(0,0,0,.45);color:#fff;line-height:1}
+.bdg .in small{font-size:12px;font-weight:800;color:#f2d9ff}
+.bdg .in b{font:italic 900 36px/1.05 "Pretendard","Malgun Gothic",sans-serif;background:linear-gradient(90deg,#ff9cc8,#ffe08a,#9ff0c0,#9fd8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bdg .in em{font-style:normal;font-size:12px;font-weight:900;color:#ffe08a;margin-top:2px}
+.bdg>span{position:absolute;left:50%;bottom:0;transform:translateX(-50%);padding:1px 12px;border-radius:10px;background:linear-gradient(90deg,#ff6fb5,#a273ff);font-size:13px;font-weight:900;color:#fff;white-space:nowrap;box-shadow:0 0 0 2px #fff}
+.flash{background:radial-gradient(circle at 80% 18%,#fff,rgba(255,220,240,.6) 30%,transparent 70%);opacity:0;mix-blend-mode:screen}
+.go.B .tint,.go.B .rain,.go.B .frame{animation:onB 9s ease infinite}
+@keyframes onB{0%,2%{opacity:0}8%,88%{opacity:1}96%,100%{opacity:0}}
+.go.B .frame{animation:onB 9s ease infinite,rotA 3s linear infinite}
+@keyframes rotA{to{--a:360deg}}
+.go.B .arc{animation:arck 9s ease-in-out infinite}
+@keyframes arck{0%,4%{opacity:0;--sw:0deg}8%{opacity:1}30%,86%{opacity:1;--sw:180deg}96%,100%{opacity:0;--sw:180deg}}
+.go.B .flash{animation:flashB 9s ease-out infinite}
+@keyframes flashB{0%{opacity:0}2%{opacity:.9}10%,100%{opacity:0}}
+.go.B .ribw{animation:ribk 9s cubic-bezier(.2,1.2,.4,1) infinite}
+@keyframes ribk{0%,2%{opacity:0;transform:translateX(-50%) scale(1.6)}6%,20%{opacity:1;transform:translateX(-50%) scale(1)}27%,100%{opacity:0;transform:translate(calc(-50% + 380px),-110px) scale(.25)}}
+.go.B .bdg{animation:bdgk 9s cubic-bezier(.2,1.4,.4,1) infinite}
+@keyframes bdgk{0%,22%{opacity:0;transform:scale(.4)}28%,88%{opacity:1;transform:none}95%,100%{opacity:0;transform:scale(.8)}}
+.go.B .bdg .rg{animation:rotA 3s linear infinite,tk 9s linear infinite}
+@keyframes tk{0%,8%{--t:360deg}88%,100%{--t:0deg}}
+.go.B .splat{animation-play-state:running}
+.B .splats{opacity:0}
+.go.B .splats{animation:onB 9s ease infinite}
+
+/* ===================== C. 순풍 가속 = 하늘빛 바람 (가로로 흐르는 띠 · 깃털, 60초) ===================== */
+.C .tint{background:linear-gradient(100deg,rgba(150,230,255,.34),rgba(255,255,255,.05) 50%,rgba(120,210,255,.3)),radial-gradient(ellipse 50% 40% at 88% 10%,rgba(255,255,255,.35),transparent 70%);mix-blend-mode:screen;opacity:0}
+.C .jet{opacity:0}
+.C .jet svg{position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 0 5px rgba(60,190,255,.95))}
+.C .jet path{fill:none;stroke-linecap:round;animation:dash var(--d,1.4s) linear infinite;animation-delay:var(--dl,0s)}
+@keyframes dash{from{stroke-dashoffset:1700}to{stroke-dashoffset:0}}
+.C .aura{background:radial-gradient(ellipse 26% 22% at 22% 60%,rgba(140,230,255,.5),transparent 70%);mix-blend-mode:screen;opacity:0}
+.C .puffs{opacity:0}
+.pf{position:absolute;width:var(--z,220px);height:calc(var(--z,220px) * .55);background:linear-gradient(180deg,#fff,#d8f3ff);-webkit-mask:url(img/vfx_textures_puff.png) center/100% 100% no-repeat;mask:url(img/vfx_textures_puff.png) center/100% 100% no-repeat;opacity:.5;filter:blur(1px);animation:pfk var(--d,1.6s) linear infinite;animation-delay:var(--dl,0s)}
+@keyframes pfk{from{transform:translateX(calc(var(--w) * 1px + 100px))}to{transform:translateX(-400px)}}
+.fth{position:absolute;left:0;top:0;width:18px;height:46px;background:linear-gradient(180deg,#fff,#c6f0ff);-webkit-mask:url(img/vfx_textures_feather.png) center/contain no-repeat;mask:url(img/vfx_textures_feather.png) center/contain no-repeat;filter:drop-shadow(0 0 4px #8fe3ff);offset-rotate:auto 90deg;opacity:0}
+.wtag{position:absolute;left:560px;top:16px;z-index:6;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:5px 18px 6px 8px;border-radius:20px;background:linear-gradient(90deg,rgba(25,180,255,.92),rgba(110,215,255,.92));color:#fff;font-size:15px;font-weight:900;white-space:nowrap;box-shadow:0 0 0 2px #fff,0 0 18px rgba(25,180,255,.6);opacity:0}
+.wtag img{width:28px;height:28px}
+.wtag small{font-size:13px;font-weight:800;color:#eaf8ff}
+.wb{position:absolute;right:362px;top:576px;z-index:6;width:198px;height:60px;opacity:0;filter:drop-shadow(0 0 14px rgba(25,180,255,.7)) drop-shadow(0 4px 6px rgba(0,30,60,.35))}
+.wb .pl{position:absolute;inset:0;display:flex;align-items:center;gap:8px;padding:0 16px 0 14px;clip-path:polygon(4% 0,100% 0,96% 100%,0 100%);background:linear-gradient(90deg,#ffffff,#d8f3ff) bottom/100% 5px no-repeat,linear-gradient(120deg,#7fdcff,#19b4ff 60%,#1488d8);color:#fff}
+.wb img{width:40px;height:40px;filter:drop-shadow(0 2px 2px rgba(0,40,80,.4))}
+.wb .tx{line-height:1.1}
+.wb .tx small{display:block;font-size:12px;font-weight:800;white-space:nowrap}
+.wb .tx b{font:900 24px/1 "Pretendard","Malgun Gothic",sans-serif;counter-reset:s var(--s);white-space:nowrap}
+.wb .tx b::before{content:"0:" counter(s)}
+.wb .bar2{position:absolute;left:16px;right:16px;bottom:9px;height:4px;border-radius:2px;background:rgba(0,60,110,.35)}
+.wb .bar2 i{position:absolute;left:0;top:0;bottom:0;width:98%;border-radius:2px;background:#fff;box-shadow:0 0 6px #fff}
+.dmg{position:absolute;z-index:5;font:italic 900 26px/1 "Pretendard","Malgun Gothic",sans-serif;color:#fff;text-shadow:0 0 8px #19b4ff,0 2px 0 #0d6fb0;white-space:nowrap;opacity:0}
+.dmg small{font-size:14px;margin-left:4px;color:#bff0ff}
+.go.C .tint,.go.C .jet,.go.C .aura,.go.C .puffs,.go.C .wtag,.go.C .wb{animation:onC 6s ease infinite}
+@keyframes onC{0%{opacity:0}8%,92%{opacity:1}100%{opacity:0}}
+.go.C .wtag{animation:onC 6s ease infinite,wtk 6s cubic-bezier(.2,1.3,.4,1) infinite}
+@keyframes wtk{0%{transform:translate(-50%,-40px)}8%,100%{transform:translateX(-50%)}}
+.go.C .wb{animation:onC 6s ease infinite,wbk 6s steps(6) infinite}
+@keyframes wbk{0%{--s:59}100%{--s:53}}
+.go.C .wb .bar2 i{animation:barC 6s linear infinite}
+@keyframes barC{from{width:98%}to{width:88%}}
+.go.C .fth{animation:fthk var(--d,2.2s) cubic-bezier(.4,.1,.6,.9) infinite;animation-delay:var(--dl,0s)}
+@keyframes fthk{0%{offset-distance:0%;opacity:0}12%{opacity:1}85%{opacity:1}100%{offset-distance:100%;opacity:0}}
+.go.C .dmg{animation:dmgk 1.6s ease-out infinite;animation-delay:var(--dl,0s)}
+@keyframes dmgk{0%{opacity:0;transform:translateY(10px) scale(.6)}15%{opacity:1;transform:scale(1.1)}70%{opacity:1;transform:translateY(-16px)}100%{opacity:0;transform:translateY(-24px)}}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>정화 · 채색 폭주 · 순풍 가속 B 「하늘 날씨」 — 수정 시안 (#15 · #17 · #30)</h1>
+<p class="lead">PD가 고른 <b>B 하늘 날씨</b>를 다듬은 판입니다. 세 순간을 <b>서로 다른 날씨</b>로 나눴습니다: <b>정화 = 햇살</b>(금 · 흰빛, 위에서 아래로 열리는 빛), <b>채색 폭주 = 무지개 소나기</b>(프리즘 무지개 · 자홍, 8초), <b>순풍 가속 = 하늘빛 바람</b>(하늘색 · 흰 바람 띠가 가로로 흐름, 60초). 빛 · 입자 · 그라데이션을 여러 겹으로 쌓았고(게임에서는 전체 화면 셰이더 1장 + 입자 1~2개 정도), 전투 한가운데(고래 ~ 적 사이)는 가리지 않습니다. 바탕은 지금 전투 캡처(STAGE 33)이고 수치는 지금 게임 값입니다(첫 정화 빛물감 +2.5, 폭주 8초 · 공격력 ×1.5, 순풍 60초 · 2배속 · 피해 +30%).</p>
+<div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button><span style="width:12px"></span><button type="button" data-replay-all>▶ 움직임 처음부터</button></div>
+
+<section class="ref">
+  <h2>지금 게임</h2>
+  <p class="cap">정화 · 폭주 · 순풍이 모두 가운데 같은 모양의 판으로 떠서 서로 구별이 잘 안 되고 전투를 가립니다.</p>
+  <div class="refs">
+    <figure><img src="img/artifacts_feedback70_after_stage_clear_transition_f1_1280x720.jpg" alt="지금 정화"><figcaption>artifacts/feedback70/after/stage_clear_transition_f1_1280x720.jpg</figcaption></figure>
+    <figure><img src="img/artifacts_feedback70_before_fever_f2_1280x720.jpg" alt="지금 채색 폭주"><figcaption>artifacts/feedback70/before/fever_f2_1280x720.jpg</figcaption></figure>
+    <figure><img src="img/artifacts_feedback70_after_wind_active_f3_1280x720.jpg" alt="지금 순풍 가속"><figcaption>artifacts/feedback70/after/wind_active_f3_1280x720.jpg</figcaption></figure>
+  </div>
+</section>
+
+<section class="ref">
+  <h2>원래 시안 B (비교용)</h2>
+  <p class="cap">햇살 빛살 + 쪽지 / 자홍 빛살 + 위 띠 / 바람 줄 + 삼각 돛. 셋 다 같은 「가운데에서 퍼지는 빛살」이라 겹쳐 보였고, 빛이 한 겹이라 납작했습니다. 움직이는 원본: <a href="https://yooonmu.github.io/skywhale-archive/mockups/clear_fever/index.html">feedback70/clear_fever/index.html</a></p>
+  <div class="g3 w12"><img src="orig/0_1280.jpg" alt="원래 B 정화" style="width:100%;border-radius:8px"><img src="orig/1_1280.jpg" alt="원래 B 폭주" style="width:100%;border-radius:8px"><img src="orig/2_1280.jpg" alt="원래 B 순풍" style="width:100%;border-radius:8px"></div>
+  <div class="g3 w16"><img src="orig/0_1600.jpg" alt="원래 B 정화 1600" style="width:100%;border-radius:8px"><img src="orig/1_1600.jpg" alt="원래 B 폭주 1600" style="width:100%;border-radius:8px"><img src="orig/2_1600.jpg" alt="원래 B 순풍 1600" style="width:100%;border-radius:8px"></div>
+</section>
+
+<h3>1. 스테이지 정화 — 햇살이 든다</h3>
+<section class="opt">
+  <h2>잿빛 구름이 갈라지고 햇살 · 색이 위에서부터 번짐 (약 2초) <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">정화하는 순간 위쪽 구름이 양옆으로 갈라지며 <b>해가 뜨고 금빛 빛줄기</b>가 내려오고, 해 자리에서 <b>둥글게 색이 되살아나</b> 화면 전체로 번집니다(잿빛 → 색, 이 게임의 「색을 되찾는다」). 금빛 띠가 한 번 비스듬히 지나가고 금가루가 떠오릅니다. 위 가운데에 <b>「STAGE 33 정화!」 금 쪽지</b>가 내려오고, HUD의 STAGE 숫자가 34로 넘어가며, 분홍 빛물감 방울(+2.5)이 <b>왼쪽 「색 지도」 버튼</b>으로 날아가 반짝입니다.</p>
+  <div class="vp" data-clone="A"><div class="scr A"><div class="bgc"></div>
+    <div class="fx ash"></div><div class="fx rays"></div><div class="sun"></div><div class="cl l"></div><div class="cl r"></div><div class="fx wash"></div><div class="fx motes"></div>
+    <div class="stg"><small>STAGE</small><span class="nn"><i>33</i><i>34</i></span></div><div class="stgfl"></div>
+    <div class="slipw"><div class="slip"><span class="sunm"></span><div class="tx"><small>STAGE 33</small><b>정화!</b></div><span class="pt"><img src="img/assets_ui_kit_side_palette.png" alt="">빛물감 +2.5</span></div></div>
+    <div class="pd"><b>+2.5</b></div><div class="cmr"></div>
+  </div></div>
+  <ul class="beats"><li><b>0.0s</b> 잿빛 · 구름</li><li><b>0.3s</b> 해 · 빛줄기</li><li><b>0.5~2.6s</b> 해 자리부터 색이 둥글게 번짐</li><li><b>0.8s</b> 금 쪽지</li><li><b>1.6s</b> STAGE 33 → 34</li><li><b>2.2s</b> 빛물감 방울 → 색 지도 버튼</li></ul>
+</section>
+
+<h3>2. 채색 폭주 — 무지개 소나기 (8초)</h3>
+<section class="opt">
+  <h2>무지개가 걸리고 물감 비가 내림 · 콤보 자리 = 8초 무지개 고리 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">콤보가 폭주에 닿으면 오른쪽 위에서 한 번 번쩍이며 <b>가운데 큰 띠 「채색 폭주!」</b>가 찍혔다가 콤보 자리로 빨려 들어가 <b>무지개 고리 배지(공격력 ×1.5)</b>가 됩니다. 고리는 8초 동안 시계 방향으로 줄어듭니다. 그동안 하늘에 <b>무지개 호</b>가 왼쪽에서 오른쪽으로 걸리고, 화면 가장자리에 <b>프리즘 빛이 돌며</b>, 일곱 빛깔 <b>물감 비</b>가 비스듬히 내리고, 적이 맞는 자리마다 물감이 톡톡 튑니다. 하늘은 자홍 · 보라 노을빛으로 물듭니다.</p>
+  <div class="vp" data-clone="B"><div class="scr B"><div class="bgc"></div>
+    <div class="fx tint"></div><div class="fx arc"></div><div class="fx frame"></div>
+    <div class="fx rain">
+      <i class="rd" style="left:16%;--c:#ff4f8b;animation-delay:-.2s"></i><i class="rd" style="left:24%;--c:#ffa33d;--d:1.3s;animation-delay:-.7s"></i><i class="rd" style="left:33%;--c:#ffe45c;animation-delay:-.4s"></i><i class="rd" style="left:41%;--c:#5fe08a;--d:1.25s;animation-delay:-.9s"></i><i class="rd" style="left:50%;--c:#4fb8ff;animation-delay:-.1s"></i><i class="rd" style="left:58%;--c:#a273ff;--d:1.2s;animation-delay:-.6s"></i><i class="rd" style="left:66%;--c:#ff4f8b;--d:1s;animation-delay:-.35s"></i><i class="rd" style="left:73%;--c:#ffa33d;animation-delay:-.8s"></i><i class="rd" style="left:80%;--c:#ffe45c;--d:1.3s;animation-delay:-.15s"></i><i class="rd" style="left:87%;--c:#5fe08a;animation-delay:-.55s"></i><i class="rd" style="left:94%;--c:#4fb8ff;--d:1.15s;animation-delay:-1s"></i><i class="rd" style="left:101%;--c:#a273ff;animation-delay:-.45s"></i><i class="rd" style="left:108%;--c:#ff4f8b;--d:1.25s;animation-delay:-.75s"></i><i class="rd" style="left:62%;--c:#ffe45c;--d:1.4s;animation-delay:-1.1s"></i><i class="rd" style="left:46%;--c:#ff4f8b;--d:1.35s;animation-delay:-.25s"></i><i class="rd" style="left:84%;--c:#a273ff;--d:1.05s;animation-delay:-.95s"></i>
+    </div>
+    <div class="fx splats"><i class="splat" style="right:400px;top:260px;--c:#ff6fb5"></i><i class="splat" style="right:250px;top:330px;--c:#ffd36b;animation-delay:-.45s"></i><i class="splat" style="right:330px;top:420px;--c:#6fd0ff;animation-delay:-.9s"></i></div>
+    <div class="fx flash"></div>
+    <div class="ribw"><div class="rib"><b>채색 폭주!</b><small>8초 동안 모두의 공격력 ×1.5</small></div></div>
+    <div class="bdg"><i class="rg"></i><div class="in"><small>공격력</small><b>×1.5</b><em>8초</em></div><span>채색 폭주</span></div>
+  </div></div>
+  <ul class="beats"><li><b>0.0s</b> 오른쪽 위 번쩍</li><li><b>0.2~1.8s</b> 큰 띠 「채색 폭주!」</li><li><b>2.0s</b> 띠 → 콤보 자리 배지</li><li><b>0.4~2.7s</b> 무지개 호가 걸림</li><li><b>0.7~8s</b> 물감 비 · 프리즘 가장자리 · 고리가 줄어듦</li></ul>
+</section>
+
+<h3>3. 순풍 가속 — 하늘빛 바람 (60초)</h3>
+<section class="opt">
+  <h2>흰 바람 띠가 고래 뒤에서 앞으로 흐르고 구름이 2배로 지나감 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">하늘이 맑은 하늘색으로 개고, <b>흰 · 하늘색 바람 띠</b>가 고래 뒤(왼쪽)에서 앞(오른쪽)으로 길게 흐르며 <b>깃털</b>이 바람을 탑니다. 아래 구름은 평소의 2배로 뒤로 스쳐 가고, 고래 둘레에 하늘빛이 감돕니다. 위에는 작은 띠 <b>「순풍 가속 · 2배속 · 피해 +30%」</b>, 「순풍 가속」 버튼은 <b>하늘색 시간 판(남은 0:59 + 줄어드는 줄)</b>이 되고, 피해 숫자는 하늘빛으로 떠서 +30%가 눈에 보입니다. 금 · 흰 햇살(정화), 무지개(폭주)와 색 · 방향이 겹치지 않습니다.</p>
+  <div class="vp" data-clone="C"><div class="scr C"><div class="bgc"></div>
+    <div class="fx tint"></div><div class="fx aura"></div>
+    <div class="fx jet"><svg viewBox="0 0 1280 720" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="wg" x1="0" x2="1"><stop offset="0" stop-color="#bff0ff" stop-opacity=".1"/><stop offset=".5" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#5fd0ff" stop-opacity=".55"/></linearGradient></defs>
+      <path d="M -120 420 C 200 360, 420 480, 700 400 S 1100 330, 1420 380" stroke="url(#wg)" stroke-width="7" stroke-dasharray="320 1380" style="--d:1.3s"/>
+      <path d="M -120 250 C 240 190, 520 280, 820 220 S 1180 170, 1420 200" stroke="url(#wg)" stroke-width="4" stroke-dasharray="260 1440" style="--d:1.1s;--dl:-.5s"/>
+      <path d="M -120 560 C 260 520, 520 610, 820 545 S 1160 505, 1420 535" stroke="url(#wg)" stroke-width="10" stroke-dasharray="420 1280" style="--d:1.6s;--dl:-.8s"/>
+      <path d="M -120 150 C 300 120, 600 180, 900 130 S 1200 100, 1420 115" stroke="url(#wg)" stroke-width="3" stroke-dasharray="220 1480" style="--d:1s;--dl:-.2s"/>
+      <path d="M -120 470 C 220 440, 470 520, 760 470 S 1120 420, 1420 455" stroke="url(#wg)" stroke-width="3" stroke-dasharray="200 1500" style="--d:.9s;--dl:-.6s"/>
+      <path d="M -120 330 C 260 300, 560 360, 860 310 S 1180 280, 1420 300" stroke="url(#wg)" stroke-width="5" stroke-dasharray="300 1400" style="--d:1.25s;--dl:-1s"/>
+    </svg></div>
+    <div class="fx puffs"><i class="pf" style="top:500px;--z:200px"></i><i class="pf" style="top:530px;--z:170px;--dl:-.6s;--d:1.4s"></i><i class="pf" style="top:470px;--z:220px;--dl:-1.1s;--d:1.8s"></i><i class="pf" style="top:540px;--z:180px;--dl:-.3s;--d:1.5s"></i></div>
+    <i class="fth" style="offset-path:path('M 60 380 C 300 300, 520 420, 760 340 S 1000 280, 1200 300');--d:2.4s"></i><i class="fth" style="offset-path:path('M 0 520 C 260 470, 520 560, 780 500 S 1040 460, 1260 480');--d:2.1s;--dl:-.9s"></i><i class="fth" style="offset-path:path('M 100 200 C 360 160, 600 240, 860 190 S 1080 160, 1260 170');--d:2.6s;--dl:-1.6s"></i><i class="fth" style="offset-path:path('M 20 300 C 280 260, 480 330, 720 280 S 980 250, 1220 260');--d:2.3s;--dl:-.4s"></i>
+    <span class="dmg" style="right:300px;top:250px">2,301<small>+30%</small></span><span class="dmg" style="right:180px;top:330px;--dl:-.7s">1,955<small>+30%</small></span><span class="dmg" style="right:250px;top:420px;--dl:-1.2s">2,688<small>+30%</small></span>
+    <div class="wtag"><img src="img/assets_ui_kit_side_wind.png" alt="">순풍 가속 <small>2배속 · 피해 +30% · 60초</small></div>
+    <div class="wb"><div class="pl"><img src="img/assets_ui_kit_side_wind.png" alt=""><div class="tx"><small>2배속 · 피해 +30%</small><b></b></div></div><span class="bar2"><i></i></span></div>
+  </div></div>
+  <ul class="beats"><li><b>0.0s</b> 하늘이 개며 위 띠가 내려옴</li><li><b>계속</b> 바람 띠 · 깃털 · 구름 2배 흐름</li><li><b>버튼</b> 하늘색 시간 판 0:59 → 0:00</li><li><b>숫자</b> 하늘빛 피해 + 「+30%」</li></ul>
+</section>
+
+<h3>4. 셋을 나란히 — 색 · 방향 · 모양이 다르게</h3>
+<div class="g3" id="cmp">
+  <div data-slot="A"><p>정화 = 햇살<small>금 · 흰빛 / 위에서 아래로 / 둥글게 번지는 색</small></p></div>
+  <div data-slot="B"><p>채색 폭주 = 무지개 소나기<small>무지개 · 자홍 / 호 + 비스듬한 비 / 가장자리가 도는 프리즘</small></p></div>
+  <div data-slot="C"><p>순풍 가속 = 하늘빛 바람<small>하늘색 · 흰빛 / 왼쪽 → 오른쪽 가로 흐름 / 깃털 · 구름</small></p></div>
+</div>
+</main>
+<script>
+// 4번 비교 칸: 위 세 화면을 그대로 복제 (그림 경로는 위 마크업의 글자 그대로)
+document.querySelectorAll('#cmp [data-slot]').forEach(slot=>{const src=document.querySelector(`[data-clone="${slot.dataset.slot}"]`);slot.prepend(src.cloneNode(true))});
+const fit=()=>document.querySelectorAll('.vp').forEach(v=>{const s=v.querySelector('.scr');const k=v.clientWidth/s.offsetWidth;s.style.transform=`scale(${k})`;v.style.height=s.offsetHeight*k+'px'});
+addEventListener('resize',fit);
+document.querySelectorAll('.bar [data-res]').forEach(b=>b.addEventListener('click',()=>{document.documentElement.style.setProperty('--w',b.dataset.res);document.documentElement.dataset.w=b.dataset.res;document.querySelectorAll('.bar [data-res]').forEach(x=>x.setAttribute('aria-pressed',x===b));fit()}));
+const play=s=>{s.classList.remove('go');void s.offsetWidth;s.classList.add('go')};
+document.querySelectorAll('[data-replay]').forEach(b=>b.addEventListener('click',()=>b.closest('.opt').querySelectorAll('.scr').forEach(play)));
+document.querySelector('[data-replay-all]').addEventListener('click',()=>document.querySelectorAll('.scr').forEach(play));
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){play(en.target.querySelector('.scr'));io.unobserve(en.target)}}),{threshold:.35});
+document.querySelectorAll('.vp').forEach(v=>io.observe(v));
+fit();
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>시안 프레임</title>
+<!-- 시안(clear_fever_b) 한 화면을 정해진 시각에 멈춰 찍는 도우미: mock_shot.html?s=A|B|C&t=초&w=1280|1600
+     크롬 헤드리스 --allow-file-access-from-files --screenshot 으로 찍는다 (shots/mock_*.png) -->
+<style>html,body{margin:0;overflow:hidden;background:#1d1838}iframe{border:0;width:1600px;height:4000px;position:absolute;left:0;top:0}</style>
+</head><body><iframe id="f" src="../clear_fever_b/index.html"></iframe>
+<script>
+const q = new URLSearchParams(location.search);
+const S = q.get('s'), T = +q.get('t'), W = q.get('w') || '1280';
+f.onload = () => {
+  const d = f.contentDocument;
+  d.documentElement.style.setProperty('--w', W);
+  d.documentElement.dataset.w = W;
+  const scr = d.querySelector(`[data-clone="${S}"] .scr`);
+  const st = d.createElement('style');
+  st.textContent = 'body>*{display:none!important}#shot{display:block!important;position:fixed!important;left:0;top:0;transform:none!important}';
+  d.head.appendChild(st);
+  scr.id = 'shot';
+  d.body.appendChild(scr);
+  scr.classList.add('go');
+  requestAnimationFrame(() => d.getAnimations().forEach(a => { a.pause(); a.currentTime = T * 1000; }));
+};
+</script></body></html>

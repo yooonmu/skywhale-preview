@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 · 큰 그림 선명도 (art-sharpness) 전/후</title>
+<style>
+:root{--navy:#2e2350;--lav:#8b74e8;--gold:#d9a52b;--cream:#fff8ec;--line:#e2dbf5}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;line-height:1.5}
+.page{max-width:1240px;margin:0 auto;padding:20px 16px 64px}
+h1{font-size:22px;margin:0 0 4px}
+h2{font-size:18px;margin:0 0 6px}
+h3{font-size:15px;margin:12px 0 6px}
+.lead{margin:0 0 16px;font-size:14px;color:#5a5180}
+section{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 18px}
+.cap{margin:0 0 10px;font-size:14px;color:#4c4374}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+figure{margin:0}
+figcaption{font-size:13px;color:#6a6290;margin:4px 0 0}
+img{width:100%;display:block;border-radius:8px;background:#1d1838;image-rendering:pixelated}
+.tag{display:inline-block;padding:1px 10px;border-radius:10px;font-size:12px;font-weight:700;margin-right:6px}
+.cur{background:#ece7ff;color:#5b44c4}.new{background:#ffe7a6;color:#7a4b00}
+table{border-collapse:collapse;font-size:13px;width:100%}
+td,th{border-top:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:#5a5180;font-weight:700}
+@media (max-width:860px){.pair{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>큰 그림 선명도 — 원인과 고친 뒤</h1>
+<p class="lead">같은 저장 · 같은 순간(움직임 · 반짝이를 멈춘 프레임)을 1280×720 · 1600×720에서 찍은 실제 게임 화면을 얼굴 둘레만 잘라 <b>3배</b>(가장 가까운 픽셀 그대로)로 키웠습니다. 그림체 · 그림 자체는 바꾸지 않았고, 원본보다 큰 그림을 새로 만들지도 않았습니다.</p>
+
+<section>
+<h2>원인 요약 (화면 픽셀 / 원본 픽셀)</h2>
+<table>
+<tr><th>화면</th><th>원본 → 화면 (1280 · 1600 같음)</th><th>원인</th><th>고침</th></tr>
+<tr><td>궁극기 컷인 (전용 그림: 세레나 · 아르카)</td><td>1672×941 → 979×551 (0.59배)</td><td>밉맵 없이 0.59배로 줄여 그려 머리카락 · 윤곽선이 계단처럼 깨짐 + 배경 지운 판의 가장자리에 원래 배경색 테두리(후광)</td><td>컷인 그림 가져오기 설정에 밉맵 켬, 13장 가장자리 다시 가름</td></tr>
+<tr><td>궁극기 컷인 (SD: 루미 등)</td><td>527×512 → 921×894 (1.75배 늘림) ⇒ 767×744 (1.20배)</td><td>원본(767×744)을 512로 줄여 둔 것을 다시 1.75배 늘림 → 두 번 뽑혀 흐림</td><td>큰 화면용 1024 그림(cutin_tex) — 미리 손질, 없으면 그 프레임만 512</td></tr>
+<tr><td>아이 상세 (전용 그림)</td><td>1672×941 → 1187×668 (0.71배)</td><td>그림 셰이더가 filter_linear(밉맵 없음)로 뽑음 · 아르카 그림 밉맵 없음</td><td>cover_art 셰이더 filter_linear_mipmap + 가져오기 밉맵</td></tr>
+<tr><td>아이 상세 (SD)</td><td>368×512 → 640×890 (1.74배) ⇒ 551×766 (1.16배)</td><td>512로 줄인 SD를 다시 늘림</td><td>stand_big(원본 해상도, 최대 1024)</td></tr>
+<tr><td>편성 카드</td><td>368×512 → 224×312 (0.61배)</td><td>lineup_card · place_card 셰이더 filter_linear</td><td>filter_linear_mipmap</td></tr>
+<tr><td>소환 SS 공개</td><td>1672×941 → 1382×778 (0.83배) · 1728×973 (1.03배)</td><td>문제 없음 (밉맵 · 가로 1600에서 거의 1:1)</td><td>그대로</td></tr>
+<tr><td>소환 SD 공개 · 이야기 무대</td><td>368×512 → 345×480 (0.94배) · 이야기 0.67배</td><td>문제 없음</td><td>그대로</td></tr>
+</table>
+<p class="cap">창 배율: canvas_items + expand, 두 폭 모두 화면 배율 1.0 (가로만 넓어짐). 기본 필터 linear_mipmap(3). 수치: <code>artifacts/feedback70/sharpness/measure_before.json</code> · <code>measure_after.json</code></p>
+</section>
+
+<section>
+<h2>1. 궁극기 컷인 — 세레나 (전용 그림)</h2>
+<div class="pair">
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_cutin_serena_1280_before.png" alt="전 1280"><figcaption><span class="tag cur">전</span>1280 · 밉맵 없이 0.59배</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_cutin_serena_1280_after.png" alt="후 1280"><figcaption><span class="tag new">후</span>1280 · 밉맵 + 가장자리 정리</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_cutin_serena_1600_before.png" alt="전 1600"><figcaption><span class="tag cur">전</span>1600</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_cutin_serena_1600_after.png" alt="후 1600"><figcaption><span class="tag new">후</span>1600</figcaption></figure>
+</div>
+<h3>아르카 (신화)</h3>
+<div class="pair">
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_cutin_arca_1280_before.png" alt="전 1280"><figcaption><span class="tag cur">전</span>1280</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_cutin_arca_1280_after.png" alt="후 1280"><figcaption><span class="tag new">후</span>1280</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_cutin_arca_1600_before.png" alt="전 1600"><figcaption><span class="tag cur">전</span>1600</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_cutin_arca_1600_after.png" alt="후 1600"><figcaption><span class="tag new">후</span>1600</figcaption></figure>
+</div>
+</section>
+
+<section>
+<h2>2. 궁극기 컷인 — 루미 (SD 공격 자세)</h2>
+<div class="pair">
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_cutin_lumi_1280_before.png" alt="전 1280"><figcaption><span class="tag cur">전</span>1280 · 512 그림을 1.75배</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_cutin_lumi_1280_after.png" alt="후 1280"><figcaption><span class="tag new">후</span>1280 · 원본 767×744를 1.20배</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_cutin_lumi_1600_before.png" alt="전 1600"><figcaption><span class="tag cur">전</span>1600</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_cutin_lumi_1600_after.png" alt="후 1600"><figcaption><span class="tag new">후</span>1600</figcaption></figure>
+</div>
+</section>
+
+<section>
+<h2>3. 컷인 가장자리 후광 (원본 판 4배 · 어두운 띠 위)</h2>
+<p class="cap">배경 지운 판의 알파가 윤곽선 바깥으로 2~4px 넉넉해 원래 배경색(풀빛 · 하늘빛)이 거의 불투명하게 남아 있었습니다. 원본 일러스트로 가장자리만 다시 갈라(배경색과 그림색 사이 비율로 알파 · 배경을 덜어 낸 색) 13장 모두 정리했습니다. 손질 전 판: <code>design/backup/cutin_cut_v1/</code></p>
+<div class="pair">
+<figure><img src="img/artifacts_feedback70_sharpness_defringe_ciel_before.png" alt="시엘 전"><figcaption><span class="tag cur">전</span>시엘</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_defringe_ciel_after.png" alt="시엘 후"><figcaption><span class="tag new">후</span>시엘</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_defringe_marin_before.png" alt="마린 전"><figcaption><span class="tag cur">전</span>마린</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_defringe_marin_after.png" alt="마린 후"><figcaption><span class="tag new">후</span>마린</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_defringe_serena_before.png" alt="세레나 전"><figcaption><span class="tag cur">전</span>세레나</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_defringe_serena_after.png" alt="세레나 후"><figcaption><span class="tag new">후</span>세레나</figcaption></figure>
+</div>
+</section>
+
+<section>
+<h2>4. 아이 상세 큰 그림</h2>
+<h3>세레나 (전용 그림)</h3>
+<div class="pair">
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_hero_serena_1280_before.png" alt="전 1280"><figcaption><span class="tag cur">전</span>1280</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_hero_serena_1280_after.png" alt="후 1280"><figcaption><span class="tag new">후</span>1280</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_hero_serena_1600_before.png" alt="전 1600"><figcaption><span class="tag cur">전</span>1600</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_hero_serena_1600_after.png" alt="후 1600"><figcaption><span class="tag new">후</span>1600</figcaption></figure>
+</div>
+<h3>아르카 (신화)</h3>
+<div class="pair">
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_hero_arca_1280_before.png" alt="전 1280"><figcaption><span class="tag cur">전</span>1280</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_hero_arca_1280_after.png" alt="후 1280"><figcaption><span class="tag new">후</span>1280</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_hero_arca_1600_before.png" alt="전 1600"><figcaption><span class="tag cur">전</span>1600</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_hero_arca_1600_after.png" alt="후 1600"><figcaption><span class="tag new">후</span>1600</figcaption></figure>
+</div>
+<h3>루미 (SD)</h3>
+<div class="pair">
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_hero_lumi_1280_before.png" alt="전 1280"><figcaption><span class="tag cur">전</span>1280 · 368×512를 1.74배</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_hero_lumi_1280_after.png" alt="후 1280"><figcaption><span class="tag new">후</span>1280 · 원본 551×766을 1.16배</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_hero_lumi_1600_before.png" alt="전 1600"><figcaption><span class="tag cur">전</span>1600</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_hero_lumi_1600_after.png" alt="후 1600"><figcaption><span class="tag new">후</span>1600</figcaption></figure>
+</div>
+</section>
+
+<section>
+<h2>5. 편성 라인업 카드</h2>
+<div class="pair">
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_formation_1280_before.png" alt="전 1280"><figcaption><span class="tag cur">전</span>1280 · filter_linear</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_formation_1280_after.png" alt="후 1280"><figcaption><span class="tag new">후</span>1280 · filter_linear_mipmap</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_formation_1600_before.png" alt="전 1600"><figcaption><span class="tag cur">전</span>1600</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_formation_1600_after.png" alt="후 1600"><figcaption><span class="tag new">후</span>1600</figcaption></figure>
+</div>
+</section>
+
+<section>
+<h2>6. 소환 공개 (확인 · 바꾸지 않음)</h2>
+<div class="pair">
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_gacha_ss_1280_before.png" alt="SS 전 1280"><figcaption><span class="tag cur">전</span>SS 1280</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_gacha_ss_1280_after.png" alt="SS 후 1280"><figcaption><span class="tag new">후</span>SS 1280</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_gacha_ss_1600_before.png" alt="SS 전 1600"><figcaption><span class="tag cur">전</span>SS 1600</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_gacha_ss_1600_after.png" alt="SS 후 1600"><figcaption><span class="tag new">후</span>SS 1600</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_gacha_sd_1280_before.png" alt="SD 전 1280"><figcaption><span class="tag cur">전</span>SD 1280</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_gacha_sd_1280_after.png" alt="SD 후 1280"><figcaption><span class="tag new">후</span>SD 1280</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_gacha_sd_1600_before.png" alt="SD 전 1600"><figcaption><span class="tag cur">전</span>SD 1600</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_gacha_sd_1600_after.png" alt="SD 후 1600"><figcaption><span class="tag new">후</span>SD 1600</figcaption></figure>
+</div>
+</section>
+
+<section>
+<h2>7. 이야기 무대 SD (확인 · 바꾸지 않음)</h2>
+<div class="pair">
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_story_1280_before.png" alt="전 1280"><figcaption><span class="tag cur">전</span>1280</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_story_1280_after.png" alt="후 1280"><figcaption><span class="tag new">후</span>1280</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_story_1600_before.png" alt="전 1600"><figcaption><span class="tag cur">전</span>1600</figcaption></figure>
+<figure><img src="img/artifacts_feedback70_sharpness_crops_sharp_story_1600_after.png" alt="후 1600"><figcaption><span class="tag new">후</span>1600</figcaption></figure>
+</div>
+</section>
+
+<section>
+<h2>용량 · 메모리</h2>
+<table>
+<tr><th>항목</th><th>전</th><th>후</th></tr>
+<tr><td>APK: 컷인 전용 판 13장 (무손실 WebP, 밉맵 포함)</td><td>약 17.2MB</td><td>약 24.9MB (+7.6MB)</td></tr>
+<tr><td>VRAM: 전용 판 1장 (1672×941 RGBA)</td><td>6.3MB</td><td>8.4MB (+2.1MB, 컷인 · 상세에 떠 있는 동안만)</td></tr>
+<tr><td>VRAM: 큰 SD 한 자세 (예: 루미 공격 767×744)</td><td>512 그림 약 1.4MB</td><td>약 3.0MB (+1.6MB, 연 아이 · 컷인 아이만 캐시)</td></tr>
+</table>
+</section>
+</main>
+</body>
+</html>

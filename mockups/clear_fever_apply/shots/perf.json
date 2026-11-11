@@ -1,0 +1,57 @@
+[
+  {
+    "avg_ms": 4.93,
+    "frames": 609,
+    "gpu_p50_ms": 1.22,
+    "gpu_p95_ms": 2.32,
+    "label": "battle",
+    "max_ms": 19.77,
+    "p95_ms": 7.16,
+    "renderer": "gl_compatibility",
+    "width": 1600
+  },
+  {
+    "avg_ms": 5.13,
+    "frames": 781,
+    "gpu_p50_ms": 1.39,
+    "gpu_p95_ms": 2.42,
+    "label": "fever",
+    "max_ms": 15.44,
+    "p95_ms": 7.88,
+    "renderer": "gl_compatibility",
+    "width": 1600
+  },
+  {
+    "avg_ms": 6.1,
+    "frames": 656,
+    "gpu_p50_ms": 1.13,
+    "gpu_p95_ms": 2.39,
+    "label": "fever+wind",
+    "max_ms": 17.61,
+    "p95_ms": 8.91,
+    "renderer": "gl_compatibility",
+    "width": 1600
+  },
+  {
+    "avg_ms": 6.51,
+    "frames": 461,
+    "gpu_p50_ms": 1.4,
+    "gpu_p95_ms": 2.64,
+    "label": "wind",
+    "max_ms": 20.32,
+    "p95_ms": 10.43,
+    "renderer": "gl_compatibility",
+    "width": 1600
+  },
+  {
+    "avg_ms": 3.96,
+    "frames": 632,
+    "gpu_p50_ms": 1.36,
+    "gpu_p95_ms": 2.45,
+    "label": "clear",
+    "max_ms": 14.07,
+    "p95_ms": 5.45,
+    "renderer": "gl_compatibility",
+    "width": 1600
+  }
+]

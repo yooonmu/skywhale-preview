@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 · 키웠을 때 한마디 — 꼬리 고침 · 모든 아이 적용</title>
+<style>
+:root{--navy:#2e2350;--lav:#8b74e8;--gold:#d9a52b;--cream:#fff8ec;--line:#e2dbf5}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;line-height:1.5}
+.page{max-width:1240px;margin:0 auto;padding:20px 16px 64px}
+h1{font-size:22px;margin:0 0 4px}
+h2{font-size:18px;margin:0 0 6px}
+h3{font-size:15px;margin:12px 0 6px}
+.lead{margin:0 0 16px;font-size:14px;color:#5a5180}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
+.bar button,.bar a{font:inherit;font-size:14px;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer;display:inline-flex;align-items:center;text-decoration:none}
+.bar button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.bar a{background:var(--cream);border-color:#ecd9a8;font-weight:700}
+section{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 18px}
+.cap{margin:0 0 10px;font-size:14px;color:#4c4374}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+figure{margin:0}
+figcaption{font-size:13px;color:#6a6290;margin:4px 0 0}
+video,img{width:100%;display:block;border-radius:8px;background:#1d1838}
+.zoom img{background:#2a1f5c;image-rendering:auto}
+.tag{display:inline-block;padding:1px 10px;border-radius:10px;font-size:12px;font-weight:700;margin-right:6px}
+.cur{background:#ece7ff;color:#5b44c4}.new{background:#ffe7a6;color:#7a4b00}
+.who{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:14px 0 6px;font-weight:700}
+.pill{display:inline-block;padding:0 9px;border-radius:9px;font-size:11px;font-weight:800;color:#1d1530;line-height:18px}
+.pill.plain{background:#ece7ff;color:#5b44c4}
+.pill.rainbow{background:linear-gradient(90deg,#ff5f4f,#ff9a3c,#ffd75e,#4fd18b,#3fa9ff,#9a6bff)}
+table{border-collapse:collapse;font-size:14px;width:100%}
+td,th{border-top:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{width:150px;color:#5a5180;font-weight:700}
+@media (max-width:860px){.pair{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){video{display:none}}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>키웠을 때 한마디 — 꼬리 고침 · 63명 모두 적용</h1>
+<p class="lead">PD 승인한 말풍선 한마디에서 <b>꼬리(꼭지)와 몸통의 이음매</b>를 고치고, <b>63명 모두</b>(신화 포함)에게 넣었습니다. 아래는 실제 게임 화면입니다 (같은 저장 · 같은 순서).</p>
+<div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button><a href="lines.html">63명 대사표 보기 →</a></div>
+
+<section>
+  <h2>1. 꼬리 고침 — 세 자리</h2>
+  <p class="cap">PD 3차 의견: 꼬리 <b>끝은 뾰족하게</b>. 나머지는 지난번 그대로입니다: <b>밑동 폭 32px</b>(1280 기준)이 몸통 테두리에 <b>접하며 오목하게 흘러나오고</b>(꺾임 없음), 한쪽이 Bézier 곡선 하나로 이어지며 <b>얼굴 쪽으로 휩니다</b>. 끝의 둥근 반원을 빼고 두 옆선이 <b>32°로 만나는 뾰족한 점</b>이 되게 했고, 테두리는 끝에서 <b>마이터(뾰족한 이음)</b>로 만나 끝까지 같은 2px 두께입니다(무뎌지거나 튀어나오지 않음). 몸통과 꼬리는 테셀레이션한 <b>다각형 하나</b>라 테두리 · 그림자가 한 바퀴 이어지고, 채움은 몸통과 같은 그러데이션을 그 자리 그대로 이어 받습니다. 같은 칸 · 같은 글에 지난번(둥근 끝) / 지금(뾰족한 끝) 그리기만 바꿔 찍었고, <b>3배</b>로 키운 화면입니다.</p>
+  <h3>머리 옆 (얼굴 오른쪽 · 가장 흔한 자리) — 유나 승급</h3>
+  <div class="pair zoom">
+    <figure><img data-zoom="before_left" alt="지난번 꼬리 · 머리 옆"><figcaption><span class="tag cur">지난번</span>둥근 끝</figcaption></figure>
+    <figure><img data-zoom="after_left" alt="새 꼬리 · 머리 옆"><figcaption><span class="tag new">지금</span>넓은 밑동 · 얼굴 쪽으로 휜 곡선 · 뾰족한 끝</figcaption></figure>
+  </div>
+  <h3>머리 위 — 미오 승급 (대비용 자리: 실제 플레이에서는 나오지 않음)</h3>
+  <p class="cap">머리 위는 머리 옆 · 반대쪽이 모두 막혔을 때만 쓰는 <b>대비 자리</b>입니다. 지금 63명의 모든 대사(1280 · 1600)는 머리 옆이나 반대쪽에 들어가서 QA 집계에서도 0/632번이었습니다 — PD가 게임에서 보실 일은 없고, 모양 확인용으로만 억지로 띄웠습니다.</p>
+  <div class="pair zoom">
+    <figure><img data-zoom="before_bottom" alt="지난번 꼬리 · 머리 위"><figcaption><span class="tag cur">지난번</span></figcaption></figure>
+    <figure><img data-zoom="after_bottom" alt="새 꼬리 · 머리 위"><figcaption><span class="tag new">지금</span>아래로 얼굴을 가리킴</figcaption></figure>
+  </div>
+  <h3>반대쪽 (얼굴 왼쪽) — 루미 승급</h3>
+  <div class="pair zoom">
+    <figure><img data-zoom="before_right" alt="지난번 꼬리 · 반대쪽"><figcaption><span class="tag cur">지난번</span></figcaption></figure>
+    <figure><img data-zoom="after_right" alt="새 꼬리 · 반대쪽"><figcaption><span class="tag new">지금</span>오른쪽 얼굴을 가리킴</figcaption></figure>
+  </div>
+  <h3>전체 화면 (지금)</h3>
+  <div class="pair">
+    <figure><img data-full="after_left" alt="머리 옆 전체 화면"><figcaption>머리 옆 · 유나</figcaption></figure>
+    <figure><img data-full="after_bottom" alt="머리 위 전체 화면"><figcaption>머리 위 · 미오</figcaption></figure>
+    <figure><img data-full="after_right" alt="반대쪽 전체 화면"><figcaption>반대쪽 · 루미</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>2. 모든 아이 적용 — 표본 다섯 명</h2>
+  <p class="cap">레벨 업 한 번 / 승급(무대를 1.6초에 닫은 뒤) 녹화와 띠(6장). A 컷인(유나) · SS(이그니, 불꽃 색) · 신화(아르카, 무지개) · SD 그림(루미 S · 세나 B · 다희 A, 모자). 유나는 레벨 업 다섯 번 빠르게도 — 말풍선 하나로 합쳐지고 버튼을 막지 않습니다. 또 <b>승급 한마디가 떠 있는 동안 레벨 업 세 번</b>: 승급 말풍선이 같은 크기 · 같은 자리 · 같은 글씨(20px)로 그대로 남습니다(전에는 16~18px로 작아져 다시 그려졌음).</p>
+  <p class="cap"><b>QA 고침</b> — ① SD 그림의 꼬리는 얼굴 칸 가운데가 아니라 초상화 기준점의 <b>눈높이(얼굴 가운데)</b>를 가리킵니다. 모자 · 고글이 있는 다희 · 루미는 전에 머리카락(1280에서 y≈218)을 가리켰고, 이제 눈 쪽(y≈330)을 가리킵니다. ② 좁은 자리에서도 <b>마지막 줄에 낱말 하나만 남지 않게</b> 줄 폭을 고르게 나눕니다(루미 「…숨을 곳은 / 없어.」 → 「배율이 한 단계 / 올랐어. 숨을 / 곳은 없어.」).</p>
+  <div id="samples"></div>
+</section>
+
+<section>
+  <h2>무엇을 정했나요</h2>
+  <table>
+    <tr><th>대사</th><td>63명 × 레벨 업 3줄 · 승급 2줄 (유나는 승인한 3줄 그대로) = 316줄. 아이마다 궁극기 대사 · 전투 대사 · 이야기 · SS 소환 대사 · 외형 · 무기에서 말투를 잡았습니다 (항해사님에게 존댓말/반말도 원래 대사대로, 신화는 제 설정대로: 아르카 = 첫 채색사의 제자, 윤슬 = 고래와의 약속, 녹스 = 속죄하는 잿빛 왕관). 같은 줄이 두 아이에게 겹치지 않습니다. <a href="lines.html">대사표</a></td></tr>
+    <tr><th>얼굴 칸</th><td>컷인 그림이 있는 13명은 그림마다 얼굴 칸(머리 장식 · 왕관 · 모자 위부터 턱까지)을 25px 격자로 쟀고, SD 그림 50명은 공통 초상화 기준점의 <b>머리 실루엣</b>(머리카락 · 장식 포함, 옆으로 길게 늘어진 머리는 얼굴 둘레까지)을 얼굴 칸으로 봅니다. 꼬리는 컷인 = 얼굴 칸 가운데, SD 그림 = 기준점의 눈높이를 가리킵니다.</td></tr>
+    <tr><th>줄 나누기</th><td>띄어쓰기 단위로만 나누고, 같은 줄 수 안에서 가장 고른 폭으로 — 마지막 줄에 짧은 낱말 하나만 남으면 다른 나눔을 고릅니다.</td></tr>
+    <tr><th>자리</th><td>머리 옆 · 머리 위 · 반대쪽 중 얼굴 칸 · 레벨 원 · ◀ ▶ · 크림 판(그림자 + 12px)과 겹치지 않는 자리, 그중 <b>줄 수가 가장 적은 곳</b> (같으면 머리 옆이 먼저). 좁은 틈에 세 줄로 접힌 말풍선 대신 두 줄로 놓입니다.</td></tr>
+    <tr><th>자동 검사</th><td>63명의 모든 줄을 1280 · 1600에서 띄워 봅니다 — 글자가 말풍선 안 · 얼굴 칸 · 레벨 원 · ◀ ▶ · 크림 판과 안 겹침 · 꼬리가 한 윤곽 안에 있고 얼굴 쪽을 가리키며 얼굴 칸에 닿지 않음 · 이음매 꺾임 40° 미만(끝 점 제외) · 끝은 뾰족함(120° 넘게 꺾임) · 대사 띄어쓰기/문장 부호 · 겹치는 줄 없음 (tools/fb70_overflow_check.gd).</td></tr>
+    <tr><th>그대로인 것</th><td>그림 · 입자 연출 없음, 말풍선 속 얼굴 없음, 빠른 레벨 업 합치기(1.6초), 누르기를 막지 않음, 승급은 조금 큰 글씨로 조금 더 오래(그동안 레벨 업을 눌러도 승급 말풍선 그대로).</td></tr>
+  </table>
+</section>
+</main>
+<script>
+const base='media/';
+const samples=[
+  ['yuna','유나','<span class="pill plain">A</span> 별 · 컷인',['level','level_rapid','star','star_level']],
+  ['ignis','이그니','<span class="pill" style="background:#ff5f4f">SS</span> 불꽃 · 컷인',['level','star']],
+  ['arca','아르카','<span class="pill rainbow">신화</span> 무지개 · 컷인',['level','star']],
+  ['lumi','루미','<span class="pill plain">S</span> 별 · SD 그림',['level','star']],
+  ['sena','세나','<span class="pill plain">B</span> 노을 · SD 그림',['level','star']],
+  ['dahee','다희','<span class="pill plain">A</span> SD 그림 · 모자 (꼬리가 눈 쪽을 가리킴)',['level','star']],
+];
+const KIND={level:'레벨 업 한 번',level_rapid:'레벨 업 다섯 번 빠르게',star:'승급',star_level:'승급 한마디 중 레벨 업 세 번 (승급 말풍선 그대로)'};
+const box=document.getElementById('samples');
+box.innerHTML=samples.map(([id,name,meta,kinds])=>`<div class="who">${name} ${meta}</div>`+kinds.map(k=>`<div class="pair" style="margin-bottom:10px"><figure><video data-clip="r3_${id}_${k}" muted loop playsinline controls preload="none"></video><figcaption>${KIND[k]}</figcaption></figure><figure><img data-clip="r3_${id}_${k}" data-strip alt="${name} ${KIND[k]} 띠" loading="lazy"><figcaption>띠 6장</figcaption></figure></div>`).join('')).join('');
+let res='1280';
+const load=()=>{
+  document.querySelectorAll('img[data-zoom]').forEach(i=>{i.src=`${base}tail/zoom_${i.dataset.zoom}_${res}.png`});
+  document.querySelectorAll('img[data-full]').forEach(i=>{i.src=`${base}tail/tail_${i.dataset.full}_${res}.jpg`});
+  document.querySelectorAll('video[data-clip]').forEach(v=>{v.src=`${base}${v.dataset.clip}_${res}.mp4`});
+  document.querySelectorAll('img[data-strip]').forEach(i=>{i.src=`${base}${i.dataset.clip}_${res}_strip.jpg`});
+};
+document.querySelectorAll('.bar [data-res]').forEach(b=>b.addEventListener('click',()=>{res=b.dataset.res;document.querySelectorAll('.bar [data-res]').forEach(x=>x.setAttribute('aria-pressed',x===b));load()}));
+load();
+</script>
+</body>
+</html>

@@ -1,0 +1,1030 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>레인보우 아틀리에 · UI 전수 조사 · 다시 그리기 계획</title>
+<style>
+:root{--ink:#3b2c7a;--soft:#6d6496;--cream:#fffaf2;--cream2:#f6f0ff;--lav:#8f7be8;--lav2:#e9e3ff;--gold:#c99a2e;--line:#e3dcf5;
+  --a:#1f7a5e;--b:#4a55c8;--c:#6b6680;--d:#b8461f;--x:#b9b3c9}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;color:var(--ink);background:linear-gradient(180deg,#f3eeff 0,#fffaf2 420px);line-height:1.5}
+header{padding:28px 36px 18px;background:linear-gradient(110deg,#4b3a9a,#8f7be8 60%,#f2b8d0);color:#fff}
+header h1{margin:0 0 6px;font-size:26px;letter-spacing:-.3px}
+header p{margin:4px 0;opacity:.95;font-size:14px}
+main{padding:18px 36px 60px;max-width:1500px;margin:0 auto}
+h2{font-size:21px;margin:34px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+h3{font-size:17px;margin:0}
+.sum{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.sum div{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 16px;min-width:120px;box-shadow:0 2px 6px #3b2c7a10}
+.sum b{display:block;font-size:24px}
+.chip{display:inline-block;font-size:12px;font-weight:700;color:#fff;border-radius:999px;padding:1px 10px;vertical-align:middle;white-space:nowrap}
+.ca{background:var(--a)}.cb{background:var(--b)}.cc{background:var(--c)}.cd{background:var(--d)}
+.cx{background:#fff;color:#5f5873;border:1px solid var(--x)}
+.box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:12px 0;box-shadow:0 2px 8px #3b2c7a0c}
+.box ul{margin:6px 0;padding-left:20px}
+table{border-collapse:collapse;width:100%;background:#fff;border-radius:12px;overflow:hidden;font-size:13.5px}
+th,td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--lav2);font-weight:700;white-space:nowrap}
+.batch{margin:26px 0 8px;padding:14px 18px;background:linear-gradient(100deg,#fff,#f6f0ff);border:1px solid var(--line);border-left:6px solid var(--d);border-radius:14px}
+.batch .meta{font-size:13px;color:var(--soft);margin-top:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(440px,100%),1fr));gap:14px;margin-top:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 2px 8px #3b2c7a0f;display:flex;flex-direction:column}
+.card .shot{display:block;background:#2a2340;aspect-ratio:16/9;overflow:hidden}
+.card .shot img{width:100%;height:100%;object-fit:cover;display:block}
+.card .path{font:11px/1.4 Consolas,monospace;color:#6f6890;padding:4px 12px 0;word-break:break-all}
+.card .body{padding:8px 14px 14px;font-size:13.5px}
+.card h4{margin:4px 0 4px;font-size:16px}
+.card .src{font:11.5px Consolas,monospace;color:#635c7a;word-break:break-word}
+.card .now{color:#9a5a45}
+.card .dir{font-weight:700;margin:6px 0}
+.card dl{margin:6px 0 0}
+.card dt{font-weight:700;font-size:12.5px;color:#5b46c4;margin-top:6px}
+.card dd{margin:2px 0 0 0}
+.card ol{margin:2px 0 0;padding-left:18px}
+.card .note{font-size:12.5px;color:var(--soft);margin-top:6px}
+.mini{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:12px;margin-top:10px}
+.mini .card .body{font-size:13px}
+.id{font:700 12px Consolas,monospace;color:var(--d)}
+footer{margin-top:40px;font-size:12.5px;color:var(--soft)}
+code{font-family:Consolas,monospace;font-size:12px;background:#f1edfb;padding:1px 4px;border-radius:4px;word-break:break-all}
+@media (max-width:600px){header{padding:20px 16px 14px}main{padding:14px 12px 40px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>UI 전수 조사 · 다시 그리기 계획 — 레인보우 아틀리에</h1>
+  <p>PD 결정: 피드백 70에서 새로 그리지 않은 모든 화면 · 팝업 · 알림은 <b>화면마다 고유한 디자인</b>으로 다시 그린다 (비슷한 판 · 버튼 재사용 금지). <b>전투 화면도</b> 확정 · 진행 중인 시안(전투 HUD B · 정화/폭주/순풍 B · 컷인 A)을 뺀 나머지를 모두 다시 그린다 → <a href="#battle" style="color:#fff">전투 화면</a>.</p>
+  <p>모든 화면은 <b>시안 → PD 확정 → 구현</b> 순서 (작은 알림까지). 캡처는 모두 1280×720 · 2026-11-10 빌드.</p>
+</header>
+<main>
+
+<div class="sum">
+  <div>전체 화면 · 팝업 · 알림 · 전투 표시<b>95</b></div>
+  <div><span class="chip ca">a</span> 이번 라운드 새로 그림<b>9</b></div>
+  <div><span class="chip cb">b</span> 다른 에이전트 시안 진행 중<b>8</b></div>
+  <div><span class="chip cc">c</span> 없앨 예정<b>2</b></div>
+  <div><span class="chip cd">d</span> 아직 안 그림 · 비전투<b>52</b></div>
+  <div><span class="chip cd">d</span> <span class="chip cx">전투</span> 아직 안 그림 · 전투 화면<b>24</b></div>
+</div>
+
+<div class="box">
+  <b>분류</b> —
+  <span class="chip ca">a</span> 피드백 70에서 시안 확정 · 구현 끝 (타이틀 A · 전투 HUD B · 편성 B · 아이 상세 A · 승급 확인 2 · 장비 작업대 A · 컷인 A · 손가락 안내 강조) ·
+  <span class="chip cb">b</span> 시안 진행 중 (<code>design/mockups/feedback70/{summon,clear_fever,colormap,rewards}</code>) ·
+  <span class="chip cc">c</span> 없앰 (#49 의뢰) ·
+  <span class="chip cd">d</span> 이번 계획 대상 (비전투 1~11 묶음 · <span class="chip cx">전투</span> 전투 1~5 묶음).
+</div>
+
+<div class="box">
+  <b>시안 규칙 (묶음 하나 = PD 한 번 검토)</b>
+  <ul>
+    <li>화면마다: 지금 게임 캡처 옆에 <b>방향이 다른 시안 2~3개</b> (색만 바꾼 변형 금지 — 구조 · 주인공이 달라야 함). 아래 「시안에 담을 상태」를 모두 한 화면씩 보여 준다.</li>
+    <li>1280×720 기준 + 1600×720 한 장. 터치 칸 44px 이상, 글자 넘침 없이.</li>
+    <li>게임에 있는 그림만 (SD · 초상 · 컷인 · 아이콘 · 배경). 수치 · 문구는 캡처와 같게 (확률 공시 등 법정 문구는 그대로).</li>
+    <li>공통으로 지킬 것: 글꼴, 등급 색 규칙 (SS = 그 아이의 속성 색 · 신화 = 무지개), 재화 아이콘. <b>판 · 버튼 · 장식은 화면 전용</b> — 지금의 공용 크림 판 + 라벤더 띠를 그대로 쓰지 않는다 (#3 「UI들이 너무 비슷함」의 원인).</li>
+    <li>(b) 시안과 겹치는 부품(보상 아이콘 칸 · 잠금 안내)은 그쪽 확정안을 따르고, 판과 연출만 그 화면 전용으로.</li>
+  </ul>
+</div>
+
+<h2>묶음 순서 (자주 보는 순)</h2>
+<table>
+  <tr><th>순서</th><th>묶음</th><th>화면</th><th>얼마나 자주 보나</th></tr>
+  <tr><td>1</td><td><a href="#g1">아이들 허브</a></td><td>6</td><td>접속마다 여러 번 — 성장 · 장비 · 목록을 오가며 진주를 쓴다. 메뉴 공통 틀은 모든 메뉴에서 보임</td></tr>
+  <tr><td>2</td><td><a href="#g2">접속 · 레벨 업 알림</a></td><td>4</td><td>접속할 때마다 (출석 · 항해일지), 퀘스트마다 (완료 알림 · 레벨 업)</td></tr>
+  <tr><td>3</td><td><a href="#g3">복귀 루프</a></td><td>4</td><td>하루 3~10번 (방치형의 핵심 반복)</td></tr>
+  <tr><td>4</td><td><a href="#g4">모험 허브 · 콘텐츠</a></td><td>6</td><td>매일 콘텐츠 5종 × 입장권</td></tr>
+  <tr><td>5</td><td><a href="#g5">모험 결과 · 정산</a></td><td>5</td><td>모험을 할 때마다 · 매주 정산</td></tr>
+  <tr><td>6</td><td><a href="#g6">분교 · 고래</a></td><td>4</td><td>하루 몇 번 (건설 · 연구 타이머, 보호막 막대를 누를 때)</td></tr>
+  <tr><td>7</td><td><a href="#g7">안내 · 도움말</a></td><td>4</td><td>첫 1주에 가장 많이 (가이드 퀘스트 44줄 · 첫 세션) — 첫인상이라 앞당겨도 됨</td></tr>
+  <tr><td>8</td><td><a href="#g8">상점 · 교환</a></td><td>5</td><td>하루 한 번 (무료 선물) + 가끔</td></tr>
+  <tr><td>9</td><td><a href="#g9">이야기</a></td><td>6</td><td>장 보스 · 아이 합류마다</td></tr>
+  <tr><td>10</td><td><a href="#g10">설정</a></td><td>4</td><td>드묾</td></tr>
+  <tr><td>11</td><td><a href="#g11">시스템 안내</a></td><td>4</td><td>예외 상황 (절전 · 종료 · 저장 손상 · 구매 실패)</td></tr>
+</table>
+
+<h2>대상 (d) — 묶음별 시안 계획</h2>
+
+<!-- ===== 1 ===== -->
+<div class="batch" id="g1"><h3>1 · 아이들 허브 <span class="chip cd">d · 6</span></h3>
+<div class="meta">한 번에 볼 것: 메뉴 공통 틀이 정해져야 나머지 메뉴 묶음이 따라간다. 아이 상세 A · 승급 확인 2 · 장비 작업대 A(a)와 같은 허브라 그 셋과 나란히 놓고 검토.</div></div>
+<div class="grid">
+<div class="card" data-id="D1-1" data-cls="d" data-batch="1 아이들 허브">
+  <a class="shot" href="img/after/menu_heroes_1280x720.jpg" target="_blank"><img src="img/after/menu_heroes_1280x720.jpg" alt="메뉴 공통 틀" loading="lazy"></a>
+  <div class="path">img/after/menu_heroes_1280x720.jpg</div>
+  <div class="body"><span class="id">D1-1</span> <span class="chip cd">d</span>
+  <h4>메뉴 공통 틀 (허브 탭 · 하위 탭 · 지갑 · 닫기)</h4><div class="src">scripts/menus.gd _render · _header · _tab</div>
+  <div class="now">지금: 여섯 허브가 모두 같은 크림 판 + 라벤더 띠 + 같은 탭 버튼.</div>
+  <div class="dir">방향: 이동 골격은 하나로 얇게, 허브마다 바탕 결 · 색 · 장식이 달라지는 「아틀리에 서랍」.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>허브 6개 각각 고른 모습 · 잠긴 허브(항해사 Lv.N 필요) · 하위 탭 빨간 점 · 판 전체를 덮는 화면(아이 상세 · 작업대)에서 숨김 · 1600 폭</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 오른쪽 세로 책갈피 — 허브 = 색 책갈피, 본문 가로 폭 최대</li><li>B 위 띠 유지 + 허브별 무늬 (아이들 수채 · 모험 항해도 · 분교 칠판 · 상점 진열장)</li><li>C 하단 메뉴 바가 그대로 올라와 시트가 됨 — 닫기 = 아래로 내리기</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D1-2" data-cls="d" data-batch="1 아이들 허브">
+  <a class="shot" href="img/after/menu_heroes_1280x720.jpg" target="_blank"><img src="img/after/menu_heroes_1280x720.jpg" alt="아이들 목록" loading="lazy"></a>
+  <div class="path">img/after/menu_heroes_1280x720.jpg</div>
+  <div class="body"><span class="id">D1-2</span> <span class="chip cd">d</span>
+  <h4>아이들 목록</h4><div class="src">scripts/menus.gd _heroes · _hero_cell</div>
+  <div class="now">지금: 같은 카드 격자, 갑판 위 / 대기 구분만.</div>
+  <div class="dir">방향: 「분교 학생 앨범」 — 갑판 위 네 명은 크게, 나머지는 촘촘한 사진첩.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>만난 아이 21명 · 60명(스크롤) · 속성 거르기 · 성장 가능 빨간 점 · NEW · SS(속성 색) · 신화(무지개) · 1600</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 폴라로이드 앨범 — 갑판 4명이 첫 장</li><li>B 등급 선반 진열 — SS · 신화는 액자</li><li>C 왼쪽 큰 미리보기 + 오른쪽 목록 (누르면 바로 상세)</li></ol></dd></dl>
+  <div class="note">#68 「갑판 위」 묶음은 그대로 둔다.</div></div></div>
+
+<div class="card" data-id="D1-3" data-cls="d" data-batch="1 아이들 허브">
+  <a class="shot" href="img/after/menu_growth_1280x720.jpg" target="_blank"><img src="img/after/menu_growth_1280x720.jpg" alt="성장" loading="lazy"></a>
+  <div class="path">img/after/menu_growth_1280x720.jpg</div>
+  <div class="body"><span class="id">D1-3</span> <span class="chip cd">d</span>
+  <h4>성장 (영구 레벨 · 승급)</h4><div class="src">scripts/menus.gd _growth · _growth_row</div>
+  <div class="now">지금: 한 줄에 글자 7~8줄, 버튼 넷.</div>
+  <div class="dir">방향: 「진주로 키우는 화분」 — 한 줄에 숫자 둘(성장 Lv · ★)과 큰 버튼 둘만, 자세한 수치는 누를 때.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>레벨 업 가능 · 진주 부족 · 레벨 상한 · 승급 가능 / 결정 부족 · 각성 단계 · ×1 / ×10 / MAX · 레벨 업 순간(#45 빛 고리 유지) · 분교 단합 띠</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 얇은 줄 목록 — 줄 높이 절반, 비용은 알약</li><li>B 한 아이 집중 — 왼쪽 목록 + 오른쪽 큰 성장판</li><li>C 4열 타일 + 아래에서 올라오는 시트</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D1-4" data-cls="d" data-batch="1 아이들 허브">
+  <a class="shot" href="img/after/gear_list_1280x720.jpg" target="_blank"><img src="img/after/gear_list_1280x720.jpg" alt="장비 목록" loading="lazy"></a>
+  <div class="path">img/after/gear_list_1280x720.jpg</div>
+  <div class="body"><span class="id">D1-4</span> <span class="chip cd">d</span>
+  <h4>장비 목록 (아이 · 착용 4칸 · 가방)</h4><div class="src">scripts/menus.gd _gear · _gear_card</div>
+  <div class="now">지금: 작업대(A)와 달리 옛 세 칸 판 그대로.</div>
+  <div class="dir">방향: 작업대와 이어지는 「공방 선반」 — 착용 4칸은 아이 SD 둘레, 가방은 서랍.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>4칸 꽉 참 / 빈 칸 · 가방 비어 있음 / 30개 이상 · 부위 탭 · 도감 · 색가루 · 일괄 연성 가능 · ⓘ</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 마네킹 + 서랍</li><li>B 페그보드 벽 — 부위별 고리에 걸린 장비</li><li>C 가방 중심 격자 + 위쪽 착용 띠</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D1-5" data-cls="d" data-batch="1 아이들 허브">
+  <a class="shot" href="img/inventory/inv_awaken_steps_1280x720.jpg" target="_blank"><img src="img/inventory/inv_awaken_steps_1280x720.jpg" alt="각성 단계별 효과" loading="lazy"></a>
+  <div class="path">img/inventory/inv_awaken_steps_1280x720.jpg</div>
+  <div class="body"><span class="id">D1-5</span> <span class="chip cd">d</span>
+  <h4>각성 단계별 효과 창</h4><div class="src">scripts/menus.gd _result_panel (성장 「단계별 효과」)</div>
+  <div class="now">지금: 공용 결과 창에 글자 목록.</div>
+  <div class="dir">방향: 「별자리 잇기」 — 다섯 단계를 이은 별자리, 지금 단계까지 빛남.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>0/5 · 3/5 · 5/5(외형 · 궁극기 진화) · 4단계 아이(S 이하) · SS(속성 색) · 신화(무지개)</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 별자리</li><li>B 아래에서 위로 오르는 각성 계단</li><li>C 카드 뒷면에 새겨진 각인</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D1-6" data-cls="d" data-batch="1 아이들 허브">
+  <a class="shot" href="img/inventory/inv_gear_merge_1280x720.jpg" target="_blank"><img src="img/inventory/inv_gear_merge_1280x720.jpg" alt="장비 연성 결과" loading="lazy"></a>
+  <div class="path">img/inventory/inv_gear_merge_1280x720.jpg</div>
+  <div class="body"><span class="id">D1-6</span> <span class="chip cd">d</span>
+  <h4>장비 연성 · 잠재 등급 상승 결과 창</h4><div class="src">scripts/menus.gd 「일괄 연성」 → _result_panel · scripts/ui/gear_bench.gd 「잠재 등급 상승!」</div>
+  <div class="now">지금: 각성 창과 같은 공용 결과 창.</div>
+  <div class="dir">방향: 「물감 섞기」 — 네 개가 하나로 섞여 새 장비 카드가 나옴.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>연성 n개 성공 · 연성할 것 없음(안내) · 잠재 등급 상승</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 팔레트 위 네 방울이 하나로</li><li>B 가마에서 꺼낸 카드</li><li>C 창 없이 작업대 위 리본 알림</li></ol></dd></dl></div></div>
+</div>
+
+<!-- ===== 2 ===== -->
+<div class="batch" id="g2"><h3>2 · 접속 · 레벨 업 알림 <span class="chip cd">d · 4</span></h3>
+<div class="meta">보상 아이콘 칸은 (b) rewards 시안을 따르고, 여기서는 「그 순간」의 판과 연출만. 출석 → 항해일지가 연달아 뜨는 흐름도 한 장.</div></div>
+<div class="grid">
+<div class="card" data-id="D2-1" data-cls="d" data-batch="2 접속 · 레벨 업 알림">
+  <a class="shot" href="img/after/start_popup_1_1280x720.jpg" target="_blank"><img src="img/after/start_popup_1_1280x720.jpg" alt="출석 보상" loading="lazy"></a>
+  <div class="path">img/after/start_popup_1_1280x720.jpg</div>
+  <div class="body"><span class="id">D2-1</span> <span class="chip cd">d</span>
+  <h4>출석 보상</h4><div class="src">scripts/economy.gd check_attendance → RewardPopup</div>
+  <div class="now">지금: 공용 보상 판에 채색석 한 칸.</div>
+  <div class="dir">방향: 「분교 출석부 도장」 — 이번 주 7칸, 오늘 칸에 도장이 찍힘.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>1일째 · 7일째 · 월정액 몫 포함 · 이어서 항해일지가 뜨는 순서</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 출석부 펼침 + 도장</li><li>B 고래 우편 봉투</li><li>C 창 없이 위쪽 7칸 띠</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D2-2" data-cls="d" data-batch="2 접속 · 레벨 업 알림">
+  <a class="shot" href="img/inventory/inv_logbook_1280x720.jpg" target="_blank"><img src="img/inventory/inv_logbook_1280x720.jpg" alt="항해일지" loading="lazy"></a>
+  <div class="path">img/inventory/inv_logbook_1280x720.jpg</div>
+  <div class="body"><span class="id">D2-2</span> <span class="chip cd">d</span>
+  <h4>항해일지 (방치 보상)</h4><div class="src">scripts/hud.gd show_logbook</div>
+  <div class="dir">방향: 「항해 일지 한 쪽」 — 떠나 있던 시간 · 지나온 항로 · 모은 바람 조각을 손글씨로.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>10분 · 3시간 · 8시간(상한) · 출석 보상과 연달아</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 가죽 일지 펼침</li><li>B 항로 지도 점선</li><li>C 돌아온 고래 그림 카드 + 숫자 한 줄</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D2-3" data-cls="d" data-batch="2 접속 · 레벨 업 알림">
+  <a class="shot" href="img/inventory/inv_acct_levelup_1280x720.jpg" target="_blank"><img src="img/inventory/inv_acct_levelup_1280x720.jpg" alt="항해사 레벨 업" loading="lazy"></a>
+  <div class="path">img/inventory/inv_acct_levelup_1280x720.jpg</div>
+  <div class="body"><span class="id">D2-3</span> <span class="chip cd">d</span>
+  <h4>항해사 레벨 업 · 새 콘텐츠 열림</h4><div class="src">scripts/main.gd add_exp → RewardPopup</div>
+  <div class="dir">방향: 「계급장 수여 + 문 열림」 — 큰 레벨 숫자, 열린 콘텐츠 그림 카드가 펼쳐지고 하단 메뉴 자물쇠가 풀림.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>레벨 업만(채색석 30) · 새 콘텐츠 1개 · 2개 · 두 레벨 연속</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 금빛 계급장</li><li>B 새 콘텐츠 문 열림</li><li>C 창 없이 위쪽 띠 + 메뉴 아이콘이 풀림</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D2-4" data-cls="d" data-batch="2 접속 · 레벨 업 알림">
+  <a class="shot" href="img/inventory/inv_toast_ok_1280x720.jpg" target="_blank"><img src="img/inventory/inv_toast_ok_1280x720.jpg" alt="완료 알림" loading="lazy"></a>
+  <div class="path">img/inventory/inv_toast_ok_1280x720.jpg</div>
+  <div class="body"><span class="id">D2-4</span> <span class="chip cd">d</span>
+  <h4>완료 알림 토스트 (추천 편성 · 새 덱 탭 · 되돌림 · 신화 1명 제한)</h4><div class="src">scripts/hud.gd system_msg</div>
+  <div class="now">지금: 잠금 안내와 같은 어두운 알약.</div>
+  <div class="dir">방향: 「붙였다 떼는 메모」 — 해낸 일은 금빛, 막힌 일은 회색 메모.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>성공 한 줄 · 두 줄(이유) · 제한 안내 · 메뉴 위 / 전투 위</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 메모지</li><li>B 붓 한 획 띠</li><li>C 유나 얼굴 + 한 줄</li></ol></dd></dl>
+  <div class="note">잠금 안내(#11)는 (b) rewards 시안 — 자리 · 크기를 그쪽과 맞춘다.</div></div></div>
+</div>
+
+<!-- ===== 3 ===== -->
+<div class="batch" id="g3"><h3>3 · 복귀 루프 <span class="chip cd">d · 4</span></h3>
+<div class="meta">확인 → 연출 → 보상이 한 흐름이라 네 화면을 이어 붙인 띠로 검토. #49로 「못 채운 의뢰」 문구는 사라진다.</div></div>
+<div class="grid">
+<div class="card" data-id="D3-1" data-cls="d" data-batch="3 복귀 루프">
+  <a class="shot" href="img/after/return_ask_1280x720.jpg" target="_blank"><img src="img/after/return_ask_1280x720.jpg" alt="복귀 확인" loading="lazy"></a>
+  <div class="path">img/after/return_ask_1280x720.jpg</div>
+  <div class="body"><span class="id">D3-1</span> <span class="chip cd">d</span>
+  <h4>학교로 복귀 확인</h4><div class="src">scripts/hud.gd _ask_return</div>
+  <div class="dir">방향: 「귀항 승선권」 — 받는 진주와 처음으로 돌아가는 것을 양쪽에.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>진주 n개 · 복귀 퀘스트 손가락 안내 중 · 1600</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 승선권 (절취선)</li><li>B 저울 판 — 남는 것 / 처음으로</li><li>C 학교를 바라보는 고래 그림 카드</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D3-2" data-cls="d" data-batch="3 복귀 루프">
+  <a class="shot" href="img/inventory/inv_return_short_1280x720.jpg" target="_blank"><img src="img/inventory/inv_return_short_1280x720.jpg" alt="복귀 불가" loading="lazy"></a>
+  <div class="path">img/inventory/inv_return_short_1280x720.jpg</div>
+  <div class="body"><span class="id">D3-2</span> <span class="chip cd">d</span>
+  <h4>복귀 불가 안내 (짧은 항해)</h4><div class="src">scripts/hud.gd _ask_return (진주 0)</div>
+  <div class="dir">방향: 창 대신 복귀 버튼 위 말풍선 + 「STAGE 4까지」 진행 막대.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>STAGE 1 · STAGE 3</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 버튼 위 말풍선</li><li>B 작은 진행 막대 카드</li><li>C 유나 한마디</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D3-3" data-cls="d" data-batch="3 복귀 루프">
+  <a class="shot" href="img/after/return_cutscene_f2_1280x720.jpg" target="_blank"><img src="img/after/return_cutscene_f2_1280x720.jpg" alt="귀환 연출" loading="lazy"></a>
+  <div class="path">img/after/return_cutscene_f2_1280x720.jpg</div>
+  <div class="body"><span class="id">D3-3</span> <span class="chip cd">d</span>
+  <h4>귀환 연출 띠 「모항으로 귀환」</h4><div class="src">scripts/hud.gd return_banner · white_flash</div>
+  <div class="dir">방향: 「항해 끝」 — 고래가 뱃머리를 돌리고 제목이 붓으로 칠해짐.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>시작 · 가운데 · 흰 섬광 · 학교 도착 (프레임 띠)</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 붓 띠 제목</li><li>B 항로 지도가 접힘</li><li>C 노을 하늘 전환</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D3-4" data-cls="d" data-batch="3 복귀 루프">
+  <a class="shot" href="img/after/return_reward_1280x720.jpg" target="_blank"><img src="img/after/return_reward_1280x720.jpg" alt="귀환 보상" loading="lazy"></a>
+  <div class="path">img/after/return_reward_1280x720.jpg</div>
+  <div class="body"><span class="id">D3-4</span> <span class="chip cd">d</span>
+  <h4>귀환 보상</h4><div class="src">scripts/main.gd return_to_school → RewardPopup 「귀환 보상」</div>
+  <div class="dir">방향: 「분교 도착 환영」 — 진주 + 이번 항해 기록(최고 STAGE).</div>
+  <dl><dt>시안에 담을 상태</dt><dd>진주만 · 기록 갱신 · 복귀 퀘스트 완료와 연달아</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 분교 정문 환영 카드</li><li>B 진주 항아리가 차오름</li><li>C 기록 리본</li></ol></dd></dl></div></div>
+</div>
+
+<!-- ===== 4 ===== -->
+<div class="batch" id="g4"><h3>4 · 모험 허브 · 콘텐츠 <span class="chip cd">d · 6</span></h3>
+<div class="meta">#55 AI 같은 배경 그림 · #56 겹침 · 도움말을 함께 푼다. 다섯 콘텐츠는 같은 틀에 그림만 바꾸지 말고 콘텐츠마다 주인공(달력 · 리그 · 복도 · 성벽 · 신전)을 다르게.</div></div>
+<div class="grid">
+<div class="card" data-id="D4-1" data-cls="d" data-batch="4 모험 허브 · 콘텐츠">
+  <a class="shot" href="img/after/adventure_hub_1280x720.jpg" target="_blank"><img src="img/after/adventure_hub_1280x720.jpg" alt="모험 허브" loading="lazy"></a>
+  <div class="path">img/after/adventure_hub_1280x720.jpg</div>
+  <div class="body"><span class="id">D4-1</span> <span class="chip cd">d</span>
+  <h4>모험 허브</h4><div class="src">scripts/menus.gd _adventure · scripts/adventure_pages.gd hub_card</div>
+  <div class="dir">방향: 「항해도」 — 여섯 곳이 지도 위 섬, 오늘 열린 곳이 빛남.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>오늘 열린 섬 · 입장권 0 · 잠김(항해사 Lv) · NEW · 정산까지 남은 시간 · 아래 보너스 줄</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 지도 위 섬</li><li>B 여행 포스터 6장</li><li>C 오늘 추천 하나 크게 + 작은 다섯</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D4-2" data-cls="d" data-batch="4 모험 허브 · 콘텐츠">
+  <a class="shot" href="img/after/adv_element_1280x720.jpg" target="_blank"><img src="img/after/adv_element_1280x720.jpg" alt="원소 구름섬" loading="lazy"></a>
+  <div class="path">img/after/adv_element_1280x720.jpg</div>
+  <div class="body"><span class="id">D4-2</span> <span class="chip cd">d</span>
+  <h4>원소 구름섬</h4><div class="src">scripts/adventure_pages.gd _element</div>
+  <div class="dir">방향: 「요일 섬 회전판 + 수호신 레벨 사다리」.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>오늘 섬 · 일요일 6곳 · 소탕 가능 · 입장권 0 · 관문 Lv · 원소 공명 단계</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 요일 회전판</li><li>B 세로 수호신 탑</li><li>C 원소 공명 막대 중심</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D4-3" data-cls="d" data-batch="4 모험 허브 · 콘텐츠">
+  <a class="shot" href="img/after/adv_rank_1280x720.jpg" target="_blank"><img src="img/after/adv_rank_1280x720.jpg" alt="등급전" loading="lazy"></a>
+  <div class="path">img/after/adv_rank_1280x720.jpg</div>
+  <div class="body"><span class="id">D4-3</span> <span class="chip cd">d</span>
+  <h4>항해사 등급전</h4><div class="src">scripts/adventure_pages.gd _rank</div>
+  <div class="dir">방향: 「리그 보드」 — 상대 셋, 내 계급 엠블럼, 정산 시계.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>상대 셋 · 새로고침 · 도전 0 · 상성 유리 / 불리 · 정산 직후</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 순위 사다리 + 상대 카드</li><li>B 결투장 세 문</li><li>C 트레이딩 카드 셋</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D4-4" data-cls="d" data-batch="4 모험 허브 · 콘텐츠">
+  <a class="shot" href="img/after/adv_soul_1280x720.jpg" target="_blank"><img src="img/after/adv_soul_1280x720.jpg" alt="기억의 회랑" loading="lazy"></a>
+  <div class="path">img/after/adv_soul_1280x720.jpg</div>
+  <div class="body"><span class="id">D4-4</span> <span class="chip cd">d</span>
+  <h4>기억의 회랑</h4><div class="src">scripts/adventure_pages.gd _soul</div>
+  <div class="dir">방향: 「기억 액자 복도」 — 1~10단계가 복도에 걸린 액자.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>충전 3/3 · 0/3(다음 충전 시간) · 열린 / 잠긴 단계 · 승률</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 원근 복도</li><li>B 책장 — 책 등이 단계</li><li>C 원형 회랑 10칸</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D4-5" data-cls="d" data-batch="4 모험 허브 · 콘텐츠">
+  <a class="shot" href="img/after/adv_castle_1280x720.jpg" target="_blank"><img src="img/after/adv_castle_1280x720.jpg" alt="잿빛성" loading="lazy"></a>
+  <div class="path">img/after/adv_castle_1280x720.jpg</div>
+  <div class="body"><span class="id">D4-5</span> <span class="chip cd">d</span>
+  <h4>잿빛성</h4><div class="src">scripts/adventure_pages.gd _castle</div>
+  <div class="dir">방향: 「버티는 성벽」 — 버틴 시간 막대와 30초마다 장비 눈금.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>최고 0초 · 95초 · 180초 완주 · 입장 0</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 모래시계 + 보상 눈금</li><li>B 버틴 만큼 색이 오르는 성벽</li><li>C 가로 타임라인</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D4-6" data-cls="d" data-batch="4 모험 허브 · 콘텐츠">
+  <a class="shot" href="img/after/adv_temple_1280x720.jpg" target="_blank"><img src="img/after/adv_temple_1280x720.jpg" alt="신전" loading="lazy"></a>
+  <div class="path">img/after/adv_temple_1280x720.jpg</div>
+  <div class="body"><span class="id">D4-6</span> <span class="chip cd">d</span>
+  <h4>신전 · 항해사 승급전</h4><div class="src">scripts/adventure_pages.gd _temple</div>
+  <div class="dir">방향: 「신전 계단과 계급장」.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>지금 계급 · 다음 계급 · 도전 · 실패 직후</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 계단 위 신전 문</li><li>B 계급장 진열장</li><li>C 커지는 성화</li></ol></dd></dl></div></div>
+</div>
+
+<!-- ===== 5 ===== -->
+<div class="batch" id="g5"><h3>5 · 모험 결과 · 정산 <span class="chip cd">d · 5</span></h3>
+<div class="meta">지금은 모두 같은 보상 팝업. 콘텐츠 페이지(묶음 4)에서 고른 방향을 결과에도 이어 간다 — 예: 잿빛성 = 성벽이면 결과도 성벽. #62 잿빛성 보상 UI 포함.</div></div>
+<div class="grid">
+<div class="card" data-id="D5-1" data-cls="d" data-batch="5 모험 결과 · 정산">
+  <a class="shot" href="img/inventory/inv_result_castle_1280x720.jpg" target="_blank"><img src="img/inventory/inv_result_castle_1280x720.jpg" alt="잿빛성 결과" loading="lazy"></a>
+  <div class="path">img/inventory/inv_result_castle_1280x720.jpg</div>
+  <div class="body"><span class="id">D5-1</span> <span class="chip cd">d</span>
+  <h4>잿빛성 결과 (#62)</h4><div class="src">scripts/main.gd _dungeon_end castle → RewardPopup</div>
+  <div class="dir">방향: 「버틴 시간 기록판」 — 큰 초 숫자 + 구간 눈금 위에 얻은 장비.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>95초(장비 3) · 180초 완주(보너스) · 0초(보상 없음) · 최고 기록 갱신</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 모래시계 기록</li><li>B 성벽 위 깃발</li><li>C 타임라인 보상 띠</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D5-2" data-cls="d" data-batch="5 모험 결과 · 정산">
+  <a class="shot" href="img/inventory/inv_result_element_1280x720.jpg" target="_blank"><img src="img/inventory/inv_result_element_1280x720.jpg" alt="원소섬 결과" loading="lazy"></a>
+  <div class="path">img/inventory/inv_result_element_1280x720.jpg</div>
+  <div class="body"><span class="id">D5-2</span> <span class="chip cd">d</span>
+  <h4>원소섬 도달 · 소탕 결과</h4><div class="src">scripts/main.gd _dungeon_end element · sweep</div>
+  <div class="dir">방향: 「속성 결정 도장」 — 도달 Lv 도장 + 원소석이 그 섬 색으로.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>도달 · 관문 첫 돌파 포함 · 소탕 · 실패(띠)</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 속성 결정</li><li>B 섬 도장 카드</li><li>C 레벨 사다리 깃발</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D5-3" data-cls="d" data-batch="5 모험 결과 · 정산">
+  <a class="shot" href="img/inventory/inv_result_temple_1280x720.jpg" target="_blank"><img src="img/inventory/inv_result_temple_1280x720.jpg" alt="신전 결과" loading="lazy"></a>
+  <div class="path">img/inventory/inv_result_temple_1280x720.jpg</div>
+  <div class="body"><span class="id">D5-3</span> <span class="chip cd">d</span>
+  <h4>신전 승급 결과</h4><div class="src">scripts/main.gd _dungeon_end temple</div>
+  <div class="now">지금: 별 하나와 「3등 항해사」 글자뿐.</div>
+  <div class="dir">방향: 「계급장 수여식」.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>승급 · 실패</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 메달 수여</li><li>B 신전 빛기둥</li><li>C 계급 리본</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D5-4" data-cls="d" data-batch="5 모험 결과 · 정산">
+  <a class="shot" href="img/inventory/inv_result_rank_1280x720.jpg" target="_blank"><img src="img/inventory/inv_result_rank_1280x720.jpg" alt="등급전 결과" loading="lazy"></a>
+  <div class="path">img/inventory/inv_result_rank_1280x720.jpg · img/inventory/inv_result_soul_1280x720.jpg</div>
+  <div class="body"><span class="id">D5-4</span> <span class="chip cd">d</span>
+  <h4>등급전 · 회랑 승패 결과</h4><div class="src">scripts/main.gd arena_fight · soul_fight → RewardPopup</div>
+  <div class="dir">방향: 「대결 결과판」 — 내 덱 vs 상대 덱 얼굴 + 점수 변화.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>등급전 승리 / 패배 · 회랑 승리(단계 열림) / 패배</dd>
+  <dt>시안 방향</dt><dd><ol><li>A VS 결과판 (양쪽 네 명)</li><li>B 점수 사다리 이동</li><li>C 이긴 아이 한 명 포즈</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D5-5" data-cls="d" data-batch="5 모험 결과 · 정산">
+  <a class="shot" href="img/inventory/inv_rank_week_1280x720.jpg" target="_blank"><img src="img/inventory/inv_rank_week_1280x720.jpg" alt="주간 정산" loading="lazy"></a>
+  <div class="path">img/inventory/inv_rank_week_1280x720.jpg</div>
+  <div class="body"><span class="id">D5-5</span> <span class="chip cd">d</span>
+  <h4>등급전 주간 정산</h4><div class="src">scripts/main.gd check_rank_week</div>
+  <div class="dir">방향: 「주간 시상」 — 순위 · 점수 · 채색석.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>상위권 · 하위(기본 보상) · 도전 안 한 주</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 시상대</li><li>B 리그 증명서</li><li>C 순위 리본</li></ol></dd></dl></div></div>
+</div>
+
+<!-- ===== 6 ===== -->
+<div class="batch" id="g6"><h3>6 · 분교 · 고래 <span class="chip cd">d · 4</span></h3>
+<div class="meta">분교 허브 두 탭(분교 · 고래 강화)이 서로 다른 장소(학교 / 고래 도크)로 보이게. 숨결 탭은 #64 숨결 버튼의 진주 구슬 언어와 맞춤.</div></div>
+<div class="grid">
+<div class="card" data-id="D6-1" data-cls="d" data-batch="6 분교 · 고래">
+  <a class="shot" href="img/after/menu_school_1280x720.jpg" target="_blank"><img src="img/after/menu_school_1280x720.jpg" alt="분교" loading="lazy"></a>
+  <div class="path">img/after/menu_school_1280x720.jpg</div>
+  <div class="body"><span class="id">D6-1</span> <span class="chip cd">d</span>
+  <h4>분교 (교실 · 연구)</h4><div class="src">scripts/menus.gd _school</div>
+  <div class="dir">방향: 「분교 단면도」 — 교실 셋이 그림 속 방, 연구는 칠판.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>짓는 중(남은 시간) · 연구 중 · 진주 부족 · 최대 · 과학실 먼저(잠김) · 완성 직후</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 인형집 단면</li><li>B 칠판 · 게시판</li><li>C 고래 등 위 분교 지도</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D6-2" data-cls="d" data-batch="6 분교 · 고래">
+  <a class="shot" href="img/after/menu_whale_1280x720.jpg" target="_blank"><img src="img/after/menu_whale_1280x720.jpg" alt="고래 강화" loading="lazy"></a>
+  <div class="path">img/after/menu_whale_1280x720.jpg</div>
+  <div class="body"><span class="id">D6-2</span> <span class="chip cd">d</span>
+  <h4>고래 강화 (보호막 · 심장)</h4><div class="src">scripts/menus.gd _whale</div>
+  <div class="dir">방향: 「고래 정비 도크」 — 고래 그림 가운데, 보호막 · 심장이 고래 몸 위 계기.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>강화 가능 · 부족 · 레벨 업 순간 · 보호막 막대(#41)를 눌러 들어온 경우</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 고래 해부도 (심장 자리 하트)</li><li>B 도크 + 양쪽 계기판</li><li>C 고래 초상 카드 둘 (정돈)</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D6-3" data-cls="d" data-batch="6 분교 · 고래">
+  <a class="shot" href="img/inventory/inv_whale_breath_1280x720.jpg" target="_blank"><img src="img/inventory/inv_whale_breath_1280x720.jpg" alt="고래 숨결 탭" loading="lazy"></a>
+  <div class="path">img/inventory/inv_whale_breath_1280x720.jpg</div>
+  <div class="body"><span class="id">D6-3</span> <span class="chip cd">d</span>
+  <h4>고래 숨결 강화 탭</h4><div class="src">scripts/menus.gd _whale_breath</div>
+  <div class="now">지금: 같은 고래 그림 카드 셋.</div>
+  <div class="dir">방향: 「숨결 진주 구슬 셋」 — 위력 · 충전 · 얼룩.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>각 Lv.0/20 · 최대 · 자동 숨결 OFF / ON · 첫 사용 전</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 구슬 셋</li><li>B 리본 하나에 세 마디</li><li>C 오선 악보</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D6-4" data-cls="d" data-batch="6 분교 · 고래">
+  <a class="shot" href="img/after/school_done_f1_1280x720.jpg" target="_blank"><img src="img/after/school_done_f1_1280x720.jpg" alt="분교 완성 알림" loading="lazy"></a>
+  <div class="path">img/after/school_done_f1_1280x720.jpg</div>
+  <div class="body"><span class="id">D6-4</span> <span class="chip cd">d</span>
+  <h4>분교 완성 알림 (위쪽)</h4><div class="src">scripts/hud.gd school_notice</div>
+  <div class="dir">방향: 「분교 종」 — 종 + 짧은 리본, 끝나면 하단 「분교」로 날아감.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>교실 완성 · 연구 완료 · 둘이 연달아</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 종 + 리본</li><li>B 분필 쪽지</li><li>C 아이콘이 하단 메뉴로 날아감</li></ol></dd></dl></div></div>
+</div>
+
+<!-- ===== 7 ===== -->
+<div class="batch" id="g7"><h3>7 · 안내 · 도움말 <span class="chip cd">d · 4</span></h3>
+<div class="meta">손가락 · 강조 테두리(a)는 그대로 두고, 말하는 판만 새로. 튜토리얼 말풍선은 이야기 대사창(묶음 9)과 같은 계열이 될 수 있어 함께 볼지 PD 판단.</div></div>
+<div class="grid">
+<div class="card" data-id="D7-1" data-cls="d" data-batch="7 안내 · 도움말">
+  <a class="shot" href="img/after/tut_formation_1280x720.jpg" target="_blank"><img src="img/after/tut_formation_1280x720.jpg" alt="튜토리얼 말풍선" loading="lazy"></a>
+  <div class="path">img/after/tut_formation_1280x720.jpg</div>
+  <div class="body"><span class="id">D7-1</span> <span class="chip cd">d</span>
+  <h4>튜토리얼 말풍선 (유나)</h4><div class="src">scripts/tutorial.gd</div>
+  <div class="now">지금: 메뉴와 같은 크림 판 + 라벤더 이름표.</div>
+  <div class="dir">방향: 「유나의 스케치북 쪽지」 — 손글씨 말풍선, 유나 표정과 이어짐.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>설명 단계(어두움) · 행동 단계(빛나는 곳) · 여러 칸 1/3 · 유나 왼쪽 / 오른쪽 · 메뉴 위</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 스케치북 쪽지</li><li>B 꼬리 달린 만화 말풍선</li><li>C 아래 대사창 (이야기 대사창과 같은 계열)</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D7-2" data-cls="d" data-batch="7 안내 · 도움말">
+  <a class="shot" href="img/inventory/inv_help_bubble_1280x720.jpg" target="_blank"><img src="img/inventory/inv_help_bubble_1280x720.jpg" alt="도움말 말풍선" loading="lazy"></a>
+  <div class="path">img/inventory/inv_help_bubble_1280x720.jpg · img/inventory/inv_help_page_1280x720.jpg</div>
+  <div class="body"><span class="id">D7-2</span> <span class="chip cd">d</span>
+  <h4>도움말 말풍선 (재화 · 표시 · 메뉴 「?」)</h4><div class="src">scripts/hud.gd show_help · help_button</div>
+  <div class="dir">방향: 「단어장 카드」 — 아이콘 + 한 줄 뜻 + 얻는 곳 / 쓰는 곳 두 칸.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>재화 셋 · 보호막 · 스테이지 · 메뉴 페이지 「?」 · 화면 가장자리</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 단어장 카드</li><li>B 돋보기 원</li><li>C 얇은 툴팁</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D7-3" data-cls="d" data-batch="7 안내 · 도움말">
+  <a class="shot" href="img/inventory/inv_skill_detail_1280x720.jpg" target="_blank"><img src="img/inventory/inv_skill_detail_1280x720.jpg" alt="스킬 상세" loading="lazy"></a>
+  <div class="path">img/inventory/inv_skill_detail_1280x720.jpg</div>
+  <div class="body"><span class="id">D7-3</span> <span class="chip cd">d</span>
+  <h4>스킬 상세 창</h4><div class="src">scripts/skill_detail.gd</div>
+  <div class="dir">방향: 「기술서 한 쪽」 — 왼쪽 설명, 오른쪽 미리보기를 액자 속 무대로.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>스킬 / 궁극기 탭 · SS 서명 · 신화 · 각성 진화 궁극기 · 전투 위 / 아이 상세 위</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 기술서 펼침</li><li>B 미리보기 크게 + 아래 설명 띠</li><li>C 카드 뒤집기</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D7-4" data-cls="d" data-batch="7 안내 · 도움말">
+  <a class="shot" href="img/inventory/inv_toast_gear_1280x720.jpg" target="_blank"><img src="img/inventory/inv_toast_gear_1280x720.jpg" alt="한 줄 알림" loading="lazy"></a>
+  <div class="path">img/inventory/inv_toast_gear_1280x720.jpg</div>
+  <div class="body"><span class="id">D7-4</span> <span class="chip cd">d</span>
+  <h4>짧은 한 줄 알림 (장비 분해 등)</h4><div class="src">scripts/menus.gd _toast · scripts/ui/gear_bench.gd</div>
+  <div class="dir">방향: 「작업대 위 색가루 튐」 — 색가루가 위 지갑으로 날아감.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>분해 · 연속 분해 · 메뉴 판 아래</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 색가루 병으로 날아감</li><li>B 작은 리본</li><li>C 칠판 글씨</li></ol></dd></dl></div></div>
+</div>
+
+<!-- ===== 8 ===== -->
+<div class="batch" id="g8"><h3>8 · 상점 · 교환 <span class="chip cd">d · 5</span></h3>
+<div class="meta">신화 조각 병 · 별가루는 (b) 소환 시안의 결과 화면과 같은 물건으로 보이게. 가격 · 확률 숫자는 그대로.</div></div>
+<div class="grid">
+<div class="card" data-id="D8-1" data-cls="d" data-batch="8 상점 · 교환">
+  <a class="shot" href="img/after/menu_shop_1280x720.jpg" target="_blank"><img src="img/after/menu_shop_1280x720.jpg" alt="상점" loading="lazy"></a>
+  <div class="path">img/after/menu_shop_1280x720.jpg</div>
+  <div class="body"><span class="id">D8-1</span> <span class="chip cd">d</span>
+  <h4>상점</h4><div class="src">scripts/menus.gd _shop · _price_button</div>
+  <div class="dir">방향: 「화방 진열장」 — 채색석이 물감 병처럼 선반에.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>무료 선물 받기 / 받음 · 첫 구매 2배 · 월정액 남은 일수 · 결제 중</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 선반 진열</li><li>B 가로 쇼케이스</li><li>C 계산대 + 추천 하나 크게</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D8-2" data-cls="d" data-batch="8 상점 · 교환">
+  <a class="shot" href="img/inventory/inv_shop_free_1280x720.jpg" target="_blank"><img src="img/inventory/inv_shop_free_1280x720.jpg" alt="무료 선물" loading="lazy"></a>
+  <div class="path">img/inventory/inv_shop_free_1280x720.jpg</div>
+  <div class="body"><span class="id">D8-2</span> <span class="chip cd">d</span>
+  <h4>무료 선물 · 구매 완료</h4><div class="src">scripts/menus.gd _shop → RewardPopup 「매일 무료 선물」 · 「구매 완료」</div>
+  <div class="dir">방향: 「포장 리본 풀기」.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>무료 30 · 첫 구매 2배 · 월정액 구매</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 선물 상자</li><li>B 영수증 카드</li><li>C 창 없이 진열장에서 지갑으로 날아감</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D8-3" data-cls="d" data-batch="8 상점 · 교환">
+  <a class="shot" href="img/after/mythic_shop_1280x720.jpg" target="_blank"><img src="img/after/mythic_shop_1280x720.jpg" alt="신화 조각 상점" loading="lazy"></a>
+  <div class="path">img/after/mythic_shop_1280x720.jpg</div>
+  <div class="body"><span class="id">D8-3</span> <span class="chip cd">d</span>
+  <h4>신화 조각 상점</h4><div class="src">scripts/mythic_shop.gd</div>
+  <div class="dir">방향: 「무지개 보석상」 — 신화 조각 병(소환 시안의 병과 이어짐).</div>
+  <dl><dt>시안에 담을 상태</dt><dd>조각 부족 · 교환 가능 · 한도 0 · 신화 아이 고르기(드롭다운 대신 카드) · SS 선택권 사용</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 보석상 카운터</li><li>B 조각 병 + 교환 목록</li><li>C 신화 아이 초상 갤러리</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D8-4" data-cls="d" data-batch="8 상점 · 교환">
+  <a class="shot" href="img/after/grade_dust_1280x720.jpg" target="_blank"><img src="img/after/grade_dust_1280x720.jpg" alt="별가루 교환소" loading="lazy"></a>
+  <div class="path">img/after/grade_dust_1280x720.jpg</div>
+  <div class="body"><span class="id">D8-4</span> <span class="chip cd">d</span>
+  <h4>별가루 교환소</h4><div class="src">scripts/menus.gd _dust_panel</div>
+  <div class="dir">방향: 「별 병 교환」 — 왼쪽 결정 바꾸기, 오른쪽 아이 데려오기.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>별가루 부족 · 가능 · 픽업 · SS 카드</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 별 병 + 교환 카드</li><li>B 별자리 지도</li><li>C 두 칸 저울</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D8-5" data-cls="d" data-batch="8 상점 · 교환">
+  <a class="shot" href="img/inventory/inv_summon_rates_1280x720.jpg" target="_blank"><img src="img/inventory/inv_summon_rates_1280x720.jpg" alt="확률 정보" loading="lazy"></a>
+  <div class="path">img/inventory/inv_summon_rates_1280x720.jpg</div>
+  <div class="body"><span class="id">D8-5</span> <span class="chip cd">d</span>
+  <h4>소환 확률 정보</h4><div class="src">scripts/menus.gd _rates_panel</div>
+  <div class="now">지금: 긴 글 벽.</div>
+  <div class="dir">방향: 「공시표」 — 등급 막대 + 보장 세 개를 아이콘으로, 아이 목록은 접기 (숫자 · 문구는 그대로).</div>
+  <dl><dt>시안에 담을 상태</dt><dd>픽업 / 상시 · 아이 목록 펼침 · 스크롤 끝</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 표 + 막대</li><li>B 등급 카드 넷</li><li>C 요약 위 + 전체 표기 아래</li></ol></dd></dl></div></div>
+</div>
+
+<!-- ===== 9 ===== -->
+<div class="batch" id="g9"><h3>9 · 이야기 <span class="chip cd">d · 6</span></h3>
+<div class="meta">대사창(D9-3)이 정해지면 프롤로그 · 모험 첫 소개 · 색 지도 장소 이야기까지 같은 대사창을 쓴다. 이야기 열림 알림은 #36 흐름(전투는 이어지고 「이야기」가 반짝임) 그대로.</div></div>
+<div class="grid">
+<div class="card" data-id="D9-1" data-cls="d" data-batch="9 이야기">
+  <a class="shot" href="img/after/story_menu_1280x720.jpg" target="_blank"><img src="img/after/story_menu_1280x720.jpg" alt="이야기 목록" loading="lazy"></a>
+  <div class="path">img/after/story_menu_1280x720.jpg</div>
+  <div class="body"><span class="id">D9-1</span> <span class="chip cd">d</span>
+  <h4>이야기 목록 · 메인 스토리</h4><div class="src">scripts/story_menu.gd (main)</div>
+  <div class="dir">방향: 「그림책 책장」 — 장마다 동화책 표지.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>감상 완료 · 새로 열림 · 잠김(조건) · 보상 받기 전</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 책장</li><li>B 엽서 앨범</li><li>C 항로 타임라인</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D9-2" data-cls="d" data-batch="9 이야기">
+  <a class="shot" href="img/after/grade_ss_story_1280x720.jpg" target="_blank"><img src="img/after/grade_ss_story_1280x720.jpg" alt="SS 이야기" loading="lazy"></a>
+  <div class="path">img/after/grade_ss_story_1280x720.jpg</div>
+  <div class="body"><span class="id">D9-2</span> <span class="chip cd">d</span>
+  <h4>이야기 목록 · SS 이야기</h4><div class="src">scripts/story_menu.gd (ss)</div>
+  <div class="dir">방향: 「아이별 일기장」.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>만남 · 못 만남 · 새 이야기 · 속성 색</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 일기장 표지</li><li>B 초상 액자</li><li>C 편지 봉투</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D9-3" data-cls="d" data-batch="9 이야기">
+  <a class="shot" href="img/inventory/inv_story_scene_1280x720.jpg" target="_blank"><img src="img/inventory/inv_story_scene_1280x720.jpg" alt="이야기 장면" loading="lazy"></a>
+  <div class="path">img/inventory/inv_story_scene_1280x720.jpg</div>
+  <div class="body"><span class="id">D9-3</span> <span class="chip cd">d</span>
+  <h4>이야기 장면 (대사창)</h4><div class="src">scripts/story_player.gd</div>
+  <div class="dir">방향: 블루아카이브풍 대사창은 유지, 종이결 · 붓 이름표로 아틀리에답게.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>내레이션 · 대사(이름표) · 항해 일지 · 건너뛰기 · 배경 없이 전투 위(모험 첫 소개 · 색 지도 이야기)</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 종이결 대사창</li><li>B 반투명 유리 + 붓 이름표</li><li>C 그림책 자막</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D9-4" data-cls="d" data-batch="9 이야기">
+  <a class="shot" href="img/inventory/inv_prologue_f1_1280x720.jpg" target="_blank"><img src="img/inventory/inv_prologue_f1_1280x720.jpg" alt="프롤로그" loading="lazy"></a>
+  <div class="path">img/inventory/inv_prologue_f1_1280x720.jpg · img/inventory/inv_prologue_f2_1280x720.jpg</div>
+  <div class="body"><span class="id">D9-4</span> <span class="chip cd">d</span>
+  <h4>프롤로그 (첫 실행 · 다시 보기)</h4><div class="src">scripts/prologue.gd</div>
+  <div class="dir">방향: 「잿빛에서 색으로」 — 레터박스 자막을 손글씨로, 색이 번질 때 붓.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>내레이션 · 고래 등장 · 색 번짐 · 유나 대화 · 건너뛰기</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 손글씨 자막</li><li>B 그림책 넘김</li><li>C 붓이 화면을 칠하며</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D9-5" data-cls="d" data-batch="9 이야기">
+  <a class="shot" href="img/after/story_auto_scene_f2_1280x720.jpg" target="_blank"><img src="img/after/story_auto_scene_f2_1280x720.jpg" alt="이야기 열림 알림" loading="lazy"></a>
+  <div class="path">img/after/story_auto_scene_f2_1280x720.jpg</div>
+  <div class="body"><span class="id">D9-5</span> <span class="chip cd">d</span>
+  <h4>이야기 열림 알림 (위쪽)</h4><div class="src">scripts/hud.gd story_notice</div>
+  <div class="dir">방향: 「책갈피 리본」이 「이야기」 버튼으로 날아감.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>장 이야기 · SS 아이 이야기 · 스테이지 전환 카드와 함께</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 책 리본</li><li>B 아이 얼굴 미니 카드</li><li>C 반짝임만</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D9-6" data-cls="d" data-batch="9 이야기">
+  <a class="shot" href="img/inventory/inv_story_reward_1280x720.jpg" target="_blank"><img src="img/inventory/inv_story_reward_1280x720.jpg" alt="첫 감상 보상" loading="lazy"></a>
+  <div class="path">img/inventory/inv_story_reward_1280x720.jpg</div>
+  <div class="body"><span class="id">D9-6</span> <span class="chip cd">d</span>
+  <h4>첫 감상 보상 · 아이 합류</h4><div class="src">scripts/main.gd on_story_read · on_ss_story_read</div>
+  <div class="dir">방향: 「책을 덮고 받는 도장」 — 합류한 아이를 크게.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>아이 합류 + 채색석 · SS 이야기 채색석만</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 책 덮기 + 도장</li><li>B 엔딩 카드</li><li>C 합류 아이 클로즈업</li></ol></dd></dl></div></div>
+</div>
+
+<!-- ===== 10 ===== -->
+<div class="batch" id="g10"><h3>10 · 설정 <span class="chip cd">d · 4</span></h3>
+<div class="meta">D10-4는 디자인보다 먼저 PD 결정이 필요 (출시 판에 사운드 테스트를 남길지).</div></div>
+<div class="grid">
+<div class="card" data-id="D10-1" data-cls="d" data-batch="10 설정">
+  <a class="shot" href="img/inventory/inv_more_menu_1280x720.jpg" target="_blank"><img src="img/inventory/inv_more_menu_1280x720.jpg" alt="메뉴 펼침" loading="lazy"></a>
+  <div class="path">img/inventory/inv_more_menu_1280x720.jpg</div>
+  <div class="body"><span class="id">D10-1</span> <span class="chip cd">d</span>
+  <h4>오른쪽 위 「메뉴」 펼침</h4><div class="src">scripts/hud.gd toggle_more</div>
+  <div class="dir">방향: 출시 판 항목이 「설정」 하나뿐 — 펼침을 없애고 바로 설정을 여는 안 포함.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>출시(설정만) · 개발 빌드(설정 + 개발)</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 펼침 없앰 (톱니 하나)</li><li>B 작은 드롭다운 카드</li><li>C 세로 동그라미 정돈</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D10-2" data-cls="d" data-batch="10 설정">
+  <a class="shot" href="img/inventory/inv_settings_1280x720.jpg" target="_blank"><img src="img/inventory/inv_settings_1280x720.jpg" alt="설정" loading="lazy"></a>
+  <div class="path">img/inventory/inv_settings_1280x720.jpg</div>
+  <div class="body"><span class="id">D10-2</span> <span class="chip cd">d</span>
+  <h4>설정</h4><div class="src">scripts/settings_panel.gd</div>
+  <div class="dir">방향: 「분교 교무수첩」 — 켬 / 끔이 물감 스위치.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>기본값 · 30 절전 · 준비 중 항목 · 1600</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 수첩 두 쪽</li><li>B 탭 (게임 · 알림 · 계정)</li><li>C 카드 격자</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D10-3" data-cls="d" data-batch="10 설정">
+  <a class="shot" href="img/inventory/inv_credits_1280x720.jpg" target="_blank"><img src="img/inventory/inv_credits_1280x720.jpg" alt="만든 사람들" loading="lazy"></a>
+  <div class="path">img/inventory/inv_credits_1280x720.jpg</div>
+  <div class="body"><span class="id">D10-3</span> <span class="chip cd">d</span>
+  <h4>만든 사람들</h4><div class="src">scripts/settings_panel.gd (credits)</div>
+  <div class="dir">방향: 「전시회 명판」 — 제작 · 글꼴 · 엔진, 라이선스 전문은 접기.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>위 · 아래로 스크롤 · 라이선스 펼침</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 명판</li><li>B 흐르는 크레딧</li><li>C 그림책 판권면</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D10-4" data-cls="d" data-batch="10 설정">
+  <a class="shot" href="img/inventory/inv_sound_1280x720.jpg" target="_blank"><img src="img/inventory/inv_sound_1280x720.jpg" alt="소리 창" loading="lazy"></a>
+  <div class="path">img/inventory/inv_sound_1280x720.jpg</div>
+  <div class="body"><span class="id">D10-4</span> <span class="chip cd">d</span>
+  <h4>소리 창 (사운드 테스트)</h4><div class="src">scripts/sound_panel.gd</div>
+  <div class="now">지금: 출력 장치 · dB 같은 QA 정보가 그대로 보임.</div>
+  <div class="dir">방향: PD 결정 — 출시 판에 「소리 듣기」로 남길지, 개발 메뉴로 옮길지.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>재생 중 · 정지 · 배경 음악 끔</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 축음기 레코드 목록 (기술 수치 숨김)</li><li>B 개발 메뉴로 이동 — 설정에서 빠진 모습</li><li>C 음악 상자</li></ol></dd></dl></div></div>
+</div>
+
+<!-- ===== 11 ===== -->
+<div class="batch" id="g11"><h3>11 · 시스템 안내 <span class="chip cd">d · 4</span></h3>
+<div class="meta">드물지만 놓치면 신뢰가 깨지는 화면. 확인창 셋(복귀 · 종료 · 저장 손상)은 묶음 3의 복귀 확인과 같은 판으로 겹치지 않게 각자 다르게.</div></div>
+<div class="grid">
+<div class="card" data-id="D11-1" data-cls="d" data-batch="11 시스템 안내">
+  <a class="shot" href="img/inventory/inv_power_save_1280x720.jpg" target="_blank"><img src="img/inventory/inv_power_save_1280x720.jpg" alt="방치 절전" loading="lazy"></a>
+  <div class="path">img/inventory/inv_power_save_1280x720.jpg</div>
+  <div class="body"><span class="id">D11-1</span> <span class="chip cd">d</span>
+  <h4>방치 절전 화면</h4><div class="src">scripts/power_save.gd</div>
+  <div class="dir">방향: 「잠든 고래 밤하늘」.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>막 절전 · 10분 · 연출 중(STAGE 없음)</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 밤하늘 고래 실루엣</li><li>B 시계 하나</li><li>C 아래 작은 카드</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D11-2" data-cls="d" data-batch="11 시스템 안내">
+  <a class="shot" href="img/inventory/inv_quit_1280x720.jpg" target="_blank"><img src="img/inventory/inv_quit_1280x720.jpg" alt="게임 종료" loading="lazy"></a>
+  <div class="path">img/inventory/inv_quit_1280x720.jpg</div>
+  <div class="body"><span class="id">D11-2</span> <span class="chip cd">d</span>
+  <h4>게임 종료 확인</h4><div class="src">scripts/back_nav.gd ask_quit</div>
+  <div class="dir">방향: 「배웅」 — 손 흔드는 아이 + 「최대 8시간 항해」.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>전투 위 · 타이틀 위 · 이야기 위</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 배웅하는 아이</li><li>B 고래 등불 끄기</li><li>C 작은 확인 카드</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D11-3" data-cls="d" data-batch="11 시스템 안내">
+  <a class="shot" href="img/inventory/inv_save_corrupt_1280x720.jpg" target="_blank"><img src="img/inventory/inv_save_corrupt_1280x720.jpg" alt="저장 손상" loading="lazy"></a>
+  <div class="path">img/inventory/inv_save_corrupt_1280x720.jpg</div>
+  <div class="body"><span class="id">D11-3</span> <span class="chip cd">d</span>
+  <h4>저장 손상 안내</h4><div class="src">scripts/main.gd _notify_corrupt_save</div>
+  <div class="dir">방향: 차분한 시스템 카드 — 되살린 날짜 · 무엇이 사라졌는지.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>백업에서 되살림 · 처음부터</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 일지의 찢긴 쪽</li><li>B 단정한 시스템 카드</li><li>C 유나 사과</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="D11-4" data-cls="d" data-batch="11 시스템 안내">
+  <a class="shot" href="img/inventory/inv_banner_fail_1280x720.jpg" target="_blank"><img src="img/inventory/inv_banner_fail_1280x720.jpg" alt="구매 실패 띠" loading="lazy"></a>
+  <div class="path">img/inventory/inv_banner_fail_1280x720.jpg</div>
+  <div class="body"><span class="id">D11-4</span> <span class="chip cd">d</span>
+  <h4>비전투 알림 띠 (구매 실패 · 기기 시간 확인)</h4><div class="src">scripts/economy.gd tell · warn_clock → hud.banner</div>
+  <div class="now">지금: 전투 띠와 같은 큰 띠에 빨간 글자.</div>
+  <div class="dir">방향: 「경고 리본」 — 누른 버튼 근처의 작은 붉은 리본.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>채색석 부족 · 색가루 부족 · 재료 부족 · 기기 시간 · 서버 실패</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 붉은 리본</li><li>B 완료 알림(D2-4)과 같은 자리, 색만 다름</li><li>C 버튼 흔들림 + 말풍선</li></ol></dd></dl></div></div>
+</div>
+
+<h2 id="battle">전투 화면 — 남은 UI 전부 다시 그리기 <span class="chip cd">d · 24</span></h2>
+<div class="box">
+  <b>그대로 두는 것 (확정 · 진행 중)</b>
+  <ul>
+    <li><span class="chip ca">a</span> 전투 HUD B: 왼쪽 위 통합 판(항해사 · STAGE · 계정 줄 · 진행 막대) · 기운 보스 판(약점 알약 · 노란 지연 몫) · 고래 보호막 막대 · 스테이지 전환 카드 (A2)</li>
+    <li><span class="chip ca">a</span> 고래 숨결 버튼 · 연출 (A9) · 궁극기 컷인 A (A7) · 손가락 안내 · 강조 테두리 · 「이어서 안내」 꼬리표 (A8) · 길게 눌러 여는 아이 정보 = 아이 상세 A (A4)</li>
+    <li><span class="chip cb">b</span> 정화 CLEAR · 채색 폭주(가장자리 빛 · 폭주 콤보 엠블럼 · 띠) · 순풍 가속 연출 · 띠 — fb-mockups-rev가 B안 수정 중 (B3). 잠긴 버튼을 눌렀을 때 알림 (B7)</li>
+    <li><span class="chip cc">c</span> 왼쪽 「의뢰」 칸 · 저절로 펼쳐지는 의뢰 창 · 의뢰 완료 토스트 (C1 · C2, #49)</li>
+  </ul>
+  <b>전투 시안 공통 규칙</b>
+  <ul>
+    <li>확정된 HUD B의 말투를 잇는다: 14° 기운 판 · 크림→라벤더 판 + 얇은 금 테(정보) · 남색→보라 판 + 금 테(중요 · 적) · 금빛 = 보상 · 준비 완료 · 속성 색 = 그 아이. 등급: SS = 그 아이 속성 색이 흐르는 테, 신화 = 무지개 테.</li>
+    <li>판 · 버튼 모양은 요소마다 전용 (같은 크림 둥근 상자 재사용 금지). 적이 오는 오른쪽 하늘을 지금보다 더 가리지 않는다.</li>
+    <li>1280에서 아래 한 줄(메뉴 바 458 · 숨결 248 · 조작 줄 200 · 스킬칸 4칸 328)이 겹치지 않고, 1600에서는 오른쪽에 붙은 것만 밀려난다. 시안 바탕은 HUD를 숨긴 같은 순간의 전투 캡처라 확정 부품은 지금 모습 그대로 보인다.</li>
+  </ul>
+</div>
+
+<h3 style="margin-top:18px">전투 묶음 순서 (자주 보는 순)</h3>
+<table>
+  <tr><th>순서</th><th>묶음</th><th>요소</th><th>얼마나 자주 보나</th><th>시안</th></tr>
+  <tr><td>전투 1</td><td><a href="#bt1">엄지 구역 (스킬칸 · 강화 · 조작 줄 · 메뉴 바 · 퀘스트)</a></td><td>5</td><td>전투 내내 보이고 가장 많이 누른다</td><td><a href="../mockups/feedback70/battle_b1/index.html">battle_b1 ✔</a></td></tr>
+  <tr><td>전투 2</td><td><a href="#bt2">늘 보이는 위 · 옆 + 전투 글자</a></td><td>5</td><td>전투 내내 보임 · 숫자는 초마다 수십 번</td><td>다음</td></tr>
+  <tr><td>전투 3</td><td><a href="#bt3">전투 순간 알림</a></td><td>5</td><td>10칸마다 보스 · 강화할 때마다 · 실패할 때</td><td>—</td></tr>
+  <tr><td>전투 4</td><td><a href="#bt4">모험 전투 (#61)</a></td><td>5</td><td>매일 입장권 수만큼</td><td>—</td></tr>
+  <tr><td>전투 5</td><td><a href="#bt5">대결 · 하늘 이벤트</a></td><td>4</td><td>하루 몇 번 · 켜 둔 15분마다</td><td>—</td></tr>
+</table>
+
+<h3 style="margin-top:18px">전투 위에 뜨지만 다른 묶음 · 시안에서 다루는 것</h3>
+<table>
+  <tr><th>무엇</th><th>어디서</th></tr>
+  <tr><td>항해일지 (돌아왔을 때 전투 위 팝업)</td><td>D2-2</td></tr>
+  <tr><td>완료 알림 토스트 (추천 편성 · 새 덱 탭 · 신화 1명 제한)</td><td>D2-4</td></tr>
+  <tr><td>복귀 확인 · 복귀 불가 · 귀환 연출 띠 · 귀환 보상</td><td>D3-1 · D3-2 · D3-3 · D3-4</td></tr>
+  <tr><td>모험이 끝난 뒤 결과 팝업 (잿빛성 · 원소섬 · 신전 · 등급전 · 회랑)</td><td>D5-1 ~ D5-4</td></tr>
+  <tr><td>분교 완성 알림 · 이야기 열림 알림 (화면 위쪽)</td><td>D6-4 · D9-5</td></tr>
+  <tr><td>튜토리얼 말풍선 · 「?」 도움말 말풍선</td><td>D7-1 · D7-2</td></tr>
+  <tr><td>오른쪽 위 「메뉴」 펼침 (설정 · 개발)</td><td>D10-1</td></tr>
+  <tr><td>잠긴 버튼 알림 · 정화 · 폭주 · 순풍 연출 · 의뢰</td><td>B7 · B3 · C1 · C2</td></tr>
+</table>
+
+<!-- ===== 전투 1 ===== -->
+<div class="batch" id="bt1"><h3>전투 1 · 엄지 구역 <span class="chip cd">d · 5</span> <span class="chip cx">전투</span></h3>
+<div class="meta">시안: <a href="../mockups/feedback70/battle_b1/index.html">design/mockups/feedback70/battle_b1/index.html</a> — 요소마다 A/B/C (고르기 가능) · 1280/1600 · 상태 칸. 아래 줄 다섯이 한 줄을 나눠 쓰므로 함께 검토.</div></div>
+<div class="grid">
+<div class="card" data-id="BT1-1" data-cls="d" data-batch="전투 1 엄지 구역">
+  <a class="shot" href="img/battle/b1_hud_1280x720.jpg" target="_blank"><img src="img/battle/b1_hud_1280x720.jpg" alt="아이 스킬칸" loading="lazy"></a>
+  <div class="path">img/battle/b1_hud_1280x720.jpg · img/battle/bt_cards_poor_1280x720.jpg</div>
+  <div class="body"><span class="id">BT1-1</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>아이 스킬칸 (초상 · 궁극기 쿨타임 · 준비 빛 · 항해 Lv)</h4><div class="src">scripts/hud.gd _make_card · assets/ui/card_frame.gdshader · ui/grade_style.gd frame</div>
+  <div class="now">지금: 정사각 초상 4칸이 다른 판과 같은 둥근 상자. 준비 상태가 테두리 빛뿐이라 쿨타임 숫자 칸과 잘 구분되지 않는다.</div>
+  <div class="dir">방향: 「갑판 아이들의 출격 카드」 — HUD B의 기울기를 이어받고, 궁극기 준비가 한눈에 튀어나온다.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>준비 · 쿨타임(초) · SS(속성 색 테) · 신화(무지개 테) · 강화 순간 · 갑판 3명 이하 · 길게 누르기(아이 정보) · 1600</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 기운 액자 — 위에서 걷히는 남색 베일 + 큰 숫자, 준비 = 금 테 + 「궁극기」 띠</li><li>B 물감 원판 — 둥근 초상, 속성 색 고리가 시계 방향으로 차오름</li><li>C 세로 카드 — 이름 띠 + 상반신, 쿨타임 = 아래에서 차오르는 물감</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT1-2" data-cls="d" data-batch="전투 1 엄지 구역">
+  <a class="shot" href="img/battle/bt_cards_poor_1280x720.jpg" target="_blank"><img src="img/battle/bt_cards_poor_1280x720.jpg" alt="강화 버튼 줄" loading="lazy"></a>
+  <div class="path">img/battle/bt_cards_poor_1280x720.jpg · img/battle/bt_upgrade_pop_1280x720.jpg</div>
+  <div class="body"><span class="id">BT1-2</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>강화 버튼 줄 (칸 위 ▲비용 · ? · 일괄 강화 · ×1/×10/MAX)</h4><div class="src">scripts/hud.gd _make_card up · buy_btn · bulk_btn · help_button("battle") · hold_repeat</div>
+  <div class="now">지금: 같은 작은 크림 버튼 다섯 종류가 따로 떠 있고, 살 수 없을 때는 흐려지기만 한다. 단위(×1)가 무엇을 바꾸는지 안 보인다.</div>
+  <div class="dir">방향: 「바람 조각을 쓰는 줄」 — 살 수 있음 · 없음 · 단위가 한눈에.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>살 수 있음 · 부족 · ×10(+10 비용) · MAX(+N 비용) · 누르고 있기(반복) · 일괄 강화 켜짐/꺼짐 · 1600</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 금빛 꼬리표 + ×1 · ×10 · MAX 세 칸 스위치 (지금 단위가 늘 보임)</li><li>B 카드 밑 받침대 — 카드와 버튼이 한 덩어리</li><li>C 모으는 막대 — 비용까지 얼마나 모였는지 버튼 안이 차오름</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT1-3" data-cls="d" data-batch="전투 1 엄지 구역">
+  <a class="shot" href="img/battle/bt_wind_cd_1280x720.jpg" target="_blank"><img src="img/battle/bt_wind_cd_1280x720.jpg" alt="조작 줄" loading="lazy"></a>
+  <div class="path">img/battle/bt_wind_cd_1280x720.jpg · img/battle/bt_wind_on_1280x720.jpg · img/after/hud_fresh_1280x720.jpg (의뢰 창은 c)</div>
+  <div class="body"><span class="id">BT1-3</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>조작 줄 (순풍 가속 · 복귀 · 자동/수동)</h4><div class="src">scripts/hud.gd _build_buttons · refresh (wind_btn · return_btn · auto_btn) · ui/lock_gate.gd</div>
+  <div class="now">지금: 산호 · 크림 · 라벤더 버튼이 제각각, 쿨타임은 글자뿐(「순풍 4:05」), 모험 중에는 이유 없이 흐려진다.</div>
+  <div class="dir">방향: 「전투 손잡이」 — 세 조작을 한 가족으로, 남은 시간은 막대 · 고리로.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>순풍 준비 · 사용 중(2배속 58초) · 쿨타임(4:05) · 바람 모으는 중(첫 항해) · 모험 중 못 씀(#61) · 복귀 +N · 복귀 잠김(Lv.4) · 자동 · 수동</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 한 판 세 칸 — 남색 기운 판 하나에 순풍 · 복귀 · 자동</li><li>B 순풍 돛 — 순풍이 주인공, 복귀 · 자동은 옆 작은 알약</li><li>C 구슬 셋 — 숨결 구슬과 한 가족인 둥근 버튼 세 개</li></ol></dd></dl>
+  <div class="note">순풍 연출 · 띠는 B3(clear_fever B)를 따른다. 이 묶음은 버튼만.</div></div></div>
+
+<div class="card" data-id="BT1-4" data-cls="d" data-batch="전투 1 엄지 구역">
+  <a class="shot" href="img/after/hud_fresh_1280x720.jpg" target="_blank"><img src="img/after/hud_fresh_1280x720.jpg" alt="하단 메뉴 바" loading="lazy"></a>
+  <div class="path">img/after/hud_fresh_1280x720.jpg · img/battle/b1_hud_1280x720.jpg</div>
+  <div class="body"><span class="id">BT1-4</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>하단 메뉴 바 (아이들 · 편성 · 소환 · 모험 · 분교 · 상점)</h4><div class="src">scripts/hud.gd _build_resources menu_box · _nav_tile · _badge · _sparkle</div>
+  <div class="now">지금: 크림 판 한 장에 아이콘 6개. 잠기면 「항해사 Lv.N 필요」 세 줄이 아이콘 자리를 덮고, 빨간 점은 이유가 없다.</div>
+  <div class="dir">방향: 「아틀리에 서랍 손잡이」 — 메뉴 공통 틀(D1-1)의 허브 색을 여기서 먼저 보여 준다.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>평소 · 빨간 점(할 일) · 잠김(Lv.N) · 분교 반짝임(완성) · 누름 · 1600</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 기운 판 + 허브 물감 방울 — 아이콘마다 허브 색 방울</li><li>B 구름 위 단추 — 판 없이 둥근 단추 여섯 + 이름 리본</li><li>C 남색 띠 + 이유 꼬리표 — 점 대신 「성장 가능」 「무료 소환」</li></ol></dd></dl>
+  <div class="note">잠김 모양(자물쇠 · 흑백)은 B7(rewards locked)을 따른다.</div></div></div>
+
+<div class="card" data-id="BT1-5" data-cls="d" data-batch="전투 1 엄지 구역">
+  <a class="shot" href="img/after/quest_ready_1280x720.jpg" target="_blank"><img src="img/after/quest_ready_1280x720.jpg" alt="퀘스트 카드" loading="lazy"></a>
+  <div class="path">img/after/quest_ready_1280x720.jpg · img/after/quest_claim_f3_1280x720.jpg · img/battle/b1_hud_1280x720.jpg</div>
+  <div class="body"><span class="id">BT1-5</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>퀘스트 카드 (진행 · 보상 받기 · 이어서 안내)</h4><div class="src">scripts/hud.gd _build_quest · _refresh_quest · _on_quest · tutorial.gd resume_tag</div>
+  <div class="now">지금: 통합 판 아래에 같은 크림 판. 완료되면 금 테 + 손가락. 보상 칸이 작아 무엇을 받는지 약하다.</div>
+  <div class="dir">방향: 「오늘의 할 일 쪽지」 — 통합 판(a)과 이어지는 기울기, 보상이 주인공.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>진행 중 · 완료(보상 받기) · 받은 뒤 다음 퀘스트 밀려 들어옴 · 이어서 안내 · 긴 문구 · 메뉴가 열리면 숨김</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 기운 리본 — 오른쪽 끝 보상 메달</li><li>B 핀 꽂은 메모지 — 완료 = 붉은 도장</li><li>C 접힌 알약 — 평소 한 줄, 완료 · 누를 때 펼침</li></ol></dd></dl></div></div>
+</div>
+
+<!-- ===== 전투 2 ===== -->
+<div class="batch" id="bt2"><h3>전투 2 · 늘 보이는 위 · 옆 + 전투 글자 <span class="chip cd">d · 5</span> <span class="chip cx">전투</span></h3>
+<div class="meta">한 번에 볼 것: 재화 줄은 날아오는 빛(피해 · 처치 보상)이 닿는 곳, 콤보는 B3 폭주 엠블럼으로 넘어가는 앞 단계라 함께.</div></div>
+<div class="grid">
+<div class="card" data-id="BT2-1" data-cls="d" data-batch="전투 2 위 · 옆 · 글자">
+  <a class="shot" href="img/after/currency_fly_f4_1280x720.jpg" target="_blank"><img src="img/after/currency_fly_f4_1280x720.jpg" alt="재화 줄" loading="lazy"></a>
+  <div class="path">img/after/currency_fly_f4_1280x720.jpg · img/battle/b1_hud_1280x720.jpg</div>
+  <div class="body"><span class="id">BT2-1</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>오른쪽 위 재화 줄 + 「메뉴」 버튼</h4><div class="src">scripts/hud.gd _build_resources _chip · more_btn · _fly_reward · fly_gold · help_on</div>
+  <div class="now">지금: 크림 판 하나에 재화 셋 + 금 「+」(채색석만), 메뉴 버튼은 따로 떠 있다.</div>
+  <div class="dir">방향: 「지갑 띠」 — 빛이 날아와 닿는 자리가 분명하고, 숫자가 오를 때 기쁘게.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>평소 · 빛이 닿아 숫자 튐 · 긴 숫자(12.3b · 99,999) · 눌러서 도움말 · 메뉴 펼침(D10-1) · 1600</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 남색 지갑 띠 (보스 판 가족)</li><li>B 재화마다 따로 보석 칸</li><li>C 메뉴 버튼과 한 판</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT2-2" data-cls="d" data-batch="전투 2 위 · 옆 · 글자">
+  <a class="shot" href="img/battle/bt_upgrade_pop_1280x720.jpg" target="_blank"><img src="img/battle/bt_upgrade_pop_1280x720.jpg" alt="왼쪽 보조 버튼" loading="lazy"></a>
+  <div class="path">img/battle/bt_upgrade_pop_1280x720.jpg · img/battle/b1_hud_1280x720.jpg</div>
+  <div class="body"><span class="id">BT2-2</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>왼쪽 보조 버튼 (색 지도 · 이야기)</h4><div class="src">scripts/hud.gd _side_tile · _sparkle · paint_gain</div>
+  <div class="now">지금: 크림 동그라미 + 흰 글자, 이야기 반짝임은 금 고리. 「의뢰」 칸이 빠지면(c) 위쪽이 빈다.</div>
+  <div class="dir">방향: 「책상 위 소품」 — 팔레트 · 그림책 그림이 그대로 버튼.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>평소 · 빨간 점 · 반짝임(볼 이야기) · +N 빛물감 솟음 · 잠김 · 의뢰 칸 빠진 뒤 자리</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 기운 책갈피 탭</li><li>B 소품 그림만 (판 없음)</li><li>C 세로 띠 한 장</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT2-3" data-cls="d" data-batch="전투 2 위 · 옆 · 글자">
+  <a class="shot" href="img/battle/b1_hud_1280x720.jpg" target="_blank"><img src="img/battle/b1_hud_1280x720.jpg" alt="콤보 숫자" loading="lazy"></a>
+  <div class="path">img/battle/b1_hud_1280x720.jpg · img/battle/bt_now_1280x720.jpg (폭주 중 = B3)</div>
+  <div class="body"><span class="id">BT2-3</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>콤보 숫자</h4><div class="src">scripts/hud.gd show_combo · assets/ui/combo_text.gdshader</div>
+  <div class="now">지금: 오른쪽 위 큰 숫자 + 「COMBO」. 폭주까지 30% · 62%에서 색만 바뀌어 얼마나 남았는지 모른다.</div>
+  <div class="dir">방향: 「폭주까지 남은 길」 — B3 폭주 엠블럼으로 이어지는 게이지가 보인다.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>5 · 30% · 62% 달아오름 · 끊김(흐려짐) · 보스 판 있을 때 · 폭주 직전 → B3로 넘김</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 숫자 + 폭주 게이지 호</li><li>B 붓 자국 위 숫자</li><li>C 작은 알약 — 달아오르면 커짐</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT2-4" data-cls="d" data-batch="전투 2 위 · 옆 · 글자">
+  <a class="shot" href="img/battle/bt_numbers_1280x720.jpg" target="_blank"><img src="img/battle/bt_numbers_1280x720.jpg" alt="피해 숫자" loading="lazy"></a>
+  <div class="path">img/battle/bt_numbers_1280x720.jpg · img/after/boss_rapid_hits_f3_1280x720.jpg</div>
+  <div class="body"><span class="id">BT2-4</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>피해 숫자 · 처치 보상 글자 (+N 바람 조각)</h4><div class="src">scripts/main.gd show_damage · hud.gd combat_text · pop_gold · fly_gold</div>
+  <div class="now">지금: 크림 · 금 글자 + 남색 테, 평타 · 약점 · 스킬 · 치명 · 궁극기가 크기로만 갈린다. 보호막 회복은 숫자 없이 빛만.</div>
+  <div class="dir">방향: 「붓 글씨 숫자」 — 단계가 모양으로도 구분되고, 많이 쌓여도 읽힌다.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>평타 · 약점 · 스킬 · 치명타 · 궁극기(!) · 많이 쌓일 때 · +N 바람 조각 · (안) 보호막 회복 +N</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 단계별 글자 모양 (약점 = 마름모 꼬리표, 치명 = 금박)</li><li>B 때린 아이 속성 색 테</li><li>C 평타는 작게, 궁극기는 합계 하나로 크게</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT2-5" data-cls="d" data-batch="전투 2 위 · 옆 · 글자">
+  <a class="shot" href="img/after/hud_fresh_1280x720.jpg" target="_blank"><img src="img/after/hud_fresh_1280x720.jpg" alt="적 체력 막대" loading="lazy"></a>
+  <div class="path">img/after/hud_fresh_1280x720.jpg · img/battle/bt_numbers_1280x720.jpg (오른쪽 황금 잿빛)</div>
+  <div class="body"><span class="id">BT2-5</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>적 체력 막대 · 약점 표시 · 황금 잿빛</h4><div class="src">scripts/enemy.gd _draw_bar · main.gd _make_elite</div>
+  <div class="now">지금: 빨간 사각 막대 + 약점 마름모. 황금 잿빛은 금빛 물들임 + 반짝이뿐이라 「체력 3배 · 보상 6배」가 안 보인다.</div>
+  <div class="dir">방향: 「잿빛 꼬리표」 — 보스 판(a)의 작은 판 말투.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>가득 · 깎임(지연 몫) · 약점 속성 · 황금 잿빛 · 무리(15마리) 겹침 · 처치</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 기운 미니 막대 + 약점 동그라미</li><li>B 막대 대신 발밑 고리</li><li>C 맞을 때만 보이는 막대 + 황금 왕관</li></ol></dd></dl></div></div>
+</div>
+
+<!-- ===== 전투 3 ===== -->
+<div class="batch" id="bt3"><h3>전투 3 · 전투 순간 알림 <span class="chip cd">d · 5</span> <span class="chip cx">전투</span></h3>
+<div class="meta">한 번에 볼 것: 지금은 CLEAR · 순풍 · RETRY · 이벤트 · VS가 모두 같은 크림 띠. 이 묶음에서 실패 · 보스 · 작은 반응의 「띠 가족」을 정한다 (CLEAR · 순풍은 B3).</div></div>
+<div class="grid">
+<div class="card" data-id="BT3-1" data-cls="d" data-batch="전투 3 순간 알림">
+  <a class="shot" href="img/after/boss_intro_f2_1280x720.jpg" target="_blank"><img src="img/after/boss_intro_f2_1280x720.jpg" alt="보스 등장" loading="lazy"></a>
+  <div class="path">img/after/boss_intro_f2_1280x720.jpg</div>
+  <div class="body"><span class="id">BT3-1</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>보스 등장 두루마리 · 파수꾼 경고 띠</h4><div class="src">scripts/hud.gd boss_intro → hud_skin.gd boss_intro · first_voyage.gd banner</div>
+  <div class="now">지금: 크림 두루마리에 보스 그림 + 이름. 위의 남색 보스 판(a)과 결이 다르다.</div>
+  <div class="dir">방향: 「잿빛 기록 펼침」 — 보스 판 B와 같은 남색 · 금 테로 이어진다.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>파수꾼(10칸) · 장 보스(100칸) · 첫 항해 경고 · 약점 있음/없음 · 1600</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 남색 기운 띠가 화면을 가로지름</li><li>B 두루마리 유지 + 남색 · 금 테</li><li>C 보스 실루엣 짧은 컷인</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT3-2" data-cls="d" data-batch="전투 3 순간 알림">
+  <a class="shot" href="img/battle/bt_retry_1280x720.jpg" target="_blank"><img src="img/battle/bt_retry_1280x720.jpg" alt="RETRY" loading="lazy"></a>
+  <div class="path">img/battle/bt_retry_1280x720.jpg</div>
+  <div class="body"><span class="id">BT3-2</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>전투 실패 띠 RETRY · 도시락 되살림 띠</h4><div class="src">scripts/main.gd _fail · 도시락(heal) · hud.gd banner</div>
+  <div class="now">지금: 성공 띠와 같은 크림 판에 빨간 「RETRY」. 팁이 한 줄 작은 글자.</div>
+  <div class="dir">방향: 「다시 붓을 드는 순간」 — 실패는 차분하게, 다음에 할 일(강화 · 보호막 · 복귀)이 먼저.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>시간 초과 · 보호막 붕괴 · 두 번 연속(복귀 권유) · 도시락으로 되살림</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 잿빛 번짐 + 팁 버튼</li><li>B 고래가 흔들리는 연출 + 팁 카드</li><li>C 띠 없이 갑판 위 아이 말풍선</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT3-3" data-cls="d" data-batch="전투 3 순간 알림">
+  <a class="shot" href="img/battle/bt_upgrade_pop_1280x720.jpg" target="_blank"><img src="img/battle/bt_upgrade_pop_1280x720.jpg" alt="강화 반응" loading="lazy"></a>
+  <div class="path">img/battle/bt_upgrade_pop_1280x720.jpg · img/after/45_levelup_strip_after_1280.jpg</div>
+  <div class="body"><span class="id">BT3-3</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>강화 반응 (항해 Lv +N · 전투력 ▲ · +N 빛물감)</h4><div class="src">scripts/hud.gd card_level_up · power_up · paint_gain · levelup_fx.gd</div>
+  <div class="now">지금: 노랑 · 초록 · 분홍 글자가 각자 다른 곳에서 솟는다 (모양이 제각각).</div>
+  <div class="dir">방향: 「작은 축하 도장」 — 같은 가족의 작은 반응.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>한 번 · 길게 눌러 연속 · ×10 · 일괄 강화(4칸 동시) · 빛물감 +5</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 금빛 리본 숫자</li><li>B 숫자 + 별가루</li><li>C 카드에 찍히는 도장</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT3-4" data-cls="d" data-batch="전투 3 순간 알림">
+  <a class="shot" href="img/after/hud_boss_1280x720.jpg" target="_blank"><img src="img/after/hud_boss_1280x720.jpg" alt="아이 머리 위 표시" loading="lazy"></a>
+  <div class="path">img/after/hud_boss_1280x720.jpg · img/battle/bt_numbers_1280x720.jpg (말풍선)</div>
+  <div class="body"><span class="id">BT3-4</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>아이 머리 위 · 발밑 표시 (스킬 이름표 · 말풍선 · 쿨타임 막대 · LEVEL UP)</h4><div class="src">scripts/main.gd show_skill_tag · bark · hero.gd _draw_skill_bar · levelup_fx.gd</div>
+  <div class="now">지금: 이름표는 속성 색 사각 알약, 말풍선은 흰 판, 발밑 막대는 사각형 — 아이 상세 A의 말풍선 · 반응과 다르다.</div>
+  <div class="dir">방향: 「아이 곁 작은 소품」 — 아이 상세 A · 반응 말풍선과 같은 말투.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>스킬 이름 · 말풍선(보스 · 정화 · 궁극기) · 쿨타임 막대(곧 스킬 깜빡임) · SS/신화 발밑 고리 · LEVEL UP</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 붓 글씨 이름표</li><li>B 말풍선 꼬리 + 속성 점</li><li>C 발밑 막대를 고리로</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT3-5" data-cls="d" data-batch="전투 3 순간 알림">
+  <a class="shot" href="img/after/shield_hit_f2_1280x720.jpg" target="_blank"><img src="img/after/shield_hit_f2_1280x720.jpg" alt="보호막 피격 막" loading="lazy"></a>
+  <div class="path">img/after/shield_hit_f2_1280x720.jpg</div>
+  <div class="body"><span class="id">BT3-5</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>고래 보호막 피격 막</h4><div class="src">scripts/barrier.gd · main.gd barrier_hit (막대는 a)</div>
+  <div class="now">지금: 맞은 자리에서 육각 무늬가 퍼지고 파랑 → 주황 → 빨강. 세계관(물감 · 고래)과 결이 약하다.</div>
+  <div class="dir">방향: 「물감 막」 — 육각 대신 고래 무늬 · 물감 번짐.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>가득 · 반 · 25% 아래 깜빡임 · 무적 · 도시락 회복</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 물감 번짐 막</li><li>B 고래 무늬 레이스</li><li>C 육각 유지 + 색만 정리</li></ol></dd></dl></div></div>
+</div>
+
+<!-- ===== 전투 4 ===== -->
+<div class="batch" id="bt4"><h3>전투 4 · 모험 전투 (#61) <span class="chip cd">d · 5</span> <span class="chip cx">전투</span></h3>
+<div class="meta">한 번에 볼 것: 공통 틀(BT4-1)이 정해져야 콘텐츠별 판이 따라간다. 끝난 뒤 결과 팝업은 D5 · 잿빛성 보상(#56 #62)과 이어서.</div></div>
+<div class="grid">
+<div class="card" data-id="BT4-1" data-cls="d" data-batch="전투 4 모험 전투">
+  <a class="shot" href="img/battle/bt_adv_element_1280x720.jpg" target="_blank"><img src="img/battle/bt_adv_element_1280x720.jpg" alt="콘텐츠 전투 공통 틀" loading="lazy"></a>
+  <div class="path">img/battle/bt_adv_element_1280x720.jpg · img/battle/bt_adv_castle_1280x720.jpg · img/battle/bt_soul_1280x720.jpg</div>
+  <div class="body"><span class="id">BT4-1</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>콘텐츠 전투 공통 틀 — 쓸 수 있는 것 · 없는 것 표시 (#61)</h4><div class="src">scripts/hud.gd refresh (set_stage_visible · wind_btn.disabled) · whale_breath.gd can_use</div>
+  <div class="now">지금: 순풍은 이유 없이 흐리고, 복귀 · 퀘스트 카드 · 강화 버튼은 항해 때와 똑같이 보인다. 대결에서는 숨결이 「준비 완료 · TAP」인데 쓸 수 없다.</div>
+  <div class="dir">방향: 「입장권 전투 모드」 — 그 콘텐츠에서 쓰는 것만 밝게, 안 되는 것은 이유 한 줄.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>원소섬 · 잿빛성 · 신전 · 등급전 · 회랑 각각의 숨결 · 순풍 · 복귀 · 강화 · 퀘스트 표시 · 나가기(포기) 유무</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 아래 줄 전체가 「모험 띠」로 바뀜</li><li>B 같은 자리에 잠금 꼬리표 + 이유</li><li>C 안 되는 버튼은 숨기고 남은 칸을 크게</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT4-2" data-cls="d" data-batch="전투 4 모험 전투">
+  <a class="shot" href="img/battle/bt_adv_element_start_1280x720.jpg" target="_blank"><img src="img/battle/bt_adv_element_start_1280x720.jpg" alt="원소섬 전투" loading="lazy"></a>
+  <div class="path">img/battle/bt_adv_element_start_1280x720.jpg · img/battle/bt_adv_element_1280x720.jpg</div>
+  <div class="body"><span class="id">BT4-2</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>원소섬 전투 (수호신 Lv 연속)</h4><div class="src">scripts/main.gd start_dungeon("element") · _next_guardian · hud.set_boss</div>
+  <div class="now">지금: 보스 판에 「생명 수호신 Lv.2」만. 90초 안에 어디까지 왔는지 · 다음 관문(5 Lv마다)이 안 보인다.</div>
+  <div class="dir">방향: 「수호신 계단」 — Lv 계단과 관문이 보스 판 옆에.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>Lv.1 시작 · 다음 Lv 등장 · 관문 수호신 · 시간 끝 · 최고 기록 넘음</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 보스 판 아래 Lv 계단</li><li>B 통합 판 자리에 섬 문장 + 도달 Lv</li><li>C 화면 위 얇은 Lv 줄</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT4-3" data-cls="d" data-batch="전투 4 모험 전투">
+  <a class="shot" href="img/battle/bt_adv_castle_1280x720.jpg" target="_blank"><img src="img/battle/bt_adv_castle_1280x720.jpg" alt="잿빛성 전투" loading="lazy"></a>
+  <div class="path">img/battle/bt_adv_castle_1280x720.jpg · img/battle/bt_adv_castle_start_1280x720.jpg</div>
+  <div class="body"><span class="id">BT4-3</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>잿빛성 전투 (버틴 시간 · 장비 구간)</h4><div class="src">scripts/hud.gd refresh 잿빛성 분기 · main.gd _castle_tick · Adventure.CASTLE_BANDS</div>
+  <div class="now">지금: 보스 판을 빌려 「잿빛성 · 장비 2개 · 다음 28초」 한 줄 + 시간 막대.</div>
+  <div class="dir">방향: 「버티기 시계」 — 30초 구간마다 장비 상자가 열리는 시계 띠 (#56 #62 보상과 이어짐).</div>
+  <dl><dt>시안에 담을 상태</dt><dd>0초 · 구간 도달(상자 열림) · 2분 넘음 · 보호막 위험 · 3분 완주</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 구간 눈금 막대 + 상자</li><li>B 둥근 시계</li><li>C 얻은 장비가 갑판 옆에 쌓임</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT4-4" data-cls="d" data-batch="전투 4 모험 전투">
+  <a class="shot" href="img/battle/bt_adv_temple_start_1280x720.jpg" target="_blank"><img src="img/battle/bt_adv_temple_start_1280x720.jpg" alt="신전 전투" loading="lazy"></a>
+  <div class="path">img/battle/bt_adv_temple_start_1280x720.jpg</div>
+  <div class="body"><span class="id">BT4-4</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>신전 승급 시련 전투</h4><div class="src">scripts/main.gd start_dungeon("temple") · _spawn_dungeon_boss</div>
+  <div class="now">지금: 「3등 항해사 승급 시련」 보스 판 + 60초. 계급(승급) 느낌이 없다.</div>
+  <div class="dir">방향: 「승급 의식」 — 계급 휘장과 남은 시간이 주인공.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>시작 · 반 · 10초 남음 · 성공 · 실패</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 휘장 + 보스 판</li><li>B 신전 기둥 액자</li><li>C 시간 고리 중심</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT4-5" data-cls="d" data-batch="전투 4 모험 전투">
+  <a class="shot" href="img/battle/bt_adv_castle_start_1280x720.jpg" target="_blank"><img src="img/battle/bt_adv_castle_start_1280x720.jpg" alt="콘텐츠 시작 띠" loading="lazy"></a>
+  <div class="path">img/battle/bt_adv_castle_start_1280x720.jpg · img/battle/bt_adv_element_start_1280x720.jpg · img/battle/bt_adv_temple_start_1280x720.jpg</div>
+  <div class="body"><span class="id">BT4-5</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>콘텐츠 시작 · 끝 띠 (시작 · 관문 · CLEAR · 실패 · N초 버팀)</h4><div class="src">scripts/main.gd start_dungeon · _dungeon_end · hud.gd banner</div>
+  <div class="now">지금: 일반 크림 띠에 콘텐츠 색 글자만 바뀐다.</div>
+  <div class="dir">방향: 「입장 문장」 — 콘텐츠마다 문장(섬 · 성 · 신전) 하나.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>원소섬 · 잿빛성 · 신전 시작 · 관문 · CLEAR · 실패 · 3분 완주</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 콘텐츠 문장 + 기운 띠</li><li>B 입장권이 찢어지는 연출</li><li>C 배경 그림 카드가 넘어감</li></ol></dd></dl>
+  <div class="note">끝난 뒤 결과 팝업은 D5-1 ~ D5-4.</div></div></div>
+</div>
+
+<!-- ===== 전투 5 ===== -->
+<div class="batch" id="bt5"><h3>전투 5 · 대결 · 하늘 이벤트 <span class="chip cd">d · 4</span> <span class="chip cx">전투</span></h3>
+<div class="meta">한 번에 볼 것: 대결은 BT4-1 공통 틀(항해 HUD를 얼마나 숨기나)을 따른다.</div></div>
+<div class="grid">
+<div class="card" data-id="BT5-1" data-cls="d" data-batch="전투 5 대결 · 하늘">
+  <a class="shot" href="img/battle/bt_soul_1280x720.jpg" target="_blank"><img src="img/battle/bt_soul_1280x720.jpg" alt="대결 장면" loading="lazy"></a>
+  <div class="path">img/battle/bt_soul_1280x720.jpg · img/inventory/inv_duel_1280x720.jpg</div>
+  <div class="body"><span class="id">BT5-1</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>대결 장면 HUD (등급전 · 기억의 회랑)</h4><div class="src">scripts/duel_scene.gd _build_ui · 이름판 · 건너뛰기 · 상대 이름표 · 내 아이 체력 막대</div>
+  <div class="now">지금: 오른쪽 위 크림 이름판 + 「건너뛰기」. 항해 HUD(퀘스트 · 메뉴 바 · 강화 · 순풍 · 숨결)가 그대로 남는다.</div>
+  <div class="dir">방향: 「마주 선 두 고래」 — 좌우 대칭 VS 화면.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>등급전 · 회랑 · 우리 아이 쓰러짐 · 상대 보호막 깨짐 · 건너뛰기</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 위쪽 좌우 이름판 + 가운데 VS</li><li>B 아래쪽 대결 띠 (항해 HUD 숨김)</li><li>C 상대 이름판만 남색으로 정리</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT5-2" data-cls="d" data-batch="전투 5 대결 · 하늘">
+  <a class="shot" href="img/battle/bt_duel_end_1280x720.jpg" target="_blank"><img src="img/battle/bt_duel_end_1280x720.jpg" alt="대결 띠" loading="lazy"></a>
+  <div class="path">img/battle/bt_duel_end_1280x720.jpg</div>
+  <div class="body"><span class="id">BT5-2</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>대결 시작 · 끝 띠 (VS · 승리! · 패배)</h4><div class="src">scripts/duel_scene.gd hud.banner</div>
+  <div class="now">지금: 일반 크림 띠에 금 글자 「승리!」.</div>
+  <div class="dir">방향: 「결판 도장」.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>VS · 승리 · 패배 · 건너뛴 뒤</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 대각 VS 컷</li><li>B 고래 문장 도장</li><li>C 깃발이 올라감</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT5-3" data-cls="d" data-batch="전투 5 대결 · 하늘">
+  <a class="shot" href="img/battle/bt_shower_drops_1280x720.jpg" target="_blank"><img src="img/battle/bt_shower_drops_1280x720.jpg" alt="색 소나기" loading="lazy"></a>
+  <div class="path">img/battle/bt_shower_drops_1280x720.jpg · img/battle/bt_shower_banner_1280x720.jpg</div>
+  <div class="body"><span class="id">BT5-3</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>하늘 이벤트 · 색 소나기</h4><div class="src">scripts/sky_events.gd _shower</div>
+  <div class="now">지금: 일반 띠 + 팔레트 아이콘이 떨어진다. 눌러야 하는 것인지, 몇 초 남았는지 모른다.</div>
+  <div class="dir">방향: 「누르고 싶은 물방울」 — 반짝이는 물감 방울 + 남은 시간.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>띠 · 물방울이 떨어짐 · 누름(+5) · 끝(모은 수)</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 물감 방울 + 위쪽 남은 시간</li><li>B 팔레트 유지 + 테두리 빛</li><li>C 화면 가장자리 빗줄기</li></ol></dd></dl></div></div>
+
+<div class="card" data-id="BT5-4" data-cls="d" data-batch="전투 5 대결 · 하늘">
+  <a class="shot" href="img/battle/bt_bridge_1280x720.jpg" target="_blank"><img src="img/battle/bt_bridge_1280x720.jpg" alt="무지개 다리" loading="lazy"></a>
+  <div class="path">img/battle/bt_bridge_1280x720.jpg</div>
+  <div class="body"><span class="id">BT5-4</span> <span class="chip cd">d</span> <span class="chip cx">전투</span>
+  <h4>하늘 이벤트 · 무지개 다리</h4><div class="src">scripts/sky_events.gd _bridge</div>
+  <div class="now">지금: 일반 띠 + 반원 무지개. 누를 수 있다는 표시가 없다.</div>
+  <div class="dir">방향: 「건너고 싶은 다리」 — 누를 자리 손짓 + 빛물감 +30.</div>
+  <dl><dt>시안에 담을 상태</dt><dd>걸림 · 누름(+30) · 사라짐</dd>
+  <dt>시안 방향</dt><dd><ol><li>A 무지개 위 반짝 손짓</li><li>B 다리 끝 보물</li><li>C 띠 대신 작은 알림</li></ol></dd></dl></div></div>
+</div>
+
+<h2>이번 라운드에 새로 그림 (a)</h2>
+<div class="mini">
+<div class="card" data-id="A1" data-cls="a" data-batch="—"><a class="shot" href="img/after/title_ready_1280x720.jpg" target="_blank"><img src="img/after/title_ready_1280x720.jpg" alt="타이틀" loading="lazy"></a><div class="path">img/after/title_ready_1280x720.jpg</div>
+  <div class="body"><span class="id">A1</span> <span class="chip ca">a</span><h4>타이틀 · 로딩 · 터치해서 시작</h4><div class="src">scripts/title.gd — 시안 A 붓 자국 로고 (#1) · 부트 스플래시 · 준비 실패 문구 포함</div></div></div>
+<div class="card" data-id="A2" data-cls="a" data-batch="전투"><a class="shot" href="img/after/hud_late_1280x720.jpg" target="_blank"><img src="img/after/hud_late_1280x720.jpg" alt="전투 HUD" loading="lazy"></a><div class="path">img/after/hud_late_1280x720.jpg</div>
+  <div class="body"><span class="id">A2</span> <span class="chip ca">a</span> <span class="chip cx">전투</span><h4>전투 HUD 시안 B</h4><div class="src">hud.gd · hud_stage_panel · hud_boss_panel · hud_stage_card · hud_shield_bar — 왼쪽 위 통합 판 · 기운 보스 판 · 스테이지 전환 카드 · 보호막 막대 (#4 #6 #31 #35 #41 #57). 조작 줄 · 퀘스트 칸은 자리만 옮겼다 (#5 #50) → BT1-3 · BT1-5</div></div></div>
+<div class="card" data-id="A3" data-cls="a" data-batch="—"><a class="shot" href="img/after/formation_1280x720.jpg" target="_blank"><img src="img/after/formation_1280x720.jpg" alt="편성" loading="lazy"></a><div class="path">img/after/formation_1280x720.jpg</div>
+  <div class="body"><span class="id">A3</span> <span class="chip ca">a</span><h4>편성 시안 B (팀 라인업 · 등급전 덱)</h4><div class="src">scripts/ui/formation_page.gd (#37 #38 #60)</div></div></div>
+<div class="card" data-id="A4" data-cls="a" data-batch="—"><a class="shot" href="img/after/hero_info_1280x720.jpg" target="_blank"><img src="img/after/hero_info_1280x720.jpg" alt="아이 상세" loading="lazy"></a><div class="path">img/after/hero_info_1280x720.jpg</div>
+  <div class="body"><span class="id">A4</span> <span class="chip ca">a</span><h4>아이 상세 시안 A (+ 레벨 업 빛 고리 · 기뻐하는 반응 시제품)</h4><div class="src">scripts/ui/hero_page.gd · level_burst.gd · hero_react.gd (#43 #45) — 전투에서 길게 눌러 여는 정보 창도 같은 화면</div></div></div>
+<div class="card" data-id="A5" data-cls="a" data-batch="—"><a class="shot" href="img/after/star_up_card_1280x720.jpg" target="_blank"><img src="img/after/star_up_card_1280x720.jpg" alt="승급 확인" loading="lazy"></a><div class="path">img/after/star_up_card_1280x720.jpg</div>
+  <div class="body"><span class="id">A5</span> <span class="chip ca">a</span><h4>승급 확인 시안 2 (+ 각성하기)</h4><div class="src">scripts/ui/star_confirm.gd (#59) — 최고 성급에서 같은 카드가 「각성하기」</div></div></div>
+<div class="card" data-id="A6" data-cls="a" data-batch="—"><a class="shot" href="img/after/gear_detail_1280x720.jpg" target="_blank"><img src="img/after/gear_detail_1280x720.jpg" alt="장비 작업대" loading="lazy"></a><div class="path">img/after/gear_detail_1280x720.jpg</div>
+  <div class="body"><span class="id">A6</span> <span class="chip ca">a</span><h4>장비 작업대 시안 A (+ ⓘ 말풍선 · 덧칠)</h4><div class="src">scripts/ui/gear_bench.gd (#52 #53) — 장비 목록(D1-4)은 아직</div></div></div>
+<div class="card" data-id="A7" data-cls="a" data-batch="전투"><a class="shot" href="img/after/ult_cutin_f2_1280x720.jpg" target="_blank"><img src="img/after/ult_cutin_f2_1280x720.jpg" alt="컷인" loading="lazy"></a><div class="path">img/after/ult_cutin_f2_1280x720.jpg</div>
+  <div class="body"><span class="id">A7</span> <span class="chip ca">a</span> <span class="chip cx">전투</span><h4>궁극기 컷인 시안 A (아틀리에 붓질)</h4><div class="src">scripts/cutin.gd (#32)</div></div></div>
+<div class="card" data-id="A8" data-cls="a" data-batch="—"><a class="shot" href="img/after/guide_growth_2_1280x720.jpg" target="_blank"><img src="img/after/guide_growth_2_1280x720.jpg" alt="손가락 안내" loading="lazy"></a><div class="path">img/after/guide_growth_2_1280x720.jpg</div>
+  <div class="body"><span class="id">A8</span> <span class="chip ca">a</span><h4>손가락 안내 · 강조 테두리</h4><div class="src">scripts/tutorial.gd GUIDES · HALO (#8 #9 #22 #44 #51 #54) — 말풍선 판은 D7-1</div></div></div>
+<div class="card" data-id="A9" data-cls="a" data-batch="전투"><a class="shot" href="img/after/breath_ready_1280x720.jpg" target="_blank"><img src="img/after/breath_ready_1280x720.jpg" alt="고래 숨결" loading="lazy"></a><div class="path">img/after/breath_ready_1280x720.jpg</div>
+  <div class="body"><span class="id">A9</span> <span class="chip ca">a</span> <span class="chip cx">전투</span><h4>고래 숨결 버튼 · 연출</h4><div class="src">scripts/whale_breath_button.gd · whale_breath_fx.gd (#19 #64)</div></div></div>
+</div>
+
+<h2>다른 에이전트 시안 진행 중 (b)</h2>
+<div class="mini">
+<div class="card" data-id="B1" data-cls="b" data-batch="—"><a class="shot" href="img/after/summon_pickup_1280x720.jpg" target="_blank"><img src="img/after/summon_pickup_1280x720.jpg" alt="소환 탭" loading="lazy"></a><div class="path">img/after/summon_pickup_1280x720.jpg</div>
+  <div class="body"><span class="id">B1</span> <span class="chip cb">b</span><h4>소환 탭 (픽업 · 상시 출석부)</h4><div class="src">design/mockups/feedback70/summon (#22 #39 #40) — 확률 정보 · 별가루 교환소는 시안에 없어 D8-4 · D8-5로</div></div></div>
+<div class="card" data-id="B2" data-cls="b" data-batch="—"><a class="shot" href="img/after/gacha_ten_result_1280x720.jpg" target="_blank"><img src="img/after/gacha_ten_result_1280x720.jpg" alt="소환 연출" loading="lazy"></a><div class="path">img/after/gacha_ten_result_1280x720.jpg</div>
+  <div class="body"><span class="id">B2</span> <span class="chip cb">b</span><h4>소환 연출 (칠하기 · 등급 · SS · 10연 결과 · 신화 조각 · 중복 별가루)</h4><div class="src">scripts/gacha_show.gd — summon 시안 (#23~#27)</div></div></div>
+<div class="card" data-id="B3" data-cls="b" data-batch="전투"><a class="shot" href="img/after/stage_clear_transition_f2_1280x720.jpg" target="_blank"><img src="img/after/stage_clear_transition_f2_1280x720.jpg" alt="정화 폭주 순풍" loading="lazy"></a><div class="path">img/after/stage_clear_transition_f2_1280x720.jpg</div>
+  <div class="body"><span class="id">B3</span> <span class="chip cb">b</span> <span class="chip cx">전투</span><h4>스테이지 정화 · 채색 폭주 · 순풍 가속</h4><div class="src">design/mockups/feedback70/clear_fever (#15 #17 #30)</div></div></div>
+<div class="card" data-id="B4" data-cls="b" data-batch="—"><a class="shot" href="img/before/color_map_1280x720.jpg" target="_blank"><img src="img/before/color_map_1280x720.jpg" alt="색 지도" loading="lazy"></a><div class="path">img/before/color_map_1280x720.jpg</div>
+  <div class="body"><span class="id">B4</span> <span class="chip cb">b</span><h4>색 지도 서랍</h4><div class="src">scripts/color_world.gd — design/mockups/feedback70/colormap (#28 #29 #66)</div></div></div>
+<div class="card" data-id="B5" data-cls="b" data-batch="—"><a class="shot" href="img/before/color_restore_f3_1280x720.jpg" target="_blank"><img src="img/before/color_restore_f3_1280x720.jpg" alt="색 복원" loading="lazy"></a><div class="path">img/before/color_restore_f3_1280x720.jpg</div>
+  <div class="body"><span class="id">B5</span> <span class="chip cb">b</span><h4>색 복원 장면 · 영구 보너스 (story-perm)</h4><div class="src">rewards 시안 (#48) — 장소 이야기 대사창은 D9-3을 따름</div></div></div>
+<div class="card" data-id="B6" data-cls="b" data-batch="—"><a class="shot" href="img/after/reward_popup_1280x720.jpg" target="_blank"><img src="img/after/reward_popup_1280x720.jpg" alt="보상 팝업" loading="lazy"></a><div class="path">img/after/reward_popup_1280x720.jpg · img/after/quest_reward_popup_1280x720.jpg</div>
+  <div class="body"><span class="id">B6</span> <span class="chip cb">b</span><h4>보상 팝업 (아이콘 · 눌러서 보기) — 퀘스트 완료 · 장 보스 첫 정화 · 원소섬 소탕 등 일반 보상</h4><div class="src">scripts/reward_popup.gd — rewards 시안 (#34 #58). 특정 순간의 팝업(출석 · 항해일지 · 레벨 업 · 귀환 · 모험 결과 · 상점 · 첫 감상)은 d로 따로</div></div></div>
+<div class="card" data-id="B7" data-cls="b" data-batch="—"><a class="shot" href="img/after/locked_tap_mid_1280x720.jpg" target="_blank"><img src="img/after/locked_tap_mid_1280x720.jpg" alt="잠금 안내" loading="lazy"></a><div class="path">img/after/locked_tap_mid_1280x720.jpg</div>
+  <div class="body"><span class="id">B7</span> <span class="chip cb">b</span><h4>잠긴 메뉴 안내 (자물쇠 · 흑백)</h4><div class="src">hud.gd system_msg · refresh_feature_locks — rewards 시안 locked (#11)</div></div></div>
+<div class="card" data-id="B8" data-cls="b" data-batch="—"><a class="shot" href="img/after/hero_codex_1280x720.jpg" target="_blank"><img src="img/after/hero_codex_1280x720.jpg" alt="성장 기록" loading="lazy"></a><div class="path">img/after/hero_codex_1280x720.jpg</div>
+  <div class="body"><span class="id">B8</span> <span class="chip cb">b</span><h4>성장 기록 · 모두 받기</h4><div class="src">scripts/hero_codex_page.gd — rewards 시안 growth-record (#20)</div></div></div>
+</div>
+
+<h2>없앨 예정 (c)</h2>
+<div class="mini">
+<div class="card" data-id="C1" data-cls="c" data-batch="—"><a class="shot" href="img/before/requests_panel_1280x720.jpg" target="_blank"><img src="img/before/requests_panel_1280x720.jpg" alt="의뢰 창" loading="lazy"></a><div class="path">img/before/requests_panel_1280x720.jpg</div>
+  <div class="body"><span class="id">C1</span> <span class="chip cc">c</span><h4>섬 주민 의뢰 창</h4><div class="src">scripts/island_requests.gd (#49)</div></div></div>
+<div class="card" data-id="C2" data-cls="c" data-batch="—"><a class="shot" href="img/after/start_popup_1_1280x720.jpg" target="_blank"><img src="img/after/start_popup_1_1280x720.jpg" alt="의뢰 토스트" loading="lazy"></a><div class="path">img/after/start_popup_1_1280x720.jpg (왼쪽 「의뢰 완료 · 떡집 아주머니」 · 「의뢰」 칸)</div>
+  <div class="body"><span class="id">C2</span> <span class="chip cc">c</span><h4>의뢰 완료 토스트 · 왼쪽 「의뢰」 칸 · 복귀 확인의 의뢰 문구</h4><div class="src">island_requests.gd _toast · hud.gd side_box (#49)</div></div></div>
+</div>
+
+<h2>전체 목록</h2>
+<table id="index"><tr><th>번호</th><th>화면</th><th>분류</th><th>묶음</th><th>캡처</th></tr></table>
+
+<footer>
+  <p>새로 찍은 화면: <code>tools/ui_inventory_capture.gd</code> (feedback_capture.gd의 늦은 계정 상태, 비공개 APPDATA) — 원본 <code>artifacts/feedback70/inventory/</code>, 이 페이지용 사본 <code>img/inventory/</code>. 나머지는 <code>img/after/</code> · <code>img/before/</code> (artifacts/feedback70/after · before 사본).</p>
+  <p>다시 찍기: <code>$env:CAPTURE_SCRIPT='res://tools/ui_inventory_capture.gd'; node tools/feedback_capture_run.mjs artifacts/feedback70/inventory late</code></p>
+  <p>전투 화면: <code>tools/battle_inventory_capture.gd</code> — 원본 <code>artifacts/feedback70/battle/</code>, 이 페이지용 사본 <code>img/battle/</code>. 다시 찍기: <code>$env:CAPTURE_SCRIPT='res://tools/battle_inventory_capture.gd'; node tools/feedback_capture_run.mjs artifacts/feedback70/battle late</code></p>
+</footer>
+</main>
+<script>
+(function(){
+  var cls={a:["ca","a"],b:["cb","b"],c:["cc","c"],d:["cd","d"],x:["cx","범위 밖"]};
+  var t=document.getElementById("index");
+  document.querySelectorAll(".card[data-id]").forEach(function(c){
+    var k=cls[c.dataset.cls], img=c.querySelector("img"), tr=document.createElement("tr");
+    tr.innerHTML="<td class='id'></td><td></td><td><span class='chip "+k[0]+"'>"+k[1]+"</span></td><td></td><td><code></code></td>";
+    tr.children[0].textContent=c.dataset.id;
+    tr.children[1].textContent=c.querySelector("h4").textContent;
+    tr.children[3].textContent=c.dataset.batch;
+    tr.children[4].firstChild.textContent=img.getAttribute("src");
+    t.appendChild(tr);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<title>정화 · 폭주 · 순풍 — 시안 B 적용 (시안 ↔ 게임)</title>
+<style>
+:root{--lav:#8f7fe0;--gold:#e8b94a;--cream:#fff8ec;--ink:#2d2650}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Pretendard","Noto Sans KR",system-ui,sans-serif;background:linear-gradient(180deg,#f4f0ff,#fff8ec);color:var(--ink)}
+header{padding:28px 40px 12px}
+h1{margin:0 0 6px;font-size:26px}
+h2{margin:36px 0 10px;font-size:21px;border-left:6px solid var(--lav);padding-left:10px}
+h3{margin:18px 0 8px;font-size:15px;color:#5a4fa0}
+p,li{font-size:14px;line-height:1.6}
+main{padding:0 40px 60px}
+nav a{display:inline-block;margin:4px 6px 0 0;padding:5px 12px;border-radius:999px;background:#fff;border:1px solid #d9d0ff;color:var(--ink);text-decoration:none;font-size:13px}
+.tabs button{border:1px solid #cfc4ff;background:#fff;border-radius:999px;padding:5px 14px;margin-right:6px;cursor:pointer;font-size:13px}
+.tabs button.on{background:#6a5bc4;color:#fff;border-color:#6a5bc4}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:start}
+.grid figure{margin:0;background:#fff;border-radius:12px;padding:8px;box-shadow:0 2px 10px #8f7fe022}
+.grid figcaption{font-size:12px;color:#6a6290;margin-bottom:6px;font-weight:600}
+.grid img,.grid video{width:100%;border-radius:8px;display:block;background:#1d1838}
+.row{display:grid;grid-template-columns:110px 1fr 1fr 1fr;gap:10px;align-items:center;margin-bottom:10px}
+.row b{font-size:12px;color:#6a6290}
+.row img{width:100%;border-radius:6px;cursor:zoom-in}
+.colhead{font-size:12px;font-weight:700;color:#5a4fa0}
+table{border-collapse:collapse;font-size:13px;margin-top:6px}
+td,th{border:1px solid #e1dbff;padding:6px 10px;background:#fff}
+th{background:#f1edff}
+.ok{color:#1f7344;font-weight:700}
+.note{background:#fff;border:1px solid #eadfb8;border-radius:10px;padding:10px 14px}
+#zoom{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;z-index:9}
+#zoom img{max-width:96vw;max-height:94vh}
+</style></head><body>
+<header>
+<h1>정화 · 폭주 · 순풍 — 시안 B 게임 적용</h1>
+<p>시안: <code>design/mockups/feedback70/clear_fever_b/index.html</code> · 게임: Godot 4.7.2 gl_compatibility 캡처 (<code>tools/clear_fever_capture.gd</code>). 해상도 탭으로 1280×720 / 1600×720 을 바꿔 봅니다. 사진을 누르면 크게 보입니다.</p>
+<nav><a href="#clear">정화</a><a href="#fever">채색 폭주</a><a href="#wind">순풍 2배속</a><a href="#checks">검사 · 프레임 시간</a></nav>
+<div class="tabs" style="margin-top:12px"><button data-w="1280" class="on">1280×720</button><button data-w="1600">1600×720</button></div>
+</header>
+<main id="m"></main>
+<div id="zoom" onclick="this.style.display='none'"><img alt="확대"></div>
+<script>
+const MOMENTS = [
+  {id:'clear', title:'정화 (스테이지 클리어)', mock:'A', n:8, desc:'잿빛이 걷히고 섬에 색이 돌아오는 순간. 빛 커튼 셰이더(끝이 부드럽게 사라지는 층) + 색 번짐 파동 + 꽃가루 입자, 상단 「정화!」 카드와 빛물감 보상이 HUD B 스테이지 패널 옆에 붙는다.'},
+  {id:'fever', title:'채색 폭주 (피버)', mock:'B', n:7, desc:'콤보가 차면 화면 가장자리에 무지개 물감 테두리가 흐르고 색 조각 비가 내린다. 가운데 「채색 폭주!」 배너 → 8초 공격력 ×1.5. 세로 무지개 기둥 · 폭발형 연출 없이 비스듬한 물감 조각과 테두리 흐름만 쓴다.'},
+  {id:'wind', title:'순풍 가속 (2배속 · 59초)', mock:'C', n:5, desc:'바람 버튼이 「2배속 · 59초」 링 타이머로 바뀌고, 하늘에 꼬리가 가늘어지는 바람결과 깃털이 흐른다. 상단 「순풍 가속 · 2배속 · 피해 +30% · 0:59」 알약이 남는다.'},
+];
+const zoom = document.getElementById('zoom');
+function draw(w){
+  const m = document.getElementById('m');
+  m.innerHTML = MOMENTS.map(o => {
+    const rows = Array.from({length:o.n},(_,i)=>{
+      const f=i+1;
+      return `<div class="row"><b>프레임 ${f}</b>
+        <img src="shots/mock_${o.mock}_${w}_f${f}.png" alt="시안 ${f}">
+        <img src="shots/before_${o.id}_${w}_f${f}_${w}x720.jpg" alt="이전 ${f}" onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'—'}))">
+        <img src="shots/after_${o.id}_${w}_f${f}_${w}x720.jpg" alt="적용 ${f}"></div>`;
+    }).join('');
+    return `<section id="${o.id}"><h2>${o.title}</h2><p>${o.desc}</p>
+      <h3>움직임 (같은 길이로 녹화 · 실시간 재생)</h3>
+      <div class="grid">
+        <figure><figcaption>이전 (before)</figcaption><video src="shots/video/before_${o.id}_${w}.webm" autoplay loop muted playsinline controls></video></figure>
+        <figure><figcaption>적용 (after)</figcaption><video src="shots/video/after_${o.id}_${w}.webm" autoplay loop muted playsinline controls></video></figure>
+        <figure><figcaption>시안 B (원본 HTML)</figcaption><img src="shots/mock_${o.mock}_${w}_f${Math.ceil(o.n/2)}.png" alt="시안 B ${o.title}"><a href="../clear_fever_b/index.html">시안 열기</a></figure>
+      </div>
+      <h3>시안 ↔ 게임 프레임 비교</h3>
+      <div class="row"><span></span><span class="colhead">시안</span><span class="colhead">이전</span><span class="colhead">적용</span></div>
+      ${rows}</section>`;
+  }).join('') + `
+  <section id="checks"><h2>검사 · 프레임 시간</h2>
+  <table><tr><th>검사</th><th>결과</th></tr>
+  <tr><td>feedback70_battle_check</td><td class="ok">35 / 실패 0</td></tr>
+  <tr><td>idle_power_check (절전 모드 히트스톱 포함)</td><td class="ok">22 / 실패 0</td></tr>
+  <tr><td>release_ui_check</td><td class="ok">80 / 실패 0</td></tr></table>
+  <h3>폭주 중 프레임 시간 (1600×720, gl_compatibility)</h3>
+  <table><tr><th></th><th>평균</th><th>p95</th><th>GPU p50</th></tr>
+  <tr><td>일반 전투</td><td>4.93 ms</td><td>7.16 ms</td><td>1.22 ms</td></tr>
+  <tr><td>채색 폭주</td><td>5.13 ms</td><td>7.88 ms</td><td>1.39 ms</td></tr></table>
+  <p class="note">모든 층은 미리 만들어 둔 노드를 재사용(풀)하며, 폭주 · 정화 · 순풍 중 새 노드 할당이 없다. 끊긴 끝 없이 셰이더 마스크로 양 끝이 사라지고, 붙여 넣은 평면 이미지는 쓰지 않는다.</p>
+  </section>`;
+  m.querySelectorAll('.row img').forEach(i=>i.onclick=()=>{zoom.firstElementChild.src=i.src;zoom.style.display='flex'});
+}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b)); draw(b.dataset.w);
+});
+draw('1280');
+</script>
+</body></html>

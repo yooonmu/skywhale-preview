@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="252" viewBox="0 0 220 252">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6d2"/><stop offset=".3" stop-color="#ffd877"/><stop offset=".62" stop-color="#e4a63c"/><stop offset=".86" stop-color="#b8761c"/><stop offset="1" stop-color="#e9bd5c"/></linearGradient>
+<radialGradient id="en" cx=".42" cy=".3" r=".8"><stop offset="0" stop-color="#efe8ff"/><stop offset=".4" stop-color="#ab92f4"/><stop offset=".85" stop-color="#6447c4"/><stop offset="1" stop-color="#4b3296"/></radialGradient>
+<linearGradient id="gl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+<clipPath id="in"><path d="M32.72,57.44 Q71.36,45.68 110,32.24 Q148.64,45.68 187.28,57.44 L187.28,122.96 C187.28,173.36 153.68,203.6 110,223.76 C66.32,203.6 32.72,173.36 32.72,122.96 Z"/></clipPath></defs>
+<path d="M18,44 Q64,30 110,14 Q156,30 202,44 L202,122 C202,182 162,218 110,242 C58,218 18,182 18,122 Z" fill="url(#g)" stroke="#4a2b45" stroke-width="3" stroke-linejoin="round"/>
+<path d="M25.36,50.72 Q67.68,37.84 110,23.12 Q152.32,37.84 194.64,50.72 L194.64,122.48 C194.64,177.68 157.84,210.8 110,232.88 C62.16,210.8 25.36,177.68 25.36,122.48 Z" fill="none" stroke="#fff6d2" stroke-opacity=".7" stroke-width="1.6"/>
+<path d="M32.72,57.44 Q71.36,45.68 110,32.24 Q148.64,45.68 187.28,57.44 L187.28,122.96 C187.28,173.36 153.68,203.6 110,223.76 C66.32,203.6 32.72,173.36 32.72,122.96 Z" fill="url(#en)" stroke="#4a2b45" stroke-width="2.4" stroke-linejoin="round"/>
+<g clip-path="url(#in)">
+<path d="M20,20 L120,20 L60,150 L20,150 Z" fill="url(#gl)" opacity=".7"/>
+<polygon points="110,40 118.42,89.67 159.5,60.5 130.33,101.58 180,110 130.33,118.42 159.5,159.5 118.42,130.33 110,180 101.58,130.33 60.5,159.5 89.67,118.42 40,110 89.67,101.58 60.5,60.5 101.58,89.67" fill="#fff" opacity=".08"/>
+</g>
+<circle cx="110" cy="16" r="15" fill="url(#g)" stroke="#4a2b45" stroke-width="2.4"/>
+<polygon points="110,5 112.49,13.51 121,16 112.49,18.49 110,27 107.51,18.49 99,16 107.51,13.51" fill="#fff6d2" stroke="#a86e1a" stroke-width="1"/>
+</svg>

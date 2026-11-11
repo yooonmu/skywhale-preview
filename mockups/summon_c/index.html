@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 수정 시안 · 소환 탭 C 「전신 무대」 + 오른쪽 위 가독성 (#22)</title>
+<style>
+:root{--navy:#2e2350;--lav:#8b74e8;--gold:#d9a52b;--line:#e2dbf5;--w:1280}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;line-height:1.45}
+.page{max-width:1180px;margin:0 auto;padding:20px 16px 64px}
+.page>h1{font-size:22px;margin:0 0 4px}
+.page>h3{font-size:18px;margin:30px 0 8px;padding-top:10px;border-top:2px solid var(--line)}
+.lead{margin:0 0 14px;font-size:14px;color:#5a5180}
+.bar{position:sticky;top:0;z-index:30;display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 16px;padding:8px 0;font-size:13px;background:rgba(243,240,250,.94)}
+.bar button{font:inherit;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.ref,.opt{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 18px}
+.opt h2,.ref h2{font-size:17px;margin:0 0 2px}
+.cap{margin:0 0 10px;font-size:14px;color:#4c4374}
+.cap b{color:#5b3fc0}
+.vp{position:relative;width:100%;overflow:hidden;border-radius:8px;background:#1d1838}
+.scr{position:absolute;left:0;top:0;width:calc(var(--w)*1px);height:720px;transform-origin:0 0;overflow:hidden;font-size:16px}
+.refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.refs figure{margin:0}.refs img{width:100%;display:block;border-radius:8px}.refs figcaption{overflow-wrap:anywhere;font-size:12px;color:#6a6290;margin-top:4px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(500px,100%),1fr));gap:14px}
+.st{font-size:14px;font-weight:700;margin:6px 0 0;color:#3b3166}
+.st small{display:block;font-weight:400;color:#655c8c;font-size:13px}
+.w16{display:none}:root[data-w="1600"] .w12{display:none}:root[data-w="1600"] .w16{display:block}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ================= 전신 무대: 컷인 그림 + 속성 빛 ================= */
+.S{--ink:color-mix(in srgb,var(--eld) 45%,#170f3c);color:#fff}
+.art{position:absolute;inset:-2%;background-position:40% 20%;background-size:cover;animation:drift 16s ease-in-out infinite alternate}
+@keyframes drift{to{transform:scale(1.035) translate(-8px,-4px)}}
+.rim{position:absolute;inset:0;background:radial-gradient(ellipse 45% 60% at 100% 40%,color-mix(in srgb,var(--el) 35%,transparent),transparent 70%);mix-blend-mode:screen;pointer-events:none}
+.vig{position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--ink) 82%,transparent),transparent 30%),linear-gradient(0deg,color-mix(in srgb,var(--ink) 88%,transparent),color-mix(in srgb,var(--ink) 30%,transparent) 30%,transparent 50%)}
+.sheen{position:absolute;inset:0;background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.22) 50%,transparent 58%) 0 0/300% 100% no-repeat;animation:sh 7s ease-in-out infinite;mix-blend-mode:screen;pointer-events:none}
+@keyframes sh{0%,45%{background-position:130% 0}100%{background-position:-130% 0}}
+/* 속성 입자 */
+.mo{position:absolute;top:-30px;pointer-events:none;animation:fall var(--d,9s) linear infinite;animation-delay:var(--dl,0s)}
+@keyframes fall{to{transform:translate(-160px,800px) rotate(320deg)}}
+.mo.up{top:auto;bottom:-30px;animation-name:rise}
+@keyframes rise{to{transform:translate(-80px,-780px) scale(.4);opacity:0}}
+.leaf{width:12px;height:20px;border-radius:0 100% 0 100%;background:linear-gradient(var(--el),#e8ffe8);opacity:.9}
+.petal{width:14px;height:10px;border-radius:70% 0 70% 0;background:#ffe0ec;opacity:.95}
+.feather{width:16px;height:42px;background:linear-gradient(#fff,#fff0b8);-webkit-mask:url(img/vfx_textures_feather.png) center/contain no-repeat;mask:url(img/vfx_textures_feather.png) center/contain no-repeat;filter:drop-shadow(0 0 4px #ffe08a)}
+.ember{width:8px;height:8px;border-radius:50%;background:radial-gradient(circle,#fff6d0,#ffad4a 50%,rgba(255,74,46,0) 72%);box-shadow:0 0 10px #ff8a3c}
+.star{width:20px;height:20px;background:linear-gradient(#fff,var(--ell));-webkit-mask:url(img/vfx_textures_star4.png) center/contain no-repeat;mask:url(img/vfx_textures_star4.png) center/contain no-repeat;animation:fall var(--d,9s) linear infinite,tw 1.6s ease-in-out infinite}
+@keyframes tw{50%{opacity:.3}}
+
+/* ---- 오른쪽 위: 띠 그림자 + 유리 판 (가독성 수정) ---- */
+.band{position:absolute;left:0;right:0;top:0;height:132px;background:linear-gradient(180deg,color-mix(in srgb,var(--ink) 72%,transparent),color-mix(in srgb,var(--ink) 34%,transparent) 55%,transparent);-webkit-backdrop-filter:blur(2.5px);backdrop-filter:blur(2.5px);-webkit-mask:linear-gradient(#000 45%,transparent);mask:linear-gradient(#000 45%,transparent);pointer-events:none}
+.ttl{position:absolute;left:26px;top:18px;z-index:5;display:flex;align-items:center;gap:10px}
+.ttl b{font-size:26px;font-weight:900;letter-spacing:2px;text-shadow:0 2px 4px rgba(0,0,0,.55),0 0 10px rgba(0,0,0,.3)}
+.ttl i{width:6px;height:28px;border-radius:3px;background:linear-gradient(var(--ell),var(--el))}
+.glass{position:absolute;right:20px;top:14px;z-index:5;display:flex;align-items:center;gap:6px;padding:5px;border-radius:18px;background:linear-gradient(180deg,rgba(30,22,70,.62),rgba(16,10,44,.74));-webkit-backdrop-filter:blur(12px) saturate(1.3);backdrop-filter:blur(12px) saturate(1.3);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3),inset 0 -2px 0 rgba(255,231,166,.55),0 8px 20px rgba(0,0,0,.35)}
+.cy{display:flex;align-items:center;gap:6px;height:44px;padding:0 6px 0 6px;border-radius:13px;background:rgba(255,255,255,.08)}
+.cy img{width:30px;height:30px}
+.cy b{font-size:18px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.3px;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.cy small{font-size:11.5px;font-weight:800;color:#d8cff8;margin-right:2px}
+.cy .add{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(180deg,#fff3c4,#e2a93a);color:#4a2e00;font-size:20px;font-weight:900;line-height:1;box-shadow:0 0 0 1.5px #fff}
+.cy.dust img{filter:sepia(1) saturate(3) hue-rotate(-12deg) brightness(1.05)}
+.sep{width:1px;height:28px;background:rgba(255,255,255,.25)}
+.gb{display:flex;align-items:center;justify-content:center;gap:5px;min-width:44px;height:44px;padding:0 12px;border-radius:13px;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);font-size:15px;font-weight:900;white-space:nowrap}
+.gb.x{width:44px;padding:0;border-radius:50%;background:#fff;color:var(--navy);font-size:24px;box-shadow:0 0 0 2px rgba(255,231,166,.9)}
+.timer{position:absolute;right:20px;top:72px;z-index:5;display:flex;align-items:center;gap:6px;padding:4px 12px 4px 8px;border-radius:12px;background:rgba(16,10,44,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);font-size:13.5px;font-weight:800;white-space:nowrap}
+.timer i{width:8px;height:8px;border-radius:50%;background:var(--el);box-shadow:0 0 8px var(--el)}
+
+/* ---- 왼쪽 배너 목록: 물방울 얼굴 3개 ---- */
+.dots{position:absolute;left:24px;top:104px;z-index:4;display:flex;flex-direction:column;gap:18px}
+.dot{display:flex;align-items:center;gap:12px}
+.dot>i{position:relative;width:72px;height:72px;border-radius:50% 50% 50% 10%;transform:rotate(-45deg);box-shadow:0 0 0 3px rgba(255,255,255,.65),0 6px 12px rgba(0,0,0,.35);overflow:hidden}
+.dot>i span{position:absolute;inset:-12%;display:block;transform:rotate(45deg);background-size:250% auto;background-position:30% 18%}
+.dot div{padding:3px 10px;border-radius:10px;background:rgba(16,10,44,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);font-size:16px;font-weight:900;line-height:1.2;white-space:nowrap}
+.dot div small{display:block;font-size:12px;font-weight:700;color:#e0d8ff}
+.dot.on>i{box-shadow:0 0 0 4px var(--el),0 0 24px var(--el),0 6px 12px rgba(0,0,0,.35)}
+.dot.off{opacity:.82}
+
+/* ---- 아래 왼쪽: 이름 띠 ---- */
+.tags{position:absolute;left:150px;bottom:288px;z-index:4;display:flex;gap:8px}
+.tags b{padding:3px 12px;border-radius:8px;background:#fff;color:var(--eld);font-size:16px;font-weight:900;box-shadow:0 3px 6px rgba(0,0,0,.25)}
+.tags b.ss{background:linear-gradient(90deg,var(--el),var(--ell));color:#fff;text-shadow:0 1px 1px rgba(0,0,0,.35)}
+.rib{position:absolute;left:0;bottom:150px;z-index:3;padding:16px 70px 18px 150px;transform:skewX(-10deg);transform-origin:0 100%;background:linear-gradient(90deg,var(--ell),#fff3cf) top/100% 3px no-repeat,linear-gradient(90deg,color-mix(in srgb,var(--eld) 92%,transparent),color-mix(in srgb,var(--el) 55%,transparent) 78%,transparent)}
+.rib>div{transform:skewX(10deg)}
+.rib h5{margin:0;font-size:68px;line-height:1;font-weight:900;letter-spacing:3px;text-shadow:3px 3px 0 color-mix(in srgb,var(--eld) 70%,#000),0 0 22px color-mix(in srgb,var(--el) 60%,transparent)}
+.rib q{display:block;margin-top:8px;font-size:20px;font-weight:700;quotes:"「" "」";text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.mem{position:absolute;left:150px;bottom:34px;z-index:4;display:flex;align-items:center;gap:12px}
+.mem .ring{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--el) 7%,rgba(255,255,255,.22) 0);box-shadow:0 0 12px color-mix(in srgb,var(--el) 60%,transparent)}
+.mem .ring b{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:var(--ink);font-size:17px;font-weight:900}
+.mem div{line-height:1.25;font-weight:800;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+.mem div small{display:block;font-size:13px;font-weight:700;color:#e6defa}
+
+/* ---- 아래 오른쪽: 유리 받침 + 소환 버튼 ---- */
+.ped{position:absolute;right:24px;bottom:26px;z-index:4;display:flex;gap:12px;padding:12px;border-radius:26px;background:linear-gradient(180deg,rgba(30,22,70,.5),rgba(16,10,44,.66));-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.28),inset 0 -2px 0 rgba(255,231,166,.5),0 0 40px color-mix(in srgb,var(--el) 40%,transparent)}
+.pull{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:184px;height:84px;border-radius:18px;border:0;font:inherit;color:#fff;font-size:22px;font-weight:900;line-height:1.15;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 2px rgba(255,255,255,.5)}
+.pull small{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:800}
+.pull small img{width:24px;height:24px}
+.pull.ten{width:250px;font-size:28px;color:var(--eld);background:linear-gradient(90deg,var(--ell),#fff3cf) bottom/100% 5px no-repeat,linear-gradient(160deg,#fff,color-mix(in srgb,var(--ell) 55%,#fff));box-shadow:0 0 0 2px #fff,0 0 24px color-mix(in srgb,var(--el) 80%,transparent)}
+.pull.ten::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.75) 50%,transparent 60%) 0 0/300% 100% no-repeat;animation:sh 3.5s ease-in-out infinite}
+.pull.free{background:linear-gradient(160deg,rgba(255,255,255,.22),rgba(255,255,255,.08));font-size:20px}
+.pull.free small{color:#ffe08a}
+.sbadge{position:absolute;right:40px;bottom:120px;z-index:5;display:flex;align-items:center;gap:6px;padding:5px 12px 5px 8px;border-radius:14px;background:#1c1442;font-size:15px;font-weight:900;white-space:nowrap;box-shadow:0 0 0 2px #fff,0 0 16px rgba(255,255,255,.6)}
+.shard{position:relative;display:inline-block;width:18px;height:28px;clip-path:polygon(50% 0,100% 30%,80% 100%,20% 100%,0 30%);background:conic-gradient(from 200deg,#ff6b8b,#ffb54d,#ffe66b,#6fe39a,#5ec3ff,#8b7bff,#e07bff,#ff6b8b)}
+.pity{position:absolute;right:24px;bottom:164px;z-index:4;padding:3px 12px;border-radius:10px;background:rgba(16,10,44,.58);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);font-size:13px;font-weight:700;color:#efe9ff;white-space:nowrap}
+
+/* ================= 가독성 비교 (오른쪽 위 확대) ================= */
+.zg{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(520px,100%),1fr));gap:10px}
+.zc{position:relative;height:150px;border-radius:8px;overflow:hidden;background-size:1280px auto;background-position:right 0 top 0;background-repeat:no-repeat}
+.zc .lb{position:absolute;left:8px;bottom:6px;z-index:6;padding:1px 8px;border-radius:6px;background:#fff;color:var(--navy);font-size:12px;font-weight:800}
+.zc .lb.bad{background:#ffe3e3;color:#a0283a}.zc .lb.good{background:#dcf7e8;color:#16704e}
+/* 원래 C의 칩 (그대로 옮김) */
+.old{position:absolute;right:22px;top:16px;display:flex;gap:12px;color:#fff;font-weight:700}
+.old span{display:flex;align-items:center;gap:6px;background:rgba(10,6,30,.35);padding:5px 14px 5px 8px;border-radius:18px}
+.old img{width:26px;height:26px}
+.oldt{position:absolute;right:30px;top:80px;color:#fff;font-weight:800;background:rgba(0,0,0,.35);padding:6px 14px;border-radius:12px}
+.zc .glass{right:20px;top:14px}
+.zc .timer{top:72px}
+.zc .band{height:132px}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>소환 탭 C 「전신 무대」 — 수정 시안 (#22)</h1>
+<p class="lead">PD가 고른 <b>C 전신 무대</b>를 조금 다듬고, <b>오른쪽 위(재화 · 확률 · 닫기)가 바쁜 그림 위에서 안 읽히던 문제</b>를 고쳤습니다: ① 화면 위쪽에 아이 속성 색이 섞인 남색 <b>그림자 띠</b>(살짝 흐림), ② 재화 · 확률 · 닫기를 한 장의 <b>유리 판</b>(뒤 흐림 + 흰 테 + 금 밑줄)에 모으고, ③ 숫자에 그림자 · 칸 바탕. 닫기는 흰 동그라미로 어떤 그림 위에서도 먼저 보입니다. 아래에서 <b>밝은 그림(아리아 · 플로라) · 바쁜 그림(이그니) · 어두운 그림(세레나)</b> 위에서 확인합니다. 그림은 모두 게임에 있는 컷인, 대사는 <code>scripts/roster.gd</code>, 속성 색은 <code>scripts/fx/ss_element_style.gd</code> 값입니다.</p>
+<div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button></div>
+
+<section class="ref">
+  <h2>지금 게임</h2>
+  <p class="cap">메뉴 판 안의 배너 그림. 그림이 작고, 재화 · 닫기는 메뉴 판 위에 있습니다.</p>
+  <div class="refs">
+    <figure><img src="img/artifacts_feedback70_after_summon_pickup_1280x720.jpg" alt="지금 픽업 소환"><figcaption>artifacts/feedback70/after/summon_pickup_1280x720.jpg</figcaption></figure>
+    <figure><img src="img/artifacts_feedback70_after_summon_standard_1280x720.jpg" alt="지금 상시 소환"><figcaption>artifacts/feedback70/after/summon_standard_1280x720.jpg</figcaption></figure>
+  </div>
+</section>
+
+<section class="ref">
+  <h2>원래 시안 C (비교용)</h2>
+  <p class="cap">오른쪽 위 재화 칩이 옅은 반투명 알약이라 흰 벚꽃 가지 위에서 숫자가 묻히고, 닫기 · 확률이 없었습니다. 움직이는 원본: <a href="https://yooonmu.github.io/skywhale-archive/mockups/summon/index.html">feedback70/summon/index.html</a></p>
+  <img class="w12" src="orig/0_1280.jpg" alt="원래 시안 C 1280" style="width:100%;border-radius:8px"><img class="w16" src="orig/0_1600.jpg" alt="원래 시안 C 1600" style="width:100%;border-radius:8px">
+</section>
+
+<h3>1. 수정 C — 플로라 픽업 (밝고 바쁜 그림)</h3>
+<section class="opt">
+  <h2>그림 위 그림자 띠 + 유리 판 · 속성 입자 · 이름 띠</h2>
+  <p class="cap">그림은 천천히 숨 쉬듯 다가오고(1.035배), 오른쪽 가장자리에 <b>속성 빛(생명 초록)</b>, 잎 · 꽃잎이 흩날리며 빛이 한 번씩 비스듬히 지나갑니다. 이름 띠는 위에 속성 연두 → 크림 금줄, 10회 버튼은 속성 빛 + 반짝임 + <b>무지개 신화 조각 딱지</b>. 오늘 무료 1회가 있으면 1회 버튼이 「무료」로 바뀝니다(지금 게임과 같음).</p>
+  <div class="vp"><div class="scr S" style="--el:#3fcf86;--eld:#16704e;--ell:#b8f3a6">
+    <div class="art" style="background-image:url(img/assets_cutin_flora_cutin.png)"></div><div class="rim"></div><div class="vig"></div><div class="sheen"></div>
+    <i class="mo leaf" style="left:62%;--d:8s"></i><i class="mo petal" style="left:74%;--d:10s;--dl:-3s"></i><i class="mo leaf" style="left:86%;--d:7s;--dl:-5s"></i><i class="mo petal" style="left:94%;--d:9s;--dl:-1s"></i><i class="mo leaf" style="left:52%;--d:11s;--dl:-7s"></i>
+    <div class="band"></div>
+    <div class="ttl"><i></i><b>소환</b></div>
+    <div class="glass"><span class="cy"><img src="img/assets_ui_icon_gem.png" alt="채색석"><b>51,843</b><span class="add">+</span></span><span class="cy dust"><img src="img/assets_ui_icon_dust.png" alt="별가루"><small>별가루</small><b>2</b></span><span class="sep"></span><span class="gb">확률</span><span class="gb x">×</span></div>
+    <div class="timer"><i></i>픽업 교체까지 6일 23시간</div>
+    <div class="dots">
+      <div class="dot on"><i><span style="background-image:url(img/assets_cutin_flora_cutin.png)"></span></i><div>픽업<small>6일</small></div></div>
+      <div class="dot off"><i><span style="background:url(img/assets_ui_summon_standard.png) 70% 50%/250% auto"></span></i><div>상시</div></div>
+      <div class="dot off"><i style="box-shadow:0 0 0 3px #ffcc4d,0 6px 12px rgba(0,0,0,.35)"><span style="background:#26306b url(img/assets_ui_summon_book.png) 50% 40%/80% auto no-repeat"></span></i><div>첫 항해<small>50회</small></div></div>
+    </div>
+    <div class="tags"><b class="ss">SS</b><b>생명</b><b>50% 픽업</b></div>
+    <div class="rib"><div><h5>플로라</h5><q>모두, 다시 피어나.</q></div></div>
+    <div class="mem"><div class="ring"><b>11</b></div><div>기억 포인트 11 / 150<small>150점이면 플로라를 바로 데려와요</small></div></div>
+    <div class="pity">SS가 나오면 50% 플로라 · 놓치면 다음 SS 확정</div>
+    <div class="ped"><button class="pull free" type="button">무료 1회<small>오늘 한 번</small></button><button class="pull ten" type="button">10회<small><img src="img/assets_ui_icon_gem.png" alt="">1,600</small></button></div>
+    <div class="sbadge"><span class="shard"></span>신화 조각 1~3</div>
+  </div></div>
+</section>
+
+<h3>2. 오른쪽 위만 확대 — 원래 칩 vs 수정 유리 판</h3>
+<section class="opt">
+  <h2>밝은 · 바쁜 · 어두운 그림 4장 위에서</h2>
+  <p class="cap">왼쪽은 원래 C의 옅은 알약 칩(재화만, 닫기 · 확률 없음), 오른쪽은 수정판입니다. 밝은 그림(아리아의 연보라 하늘 · 플로라의 흰 꽃)에서 원래 칩은 흰 숫자가 바탕에 묻히고, 바쁜 그림(이그니의 불새)에서는 무늬와 겹칩니다. 수정판은 <b>띠 그림자 → 유리 판 → 칸 바탕</b> 세 겹이라 어느 그림에서도 대비가 일정합니다.</p>
+  <div class="zg">
+    <div class="zc S" style="background-image:url(img/assets_cutin_flora_cutin.png)"><div class="old"><span><img src="img/assets_ui_icon_ticket.png" alt="">3</span><span><img src="img/assets_ui_icon_gem.png" alt="">51,843</span></div><div class="oldt">6일 23시간</div><span class="lb bad">원래 · 플로라 (밝음 · 꽃)</span></div>
+    <div class="zc S" style="--el:#3fcf86;--eld:#16704e;--ell:#b8f3a6;background-image:url(img/assets_cutin_flora_cutin.png)"><div class="band"></div><div class="glass"><span class="cy"><img src="img/assets_ui_icon_gem.png" alt=""><b>51,843</b><span class="add">+</span></span><span class="cy dust"><img src="img/assets_ui_icon_dust.png" alt=""><small>별가루</small><b>2</b></span><span class="sep"></span><span class="gb">확률</span><span class="gb x">×</span></div><div class="timer"><i></i>픽업 교체까지 6일 23시간</div><span class="lb good">수정 · 플로라</span></div>
+    <div class="zc S" style="background-image:url(img/assets_cutin_aria_cutin.png)"><div class="old"><span><img src="img/assets_ui_icon_ticket.png" alt="">3</span><span><img src="img/assets_ui_icon_gem.png" alt="">51,843</span></div><div class="oldt">6일 23시간</div><span class="lb bad">원래 · 아리아 (밝음 · 연보라)</span></div>
+    <div class="zc S" style="--el:#ffd24e;--eld:#b07a1a;--ell:#fff0a8;background-image:url(img/assets_cutin_aria_cutin.png)"><div class="band"></div><div class="glass"><span class="cy"><img src="img/assets_ui_icon_gem.png" alt=""><b>51,843</b><span class="add">+</span></span><span class="cy dust"><img src="img/assets_ui_icon_dust.png" alt=""><small>별가루</small><b>2</b></span><span class="sep"></span><span class="gb">확률</span><span class="gb x">×</span></div><div class="timer"><i></i>픽업 교체까지 6일 23시간</div><span class="lb good">수정 · 아리아</span></div>
+    <div class="zc S" style="background-image:url(img/assets_cutin_ignis_cutin.png)"><div class="old"><span><img src="img/assets_ui_icon_ticket.png" alt="">3</span><span><img src="img/assets_ui_icon_gem.png" alt="">51,843</span></div><div class="oldt">6일 23시간</div><span class="lb bad">원래 · 이그니 (바쁨 · 불새)</span></div>
+    <div class="zc S" style="--el:#ff4a2e;--eld:#8c1838;--ell:#ffad4a;background-image:url(img/assets_cutin_ignis_cutin.png)"><div class="band"></div><div class="glass"><span class="cy"><img src="img/assets_ui_icon_gem.png" alt=""><b>51,843</b><span class="add">+</span></span><span class="cy dust"><img src="img/assets_ui_icon_dust.png" alt=""><small>별가루</small><b>2</b></span><span class="sep"></span><span class="gb">확률</span><span class="gb x">×</span></div><div class="timer"><i></i>픽업 교체까지 6일 23시간</div><span class="lb good">수정 · 이그니</span></div>
+    <div class="zc S" style="background-image:url(img/assets_cutin_serena_cutin.png)"><div class="old"><span><img src="img/assets_ui_icon_ticket.png" alt="">3</span><span><img src="img/assets_ui_icon_gem.png" alt="">51,843</span></div><div class="oldt">6일 23시간</div><span class="lb bad">원래 · 세레나 (어두움 · 별밤)</span></div>
+    <div class="zc S" style="--el:#9a6bff;--eld:#361a78;--ell:#d4b8ff;background-image:url(img/assets_cutin_serena_cutin.png)"><div class="band"></div><div class="glass"><span class="cy"><img src="img/assets_ui_icon_gem.png" alt=""><b>51,843</b><span class="add">+</span></span><span class="cy dust"><img src="img/assets_ui_icon_dust.png" alt=""><small>별가루</small><b>2</b></span><span class="sep"></span><span class="gb">확률</span><span class="gb x">×</span></div><div class="timer"><i></i>픽업 교체까지 6일 23시간</div><span class="lb good">수정 · 세레나</span></div>
+  </div>
+</section>
+
+<h3>3. 다른 아이 픽업일 때 (같은 틀 · 속성 색만 바뀜)</h3>
+<div class="two">
+<section class="opt">
+  <h2>아리아 · 빛 — 밝은 연보라 그림</h2>
+  <div class="vp"><div class="scr S" style="--el:#ffd24e;--eld:#b07a1a;--ell:#fff0a8">
+    <div class="art" style="background-image:url(img/assets_cutin_aria_cutin.png)"></div><div class="rim"></div><div class="vig"></div><div class="sheen"></div>
+    <i class="mo feather" style="left:66%;--d:9s"></i><i class="mo feather" style="left:82%;--d:11s;--dl:-4s"></i><i class="mo feather" style="left:93%;--d:8s;--dl:-6s"></i><i class="mo star" style="left:58%;--d:12s;--dl:-2s"></i>
+    <div class="band"></div>
+    <div class="ttl"><i></i><b>소환</b></div>
+    <div class="glass"><span class="cy"><img src="img/assets_ui_icon_gem.png" alt="채색석"><b>51,843</b><span class="add">+</span></span><span class="cy dust"><img src="img/assets_ui_icon_dust.png" alt="별가루"><small>별가루</small><b>2</b></span><span class="sep"></span><span class="gb">확률</span><span class="gb x">×</span></div>
+    <div class="timer"><i></i>픽업 교체까지 6일 23시간</div>
+    <div class="dots">
+      <div class="dot on"><i><span style="background-image:url(img/assets_cutin_aria_cutin.png)"></span></i><div>픽업<small>6일</small></div></div>
+      <div class="dot off"><i><span style="background:url(img/assets_ui_summon_standard.png) 70% 50%/250% auto"></span></i><div>상시</div></div>
+      <div class="dot off"><i style="box-shadow:0 0 0 3px #ffcc4d,0 6px 12px rgba(0,0,0,.35)"><span style="background:#26306b url(img/assets_ui_summon_book.png) 50% 40%/80% auto no-repeat"></span></i><div>첫 항해<small>50회</small></div></div>
+    </div>
+    <div class="tags"><b class="ss">SS</b><b>빛</b><b>50% 픽업</b></div>
+    <div class="rib"><div><h5>아리아</h5><q>누구도, 다시는 잃지 않아.</q></div></div>
+    <div class="mem"><div class="ring"><b>11</b></div><div>기억 포인트 11 / 150<small>150점이면 아리아를 바로 데려와요</small></div></div>
+    <div class="ped"><button class="pull" type="button">1회<small><img src="img/assets_ui_icon_gem.png" alt="">160</small></button><button class="pull ten" type="button">10회<small><img src="img/assets_ui_icon_gem.png" alt="">1,600</small></button></div>
+    <div class="sbadge"><span class="shard"></span>신화 조각 1~3</div>
+  </div></div>
+  <p class="st">빛 = 금 · 크림<small>깃털 입자, 위 띠는 남색에 금빛이 섞여 연보라 하늘 위에서도 판이 떠 보입니다</small></p>
+</section>
+<section class="opt">
+  <h2>이그니 · 불꽃 — 오른쪽 위가 불새로 바쁜 그림</h2>
+  <div class="vp"><div class="scr S" style="--el:#ff4a2e;--eld:#8c1838;--ell:#ffad4a">
+    <div class="art" style="background-image:url(img/assets_cutin_ignis_cutin.png)"></div><div class="rim"></div><div class="vig"></div><div class="sheen"></div>
+    <i class="mo ember up" style="left:60%;--d:5s"></i><i class="mo ember up" style="left:72%;--d:6s;--dl:-2s"></i><i class="mo ember up" style="left:84%;--d:4.5s;--dl:-1s"></i><i class="mo ember up" style="left:92%;--d:5.5s;--dl:-3s"></i><i class="mo ember up" style="left:66%;--d:7s;--dl:-4s"></i>
+    <div class="band"></div>
+    <div class="ttl"><i></i><b>소환</b></div>
+    <div class="glass"><span class="cy"><img src="img/assets_ui_icon_gem.png" alt="채색석"><b>51,843</b><span class="add">+</span></span><span class="cy dust"><img src="img/assets_ui_icon_dust.png" alt="별가루"><small>별가루</small><b>2</b></span><span class="sep"></span><span class="gb">확률</span><span class="gb x">×</span></div>
+    <div class="timer"><i></i>픽업 교체까지 6일 23시간</div>
+    <div class="dots">
+      <div class="dot on"><i><span style="background-image:url(img/assets_cutin_ignis_cutin.png)"></span></i><div>픽업<small>6일</small></div></div>
+      <div class="dot off"><i><span style="background:url(img/assets_ui_summon_standard.png) 70% 50%/250% auto"></span></i><div>상시</div></div>
+      <div class="dot off"><i style="box-shadow:0 0 0 3px #ffcc4d,0 6px 12px rgba(0,0,0,.35)"><span style="background:#26306b url(img/assets_ui_summon_book.png) 50% 40%/80% auto no-repeat"></span></i><div>첫 항해<small>50회</small></div></div>
+    </div>
+    <div class="tags"><b class="ss">SS</b><b>불꽃</b><b>50% 픽업</b></div>
+    <div class="rib"><div><h5>이그니</h5><q>재 속에서도, 나는 다시 타올라.</q></div></div>
+    <div class="mem"><div class="ring"><b>11</b></div><div>기억 포인트 11 / 150<small>150점이면 이그니를 바로 데려와요</small></div></div>
+    <div class="ped"><button class="pull" type="button">1회<small><img src="img/assets_ui_icon_gem.png" alt="">160</small></button><button class="pull ten" type="button">10회<small><img src="img/assets_ui_icon_gem.png" alt="">1,600</small></button></div>
+    <div class="sbadge"><span class="shard"></span>신화 조각 1~3</div>
+  </div></div>
+  <p class="st">불꽃 = 진홍 · 주황<small>불티가 아래에서 올라오고, 위 띠가 불새 날개 끝을 눌러 줘 판 테두리가 또렷합니다</small></p>
+</section>
+<section class="opt">
+  <h2>세레나 · 별 — 어두운 별밤 그림</h2>
+  <div class="vp"><div class="scr S" style="--el:#9a6bff;--eld:#361a78;--ell:#d4b8ff">
+    <div class="art" style="background-image:url(img/assets_cutin_serena_cutin.png)"></div><div class="rim"></div><div class="vig"></div><div class="sheen"></div>
+    <i class="mo star" style="left:60%;--d:10s"></i><i class="mo star" style="left:74%;--d:12s;--dl:-5s"></i><i class="mo star" style="left:88%;--d:9s;--dl:-2s"></i><i class="mo star" style="left:96%;--d:11s;--dl:-7s"></i>
+    <div class="band"></div>
+    <div class="ttl"><i></i><b>소환</b></div>
+    <div class="glass"><span class="cy"><img src="img/assets_ui_icon_gem.png" alt="채색석"><b>51,843</b><span class="add">+</span></span><span class="cy dust"><img src="img/assets_ui_icon_dust.png" alt="별가루"><small>별가루</small><b>2</b></span><span class="sep"></span><span class="gb">확률</span><span class="gb x">×</span></div>
+    <div class="timer"><i></i>픽업 교체까지 6일 23시간</div>
+    <div class="dots">
+      <div class="dot on"><i><span style="background-image:url(img/assets_cutin_serena_cutin.png)"></span></i><div>픽업<small>6일</small></div></div>
+      <div class="dot off"><i><span style="background:url(img/assets_ui_summon_standard.png) 70% 50%/250% auto"></span></i><div>상시</div></div>
+      <div class="dot off"><i style="box-shadow:0 0 0 3px #ffcc4d,0 6px 12px rgba(0,0,0,.35)"><span style="background:#26306b url(img/assets_ui_summon_book.png) 50% 40%/80% auto no-repeat"></span></i><div>첫 항해<small>50회</small></div></div>
+    </div>
+    <div class="tags"><b class="ss">SS</b><b>별</b><b>50% 픽업</b></div>
+    <div class="rib"><div><h5>세레나</h5><q>모든 별이 내 편이야.</q></div></div>
+    <div class="mem"><div class="ring"><b>11</b></div><div>기억 포인트 11 / 150<small>150점이면 세레나를 바로 데려와요</small></div></div>
+    <div class="ped"><button class="pull" type="button">1회<small><img src="img/assets_ui_icon_gem.png" alt="">160</small></button><button class="pull ten" type="button">10회<small><img src="img/assets_ui_icon_gem.png" alt="">1,600</small></button></div>
+    <div class="sbadge"><span class="shard"></span>신화 조각 1~3</div>
+  </div></div>
+  <p class="st">별 = 보라 · 라일락<small>어두운 그림에서는 띠가 거의 티 나지 않고, 유리 판의 흰 테 · 금 밑줄이 판 경계를 잡아 줍니다</small></p>
+</section>
+</div>
+</main>
+<script>
+const fit=()=>document.querySelectorAll('.vp').forEach(v=>{const s=v.querySelector('.scr');const k=v.clientWidth/s.offsetWidth;s.style.transform=`scale(${k})`;v.style.height=s.offsetHeight*k+'px'});
+addEventListener('resize',fit);
+document.querySelectorAll('.bar [data-res]').forEach(b=>b.addEventListener('click',()=>{document.documentElement.style.setProperty('--w',b.dataset.res);document.documentElement.dataset.w=b.dataset.res;document.querySelectorAll('.bar [data-res]').forEach(x=>x.setAttribute('aria-pressed',x===b));fit()}));
+fit();
+</script>
+</body>
+</html>

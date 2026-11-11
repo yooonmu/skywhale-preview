@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>소환 시안 적용 — 시안 ↔ 게임 · 전 ↔ 후 (summon_c · summon_flow_na)</title>
+<style>
+:root{--navy:#2e2350;--line:#e2dbf5}
+*{box-sizing:border-box}
+body{margin:0;background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.5}
+.page{max-width:1240px;margin:0 auto;padding:20px 16px 64px}
+h1{font-size:22px;margin:0 0 6px}
+h2{font-size:18px;margin:34px 0 8px;padding-top:12px;border-top:2px solid var(--line)}
+h3{font-size:15px;margin:18px 0 6px}
+p,li{font-size:14px;color:#4c4374}
+code{font-size:12.5px;background:#ebe5fb;padding:1px 5px;border-radius:4px}
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:8px;align-items:center;padding:8px 0;background:rgba(243,240,250,.95)}
+.bar button{font:inherit;font-size:13px;min-height:40px;padding:0 16px;border-radius:20px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--navy);color:#fff}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 14px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px}
+.pair figure{margin:0}
+.pair img{width:100%;display:block;border-radius:6px;background:#1d1838}
+.pair figcaption{font-size:12px;color:#6a6290;margin-top:4px;overflow-wrap:anywhere}
+.pair .t{grid-column:1/-1;font-size:14px;font-weight:700;color:#3b3166}
+.pair .t small{display:block;font-weight:400;color:#655c8c;font-size:13px}
+.vids{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:10px}
+.vids figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px}
+.vids video,.vids img{width:100%;display:block;border-radius:6px;background:#1d1838}
+.ok{display:inline-block;padding:1px 8px;border-radius:8px;background:#e3f7ea;color:#16704e;font-weight:700;font-size:12px}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>소환 시안 적용 — 시안 ↔ 게임 · 전 ↔ 후</h1>
+<p>PD 확정 시안 <a href="../summon_c/index.html">summon_c</a>(소환 탭 C) · <a href="../summon_flow_na/index.html">summon_flow_na</a>(소환 흐름 나 「이젤 캔버스」 + 중복 → 별가루)를 게임에 넣은 결과입니다.
+시안 그림은 시안 HTML을 같은 순간에 멈춰 찍었고(<code>build_mock.mjs</code>), 게임 그림은 같은 결과 · 같은 지갑으로 실제 연출을 돌려 찍었습니다(<code>tools/summon_apply_capture.gd</code>).
+예시 지갑: 채색석 51,843 · 별가루 2 · 기억 포인트 11 · 신화 조각 43, 플로라 픽업 첫날. 10회 결과는 시안 ⑥과 같은 열 명(새 아이 예슬 · 채원 · 플로라, 중복 7명 = 별가루 +38, 신화 조각 +3).</p>
+<ul>
+<li>코드: 소환 화면 <code>scripts/ui/summon_page.gd</code>(menus.gd에서 옮김, menus.gd는 부르는 줄만) · 공용 판/글자/장식 <code>scripts/ui/summon_fx.gd</code> · 연출 <code>scripts/gacha_show.gd</code>(새로 씀) · 셰이더 <code>assets/ui/fx/summon_*</code> · <code>atelier_*</code> · <code>gold_ink</code></li>
+<li>PD 규칙: 등급 색은 <code>GradeStyle</code>(SS = 속성 색 · 신화 = 무지개, 금빛은 S 등급 · 가는 테만) · 칠하는 동안 물감 · 시간 · 붓이 등급과 상관없이 같음(등급은 ② 물감에서 처음) · 효과는 셰이더 · 입자 겹(평면 그림 붙이기 없음, 빛살 · 물감 줄기 끝은 부드럽게, 세로 무지개 기둥 없음) · 중복 아이는 별가루만</li>
+<li>검사: release_ui <span class="ok">80/0</span> · back_button <span class="ok">65/0</span> · first_session <span class="ok">49/0</span> · fb70_overflow <span class="ok">41,036/0</span> · 안내 「summon」 짚는 칸(소환 메뉴 · 「10회 소환」) 1280 · 1600 모두 찾아짐</li>
+</ul>
+<div class="bar"><button type="button" data-w="1280" aria-pressed="true">1280×720</button><button type="button" data-w="1600" aria-pressed="false">1600×720</button></div>
+
+<h2>1. 소환 탭 (summon_c)</h2>
+<div id="tab"></div>
+<h2>2. 소환 흐름 — 시안 ↔ 게임 (summon_flow_na)</h2>
+<div id="flow"></div>
+<h2>3. 소환 흐름 — 전 ↔ 후 (게임)</h2>
+<div id="ba"></div>
+<h2>4. 움직임 (1280×720)</h2>
+<p>게임 화면을 실제 속도로 녹화(약 12~13fps 프레임 → mp4). GIF는 480px · 10fps 미리보기입니다.</p>
+<div class="vids">
+<figure><video src="video/after_ten.mp4" controls muted loop playsinline></video><figcaption>후 · 10회: 꾹 누르기 → SS 금 → 손글씨 → 붓 한 번 → 액자 벽 → 중복 별가루 · 신화 조각 → 합계</figcaption></figure>
+<figure><video src="video/before_ten.mp4" controls muted loop playsinline></video><figcaption>전 · 10회 (문질러 칠하기 → 마법진 예고 → 카드)</figcaption></figure>
+<figure><video src="video/after_dupe.mp4" controls muted loop playsinline></video><figcaption>후 · 1회 하윤(S) 중복 → 별가루 +30</figcaption></figure>
+<figure><video src="video/before_dupe.mp4" controls muted loop playsinline></video><figcaption>전 · 1회 중복 (카드 딱지 「별가루 +30」)</figcaption></figure>
+<figure><video src="video/after_grade_b.mp4" controls muted loop playsinline></video><figcaption>후 · 1회 B 새 아이 (작은 물방울)</figcaption></figure>
+<figure><video src="video/after_grade_a.mp4" controls muted loop playsinline></video><figcaption>후 · 1회 A 새 아이 (번짐 두 겹 + 반짝)</figcaption></figure>
+<figure><img src="video/after_ten.gif" alt="10회 GIF"><figcaption>video/after_ten.gif</figcaption></figure>
+<figure><img src="video/after_dupe.gif" alt="중복 GIF"><figcaption>video/after_dupe.gif</figcaption></figure>
+</div>
+</main>
+<script>
+// [제목, 설명, 왼쪽 그림, 왼쪽 이름, 오른쪽 그림, 오른쪽 이름] — {W}는 1280 / 1600
+const TAB = [
+  ["픽업 · 밝은 그림 (플로라)", "오른쪽 위 재화 · 확률 · 닫기는 남색 유리 판(뒤 그림을 흐리게 비춤) 위라 그림에 묻히지 않습니다. 시안의 「첫 항해」 배너는 게임에 아직 없어(Quests.HAS_BANNERS = false) 그 자리는 별가루 교환소, 1회 버튼은 오늘 무료라 「무료 1회」.", "mock/c_flora_{W}x720.png", "시안", "after/tab_flora_{W}x720.jpg", "게임 (후)"],
+  ["픽업 · 바쁜 그림 (이그니스)", "", "mock/c_ignis_{W}x720.png", "시안", "after/tab_ignis_{W}x720.jpg", "게임 (후)"],
+  ["픽업 · 어두운 그림 (세레나)", "", "mock/c_serena_{W}x720.png", "시안", "after/tab_serena_{W}x720.jpg", "게임 (후)"],
+  ["전 ↔ 후 · 픽업", "", "before/tab_flora_{W}x720.jpg", "전", "after/tab_flora_{W}x720.jpg", "후"],
+  ["전 ↔ 후 · 상시 출석부", "", "before/tab_standard_{W}x720.jpg", "전", "after/tab_standard_{W}x720.jpg", "후"],
+  ["전 ↔ 후 · 확률 정보", "", "before/tab_rates_{W}x720.jpg", "전", "after/tab_rates_{W}x720.jpg", "후"],
+];
+const FLOW = [
+  ["① 칠하기", "리넨 캔버스 가운데 점선 동그라미 · 꾹 누르면 흰 고리가 차오르며 붓이 원을 돌아 칠함. 물감은 등급과 상관없이 같음", "mock/na_paint_{W}x720.png", "시안", "after/ten_hold_{W}x720.jpg", "게임 (꾹 누른 지 1초)"],
+  ["② 등급 물감 · SS", "캔버스가 먹물로 검어지고 속성 빛(생명 초록) 금 · 속성 액자", "mock/na_grades_{W}x720.png", "시안 (B · A · S · SS 한 장)", "after/ten_grade_ss_{W}x720.jpg", "게임 SS"],
+  ["② 등급 물감 · S / A / B", "S 캔버스 가득 + 금 액자 + 햇살 · A 번짐 두 겹 · B 한 방울", "after/dupe_grade_s_{W}x720.jpg", "게임 S", "after/grade_a_grade_{W}x720.jpg", "게임 A (B는 아래 전↔후)"],
+  ["③ SS 손글씨", "첫마디가 한 글자씩 써지고 서명 · 속성 물감 네 줄기가 흘러내림", "mock/na_ss_line_{W}x720.png", "시안", "after/ten_ss_line_{W}x720.jpg", "게임"],
+  ["④ SS 등장", "젖은 붓 한 번에 그림이 칠해지고 속성 충격파 · 잎 입자 · 속성 이름 띠", "mock/na_ss_reveal_{W}x720.png", "시안", "after/ten_ss_reveal_{W}x720.jpg", "게임"],
+  ["⑤ 1회 중복 · 도장", "S 금 액자로 누가 나왔는지 보여 준 뒤 「중복 · 이미 만남」 밀랍 도장", "mock/na_dupe_stamp_{W}x720.png", "시안", "after/dupe_stamp_{W}x720.jpg", "게임"],
+  ["⑤ 1회 중복 · 금가루로 바스러짐", "위에서부터 금가루로 바스러지며 알갱이가 곡선으로 별가루 병에 · +N과 보유 수가 같이 오름", "mock/na_dupe_crumble_{W}x720.png", "시안", "after/dupe_crumble_{W}x720.jpg", "게임"],
+  ["⑤ 1회 중복 · 안내", "금가루 더미 + 「+30 · 하윤 · S 중복」, 아래 「별가루 교환소 · 확인」", "mock/na_dupe_toast_{W}x720.png", "시안", "after/dupe_result_{W}x720.jpg", "게임"],
+  ["⑥ 10회 · 바스러짐", "NEW 리본 · 「중복」 도장 → 한 장씩 금가루로 별가루 병에", "mock/na_ten_crumble_{W}x720.png", "시안", "after/ten_dupe_{W}x720.jpg", "게임"],
+  ["⑥ 10회 · 합계", "새로 만난 아이 3 · 별가루 +38 · 신화 조각 +3 (병 2 → 40, 43 → 46) + 「다시 10회 · 확인」", "mock/na_ten_sum_{W}x720.png", "시안", "after/ten_result_{W}x720.jpg", "게임"],
+];
+const BA = [
+  ["칠하기", "", "before/ten_paint_{W}x720.jpg", "전", "after/ten_paint_{W}x720.jpg", "후"],
+  ["SS 예고", "", "before/ten_grade_ss_{W}x720.jpg", "전 (세로 속성 기둥)", "after/ten_grade_ss_{W}x720.jpg", "후"],
+  ["SS 대사", "", "before/ten_ss_line_{W}x720.jpg", "전", "after/ten_ss_line_{W}x720.jpg", "후"],
+  ["SS 등장", "", "before/ten_ss_reveal_{W}x720.jpg", "전", "after/ten_ss_reveal_{W}x720.jpg", "후"],
+  ["10회 결과", "", "before/ten_result_{W}x720.jpg", "전 (중복은 작은 딱지)", "after/ten_result_{W}x720.jpg", "후"],
+  ["1회 중복 결과", "", "before/dupe_result_{W}x720.jpg", "전", "after/dupe_result_{W}x720.jpg", "후"],
+  ["1회 B 새 아이", "", "before/grade_b_deal_{W}x720.jpg", "전", "after/grade_b_deal_{W}x720.jpg", "후"],
+  ["1회 A 새 아이", "", "before/grade_a_deal_{W}x720.jpg", "전", "after/grade_a_deal_{W}x720.jpg", "후"],
+];
+function render(w) {
+  for (const [id, rows] of [["tab", TAB], ["flow", FLOW], ["ba", BA]]) {
+    document.getElementById(id).innerHTML = rows.map(([t, d, a, an, b, bn]) => {
+      const A = a.replace("{W}", w), B = b.replace("{W}", w);
+      return `<div class="pair"><div class="t">${t}${d ? `<small>${d}</small>` : ""}</div>` +
+        `<figure><img loading="lazy" src="${A}" alt="${an}"><figcaption>${an} · ${A}</figcaption></figure>` +
+        `<figure><img loading="lazy" src="${B}" alt="${bn}"><figcaption>${bn} · ${B}</figcaption></figure></div>`;
+    }).join("");
+  }
+}
+document.querySelectorAll(".bar [data-w]").forEach(btn => btn.addEventListener("click", () => {
+  document.querySelectorAll(".bar [data-w]").forEach(x => x.setAttribute("aria-pressed", x === btn));
+  render(btn.dataset.w);
+}));
+render("1280");
+</script>
+</body>
+</html>

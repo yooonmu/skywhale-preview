@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 · 색 지도 서랍 B 적용 (시안 ↔ 게임)</title>
+<style>
+:root{--navy:#2e2350;--lav:#8b74e8;--gold:#d9a52b;--cream:#fff8ec;--line:#e2dbf5}
+*{box-sizing:border-box}
+body{margin:0;background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.5}
+header{padding:28px 40px 18px;background:linear-gradient(120deg,#3d2f82,#6a4fc9 60%,#b98be8);color:#fff}
+header h1{margin:0 0 6px;font-size:26px}
+header p{margin:0;opacity:.9;font-size:14px}
+nav{position:sticky;top:0;z-index:5;display:flex;gap:8px;align-items:center;padding:10px 40px;background:#fffffff0;border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+nav button{border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:999px;padding:6px 16px;font:inherit;font-size:14px;cursor:pointer}
+nav button.on{background:var(--lav);color:#fff;border-color:var(--lav)}
+nav .sp{flex:1}
+main{padding:24px 40px 60px;max-width:1800px;margin:0 auto}
+section{margin:0 0 40px}
+h2{font-size:20px;margin:0 0 4px}
+h2 small{font-weight:400;color:#7a6fa0;font-size:14px;margin-left:8px}
+.note{margin:0 0 12px;color:#5a4f80;font-size:14px}
+.row{display:grid;gap:14px}
+.row.two{grid-template-columns:1fr 1fr}
+.row.three{grid-template-columns:1fr 1fr 1fr}
+figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 4px 18px #2e235014}
+figure img,figure video{display:block;width:100%;height:auto;cursor:zoom-in}
+figcaption{padding:8px 12px;font-size:13px;display:flex;gap:8px;align-items:center}
+.tag{display:inline-block;border-radius:6px;padding:1px 8px;font-size:12px;font-weight:700;color:#fff}
+.t-spec{background:#8a6512}.t-game{background:#5b45b8}.t-before{background:#5f5873}
+h2 small,nav span{color:#5f5585!important}
+nav button.on{background:#5b45b8!important;border-color:#5b45b8!important}
+.slider{position:relative;overflow:hidden;border-radius:14px;border:1px solid var(--line);background:#000;user-select:none}
+.slider img{display:block;width:100%;height:auto}
+.slider .top{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--x,50%)) 0 0)}
+.slider .bar{position:absolute;top:0;bottom:0;left:var(--x,50%);width:3px;margin-left:-1.5px;background:#fff;box-shadow:0 0 8px #0008;pointer-events:none}
+.slider .lab{position:absolute;top:10px;padding:2px 10px;border-radius:6px;font-size:12px;font-weight:700;color:#fff}
+.slider .lab.l{left:10px;background:#8a6512}.slider .lab.r{right:10px;background:#5b45b8}
+table{border-collapse:collapse;width:100%;background:#fff;border-radius:14px;overflow:hidden;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:8px 12px;text-align:left;vertical-align:top}
+th{background:#f7f4ff}
+.ok{color:#1f6e43;font-weight:700}.miss{color:#a63d62;font-weight:700}
+#zoom{position:fixed;inset:0;background:#000d;display:none;align-items:center;justify-content:center;z-index:9;cursor:zoom-out}
+#zoom img{max-width:96vw;max-height:94vh}
+</style>
+</head>
+<body>
+<header>
+<h1>색 지도 서랍 B 「큰 미리보기」 — 게임 적용</h1>
+<p>시안 <code>design/mockups/feedback70/colormap_b/index.html</code> → 게임 <code>scripts/ui/colormap_drawer.gd</code> · <code>scripts/color_world.gd</code>. PD #28: 「칠하기」를 눌러야 붓고, 자리를 비운 동안 모인 몫은 돌아오면 저절로 칠해짐.</p>
+</header>
+<nav>
+<button data-w="1280" class="on">1280×720</button>
+<button data-w="1600">1600×720</button>
+<span class="sp"></span>
+<span style="font-size:13px;color:#7a6fa0">비교 막대는 끌어서 시안 ↔ 게임을 넘겨 보세요 · 그림을 누르면 크게</span>
+</nav>
+<main>
+
+<section>
+<h2>전 → 후 <small>같은 저장 · 같은 해상도 · 꽃잎 시장 거리 69% · 물감통 12</small></h2>
+<div class="row two">
+<figure><img data-s="before_map"><figcaption><span class="tag t-before">전</span>예전 색 지도 (전체 화면 지도)</figcaption></figure>
+<figure><img data-s="after_main"><figcaption><span class="tag t-game">후</span>서랍 B — 전투를 보면서 오른쪽에서 열림</figcaption></figure>
+</div>
+</section>
+
+<section>
+<h2>「칠하기」 붓질 <small>물감통 12 → 69% → 81% (75% 칸 넘김) · 실제 게임 녹화</small></h2>
+<p class="note">게임 화면 프레임을 찍힌 시각 그대로 묶었습니다 (mp4 · webm · gif가 <code>shots/video/</code>에 있음).</p>
+<div class="row two">
+<figure><video data-v="paint" autoplay loop muted playsinline></video><figcaption><span class="tag t-game">영상</span>붓이 미리보기 위를 지나며 잿빛이 걷히고 % · 칸 · 물감통이 함께 움직임</figcaption></figure>
+<figure><img data-g="paint"><figcaption><span class="tag t-game">GIF</span>같은 장면 (640 폭)</figcaption></figure>
+</div>
+<div class="row two" style="margin-top:14px">
+<figure><img data-s="after_painting"><figcaption><span class="tag t-game">붓질 중</span>74% — 붓 · 젖은 물감 셰이더</figcaption></figure>
+<figure><img data-s="after_painted"><figcaption><span class="tag t-game">끝</span>81% · 75% 칸 체크 · 물감통 0 → 「물감이 모이면 반짝여요」</figcaption></figure>
+</div>
+</section>
+
+<section id="cmp"></section>
+
+<section>
+<h2>QA 수정 뒤 상태 <small>시안에 없던 경우 · 같은 저장</small></h2>
+<div class="row two">
+<figure><img data-s="after_gift"><figcaption><span class="tag t-game">칸 도달</span>「75% 칸 도달!」 상자는 시안처럼 왼쪽으로 비켜 큰 % · 장소 글줄 위에</figcaption></figure>
+<figure><img data-s="after_story"><figcaption><span class="tag t-game">이야기</span>다 칠한 장소: 이야기는 「이야기 보기」를 눌렀을 때만 (아직 안 봄 = 금빛 숨쉬기 · 칸에도 「이야기 보기」)</figcaption></figure>
+<figure><img data-s="after_full"><figcaption><span class="tag t-game">넘침 · 열린 곳 없음</span>93 → 100% · 다 칠해요! / 남는 5 · 물감통에 남아요 (줄 전체 폭에 맞춤)</figcaption></figure>
+<figure><img data-s="after_full_next"><figcaption><span class="tag t-game">넘침 · 다음 장소</span>남는 5 → 풍경 공방</figcaption></figure>
+<figure><img data-s="after_ret"><figcaption><span class="tag t-game">돌아옴</span>1시간 12분 · +36 모두 칠했어요 (전체 화면 「자리를 비운 사이」 장면은 없앰 — 띠 + 붓질만)</figcaption></figure>
+<figure><img data-s="after_ret9h"><figcaption><span class="tag t-game">9시간 · 다시 켬</span>앱을 다시 켠 길(저장 시각 9시간 전): 띠는 실제로 비운 「9시간 0분 (8시간까지)」, 붓는 양만 8시간 = +240 · 칠함 31 · 물감통 +209 · 띠가 덮는 동안 위 칩은 숨김</figcaption></figure>
+<figure><img data-s="after_hud"><figcaption><span class="tag t-game">HUD</span>전투 화면 왼쪽 「색 지도」: 지금 장소 그림 + 진행 고리 + % · 칠할 수 있으면 붓이 반짝</figcaption></figure>
+</div>
+<p class="note">왼쪽 HUD 「색 지도」 자리는 모든 게임 화면에서 시안의 작은 원(지금 장소 그림 + 진행 고리 + %)으로 바뀌었고, 물감통에 물감이 있으면 붓이 반짝입니다 (<code>scripts/ui/colormap_hud_badge.gd</code>).</p>
+</section>
+
+<section>
+<h2>시안과 다르게 / 더 보탠 정보</h2>
+<table>
+<tr><th>항목</th><th>시안</th><th>게임</th></tr>
+<tr><td>미리보기 아래 줄</td><td>장소 2/5 · 빛물감</td><td>장소 2/5 · 빛물감 69/100 · <b>다음 칸까지 남은 빛물감</b> (예: 75% 칸까지 6)</td></tr>
+<tr><td>물감통 칸</td><td>+12% · 69 → 81%</td><td>칠하기 1번 = 물감통 전부 · 넘는 칸 · <b>정화당 +2.5 (지금 스테이지 기준)</b> · 자리 비움 분당 0.5 · 최대 8시간</td></tr>
+<tr><td>물감통이 빈 때</td><td>—</td><td>다음 정화 몫 +2.5 · 「물감이 모이면 반짝여요」 · 「칠하기」는 흐리게</td></tr>
+<tr><td>돌아왔을 때 띠</td><td>다녀오신 사이 +36</td><td>+ 비운 시간 · 분당 · 어느 장소가 몇 % → 몇 %, 진행 막대에 「자리 비움 +36」 구간 표시 · 다른 장소를 고르거나 칠하면 사라짐</td></tr>
+<tr><td>다 칠하고 남는 몫</td><td>—</td><td>「남는 5 → 풍경 공방」 · 열린 곳이 없으면 「남는 5 · 물감통에 남아요」</td></tr>
+<tr><td>돌아왔을 때 칠함 / 물감통</td><td>—</td><td>「+240 · 칠함 31 · 물감통 +209」, 8시간을 넘겼으면 「(8시간까지)」. 앱이 뒤로 갔다 돌아올 때도 같은 띠 + 붓질 (열린 서랍이면 그 자리에서)</td></tr>
+</table>
+</section>
+
+<section>
+<h2>PD 결정 반영 · 빠진 것</h2>
+<table>
+<tr><th>번호</th><th>내용</th><th>상태</th></tr>
+<tr><td>#28</td><td>「칠하기」를 눌러야 붓기 (정화 빛물감은 물감통으로) · 자리를 비운 동안 몫은 돌아오면 저절로</td><td class="ok">적용 — <code>ColorWorld.paint_now</code> · <code>add_paint</code> · <code>on_offline</code>. 첫 정화 장면(첫 장소 50%)은 그대로 바로 칠해짐 (35.9초에 등장)</td></tr>
+<tr><td>#67</td><td>순풍 돌파 · 100% 장소당 시작 +10 · 기록 −30 상한</td><td class="miss">시안 B에 표시 없음 → 넣지 않음</td></tr>
+<tr><td>25 · 50 · 75% 칸 보상</td><td>시안의 채색석 20 · 진주 5 · 색가루 5</td><td class="miss">지급 규칙이 아직 없음 → 칸 · 아이콘 · 도달 연출만 (<code>ColorWorld.STEP_REWARDS = false</code>, 규칙이 생기면 true로 글자 · 보상 상자가 켜짐)</td></tr>
+<tr><td>장소 완성 카드</td><td><code>scripts/ui/place_card.gd</code></td><td class="ok">그대로 사용 — 100%가 되면 복원 장면 → 완성 카드. 이야기는 저절로 열지 않고 서랍의 「이야기 보기」로만 (PD #28)</td></tr>
+<tr><td>HUD 「색 지도」</td><td>지금 장소 작은 원 + % · 붓 반짝</td><td class="ok">적용 — <code>ColormapHudBadge</code> (hud.gd에는 붙이는 한 줄)</td></tr>
+<tr><td>궁극기 컷인 vs 붓질</td><td>—</td><td class="ok">붓질하는 동안만 서랍 층을 컷인 위(21)로: 컷인은 왼쪽 전투 쪽에 그대로 보이고 피해 · 시점은 그대로</td></tr>
+</table>
+</section>
+
+<section>
+<h2>검사</h2>
+<table>
+<tr><th>검사</th><th>결과</th></tr>
+<tr><td>가이드 퀘스트 #30 · 안내 대상 · 서랍 글자 넘침 (<code>tools/colormap_guide_check.gd</code>)</td><td class="ok">fails=0 — hub:colormap · ColorDrawerPlace0 · 「칠하는 중」 · PaintButton 찾음, 「칠하기」로 #30 완료, 붓질 중 뒤로 닫기 → 완성 카드 정상, 「빛물감은 어디서?」 뒤로 = 창만 닫힘, 9시간 칠함/물감통, 앱 복귀 시 띠 + 붓질, 앱을 다시 켠 9시간 = 「9시간 0분 (8시간까지)」 · 붓는 양 240, 1280 · 1600 × 5장소 × 물감통 0/12</td></tr>
+<tr><td>release_ui_check</td><td class="ok">80 / 실패 0</td></tr>
+<tr><td>back_button_check</td><td class="ok">65 / 실패 0</td></tr>
+<tr><td>first_session_check</td><td class="ok">49 / 실패 0 (옛 저장 검사를 #28에 맞춤)</td></tr>
+<tr><td>fb70_overflow_check</td><td class="ok">41036 / 실패 0</td></tr>
+</table>
+</section>
+</main>
+<div id="zoom"><img alt=""></div>
+<script>
+const STATES=[["main","기본 — 칠하는 중 장소"],["src","빛물감은 어디서? (물감통을 누름)"],["lock","잠긴 장소"],["done","다 칠한 장소"],["ret","돌아왔을 때 — 자리 비움 몫 자동"]];
+let W=1280;
+function render(){
+  document.querySelectorAll("img[data-s]").forEach(i=>{i.src=`shots/${i.dataset.s}_${W}x720.png`;i.alt=i.closest("figure").querySelector("figcaption").textContent;});
+  document.querySelectorAll("img[data-g]").forEach(i=>{i.src=`shots/video/${i.dataset.g}_${W}.gif`;i.alt="「칠하기」 붓질 GIF";});
+  document.querySelectorAll("video[data-v]").forEach(v=>{v.innerHTML=`<source src="shots/video/${v.dataset.v}_${W}.webm" type="video/webm"><source src="shots/video/${v.dataset.v}_${W}.mp4" type="video/mp4">`;v.load();});
+  const c=document.getElementById("cmp");
+  c.innerHTML=`<h2>시안 ↔ 게임 <small>${W}×720 · 같은 상태</small></h2><p class="note">왼쪽 시안(금색) · 오른쪽 게임(보라). 막대를 끌어 겹쳐 봅니다.</p>`+
+    STATES.map(([k,t])=>`<h3 style="font-size:16px;margin:18px 0 8px">${t}</h3><div class="row two">
+      <div class="slider" style="--x:50%"><img src="shots/after_${k}_${W}x720.png" alt="게임 ${t}"><img class="top" src="shots/spec_${k}_${W}x720.png" alt="시안 ${t}"><div class="bar"></div><span class="lab l">시안</span><span class="lab r">게임</span></div>
+      <div class="row two"><figure><img src="shots/spec_${k}_${W}x720.png" alt="시안 ${t}"><figcaption><span class="tag t-spec">시안</span>${t}</figcaption></figure><figure><img src="shots/after_${k}_${W}x720.png" alt="게임 ${t}"><figcaption><span class="tag t-game">게임</span>${t}</figcaption></figure></div></div>`).join("");
+  c.querySelectorAll(".slider").forEach(s=>{
+    const mv=e=>{const r=s.getBoundingClientRect();const x=((e.touches?e.touches[0].clientX:e.clientX)-r.left)/r.width;s.style.setProperty("--x",Math.min(100,Math.max(0,x*100))+"%");};
+    s.addEventListener("pointermove",e=>{if(e.buttons)mv(e)});s.addEventListener("pointerdown",mv);
+  });
+}
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x===b));W=+b.dataset.w;render();});
+document.addEventListener("click",e=>{const z=document.getElementById("zoom");if(e.target.matches("figure img")){z.querySelector("img").src=e.target.src;z.style.display="flex";}else if(e.target.closest("#zoom"))z.style.display="none";});
+render();
+</script>
+</body>
+</html>

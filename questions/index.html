@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>구름고래 분교 · 남은 질문 (11/10 밤)</title>
+<style>
+:root{--navy:#28305a;--lav:#6551c4;--line:#e4def5;--bg:#f6f3ff;--gold:#c99a2e}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Pretendard","Malgun Gothic",sans-serif;background:var(--bg);color:var(--navy);line-height:1.55}
+main{max-width:880px;margin:0 auto;padding:20px 16px 120px}
+h1{font-size:22px;margin:0 0 4px}.lead{margin:0 0 18px;color:#4f5683;font-size:14px}
+.lead a{color:var(--lav)}
+h2{font-size:15px;margin:26px 0 8px;color:var(--lav)}
+.q{background:#fff;border:1px solid var(--line);border-left:5px solid var(--lav);border-radius:8px;padding:14px 16px;margin:0 0 12px}
+.q h3{margin:0 0 4px;font-size:16px}
+.q .why{margin:0 0 10px;font-size:13px;color:#4f5683}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{font:inherit;font-size:13px;text-align:left;min-height:44px;padding:8px 12px;border:1px solid #cfc6f3;background:#fff;border-radius:8px;cursor:pointer;color:var(--navy);flex:1 1 220px}
+.opts button b{display:block;font-size:14px}
+.opts button small{color:#5b6290}
+.opts button.rec{border-color:var(--gold)}
+.opts button.rec b::after{content:" · 추천";color:var(--gold);font-size:12px}
+.opts button.sel{background:var(--lav);color:#fff;border-color:var(--lav)}
+.opts button.sel small{color:#eae6ff}
+textarea{width:100%;margin-top:8px;min-height:40px;font:inherit;font-size:13px;padding:6px 8px;border:1px solid #d9d2f5;border-radius:6px;resize:vertical}
+.bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.bar button{font:inherit;font-weight:700;min-height:44px;padding:8px 16px;border:0;background:var(--lav);color:#fff;border-radius:6px;cursor:pointer}
+.bar span{font-size:13px}
+#out{display:none;width:100%;min-height:90px}
+</style></head><body><main>
+<h1>남은 질문 · 11/10 밤</h1>
+<p class="lead">앞서 답해 주신 11개는 모두 반영했어요. 이번엔 출시 이름과 서버 방향만 남았어요. 서버 쪽은 비교 문서(docs/서버_결제_계정_비교.md)의 9장을 쉽게 옮긴 거예요. 고르면 자동 저장되고, 아래 버튼으로 복사해 채팅에 붙여 주세요.</p>
+
+<h2>출시 이름</h2>
+<section class="q" data-q="studio"><h3>1. 스튜디오(개발사) 영어 이름</h3>
+<p class="why">패키지 이름 com.<b>스튜디오</b>.cloudwhale 의 앞부분이에요. 스토어에 한 번 올리면 바꿀 수 없어요. 갖고 있거나 쓸 도메인이 있으면 그 이름이 가장 좋아요. 정하지 않았으면 쓰고 싶은 단어만 적어 주셔도 후보를 만들어 드릴게요.</p>
+<div class="opts">
+<button data-v="메모에 적은 이름"><b>메모에 이름을 적을게요</b><small>영어 소문자</small></button>
+<button data-v="후보 만들어 주기"><b>후보를 만들어 주세요</b><small>메모에 원하는 느낌·단어</small></button>
+</div></section>
+
+<section class="q" data-q="slug"><h3>2. 게임 부분 이름</h3>
+<p class="why">"skywhale"은 1천만 다운로드 니켈로디언 게임 「Sky Whale」과 겹쳐서 피하는 게 좋아요.</p>
+<div class="opts">
+<button class="rec" data-v="cloudwhale"><b>cloudwhale</b><small>짧고 영어 제목(예: Cloud Whale School)과 맞음</small></button>
+<button data-v="gureumgorae"><b>gureumgorae</b><small>한국어 제목 그대로, 겹칠 일 없음</small></button>
+<button data-v="cloudwhaleschool"><b>cloudwhaleschool</b><small>제목 전체, 조금 김</small></button>
+</div></section>
+
+<section class="q" data-q="credits"><h3>3. 크레딧의 제작 표기</h3>
+<p class="why">설정 → 만든 사람들에 지금은 「구름고래 분교 개발팀」으로 임시 표기돼 있어요.</p>
+<div class="opts">
+<button data-v="스튜디오 이름으로"><b>1번 스튜디오 이름으로</b><small>패키지와 같은 이름</small></button>
+<button data-v="메모에 적은 표기"><b>메모에 적을게요</b><small>팀·개인 이름</small></button>
+<button data-v="지금 표기 유지"><b>지금 표기 유지</b><small>출시 직전에 다시</small></button>
+</div></section>
+
+<h2>서버·결제·계정</h2>
+<section class="q" data-q="server"><h3>4. 서버 방식</h3>
+<p class="why">비교 결과 Firebase가 1순위예요(로그인·클라우드 저장·서버 시간·뽑기·결제 검증을 한 곳에서, 월 1만 명 기준 약 $70~150). 대안은 Supabase(서울에 데이터 보관). 국내 서비스(뒤끝·하이브)는 Godot용 도구가 아직 없어요. 어느 쪽이든 뽑기·재화 계산을 서버용으로 다시 짜는 게 작업의 절반 이상이고, 소프트런칭 전까지 약 6~8주예요.</p>
+<div class="opts">
+<button class="rec" data-v="Firebase 1순위 + Supabase 대안"><b>Firebase로 진행 (막히면 Supabase)</b><small>먼저 2주 동안 실제 폰에서 로그인·결제 연결 시험</small></button>
+<button data-v="Supabase로 진행"><b>Supabase로 진행</b><small>데이터를 처음부터 서울에만 둠</small></button>
+<button data-v="좀 더 보고 결정"><b>좀 더 보고 결정</b><small>문서를 읽어 본 뒤</small></button>
+</div></section>
+
+<section class="q" data-q="data"><h3>5. 개인정보 보관 위치</h3>
+<p class="why">Firebase는 게임 데이터는 서울에 두지만, 로그인 정보는 미국에서 처리돼요. 그래서 "해외로 옮겨 처리한다"는 고지가 필요해요.</p>
+<div class="opts">
+<button class="rec" data-v="국외이전 고지로 충분"><b>고지로 충분</b><small>약관·개인정보 방침에 안내 (대부분의 게임이 이렇게 함)</small></button>
+<button data-v="국내에만 보관"><b>국내에만 보관</b><small>Supabase로 바뀌어요</small></button>
+</div></section>
+
+<section class="q" data-q="guest"><h3>6. 게스트(로그인 없이) 플레이</h3>
+<p class="why">게스트를 허용하면 첫 진입이 쉬운 대신, 계정 연결 전에 폰을 바꾸면 진행이 사라질 수 있어요.</p>
+<div class="opts">
+<button class="rec" data-v="게스트 허용, 첫 결제 전에 계정 연결 필수"><b>허용 · 첫 결제 전 연결 필수</b><small>쉽게 시작하고 돈 쓴 기록은 안전하게</small></button>
+<button data-v="처음부터 구글 로그인 필수"><b>처음부터 로그인 필수</b><small>가장 안전, 첫 진입이 한 단계 늘어남</small></button>
+<button data-v="게스트 허용, 결제도 게스트 가능"><b>게스트로 결제도 허용</b><small>편하지만 분실 문의가 늘어요</small></button>
+</div></section>
+
+<section class="q" data-q="reset"><h3>7. 하루가 바뀌는 시각</h3>
+<p class="why">출석·무료 소환·일일 퀘스트가 새로 열리는 시각이에요. 지금은 각자 폰의 자정이에요.</p>
+<div class="opts">
+<button class="rec" data-v="한국 시간 05시"><b>한국 시간 오전 5시</b><small>밤늦게 하는 유저도 하루가 안 끊김 (서브컬처 게임 대부분)</small></button>
+<button data-v="한국 시간 00시"><b>한국 시간 자정</b><small>직관적</small></button>
+</div></section>
+
+<section class="q" data-q="gems"><h3>8. 유료·무료 채색석 구분</h3>
+<p class="why">환불·청약철회 때문에 돈 주고 산 채색석과 보상으로 받은 채색석을 서버에서는 따로 세야 해요. 화면에 어떻게 보일지와 어느 쪽을 먼저 쓸지만 정하면 돼요.</p>
+<div class="opts">
+<button class="rec" data-v="화면엔 합쳐서, 무료 먼저 사용"><b>화면엔 합쳐 보이고 무료부터 사용</b><small>단순하고 유저에게 유리 (상세 화면에서만 나눠 보기)</small></button>
+<button data-v="화면에 나눠서 표시"><b>화면에 나눠 표시</b><small>투명하지만 복잡해 보여요</small></button>
+</div></section>
+
+<section class="q" data-q="offline"><h3>9. 인터넷이 끊겼을 때</h3>
+<div class="opts">
+<button class="rec" data-v="전투·방치는 되고 소환·결제·상점만 막기"><b>전투·방치는 계속, 소환·결제·상점만 막기</b><small>지하철에서도 방치형답게</small></button>
+<button data-v="접속 끊기면 전부 멈춤"><b>전부 멈추기</b><small>가장 안전, 불편</small></button>
+</div></section>
+
+<section class="q" data-q="minor"><h3>10. 14세 미만 이용자</h3>
+<div class="opts">
+<button class="rec" data-v="14세 미만 가입 제한"><b>14세 미만 가입 제한</b><small>법정대리인 동의 절차를 만들 필요가 없어 단순</small></button>
+<button data-v="보호자 동의 절차 만들기"><b>보호자 동의 절차 만들기</b><small>이용층이 넓어지지만 작업·관리가 늘어요</small></button>
+</div></section>
+
+<section class="q" data-q="budget"><h3>11. 서버 비용 알림 금액</h3>
+<p class="why">이 금액을 넘으면 바로 알림이 오게 걸어 둬요. 소프트런칭 규모(1천~1만 명)는 월 $20~150 정도 예상이에요.</p>
+<div class="opts">
+<button class="rec" data-v="월 $50 (소프트런칭)"><b>월 $50</b><small>소프트런칭 동안</small></button>
+<button data-v="월 $300"><b>월 $300</b><small>여유 있게</small></button>
+<button data-v="메모에 금액"><b>메모에 적을게요</b></button>
+</div></section>
+
+<section class="q" data-q="later"><h3>12. 나머지는 개발 쪽에 맡길까요?</h3>
+<p class="why">재화 획득 검증 수준(시간당 상한 등), 뽑기·결제 기록 보관 기간, 소프트런칭에 우편·쿠폰 포함 여부, 소프트런칭 지역·기간은 업계 기준으로 가안을 만들어 나중에 확인받을게요.</p>
+<div class="opts">
+<button class="rec" data-v="가안 만들어서 나중에 확인"><b>가안 만들어 나중에 확인</b></button>
+<button data-v="지금 같이 정하기"><b>지금 같이 정하기</b><small>메모에 생각을 적어 주세요</small></button>
+</div></section>
+</main>
+<div class="bar"><button type="button" id="copy">답 모아서 복사</button><span id="msg">고른 답은 이 기기에 자동 저장돼요.</span><textarea id="out" readonly aria-label="모은 답"></textarea></div>
+<script>
+const KEY="skywhale-questions-1110-night", st=JSON.parse(localStorage.getItem(KEY)||"{}");
+const save=()=>localStorage.setItem(KEY,JSON.stringify(st));
+document.querySelectorAll(".q").forEach(q=>{
+  const id=q.dataset.q, ta=document.createElement("textarea");
+  ta.placeholder="메모 (선택)";ta.setAttribute("aria-label",q.querySelector("h3").textContent+" 메모");ta.value=st[id]?.t||"";q.appendChild(ta);
+  q.querySelectorAll(".opts button").forEach(b=>{
+    b.type="button";b.dataset.choiceGroup=id;b.dataset.choice=id+":"+b.dataset.v;
+    if(st[id]?.v===b.dataset.v)b.classList.add("sel");
+    b.addEventListener("click",()=>{st[id]={...(st[id]||{}),v:b.dataset.v};save();q.querySelectorAll(".opts button").forEach(x=>x.classList.toggle("sel",x===b));});
+  });
+  ta.addEventListener("input",()=>{st[id]={...(st[id]||{}),t:ta.value};save();});
+});
+document.getElementById("copy").addEventListener("click",async()=>{
+  const lines=[...document.querySelectorAll(".q")].map(q=>{const s=st[q.dataset.q]||{};return s.v||s.t?.trim()?`${q.querySelector("h3").textContent}: ${s.v||"-"}${s.t?.trim()?" / "+s.t.trim():""}`:null}).filter(Boolean);
+  const text=lines.join("\n")||"(아직 고른 답 없음)",out=document.getElementById("out"),msg=document.getElementById("msg");out.value=text;out.style.display="block";
+  try{await navigator.clipboard.writeText(text);msg.textContent="복사했어요. 채팅에 붙여 주세요.";}catch(e){out.select();msg.textContent="아래 글을 선택해 복사해 주세요.";}
+});
+</script></body></html>

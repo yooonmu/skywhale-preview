@@ -1,0 +1,102 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Ti
+
+SECTION go_late
+SECTION cf_1280
+SHOT before_clear_1280_f1_1280x720.jpg
+SHOT before_clear_1280_f2_1280x720.jpg
+SHOT before_clear_1280_f3_1280x720.jpg
+SHOT before_clear_1280_f4_1280x720.jpg
+SHOT before_clear_1280_f5_1280x720.jpg
+SHOT before_clear_1280_f6_1280x720.jpg
+SHOT before_clear_1280_f7_1280x720.jpg
+SHOT before_clear_1280_f8_1280x720.jpg
+SHOT before_fever_1280_f1_1280x720.jpg
+SHOT before_fever_1280_f2_1280x720.jpg
+SHOT before_fever_1280_f3_1280x720.jpg
+SHOT before_fever_1280_f4_1280x720.jpg
+SHOT before_fever_1280_f5_1280x720.jpg
+SHOT before_fever_1280_f6_1280x720.jpg
+SHOT before_fever_1280_f7_1280x720.jpg
+SHOT before_wind_1280_f1_1280x720.jpg
+SHOT before_wind_1280_f2_1280x720.jpg
+SHOT before_wind_1280_f3_1280x720.jpg
+SHOT before_wind_1280_f4_1280x720.jpg
+SHOT before_wind_1280_f5_1280x720.jpg
+SHOT after_clear_1280_f1_1280x720.jpg
+SHOT after_clear_1280_f2_1280x720.jpg
+SHOT after_clear_1280_f3_1280x720.jpg
+SHOT after_clear_1280_f4_1280x720.jpg
+SHOT after_clear_1280_f5_1280x720.jpg
+SHOT after_clear_1280_f6_1280x720.jpg
+SHOT after_clear_1280_f7_1280x720.jpg
+SHOT after_clear_1280_f8_1280x720.jpg
+SHOT after_fever_1280_f1_1280x720.jpg
+SHOT after_fever_1280_f2_1280x720.jpg
+SHOT after_fever_1280_f3_1280x720.jpg
+SHOT after_fever_1280_f4_1280x720.jpg
+SHOT after_fever_1280_f5_1280x720.jpg
+SHOT after_fever_1280_f6_1280x720.jpg
+SHOT after_fever_1280_f7_1280x720.jpg
+SHOT after_wind_1280_f1_1280x720.jpg
+SHOT after_wind_1280_f2_1280x720.jpg
+SHOT after_wind_1280_f3_1280x720.jpg
+SHOT after_wind_1280_f4_1280x720.jpg
+SHOT after_wind_1280_f5_1280x720.jpg
+SHOT after_wind_dmg_1280_1280x720.jpg
+SECTION cf_1600
+SHOT before_clear_1600_f1_1600x720.jpg
+SHOT before_clear_1600_f2_1600x720.jpg
+SHOT before_clear_1600_f3_1600x720.jpg
+SHOT before_clear_1600_f4_1600x720.jpg
+SHOT before_clear_1600_f5_1600x720.jpg
+SHOT before_clear_1600_f6_1600x720.jpg
+SHOT before_clear_1600_f7_1600x720.jpg
+SHOT before_clear_1600_f8_1600x720.jpg
+SHOT before_fever_1600_f1_1600x720.jpg
+SHOT before_fever_1600_f2_1600x720.jpg
+SHOT before_fever_1600_f3_1600x720.jpg
+SHOT before_fever_1600_f4_1600x720.jpg
+SHOT before_fever_1600_f5_1600x720.jpg
+SHOT before_fever_1600_f6_1600x720.jpg
+SHOT before_fever_1600_f7_1600x720.jpg
+SHOT before_wind_1600_f1_1600x720.jpg
+SHOT before_wind_1600_f2_1600x720.jpg
+SHOT before_wind_1600_f3_1600x720.jpg
+SHOT before_wind_1600_f4_1600x720.jpg
+SHOT before_wind_1600_f5_1600x720.jpg
+SHOT after_clear_1600_f1_1600x720.jpg
+SHOT after_clear_1600_f2_1600x720.jpg
+SHOT after_clear_1600_f3_1600x720.jpg
+SHOT after_clear_1600_f4_1600x720.jpg
+SHOT after_clear_1600_f5_1600x720.jpg
+SHOT after_clear_1600_f6_1600x720.jpg
+SHOT after_clear_1600_f7_1600x720.jpg
+SHOT after_clear_1600_f8_1600x720.jpg
+SHOT after_fever_1600_f1_1600x720.jpg
+SHOT after_fever_1600_f2_1600x720.jpg
+SHOT after_fever_1600_f3_1600x720.jpg
+SHOT after_fever_1600_f4_1600x720.jpg
+SHOT after_fever_1600_f5_1600x720.jpg
+SHOT after_fever_1600_f6_1600x720.jpg
+SHOT after_fever_1600_f7_1600x720.jpg
+SHOT after_wind_1600_f1_1600x720.jpg
+SHOT after_wind_1600_f2_1600x720.jpg
+SHOT after_wind_1600_f3_1600x720.jpg
+SHOT after_wind_1600_f4_1600x720.jpg
+SHOT after_wind_1600_f5_1600x720.jpg
+SHOT after_wind_dmg_1600_1600x720.jpg
+SECTION cf_video
+VIDEO before_clear_1280 frames=188
+VIDEO before_fever_1280 frames=249
+VIDEO before_wind_1280 frames=188
+VIDEO after_clear_1280 frames=186
+VIDEO after_fever_1280 frames=252
+VIDEO after_wind_1280 frames=178
+VIDEO before_clear_1600 frames=167
+VIDEO before_fever_1600 frames=211
+VIDEO before_wind_1600 frames=161
+VIDEO after_clear_1600 frames=146
+VIDEO after_fever_1600 frames=201
+VIDEO after_wind_1600 frames=161
+FEEDBACK_DONE phase=late entries=14 failures=[]

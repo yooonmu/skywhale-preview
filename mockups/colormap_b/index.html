@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 수정 시안 · 색 지도 서랍 B 「큰 미리보기」 (#28 #29 #66)</title>
+<style>
+:root{--navy:#2e2350;--lav:#8b74e8;--gold:#d9a52b;--cream:#fff8ec;--line:#e2dbf5;--w:1280}
+@property --p{syntax:'<percentage>';inherits:true;initial-value:69%}
+@property --n{syntax:'<integer>';inherits:true;initial-value:69}
+@property --j{syntax:'<integer>';inherits:true;initial-value:12}
+@property --q{syntax:'<integer>';inherits:true;initial-value:33}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;line-height:1.45}
+.page{max-width:1180px;margin:0 auto;padding:20px 16px 64px}
+.page>h1{font-size:22px;margin:0 0 4px}
+.page>h3{font-size:18px;margin:30px 0 8px;padding-top:10px;border-top:2px solid var(--line)}
+.lead{margin:0 0 14px;font-size:14px;color:#5a5180}
+.bar{position:sticky;top:0;z-index:30;display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 16px;padding:8px 0;font-size:13px;background:rgba(243,240,250,.94)}
+.bar button,.rp{font:inherit;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.ref,.opt{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 18px}
+.opt h2,.ref h2{font-size:17px;margin:0 0 2px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.opt h2 .rp{margin-left:auto;font-size:13px;min-height:36px}
+.cap{margin:0 0 10px;font-size:14px;color:#4c4374}
+.cap b{color:#5b3fc0}
+.vp{position:relative;width:100%;overflow:hidden;border-radius:8px;background:#1d1838}
+.scr{position:absolute;left:0;top:0;width:calc(var(--w)*1px);height:720px;transform-origin:0 0;overflow:hidden;font-size:16px}
+.refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.refs figure{margin:0}.refs img{width:100%;display:block;border-radius:8px}.refs figcaption{overflow-wrap:anywhere;font-size:12px;color:#6a6290;margin-top:4px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(500px,100%),1fr));gap:14px}
+.w16{display:none}:root[data-w="1600"] .w12{display:none}:root[data-w="1600"] .w16{display:block}
+.rule{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin:0 0 12px;padding:0;list-style:none}
+.rule li{background:#f6f2ff;border-radius:10px;padding:8px 12px;font-size:13px;color:#4c4374}
+.rule li b{display:block;color:var(--navy);font-size:14px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* 가이드용 노드 이름 (「노드 이름」 단추) */
+body.nodes [data-node]{outline:2px dashed #ff3d8b;outline-offset:2px}
+body.nodes [data-node]::after{content:attr(data-node);position:absolute;left:0;top:-20px;z-index:40;background:#ff3d8b;color:#fff;font:700 11px/1.4 Consolas,monospace;padding:1px 6px;border-radius:4px;white-space:nowrap}
+
+/* ================= 전투 바탕 (왼쪽 60%는 그대로 돈다) ================= */
+.bgc{position:absolute;inset:0;background:url(img/artifacts_feedback70_after_hud_late_1280x720.jpg) left top/auto 100% no-repeat}
+:root[data-w="1600"] .bgc{background-image:url(img/artifacts_feedback70_after_hud_late_1600x720.jpg)}
+.bloom{position:absolute;left:0;top:0;width:calc(var(--w)*.6px);height:720px;background:radial-gradient(ellipse 60% 45% at 45% 40%,rgba(255,170,215,.38),transparent 70%),radial-gradient(ellipse 40% 30% at 70% 25%,rgba(255,226,140,.3),transparent 70%);mix-blend-mode:screen;opacity:0;pointer-events:none}
+/* HUD 「색 지도」 자리: 지금 장소의 작은 원 + % (물감통에 물감이 있으면 붓이 반짝) */
+.mini{position:absolute;left:20px;top:282px;width:60px;height:60px;border-radius:50%;padding:5px;background:conic-gradient(#ff8fc4 var(--p),rgba(255,255,255,.55) 0);box-shadow:0 0 0 3px #fff,0 4px 8px rgba(46,35,80,.3);z-index:3}
+.mini i{display:block;width:100%;height:100%;border-radius:50%;background:url(img/assets_colorworld_ch1_market.png) 50% 50%/cover}
+.mini b{position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);padding:0 7px;border-radius:9px;background:linear-gradient(90deg,#ff7fb5,#9a58e0);font-size:12px;font-weight:900;color:#fff;line-height:17px;white-space:nowrap;box-shadow:0 0 0 2px #fff;counter-reset:n var(--n)}
+.mini b::before{content:counter(n) "%"}
+.mini em{position:absolute;right:-9px;top:-9px;width:30px;height:30px;border-radius:50%;background:#fff url(img/assets_ui_gacha_brush.png) center/auto 25px no-repeat;transform:rotate(30deg);box-shadow:0 0 12px #ffd36b;animation:tw 1.2s ease-in-out infinite}
+.mini em.off{display:none}
+@keyframes tw{50%{box-shadow:0 0 24px #ffd36b;transform:rotate(30deg) scale(1.12)}}
+
+/* ================= 서랍: 남색 아틀리에 판 + 금 레일 ================= */
+.dw{position:absolute;right:0;top:0;bottom:0;width:calc(var(--w)*.4px);z-index:5;color:#fff;
+  background:radial-gradient(ellipse 90% 40% at 70% 100%,rgba(255,143,196,.16),transparent 70%),radial-gradient(ellipse 80% 30% at 20% 0,rgba(154,132,240,.28),transparent 70%),repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 1px,transparent 1px 36px),repeating-linear-gradient(90deg,rgba(255,255,255,.028) 0 1px,transparent 1px 36px),linear-gradient(180deg,#30256a,#211852 55%,#19123f);
+  box-shadow:inset 3px 0 0 #e7c069,inset 6px 0 0 rgba(255,231,166,.25),-14px 0 34px rgba(8,4,28,.55)}
+.dw::before{content:"";position:absolute;right:-60px;bottom:120px;width:300px;height:300px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(255,231,166,.06) 0 2deg,transparent 2deg 22.5deg);-webkit-mask:radial-gradient(circle,#000 30%,transparent 70%);mask:radial-gradient(circle,#000 30%,transparent 70%);pointer-events:none}
+.tab{position:absolute;left:-34px;top:318px;width:34px;height:88px;border-radius:14px 0 0 14px;display:grid;place-items:center;font-size:26px;font-weight:900;color:#fff;background:linear-gradient(180deg,#3d2f82,#261c58);box-shadow:inset 0 0 0 1.5px rgba(255,231,166,.7),-4px 4px 10px rgba(8,4,28,.4)}
+.hd{position:absolute;left:16px;right:16px;top:12px;height:40px;display:flex;align-items:center;gap:10px}
+.hd .pl{padding:3px 20px 6px 14px;font-size:21px;font-weight:900;white-space:nowrap;background:linear-gradient(90deg,#ffe7a6,#d9a52b) bottom/100% 3px no-repeat,linear-gradient(100deg,#9a84f0,#6b55d8);clip-path:polygon(4% 0,100% 0,96% 100%,0 100%)}
+.hd .rg{font-size:13px;font-weight:700;color:#d8cff8;white-space:nowrap}
+.hd .ch{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:#d8cff8;white-space:nowrap;line-height:1.25;text-align:right}
+.hd .ch b{display:block;color:#fff;font-size:14px;counter-reset:q var(--q)}
+.hd .ch b::before{content:"장 전체 " counter(q) "%"}
+.hd .ch i{width:36px;height:36px;border-radius:50%;background:radial-gradient(circle,#211852 42%,transparent 44%),conic-gradient(#ffd36b calc(var(--q) * 1%),rgba(255,255,255,.14) 0);box-shadow:0 0 0 1.5px rgba(255,231,166,.5)}
+
+/* ---- 큰 미리보기: 금 액자 속 장소 그림, 잿빛 위로 색이 번진다 ---- */
+.cv{position:absolute;left:16px;right:16px;top:60px;height:208px;border-radius:4px;overflow:hidden;box-shadow:0 0 0 3px #f7dfa6,0 0 0 5px #a9781f,0 0 0 7px rgba(255,240,200,.25),0 16px 30px rgba(4,2,20,.6)}
+.cv .g,.cv .c{position:absolute;inset:0;background-position:center 42%;background-size:cover;background-repeat:no-repeat}
+.cv .g{filter:grayscale(1) brightness(.7) contrast(.92) sepia(.12)}
+.cv .c{-webkit-mask:linear-gradient(100deg,#000 calc(var(--p) - 4%),transparent calc(var(--p) + 4%));mask:linear-gradient(100deg,#000 calc(var(--p) - 4%),transparent calc(var(--p) + 4%))}
+.cv .ash{position:absolute;inset:0;background:linear-gradient(100deg,transparent calc(var(--p) + 3%),rgba(70,62,110,.28) calc(var(--p) + 9%));pointer-events:none}
+/* 젖은 붓 자국 가장자리: 분홍 · 금 번짐 */
+.cv .ed{position:absolute;top:-12%;bottom:-12%;left:var(--p);width:70px;margin-left:-35px;transform:skewX(-10deg);background:radial-gradient(ellipse 30% 14% at 50% 22%,rgba(255,240,200,.9),transparent),radial-gradient(ellipse 34% 16% at 40% 62%,rgba(255,170,215,.85),transparent),linear-gradient(90deg,transparent,rgba(255,190,225,.5) 45%,rgba(255,236,190,.55) 55%,transparent);mix-blend-mode:screen;filter:blur(3px);opacity:.75}
+.cv .sh{position:absolute;inset:0;background:linear-gradient(0deg,rgba(18,12,46,.86),rgba(18,12,46,.2) 42%,transparent 60%),linear-gradient(180deg,rgba(18,12,46,.45),transparent 26%);pointer-events:none}
+.cv .brush{position:absolute;left:var(--p);top:6px;width:40px;height:150px;margin-left:-6px;background:url(img/assets_ui_gacha_brush.png) center/contain no-repeat;transform-origin:50% 92%;transform:rotate(28deg);filter:drop-shadow(0 6px 6px rgba(0,0,0,.45));opacity:0}
+.cv .nm{position:absolute;left:14px;bottom:10px;line-height:1.15}
+.cv .nm small{display:block;font-size:12.5px;font-weight:700;color:#e8e0ff;white-space:nowrap}
+.cv .nm small em{font-style:normal;color:#ffc2dd}
+.cv .nm b{font-size:26px;font-weight:900;letter-spacing:.5px;white-space:nowrap;text-shadow:0 2px 6px rgba(0,0,0,.6)}
+.cv .pc{position:absolute;right:14px;bottom:2px;font:italic 900 54px/1 "Pretendard","Malgun Gothic",sans-serif;color:#fff;text-shadow:0 0 18px rgba(255,143,196,.9),0 3px 0 #8b3a6a;counter-reset:n var(--n)}
+.cv .pc::before{content:counter(n)}
+.cv .pc small{font-size:30px;margin-left:2px}
+.chip{position:absolute;top:10px;display:flex;align-items:center;gap:6px;padding:3px 12px 3px 6px;border-radius:14px;font-size:12.5px;font-weight:800;white-space:nowrap;background:rgba(18,12,46,.72);box-shadow:inset 0 0 0 1px rgba(255,231,166,.5);backdrop-filter:blur(3px)}
+.chip img{width:22px;height:22px}
+.chip.l{left:10px}.chip.r{right:10px}
+.chip.pk{background:linear-gradient(90deg,#ff7fb5,#c45bd6);box-shadow:0 0 12px rgba(255,127,181,.6)}
+.chip .bru{width:22px;height:22px;background:url(img/assets_ui_gacha_brush.png) center/auto 20px no-repeat;transform:rotate(30deg)}
+.sp{position:absolute;width:22px;height:22px;background:url(img/vfx_textures_star4.png) center/contain no-repeat;mix-blend-mode:screen;opacity:0}
+
+/* ---- 25 · 50 · 75 · 100% 보상 줄 ---- */
+.ms{position:absolute;left:30px;right:30px;top:282px;height:58px}
+.ms .tr{position:absolute;left:0;right:0;top:14px;height:10px;border-radius:5px;background:rgba(255,255,255,.12);box-shadow:inset 0 1px 3px rgba(0,0,0,.55)}
+.ms .fl{position:absolute;left:0;top:0;bottom:0;width:var(--p);border-radius:5px;background:linear-gradient(90deg,#ff8fc4,#c58bff 60%,#ffd36b);box-shadow:0 0 10px rgba(255,143,196,.6)}
+.ms .fl.idle{left:var(--a);width:calc(var(--p) - var(--a));border-radius:0 5px 5px 0;background:linear-gradient(90deg,#8fd0ff,#b9a6ff);box-shadow:0 0 10px rgba(143,208,255,.7)}
+.ms .gh{position:absolute;top:0;bottom:0;left:var(--p);width:max(0%,calc(var(--to,69%) - var(--p)));border-radius:0 5px 5px 0;background:repeating-linear-gradient(135deg,rgba(255,211,107,.85) 0 4px,rgba(255,211,107,.3) 4px 8px)}
+.nd{position:absolute;top:0;width:38px;height:38px;margin-left:-19px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 40% 30%,#4a3c96,#241a5c);box-shadow:0 0 0 2px #8f80c8,0 4px 8px rgba(0,0,0,.45)}
+.nd img{width:26px;height:26px}
+.nd small{position:absolute;top:41px;left:50%;transform:translateX(-50%);font-size:11.5px;font-weight:800;color:#cfc6f2;white-space:nowrap}
+.nd.end small{left:auto;right:-6px;transform:none}
+.nd.got{background:radial-gradient(circle at 40% 30%,#fff3c4,#e2a93a);box-shadow:0 0 0 2px #fff3cf,0 0 12px rgba(255,211,107,.7)}
+.nd.got img{filter:saturate(.9)}
+.nd.got::after,.nd .ok{content:"";position:absolute;right:-5px;top:-5px;width:17px;height:17px;border-radius:50%;background:#2fb36d url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/12px no-repeat;box-shadow:0 0 0 2px #fff}
+.nd.got small{color:#ffe08a}
+.nd.nx{box-shadow:0 0 0 2.5px #ff8fc4,0 0 14px rgba(255,143,196,.8)}
+.nd.nx small{color:#ffc2dd}
+.nd .ok{opacity:0}
+.nd .gl{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 40% 30%,#fff3c4,#e2a93a);box-shadow:0 0 0 2px #fff3cf,0 0 14px rgba(255,211,107,.8);opacity:0}
+.nd .gl+img{position:relative}
+/* 보상 상자 */
+.gift{position:absolute;bottom:42px;width:120px;margin-left:-60px;display:flex;flex-direction:column;align-items:center;opacity:0;z-index:6;pointer-events:none}
+.gift .bx{position:relative;width:62px;height:62px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(160deg,#fff3c4,#f2b54a);box-shadow:0 0 0 2.5px #fff,0 0 26px #ffd36b,0 8px 12px rgba(0,0,0,.4)}
+.gift .bx::before{content:"";position:absolute;left:50%;top:50%;width:200px;height:200px;margin:-100px;border-radius:50%;background:repeating-conic-gradient(rgba(255,236,190,.55) 0 6deg,transparent 6deg 24deg);-webkit-mask:radial-gradient(circle,#000 20%,transparent 66%);mask:radial-gradient(circle,#000 20%,transparent 66%);z-index:-1;animation:spin 8s linear infinite}
+.gift .bx img{width:44px;height:44px}
+.gift b{margin-top:6px;padding:1px 10px;border-radius:10px;background:rgba(18,12,46,.85);font-size:13px;font-weight:900;color:#ffe08a;white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(255,231,166,.6)}
+
+/* ---- 장소 5곳 (ColorDrawerPlace0~4) ---- */
+.pl5{position:absolute;left:16px;right:16px;top:348px;height:92px;display:flex;gap:8px}
+.pt{position:relative;flex:1;min-width:0;border-radius:10px;padding:4px 4px 0;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,231,166,.22);cursor:pointer}
+.pt .th{position:relative;height:48px;border-radius:7px;background-size:cover;background-position:center}
+.pt b{display:block;margin-top:3px;font-size:11.5px;font-weight:800;letter-spacing:-.3px;white-space:nowrap;text-align:center}
+.pt small{display:block;font-size:11px;font-weight:700;color:#cfc6f2;white-space:nowrap;text-align:center;letter-spacing:-.2px}
+.pt .mb{position:absolute;left:8px;right:8px;top:46px;height:4px;box-shadow:0 0 0 1.5px rgba(18,12,46,.7);border-radius:2px;background:rgba(255,255,255,.14)}
+.pt .mb u{position:absolute;left:0;top:0;bottom:0;border-radius:2px;background:linear-gradient(90deg,#ff8fc4,#ffd36b)}
+.pt.dn{box-shadow:inset 0 0 0 1.5px #ffd36b,0 0 12px rgba(255,211,107,.3)}
+.pt.dn small{color:#ffe08a}
+.pt.dn .th::after{content:"";position:absolute;right:-4px;top:-4px;width:18px;height:18px;border-radius:50%;background:#2fb36d url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/12px no-repeat;box-shadow:0 0 0 2px #fff}
+.pt.on{background:linear-gradient(180deg,rgba(255,143,196,.32),rgba(255,143,196,.08));box-shadow:inset 0 0 0 2px #ff8fc4,0 0 18px rgba(255,143,196,.5);transform:translateY(-4px)}
+.pt.on small{color:#ffc2dd}
+.pt.on::before{content:"";position:absolute;left:50%;top:-11px;margin-left:-7px;border:7px solid transparent;border-bottom-color:#ff8fc4;border-top:0}
+.pt.sel{box-shadow:inset 0 0 0 2px #fff,0 0 16px rgba(255,255,255,.45);transform:translateY(-4px)}
+.pt.sel::before{content:"";position:absolute;left:50%;top:-11px;margin-left:-7px;border:7px solid transparent;border-bottom-color:#fff;border-top:0}
+.pt.lk .th{filter:grayscale(1) brightness(.42)}
+.pt.lk .th::after{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='2.6' d='M7.5 11V8a4.5 4.5 0 0 1 9 0v3'/%3E%3Crect x='5' y='11' width='14' height='10' rx='2.5' fill='%23fff'/%3E%3C/svg%3E") center/22px no-repeat}
+.pt.lk b{color:#bdb4e0}
+
+/* ---- 받는 중인 보너스 합계 ---- */
+.bn{position:absolute;left:16px;right:16px;top:452px;height:52px;display:flex;align-items:center;gap:12px;padding:0 12px;border-radius:12px;background:linear-gradient(90deg,rgba(255,211,107,.2),rgba(255,255,255,.04) 70%);box-shadow:inset 0 0 0 1px rgba(255,231,166,.4)}
+.bn>img{width:36px;height:36px;flex:none;filter:drop-shadow(0 0 6px rgba(255,236,190,.6))}
+.bn .tx{line-height:1.15;min-width:0}
+.bn .tx small{display:block;font-size:11.5px;font-weight:800;color:#e6dcff;white-space:nowrap}
+.bn .tx b{font-size:20px;font-weight:900;color:#ffe08a;white-space:nowrap}
+.bn .nx{margin-left:auto;text-align:right;line-height:1.2;white-space:nowrap}
+.bn .nx small{display:block;font-size:11px;font-weight:700;color:#cfc6f2}
+.bn .nx span{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:800;color:#fff}
+.bn .nx span img{width:20px;height:20px}
+.bn .dots{display:flex;gap:4px;justify-content:flex-end;margin-top:3px}
+.bn .dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.18)}
+.bn .dots i.on{background:#ffd36b;box-shadow:0 0 6px #ffd36b}
+
+/* ---- 물감통 · 칠하면 얼마 · 칠하기 ---- */
+.pa{position:absolute;left:16px;right:16px;top:516px;bottom:12px;display:flex;align-items:stretch;gap:12px}
+.jar{position:relative;flex:none;width:104px;cursor:pointer}
+.jar .lid{position:absolute;left:24px;right:24px;top:8px;height:18px;border-radius:5px;background:repeating-linear-gradient(90deg,rgba(0,0,0,.12) 0 2px,transparent 2px 6px),linear-gradient(180deg,#fff0c0,#d9a52b 60%,#a9781f);box-shadow:0 2px 0 #7a5418}
+.jar .nk{position:absolute;left:30px;right:30px;top:24px;height:10px;background:linear-gradient(90deg,rgba(255,255,255,.4),rgba(255,255,255,.1) 40%,rgba(255,255,255,.3));box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)}
+.jar .bd{position:absolute;left:6px;right:6px;top:32px;height:118px;border-radius:26px 26px 32px 32px;overflow:hidden;background:linear-gradient(90deg,rgba(255,255,255,.26),rgba(255,255,255,.05) 30%,rgba(255,255,255,.04) 70%,rgba(255,255,255,.2));box-shadow:inset 0 0 0 2px rgba(255,255,255,.6),inset 0 -10px 18px rgba(255,255,255,.1),0 10px 18px rgba(0,0,0,.45)}
+.jar .lq{position:absolute;left:0;right:0;bottom:0;height:var(--lv,64%);background:radial-gradient(ellipse 60% 30% at 30% 30%,rgba(255,255,255,.35),transparent 70%),linear-gradient(180deg,#ffc2dd,#ff7fb5 38%,#b28cff 80%,#8fd0ff)}
+.jar .lq::before{content:"";position:absolute;left:-10%;right:-10%;top:-6px;height:12px;border-radius:50%;background:#ffd6ea;box-shadow:0 0 10px rgba(255,214,234,.9);animation:wob 2.4s ease-in-out infinite}
+@keyframes wob{50%{transform:translateY(2px) scaleX(.96)}}
+.jar .hl{position:absolute;left:12px;top:12px;width:9px;height:70px;border-radius:5px;background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,0))}
+.jar .lb{position:absolute;left:50%;top:84px;transform:translateX(-50%) rotate(-4deg);padding:2px 9px 3px;border-radius:4px;background:linear-gradient(180deg,#fffaf0,#f3e6c8);color:#5b3a10;font-size:11px;font-weight:900;white-space:nowrap;box-shadow:0 2px 4px rgba(0,0,0,.35),inset 0 0 0 1px #d9a52b}
+.jar .am{position:absolute;left:-6px;right:-6px;bottom:0;text-align:center;line-height:1.1}
+.jar .am b{font-size:24px;font-weight:900;counter-reset:j var(--j);text-shadow:0 0 10px rgba(255,143,196,.7)}
+.jar .am b::before{content:counter(j)}
+.jar .am small{display:block;font-size:11px;font-weight:700;color:#cfc6f2}
+.inf{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;padding:6px 0 4px}
+.inf .k{font-size:11.5px;font-weight:800;color:#cfc6f2}
+.inf .add{display:flex;align-items:baseline;gap:8px;line-height:1.05}
+.inf .add b{font:italic 900 34px/1 "Pretendard","Malgun Gothic",sans-serif;color:#ffd36b;text-shadow:0 0 12px rgba(255,211,107,.55)}
+.inf .add span{font-size:12.5px;font-weight:800;color:#fff}
+.inf .fx{font-size:12.5px;font-weight:700;color:#e6dcff}
+.inf .fx em{font-style:normal;color:#ffc2dd;font-weight:900}
+.inf hr{width:100%;height:1px;margin:3px 0;border:0;background:linear-gradient(90deg,rgba(255,231,166,.55),transparent)}
+.inf .src{display:flex;align-items:flex-start;gap:6px;font-size:12px;font-weight:700;color:#e6dcff;line-height:1.3}
+.inf .src img{width:20px;height:20px;flex:none}
+.inf .src b{color:#ffe08a}
+/* PaintButton */
+.pbw{flex:none;width:170px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding-bottom:6px}
+.pb{position:relative;height:84px;display:flex;align-items:center;justify-content:center;gap:4px;border:0;font:900 30px/1 "Pretendard","Malgun Gothic",sans-serif;color:#fff;letter-spacing:2px;text-shadow:0 2px 0 rgba(120,30,80,.55);cursor:pointer;clip-path:polygon(7% 0,100% 0,93% 100%,0 100%);background:linear-gradient(90deg,#ffe7a6,#d9a52b) bottom/100% 5px no-repeat,radial-gradient(ellipse 40% 60% at 80% 20%,rgba(255,255,255,.45),transparent 70%),linear-gradient(160deg,#ffa6cf,#e0559a 50%,#9a58e0)}
+.pb::before{content:"";position:absolute;inset:4px 8px 9px;clip-path:polygon(7% 0,100% 0,93% 100%,0 100%);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7)}
+.pb img{width:36px;height:60px;object-fit:contain;transform:rotate(30deg);filter:drop-shadow(0 3px 3px rgba(0,0,0,.35))}
+.pbw{filter:drop-shadow(0 0 14px rgba(255,143,196,.55)) drop-shadow(0 6px 8px rgba(8,4,28,.5))}
+.pbw small{display:block;text-align:center;font-size:12px;font-weight:800;color:#e6dcff;white-space:nowrap}
+.pbw small b{color:#ffc2dd}
+.pb.off{background:linear-gradient(90deg,#a99fd0,#7d71b0) bottom/100% 5px no-repeat,linear-gradient(160deg,#5a4c9a,#3d3175);color:#b9b0e0;text-shadow:none}
+.pbw.off{filter:drop-shadow(0 6px 8px rgba(8,4,28,.5))}
+.pb.off img{filter:grayscale(1) opacity(.5)}
+.pb.story{font-size:20px;letter-spacing:0;background:linear-gradient(90deg,#ffe7a6,#d9a52b) bottom/100% 5px no-repeat,linear-gradient(180deg,#fffaf0,#f1e5ff);color:var(--navy);text-shadow:none}
+.pb.story img{width:38px;height:38px;transform:none}
+.tap{position:absolute;left:50%;top:50%;width:56px;height:56px;margin:-28px;border-radius:50%;border:4px solid #fff;box-shadow:0 0 16px #fff;opacity:0;z-index:9;pointer-events:none}
+/* 물감이 날아가는 방울 */
+.drop{position:absolute;left:0;top:0;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#ff9cc8 45%,#b28cff);box-shadow:0 0 12px #ff9cc8;offset-path:path('M66 560 C 40 430, 230 380, 360 150');offset-rotate:auto;offset-distance:0%;opacity:0;z-index:8;pointer-events:none}
+.drop::after{content:"";position:absolute;right:10px;top:4px;width:30px;height:8px;border-radius:4px;background:linear-gradient(90deg,transparent,rgba(255,156,200,.8))}
+
+/* ================= 1. 칠하기 한 번 (6초 고리) ================= */
+.go.s-main{animation:pr 6s linear infinite}
+@keyframes pr{0%,16%{--p:69%;--n:69;--j:12;--q:33}58%,99.9%{--p:81%;--n:81;--j:0;--q:36}100%{--p:69%;--n:69;--j:12;--q:33}}
+.go.s-main .jar .lq{animation:lv 6s ease-in-out infinite}
+@keyframes lv{0%,16%{height:64%}58%,99.9%{height:6%}100%{height:64%}}
+.go.s-main .jar .bd{animation:tilt 6s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes tilt{0%,12%,62%,100%{transform:none}20%,50%{transform:rotate(-9deg)}}
+.go.s-main .pb{animation:press 6s ease-out infinite}
+@keyframes press{0%,9%,16%,100%{transform:none}11%{transform:scale(.93)}}
+.go.s-main .pbw .tap{animation:tapk 6s ease-out infinite}
+@keyframes tapk{0%,7%{opacity:0;transform:scale(.4)}9%{opacity:1;transform:scale(.55)}17%,100%{opacity:0;transform:scale(1.7)}}
+.go.s-main .drop{animation:dfly 6s cubic-bezier(.4,0,.6,1) infinite}
+.go.s-main .drop:nth-of-type(2){animation-delay:.14s}.go.s-main .drop:nth-of-type(3){animation-delay:.28s}
+@keyframes dfly{0%,13%{offset-distance:0%;opacity:0}15%{opacity:1}25%{offset-distance:100%;opacity:1}27%,100%{offset-distance:100%;opacity:0}}
+.go.s-main .cv .brush{animation:bru 6s ease-in-out infinite}
+@keyframes bru{0%,14%{opacity:0;transform:rotate(40deg) translateY(-10px)}20%{opacity:1}28%{transform:rotate(18deg) translateY(6px)}38%{transform:rotate(36deg) translateY(-4px)}48%{transform:rotate(16deg) translateY(8px)}58%{opacity:1;transform:rotate(30deg)}66%,100%{opacity:0;transform:rotate(30deg) translateY(-20px)}}
+.go.s-main .cv .ed{animation:edg 6s ease-in-out infinite}
+@keyframes edg{0%,14%,70%,100%{opacity:.45}24%,56%{opacity:1}}
+.go.s-main .sp{animation:spk 6s ease-out infinite}
+@keyframes spk{0%,18%{opacity:0;transform:translateY(10px) scale(.4)}26%{opacity:1;transform:translateY(-10px) scale(1)}40%,100%{opacity:0;transform:translateY(-40px) scale(.5)}}
+.go.s-main .ms .gh{animation:ghk 6s linear infinite}
+@keyframes ghk{0%,58%{opacity:1}60%,99%{opacity:0}100%{opacity:1}}
+.go.s-main .nd75 .gl,.go.s-main .nd75 .ok{animation:ndgot 6s steps(1,end) infinite}
+@keyframes ndgot{0%,37%{opacity:0}38%,99.9%{opacity:1}100%{opacity:0}}
+.go.s-main .nd75{animation:ndpop 6s ease-out infinite}
+@keyframes ndpop{0%,37%{transform:none}40%{transform:scale(1.3)}46%,100%{transform:none}}
+.go.s-main .gift{animation:gpop 6s cubic-bezier(.3,1.5,.5,1) infinite}
+@keyframes gpop{0%,37%{opacity:0;transform:translateY(20px) scale(.3)}44%{opacity:1;transform:translateY(-6px) scale(1.12)}50%,82%{opacity:1;transform:none}90%,100%{opacity:0;transform:translateY(-24px) scale(.8)}}
+.go.s-main .bloom{animation:blm 6s ease-in-out infinite}
+@keyframes blm{0%,30%,96%,100%{opacity:0}48%,72%{opacity:1}}
+.go.s-main .bgc{animation:sat 6s ease-in-out infinite}
+@keyframes sat{0%,30%,96%,100%{filter:none}48%,72%{filter:saturate(1.35) brightness(1.05)}}
+.go.s-main .inf .add{animation:addk 6s ease-in-out infinite}
+@keyframes addk{0%,16%{opacity:1}24%,58%{opacity:.35}66%,100%{opacity:1}}
+
+/* ================= 3. 돌아왔을 때: 자리 비운 동안 모인 물감이 저절로 ================= */
+.go.s-ret{animation:rt 7s linear infinite}
+@keyframes rt{0%,10%{--p:33%;--n:33;--q:26}50%,99.9%{--p:69%;--n:69;--q:33}100%{--p:33%;--n:33;--q:26}}
+.go.s-ret .cv .brush{animation:bru2 7s ease-in-out infinite}
+@keyframes bru2{0%,8%{opacity:0;transform:rotate(40deg)}14%{opacity:1}24%{transform:rotate(18deg) translateY(6px)}36%{transform:rotate(36deg)}50%{opacity:1;transform:rotate(26deg)}58%,100%{opacity:0;transform:rotate(30deg) translateY(-20px)}}
+.go.s-ret .nd50 .gl,.go.s-ret .nd50 .ok{animation:ndgot2 7s steps(1,end) infinite}
+@keyframes ndgot2{0%,29%{opacity:0}30%,99.9%{opacity:1}100%{opacity:0}}
+.go.s-ret .gift{animation:gpop2 7s cubic-bezier(.3,1.5,.5,1) infinite}
+@keyframes gpop2{0%,29%{opacity:0;transform:translateY(20px) scale(.3)}36%{opacity:1;transform:translateY(-6px) scale(1.12)}42%,84%{opacity:1;transform:none}92%,100%{opacity:0;transform:translateY(-24px) scale(.8)}}
+.go.s-ret .rib{animation:ribk 7s ease-out infinite}
+@keyframes ribk{0%{transform:translateY(-50px);opacity:0}6%,100%{transform:none;opacity:1}}
+.rib{position:absolute;left:16px;right:16px;top:60px;z-index:7;display:flex;align-items:center;gap:10px;padding:7px 12px;border-radius:4px 4px 12px 12px;background:linear-gradient(90deg,rgba(96,170,255,.95),rgba(154,132,240,.95));box-shadow:0 6px 14px rgba(8,4,28,.45),inset 0 -2px 0 rgba(255,255,255,.35)}
+.rib img{width:34px;height:34px;flex:none}
+.rib div{line-height:1.25;min-width:0}
+.rib b{display:block;font-size:15px;font-weight:900;white-space:nowrap}
+.rib small{display:block;font-size:12px;font-weight:700;color:#eef4ff;white-space:nowrap}
+.idle-tag{position:absolute;top:-21px;padding:0 8px;border-radius:8px;background:#5fa8ff;font-size:11px;font-weight:900;white-space:nowrap;transform:translateX(-50%);box-shadow:0 0 0 1.5px #fff}
+.meter{position:relative;height:8px;border-radius:4px;background:rgba(255,255,255,.14);margin:2px 0}
+.meter u{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg,#8fd0ff,#b9a6ff)}
+
+/* ================= 2. 물감통을 누르면: 어디서 모이나 ================= */
+.dim{position:absolute;inset:0;background:rgba(10,6,30,.55);z-index:6}
+.pop{position:absolute;left:16px;right:16px;top:150px;z-index:7;padding:12px 14px 10px;border-radius:14px;background:radial-gradient(ellipse 80% 40% at 50% 0,rgba(154,132,240,.35),transparent 70%),linear-gradient(180deg,#3a2d7c,#251b5a);box-shadow:0 0 0 1.5px rgba(255,231,166,.75),0 20px 40px rgba(0,0,0,.55)}
+.pop::after{content:"";position:absolute;left:56px;bottom:-12px;border:12px solid transparent;border-top-color:#251b5a;border-bottom:0;filter:drop-shadow(0 1.5px 0 rgba(255,231,166,.75))}
+.pop h5{margin:0 0 6px;font-size:17px;font-weight:900;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.pop h5 small{margin-left:auto;font-size:12px;font-weight:700;color:#cfc6f2}
+.pop ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px}
+.pop li{display:flex;align-items:center;gap:10px;padding:5px 8px;border-radius:9px;background:rgba(255,255,255,.06)}
+.pop li.now{background:linear-gradient(90deg,rgba(255,143,196,.28),rgba(255,255,255,.05));box-shadow:inset 0 0 0 1.5px #ff8fc4}
+.pop li img{width:30px;height:30px;flex:none}
+.pop li div{flex:1;min-width:0;line-height:1.2}
+.pop li b{display:block;font-size:13.5px;font-weight:900;white-space:nowrap}
+.pop li small{display:block;font-size:11.5px;font-weight:700;color:#cfc6f2;white-space:nowrap}
+.pop li em{flex:none;font-style:normal;font-size:16px;font-weight:900;color:#ffe08a;white-space:nowrap}
+.pop .ft{margin-top:6px;font-size:11.5px;font-weight:700;color:#cfc6f2}
+.go.s-src .pop{animation:popin .5s cubic-bezier(.2,1.3,.4,1) backwards}
+@keyframes popin{from{opacity:0;transform:translateY(30px) scale(.94)}}
+.s-src .jar{z-index:7}
+.ring{position:absolute;left:50%;top:60px;width:66px;height:66px;margin-left:-33px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 14px #fff;animation:rpl 1.6s ease-out infinite;pointer-events:none}
+@keyframes rpl{from{transform:scale(.6);opacity:1}to{transform:scale(1.5);opacity:0}}
+
+/* ================= 4. 잠긴 장소 · 다 칠한 장소 ================= */
+.lockv{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;z-index:2}
+.lockv i{width:54px;height:54px;border-radius:50%;background:rgba(18,12,46,.75) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23ffe7a6' stroke-width='2.4' d='M7.5 11V8a4.5 4.5 0 0 1 9 0v3'/%3E%3Crect x='5' y='11' width='14' height='10' rx='2.5' fill='%23ffe7a6'/%3E%3C/svg%3E") center/28px no-repeat;box-shadow:0 0 0 2px rgba(255,231,166,.7),0 0 20px rgba(0,0,0,.5)}
+.lockv b{font-size:19px;font-weight:900;white-space:nowrap;text-shadow:0 2px 6px rgba(0,0,0,.7)}
+.lockv small{font-size:12.5px;font-weight:700;color:#e6dcff;white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.lockv .meter{width:180px}
+.frost{position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,32,80,.35),rgba(20,14,48,.55));backdrop-filter:blur(1.5px)}
+.cv.gold{box-shadow:0 0 0 3px #fff3cf,0 0 0 5px #d9a52b,0 0 22px rgba(255,211,107,.6),0 16px 30px rgba(4,2,20,.6)}
+.cv .shine{position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%) 0 0/260% 100% no-repeat;animation:shn 4.5s ease-in-out infinite;mix-blend-mode:screen}
+@keyframes shn{0%,40%{background-position:130% 0}100%{background-position:-130% 0}}
+.petal{position:absolute;top:-20px;width:14px;height:14px;background:url(img/vfx_textures_petal.png) center/contain no-repeat;animation:fall 6s linear infinite;opacity:.9}
+@keyframes fall{to{transform:translate(-60px,260px) rotate(300deg)}}
+.storyb{position:absolute;left:14px;top:12px;display:flex;align-items:center;gap:6px;padding:4px 14px 4px 6px;border-radius:16px;background:linear-gradient(180deg,#fffaf0,#f1e5ff);color:var(--navy);font-size:13px;font-weight:900;box-shadow:0 0 0 2px #d9a52b,0 4px 8px rgba(0,0,0,.4);white-space:nowrap}
+.storyb img{width:24px;height:24px}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>색 지도 서랍 B 「큰 미리보기」 — 수정 시안 (#28 · #29 · #66)</h1>
+<p class="lead">PD가 고른 <b>B 큰 미리보기</b>를 다듬은 판입니다. 서랍은 <b>남색 아틀리에 판 + 금 레일</b>(다른 화면의 크림 판과 다른 얼굴), 위에는 <b>금 액자 속 장소 그림</b>이 잿빛 위로 칠해지고, 아래로 <b>보상 줄 → 장소 5곳 → 받는 중인 보너스 합계 → 물감통 · 「칠하기」</b> 순으로 한 번에 읽힙니다. 수치는 지금 게임 값(<code>scripts/color_world.gd</code>: 장소 비용 80 · 100 · 120 · 140 · 160, 첫 정화 +2.5 · 다시 +0.8 · 장 보스 +150, 자리 비움 분당 0.5 · 최대 8시간)이고, 25 · 50 · 75% 보상은 설계 문서의 가안입니다. 「노드 이름」을 켜면 가이드용 이름(ColorDrawerPlace0~4 · PaintButton)이 붙습니다.</p>
+<div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button><span style="width:12px"></span><button type="button" data-nodes aria-pressed="false">노드 이름</button><button type="button" data-replay-all>▶ 움직임 처음부터</button></div>
+
+<section class="ref">
+  <h2>지금 게임</h2>
+  <p class="cap">화면 전체를 덮는 판이라 전투가 멈춘 것처럼 보이고, 장소를 눌러도 %가 그대로입니다. 보너스는 아래 작은 회색 한 줄이고, 물감이 어디서 얼마나 오는지 보이지 않습니다.</p>
+  <div class="refs">
+    <figure><img src="img/artifacts_feedback70_before_color_map_1280x720.jpg" alt="지금 색 지도"><figcaption>artifacts/feedback70/before/color_map_1280x720.jpg</figcaption></figure>
+    <figure><img src="img/artifacts_feedback70_before_color_restore_f3_1280x720.jpg" alt="지금 색 되찾기 장면"><figcaption>artifacts/feedback70/before/color_restore_f3_1280x720.jpg</figcaption></figure>
+  </div>
+</section>
+
+<section class="ref">
+  <h2>원래 시안 B (비교용)</h2>
+  <p class="cap">크림 판 + 큰 그림 + 줄 목록. 물감통 12가 「칠하기」 한 번에 얼마를 올리는지, 물감이 어느 스테이지에서 오는지, 다음 보상까지 얼마 남았는지, 받는 보너스 합계가 무엇인지가 빠져 있었습니다. 움직이는 원본: <a href="https://yooonmu.github.io/skywhale-archive/mockups/colormap/index.html">feedback70/colormap/index.html</a></p>
+  <img class="w12" src="orig/0_1280.jpg" alt="원래 시안 B 1280" style="width:100%;border-radius:8px"><img class="w16" src="orig/0_1600.jpg" alt="원래 시안 B 1600" style="width:100%;border-radius:8px">
+</section>
+
+<h3>1. 수정 B — 「칠하기」 한 번</h3>
+<section class="opt">
+  <h2>물감통 12 → 꽃잎 시장 거리 +12% (69 → 81%) <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">누르기 전부터 <b>보상 줄의 금빛 빗금 = 이번 칠하기로 오를 만큼</b>, 아래 칸에 <b>「칠하기 1번 = 물감통 12 전부 → +12%」</b>가 보입니다. 누르면 물감통이 기울며 물감 방울이 액자로 날아가고, 붓이 잿빛을 걷어 69 → 81%. 75%를 넘는 순간 그 칸이 금빛으로 바뀌며 <b>보상 상자(색가루 5)</b>가 튀어나오고, 왼쪽 전투 하늘도 잠깐 색이 짙어집니다(지금의 <code>apply_sky</code>). 왼쪽 HUD 작은 원도 같이 차오릅니다.</p>
+  <div class="vp" data-name="main"><div class="scr s-main">
+    <div class="bgc"></div><div class="bloom"></div>    <div class="mini"><i></i><em></em><b></b></div>
+    <div class="dw"><div class="tab">›</div>
+      <div class="hd"><span class="pl">색 지도</span><span class="rg">1장 · 벚꽃 군도</span><div class="ch"><div><b></b>장소 1 / 5 다 칠함</div><i></i></div></div>
+      <div class="cv"><div class="g" style="background-image:url(img/assets_colorworld_ch1_market.png)"></div><div class="c" style="background-image:url(img/assets_colorworld_ch1_market.png)"></div><div class="ash"></div><div class="ed"></div><div class="sh"></div>
+        <i class="sp" style="left:62%;top:40%"></i><i class="sp" style="left:70%;top:24%;animation-delay:.3s"></i><i class="sp" style="left:76%;top:58%;animation-delay:.6s"></i><i class="sp" style="left:80%;top:34%;animation-delay:.9s"></i>
+        <div class="brush"></div>
+        <span class="chip l pk"><i class="bru"></i>칠하는 중</span>
+        <span class="chip r"><img src="img/assets_ui_icon_gold.png" alt="">100% 보너스 · 바람 조각 +5%</span>
+        <div class="nm"><small>장소 2 / 5 · 빛물감 69 / 100 · <em>다음 보상까지 6</em></small><b>꽃잎 시장 거리</b></div>
+        <div class="pc"><small>%</small></div>
+      </div>
+      <div class="ms" style="--to:81%"><div class="tr"><div class="fl"></div><div class="gh"></div></div>
+        <div class="nd got" style="left:25%"><img src="img/assets_ui_icon_gem.png" alt="채색석"><small>25% · 채색석 20</small></div>
+        <div class="nd got" style="left:50%"><img src="img/assets_ui_icon_pearl.png" alt="구름 진주"><small>50% · 진주 5</small></div>
+        <div class="nd nx nd75" style="left:75%"><i class="gl"></i><img src="img/assets_ui_icon_dust.png" alt="색가루"><i class="ok"></i><small>75% · 색가루 5</small></div>
+        <div class="nd end" style="left:100%"><img src="img/assets_ui_icon_gold.png" alt="바람 조각"><small>100% 보너스</small></div>
+        <div class="gift" style="left:75%;margin-left:-130px"><div class="bx"><img src="img/assets_ui_icon_dust.png" alt="색가루"></div><b>75% 보상 · 색가루 5</b></div>
+      </div>
+      <div class="pl5">
+        <div class="pt dn" data-node="ColorDrawerPlace0"><div class="th" style="background-image:url(img/assets_colorworld_ch1_pier.png)"></div><b>벚꽃 선착장</b><small>✓ 이야기</small></div>
+        <div class="pt on" data-node="ColorDrawerPlace1"><div class="th" style="background-image:url(img/assets_colorworld_ch1_market.png)"></div><b>꽃잎 시장 거리</b><small>칠하는 중</small><span class="mb"><u style="width:var(--p)"></u></span></div>
+        <div class="pt lk" data-node="ColorDrawerPlace2"><div class="th" style="background-image:url(img/assets_colorworld_ch1_windchime.png)"></div><b>풍경 공방</b><small>STAGE 41</small></div>
+        <div class="pt lk" data-node="ColorDrawerPlace3"><div class="th" style="background-image:url(img/assets_colorworld_ch1_hill.png)"></div><b>벚꽃 언덕</b><small>STAGE 61</small></div>
+        <div class="pt lk" data-node="ColorDrawerPlace4"><div class="th" style="background-image:url(img/assets_colorworld_ch1_bell.png)"></div><b>멈춘 종탑</b><small>91 · 미오</small></div>
+      </div>
+      <div class="bn"><img src="img/assets_ui_icon_pearl.png" alt=""><div class="tx"><small>받는 중인 보너스 합계</small><b>학교 복귀 구름 진주 +5%</b></div><div class="nx"><small>다음 · 꽃잎 시장 거리 100%</small><span><img src="img/assets_ui_icon_gold.png" alt="">바람 조각 +5%</span><div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div></div></div>
+      <div class="pa">
+        <div class="jar"><div class="lid"></div><div class="nk"></div><div class="bd"><div class="lq"></div><div class="hl"></div></div><span class="lb">빛물감</span><div class="am"><b></b><small>물감통</small></div></div>
+        <div class="inf"><span class="k">칠하기 1번 = 물감통 12 전부</span><div class="add"><b>+12%</b><span>꽃잎 시장 거리</span></div><span class="fx">69 → <em>81%</em> · 75% 보상 함께</span><hr><div class="src"><img src="img/assets_ui_kit_nav_adventure.png" alt=""><span>STAGE 정화마다 <b>+2.5</b> (1장 · 지금 33)</span></div><div class="src"><img src="img/assets_ui_kit_side_return.png" alt=""><span>자리 비움 분당 <b>0.5</b> · 최대 8시간</span></div></div>
+        <div class="pbw"><button class="pb" type="button" data-node="PaintButton"><img src="img/assets_ui_gacha_brush.png" alt="">칠하기</button><small>→ <b>꽃잎 시장 거리</b></small><span class="tap"></span></div>
+      </div>
+      <i class="drop"></i><i class="drop"></i><i class="drop"></i>
+    </div>
+  </div></div>
+</section>
+
+<h3>2. 물감통을 누르면 — 물감이 어디서 얼마나</h3>
+<section class="opt">
+  <h2>물감통 자세히 (출처 · 지금 STAGE 강조) <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">물감통을 누르면 위로 말풍선 판이 열려 <b>빛물감이 생기는 곳과 양</b>을 한 줄씩 보여 줍니다. 지금 밀고 있는 <b>STAGE 33 첫 정화(+2.5)</b> 줄이 분홍으로 강조되고, 1장(STAGE 1~100)만 이 지도에 물감을 준다는 것, 장 보스 첫 정화 +150, 자리 비운 동안 분당 0.5(최대 8시간 = 240)가 함께 보입니다. 바깥을 누르면 닫힙니다.</p>
+  <div class="vp" data-name="src"><div class="scr s-src">
+    <div class="bgc"></div>    <div class="mini"><i></i><em></em><b></b></div>
+    <div class="dw"><div class="tab">›</div>
+      <div class="hd"><span class="pl">색 지도</span><span class="rg">1장 · 벚꽃 군도</span><div class="ch"><div><b></b>장소 1 / 5 다 칠함</div><i></i></div></div>
+      <div class="cv"><div class="g" style="background-image:url(img/assets_colorworld_ch1_market.png)"></div><div class="c" style="background-image:url(img/assets_colorworld_ch1_market.png)"></div><div class="ash"></div><div class="ed"></div><div class="sh"></div>
+        <div class="nm"><small>장소 2 / 5 · 빛물감 69 / 100</small><b>꽃잎 시장 거리</b></div><div class="pc"><small>%</small></div></div>
+      <div class="ms" style="--to:81%"><div class="tr"><div class="fl"></div><div class="gh"></div></div>
+        <div class="nd got" style="left:25%"><img src="img/assets_ui_icon_gem.png" alt=""><small>25% · 채색석 20</small></div><div class="nd got" style="left:50%"><img src="img/assets_ui_icon_pearl.png" alt=""><small>50% · 진주 5</small></div><div class="nd nx" style="left:75%"><img src="img/assets_ui_icon_dust.png" alt=""><small>75% · 색가루 5</small></div><div class="nd end" style="left:100%"><img src="img/assets_ui_icon_gold.png" alt=""><small>100% 보너스</small></div></div>
+      <div class="pl5">
+        <div class="pt dn" data-node="ColorDrawerPlace0"><div class="th" style="background-image:url(img/assets_colorworld_ch1_pier.png)"></div><b>벚꽃 선착장</b><small>✓ 이야기</small></div>
+        <div class="pt on" data-node="ColorDrawerPlace1"><div class="th" style="background-image:url(img/assets_colorworld_ch1_market.png)"></div><b>꽃잎 시장 거리</b><small>칠하는 중</small><span class="mb"><u style="width:69%"></u></span></div>
+        <div class="pt lk" data-node="ColorDrawerPlace2"><div class="th" style="background-image:url(img/assets_colorworld_ch1_windchime.png)"></div><b>풍경 공방</b><small>STAGE 41</small></div>
+        <div class="pt lk" data-node="ColorDrawerPlace3"><div class="th" style="background-image:url(img/assets_colorworld_ch1_hill.png)"></div><b>벚꽃 언덕</b><small>STAGE 61</small></div>
+        <div class="pt lk" data-node="ColorDrawerPlace4"><div class="th" style="background-image:url(img/assets_colorworld_ch1_bell.png)"></div><b>멈춘 종탑</b><small>91 · 미오</small></div>
+      </div>
+      <div class="bn"><img src="img/assets_ui_icon_pearl.png" alt=""><div class="tx"><small>받는 중인 보너스 합계</small><b>학교 복귀 구름 진주 +5%</b></div><div class="nx"><small>다음 · 꽃잎 시장 거리 100%</small><span><img src="img/assets_ui_icon_gold.png" alt="">바람 조각 +5%</span><div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div></div></div>
+      <div class="dim"></div>
+      <div class="pop">
+        <h5>빛물감은 어디서? <small>물감통 지금 12</small></h5>
+        <ul>
+          <li class="now"><img src="img/assets_ui_kit_nav_adventure.png" alt=""><div><b>1장 스테이지 첫 정화</b><small>STAGE 1~100 · 지금 STAGE 33</small></div><em>+2.5</em></li>
+          <li><img src="img/assets_ui_kit_nav_adventure.png" alt="" style="filter:saturate(.3) brightness(.85)"><div><b>이미 깬 스테이지 다시 정화</b><small>복귀 뒤 다시 지나갈 때</small></div><em>+0.8</em></li>
+          <li><img src="img/assets_ui_kit_side_chest.png" alt=""><div><b>STAGE 100 장 보스 첫 정화</b><small>지도 전체에 크게 번져요</small></div><em>+150</em></li>
+          <li><img src="img/assets_ui_kit_side_wind.png" alt=""><div><b>하늘 이벤트</b><small>색 소나기 물방울 +5 (최대 8번) · 무지개 다리</small></div><em>+5 ~ 30</em></li>
+          <li><img src="img/assets_ui_kit_side_return.png" alt=""><div><b>자리 비운 동안</b><small>분당 0.5 · 최대 8시간 = 240 · 돌아오면 저절로</small></div><em>+0.5/분</em></li>
+        </ul>
+        <p class="ft">물감통 전부를 지금 고른 장소에 붓고, 그 장소를 다 칠하고 남은 몫은 다음 열린 장소로 넘칩니다.</p>
+      </div>
+      <div class="pa">
+        <div class="jar"><div class="lid"></div><div class="nk"></div><div class="bd"><div class="lq"></div><div class="hl"></div></div><span class="lb">빛물감</span><div class="am"><b></b><small>물감통</small></div><span class="ring"></span></div>
+        <div class="inf"><span class="k">칠하기 1번 = 물감통 12 전부</span><div class="add"><b>+12%</b><span>꽃잎 시장 거리</span></div></div>
+        <div class="pbw"><button class="pb" type="button" data-node="PaintButton"><img src="img/assets_ui_gacha_brush.png" alt="">칠하기</button><small>→ <b>꽃잎 시장 거리</b></small></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<h3>3. 돌아왔을 때 — 자리 비운 동안 모인 물감</h3>
+<section class="opt">
+  <h2>1시간 12분 비움 → +36이 저절로 칠해짐 (33 → 69%) <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">자리 비운 동안 모인 물감(분당 0.5)은 설계대로 <b>돌아왔을 때 저절로 붓고</b>, 서랍 위에 하늘색 띠로 <b>얼마 동안 · 얼마가 · 어디에</b> 칠해졌는지 알립니다. 보상 줄에서 그 몫은 <b>하늘색 구간</b>으로 따로 보이고, 그사이 넘은 50% 보상도 상자로 받습니다. 물감통이 비었을 때는 「칠하기」가 어두워지고 <b>다음 STAGE 정화로 +2.5</b>가 안내됩니다.</p>
+  <div class="vp" data-name="ret"><div class="scr s-ret" style="--p:69%;--n:69;--j:0;--q:33">
+    <div class="bgc"></div>    <div class="mini"><i></i><em class="off"></em><b></b></div>
+    <div class="dw"><div class="tab">›</div>
+      <div class="hd"><span class="pl">색 지도</span><span class="rg">1장 · 벚꽃 군도</span><div class="ch"><div><b></b>장소 1 / 5 다 칠함</div><i></i></div></div>
+      <div class="cv"><div class="g" style="background-image:url(img/assets_colorworld_ch1_market.png)"></div><div class="c" style="background-image:url(img/assets_colorworld_ch1_market.png)"></div><div class="ash"></div><div class="ed"></div><div class="sh"></div><div class="brush"></div>
+        <div class="nm"><small>장소 2 / 5 · 빛물감 69 / 100 · <em>다음 보상까지 6</em></small><b>꽃잎 시장 거리</b></div><div class="pc"><small>%</small></div></div>
+      <div class="rib"><img src="img/assets_ui_kit_side_return.png" alt=""><div><b>다녀오신 사이 빛물감 +36을 칠했어요</b><small>1시간 12분 · 분당 0.5 · 꽃잎 시장 거리 33 → 69%</small></div></div>
+      <div class="ms" style="--a:33%"><div class="tr"><div class="fl" style="width:33%"></div><div class="fl idle"></div></div><span class="idle-tag" style="left:51%">자리 비움 +36</span>
+        <div class="nd got" style="left:25%"><img src="img/assets_ui_icon_gem.png" alt=""><small>25% · 채색석 20</small></div>
+        <div class="nd nd50" style="left:50%"><i class="gl"></i><img src="img/assets_ui_icon_pearl.png" alt=""><i class="ok"></i><small>50% · 진주 5</small></div>
+        <div class="nd" style="left:75%"><img src="img/assets_ui_icon_dust.png" alt=""><small>75% · 색가루 5</small></div>
+        <div class="nd end" style="left:100%"><img src="img/assets_ui_icon_gold.png" alt=""><small>100% 보너스</small></div>
+        <div class="gift" style="left:50%"><div class="bx"><img src="img/assets_ui_icon_pearl.png" alt=""></div><b>50% 보상 · 진주 5</b></div>
+      </div>
+      <div class="pl5">
+        <div class="pt dn" data-node="ColorDrawerPlace0"><div class="th" style="background-image:url(img/assets_colorworld_ch1_pier.png)"></div><b>벚꽃 선착장</b><small>✓ 이야기</small></div>
+        <div class="pt on" data-node="ColorDrawerPlace1"><div class="th" style="background-image:url(img/assets_colorworld_ch1_market.png)"></div><b>꽃잎 시장 거리</b><small>칠하는 중</small><span class="mb"><u style="width:var(--p)"></u></span></div>
+        <div class="pt lk" data-node="ColorDrawerPlace2"><div class="th" style="background-image:url(img/assets_colorworld_ch1_windchime.png)"></div><b>풍경 공방</b><small>STAGE 41</small></div>
+        <div class="pt lk" data-node="ColorDrawerPlace3"><div class="th" style="background-image:url(img/assets_colorworld_ch1_hill.png)"></div><b>벚꽃 언덕</b><small>STAGE 61</small></div>
+        <div class="pt lk" data-node="ColorDrawerPlace4"><div class="th" style="background-image:url(img/assets_colorworld_ch1_bell.png)"></div><b>멈춘 종탑</b><small>91 · 미오</small></div>
+      </div>
+      <div class="bn"><img src="img/assets_ui_icon_pearl.png" alt=""><div class="tx"><small>받는 중인 보너스 합계</small><b>학교 복귀 구름 진주 +5%</b></div><div class="nx"><small>다음 · 꽃잎 시장 거리 100%</small><span><img src="img/assets_ui_icon_gold.png" alt="">바람 조각 +5%</span><div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div></div></div>
+      <div class="pa">
+        <div class="jar"><div class="lid"></div><div class="nk"></div><div class="bd"><div class="lq" style="--lv:3%"></div><div class="hl"></div></div><span class="lb">빛물감</span><div class="am"><b></b><small>물감통</small></div></div>
+        <div class="inf"><span class="k">물감통이 비었어요</span><div class="add"><b>+2.5</b><span>다음 STAGE 34 정화</span></div><hr><span class="k">자리 비운 시간 (최대 8시간)</span><div class="meter"><u style="width:15%"></u></div><span class="fx">1시간 12분 → <em>+36</em> · 8시간이면 240</span></div>
+        <div class="pbw off"><button class="pb off" type="button" data-node="PaintButton"><img src="img/assets_ui_gacha_brush.png" alt="">칠하기</button><small>물감이 모이면 반짝여요</small></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<h3>4. 다른 장소를 눌렀을 때</h3>
+<div class="two">
+<section class="opt">
+  <h2>잠긴 장소 — 풍경 공방</h2>
+  <p class="cap">잠긴 장소도 그림을 잿빛 · 흐림으로 미리 보여 주고 <b>언제 열리는지(STAGE 41 · 8칸 남음)</b>, 다 칠하면 받는 <b>궁극기 쿨타임 -3%</b>, 필요한 빛물감 120을 알려 줍니다. 「칠하기」는 그대로 지금 칠하는 곳(꽃잎 시장 거리)에 붓습니다.</p>
+  <div class="vp" data-name="lock"><div class="scr s-lock" style="--p:0%;--n:0;--j:12;--q:33">
+    <div class="bgc"></div>    <div class="mini" style="--p:69%"><i></i><em></em><b style="--n:69"></b></div>
+    <div class="dw"><div class="tab">›</div>
+      <div class="hd"><span class="pl">색 지도</span><span class="rg">1장 · 벚꽃 군도</span><div class="ch"><div><b></b>장소 1 / 5 다 칠함</div><i></i></div></div>
+      <div class="cv"><div class="g" style="background-image:url(img/assets_colorworld_ch1_windchime.png)"></div><div class="frost"></div><div class="sh"></div>
+        <span class="chip r"><img src="img/assets_ui_kit_side_wind.png" alt="">100% 보너스 · 궁극기 쿨타임 -3%</span>
+        <div class="lockv"><i></i><b>STAGE 41에서 열려요</b><small>지금 STAGE 33 · 8칸 남음</small><div class="meter"><u style="width:80%;background:linear-gradient(90deg,#ffe7a6,#d9a52b)"></u></div></div>
+        <div class="nm"><small>장소 3 / 5 · 다 칠하려면 빛물감 120</small><b>풍경 공방</b></div></div>
+      <div class="ms"><div class="tr"></div>
+        <div class="nd" style="left:25%"><img src="img/assets_ui_icon_gem.png" alt=""><small>25% · 채색석 20</small></div><div class="nd" style="left:50%"><img src="img/assets_ui_icon_pearl.png" alt=""><small>50% · 진주 5</small></div><div class="nd" style="left:75%"><img src="img/assets_ui_icon_dust.png" alt=""><small>75% · 색가루 5</small></div><div class="nd end" style="left:100%"><img src="img/assets_ui_kit_side_wind.png" alt=""><small>100% 보너스</small></div></div>
+      <div class="pl5">
+        <div class="pt dn" data-node="ColorDrawerPlace0"><div class="th" style="background-image:url(img/assets_colorworld_ch1_pier.png)"></div><b>벚꽃 선착장</b><small>✓ 이야기</small></div>
+        <div class="pt" data-node="ColorDrawerPlace1" style="box-shadow:inset 0 0 0 1.5px #ff8fc4"><div class="th" style="background-image:url(img/assets_colorworld_ch1_market.png)"></div><b>꽃잎 시장 거리</b><small style="color:#ffc2dd">69% 칠하는 중</small><span class="mb"><u style="width:69%"></u></span></div>
+        <div class="pt lk sel" data-node="ColorDrawerPlace2"><div class="th" style="background-image:url(img/assets_colorworld_ch1_windchime.png)"></div><b>풍경 공방</b><small>STAGE 41</small></div>
+        <div class="pt lk" data-node="ColorDrawerPlace3"><div class="th" style="background-image:url(img/assets_colorworld_ch1_hill.png)"></div><b>벚꽃 언덕</b><small>STAGE 61</small></div>
+        <div class="pt lk" data-node="ColorDrawerPlace4"><div class="th" style="background-image:url(img/assets_colorworld_ch1_bell.png)"></div><b>멈춘 종탑</b><small>91 · 미오</small></div>
+      </div>
+      <div class="bn"><img src="img/assets_ui_icon_pearl.png" alt=""><div class="tx"><small>받는 중인 보너스 합계</small><b>학교 복귀 구름 진주 +5%</b></div><div class="nx"><small>이 장소 100%</small><span><img src="img/assets_ui_kit_side_wind.png" alt="">궁극기 쿨타임 -3%</span><div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div></div></div>
+      <div class="pa">
+        <div class="jar"><div class="lid"></div><div class="nk"></div><div class="bd"><div class="lq"></div><div class="hl"></div></div><span class="lb">빛물감</span><div class="am"><b></b><small>물감통</small></div></div>
+        <div class="inf"><span class="k">여기는 아직 잠겨 있어요</span><div class="add"><b>+12%</b><span>꽃잎 시장 거리</span></div><span class="fx">칠하는 곳 69 → <em>81%</em></span></div>
+        <div class="pbw"><button class="pb" type="button" data-node="PaintButton"><img src="img/assets_ui_gacha_brush.png" alt="">칠하기</button><small>→ <b>꽃잎 시장 거리</b></small></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+<section class="opt">
+  <h2>다 칠한 장소 — 벚꽃 선착장</h2>
+  <p class="cap">다 칠한 장소는 액자가 금빛으로 바뀌고 꽃잎이 날리며, 보상 4칸이 모두 ✓, 받는 중인 보너스(구름 진주 +5%)가 이 장소에서 온다는 것을 보여 줍니다. 이야기는 <b>「이야기 다시 보기」를 눌렀을 때만</b> 엽니다(전투는 멈추지 않음).</p>
+  <div class="vp" data-name="done"><div class="scr s-done" style="--p:100%;--n:100;--j:12;--q:33">
+    <div class="bgc"></div>    <div class="mini" style="--p:69%"><i></i><em></em><b style="--n:69"></b></div>
+    <div class="dw"><div class="tab">›</div>
+      <div class="hd"><span class="pl">색 지도</span><span class="rg">1장 · 벚꽃 군도</span><div class="ch"><div><b></b>장소 1 / 5 다 칠함</div><i></i></div></div>
+      <div class="cv gold"><div class="c" style="background-image:url(img/assets_colorworld_ch1_pier.png)"></div><div class="shine"></div><div class="sh"></div>
+        <i class="petal" style="left:30%"></i><i class="petal" style="left:55%;animation-delay:-2s;animation-duration:7s"></i><i class="petal" style="left:80%;animation-delay:-4s"></i><i class="petal" style="left:96%;animation-delay:-1s;animation-duration:8s"></i>
+        <span class="storyb"><img src="img/assets_ui_kit_side_story.png" alt="">이야기 다시 보기</span>
+        <span class="chip r" style="box-shadow:inset 0 0 0 1.5px #ffd36b"><img src="img/assets_ui_icon_pearl.png" alt="">받는 중 · 구름 진주 +5%</span>
+        <div class="nm"><small>장소 1 / 5 · 다 칠했어요</small><b>벚꽃 선착장</b></div><div class="pc" style="text-shadow:0 0 18px rgba(255,211,107,.9),0 3px 0 #8b5a1a"><small>%</small></div></div>
+      <div class="ms"><div class="tr"><div class="fl"></div></div>
+        <div class="nd got" style="left:25%"><img src="img/assets_ui_icon_gem.png" alt=""><small>25% · 채색석 20</small></div><div class="nd got" style="left:50%"><img src="img/assets_ui_icon_pearl.png" alt=""><small>50% · 진주 5</small></div><div class="nd got" style="left:75%"><img src="img/assets_ui_icon_dust.png" alt=""><small>75% · 색가루 5</small></div><div class="nd got end" style="left:100%"><img src="img/assets_ui_icon_pearl.png" alt=""><small>100% 진주 +5%</small></div></div>
+      <div class="pl5">
+        <div class="pt dn sel" data-node="ColorDrawerPlace0"><div class="th" style="background-image:url(img/assets_colorworld_ch1_pier.png)"></div><b>벚꽃 선착장</b><small>✓ 이야기</small></div>
+        <div class="pt" data-node="ColorDrawerPlace1" style="box-shadow:inset 0 0 0 1.5px #ff8fc4"><div class="th" style="background-image:url(img/assets_colorworld_ch1_market.png)"></div><b>꽃잎 시장 거리</b><small style="color:#ffc2dd">69% 칠하는 중</small><span class="mb"><u style="width:69%"></u></span></div>
+        <div class="pt lk" data-node="ColorDrawerPlace2"><div class="th" style="background-image:url(img/assets_colorworld_ch1_windchime.png)"></div><b>풍경 공방</b><small>STAGE 41</small></div>
+        <div class="pt lk" data-node="ColorDrawerPlace3"><div class="th" style="background-image:url(img/assets_colorworld_ch1_hill.png)"></div><b>벚꽃 언덕</b><small>STAGE 61</small></div>
+        <div class="pt lk" data-node="ColorDrawerPlace4"><div class="th" style="background-image:url(img/assets_colorworld_ch1_bell.png)"></div><b>멈춘 종탑</b><small>91 · 미오</small></div>
+      </div>
+      <div class="bn" style="box-shadow:inset 0 0 0 1.5px #ffd36b,0 0 16px rgba(255,211,107,.35)"><img src="img/assets_ui_icon_pearl.png" alt=""><div class="tx"><small>받는 중인 보너스 합계 · 여기서 받는 중</small><b>학교 복귀 구름 진주 +5%</b></div><div class="nx"><small>다 칠한 곳</small><span>1 / 5</span><div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div></div></div>
+      <div class="pa">
+        <div class="jar"><div class="lid"></div><div class="nk"></div><div class="bd"><div class="lq"></div><div class="hl"></div></div><span class="lb">빛물감</span><div class="am"><b></b><small>물감통</small></div></div>
+        <div class="inf"><span class="k">여기는 다 칠했어요</span><div class="add"><b>+12%</b><span>꽃잎 시장 거리</span></div><span class="fx">칠하는 곳 69 → <em>81%</em></span></div>
+        <div class="pbw"><button class="pb" type="button" data-node="PaintButton"><img src="img/assets_ui_gacha_brush.png" alt="">칠하기</button><small>→ <b>꽃잎 시장 거리</b></small></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+</div>
+
+<h3>정보 한눈에</h3>
+<ul class="rule">
+  <li><b>장소 진행</b>액자 오른쪽 아래 큰 % + 「빛물감 69 / 100」 + 장소 칸마다 작은 막대</li>
+  <li><b>다음 보상</b>보상 줄에서 다음 칸만 분홍 테 + 「다음 보상까지 6」</li>
+  <li><b>받는 보너스 합계</b>금 줄 한 칸: 지금 받는 것 + 다음에 받을 것 + 다 칠한 곳 점 1/5</li>
+  <li><b>물감통 · 칠하기 1번</b>물감통 숫자 + 「+12%」(금빛 빗금이 보상 줄에서 미리 보임)</li>
+  <li><b>물감을 주는 스테이지</b>1장 STAGE 1~100 정화(첫 +2.5 · 다시 +0.8 · 장 보스 +150), 물감통을 누르면 전부</li>
+  <li><b>자리 비움 물감</b>분당 0.5 · 최대 8시간, 돌아오면 저절로 칠하고 하늘색 띠 · 하늘색 구간으로 알림</li>
+</ul>
+</main>
+<script>
+const fit=()=>document.querySelectorAll('.vp').forEach(v=>{const s=v.querySelector('.scr');const k=v.clientWidth/s.offsetWidth;s.style.transform=`scale(${k})`;v.style.height=s.offsetHeight*k+'px'});
+addEventListener('resize',fit);
+document.querySelectorAll('.bar [data-res]').forEach(b=>b.addEventListener('click',()=>{document.documentElement.style.setProperty('--w',b.dataset.res);document.documentElement.dataset.w=b.dataset.res;document.querySelectorAll('.bar [data-res]').forEach(x=>x.setAttribute('aria-pressed',x===b));fit()}));
+const nb=document.querySelector('[data-nodes]');
+nb.addEventListener('click',()=>{const on=document.body.classList.toggle('nodes');nb.setAttribute('aria-pressed',on)});
+const play=s=>{s.classList.remove('go');void s.offsetWidth;s.classList.add('go')};
+document.querySelectorAll('[data-replay]').forEach(b=>b.addEventListener('click',()=>b.closest('.opt').querySelectorAll('.scr').forEach(play)));
+document.querySelector('[data-replay-all]').addEventListener('click',()=>document.querySelectorAll('.scr').forEach(play));
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){play(en.target.querySelector('.scr'));io.unobserve(en.target)}}),{threshold:.35});
+document.querySelectorAll('.vp').forEach(v=>io.observe(v));
+fit();
+</script>
+</body>
+</html>

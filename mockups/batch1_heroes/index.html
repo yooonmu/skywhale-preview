@@ -1,0 +1,1451 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 시안 · 배치 1 아이들 허브 (메뉴 틀 · 목록 · 레벨 업·승급 · 장비 · 각성 · 연성)</title>
+<style>
+:root{--navy:#2e2350;--lav:#8b74e8;--gold:#d9a52b;--line:#e2dbf5;--w:1280}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;line-height:1.45}
+.page{max-width:1180px;margin:0 auto;padding:20px 16px 64px}
+.page>h1{font-size:22px;margin:0 0 4px}
+.page>h3{font-size:18px;margin:34px 0 8px;padding-top:12px;border-top:2px solid var(--line)}
+.lead{margin:0 0 14px;font-size:14px;color:#4c4374}
+.bar{position:sticky;top:0;z-index:30;display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 16px;padding:8px 0;font-size:13px;background:rgba(243,240,250,.94)}
+.bar button,.states button,.rp{font:inherit;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true],.states button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.states{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:0 0 12px;font-size:13px}
+.states>span{font-weight:800;color:#4c4374;margin:0 2px 0 8px}
+.states>span:first-child{margin-left:0}
+.ctx{font-size:13px;color:#4c4374;background:#f6f2ff;border-radius:10px;padding:8px 12px;margin:0 0 12px}
+.ctx b{color:var(--navy)}
+.ref,.opt{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 18px}
+.opt{cursor:pointer}
+.opt.sel{border-color:#6b55d8;box-shadow:0 0 0 3px rgba(107,85,216,.35)}
+.opt h2,.ref h2{font-size:17px;margin:0 0 2px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.opt h2 .rp{margin-left:auto;font-size:13px;min-height:36px}
+.cap{margin:0 0 10px;font-size:14px;color:#4c4374}
+.cap b{color:#5b3fc0}
+.vp{position:relative;width:100%;overflow:hidden;border-radius:8px;background:#1d1838}
+.scr{position:absolute;left:0;top:0;width:calc(var(--w)*1px);height:720px;transform-origin:0 0;overflow:hidden;font-size:16px;color:var(--navy);--hc:#c94a85}
+.refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.refs figure{margin:0}.refs img{width:100%;display:block;border-radius:8px}.refs figcaption{overflow-wrap:anywhere;font-size:12px;color:#5a5180;margin-top:4px}
+.w16{display:none}:root[data-w="1600"] .w12{display:none}:root[data-w="1600"] .w16{display:block}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes sheen{0%,60%{background-position:130% 0}100%{background-position:-130% 0}}
+@keyframes hue{to{filter:hue-rotate(360deg)}}
+@keyframes bob{50%{transform:translateY(-6px)}}
+@keyframes pulse{50%{box-shadow:0 0 0 3px #fff,0 0 22px var(--glow,#ffe08a)}}
+
+/* ===== 공통: 전투 바탕 · 얼굴 · 속성 · 등급 · 별 · 점 ===== */
+.bgc{position:absolute;inset:0;background:url(img/artifacts/feedback70/after/hud_mid_1280x720.jpg) left top/auto 100% no-repeat}
+:root[data-w="1600"] .bgc{background-image:url(img/artifacts/feedback70/after/hud_mid_1600x720.jpg)}
+.dim{position:absolute;inset:0;background:rgba(20,13,48,.62)}
+.f{background-repeat:no-repeat;background-size:210% auto;background-position:50% 5%;background-color:var(--el,#efe6ff)}
+.e-pu{--e:#9a6bff;--ed:#6b3fd6;--el:#efe6ff}
+.e-wh{--e:#f2c14e;--ed:#8a6400;--el:#fff4d6}
+.e-gr{--e:#4fd18b;--ed:#17704a;--el:#dff7ea}
+.e-re{--e:#ff5f4f;--ed:#c0352a;--el:#ffe3df}
+.e-bl{--e:#3fa9ff;--ed:#1f6fc0;--el:#ddeeff}
+.e-or{--e:#ff9a3c;--ed:#b35a00;--el:#ffead6}
+.e-rb{--e:#e957bc;--ed:#5a2f9a;--el:#f6e6ff}
+.gb{display:inline-grid;place-items:center;min-width:26px;height:20px;padding:0 5px;border-radius:6px;font-size:12px;font-weight:900;color:#fff;font-style:normal;line-height:1;box-shadow:0 0 0 1.5px #fff;white-space:nowrap}
+.gb.B{background:#2b66c4}.gb.A{background:#6544d6}.gb.S{background:#9a6200}.gb.SS{background:var(--ed)}
+.gb.M{background:linear-gradient(#2e2350,#2e2350) padding-box,linear-gradient(90deg,#ff5f6d,#ffb84d,#ffe36b,#5fd68b,#4fb8ff,#8b6bff,#e957bc) border-box;border:2px solid transparent;box-shadow:none}
+.stars{color:#e8a21c;font-size:14px;letter-spacing:-1px;white-space:nowrap;font-style:normal}
+.stars u{text-decoration:none;color:#c9bfe2}
+.rd{position:absolute;width:13px;height:13px;border-radius:50%;background:#ff3d55;box-shadow:0 0 0 2px #fff;z-index:3}
+.nw{position:absolute;padding:0 6px;border-radius:6px;background:#e0244a;color:#fff;font-size:11px;font-weight:900;font-style:normal;box-shadow:0 0 0 1.5px #fff;z-index:3;white-space:nowrap}
+.ii{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#fff;color:#5b44c8;font:italic 900 17px/1 Georgia,serif;box-shadow:0 0 0 2px #8b74e8;flex:none}
+/* 2~6번 공통 얇은 임시 틀 (실제 틀은 1번에서 고른 것) */
+.chr{position:absolute;left:0;right:0;top:0;height:56px;z-index:6;display:flex;align-items:center;gap:6px;padding:0 18px;background:linear-gradient(180deg,rgba(26,18,64,.94),rgba(26,18,64,.84));box-shadow:0 1px 0 rgba(255,231,166,.45);color:#fff}
+.chr .hub{display:flex;align-items:center;gap:6px;margin-right:10px;font-size:18px;font-weight:900}
+.chr .hub img{width:30px;height:30px}
+.chr .sb{position:relative;padding:6px 14px;border-radius:16px;font-size:15px;font-weight:800;color:#e0d8ff}
+.chr .sb.on{background:#fff;color:var(--navy)}
+.chr .sb .rd{right:0;top:0;width:10px;height:10px}
+.wal{display:flex;gap:8px;margin-left:auto}
+.wal span{display:flex;align-items:center;gap:4px;padding:3px 12px 3px 4px;border-radius:14px;background:rgba(255,255,255,.13);font-weight:800;font-size:14px;color:#fff;white-space:nowrap}
+.wal img{width:24px;height:24px}
+.xb{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#fff;color:var(--navy);font-size:20px;font-weight:900;flex:none;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.chr .xb{margin-left:8px}
+
+/* ================= 1. 메뉴 공통 틀 ================= */
+.hbody{position:absolute;overflow:hidden}
+.scr[data-hub=heroes] .hbody{background:radial-gradient(38% 46% at 12% 22%,rgba(255,160,205,.42),transparent 70%),radial-gradient(34% 44% at 86% 74%,rgba(150,125,255,.38),transparent 70%),radial-gradient(30% 40% at 58% 10%,rgba(110,205,255,.3),transparent 70%),radial-gradient(26% 36% at 40% 92%,rgba(255,214,110,.32),transparent 70%),linear-gradient(#f8f5ff,#ece5ff)}
+.scr[data-hub=formation] .hbody{background:repeating-linear-gradient(118deg,rgba(255,255,255,.04) 0 2px,transparent 2px 16px),radial-gradient(70% 60% at 50% 30%,#4a3796,transparent 70%),linear-gradient(160deg,#352772,#1a1347)}
+.scr[data-hub=summon] .hbody{background:radial-gradient(circle,rgba(255,236,190,.5) 0 1px,transparent 1.8px) 0 0/34px 30px,radial-gradient(60% 70% at 50% 100%,rgba(255,200,110,.35),transparent 70%),linear-gradient(180deg,#22295a,#121638)}
+.scr[data-hub=adventure] .hbody{background:radial-gradient(circle at 90% 24%,transparent 0 46px,rgba(30,120,130,.35) 47px 48px,transparent 49px 70px,rgba(30,120,130,.22) 71px 72px,transparent 73px),linear-gradient(rgba(30,120,130,.12) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,rgba(30,120,130,.12) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(170deg,#eaf7f4,#cde9e4)}
+.scr[data-hub=school] .hbody{background:radial-gradient(30% 20% at 30% 30%,rgba(255,255,255,.08),transparent 70%),radial-gradient(25% 18% at 75% 60%,rgba(255,255,255,.06),transparent 70%),linear-gradient(#2f4d42,#233a32);box-shadow:inset 0 0 0 10px #8a6a48,inset 0 0 0 12px #6b4f33}
+.scr[data-hub=shop] .hbody{background:linear-gradient(180deg,transparent 0 40%,rgba(255,255,255,.4) 40% 40.6%,rgba(255,255,255,.08) 40.6% 42.5%,transparent 42.5% 76%,rgba(255,255,255,.4) 76% 76.6%,rgba(255,255,255,.08) 76.6% 78.5%,transparent 78.5%),radial-gradient(60% 50% at 50% 0,rgba(255,190,200,.32),transparent 70%),linear-gradient(170deg,#5a2a4e,#36173a)}
+/* 허브 본문 (자리표시): 허브마다 다른 결 위에 그 허브의 대표 그림 */
+.hc{position:absolute;left:28px;right:28px;top:var(--ct,90px);bottom:18px;display:none}
+.hc.on{display:block}
+.hc .lbl{position:absolute;right:0;bottom:0;font-size:12px;font-weight:800;opacity:.75}
+.hc.heroes .mg{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:0 0 18px}
+.hc.heroes .mg em{flex:0 0 100%;font-style:normal;font-weight:900;font-size:15px;color:#5b3fc0}
+.hc.heroes .mg i{position:relative;width:84px;height:84px;border-radius:18px;box-shadow:0 0 0 3px var(--e),0 6px 10px rgba(40,25,90,.22)}
+.hc.heroes .mg.dk i{width:104px;height:104px;border-radius:22px;box-shadow:0 0 0 3px var(--e),0 0 0 6px #fff,0 8px 14px rgba(40,25,90,.3)}
+.hc.formation{display:none;justify-content:center;gap:18px;padding-top:10px}
+.hc.formation.on{display:flex}
+.hc.formation .fq{position:relative;width:170px;height:280px;transform:skewX(-8deg);border-radius:6px;overflow:hidden;background:linear-gradient(170deg,var(--el),#fff 70%);box-shadow:0 0 0 2px rgba(255,231,166,.8),0 12px 20px rgba(0,0,0,.4)}
+.hc.formation .fq img{position:absolute;left:50%;bottom:6px;height:240px;transform:translateX(-50%) skewX(8deg)}
+.hc.formation .fq b{position:absolute;left:12px;top:4px;font:italic 900 54px/1 sans-serif;color:#fff;-webkit-text-stroke:2px var(--navy);transform:skewX(8deg)}
+.hc.summon .sbn{position:absolute;left:50%;top:6px;width:660px;height:300px;margin-left:-330px;border-radius:18px;background:url(img/assets/ui/summon_bg.png) center/cover;box-shadow:0 0 0 3px #ffe08a,0 14px 30px rgba(0,0,0,.5)}
+.hc.summon .sbn img{position:absolute;right:30px;bottom:-24px;width:230px;animation:bob 3s ease-in-out infinite;filter:drop-shadow(0 10px 12px rgba(0,0,0,.5))}
+.hc.summon .sbn b{position:absolute;left:26px;bottom:22px;color:#fff;font-size:32px;font-weight:900;text-shadow:0 3px 0 #3a2a80,0 0 16px rgba(0,0,0,.6)}
+.hc.adventure{display:none;justify-content:center;align-items:flex-start;gap:16px;padding-top:16px}
+.hc.adventure.on{display:flex}
+.hc.adventure figure{margin:0;width:150px;transform:rotate(var(--r));text-align:center;font-weight:900;font-size:14px;color:#14514e}
+.hc.adventure figure img{display:block;width:150px;height:220px;object-fit:cover;border-radius:10px;box-shadow:0 0 0 4px #fff,0 10px 18px rgba(20,60,60,.35)}
+.hc.school{display:none;justify-content:center;gap:40px;padding-top:26px}
+.hc.school.on{display:flex}
+.hc.school figure{margin:0;text-align:center;color:#f1f7f2;font-size:18px;font-weight:800;font-style:italic}
+.hc.school figure img{display:block;width:170px;height:170px;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(0,0,0,.4))}
+.hc.shop .sh{position:absolute;left:0;right:0;display:flex;justify-content:center;gap:60px}
+.hc.shop .sh figure{margin:0;text-align:center;color:#fff;font-weight:900;font-size:15px}
+.hc.shop .sh img{display:block;width:96px;height:96px;margin:0 auto 4px;filter:drop-shadow(0 0 14px rgba(255,170,220,.7))}
+.hc.shop .sh span{display:inline-block;padding:1px 10px;border-radius:10px;background:#fff;color:#7a1f45;font-size:13px}
+/* 아이 상세(판 전체를 덮는 화면)가 열리면 틀은 숨김 */
+.dt{position:absolute;inset:0;z-index:8;display:none;background:radial-gradient(60% 70% at 30% 40%,#6b4fd0,transparent 70%),linear-gradient(160deg,#4a2f9a,#1d1450)}
+.scr[data-det="1"] .dt{display:block;animation:dtin .5s ease-out}
+@keyframes dtin{from{opacity:0;transform:scale(1.04)}}
+.dt .art{position:absolute;left:0;top:0;bottom:0;width:62%;background:url(img/assets/cutin/serena_cutin.png) 30% 20%/cover;-webkit-mask:linear-gradient(90deg,#000 72%,transparent);mask:linear-gradient(90deg,#000 72%,transparent)}
+.dt .nm{position:absolute;left:44px;bottom:64px;color:#fff;font-size:56px;font-weight:900;text-shadow:0 4px 0 #3a1f8a,0 0 20px rgba(0,0,0,.5)}
+.dt .nm small{display:block;font-size:16px;letter-spacing:1px}
+.dt .pn{position:absolute;right:28px;top:28px;bottom:28px;width:420px;border-radius:24px;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.28);backdrop-filter:blur(6px);color:#fff;padding:24px}
+.dt .pn .tb{display:flex;gap:8px}
+.dt .pn .tb span{padding:8px 20px;border-radius:18px;background:rgba(255,255,255,.14);font-weight:800}
+.dt .pn .tb span:first-child{background:#fff;color:var(--navy)}
+.dt .pn .nb{margin-top:26px;font-size:15px;color:#e6defd}
+.dt .pn .nb b{display:block;font-size:44px;color:#ffe08a;line-height:1.1}
+.dt .pn .bt{position:absolute;left:24px;right:24px;bottom:24px;display:flex;gap:10px}
+.dt .pn .bt span{flex:1;display:grid;place-items:center;height:70px;border-radius:16px;font-size:20px;font-weight:900;background:linear-gradient(160deg,#ffb36b,#f07a3a);color:#3a1600}
+.dt .pn .bt span+span{background:linear-gradient(160deg,#a58bff,#6b55d8);color:#fff}
+.dt .tag{position:absolute;left:50%;top:18px;transform:translateX(-50%);padding:4px 14px;border-radius:12px;background:rgba(0,0,0,.45);color:#fff;font-size:13px;font-weight:800;white-space:nowrap}
+.keep{display:none;position:absolute;z-index:9}
+.scr[data-det="1"] .keep{display:flex}
+/* 잠긴 허브 (항해사 Lv.7 필요) */
+.scr[data-lk="1"] [data-h=adventure]{filter:grayscale(1);opacity:.62}
+.lkb{display:none}
+.scr[data-lk="1"] [data-h=adventure] .lkb{display:grid;position:absolute;place-items:center;width:26px;height:26px;border-radius:50%;background:#2e2350 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M7 10V8a5 5 0 0110 0v2h1v10H6V10h1zm2 0h6V8a3 3 0 00-6 0v2z'/%3E%3C/svg%3E") center/16px no-repeat;box-shadow:0 0 0 2px #fff}
+.lt{display:none;position:absolute;z-index:7;align-items:center;gap:10px;padding:10px 16px;border-radius:16px;background:#2e2350;color:#fff;font-weight:800;font-size:15px;white-space:nowrap;box-shadow:0 10px 22px rgba(0,0,0,.4)}
+.lt small{display:block;font-size:12px;font-weight:700;color:#d9d0ff}
+.scr[data-lk="1"] .lt{display:flex;animation:ltin 3.2s ease-out infinite}
+@keyframes ltin{0%{opacity:0;transform:translateY(10px)}10%,80%{opacity:1;transform:none}100%{opacity:0}}
+
+/* A · 오른쪽 세로 책갈피 */
+.A1 .hbody{left:18px;top:16px;bottom:16px;right:122px;border-radius:26px 8px 8px 26px;box-shadow:0 18px 40px rgba(0,0,0,.45),0 0 0 1.5px rgba(255,255,255,.5)}
+.A1 .ht{position:absolute;left:46px;top:30px;z-index:2;font-size:30px;font-weight:900;color:var(--hc);letter-spacing:1px}
+.scr.A1:is([data-hub=formation],[data-hub=summon],[data-hub=school],[data-hub=shop]) .ht{color:#fff}
+.A1 .subs{position:absolute;left:170px;top:36px;z-index:2;display:none;gap:22px}
+.A1 .subs.on{display:flex}
+.A1 .subs span{position:relative;padding:2px 2px 8px;font-size:17px;font-weight:800;color:#6a6290}
+.scr.A1:is([data-hub=formation],[data-hub=summon],[data-hub=school],[data-hub=shop]) .subs span{color:#d9d0ff}
+.A1 .subs span.on{color:var(--navy)}
+.scr.A1:is([data-hub=formation],[data-hub=summon],[data-hub=school],[data-hub=shop]) .subs span.on{color:#fff}
+.A1 .subs span.on::after{content:"";position:absolute;left:-4px;right:-4px;bottom:0;height:7px;border-radius:5px 2px 6px 2px;background:var(--hc);transform:rotate(-1.5deg)}
+.A1 .subs .rd{right:-12px;top:0;width:10px;height:10px}
+.A1 .wal{position:absolute;right:150px;top:30px;z-index:2}
+.scr.A1:is([data-hub=heroes],[data-hub=adventure]) .wal span{background:rgba(46,35,80,.82)}
+.A1 .marks{position:absolute;right:14px;top:84px;width:122px;display:flex;flex-direction:column;gap:7px;z-index:3}
+.A1 .mk{position:relative;height:86px;margin-left:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-right:12px;color:#fff;font-weight:900;font-size:15px;background:linear-gradient(90deg,rgba(0,0,0,.22),transparent 26%),var(--c);clip-path:polygon(0 0,100% 0,88% 50%,100% 100%,0 100%);text-shadow:0 1px 2px rgba(0,0,0,.4);filter:saturate(.75) brightness(.92);transition:margin .35s cubic-bezier(.3,1.4,.5,1),filter .3s}
+.A1 .mk img{width:40px;height:40px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
+.A1 .mk.on{margin-left:-6px;filter:none;background:linear-gradient(90deg,rgba(255,255,255,.25),transparent 30%),var(--c)}
+.A1 .mk .lkb{left:10px;top:8px}
+.A1 .x1{position:absolute;right:30px;top:22px;z-index:3}
+.A1 .lt{right:150px;top:470px}
+.A1 .keep{right:14px;top:84px;width:98px;height:86px;align-items:center;justify-content:center;color:#fff;font-weight:900;background:#c94a85;clip-path:polygon(0 0,100% 0,88% 50%,100% 100%,0 100%)}
+.m-heroes{--c:#c94a85}.m-formation{--c:#5b44c8}.m-summon{--c:#9a6a00}.m-adventure{--c:#17706c}.m-school{--c:#2f7350}.m-shop{--c:#a8405a}
+/* B · 위 띠 + 허브별 무늬 */
+.B1 .band{position:absolute;left:0;right:0;top:0;height:104px;z-index:3;background:linear-gradient(180deg,rgba(24,16,58,.97),rgba(24,16,58,.9));box-shadow:0 3px 0 var(--hc),0 10px 24px rgba(0,0,0,.35)}
+.B1 .band::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:3px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 10px,transparent 10px 22px);opacity:.5}
+.B1 .hubs{position:absolute;left:16px;top:6px;display:flex;gap:2px}
+.B1 .hb{position:relative;display:flex;align-items:center;gap:6px;padding:6px 14px 12px;color:#e0d8ff;font-size:17px;font-weight:900}
+.B1 .hb img{width:30px;height:30px}
+.B1 .hb.on{color:#fff}
+.B1 .hb.on::after{content:"";position:absolute;left:6px;right:6px;bottom:2px;height:9px;border-radius:7px 2px 8px 3px;background:var(--hc);transform:rotate(-1.5deg);box-shadow:0 0 12px var(--hc)}
+.B1 .hb .lkb{right:0;top:0}
+.B1 .subs{position:absolute;left:24px;top:62px;display:none;gap:6px}
+.B1 .subs.on{display:flex}
+.B1 .subs span{position:relative;padding:4px 14px;border-radius:14px;font-size:14px;font-weight:800;color:#e0d8ff;background:rgba(255,255,255,.08)}
+.B1 .subs span.on{background:#fff;color:var(--navy)}
+.B1 .subs .rd{right:-2px;top:-2px;width:10px;height:10px}
+.B1 .wal{position:absolute;right:76px;top:14px}
+.B1 .x1{position:absolute;right:18px;top:10px}
+.B1 .hbody{left:14px;right:14px;top:116px;bottom:14px;border-radius:18px;box-shadow:0 14px 30px rgba(0,0,0,.4)}
+.B1 .lt{left:330px;top:112px}
+.B1 .keep{left:20px;top:18px;padding:8px 18px;border-radius:20px;background:rgba(255,255,255,.92);font-weight:900;color:var(--navy)}
+/* C · 아래 메뉴 바가 올라와 시트가 됨 */
+.C1 .sheet{position:absolute;left:0;right:0;top:92px;bottom:0;border-radius:30px 30px 0 0;overflow:hidden;box-shadow:0 -12px 30px rgba(0,0,0,.45)}
+.scr.go .C1s,.C1.go .sheet{animation:rise .7s cubic-bezier(.2,1,.3,1) backwards}
+@keyframes rise{from{transform:translateY(560px)}}
+.C1 .sheet .hbody{inset:0}
+.C1 .grab{position:absolute;left:50%;top:8px;width:72px;height:6px;margin-left:-36px;border-radius:3px;background:rgba(255,255,255,.7);box-shadow:0 0 0 1px rgba(46,35,80,.25);z-index:3}
+.C1 .nav{position:absolute;left:50%;top:22px;transform:translateX(-50%);z-index:3;display:flex;gap:4px;padding:6px;border-radius:24px;background:rgba(24,16,58,.9);box-shadow:0 8px 18px rgba(0,0,0,.3)}
+.C1 .hb{position:relative;width:96px;height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#e0d8ff;border-radius:18px;transition:transform .3s}
+.C1 .hb img{width:32px;height:32px}
+.C1 .hb.on{background:var(--hc);color:#fff;transform:translateY(-6px);box-shadow:0 8px 14px rgba(0,0,0,.35)}
+.C1 .hb .lkb{right:8px;top:4px}
+.C1 .subs{position:absolute;left:28px;top:108px;z-index:3;display:none;gap:6px}
+.C1 .subs.on{display:flex}
+.C1 .subs span{position:relative;padding:6px 16px;border-radius:16px;font-size:15px;font-weight:800;color:var(--navy);background:rgba(255,255,255,.75);box-shadow:0 0 0 1px rgba(46,35,80,.15)}
+.C1 .subs span.on{background:var(--hc);color:#fff}
+.C1 .subs .rd{right:-2px;top:-2px;width:10px;height:10px}
+.C1 .wal{position:absolute;right:28px;top:110px;z-index:3}
+.C1 .wal span{background:rgba(46,35,80,.82)}
+.C1 .down{position:absolute;right:24px;top:24px;z-index:3;display:flex;align-items:center;gap:6px;padding:0 18px;height:48px;border-radius:24px;background:#fff;font-weight:900;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.C1 .down i{width:14px;height:14px;border:solid var(--navy);border-width:0 3px 3px 0;transform:rotate(45deg) translate(-3px,-3px)}
+.C1 .lt{left:calc(50% - 170px);top:100px}
+.C1 .keep{left:50%;top:10px;transform:translateX(-50%);padding:6px 22px;border-radius:16px;background:rgba(255,255,255,.92);font-weight:900;color:var(--navy)}
+
+/* ================= 2. 아이들 목록 ================= */
+/* A · 폴라로이드 앨범 */
+.A2 .alb{position:absolute;left:24px;right:24px;top:96px;bottom:14px;border-radius:18px;background:repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 2px,transparent 2px 6px),linear-gradient(160deg,#5a3486,#331d56);box-shadow:0 18px 36px rgba(0,0,0,.5),inset 0 0 0 2px rgba(255,231,166,.45)}
+.A2 .alb::before{content:"";position:absolute;inset:7px;border:1.5px dashed rgba(255,231,166,.5);border-radius:13px;pointer-events:none}
+.A2 .pg{position:absolute;top:16px;bottom:16px;background:radial-gradient(circle,rgba(139,116,232,.14) 0 1px,transparent 1.6px) 0 0/16px 16px,linear-gradient(#fbf9ff,#efe9ff)}
+.A2 .pg.l{left:16px;width:470px;border-radius:8px 2px 2px 8px;box-shadow:inset -20px 0 22px -14px rgba(60,40,120,.45)}
+.A2 .pg.r{right:16px;left:486px;border-radius:2px 8px 8px 2px;box-shadow:inset 20px 0 22px -14px rgba(60,40,120,.45)}
+.A2 .phd{position:absolute;left:26px;top:14px;display:flex;align-items:center;gap:10px;font-size:20px;font-weight:900;font-style:italic;color:#5b3fc0;white-space:nowrap}
+.A2 .phd small{font-style:normal;font-size:13px;color:#4c4374;font-weight:800}
+.A2 .phd .cnt{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#5b3fc0;color:#fff;font-style:normal;font-size:16px}
+.A2 .pol{position:absolute;width:176px;padding:8px 8px 38px;background:#fff;box-shadow:0 8px 14px rgba(40,25,90,.3);transform:rotate(var(--r,0deg))}
+.scr.go .pol{animation:polin .6s cubic-bezier(.2,1.3,.4,1) backwards;animation-delay:var(--d,0s)}
+@keyframes polin{from{opacity:0;transform:translateY(-30px) rotate(calc(var(--r,0deg) * -3))}}
+.A2 .pol .ph{height:176px;background-repeat:no-repeat;background-size:140% auto;background-position:50% 4%;background-color:var(--el);box-shadow:inset 0 0 0 2px var(--e)}
+.A2 .pol .cp{position:absolute;left:10px;right:10px;bottom:7px;display:flex;align-items:center;gap:6px;font-size:17px;font-weight:900;white-space:nowrap}
+.A2 .pol .cp .stars{margin-left:auto;font-size:12px}
+.A2 .pol .no{position:absolute;left:-12px;top:-12px;width:36px;height:36px;border-radius:50%;background:#2e2350;color:#ffe08a;font-weight:900;font-size:18px;display:grid;place-items:center;box-shadow:0 0 0 2.5px #ffe08a;transform:rotate(calc(var(--r,0deg) * -1))}
+.A2 .pol .tape{position:absolute;left:50%;top:-11px;width:70px;height:22px;margin-left:-35px;background:rgba(255,200,225,.8);transform:rotate(-5deg);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.A2 .pol .gb{position:absolute;right:14px;top:14px}
+.A2 .pol .rd{right:-5px;top:-5px}
+.A2 .ss{box-shadow:0 0 0 3px var(--e),0 0 20px var(--e),0 8px 14px rgba(40,25,90,.3)}
+.A2 .idx{position:absolute;right:56px;top:-30px;display:flex;gap:4px;align-items:flex-end}
+.A2 .ix{display:grid;place-items:center;min-width:58px;height:32px;padding:0 10px;border-radius:10px 10px 0 0;background:var(--e,#6b55d8);color:#fff;font-size:14px;font-weight:900;filter:brightness(.88);text-shadow:0 1px 2px rgba(0,0,0,.45)}
+.A2 .ix.on{height:42px;filter:none;box-shadow:0 -4px 10px rgba(0,0,0,.25)}
+.A2 .ix.all{background:#2e2350}
+.A2 .rhd{position:absolute;left:24px;right:24px;top:14px;display:flex;align-items:center;gap:10px;font-size:18px;font-weight:900;font-style:italic;color:#5b3fc0;white-space:nowrap}
+.A2 .rhd .srt{margin-left:auto;font-style:normal;font-size:13px;padding:4px 12px;border-radius:12px;background:#fff;box-shadow:0 0 0 1px #c9bff0;color:var(--navy)}
+.A2 .grid{position:absolute;left:22px;right:30px;top:48px;padding-top:10px;bottom:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:16px 14px;align-content:start;overflow:hidden}
+.A2 .sp{position:relative;height:124px;padding:5px 5px 24px;background:#fff;box-shadow:0 4px 8px rgba(40,25,90,.24);transform:rotate(var(--r,0deg))}
+.A2 .sp .ph{height:95px;background-repeat:no-repeat;background-size:200% auto;background-position:50% 5%;background-color:var(--el)}
+.A2 .sp b{position:absolute;left:0;right:0;bottom:3px;text-align:center;font-size:13px;font-weight:900;white-space:nowrap}
+.A2 .sp .gb{position:absolute;left:3px;top:3px;transform:scale(.88);transform-origin:0 0}
+.A2 .sp .rd{right:-5px;top:-5px}
+.A2 .sp .nw{right:-6px;top:-8px}
+.A2 .sp.ss{box-shadow:0 0 0 3px var(--e),0 0 14px var(--e)}
+.A2 .myth{background:linear-gradient(#fff,#fff) padding-box,conic-gradient(#ff5f6d,#ffb84d,#ffe36b,#5fd68b,#4fb8ff,#8b6bff,#e957bc,#ff5f6d) border-box;border:4px solid transparent;padding:2px 2px 20px}
+.A2 .myth::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.75) 45%,transparent 60%) 0 0/260% 100% no-repeat;animation:sheen 3.4s ease-in-out infinite;pointer-events:none}
+.A2 .fade{position:absolute;left:0;right:0;bottom:0;height:70px;background:linear-gradient(transparent,#efe9ff);pointer-events:none;display:none}
+.A2 .sbr{position:absolute;right:10px;top:60px;bottom:16px;width:6px;border-radius:3px;background:rgba(91,63,192,.15)}
+.A2 .sbr i{position:absolute;left:0;right:0;top:0;height:100%;border-radius:3px;background:#8b74e8}
+.scr[data-n="60"] .sbr i{height:30%;top:8%}
+.scr[data-n="60"] .fade{display:block}
+.n60{display:none}.scr[data-n="60"] .n60{display:inline}.scr[data-n="60"] .n21{display:none}
+.scr[data-flt=pu] :is(.sp,.fig,.lc,.frm):not(.e-pu){display:none}
+.scr[data-flt=pu] .A2-ix-all{filter:brightness(.88)}
+/* B · 등급 선반 진열 */
+.B2 .flt{position:absolute;left:20px;top:80px;width:112px;display:flex;flex-direction:column;gap:8px;z-index:2}
+.B2 .flt span{display:flex;align-items:center;gap:8px;height:40px;padding:0 10px;border-radius:20px;background:rgba(255,255,255,.12);color:#fff;font-weight:800;font-size:14px}
+.B2 .flt span i{width:18px;height:18px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--e);box-shadow:0 0 8px var(--e)}
+.B2 .flt span.on{background:#fff;color:var(--navy)}
+.B2 .flt .cnt{display:block;margin-top:6px;padding:8px 10px;border-radius:12px;background:rgba(0,0,0,.3);color:#ffe08a;font-weight:900;font-size:13px;text-align:center}
+.B2 .cab{position:absolute;left:146px;right:22px;top:72px;bottom:12px;border-radius:16px;overflow:hidden;background:radial-gradient(80% 40% at 50% 0,rgba(160,130,255,.28),transparent 70%),linear-gradient(180deg,#2a1d5c,#1a1240);box-shadow:inset 0 0 0 2px rgba(255,231,166,.4),0 16px 30px rgba(0,0,0,.45)}
+.B2 .shelf{position:absolute;left:0;right:0;top:var(--t);height:var(--h)}
+.B2 .shelf::after{content:"";position:absolute;left:14px;right:14px;bottom:0;height:12px;border-radius:3px;background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(200,190,255,.25) 40%,rgba(120,100,200,.45));box-shadow:0 8px 12px rgba(0,0,0,.45)}
+.B2 .shelf.deck::after{height:16px;background:repeating-linear-gradient(90deg,transparent 0 118px,rgba(0,0,0,.25) 118px 120px),linear-gradient(180deg,#c99a66,#8a6440)}
+.B2 .shelf::before{content:"";position:absolute;left:30%;right:30%;bottom:12px;height:60%;background:radial-gradient(closest-side,rgba(255,236,190,.16),transparent);pointer-events:none}
+.B2 .lab{position:absolute;left:20px;top:8px;z-index:2;display:flex;align-items:center;gap:8px;color:#ffe08a;font-weight:900;font-size:15px;letter-spacing:1px;white-space:nowrap}
+.B2 .lab small{color:#e0d8ff;font-size:12px;letter-spacing:0}
+.B2 .items{position:absolute;left:40px;right:30px;bottom:12px;display:flex;align-items:flex-end;gap:12px}
+.B2 .fig{position:relative;width:100px;flex:none;text-align:center}
+.B2 .fig img{display:block;height:var(--fh,112px);margin:0 auto;filter:drop-shadow(0 6px 4px rgba(0,0,0,.45));animation:bob 4s ease-in-out infinite;animation-delay:var(--d,0s)}
+.B2 .fig b{position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);padding:0 8px;border-radius:5px;background:#efe8ff;color:var(--navy);font-size:12px;font-weight:900;white-space:nowrap;box-shadow:0 0 0 1.5px var(--e)}
+.B2 .fig .gb{position:absolute;left:4px;top:4px}
+.B2 .fig .rd{right:12px;top:4px}
+.B2 .fig .nw{right:2px;top:2px}
+.B2 .fig .anc{position:absolute;left:50%;top:-8px;transform:translateX(-50%);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#2e2350;color:#ffe08a;font-weight:900;font-size:15px;box-shadow:0 0 0 2px #ffe08a}
+.B2 .frm{position:relative;width:118px;height:146px;flex:none;padding:9px}
+.B2 .frm::before{content:"";position:absolute;inset:0;border-radius:8px;background:linear-gradient(145deg,#fff1c8,#c9952a 38%,#ffe7a6 58%,#a87818);box-shadow:0 10px 16px rgba(0,0,0,.45)}
+.B2 .frm.myth::before{background:conic-gradient(#ff5f6d,#ffb84d,#ffe36b,#5fd68b,#4fb8ff,#8b6bff,#e957bc,#ff5f6d);animation:hue 5s linear infinite}
+.B2 .frm .in{position:relative;height:100%;border-radius:3px;background-repeat:no-repeat;background-size:200% auto;background-position:50% 5%;background-color:var(--el);box-shadow:inset 0 0 0 3px var(--e),inset 0 0 18px var(--e)}
+.B2 .frm b{position:absolute;left:50%;bottom:-16px;transform:translateX(-50%);padding:0 10px;border-radius:5px;background:#2e2350;color:#fff;font-size:12.5px;font-weight:900;white-space:nowrap;box-shadow:0 0 0 1.5px var(--e)}
+.B2 .frm .gb{position:absolute;left:4px;top:4px;z-index:2}
+.B2 .frm .nw{right:-4px;top:-6px}
+.B2 .frm .anc{position:absolute;right:-8px;top:-8px;z-index:2;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#2e2350;color:#ffe08a;font-weight:900;font-size:14px;box-shadow:0 0 0 2px #ffe08a}
+.B2 .more{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);z-index:3;padding:4px 16px;border-radius:14px;background:rgba(0,0,0,.45);color:#fff;font-size:13px;font-weight:800;white-space:nowrap;animation:bob 2s ease-in-out infinite}
+/* C · 왼쪽 큰 미리보기 + 오른쪽 목록 */
+.C2 .pv{position:absolute;left:0;top:56px;bottom:0;width:44%;overflow:hidden;background:radial-gradient(60% 50% at 40% 40%,#7b5be0,transparent 70%),linear-gradient(160deg,#4a2f9a,#20155a)}
+.C2 .pv .art{position:absolute;inset:0;background:url(img/assets/cutin/serena_cutin.png) 32% 16%/cover;-webkit-mask:linear-gradient(90deg,#000 78%,transparent);mask:linear-gradient(90deg,#000 78%,transparent);animation:pvk 9s ease-in-out infinite}
+@keyframes pvk{50%{background-position:36% 20%}}
+.C2 .pv .meta{position:absolute;left:28px;bottom:26px;color:#fff}
+.C2 .pv .meta .ch{display:flex;gap:6px;margin-bottom:6px}
+.C2 .pv .meta .ch i{font-style:normal;padding:2px 10px;border-radius:12px;background:rgba(255,255,255,.18);font-size:13px;font-weight:800}
+.C2 .pv .meta b{display:block;font-size:50px;font-weight:900;line-height:1.05;text-shadow:0 4px 0 #3a1f8a,0 0 18px rgba(0,0,0,.4)}
+.C2 .pv .meta .stars{font-size:20px}
+.C2 .pv .meta .lv{font-size:14px;font-weight:800;color:#e6defd}
+.C2 .pv .go{position:absolute;right:22px;bottom:28px;display:flex;align-items:center;gap:8px;height:52px;padding:0 22px;border-radius:26px;background:linear-gradient(160deg,#fff4cf,#e8bf5a);color:#4a2e00;font-weight:900;font-size:17px;box-shadow:0 0 0 2px #fff,0 0 18px rgba(255,214,110,.7);animation:pulse 2.4s ease-in-out infinite;--glow:#ffd36b}
+.C2 .ls{position:absolute;left:44%;right:0;top:56px;bottom:0;padding:16px 22px;background:radial-gradient(60% 40% at 100% 0,rgba(255,170,210,.25),transparent 70%),linear-gradient(180deg,#f4f0ff,#e6defb)}
+.C2 .fl{display:flex;gap:6px;margin-bottom:12px}
+.C2 .fl span{display:flex;align-items:center;gap:5px;padding:4px 12px;border-radius:14px;background:#fff;font-size:13px;font-weight:800;box-shadow:0 0 0 1px #d9d0f5}
+.C2 .fl span i{width:10px;height:10px;border-radius:50%;background:var(--e)}
+.C2 .fl span.on{background:#2e2350;color:#fff}
+.C2 .gh{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:14px;font-weight:900;color:#5b3fc0;white-space:nowrap}
+.C2 .gh small{color:#4c4374;font-weight:800}
+.C2 .row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.C2 .lc{position:relative;width:78px;height:78px;border-radius:16px;box-shadow:0 0 0 2.5px var(--e),0 4px 8px rgba(40,25,90,.2)}
+.C2 .lc b{position:absolute;left:-4px;right:-4px;bottom:-9px;text-align:center;font-size:11.5px;font-weight:900;color:#fff;text-shadow:0 0 3px #2e2350,0 0 3px #2e2350,0 1px 0 #2e2350;white-space:nowrap}
+.C2 .lc .gb{position:absolute;left:-4px;top:-6px;transform:scale(.85);transform-origin:0 0}
+.C2 .lc .rd{right:-4px;top:-4px}
+.C2 .lc .nw{right:-8px;top:-8px}
+.C2 .dkr .lc{width:96px;height:96px;border-radius:20px}
+.C2 .dkr .lc em{position:absolute;right:-6px;bottom:-6px;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#2e2350;color:#ffe08a;font-style:normal;font-weight:900;font-size:14px;box-shadow:0 0 0 2px #ffe08a}
+.C2 .lc.pick{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--e),0 0 24px var(--e);animation:pulse 1.8s ease-in-out infinite;--glow:#b48bff}
+.C2 .lc.pick::before{content:"";position:absolute;left:-22px;top:50%;margin-top:-10px;border:10px solid transparent;border-right:12px solid #fff;border-left:0}
+.C2 .lc.myth{box-shadow:0 0 0 3px #fff,0 0 0 5px #e957bc;background-image:none}
+.C2 .lc.myth::after{content:"";position:absolute;inset:-5px;border-radius:20px;padding:3px;background:conic-gradient(#ff5f6d,#ffb84d,#ffe36b,#5fd68b,#4fb8ff,#8b6bff,#e957bc,#ff5f6d);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:hue 4s linear infinite}
+/* ================= 3. 아이 상세 안 레벨 업 · 승급 · 각성 ================= */
+.lvc{position:relative;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle at 40% 32%,#fff7da,#f0c75e 62%,#b8801c);color:#3a2400;font-weight:900;box-shadow:0 0 0 2.5px #fff,0 3px 6px rgba(0,0,0,.3);flex:none;line-height:1}
+.lvc>span{grid-area:1/1}
+.lvc::before{content:"";position:absolute;inset:-3px;border-radius:50%;border:3px solid #ffe08a;opacity:0;pointer-events:none}
+.lvc::after{content:"";position:absolute;inset:-18px;border-radius:50%;background:repeating-conic-gradient(rgba(255,231,166,.95) 0 5deg,transparent 5deg 22deg);-webkit-mask:radial-gradient(circle,transparent 42%,#000 50%,transparent 70%);mask:radial-gradient(circle,transparent 42%,#000 50%,transparent 70%);opacity:0;pointer-events:none}
+.burst::before{animation:ring 3.2s ease-out infinite}
+.burst::after{animation:rays2 3.2s ease-out infinite}
+@keyframes ring{0%,10%{transform:scale(1);opacity:0}14%{opacity:1}42%,100%{transform:scale(2);opacity:0}}
+@keyframes rays2{0%,10%{opacity:0;transform:scale(.7) rotate(0)}16%{opacity:1}46%,100%{opacity:0;transform:scale(1.35) rotate(45deg)}}
+.lvc .n2{opacity:0}
+.burst .n1{animation:nOut 3.2s infinite}
+.burst .n2{animation:nIn 3.2s infinite}
+@keyframes nOut{0%,12%{opacity:1;transform:none}16%,94%{opacity:0;transform:translateY(-10px)}100%{opacity:1}}
+@keyframes nIn{0%,12%{opacity:0;transform:scale(.4)}18%{opacity:1;transform:scale(1.35)}24%,90%{opacity:1;transform:none}100%{opacity:0}}
+.fup{position:absolute;font-weight:900;font-size:15px;color:#7dffb0;text-shadow:0 0 4px #0b3a22,0 1px 0 #0b3a22;white-space:nowrap;opacity:0;animation:fup 3.2s ease-out infinite;pointer-events:none;z-index:4}
+@keyframes fup{0%,12%{opacity:0;transform:translateY(8px)}20%{opacity:1}62%{opacity:1;transform:translateY(-26px)}78%,100%{opacity:0;transform:translateY(-34px)}}
+.btn{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:14px;font-weight:900;font-size:17px;color:#3a1600;background:linear-gradient(160deg,#ffc489,#f07a3a);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 3px 0 #b8501e,0 6px 10px rgba(0,0,0,.25);white-space:nowrap}
+.btn.v{color:#fff;background:linear-gradient(160deg,#a58bff,#5b44c8);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 3px 0 #3f2e9a,0 6px 10px rgba(0,0,0,.25)}
+.btn .pl{display:flex;align-items:center;gap:3px;padding:0 9px;border-radius:10px;background:rgba(40,16,0,.55);font-size:13px;color:#fff}
+.btn.v .pl{background:rgba(20,10,60,.5)}
+.btn .pl img{width:18px;height:18px}
+.btn.no,.btn.cap{color:#3b3166;background:linear-gradient(160deg,#ece8f6,#cfc7e6);box-shadow:0 3px 0 #a79fc4,0 6px 10px rgba(0,0,0,.2)}
+.btn.no .pl,.btn.cap .pl{background:#fff;color:#3b3166}
+.btn .pl s{text-decoration:none;color:#c0263f;font-weight:900}
+.btn.glow{animation:pulse 2s ease-in-out infinite;--glow:#c9b6ff}
+.seg{display:flex;padding:3px;border-radius:16px;background:rgba(0,0,0,.35);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.seg span{padding:4px 14px;border-radius:13px;font-size:14px;font-weight:900;color:#e0d8ff}
+.seg span.on{background:#fff;color:var(--navy)}
+.uni{display:flex;align-items:center;gap:8px;padding:5px 14px 5px 6px;border-radius:16px;background:linear-gradient(90deg,rgba(255,224,138,.22),rgba(255,224,138,.08));box-shadow:inset 0 0 0 1.5px rgba(255,224,138,.6);color:#fff;font-size:14px;font-weight:800;white-space:nowrap}
+.uni b{display:grid;place-items:center;min-width:28px;height:24px;padding:0 6px;border-radius:12px;background:#ffe08a;color:#4a2e00;font-size:13px}
+.aw{font-style:normal;letter-spacing:1px;color:#cfc2f5;font-size:13px;font-weight:800;white-space:nowrap}
+.tg{padding:1px 8px;border-radius:8px;font-size:11.5px;font-weight:900;white-space:nowrap;font-style:normal}
+.tg.up{background:#17704a;color:#fff}.tg.cap{background:#ffe08a;color:#4a2e00}.tg.lack{background:#fff;color:#c0263f}
+/* 3번은 「성장」 탭이 없어져(PD · scripts/menus.gd HUBS) 아이 상세 A 안의 레벨 업 · 승급 · 각성 자리만 다시 그린다.
+   바탕 = 적용된 아이 상세 A 캡처, 그 위에 그림(컷인) · 이름 · 별 · 단추 자리를 덮어 그림 */
+.G .bgh{position:absolute;inset:0;background:url(img/design/feedback70/img/after/hero_info_1280x720.jpg) left top/auto 100% no-repeat}
+:root[data-w="1600"] .G .bgh{background-image:url(img/design/feedback70/img/after/hero_info_1600x720.jpg)}
+.G .hd{position:absolute;left:0;top:0;width:1280px;height:720px}
+:root[data-w="1600"] .G .hd{left:160px}
+.G .p{display:none}
+.scr[data-pick=serena] .p.serena,.scr[data-pick=aria] .p.aria,.scr[data-pick=karen] .p.karen,.scr[data-pick=flora] .p.flora{display:block}
+.G .art{position:absolute;left:70px;top:40px;width:652px;height:640px;border-radius:22px 0 0 22px;overflow:hidden;background:var(--ci) -96px 8px/1137px 640px no-repeat,radial-gradient(55% 45% at 30% 28%,rgba(255,255,255,.22),transparent 70%),radial-gradient(circle,rgba(255,255,255,.45) 0 1px,transparent 1.6px) 0 0/46px 40px,linear-gradient(160deg,var(--e),var(--ed))}
+.G .art::after{content:"";position:absolute;inset:auto 0 0 0;height:240px;background:linear-gradient(180deg,transparent,rgba(30,18,70,.55))}
+.G .ol{color:#fff;text-shadow:0 2px 0 #2e2350,2px 0 0 #2e2350,-2px 0 0 #2e2350,0 -2px 0 #2e2350,1.5px 1.5px 0 #2e2350,-1.5px 1.5px 0 #2e2350,1.5px -1.5px 0 #2e2350,-1.5px -1.5px 0 #2e2350}
+.G .nmb{position:absolute;left:100px;top:452px;display:flex;flex-direction:column;gap:6px;z-index:3}
+.G .nmb .tags{display:flex;gap:6px}
+.G .nmb .tags i{font-style:normal;padding:2px 10px;border-radius:12px;background:#fff;color:var(--navy);font-size:14px;font-weight:900;box-shadow:0 2px 0 rgba(46,35,80,.25)}
+.G .nmb .tags i.gr{background:var(--ed);color:#fff}
+.G .nmb b{font-size:50px;font-weight:900;line-height:1.05}
+.G .inf{position:absolute;left:100px;top:588px;display:flex;flex-direction:column;gap:6px;z-index:3}
+.G .inf .r1{display:flex;align-items:center;gap:14px}
+.G .st{font-size:28px;letter-spacing:-2px;color:#ffc93a;text-shadow:0 2px 0 #7a4a00;white-space:nowrap;font-style:normal}
+.G .st u{text-decoration:none;color:rgba(255,255,255,.45);text-shadow:none}
+.G .awk{font-size:17px;font-weight:900;white-space:nowrap}
+.G .awk em{font-style:normal;letter-spacing:1px;color:#ffe08a}
+.G .inf small{font-size:15px;font-weight:800}
+.G .med{position:absolute;left:100px;top:64px;width:116px;height:116px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 40% 30%,#fff7da,#f2cd63 58%,#c38a1e);box-shadow:0 0 0 4px #fff,0 0 0 7px rgba(255,224,138,.7),0 8px 16px rgba(0,0,0,.35);color:#3a2400;font-weight:900;line-height:1;z-index:4}
+.G .med small{font-size:15px;margin-bottom:4px}
+.G .med span{font-size:46px;grid-area:1/1}
+.G .med .nn{display:grid}
+.G .med .n2{opacity:0}
+.G .scr.go .med.burst .n1,.G .med.burst .n1{animation:nOut 3.2s infinite}
+.G .med.burst .n2{animation:nIn 3.2s infinite}
+.G .med .fup{left:118px;top:24px;font-size:18px}
+.G .med.capd{box-shadow:0 0 0 4px #fff,0 0 0 7px #ffe08a,0 0 26px rgba(255,224,138,.9),0 8px 16px rgba(0,0,0,.35)}
+.G .vq{position:absolute;top:180px;width:176px;height:50px;padding-left:4px;background:#fff;color:#b4561c;font-size:31px;font-weight:900;display:flex;align-items:center;z-index:3}
+.G .vq.v1{left:756px}.G .vq.v2{left:974px}
+.G .pp{position:absolute;left:738px;top:476px;width:436px;height:174px;background:#fff8ee;border-radius:0 0 34px 0;z-index:3}
+.G .hint{font-size:12.5px;font-weight:800;color:#6a5f9e;white-space:nowrap}
+.G .hint b{color:#17704a}.G .hint s{text-decoration:none;color:#c0263f}
+.G .btn img{width:18px;height:18px}
+.G .btn small{font-size:12.5px;font-weight:800;opacity:.9}
+.G .btn.aw2{color:#3a1f00;background:linear-gradient(160deg,#ffe9a8,#f3b84a 55%,#c58bff);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 3px 0 #9a5ec8,0 6px 10px rgba(0,0,0,.25)}
+.G .btn.aw2 .pl{background:rgba(60,20,90,.55);color:#fff}
+.G .story{width:64px;height:72px;border-radius:14px;background:#fff;color:var(--navy);display:grid;place-items:center;font-size:14px;font-weight:900;box-shadow:0 0 0 1.5px #e2dbf5,0 3px 0 #d8d0ee}
+/* A · 패널 아래 「키우기 줄」 */
+.GA .strip{position:absolute;left:18px;right:18px;top:12px;display:flex;gap:8px}
+.GA .ch{flex:1;height:50px;padding:6px 10px;border-radius:12px;background:#f1ebff;display:flex;flex-direction:column;justify-content:center;gap:4px;min-width:0}
+.GA .ch b{font-size:13px;font-weight:900;color:var(--navy);white-space:nowrap;display:flex;justify-content:space-between;gap:6px}
+.GA .ch b span{color:#6a5f9e;font-weight:800}
+.GA .ch i{display:block;height:7px;border-radius:4px;background:#dcd3f6;overflow:hidden}
+.GA .ch i::after{content:"";display:block;height:100%;width:var(--v);border-radius:4px;background:linear-gradient(90deg,#ffd979,#e39a2f)}
+.GA .ch.s i::after{background:linear-gradient(90deg,#b8a6ff,#6b4fd8)}
+.GA .ch.w i::after{background:linear-gradient(90deg,#ffe08a,#c58bff)}
+.GA .ch.hot{background:#fff1c9;box-shadow:0 0 0 2px #ffcf5a}
+.GA .row{position:absolute;left:18px;right:18px;top:74px;display:flex;gap:10px;align-items:stretch}
+.GA .row .btn{flex:1;height:72px;font-size:20px}
+.GA .row .hint{position:absolute;left:0;top:78px}
+/* B · 그림 위에서 바로 */
+.GB .med{left:92px;top:58px;width:128px;height:128px;cursor:pointer}
+.GB .med span{font-size:50px}
+.GB .lvp{position:absolute;left:84px;top:196px;display:flex;flex-direction:column;align-items:center;gap:3px;z-index:4}
+.GB .lvp .btn{flex-direction:row;height:40px;padding:0 6px 0 14px;gap:8px;font-size:16px;border-radius:20px}
+.GB .lvp .btn.no{color:#5d5585}
+.GB .lvp small{font-size:12.5px;font-weight:900}
+.GB .med::after{content:"";position:absolute;left:50%;bottom:-14px;margin-left:-9px;border:9px solid transparent;border-top:10px solid #fff;border-bottom:0}
+.GB .spl{position:absolute;left:88px;top:572px;width:560px;height:92px;border-radius:18px;padding:10px 16px;background:linear-gradient(160deg,rgba(66,48,140,.94),rgba(38,27,88,.94));box-shadow:0 0 0 2px rgba(255,224,138,.65),0 10px 18px rgba(0,0,0,.35);display:flex;align-items:center;gap:16px;z-index:4}
+.GB .spl .l{display:flex;flex-direction:column;gap:4px}
+.GB .spl .st{font-size:32px}
+.GB .spl .st em{font-style:normal;color:transparent;-webkit-text-stroke:2px #ffe08a;text-shadow:0 0 12px rgba(255,224,138,.9);animation:fade 1.6s ease-in-out infinite}
+.GB .spl small{font-size:13px;font-weight:800;color:#e0d8ff;white-space:nowrap}
+.GB .spl .btn{margin-left:auto;height:62px;width:170px;font-size:18px}
+.GB .spl .dia{display:flex;gap:5px}
+.GB .spl .dia i{width:18px;height:18px;transform:rotate(45deg);border-radius:3px;background:rgba(255,255,255,.18);box-shadow:inset 0 0 0 2px rgba(255,224,138,.7)}
+.GB .spl .dia i.nx{background:linear-gradient(135deg,#fff3c4,#c58bff);animation:fade 1.4s ease-in-out infinite}
+@keyframes fade{50%{opacity:.45}}
+.GB .pv{position:absolute;left:18px;top:12px;right:96px;display:flex;flex-direction:column;gap:6px}
+.GB .pv h4{margin:0;font-size:14px;color:var(--navy)}
+.GB .pv div{display:flex;justify-content:space-between;font-size:14px;font-weight:800;color:#4c4374;padding:6px 10px;border-radius:10px;background:#f1ebff;white-space:nowrap}
+.GB .pv div b{color:#17704a}
+.GB .pv div s{text-decoration:none;color:#c0263f}
+.GB .pp .story{position:absolute;right:18px;top:12px;height:96px}
+.GB .pp .hint{position:absolute;left:18px;bottom:16px}
+/* C · 패널 안 「키우기」 탭 */
+.GC .tabs{position:absolute;left:738px;top:70px;width:384px;height:56px;background:#fff8ee;display:flex;align-items:center;gap:7px;padding-left:4px;z-index:4}
+.GC .tabs span{position:relative;height:44px;padding:0 15px;border-radius:22px;display:grid;place-items:center;font-size:16px;font-weight:900;color:var(--navy);background:linear-gradient(180deg,#f5f0ff,#e3dafb);box-shadow:0 3px 0 #c9bdf0}
+.GC .tabs span.on{color:#fff;background:linear-gradient(180deg,#4a3790,#2e2350);box-shadow:0 3px 0 #1b1238}
+.GC .tabs .rd{right:-3px;top:-3px}
+.GC .body{position:absolute;left:738px;top:128px;width:436px;height:522px;background:#fff8ee;border-radius:0 0 34px 0;z-index:3;padding:6px 18px 0}
+.GC .top{display:flex;gap:14px;align-items:center}
+.GC .dial{position:relative;width:104px;height:104px;border-radius:50%;flex:none;background:conic-gradient(#e39a2f 0 var(--v),#e7def9 0);display:grid;place-items:center}
+.GC .dial::before{content:"";position:absolute;inset:9px;border-radius:50%;background:radial-gradient(circle at 40% 30%,#fff7da,#f2cd63 60%,#c38a1e)}
+.GC .dial b{position:relative;display:flex;flex-direction:column;align-items:center;font-size:36px;font-weight:900;color:#3a2400;line-height:1}
+.GC .dial b small{font-size:12px}
+.GC .nx{display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:800;color:#4c4374;white-space:nowrap}
+.GC .nx b{color:#17704a}.GC .nx s{text-decoration:none;color:#c0263f}
+.GC .nx h4{margin:0;font-size:15px;color:var(--navy)}
+.GC .path{margin-top:14px;padding:10px 12px;border-radius:14px;background:#f1ebff}
+.GC .path h4,.GC .awr h4{margin:0 0 8px;font-size:14px;color:var(--navy);display:flex;justify-content:space-between}
+.GC .path h4 span,.GC .awr h4 span{font-size:12.5px;color:#6a5f9e}
+.GC .nodes{display:flex;justify-content:space-between;position:relative}
+.GC .nodes::before{content:"";position:absolute;left:14px;right:14px;top:14px;height:4px;border-radius:2px;background:linear-gradient(90deg,#ffc93a var(--v),#d8cff4 0)}
+.GC .nodes i{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;font-style:normal;font-size:11.5px;font-weight:800;color:#6a5f9e}
+.GC .nodes i b{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:17px;background:#fff;color:#c9bfe2;box-shadow:0 0 0 2px #d8cff4}
+.GC .nodes i.on b{background:radial-gradient(circle at 40% 30%,#fff7da,#ffc93a);color:#7a4a00;box-shadow:0 0 0 2px #fff,0 0 0 3.5px #e3a52a}
+.GC .nodes i.nx b{color:#6b4fd8;box-shadow:0 0 0 2.5px #6b4fd8,0 0 12px rgba(107,79,216,.6);animation:fade 1.4s ease-in-out infinite}
+.GC .awr{margin-top:10px;padding:10px 12px;border-radius:14px;background:#f1ebff}
+.GC .awr .dd{display:flex;gap:8px;align-items:center}
+.GC .awr .dd i{width:22px;height:22px;transform:rotate(45deg);border-radius:4px;background:#fff;box-shadow:inset 0 0 0 2px #d8cff4}
+.GC .awr .dd i.nx{background:linear-gradient(135deg,#fff3c4,#c58bff);box-shadow:0 0 0 2px #fff,0 0 10px rgba(197,139,255,.8);animation:fade 1.4s ease-in-out infinite}
+.GC .awr .dd span{margin-left:8px;font-size:12.5px;font-weight:800;color:#4c4374;white-space:nowrap}
+.GC .awr.lk{opacity:.55}
+.GC .bts{position:absolute;left:18px;right:18px;bottom:20px;display:flex;gap:10px}
+.GC .bts .btn{flex:1;height:66px;font-size:19px}
+
+/* ================= 4. 장비 목록 ================= */
+.gt{position:relative;display:grid;place-items:center;width:76px;height:76px;border-radius:14px;flex:none;background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.55),transparent 62%),linear-gradient(160deg,var(--g1),var(--g2));box-shadow:0 0 0 2.5px var(--gc),0 0 0 4.5px rgba(255,255,255,.85),0 6px 10px rgba(0,0,0,.3)}
+.gt img{width:58px;height:58px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
+.gt em{font-style:normal}
+.gt .pl{position:absolute;right:4px;bottom:1px;font-size:13px;font-weight:900;color:#fff;text-shadow:0 0 3px #000,0 1px 0 #000}
+.gt .stg{position:absolute;left:4px;top:3px;font-size:11px;font-weight:900;color:#fff;background:rgba(20,10,40,.6);border-radius:6px;padding:0 5px}
+.q0{--gc:#9aa8bb;--g1:#f3f5f9;--g2:#b8c2d2}.q1{--gc:#3fa9ff;--g1:#e2f2ff;--g2:#7cc2ff}.q2{--gc:#9a6bff;--g1:#efe6ff;--g2:#b49aff}.q3{--gc:#ffb020;--g1:#fff3d0;--g2:#ffc75a}
+.gt.empty{background:repeating-linear-gradient(45deg,rgba(255,255,255,.07) 0 6px,transparent 6px 12px);box-shadow:inset 0 0 0 2px rgba(255,255,255,.45)}
+.gt.empty img{opacity:.35;filter:grayscale(1) brightness(1.6)}
+.gt.empty::after{content:"+";position:absolute;right:6px;bottom:0;color:#fff;font-weight:900;font-size:20px}
+.gt.m4{animation:pulse 2s ease-in-out infinite;--glow:#ffb36b}
+.alt{display:none!important}
+.scr[data-eq=empty] .ex .full{display:none!important}
+.scr[data-eq=empty] .ex .alt{display:grid!important}
+.x34{display:none!important}
+.scr[data-bag="34"] .x34{display:grid!important}
+.scr[data-bag="0"] .bag .gt{display:none!important}
+.emp{display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#e6defd;font-weight:800;font-size:15px;text-align:center}
+.emp b{color:#ffe08a;font-size:17px}
+.scr[data-bag="0"] .emp{display:flex}
+.scr[data-bag="0"] .merge{filter:grayscale(1);opacity:.6;animation:none}
+.scr[data-bag="0"] .merge em{display:none}
+.chipx{display:flex;align-items:center;gap:6px;padding:5px 12px 5px 6px;border-radius:16px;background:rgba(255,255,255,.12);color:#fff;font-size:13.5px;font-weight:800;white-space:nowrap}
+.chipx img{width:24px;height:24px}
+.merge{position:relative;display:flex;align-items:center;gap:6px;height:50px;padding:0 20px;border-radius:25px;background:linear-gradient(160deg,#ffc489,#f07a3a);color:#3a1600;font-weight:900;font-size:16px;white-space:nowrap;box-shadow:0 3px 0 #b8501e,0 0 16px rgba(255,170,90,.5)}
+.merge em{position:absolute;right:-6px;top:-8px;font-style:normal;font-size:12px;padding:0 7px;border-radius:9px;background:#e0244a;color:#fff;box-shadow:0 0 0 2px #fff}
+/* A · 마네킹 + 서랍 */
+.A4 .hl{position:absolute;left:18px;top:68px;bottom:12px;width:206px;display:flex;flex-direction:column;gap:7px}
+.A4 .hl span{display:flex;align-items:center;gap:8px;height:60px;flex:none;padding:0 10px;border-radius:12px;background:rgba(255,255,255,.1);color:#fff;font-weight:900;font-size:15px}
+.A4 .hl span i.f{width:44px;height:44px;border-radius:10px;box-shadow:0 0 0 2px var(--e);flex:none}
+.A4 .hl span small{margin-left:auto;font-size:12px;color:#e0d8ff}
+.A4 .hl span.on{background:#fff;color:var(--navy);box-shadow:0 0 0 2px var(--e)}
+.A4 .hl span.on small{color:#4c4374}
+.A4 .stage{position:absolute;left:236px;top:68px;bottom:12px;width:470px;border-radius:22px;overflow:hidden;background:radial-gradient(40% 24% at 50% 80%,rgba(255,236,190,.4),transparent 70%),repeating-conic-gradient(from 0deg at 50% 62%,rgba(255,236,190,.07) 0 5deg,transparent 5deg 16deg),linear-gradient(160deg,#41308c,#1e1552);box-shadow:inset 0 0 0 2px rgba(255,231,166,.45)}
+.A4 .nmr{position:absolute;left:0;right:0;top:16px;text-align:center;color:#fff}
+.A4 .nmr b{display:block;font-size:26px}
+.A4 .nmr span{font-size:14px;font-weight:800;color:#ffe08a}
+.A4 .lns{position:absolute;inset:0;width:100%;height:100%}
+.A4 .dais{position:absolute;left:50%;bottom:96px;width:280px;height:50px;margin-left:-140px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,236,190,.75),rgba(255,236,190,0))}
+.A4 .sd{position:absolute;left:50%;bottom:112px;height:300px;transform:translateX(-50%);filter:drop-shadow(0 10px 8px rgba(0,0,0,.45));animation:bob 4s ease-in-out infinite}
+.A4 .slot{position:absolute;display:flex;flex-direction:column;align-items:center;gap:8px;color:#fff;font-size:12.5px;font-weight:800;white-space:nowrap}
+.A4 .setc{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:6px 16px;border-radius:16px;background:rgba(0,0,0,.35);box-shadow:inset 0 0 0 1.5px rgba(255,224,138,.6);color:#fff;font-weight:800;font-size:14px;white-space:nowrap}
+.A4 .setc i{font-style:normal;color:#ffc94d;letter-spacing:1px}
+.A4 .cabi{position:absolute;left:718px;right:18px;top:68px;bottom:12px;border-radius:20px;background:linear-gradient(160deg,#5a3f8e,#3a2768);box-shadow:inset 0 0 0 2px rgba(255,231,166,.4),0 16px 30px rgba(0,0,0,.4)}
+.A4 .drw{position:absolute;left:14px;right:14px;top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.A4 .drw span{position:relative;height:62px;display:flex;align-items:center;justify-content:center;gap:6px;padding-bottom:10px;border-radius:8px;background:linear-gradient(180deg,#6d51a8,#4b3482);box-shadow:inset 0 0 0 2px rgba(255,255,255,.12),0 4px 0 #2a1b52;color:#fff;font-weight:900;font-size:15px}
+.A4 .drw span::after{content:"";position:absolute;left:50%;bottom:8px;width:34px;height:6px;margin-left:-17px;border-radius:3px;background:linear-gradient(#ffe7a6,#c9952a)}
+.A4 .drw span img{width:30px;height:30px}
+.A4 .drw span.on{transform:translateY(8px);background:linear-gradient(180deg,#fff,#efe8ff);color:var(--navy);box-shadow:0 0 0 2px #ffe08a,0 4px 0 #c9952a}
+.A4 .tray{position:absolute;left:14px;right:14px;top:96px;bottom:78px;border-radius:12px;padding:16px;background:linear-gradient(180deg,#2a1d58,#1d1444);box-shadow:inset 0 10px 18px rgba(0,0,0,.55),inset 0 0 0 2px rgba(255,255,255,.08);overflow:hidden}
+.A4 .tray .emp{position:absolute;inset:0}
+.bag{display:flex;flex-wrap:wrap;gap:16px 14px;align-content:flex-start}
+.A4 .cnt{position:absolute;right:16px;top:-2px;font-size:12px;font-weight:800;color:#e0d8ff}
+.A4 .foot{position:absolute;left:14px;right:14px;bottom:14px;height:52px;display:flex;align-items:center;gap:8px}
+.A4 .foot .merge{margin-left:auto}
+/* B · 페그보드 벽 */
+.B4 .pegb{position:absolute;left:18px;right:18px;top:68px;bottom:12px;border-radius:18px;background:radial-gradient(circle,rgba(16,8,40,.6) 0 3px,transparent 3.6px) 0 0/28px 28px,radial-gradient(70% 50% at 30% 20%,rgba(255,255,255,.12),transparent 70%),linear-gradient(160deg,#6a52a8,#45307e);box-shadow:inset 0 0 0 7px #2f2060,inset 0 0 0 9px rgba(255,231,166,.45),0 16px 30px rgba(0,0,0,.45)}
+.B4 .card{position:absolute;left:40px;top:28px;width:236px;display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;background:linear-gradient(160deg,#2e2350,#3f2d8e);color:#fff;transform:rotate(-2deg);box-shadow:0 0 0 2px #ffe08a,0 10px 16px rgba(0,0,0,.45)}
+.B4 .card::before{content:"";position:absolute;left:50%;top:-10px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#e8558f);box-shadow:0 2px 3px rgba(0,0,0,.4)}
+.B4 .card i.f{width:66px;height:66px;border-radius:12px;box-shadow:0 0 0 2px var(--e);flex:none}
+.B4 .card b{display:block;font-size:22px}
+.B4 .card small{font-size:13px;font-weight:800;color:#ffe08a}
+.B4 .card .chg{display:block;margin-top:4px;font-size:12px;color:#e0d8ff;font-weight:700}
+.B4 .worn{position:absolute;left:310px;top:20px;display:flex;gap:30px;align-items:flex-start}
+.B4 .worn .w{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:30px;color:#fff;font-size:12.5px;font-weight:800;white-space:nowrap}
+.B4 .worn .w::before{content:"";position:absolute;top:0;left:50%;width:16px;height:22px;margin-left:-8px;border:4px solid #e9e2ff;border-top:0;border-radius:0 0 10px 10px;box-shadow:0 2px 2px rgba(0,0,0,.3)}
+.B4 .worn .gt{transform-origin:50% -26px;animation:swing 3.6s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes swing{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+.B4 .worn .setc{align-self:center;margin-top:22px;padding:8px 14px;border-radius:10px;background:#ffe08a;color:#4a2e00;font-weight:900;font-size:13px;transform:rotate(3deg);box-shadow:0 6px 10px rgba(0,0,0,.35);white-space:nowrap}
+.B4 .worn .setc i{font-style:normal}
+.B4 .cols{position:absolute;left:30px;right:30px;top:200px;bottom:78px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.B4 .col{position:relative;border-radius:12px;padding:44px 10px 10px;background:rgba(20,10,50,.28);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.12);overflow:hidden}
+.B4 .col h5{position:absolute;left:10px;top:8px;margin:0;display:flex;align-items:center;gap:6px;color:#fff;font-size:15px}
+.B4 .col h5 img{width:26px;height:26px}
+.B4 .col h5 small{color:#e0d8ff;font-size:12px}
+.B4 .col .bag{gap:22px 10px;justify-content:center}
+.B4 .col .gt{width:64px;height:64px;border-radius:12px;margin-top:6px}
+.B4 .col .gt img{width:48px;height:48px}
+.B4 .col .gt::before{content:"";position:absolute;left:50%;top:-14px;width:2px;height:12px;margin-left:-1px;background:#e9e2ff}
+.B4 .col .emp{position:absolute;inset:44px 0 0}
+.B4 .foot{position:absolute;left:30px;right:30px;bottom:16px;height:52px;display:flex;align-items:center;gap:10px}
+.B4 .foot .tag{position:relative;display:flex;align-items:center;gap:6px;padding:6px 14px 6px 22px;background:#fff;color:var(--navy);font-size:13.5px;font-weight:900;clip-path:polygon(14px 0,100% 0,100% 100%,14px 100%,0 50%);white-space:nowrap}
+.B4 .foot .tag::before{content:"";position:absolute;left:8px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:#45307e}
+.B4 .foot .merge{margin-left:auto}
+/* C · 가방 중심 격자 + 위쪽 착용 띠 */
+.C4 .strip{position:absolute;left:0;right:0;top:56px;height:150px;z-index:2;display:flex;align-items:center;gap:22px;padding:0 24px;color:#fff;background:linear-gradient(180deg,rgba(58,42,128,.97),rgba(38,27,88,.97));box-shadow:0 2px 0 rgba(255,231,166,.55),0 10px 20px rgba(0,0,0,.35)}
+.C4 .who{display:flex;align-items:center;gap:10px}
+.C4 .who .ar{display:grid;place-items:center;width:36px;height:56px;border-radius:12px;background:rgba(255,255,255,.12);font-size:22px;font-weight:900}
+.C4 .who i.f{width:86px;height:86px;border-radius:18px;box-shadow:0 0 0 3px var(--e);flex:none}
+.C4 .who b{display:block;font-size:24px}
+.C4 .who small{font-size:13px;font-weight:800;color:#ffe08a}
+.C4 .eq{display:flex;gap:14px}
+.C4 .eq .s{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;font-weight:800;white-space:nowrap}
+.C4 .setc{margin-left:auto;display:flex;flex-direction:column;gap:4px;padding:10px 14px;border-radius:14px;background:rgba(0,0,0,.3);box-shadow:inset 0 0 0 1.5px rgba(255,224,138,.55);font-size:13px;font-weight:800;white-space:nowrap}
+.C4 .setc b{color:#ffe08a;font-size:15px}
+.C4 .setc i{font-style:normal;color:#ffc94d}
+.C4 .gw{position:absolute;left:20px;right:20px;top:218px;bottom:12px;border-radius:18px;background:rgba(26,18,64,.82);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.14)}
+.C4 .fl{position:absolute;left:16px;right:16px;top:12px;display:flex;align-items:center;gap:6px}
+.C4 .fl span{display:flex;align-items:center;gap:4px;padding:5px 14px;border-radius:15px;background:rgba(255,255,255,.1);color:#fff;font-size:14px;font-weight:800;white-space:nowrap}
+.C4 .fl span img{width:22px;height:22px}
+.C4 .fl span.on{background:#fff;color:var(--navy)}
+.C4 .fl .cnt{margin-left:auto;background:none;color:#e0d8ff}
+.C4 .gw .bag{position:absolute;left:18px;right:18px;top:62px;bottom:16px;overflow:hidden;gap:16px 14px}
+.C4 .gw .emp{position:absolute;inset:50px 0 0}
+.C4 .fab{position:absolute;right:26px;bottom:24px;z-index:3;display:flex;align-items:center;gap:10px}
+.C4 .chips{position:absolute;left:26px;bottom:24px;z-index:3;display:flex;gap:8px}
+.C4 .chips .chipx{background:rgba(46,35,80,.92);box-shadow:0 0 0 1px rgba(255,255,255,.2)}
+/* ================= 5. 각성 단계별 효과 ================= */
+.scr[data-who=ss]{--e:#9a6bff;--ed:#6b3fd6;--el:#efe6ff}
+.scr[data-who=s]{--e:#ff5f4f;--ed:#c0352a;--el:#ffe3df}
+.scr[data-who=myth]{--e:#e957bc;--ed:#5a2f9a;--el:#f6e6ff}
+.wv,.wi{display:none!important}
+.scr[data-who=ss] .wv.w-ss,.scr[data-who=s] .wv.w-s,.scr[data-who=myth] .wv.w-myth{display:block!important}
+.scr[data-who=ss] .wi.w-ss,.scr[data-who=s] .wi.w-s,.scr[data-who=myth] .wi.w-myth{display:inline!important}
+.vv{display:none;font-style:normal}
+.scr[data-st="0"] .vv.v0,.scr[data-st="3"] .vv.v3,.scr[data-st=max] .vv.vm{display:inline}
+.t4{display:none;font-style:normal}.t5{font-style:normal}
+.scr[data-who=s] .t4{display:inline}.scr[data-who=s] .t5{display:none}
+.scr[data-who=s] .s5{display:none!important}
+.s4n{display:none!important}.scr[data-who=s] .s4n{display:flex!important}
+.sx{--on:0;--nx:0}
+.scr[data-st="3"] :is(.s1,.s2,.s3),.scr[data-st=max] .sx{--on:1}
+.scr[data-st="0"] .s1,.scr[data-st="3"] .s4{--nx:1}
+.hd5{position:absolute;z-index:4;display:flex;align-items:center;gap:10px;color:#fff;white-space:nowrap}
+.hd5>b{font-size:30px;font-weight:900;text-shadow:0 3px 0 rgba(40,20,90,.8)}
+.hd5 .cnt5{display:flex;align-items:baseline;gap:4px;margin-left:6px;padding:4px 14px;border-radius:16px;background:rgba(0,0,0,.35);box-shadow:inset 0 0 0 1.5px rgba(255,224,138,.6);font-size:15px;font-weight:800;color:#ffe08a}
+.hd5 .cnt5 em{font-style:normal;font-size:26px;font-weight:900;color:#fff}
+.nxt5{position:absolute;z-index:4;display:flex;align-items:center;gap:10px;padding:10px 18px;border-radius:18px;background:rgba(14,10,40,.72);box-shadow:inset 0 0 0 1.5px rgba(255,224,138,.55);color:#fff;font-size:15px;font-weight:800;white-space:nowrap}
+.nxt5 i.k{font-style:normal;padding:2px 10px;border-radius:10px;background:#ffe08a;color:#4a2e00;font-size:13px;font-weight:900}
+.hint5{position:absolute;z-index:4;font-size:13px;font-weight:700;color:#e0d8ff;white-space:nowrap}
+@keyframes pop5{0%{transform:scale(0)}70%{transform:scale(1.25)}100%{transform:none}}
+@keyframes draw5{from{stroke-dashoffset:300}}
+@keyframes halo5{50%{transform:scale(1.18)}}
+/* A · 별자리 */
+.A5 .sky{position:absolute;left:36px;right:36px;top:28px;bottom:28px;border-radius:28px;overflow:hidden;background:radial-gradient(circle,rgba(255,255,255,.7) 0 1px,transparent 1.6px) 0 0/97px 83px,radial-gradient(circle,rgba(255,255,255,.4) 0 .8px,transparent 1.4px) 31px 17px/53px 61px,radial-gradient(42% 55% at 74% 42%,color-mix(in srgb,var(--e) 40%,transparent),transparent 70%),radial-gradient(40% 50% at 18% 85%,rgba(255,170,210,.2),transparent 70%),linear-gradient(170deg,#1f184d,#0d0a28 72%);box-shadow:0 0 0 1.5px rgba(255,231,166,.6),0 20px 50px rgba(0,0,0,.6)}
+.A5 .tw{position:absolute;inset:0;background:radial-gradient(circle,#fff 0 1.3px,transparent 2px) 13px 40px/170px 130px,radial-gradient(circle,#ffe7a6 0 1px,transparent 1.8px) 90px 7px/210px 150px;animation:tw5 2.6s ease-in-out infinite alternate}
+@keyframes tw5{from{opacity:.25}to{opacity:1}}
+.A5 .art{position:absolute;left:-60px;bottom:-34px;width:860px;height:484px;background-repeat:no-repeat;background-size:contain;-webkit-mask:linear-gradient(90deg,#000 46%,transparent 70%);mask:linear-gradient(90deg,#000 46%,transparent 70%);transition:filter .6s}
+.A5[data-st=max] .art{filter:drop-shadow(0 0 22px var(--e)) brightness(1.08)}
+.A5 .hd5{left:40px;top:28px}
+.A5 .hint5{left:42px;top:84px}
+.A5 .cons{position:absolute;right:56px;top:46px;width:640px;height:560px}
+.A5 .cons svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.A5 .bl path{fill:none;stroke:rgba(255,255,255,.28);stroke-width:2;stroke-dasharray:3 9}
+.A5 .lo{fill:none;stroke:var(--e);stroke-width:4;stroke-linecap:round;opacity:var(--on);stroke-dasharray:300;filter:drop-shadow(0 0 6px var(--e))}
+.A5[data-who=myth] .lo{stroke:url(#rb5)}
+.A5.go .lo{animation:draw5 .9s ease-out backwards;animation-delay:var(--d,0s)}
+.A5 .st{position:absolute;width:54px;height:54px;margin:-27px 0 0 -27px}
+.A5 .st.big{width:80px;height:80px;margin:-40px 0 0 -40px}
+.A5 .st::before,.A5 .st .g{content:"";position:absolute;inset:0;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.A5 .st::before{background:rgba(255,255,255,.3)}
+.A5 .st .g{background:radial-gradient(circle at 50% 55%,#fff 0 16%,var(--e) 55%,var(--ed));opacity:var(--on)}
+.A5[data-who=myth] .st .g{background:radial-gradient(circle at 50% 55%,#fff 0 16%,transparent 46%),conic-gradient(#ff5f6d,#ffb84d,#ffe36b,#5fd68b,#4fb8ff,#8b6bff,#e957bc,#ff5f6d);animation:hue 4s linear infinite}
+.A5.go .st .g{animation:pop5 .5s ease-out backwards;animation-delay:var(--d,0s)}
+.A5 .st .h{position:absolute;inset:-30px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--e) 75%,transparent),transparent);opacity:var(--on);animation:halo5 2.6s ease-in-out infinite;pointer-events:none}
+.A5 .st .nx{position:absolute;inset:-14px;border-radius:50%;border:2.5px dashed #ffe08a;opacity:var(--nx);animation:spin 9s linear infinite}
+.A5 .st .no{position:absolute;left:50%;top:-24px;transform:translateX(-50%);font:italic 900 16px/1 Georgia,serif;color:#ffe08a}
+.A5 .st b{position:absolute;left:50%;top:62px;transform:translateX(-50%);padding:4px 12px;border-radius:12px;font-size:14.5px;font-weight:800;line-height:1.3;text-align:center;white-space:nowrap;color:rgba(255,255,255,calc(.66 + .34*var(--on)));background:rgba(255,255,255,calc(.07 + .12*var(--on)));box-shadow:inset 0 0 0 1px rgba(255,255,255,calc(.16 + .4*var(--on)))}
+.A5 .st.big b{top:88px}
+.A5 .st b small{display:block;font-size:12px;font-weight:700;color:#e6defd}
+.A5 .s4n{position:absolute;left:400px;top:150px;padding:3px 10px;border-radius:10px;background:rgba(255,255,255,.14);color:#fff;font-size:12.5px;font-weight:800;white-space:nowrap}
+.A5 .evo{display:none;position:absolute;right:-6px;top:-38px;padding:5px 14px;border-radius:14px;background:linear-gradient(90deg,#ffe08a,#fff4cf);color:#4a2e00;font-size:14px;font-weight:900;white-space:nowrap;box-shadow:0 0 18px rgba(255,224,138,.7)}
+.A5 .evo{right:96px;top:14px}
+.A5[data-st=max]:not([data-who=s]) .evo{display:block;animation:pop5 .6s .9s ease-out backwards}
+.A5 .nxt5{right:56px;bottom:40px}
+.A5 .xb{position:absolute;right:52px;top:44px;z-index:5}
+/* B · 각성 계단 */
+.B5 .hall{position:absolute;left:36px;right:36px;top:28px;bottom:28px;border-radius:28px;overflow:hidden;background:radial-gradient(46% 60% at 84% 0,rgba(255,236,190,.5),transparent 70%),repeating-linear-gradient(104deg,rgba(255,255,255,.045) 0 50px,transparent 50px 130px),linear-gradient(180deg,#2a1e6a,#4a3494 58%,#7d5cb8);box-shadow:0 0 0 1.5px rgba(255,231,166,.6),0 20px 50px rgba(0,0,0,.6)}
+.B5 .shaft{position:absolute;right:120px;top:-40px;width:260px;height:520px;background:linear-gradient(180deg,rgba(255,240,200,.38),transparent);transform:skewX(-14deg);filter:blur(4px);animation:tw5 3.4s ease-in-out infinite alternate}
+.B5 .floor{position:absolute;left:0;right:0;bottom:0;height:34px;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.06))}
+.B5 .hd5{left:40px;top:28px}
+.B5 .hint5{left:42px;top:84px}
+.B5 .nxt5{left:40px;top:120px}
+.B5 .stairs{position:absolute;right:52px;bottom:34px;width:790px;height:600px}
+.B5 .stp{position:absolute;bottom:0;width:150px;padding:14px 12px;border-radius:12px 12px 0 0;isolation:isolate;color:#fff;text-shadow:0 1px 2px rgba(20,10,50,.85);background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.24)}
+.B5 .stp::before{content:"";position:absolute;left:0;right:0;top:-14px;height:14px;background:linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,.18));clip-path:polygon(7% 0,93% 0,100% 100%,0 100%)}
+.B5 .stp::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:linear-gradient(180deg,var(--e),var(--ed));box-shadow:0 0 30px var(--e);opacity:var(--on)}
+.B5[data-who=myth] .stp::after{background:linear-gradient(180deg,#ff5f6d,#ffb84d 22%,#5fd68b 46%,#4fb8ff 66%,#8b6bff 86%,#e957bc);animation:hue 6s linear infinite}
+.B5.go .stp::after{animation:lit5 .7s ease-out backwards;animation-delay:var(--d,0s)}
+.B5[data-who=myth].go .stp::after{animation:lit5 .7s ease-out backwards,hue 6s linear infinite;animation-delay:var(--d,0s),0s}
+@keyframes lit5{from{opacity:0}}
+.B5 .stp .n{display:block;font:italic 900 34px/1 Georgia,serif;color:#ffe08a}
+.B5 .stp b{display:block;margin-top:6px;font-size:15px;line-height:1.3}
+.B5 .stp small{display:block;margin-top:4px;font-size:12px;font-weight:700;color:#f3eeff}
+.B5 .stp .nxp{position:absolute;left:50%;top:-50px;transform:translateX(-50%);padding:3px 12px;border-radius:12px;background:#ffe08a;color:#4a2e00;font-size:13px;font-weight:900;white-space:nowrap;text-shadow:none;opacity:var(--nx);animation:bob 1.6s ease-in-out infinite}
+.B5 .gate{position:absolute;left:640px;bottom:390px;width:150px;height:170px;border-radius:75px 75px 0 0;background:radial-gradient(60% 60% at 50% 70%,rgba(255,250,230,.95),rgba(255,224,138,.4) 60%,transparent 72%);box-shadow:inset 0 0 0 4px rgba(255,231,166,.7);opacity:.35;transition:opacity .6s}
+.B5 .gate::before{content:"";position:absolute;inset:-60px;background:repeating-conic-gradient(from 0deg at 50% 70%,rgba(255,236,190,.4) 0 6deg,transparent 6deg 22deg);-webkit-mask:radial-gradient(circle at 50% 70%,#000 20%,transparent 62%);mask:radial-gradient(circle at 50% 70%,#000 20%,transparent 62%);opacity:0;animation:spin 14s linear infinite}
+.B5[data-st=max] .gate{opacity:1}
+.B5[data-st=max] .gate::before{opacity:1}
+.B5[data-who=myth] .gate{box-shadow:inset 0 0 0 4px #ff8fd0,0 0 30px rgba(233,87,188,.6)}
+.B5 .gate span{position:absolute;left:50%;top:-30px;transform:translateX(-50%);padding:3px 12px;border-radius:12px;background:rgba(14,10,40,.7);color:#ffe08a;font-size:13px;font-weight:900;white-space:nowrap}
+.B5 .sd{position:absolute;z-index:3;width:150px;height:180px;left:var(--sx);bottom:var(--sy);transition:left .9s cubic-bezier(.3,1.2,.5,1),bottom .9s cubic-bezier(.3,1.5,.5,1)}
+.B5 .sd img{position:absolute;left:50%;bottom:0;height:180px;transform:translateX(-50%);filter:drop-shadow(0 8px 6px rgba(0,0,0,.45))}
+.B5 .sd img.w-myth{height:200px}
+.B5[data-st="0"] .sd{--sx:-190px;--sy:0px}
+.B5[data-st="3"] .sd{--sx:320px;--sy:250px}
+.B5[data-st=max] .sd{--sx:640px;--sy:390px}
+.B5[data-st=max][data-who=s] .sd{--sx:480px;--sy:320px}
+.B5.go .sd img{animation:hop5 .9s ease-out}
+@keyframes hop5{0%{transform:translateX(-50%) translateY(0)}40%{transform:translateX(-50%) translateY(-40px)}70%{transform:translateX(-50%) translateY(0) scaleY(.94)}100%{transform:translateX(-50%)}}
+.B5 .s4n{position:absolute;left:480px;bottom:520px;padding:3px 12px;border-radius:12px;background:rgba(14,10,40,.7);color:#ffe08a;font-size:13px;font-weight:900;white-space:nowrap}
+.B5 .xb{position:absolute;right:52px;top:44px;z-index:5}
+/* C · 카드 뒷면 각인 */
+.C5 .vel{position:absolute;inset:0;background:radial-gradient(40% 60% at 30% 52%,color-mix(in srgb,var(--e) 38%,transparent),transparent 70%),radial-gradient(circle,rgba(255,231,166,.12) 0 1px,transparent 1.6px) 0 0/22px 22px,linear-gradient(160deg,#21184f,#110c30)}
+.C5 .cardw{position:absolute;left:calc(50% - 450px);top:88px;width:340px;height:540px;perspective:1400px}
+.C5[data-who=myth] .cardw::before{content:"";position:absolute;inset:-7px;border-radius:28px;background:conic-gradient(#ff5f6d,#ffb84d,#ffe36b,#5fd68b,#4fb8ff,#8b6bff,#e957bc,#ff5f6d);animation:hue 4s linear infinite;box-shadow:0 0 30px rgba(233,87,188,.6)}
+.C5 .flip{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateY(180deg)}
+.C5.go .flip{animation:flip5 1.8s cubic-bezier(.55,0,.3,1) backwards}
+@keyframes flip5{0%,38%{transform:rotateY(0)}100%{transform:rotateY(180deg)}}
+.C5 .face{position:absolute;inset:0;border-radius:22px;overflow:hidden;-webkit-backface-visibility:hidden;backface-visibility:hidden;box-shadow:0 0 0 4px #e9c46a,0 0 0 6px #6b4a12,0 24px 40px rgba(0,0,0,.55)}
+.C5 .fr{background:linear-gradient(170deg,var(--el),#fff)}
+.C5 .fr i{position:absolute;inset:0;background-repeat:no-repeat;background-size:auto 128%;background-position:24% 8%}
+.C5 .fr b{position:absolute;left:0;right:0;bottom:0;padding:14px;background:linear-gradient(transparent,rgba(20,12,60,.85));color:#fff;font-size:28px;font-weight:900}
+.C5 .bk{transform:rotateY(180deg);background:radial-gradient(circle at 50% 42%,rgba(255,231,166,.2),transparent 55%),repeating-radial-gradient(circle at 50% 42%,rgba(255,231,166,.07) 0 2px,transparent 2px 14px),linear-gradient(170deg,#2e2468,#16103d)}
+.C5 .ring{position:absolute;left:50%;top:42%;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,231,166,.6),0 0 0 9px rgba(255,231,166,.07)}
+.C5 .bk svg{position:absolute;left:0;top:0;width:340px;height:540px}
+.C5 .bk svg path{fill:none;stroke:rgba(255,231,166,.35);stroke-width:1.5}
+.C5 .crest{position:absolute;left:50%;top:42%;width:104px;height:104px;margin:-52px 0 0 -52px;background:url(img/assets/ui/kit/crest.png) center/contain no-repeat;filter:drop-shadow(0 0 12px var(--e))}
+.C5 .sg{position:absolute;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;isolation:isolate;display:grid;place-items:center;background:#18123f;box-shadow:inset 0 3px 7px rgba(0,0,0,.7),0 0 0 2px rgba(255,231,166,.5)}
+.C5 .sg::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:50%;background:radial-gradient(circle at 40% 34%,#fff 0 9%,var(--e) 46%,var(--ed));box-shadow:0 0 20px var(--e),0 0 0 3px #ffe08a;opacity:var(--on)}
+.C5[data-who=myth] .sg::before{background:radial-gradient(circle at 40% 34%,#fff 0 9%,transparent 40%),conic-gradient(#ff5f6d,#ffb84d,#ffe36b,#5fd68b,#4fb8ff,#8b6bff,#e957bc,#ff5f6d);animation:hue 4s linear infinite}
+.C5 .sg span{font:italic 900 22px/1 Georgia,serif;color:#ffe7a6;text-shadow:0 1px 2px rgba(0,0,0,.7)}
+.C5 .sg .nx{position:absolute;inset:-9px;border-radius:50%;border:2.5px dashed #ffe08a;opacity:var(--nx);animation:spin 9s linear infinite}
+.C5 .bk .foot5{position:absolute;left:0;right:0;bottom:0;padding:14px 18px;display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.3);color:#fff;font-size:20px;font-weight:900;white-space:nowrap}
+.C5 .bk .foot5 em{margin-left:auto;font-style:normal;font-size:15px;color:#ffe08a}
+.C5 .hd5{left:calc(50% - 60px);top:36px}
+.C5 .lst5{position:absolute;left:calc(50% - 60px);top:100px;width:560px}
+.C5 .row5{position:relative;display:flex;align-items:center;gap:14px;height:76px;margin-bottom:10px;padding:0 18px;border-radius:14px;color:rgba(255,255,255,calc(.66 + .34*var(--on)));background:linear-gradient(90deg,rgba(255,255,255,calc(.05 + .1*var(--on))),rgba(255,255,255,.02));box-shadow:inset 4px 0 0 rgba(255,231,166,calc(.22 + .78*var(--on)))}
+.C5 .row5 .rn{width:44px;flex:none;font:italic 900 26px/1 Georgia,serif;color:#ffe7a6;opacity:calc(.5 + .5*var(--on))}
+.C5 .row5 b{display:block;font-size:19px}
+.C5 .row5 small{display:block;font-size:13px;font-weight:700;color:#e0d8ff}
+.C5 .row5 .ok{margin-left:auto;font-style:normal;font-size:13px;font-weight:900;color:#7dffb0;opacity:var(--on)}
+.C5 .row5 .nxp{position:absolute;right:16px;top:50%;margin-top:-13px;padding:3px 12px;border-radius:12px;background:#ffe08a;color:#4a2e00;font-size:13px;font-weight:900;opacity:var(--nx)}
+.C5[data-st=max] .row5.top{background:linear-gradient(90deg,rgba(255,224,138,.34),rgba(255,224,138,.04));box-shadow:inset 4px 0 0 #ffe08a,0 0 20px rgba(255,224,138,.25)}
+.C5[data-st=max] .row5.top::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 45%,transparent 60%) 0 0/260% 100% no-repeat;animation:sheen 3s ease-in-out infinite}
+.C5 .s4n{padding:6px 14px;border-radius:12px;background:rgba(255,255,255,.08);color:#e0d8ff;font-size:13px;font-weight:800;width:max-content}
+.C5 .xb{position:absolute;right:30px;top:24px;z-index:5}
+
+/* ================= 6. 연성 · 잠재 상승 결과 ================= */
+.rv{display:none}
+.scr[data-res=merge] .rv.r-merge,.scr[data-res=none] .rv.r-none,.scr[data-res=pot] .rv.r-pot{display:block}
+.ok6{position:absolute;z-index:6;display:grid;place-items:center;width:200px;height:58px;border-radius:29px;font-size:19px;font-weight:900;color:#4a2e00;background:linear-gradient(160deg,#fff4cf,#e8bf5a);box-shadow:0 0 0 2px #fff,0 4px 0 #a87818,0 10px 18px rgba(0,0,0,.35)}
+.potp{display:inline-flex;align-items:center;padding:3px 12px;border-radius:12px;font-size:14px;font-weight:900;color:#fff;white-space:nowrap}
+.potp.pu{background:#7b4fe0}.potp.gd6{background:#a86a00}
+.ln6{display:inline-flex;align-items:center;padding:4px 12px;border-radius:10px;background:rgba(255,255,255,.12);color:#fff;font-size:14.5px;font-weight:800;box-shadow:inset 4px 0 0 #ffc94d;white-space:nowrap}
+/* A · 팔레트 */
+.A6 .pal{position:absolute;left:50%;top:132px;width:740px;height:420px;margin-left:-370px}
+.A6 .wood{position:absolute;inset:0;border-radius:52% 48% 46% 54%/58% 52% 48% 42%;background:radial-gradient(60% 50% at 40% 26%,rgba(255,255,255,.38),transparent 70%),repeating-linear-gradient(170deg,rgba(120,70,20,.09) 0 3px,transparent 3px 12px),linear-gradient(160deg,#f3d6a2,#cf9856 58%,#a8703a);box-shadow:inset 0 -12px 0 rgba(90,50,10,.22),inset 0 0 0 3px rgba(255,240,210,.55),0 26px 44px rgba(0,0,0,.5)}
+.A6 .hole{position:absolute;left:5%;bottom:20%;width:84px;height:66px;border-radius:50%;background:#1d1538;box-shadow:inset 0 7px 10px rgba(0,0,0,.65),0 0 0 3px rgba(255,240,210,.35)}
+.A6 .dab{position:absolute;width:var(--s,34px);height:calc(var(--s,34px) * .8);border-radius:50% 46% 54% 48%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.6),transparent 40%),var(--c);box-shadow:0 2px 0 rgba(0,0,0,.15)}
+.A6 .well{position:absolute;left:50%;top:50%;width:104px;height:84px;margin:-42px 0 0 -52px;border-radius:50%;transform:translate(var(--x),var(--y));background:rgba(120,70,20,.16);box-shadow:inset 0 4px 8px rgba(90,50,10,.35)}
+.A6 .well.emp6{display:grid;place-items:center;border:2.5px dashed rgba(90,50,10,.55);background:none;box-shadow:none;color:#6b4214;font-size:30px;font-weight:900}
+.A6 .dp{position:absolute;left:50%;top:50%;width:104px;height:84px;margin:-42px 0 0 -52px;display:grid;place-items:center;border-radius:48% 52% 50% 50%/56% 54% 46% 44%;background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.75),transparent 34%),radial-gradient(circle at 50% 60%,#9ad3ff,#3fa9ff 55%,#1f6fc0);box-shadow:0 4px 0 rgba(20,60,120,.35),0 0 18px rgba(63,169,255,.45);transform:translate(var(--x),var(--y))}
+.A6 .dp img{width:52px;height:52px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
+.A6 .r-merge .dp{animation:dpm 4.8s ease-in-out infinite}
+@keyframes dpm{0%,20%{transform:translate(var(--x),var(--y)) scale(1);opacity:1}10%{transform:translate(var(--x),var(--y)) scale(1.06,.94)}44%{transform:translate(0,0) scale(.55);opacity:1}48%,100%{transform:translate(0,0) scale(.3);opacity:0}}
+.A6 .sw{position:absolute;left:50%;top:50%;width:190px;height:190px;margin:-95px 0 0 -95px;border-radius:50%;background:radial-gradient(circle,#fff 0 12%,transparent 46%),conic-gradient(#1f6fc0,#9ad3ff,#3fa9ff,#e2f2ff,#1f6fc0);animation:sw6 4.8s ease-in-out infinite}
+@keyframes sw6{0%,40%{transform:scale(0) rotate(0);opacity:0}52%{transform:scale(1.15) rotate(200deg);opacity:1}62%{transform:scale(1) rotate(320deg);opacity:1}90%{transform:scale(1) rotate(560deg);opacity:1}100%{transform:scale(0) rotate(620deg);opacity:0}}
+.A6 .nt{position:absolute;left:50%;top:50%;margin:-38px 0 0 -38px;z-index:2;animation:nt6 4.8s ease-out infinite}
+@keyframes nt6{0%,52%{transform:scale(0);opacity:0}60%{transform:scale(1.3);opacity:1}66%,92%{transform:scale(1);opacity:1}100%{transform:scale(0);opacity:0}}
+.A6 .nl{position:absolute;left:50%;top:calc(50% + 66px);transform:translateX(-50%);padding:5px 16px;border-radius:14px;background:#2e2350;color:#fff;font-size:16px;font-weight:900;white-space:nowrap;animation:nl6 4.8s ease-out infinite}
+.A6 .nl b{color:#ffe08a}
+@keyframes nl6{0%,58%{opacity:0;transform:translateX(-50%) translateY(10px)}66%,92%{opacity:1;transform:translateX(-50%)}100%{opacity:0}}
+.A6 .ttl6{position:absolute;left:50%;top:64px;transform:translateX(-50%) rotate(-2deg);z-index:2;font-size:34px;font-weight:900;color:#fff;white-space:nowrap;text-shadow:0 3px 0 #3a2a80,0 0 18px rgba(0,0,0,.5)}
+.A6 .ttl6 small{display:block;text-align:center;font-size:15px;color:#ffe08a;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.A6 .res6{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:flex;align-items:center;gap:14px;padding:10px 18px;border-radius:20px;background:rgba(20,12,56,.86);box-shadow:inset 0 0 0 1.5px rgba(255,231,166,.5);color:#fff;font-size:15px;font-weight:800;white-space:nowrap}
+.A6 .res6 .gt{width:64px;height:64px;border-radius:12px}
+.A6 .res6 .gt img{width:48px;height:48px}
+.A6.go .res6 .gt{animation:pop5 .5s ease-out backwards;animation-delay:var(--d,0s)}
+.A6 .res6 .ok6{position:static;width:150px;height:52px;font-size:17px;margin-left:10px}
+.A6 .need6{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 22px;border-radius:16px;background:rgba(255,248,232,.92);box-shadow:0 4px 0 rgba(90,50,10,.25);color:#4a2e00;font-size:15px;font-weight:800;text-align:center;white-space:nowrap}
+.A6 .need6 b{font-size:22px;color:#1f5fa8}
+.A6 .need6 small{font-size:13px;color:#6b4214}
+.A6 .ptile{position:absolute;left:50%;top:50%;margin:-66px 0 0 -66px;z-index:2}
+.A6 .ptile .gt{width:132px;height:132px;border-radius:24px;animation:rim6 4.4s ease-in-out infinite}
+.A6 .ptile .gt img{width:100px;height:100px}
+@keyframes rim6{0%,40%{box-shadow:0 0 0 4px #9a6bff,0 0 0 7px #fff,0 0 20px #9a6bff}60%,100%{box-shadow:0 0 0 4px #ffb020,0 0 0 7px #fff,0 0 34px #ffc94d}}
+.A6 .stroke6{position:absolute;left:50%;top:50%;width:420px;height:46px;margin:-23px 0 0 -210px;z-index:3;border-radius:23px;background:linear-gradient(90deg,#ff5f6d,#ffb84d,#ffe36b,#5fd68b,#4fb8ff,#8b6bff,#e957bc);clip-path:inset(0 100% 0 0 round 23px);mix-blend-mode:screen;opacity:.85;animation:st6 4.4s ease-in-out infinite;transform:rotate(-12deg)}
+@keyframes st6{0%,8%{clip-path:inset(0 100% 0 0 round 23px);opacity:.85}44%{clip-path:inset(0 0 0 0 round 23px);opacity:.85}62%,100%{clip-path:inset(0 0 0 0 round 23px);opacity:0}}
+.A6 .brush6{position:absolute;left:50%;top:50%;width:120px;height:120px;margin:-100px 0 0 -230px;z-index:4;background:url(img/assets/ui/gacha_brush.png) center/contain no-repeat;filter:drop-shadow(0 6px 6px rgba(0,0,0,.4));animation:br6 4.4s ease-in-out infinite}
+@keyframes br6{0%,8%{transform:translate(0,40px) rotate(-12deg);opacity:1}44%{transform:translate(410px,-50px) rotate(-12deg);opacity:1}56%,100%{transform:translate(460px,-80px) rotate(-12deg);opacity:0}}
+.A6 .pchg{position:absolute;left:50%;top:calc(50% + 84px);transform:translateX(-50%);z-index:3;display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:16px;background:#2e2350;color:#fff;font-weight:900;white-space:nowrap}
+.A6 .pchg .potp.gd6{animation:pop5 .5s ease-out backwards;animation-delay:1.9s}
+/* B · 가마 */
+.B6 .kiln{position:absolute;left:calc(50% - 470px);bottom:30px;width:360px;height:440px;border-radius:180px 180px 26px 26px;background:repeating-linear-gradient(0deg,transparent 0 38px,rgba(40,14,30,.45) 38px 41px),repeating-linear-gradient(90deg,transparent 0 58px,rgba(40,14,30,.3) 58px 61px),radial-gradient(70% 50% at 50% 30%,#9b5a6c,transparent 80%),linear-gradient(180deg,#7a4458,#4e2638);box-shadow:inset 0 0 0 4px rgba(255,200,170,.25),0 24px 40px rgba(0,0,0,.55)}
+.B6 .kiln::before{content:"";position:absolute;left:50%;top:-74px;width:70px;height:96px;margin-left:-35px;border-radius:8px 8px 0 0;background:linear-gradient(180deg,#5e3044,#7a4458);z-index:-1}
+.B6 .mouth{position:absolute;left:50%;bottom:60px;width:210px;height:200px;margin-left:-105px;border-radius:105px 105px 10px 10px;overflow:hidden;background:radial-gradient(60% 60% at 50% 80%,#fff3c8,#ffb14a 40%,#e0542e 75%,#5a1a1a);box-shadow:inset 0 0 0 6px #3a1a26,inset 0 0 30px rgba(0,0,0,.6),0 0 40px rgba(255,150,70,.55);animation:fl6 1.4s ease-in-out infinite alternate}
+@keyframes fl6{to{filter:brightness(1.18) saturate(1.1)}}
+.B6 .mouth i{position:absolute;bottom:-10px;width:44px;height:90px;border-radius:50% 50% 40% 40%;background:radial-gradient(circle at 50% 70%,#fff8d8,#ffcf5a 50%,transparent 72%);animation:flame6 1.1s ease-in-out infinite alternate}
+@keyframes flame6{to{transform:scaleY(1.25) translateY(-8px)}}
+.B6[data-res=none] .mouth{background:radial-gradient(60% 50% at 50% 85%,#8a8296,#4a4258 60%,#2a2238);box-shadow:inset 0 0 0 6px #3a1a26,inset 0 0 30px rgba(0,0,0,.6);animation:none}
+.B6[data-res=none] .mouth i{display:none}
+.B6 .spk{position:absolute;left:calc(50% - 290px);bottom:200px;width:6px;height:6px;border-radius:50%;background:#ffd36b;box-shadow:0 0 8px #ff9a3c;animation:spk6 2.2s ease-out infinite;animation-delay:var(--d)}
+@keyframes spk6{from{transform:translate(0,0);opacity:1}to{transform:translate(var(--x),-200px);opacity:0}}
+.B6[data-res=none] .spk{display:none}
+.B6 .kc{position:absolute;left:calc(50% - 40px);top:100px;width:250px;height:340px;z-index:3;border-radius:20px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--navy);background:radial-gradient(70% 40% at 50% 34%,rgba(255,255,255,.95),transparent 70%),linear-gradient(170deg,var(--g1),#fff 70%);box-shadow:0 0 0 5px var(--gc),0 0 0 8px #fff,0 0 40px var(--gc),0 24px 40px rgba(0,0,0,.5)}
+.B6.go .kc{animation:kout .9s cubic-bezier(.2,1.2,.4,1) backwards}
+@keyframes kout{from{transform:translate(-375px,260px) scale(.25);opacity:0}}
+.B6 .kc .ic6{width:150px;height:150px;margin-top:10px;background:radial-gradient(circle,rgba(255,255,255,.95),transparent 66%);display:grid;place-items:center}
+.B6 .kc .ic6 img{width:120px;height:120px;filter:drop-shadow(0 4px 4px rgba(0,0,0,.25))}
+.B6 .kc b{font-size:22px;font-weight:900}
+.B6 .kc small{font-size:14px;font-weight:800;color:#3b3166}
+.B6 .kc .stg6{position:absolute;left:12px;top:12px;padding:2px 10px;border-radius:10px;background:#2e2350;color:#fff;font-size:14px;font-weight:900}
+.B6 .stk{position:absolute;left:calc(50% - 26px);top:112px;width:250px;height:340px;border-radius:20px;background:#efe8ff;box-shadow:0 0 0 3px var(--gc),0 10px 20px rgba(0,0,0,.4);transform:rotate(var(--r));z-index:2}
+.B6 .kc .x3{position:absolute;right:-18px;top:-18px;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#e0244a;color:#fff;font-size:20px;font-weight:900;box-shadow:0 0 0 3px #fff}
+.B6 .side6{position:absolute;left:calc(50% + 250px);top:120px;z-index:3;display:flex;flex-direction:column;gap:12px;color:#fff;font-weight:800}
+.B6 .side6 h4{margin:0;font-size:30px;font-weight:900;text-shadow:0 3px 0 #3a2a80}
+.B6 .side6 .gl{display:flex;gap:10px}
+.B6 .side6 .gl .gt{width:68px;height:68px;border-radius:12px}
+.B6 .side6 .gl .gt img{width:52px;height:52px}
+.B6 .side6 p{margin:0;font-size:14px;color:#e6defd}
+.B6 .ok6{left:calc(50% + 250px);bottom:56px}
+.B6 .sign{position:absolute;left:calc(50% - 40px);top:170px;z-index:3;width:330px;padding:22px 24px;border-radius:14px;background:#2f4d42;box-shadow:inset 0 0 0 6px #8a6a48,0 16px 28px rgba(0,0,0,.45);color:#f1f7f2;font-size:16px;font-weight:700;transform:rotate(-2deg)}
+.B6 .sign b{display:block;margin-bottom:6px;font-size:26px;font-style:italic;color:#ffe9a6}
+.B6 .sign .cnt6{display:flex;gap:8px;margin:12px 0 6px}
+.B6 .sign .cnt6 i{width:50px;height:50px;border-radius:10px;border:2.5px dashed rgba(255,255,255,.6);display:grid;place-items:center;font-style:normal;font-size:22px}
+.B6 .sign .cnt6 i.f6{border:0;background:#3fa9ff url(img/assets/ui/gear_ribbon.png) center/38px no-repeat;box-shadow:0 0 0 2px #fff}
+.B6 .glz{position:absolute;inset:0;border-radius:20px;background:linear-gradient(115deg,transparent 30%,rgba(255,236,170,.9) 45%,transparent 60%) 0 0/260% 100% no-repeat;animation:sheen 2.4s ease-in-out infinite;pointer-events:none}
+.B6 .r-pot .kc{--gc:#ffb020;--g1:#fff3d0;animation:none}
+.B6.go .r-pot .kc{animation:kout .9s cubic-bezier(.2,1.2,.4,1) backwards,potc 2.4s 1s ease-out backwards}
+@keyframes potc{from{box-shadow:0 0 0 5px #9a6bff,0 0 0 8px #fff,0 0 40px #9a6bff,0 24px 40px rgba(0,0,0,.5)}}
+/* C · 창 없이 리본 */
+.C6 .cap6{position:absolute;inset:0;background:url(img/design/feedback70/img/after/gear_list_1280x720.jpg) left top/auto 100% no-repeat}
+:root[data-w="1600"] .C6 .cap6{background-image:url(img/design/feedback70/img/after/gear_list_1600x720.jpg)}
+.C6[data-res=pot] .cap6{background-image:url(img/design/feedback70/img/after/gear_detail_1280x720.jpg)}
+:root[data-w="1600"] .C6[data-res=pot] .cap6{background-image:url(img/design/feedback70/img/after/gear_detail_1600x720.jpg)}
+.C6 .sash{position:absolute;left:calc(50% + 60px);top:300px;z-index:3;width:600px;height:96px;display:flex;align-items:center;gap:14px;padding:0 26px 0 40px;color:#fff;background:linear-gradient(90deg,#5b44c8,#8b6bff 60%,#c94a85);clip-path:polygon(0 0,100% 0,96% 50%,100% 100%,0 100%,4% 50%);transform:rotate(-4deg);box-shadow:0 10px 20px rgba(0,0,0,.35);animation:sash6 5s ease-in-out infinite}
+.C6 .sash::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 45%,transparent 60%) 0 0/260% 100% no-repeat;animation:sheen 2.5s ease-in-out infinite}
+@keyframes sash6{0%{clip-path:polygon(0 0,0 0,0 50%,0 100%,0 100%,0 50%)}12%,82%{clip-path:polygon(0 0,100% 0,96% 50%,100% 100%,0 100%,4% 50%);opacity:1}94%,100%{clip-path:polygon(0 0,100% 0,96% 50%,100% 100%,0 100%,4% 50%);opacity:0}}
+.C6 .sash b{font-size:24px;font-weight:900;white-space:nowrap;text-shadow:0 2px 0 rgba(40,20,90,.6)}
+.C6 .sash small{display:block;font-size:13px;font-weight:800;color:#ffe9f5}
+.C6 .sash .gt{width:60px;height:60px;border-radius:12px;animation:fly6 5s ease-in-out infinite;animation-delay:var(--d)}
+.C6 .sash .gt img{width:46px;height:46px}
+@keyframes fly6{0%,14%{transform:scale(0)}22%,64%{transform:scale(1)}80%,100%{transform:translate(-120px,-80px) scale(.4);opacity:0}}
+.C6 .memo6{position:absolute;left:calc(50% + 330px);top:232px;z-index:3;width:300px;padding:14px 16px 12px;border-radius:4px 4px 14px 4px;background:#eceaf2;color:#3b3166;font-size:14px;font-weight:800;box-shadow:0 10px 18px rgba(0,0,0,.35);transform:rotate(2deg);transform-origin:70% 0;animation:memo6 3.6s ease-in-out infinite}
+.C6 .memo6::before{content:"";position:absolute;left:50%;top:-10px;width:70px;height:20px;margin-left:-35px;background:rgba(180,170,200,.8);transform:rotate(-4deg)}
+.C6 .memo6 b{display:block;font-size:16px;color:#2e2350}
+.C6 .memo6 .cnt6{display:flex;gap:6px;margin-top:8px}
+.C6 .memo6 .cnt6 i{width:38px;height:38px;border-radius:8px;border:2px dashed #8f86ad;display:grid;place-items:center;font-style:normal;color:#6a6290}
+.C6 .memo6 .cnt6 i.f6{border:0;background:#3fa9ff url(img/assets/ui/gear_ribbon.png) center/30px no-repeat;box-shadow:0 0 0 2px #fff}
+@keyframes memo6{0%{transform:rotate(2deg) translateY(-14px);opacity:0}10%{transform:rotate(-2deg);opacity:1}20%{transform:rotate(2deg)}30%,100%{transform:rotate(1deg)}}
+.C6 .rib6{position:absolute;left:calc(50% + 150px);top:150px;z-index:3;width:440px;height:70px;display:flex;align-items:center;justify-content:center;gap:10px;color:#4a2e00;font-size:24px;font-weight:900;background:linear-gradient(180deg,#fff1b8,#ffc94d 55%,#e0a020);clip-path:polygon(0 0,100% 0,95% 50%,100% 100%,0 100%,5% 50%);transform:rotate(-3deg);box-shadow:0 8px 16px rgba(0,0,0,.35);animation:rib6 4.4s ease-out infinite}
+@keyframes rib6{0%{transform:rotate(-3deg) scale(1.6);opacity:0}10%{transform:rotate(-3deg) scale(.95);opacity:1}16%,88%{transform:rotate(-3deg) scale(1);opacity:1}100%{opacity:0}}
+.C6 .glow6{position:absolute;left:calc(50% + 184px);width:344px;height:52px;z-index:2;border-radius:10px;background:linear-gradient(110deg,transparent 25%,rgba(255,214,110,.75) 45%,transparent 65%) 0 0/260% 100% no-repeat;box-shadow:0 0 0 3px #ffc94d,0 0 18px rgba(255,201,77,.8);animation:sheen 2.2s ease-in-out infinite}
+.C6 .note6{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:3;padding:6px 16px;border-radius:12px;background:rgba(20,12,56,.82);color:#fff;font-size:13px;font-weight:800;white-space:nowrap}
+/*@CSS*/
+</style>
+</head>
+<body>
+<main class="page">
+<h1>아이들 허브 — 배치 1 시안 (메뉴 틀 · 목록 · 레벨 업·승급 · 장비 · 각성 · 연성)</h1>
+<p class="lead">UI 목록(design/feedback70/ui_inventory.html)의 배치 1, 화면 6개입니다. 화면마다 방향이 다른 시안 2~3개가 있고 <b>화면마다 따로 고르면</b> 됩니다(시안을 누르면 고름 표시). 각 묶음 위 단추로 <b>상태</b>(허브 · 잠김 · 60명 · 단계 등)를 바꿔 볼 수 있습니다. 아이 상세 A · 장비 작업대 A · 편성 B와 같은 <b>짙은 보라 무대 + 금빛 테</b> 계열에 맞추고, 크림 판은 쓰지 않았습니다. 그림은 모두 게임에 있는 것이고 수치 · 이름 조합은 예시입니다. SS 테 = 그 아이의 속성 색, 신화 = 무지개.</p>
+<div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button><span style="width:12px"></span><button type="button" data-replay-all>▶ 등장 다시 보기 (전체)</button></div>
+
+<section class="ref">
+  <h2>지금 게임</h2>
+  <p class="cap">여섯 허브가 모두 같은 크림 판 + 라벤더 띠 + 같은 탭 단추입니다. 목록은 같은 카드 격자, 옛 「성장」 탭(이제 없음)은 한 줄에 글자 7~8줄과 단추 넷, 장비는 옛 세 칸 판, 각성 · 연성 결과는 같은 공용 결과 창입니다.</p>
+  <div class="refs">
+    <figure><img class="w12" src="img/design/feedback70/img/after/menu_heroes_1280x720.jpg" alt="지금 아이들 목록 1280"><img class="w16" src="img/design/feedback70/img/after/menu_heroes_1600x720.jpg" alt="지금 아이들 목록 1600"><figcaption>목록 · design/feedback70/img/after/menu_heroes_(1280|1600)x720.jpg</figcaption></figure>
+    <figure><img class="w12" src="img/design/feedback70/img/after/menu_growth_1280x720.jpg" alt="옛 성장 탭 1280"><img class="w16" src="img/design/feedback70/img/after/menu_growth_1600x720.jpg" alt="옛 성장 탭 1600"><figcaption>옛 성장 탭(없어짐) · design/feedback70/img/after/menu_growth_(1280|1600)x720.jpg</figcaption></figure>
+    <figure><img class="w12" src="img/design/feedback70/img/after/gear_list_1280x720.jpg" alt="지금 장비 목록 1280"><img class="w16" src="img/design/feedback70/img/after/gear_list_1600x720.jpg" alt="지금 장비 목록 1600"><figcaption>장비 목록 · design/feedback70/img/after/gear_list_(1280|1600)x720.jpg</figcaption></figure>
+    <figure><img src="img/design/feedback70/img/inventory/inv_awaken_steps_1280x720.jpg" alt="지금 각성 단계별 효과"><figcaption>각성 단계별 효과 · design/feedback70/img/inventory/inv_awaken_steps_1280x720.jpg</figcaption></figure>
+    <figure><img src="img/design/feedback70/img/inventory/inv_gear_merge_1280x720.jpg" alt="지금 장비 연성 결과"><figcaption>장비 연성 · design/feedback70/img/inventory/inv_gear_merge_1280x720.jpg</figcaption></figure>
+    <figure><img src="img/design/feedback70/img/after/hero_info_1280x720.jpg" alt="아이 상세 A (적용됨)"><figcaption>이어지는 화면: 아이 상세 A · design/feedback70/img/after/hero_info_1280x720.jpg</figcaption></figure>
+  </div>
+</section>
+
+<!-- ================= 1 ================= -->
+<h3>1. 메뉴 공통 틀 — 허브 탭 · 하위 탭 · 지갑 · 닫기 (D1-1)</h3>
+<p class="ctx">이동 골격은 하나로 얇게 두고 <b>허브마다 바탕 결 · 색 · 장식</b>이 달라집니다: 아이들 = 수채 종이, 편성 = 짙은 갑판(편성 B), 소환 = 밤 도서관, 모험 = 항해도, 분교 = 칠판, 상점 = 진열장. 아래 단추로 허브를 바꾸면 세 시안이 함께 바뀝니다. 「성장 기록」 빨간 점은 늘 켜 둠.</p>
+<div class="states" data-group="hub_frame"><span>허브</span><button type="button" data-k="hub" data-v="heroes" aria-pressed="true">아이들</button><button type="button" data-k="hub" data-v="formation">편성</button><button type="button" data-k="hub" data-v="summon">소환</button><button type="button" data-k="hub" data-v="adventure">모험</button><button type="button" data-k="hub" data-v="school">분교</button><button type="button" data-k="hub" data-v="shop">상점</button><span>잠김</span><button type="button" data-k="lk" data-v="0" aria-pressed="true">모두 열림</button><button type="button" data-k="lk" data-v="1">모험 잠김 (Lv.7)</button><span>판 전체 화면</span><button type="button" data-k="det" data-v="0" aria-pressed="true">틀 보임</button><button type="button" data-k="det" data-v="1">아이 상세 열림</button></div>
+
+<section class="opt" data-choice="frame_a" data-choice-group="hub_frame" data-choice-label="A · 오른쪽 세로 책갈피">
+  <h2>A · 오른쪽 세로 책갈피 — 본문 가로 폭 최대 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">허브는 오른쪽 가장자리에 꽂힌 <b>색 책갈피 6장</b>, 고른 책갈피만 본문 쪽으로 쑥 들어옵니다. 하위 탭은 제목 옆 붓 밑줄 글자, 지갑은 오른쪽 위. 위쪽 두 줄 탭이 사라져 본문이 위로 120px 넓어집니다. 상세가 열리면 틀은 숨고 고른 책갈피 하나만 남아 「돌아가기」가 됩니다.</p>
+  <div class="vp"><div class="scr A1" data-hub="heroes" data-lk="0" data-det="0">
+    <div class="bgc"></div><div class="dim"></div>
+    <div class="hbody">
+      <div class="hc heroes on" data-h="heroes" style="--ct:96px"><div class="mg dk"><em>갑판 위</em><i class="f e-wh" style="background-image:url(img/assets/chars/yerin_idle.png)"></i><i class="f e-pu" style="background-image:url(img/assets/chars/yuna_idle.png)"></i><i class="f e-pu" style="background-image:url(img/assets/chars/serena_idle.png)"></i><i class="f e-or" style="background-image:url(img/assets/chars/juhee_idle.png)"></i></div><div class="mg"><em>대기 · 17</em><i class="f e-rb" style="background-image:url(img/assets/chars/arca_idle.png)"></i><i class="f e-wh" style="background-image:url(img/assets/chars/aria_idle.png)"></i><i class="f e-gr" style="background-image:url(img/assets/chars/flora_idle.png)"></i><i class="f e-re" style="background-image:url(img/assets/chars/karen_idle.png)"></i><i class="f e-pu" style="background-image:url(img/assets/chars/noel_idle.png)"></i><i class="f e-pu" style="background-image:url(img/assets/chars/lumi_idle.png)"></i><i class="f e-re" style="background-image:url(img/assets/chars/suah_idle.png)"></i><i class="f e-wh" style="background-image:url(img/assets/chars/seoa_idle.png)"></i><i class="f e-bl" style="background-image:url(img/assets/chars/dohee_idle.png)"></i></div><span class="lbl">본문 = 2번 「아이들 목록」 시안</span></div>
+      <div class="hc formation" data-h="formation" style="--ct:96px"><div class="fq e-pu"><img src="img/assets/chars/yuna_idle.png" alt="유나"><b>1</b></div><div class="fq e-or"><img src="img/assets/chars/juhee_idle.png" alt="주희"><b>2</b></div><div class="fq e-pu"><img src="img/assets/chars/lumi_idle.png" alt="루미"><b>3</b></div><div class="fq e-wh"><img src="img/assets/chars/yerin_idle.png" alt="예린"><b>4</b></div><span class="lbl" style="color:#fff">본문 = 편성 B 팀 라인업</span></div>
+      <div class="hc summon" data-h="summon" style="--ct:96px"><div class="sbn"><img src="img/assets/ui/summon_book.png" alt="출석부"><b>출석부 소환</b></div><span class="lbl" style="color:#fff">본문 = 소환 시안</span></div>
+      <div class="hc adventure" data-h="adventure" style="--ct:96px"><figure style="--r:-3deg"><img src="img/assets/adventure/page_element_red.png" alt="">원소 구름섬</figure><figure style="--r:2deg"><img src="img/assets/adventure/page_soul.png" alt="">기억의 회랑</figure><figure style="--r:-2deg"><img src="img/assets/adventure/page_castle.png" alt="">잿빛성</figure><figure style="--r:3deg"><img src="img/assets/adventure/page_temple.png" alt="">신전</figure><figure style="--r:-1deg"><img src="img/assets/adventure/page_rank.png" alt="">등급전</figure></div>
+      <div class="hc school" data-h="school" style="--ct:96px"><figure><img src="img/assets/ui/room_lab.png" alt="">과학실 Lv.6</figure><figure><img src="img/assets/ui/room_gym.png" alt="">체육관 Lv.4</figure><figure><img src="img/assets/ui/room_cafe.png" alt="">급식실 Lv.5</figure></div>
+      <div class="hc shop" data-h="shop" style="--ct:96px"><div class="sh" style="top:40px"><figure><img src="img/assets/ui/icon_gem.png" alt="">채색석 120<br><span>1,200원</span></figure><figure><img src="img/assets/ui/icon_gem.png" alt="">채색석 630<br><span>5,900원</span></figure><figure><img src="img/assets/ui/icon_ticket.png" alt="">매일 선물<br><span>무료</span></figure></div><div class="sh" style="top:290px"><figure><img src="img/assets/ui/icon_crystal.png" alt="">성장 꾸러미<br><span>9,900원</span></figure><figure><img src="img/assets/ui/icon_pearl.png" alt="">항해 일지<br><span>4,900원</span></figure></div></div>
+      <b class="ht">아이들</b>
+      <div class="subs on" data-h="heroes"><span class="on">목록</span><span>성장 기록<i class="rd"></i></span><span>장비</span></div>
+      <div class="subs" data-h="formation"><span class="on">항해</span><span>원소섬</span><span>회랑</span><span>잿빛성</span><span>신전</span><span>등급전</span></div>
+      <div class="subs" data-h="summon"><span class="on">출석부 소환</span></div>
+      <div class="subs" data-h="adventure"><span class="on">모험</span></div>
+      <div class="subs" data-h="school"><span class="on">분교</span><span>고래 강화</span></div>
+      <div class="subs" data-h="shop"><span class="on">상점</span><span>신화 조각</span></div>
+      <div class="wal"><span><img src="img/assets/ui/icon_pearl.png" alt="구름 진주">200a</span><span><img src="img/assets/ui/icon_gem.png" alt="채색석">50,000</span></div>
+    </div>
+    <b class="xb x1">✕</b>
+    <div class="marks"><div class="mk m-heroes on" data-h="heroes"><img src="img/assets/ui/kit/nav_heroes.png" alt="">아이들</div><div class="mk m-formation" data-h="formation"><img src="img/assets/ui/kit/nav_formation.png" alt="">편성</div><div class="mk m-summon" data-h="summon"><img src="img/assets/ui/kit/nav_summon.png" alt="">소환</div><div class="mk m-adventure" data-h="adventure"><i class="lkb"></i><img src="img/assets/ui/kit/nav_adventure.png" alt="">모험</div><div class="mk m-school" data-h="school"><img src="img/assets/ui/kit/nav_school.png" alt="">분교</div><div class="mk m-shop" data-h="shop"><img src="img/assets/ui/kit/nav_shop.png" alt="">상점</div></div>
+    <div class="lt"><span class="ii" style="font-style:normal;font-family:inherit">🔒</span><div>모험은 항해사 Lv.7에 열려요<small>지금 Lv.5 · 퀘스트를 깨면 올라요</small></div></div>
+    <div class="dt"><i class="art"></i><span class="tag">아이 상세 A — 틀은 숨김</span><div class="nm"><small>SS · 별 · 광역 딜러</small>세레나</div><div class="pn"><div class="tb"><span>능력</span><span>스킬</span><span>장비</span></div><div class="nb">전투력<b>8,191</b></div><div class="nb">공격력<b>819</b></div><div class="bt"><span>레벨 업</span><span>승급 ★3</span></div></div></div>
+    <div class="keep">‹ 아이들</div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="frame_b" data-choice-group="hub_frame" data-choice-label="B · 위 띠 + 허브별 무늬">
+  <h2>B · 위 띠 유지 + 허브별 무늬 — 지금 구조, 다른 옷 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">위 띠는 그대로 두되 <b>남색 얇은 띠 + 아이콘 글자 탭</b>으로 바꾸고, 고른 허브는 그 허브 색 <b>붓 밑줄</b>. 띠 아래 테두리 색과 본문 결이 허브마다 바뀌어 「어디에 있는지」가 바탕만 봐도 보입니다. 익숙해서 배우기 쉬운 안. 상세가 열리면 띠는 위로 올라가 숨고 「‹ 목록」 칩만 남습니다.</p>
+  <div class="vp"><div class="scr B1" data-hub="heroes" data-lk="0" data-det="0">
+    <div class="bgc"></div><div class="dim"></div>
+    <div class="band">
+      <div class="hubs"><span class="hb on" data-h="heroes"><img src="img/assets/ui/kit/nav_heroes.png" alt="">아이들</span><span class="hb" data-h="formation"><img src="img/assets/ui/kit/nav_formation.png" alt="">편성</span><span class="hb" data-h="summon"><img src="img/assets/ui/kit/nav_summon.png" alt="">소환</span><span class="hb" data-h="adventure"><i class="lkb"></i><img src="img/assets/ui/kit/nav_adventure.png" alt="">모험</span><span class="hb" data-h="school"><img src="img/assets/ui/kit/nav_school.png" alt="">분교</span><span class="hb" data-h="shop"><img src="img/assets/ui/kit/nav_shop.png" alt="">상점</span></div>
+      <div class="subs on" data-h="heroes"><span class="on">목록</span><span>성장 기록<i class="rd"></i></span><span>장비</span></div>
+      <div class="subs" data-h="formation"><span class="on">항해</span><span>원소섬</span><span>회랑</span><span>잿빛성</span><span>신전</span><span>등급전</span></div>
+      <div class="subs" data-h="summon"><span class="on">출석부 소환</span></div>
+      <div class="subs" data-h="adventure"><span class="on">모험</span></div>
+      <div class="subs" data-h="school"><span class="on">분교</span><span>고래 강화</span></div>
+      <div class="subs" data-h="shop"><span class="on">상점</span><span>신화 조각</span></div>
+      <div class="wal"><span><img src="img/assets/ui/icon_pearl.png" alt="구름 진주">200a</span><span><img src="img/assets/ui/icon_gem.png" alt="채색석">50,000</span></div>
+      <b class="xb x1">✕</b>
+    </div>
+    <div class="hbody">
+      <div class="hc heroes on" data-h="heroes" style="--ct:22px"><div class="mg dk"><em>갑판 위</em><i class="f e-wh" style="background-image:url(img/assets/chars/yerin_idle.png)"></i><i class="f e-pu" style="background-image:url(img/assets/chars/yuna_idle.png)"></i><i class="f e-pu" style="background-image:url(img/assets/chars/serena_idle.png)"></i><i class="f e-or" style="background-image:url(img/assets/chars/juhee_idle.png)"></i></div><div class="mg"><em>대기 · 17</em><i class="f e-rb" style="background-image:url(img/assets/chars/arca_idle.png)"></i><i class="f e-wh" style="background-image:url(img/assets/chars/aria_idle.png)"></i><i class="f e-gr" style="background-image:url(img/assets/chars/flora_idle.png)"></i><i class="f e-re" style="background-image:url(img/assets/chars/karen_idle.png)"></i><i class="f e-pu" style="background-image:url(img/assets/chars/noel_idle.png)"></i><i class="f e-pu" style="background-image:url(img/assets/chars/lumi_idle.png)"></i><i class="f e-re" style="background-image:url(img/assets/chars/suah_idle.png)"></i><i class="f e-wh" style="background-image:url(img/assets/chars/seoa_idle.png)"></i><i class="f e-bl" style="background-image:url(img/assets/chars/dohee_idle.png)"></i><i class="f e-pu" style="background-image:url(img/assets/chars/dahee_idle.png)"></i></div><span class="lbl">본문 = 2번 「아이들 목록」 시안</span></div>
+      <div class="hc formation" data-h="formation" style="--ct:40px"><div class="fq e-pu"><img src="img/assets/chars/yuna_idle.png" alt="유나"><b>1</b></div><div class="fq e-or"><img src="img/assets/chars/juhee_idle.png" alt="주희"><b>2</b></div><div class="fq e-pu"><img src="img/assets/chars/lumi_idle.png" alt="루미"><b>3</b></div><div class="fq e-wh"><img src="img/assets/chars/yerin_idle.png" alt="예린"><b>4</b></div><span class="lbl" style="color:#fff">본문 = 편성 B 팀 라인업</span></div>
+      <div class="hc summon" data-h="summon" style="--ct:40px"><div class="sbn"><img src="img/assets/ui/summon_book.png" alt="출석부"><b>출석부 소환</b></div><span class="lbl" style="color:#fff">본문 = 소환 시안</span></div>
+      <div class="hc adventure" data-h="adventure" style="--ct:40px"><figure style="--r:-3deg"><img src="img/assets/adventure/page_element_red.png" alt="">원소 구름섬</figure><figure style="--r:2deg"><img src="img/assets/adventure/page_soul.png" alt="">기억의 회랑</figure><figure style="--r:-2deg"><img src="img/assets/adventure/page_castle.png" alt="">잿빛성</figure><figure style="--r:3deg"><img src="img/assets/adventure/page_temple.png" alt="">신전</figure><figure style="--r:-1deg"><img src="img/assets/adventure/page_rank.png" alt="">등급전</figure></div>
+      <div class="hc school" data-h="school" style="--ct:50px"><figure><img src="img/assets/ui/room_lab.png" alt="">과학실 Lv.6</figure><figure><img src="img/assets/ui/room_gym.png" alt="">체육관 Lv.4</figure><figure><img src="img/assets/ui/room_cafe.png" alt="">급식실 Lv.5</figure></div>
+      <div class="hc shop" data-h="shop" style="--ct:20px"><div class="sh" style="top:46px"><figure><img src="img/assets/ui/icon_gem.png" alt="">채색석 120<br><span>1,200원</span></figure><figure><img src="img/assets/ui/icon_gem.png" alt="">채색석 630<br><span>5,900원</span></figure><figure><img src="img/assets/ui/icon_ticket.png" alt="">매일 선물<br><span>무료</span></figure></div><div class="sh" style="top:290px"><figure><img src="img/assets/ui/icon_crystal.png" alt="">성장 꾸러미<br><span>9,900원</span></figure><figure><img src="img/assets/ui/icon_pearl.png" alt="">항해 일지<br><span>4,900원</span></figure></div></div>
+    </div>
+    <div class="lt"><span class="ii" style="font-style:normal;font-family:inherit">🔒</span><div>모험은 항해사 Lv.7에 열려요<small>지금 Lv.5 · 퀘스트를 깨면 올라요</small></div></div>
+    <div class="dt"><i class="art"></i><span class="tag">아이 상세 A — 띠는 위로 숨음</span><div class="nm"><small>SS · 별 · 광역 딜러</small>세레나</div><div class="pn"><div class="tb"><span>능력</span><span>스킬</span><span>장비</span></div><div class="nb">전투력<b>8,191</b></div><div class="nb">공격력<b>819</b></div><div class="bt"><span>레벨 업</span><span>승급 ★3</span></div></div></div>
+    <div class="keep">‹ 목록</div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="frame_c" data-choice-group="hub_frame" data-choice-label="C · 아래 메뉴가 시트로">
+  <h2>C · 아래 메뉴 바가 올라와 시트가 됨 — 닫기 = 내리기 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">전투 화면 아래 메뉴 바가 <b>그대로 위로 밀려 올라와</b> 시트의 머리가 됩니다. 고른 허브 아이콘은 허브 색 알약으로 떠오르고, 위쪽 92px에는 전투가 계속 보입니다. 닫기는 「내리기」 또는 손잡이를 아래로. 상세가 열리면 시트가 끝까지 올라가고 손잡이만 남습니다.</p>
+  <div class="vp"><div class="scr C1" data-hub="heroes" data-lk="0" data-det="0">
+    <div class="bgc"></div><div class="dim" style="background:linear-gradient(180deg,rgba(20,13,48,.2),rgba(20,13,48,.55) 92px)"></div>
+    <div class="sheet C1s">
+      <div class="hbody">
+        <div class="hc heroes on" data-h="heroes" style="--ct:162px"><div class="mg dk"><em>갑판 위</em><i class="f e-wh" style="background-image:url(img/assets/chars/yerin_idle.png)"></i><i class="f e-pu" style="background-image:url(img/assets/chars/yuna_idle.png)"></i><i class="f e-pu" style="background-image:url(img/assets/chars/serena_idle.png)"></i><i class="f e-or" style="background-image:url(img/assets/chars/juhee_idle.png)"></i></div><div class="mg"><em>대기 · 17</em><i class="f e-rb" style="background-image:url(img/assets/chars/arca_idle.png)"></i><i class="f e-wh" style="background-image:url(img/assets/chars/aria_idle.png)"></i><i class="f e-gr" style="background-image:url(img/assets/chars/flora_idle.png)"></i><i class="f e-re" style="background-image:url(img/assets/chars/karen_idle.png)"></i><i class="f e-pu" style="background-image:url(img/assets/chars/noel_idle.png)"></i><i class="f e-pu" style="background-image:url(img/assets/chars/lumi_idle.png)"></i><i class="f e-re" style="background-image:url(img/assets/chars/suah_idle.png)"></i><i class="f e-wh" style="background-image:url(img/assets/chars/seoa_idle.png)"></i><i class="f e-bl" style="background-image:url(img/assets/chars/dohee_idle.png)"></i><i class="f e-pu" style="background-image:url(img/assets/chars/dahee_idle.png)"></i></div><span class="lbl">본문 = 2번 「아이들 목록」 시안</span></div>
+        <div class="hc formation" data-h="formation" style="--ct:160px"><div class="fq e-pu"><img src="img/assets/chars/yuna_idle.png" alt="유나"><b>1</b></div><div class="fq e-or"><img src="img/assets/chars/juhee_idle.png" alt="주희"><b>2</b></div><div class="fq e-pu"><img src="img/assets/chars/lumi_idle.png" alt="루미"><b>3</b></div><div class="fq e-wh"><img src="img/assets/chars/yerin_idle.png" alt="예린"><b>4</b></div><span class="lbl" style="color:#fff">본문 = 편성 B 팀 라인업</span></div>
+        <div class="hc summon" data-h="summon" style="--ct:160px"><div class="sbn" style="height:280px"><img src="img/assets/ui/summon_book.png" alt="출석부"><b>출석부 소환</b></div><span class="lbl" style="color:#fff">본문 = 소환 시안</span></div>
+        <div class="hc adventure" data-h="adventure" style="--ct:158px"><figure style="--r:-3deg"><img src="img/assets/adventure/page_element_red.png" alt="">원소 구름섬</figure><figure style="--r:2deg"><img src="img/assets/adventure/page_soul.png" alt="">기억의 회랑</figure><figure style="--r:-2deg"><img src="img/assets/adventure/page_castle.png" alt="">잿빛성</figure><figure style="--r:3deg"><img src="img/assets/adventure/page_temple.png" alt="">신전</figure><figure style="--r:-1deg"><img src="img/assets/adventure/page_rank.png" alt="">등급전</figure></div>
+        <div class="hc school" data-h="school" style="--ct:170px"><figure><img src="img/assets/ui/room_lab.png" alt="">과학실 Lv.6</figure><figure><img src="img/assets/ui/room_gym.png" alt="">체육관 Lv.4</figure><figure><img src="img/assets/ui/room_cafe.png" alt="">급식실 Lv.5</figure></div>
+        <div class="hc shop" data-h="shop" style="--ct:150px"><div class="sh" style="top:30px"><figure><img src="img/assets/ui/icon_gem.png" alt="">채색석 120<br><span>1,200원</span></figure><figure><img src="img/assets/ui/icon_gem.png" alt="">채색석 630<br><span>5,900원</span></figure><figure><img src="img/assets/ui/icon_ticket.png" alt="">매일 선물<br><span>무료</span></figure></div><div class="sh" style="top:235px"><figure><img src="img/assets/ui/icon_crystal.png" alt="">성장 꾸러미<br><span>9,900원</span></figure><figure><img src="img/assets/ui/icon_pearl.png" alt="">항해 일지<br><span>4,900원</span></figure></div></div>
+      </div>
+      <i class="grab"></i>
+      <div class="nav"><span class="hb on" data-h="heroes"><img src="img/assets/ui/kit/nav_heroes.png" alt="">아이들</span><span class="hb" data-h="formation"><img src="img/assets/ui/kit/nav_formation.png" alt="">편성</span><span class="hb" data-h="summon"><img src="img/assets/ui/kit/nav_summon.png" alt="">소환</span><span class="hb" data-h="adventure"><i class="lkb"></i><img src="img/assets/ui/kit/nav_adventure.png" alt="">모험</span><span class="hb" data-h="school"><img src="img/assets/ui/kit/nav_school.png" alt="">분교</span><span class="hb" data-h="shop"><img src="img/assets/ui/kit/nav_shop.png" alt="">상점</span></div>
+      <div class="subs on" data-h="heroes"><span class="on">목록</span><span>성장 기록<i class="rd"></i></span><span>장비</span></div>
+      <div class="subs" data-h="formation"><span class="on">항해</span><span>원소섬</span><span>회랑</span><span>잿빛성</span><span>신전</span><span>등급전</span></div>
+      <div class="subs" data-h="summon"><span class="on">출석부 소환</span></div>
+      <div class="subs" data-h="adventure"><span class="on">모험</span></div>
+      <div class="subs" data-h="school"><span class="on">분교</span><span>고래 강화</span></div>
+      <div class="subs" data-h="shop"><span class="on">상점</span><span>신화 조각</span></div>
+      <div class="wal"><span><img src="img/assets/ui/icon_pearl.png" alt="구름 진주">200a</span><span><img src="img/assets/ui/icon_gem.png" alt="채색석">50,000</span></div>
+      <span class="down"><i></i>내리기</span>
+      <div class="lt"><span class="ii" style="font-style:normal;font-family:inherit">🔒</span><div>모험은 항해사 Lv.7에 열려요<small>지금 Lv.5 · 퀘스트를 깨면 올라요</small></div></div>
+    </div>
+    <div class="dt"><i class="art"></i><span class="tag" style="top:30px">아이 상세 A — 시트가 끝까지 올라감</span><div class="nm"><small>SS · 별 · 광역 딜러</small>세레나</div><div class="pn"><div class="tb"><span>능력</span><span>스킬</span><span>장비</span></div><div class="nb">전투력<b>8,191</b></div><div class="nb">공격력<b>819</b></div><div class="bt"><span>레벨 업</span><span>승급 ★3</span></div></div></div>
+    <div class="keep">⌄ 목록으로</div>
+  </div></div>
+</section>
+
+<!-- ================= 2 ================= -->
+<h3>2. 아이들 목록 (D1-2)</h3>
+<p class="ctx">「분교 학생 앨범」 — 갑판 위 네 명은 크게, 나머지는 촘촘하게. 공통: 갑판 위 묶음을 맨 앞(#68), 빨간 점 = 레벨 업 · 승급 가능, NEW, SS 테 = 속성 색(세레나 별 · 아리아 빛 · 플로라 생명), 신화 아르카 = 무지개. 위쪽 띠는 1번 틀이 정해지기 전의 임시 틀입니다.</p>
+<div class="states" data-group="hero_list"><span>만난 아이</span><button type="button" data-k="n" data-v="21" aria-pressed="true">21명</button><button type="button" data-k="n" data-v="60">60명 (스크롤)</button><span>속성 거르기</span><button type="button" data-k="flt" data-v="all" aria-pressed="true">전체</button><button type="button" data-k="flt" data-v="pu">별만</button></div>
+
+<section class="opt" data-choice="list_a" data-choice-group="hero_list" data-choice-label="A · 폴라로이드 앨범">
+  <h2>A · 폴라로이드 앨범 — 갑판 4명이 첫 장 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">보라 가죽 앨범을 펼친 모양. 왼쪽 장은 <b>갑판 위 4명의 큰 폴라로이드</b>(자리 번호 도장 · 마스킹 테이프), 오른쪽 장은 나머지 아이들의 작은 사진이 촘촘히. 속성 거르기는 앨범 위에 꽂힌 <b>색 인덱스 탭</b>. 들어올 때 사진이 한 장씩 붙습니다.</p>
+  <div class="vp"><div class="scr A2" data-n="21" data-flt="all">
+    <div class="bgc"></div><div class="dim"></div>
+    <div class="chr"><b class="hub"><img src="img/assets/ui/kit/nav_heroes.png" alt="">아이들</b><span class="sb on">목록</span><span class="sb">성장 기록<i class="rd"></i></span><span class="sb">장비</span><div class="wal"><span><img src="img/assets/ui/icon_pearl.png" alt="구름 진주">200a</span><span><img src="img/assets/ui/icon_gem.png" alt="채색석">50,000</span></div><b class="xb">✕</b></div>
+    <div class="alb">
+      <div class="idx"><span class="ix all on">전체</span><span class="ix e-re">불꽃</span><span class="ix e-or">노을</span><span class="ix e-wh" style="--e:#a87a00">빛</span><span class="ix e-gr" style="--e:#1f8a55">생명</span><span class="ix e-bl" style="--e:#1f7fd0">물결</span><span class="ix e-pu">별</span></div>
+      <div class="pg l">
+        <div class="phd"><span class="cnt">4</span>갑판 위<small>· 편성에서 바꿔요</small></div>
+        <figure class="pol e-wh" style="left:34px;top:62px;--r:-3deg;--d:.05s;margin:0"><i class="tape"></i><span class="no">1</span><div class="ph" style="background-image:url(img/assets/chars/yerin_idle.png)"></div><div class="cp">예린<span class="stars">★★<u>★</u></span></div><span class="gb B">B</span></figure>
+        <figure class="pol e-pu" style="left:252px;top:54px;--r:2.5deg;--d:.15s;margin:0"><i class="tape"></i><span class="no">2</span><i class="rd"></i><div class="ph" style="background-image:url(img/assets/chars/yuna_idle.png)"></div><div class="cp">유나<span class="stars">★★<u>★★</u></span></div><span class="gb A">A</span></figure>
+        <figure class="pol e-pu ss" style="left:40px;top:316px;--r:2deg;--d:.25s;margin:0"><i class="tape"></i><span class="no">3</span><div class="ph" style="background-image:url(img/assets/chars/serena_idle.png)"></div><div class="cp">세레나<span class="stars">★★<u>★★★★</u></span></div><span class="gb SS">SS</span></figure>
+        <figure class="pol e-or" style="left:256px;top:308px;--r:-2.5deg;--d:.35s;margin:0"><i class="tape"></i><span class="no">4</span><div class="ph" style="background-image:url(img/assets/chars/juhee_idle.png)"></div><div class="cp">주희<span class="stars">★★<u>★★★</u></span></div><span class="gb S">S</span></figure>
+      </div>
+      <div class="pg r">
+        <div class="rhd">만난 아이 <span class="n21">21</span><span class="n60">60</span> / 60<span class="srt">등급순 ▾</span></div>
+        <div class="grid">
+          <div class="sp e-rb myth" style="--r:-1.5deg"><div class="ph" style="background-image:url(img/assets/chars/arca_idle.png)"></div><span class="gb M">신화</span><b>아르카</b></div>
+          <div class="sp e-wh ss" style="--r:1deg"><div class="ph" style="background-image:url(img/assets/chars/aria_idle.png)"></div><span class="gb SS">SS</span><b>아리아</b></div>
+          <div class="sp e-gr ss" style="--r:-1deg"><i class="nw">NEW</i><div class="ph" style="background-image:url(img/assets/chars/flora_idle.png)"></div><span class="gb SS">SS</span><b>플로라</b></div>
+          <div class="sp e-re" style="--r:1.5deg"><i class="rd"></i><div class="ph" style="background-image:url(img/assets/chars/karen_idle.png)"></div><span class="gb S">S</span><b>카렌</b></div>
+          <div class="sp e-pu" style="--r:-1deg"><div class="ph" style="background-image:url(img/assets/chars/noel_idle.png)"></div><span class="gb S">S</span><b>노엘</b></div>
+          <div class="sp e-pu" style="--r:1deg"><div class="ph" style="background-image:url(img/assets/chars/lumi_idle.png)"></div><span class="gb S">S</span><b>루미</b></div>
+          <div class="sp e-re" style="--r:-1.5deg"><i class="rd"></i><div class="ph" style="background-image:url(img/assets/chars/suah_idle.png)"></div><span class="gb A">A</span><b>수아</b></div>
+          <div class="sp e-wh" style="--r:1deg"><div class="ph" style="background-image:url(img/assets/chars/seoa_idle.png)"></div><span class="gb A">A</span><b>서아</b></div>
+          <div class="sp e-bl" style="--r:-1deg"><div class="ph" style="background-image:url(img/assets/chars/dohee_idle.png)"></div><span class="gb A">A</span><b>도희</b></div>
+          <div class="sp e-pu" style="--r:1.5deg"><div class="ph" style="background-image:url(img/assets/chars/dahee_idle.png)"></div><span class="gb A">A</span><b>다희</b></div>
+          <div class="sp e-pu" style="--r:-1deg"><div class="ph" style="background-image:url(img/assets/chars/sora_idle.png)"></div><span class="gb A">A</span><b>소라</b></div>
+          <div class="sp e-re" style="--r:1deg"><div class="ph" style="background-image:url(img/assets/chars/youngeun_idle.png)"></div><span class="gb B">B</span><b>영은</b></div>
+          <div class="sp e-or" style="--r:-1.5deg"><div class="ph" style="background-image:url(img/assets/chars/gyeol_idle.png)"></div><span class="gb B">B</span><b>결</b></div>
+          <div class="sp e-wh" style="--r:1deg"><div class="ph" style="background-image:url(img/assets/chars/mio_idle.png)"></div><span class="gb B">B</span><b>미오</b></div>
+          <div class="sp e-bl" style="--r:-1deg"><div class="ph" style="background-image:url(img/assets/chars/seoyun_idle.png)"></div><span class="gb B">B</span><b>서윤</b></div>
+          <div class="sp e-bl" style="--r:1.5deg"><div class="ph" style="background-image:url(img/assets/chars/haeun_idle.png)"></div><span class="gb B">B</span><b>해은</b></div>
+          <div class="sp e-pu" style="--r:-1deg"><div class="ph" style="background-image:url(img/assets/chars/ria_idle.png)"></div><span class="gb B">B</span><b>리아</b></div>
+        </div>
+        <div class="fade"></div><div class="sbr"><i></i></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="list_b" data-choice-group="hero_list" data-choice-label="B · 등급 선반 진열">
+  <h2>B · 등급 선반 진열 — SS · 신화는 액자 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">밤빛 진열장. 맨 위는 <b>갑판 나무판 위에 선 4명</b>(닻 번호), 그 아래 <b>신화 · SS는 금 액자</b>(신화 = 무지개 액자), S · A · B는 유리 선반 위에 <b>서 있는 SD 피규어</b>가 숨 쉬듯 흔들립니다. 속성 거르기는 왼쪽 물감 방울. 등급이 높을수록 위층.</p>
+  <div class="vp"><div class="scr B2" data-n="21" data-flt="all">
+    <div class="bgc"></div><div class="dim"></div>
+    <div class="chr"><b class="hub"><img src="img/assets/ui/kit/nav_heroes.png" alt="">아이들</b><span class="sb on">목록</span><span class="sb">성장 기록<i class="rd"></i></span><span class="sb">장비</span><div class="wal"><span><img src="img/assets/ui/icon_pearl.png" alt="구름 진주">200a</span><span><img src="img/assets/ui/icon_gem.png" alt="채색석">50,000</span></div><b class="xb">✕</b></div>
+    <div class="flt"><span class="on"><i style="--e:#fff"></i>전체</span><span><i class="e-re"></i>불꽃</span><span><i class="e-or"></i>노을</span><span><i class="e-wh"></i>빛</span><span><i class="e-gr"></i>생명</span><span><i class="e-bl"></i>물결</span><span><i class="e-pu"></i>별</span><b class="cnt"><span class="n21">21</span><span class="n60">60</span> / 60명</b></div>
+    <div class="cab">
+      <div class="shelf deck" style="--t:0;--h:178px"><span class="lab">갑판 위 <small>· 4명</small></span><div class="items" style="bottom:16px;gap:28px;left:60px">
+        <div class="fig e-wh" style="--fh:132px"><span class="anc">1</span><img src="img/assets/chars/yerin_idle.png" alt="예린"><b>예린</b></div>
+        <div class="fig e-pu" style="--fh:132px;--d:-1s"><span class="anc">2</span><i class="rd"></i><img src="img/assets/chars/yuna_idle.png" alt="유나"><b>유나</b></div>
+        <div class="fig e-pu" style="--fh:132px;--d:-2s"><span class="anc">3</span><img src="img/assets/chars/serena_idle.png" alt="세레나"><b>세레나</b></div>
+        <div class="fig e-or" style="--fh:132px;--d:-3s"><span class="anc">4</span><img src="img/assets/chars/juhee_idle.png" alt="주희"><b>주희</b></div>
+      </div></div>
+      <div class="shelf" style="--t:178px;--h:190px"><span class="lab">신화 · SS <small>· 액자</small></span><div class="items" style="bottom:24px;gap:26px;left:60px">
+        <div class="frm myth e-rb"><div class="in" style="background-image:url(img/assets/chars/arca_idle.png)"></div><span class="gb M">신화</span><b>아르카</b></div>
+        <div class="frm e-pu"><span class="anc">3</span><div class="in" style="background-image:url(img/assets/chars/serena_idle.png)"></div><span class="gb SS">SS</span><b>세레나</b></div>
+        <div class="frm e-wh"><div class="in" style="background-image:url(img/assets/chars/aria_idle.png)"></div><span class="gb SS">SS</span><b>아리아</b></div>
+        <div class="frm e-gr"><i class="nw">NEW</i><div class="in" style="background-image:url(img/assets/chars/flora_idle.png)"></div><span class="gb SS">SS</span><b>플로라</b></div>
+      </div></div>
+      <div class="shelf" style="--t:368px;--h:170px"><span class="lab">S</span><div class="items">
+        <div class="fig e-re"><i class="rd"></i><span class="gb S">S</span><img src="img/assets/chars/karen_idle.png" alt="카렌"><b>카렌</b></div>
+        <div class="fig e-or" style="--d:-1.4s"><span class="anc" style="width:24px;height:24px;font-size:12px;left:auto;right:6px;transform:none">4</span><span class="gb S">S</span><img src="img/assets/chars/juhee_idle.png" alt="주희"><b>주희</b></div>
+        <div class="fig e-pu" style="--d:-.6s"><span class="gb S">S</span><img src="img/assets/chars/noel_idle.png" alt="노엘"><b>노엘</b></div>
+        <div class="fig e-pu" style="--d:-2.2s"><span class="gb S">S</span><img src="img/assets/chars/lumi_idle.png" alt="루미"><b>루미</b></div>
+      </div></div>
+      <div class="shelf" style="--t:538px;--h:160px"><span class="lab">A</span><div class="items">
+        <div class="fig e-re"><i class="rd"></i><span class="gb A">A</span><img src="img/assets/chars/suah_idle.png" alt="수아"><b>수아</b></div>
+        <div class="fig e-wh" style="--d:-1s"><span class="gb A">A</span><img src="img/assets/chars/seoa_idle.png" alt="서아"><b>서아</b></div>
+        <div class="fig e-bl" style="--d:-2s"><span class="gb A">A</span><img src="img/assets/chars/dohee_idle.png" alt="도희"><b>도희</b></div>
+        <div class="fig e-pu" style="--d:-3s"><span class="gb A">A</span><img src="img/assets/chars/dahee_idle.png" alt="다희"><b>다희</b></div>
+        <div class="fig e-pu" style="--d:-.5s"><span class="gb A">A</span><img src="img/assets/chars/sora_idle.png" alt="소라"><b>소라</b></div>
+        <div class="fig e-pu" style="--d:-1.6s"><span class="anc" style="width:24px;height:24px;font-size:12px;left:auto;right:6px;transform:none">2</span><span class="gb A">A</span><img src="img/assets/chars/yuna_idle.png" alt="유나"><b>유나</b></div>
+      </div></div>
+      <span class="more">▼ B 선반 7명 <span class="n60">· 더 아래 39명</span></span>
+    </div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="list_c" data-choice-group="hero_list" data-choice-label="C · 큰 미리보기 + 목록">
+  <h2>C · 왼쪽 큰 미리보기 + 오른쪽 목록 — 누르면 바로 상세 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">왼쪽은 고른 아이의 <b>컷인 그림</b>이 크게(아이 상세 A와 같은 그림이라 「상세 보기」를 누르면 그대로 커지며 이어짐), 오른쪽은 얼굴 칩 목록. 갑판 위 4명은 큰 칩 + 자리 번호, 고른 칩은 속성 색으로 빛나며 왼쪽을 가리킵니다. 목록을 한 번 누르면 미리보기, 한 번 더 누르면 상세.</p>
+  <div class="vp"><div class="scr C2" data-n="21" data-flt="all">
+    <div class="bgc"></div><div class="dim"></div>
+    <div class="chr"><b class="hub"><img src="img/assets/ui/kit/nav_heroes.png" alt="">아이들</b><span class="sb on">목록</span><span class="sb">성장 기록<i class="rd"></i></span><span class="sb">장비</span><div class="wal"><span><img src="img/assets/ui/icon_pearl.png" alt="구름 진주">200a</span><span><img src="img/assets/ui/icon_gem.png" alt="채색석">50,000</span></div><b class="xb">✕</b></div>
+    <div class="pv"><i class="art"></i><div class="meta"><div class="ch"><i>SS</i><i>● 별</i><i>광역 딜러</i></div><b>세레나</b><span class="stars">★★<u>★★★★</u></span><div class="lv">Lv.10 / 20 · 각성 0/5</div></div><span class="go">상세 보기 ›</span></div>
+    <div class="ls">
+      <div class="fl"><span class="on">전체</span><span class="e-re"><i></i>불꽃</span><span class="e-or"><i></i>노을</span><span class="e-wh"><i></i>빛</span><span class="e-gr"><i></i>생명</span><span class="e-bl"><i></i>물결</span><span class="e-pu"><i></i>별</span></div>
+      <div class="gh">갑판 위 <small>· 4명</small></div>
+      <div class="row dkr"><i class="lc f e-wh" style="background-image:url(img/assets/chars/yerin_idle.png)"><em>1</em><b>예린</b></i><i class="lc f e-pu" style="background-image:url(img/assets/chars/yuna_idle.png)"><i class="rd"></i><em>2</em><b>유나</b></i><i class="lc f e-pu pick" style="background-image:url(img/assets/chars/serena_idle.png)"><em>3</em><b>세레나</b></i><i class="lc f e-or" style="background-image:url(img/assets/chars/juhee_idle.png)"><em>4</em><b>주희</b></i></div>
+      <div class="gh">대기 <small>· <span class="n21">17</span><span class="n60">56</span>명 · 등급순</small></div>
+      <div class="row">
+        <i class="lc f e-rb myth" style="background-image:url(img/assets/chars/arca_idle.png)"><span class="gb M">신화</span><b>아르카</b></i>
+        <i class="lc f e-wh" style="background-image:url(img/assets/chars/aria_idle.png)"><span class="gb SS">SS</span><b>아리아</b></i>
+        <i class="lc f e-gr" style="background-image:url(img/assets/chars/flora_idle.png)"><i class="nw">NEW</i><span class="gb SS">SS</span><b>플로라</b></i>
+        <i class="lc f e-re" style="background-image:url(img/assets/chars/karen_idle.png)"><i class="rd"></i><span class="gb S">S</span><b>카렌</b></i>
+        <i class="lc f e-pu" style="background-image:url(img/assets/chars/noel_idle.png)"><span class="gb S">S</span><b>노엘</b></i>
+        <i class="lc f e-pu" style="background-image:url(img/assets/chars/lumi_idle.png)"><span class="gb S">S</span><b>루미</b></i>
+        <i class="lc f e-re" style="background-image:url(img/assets/chars/suah_idle.png)"><i class="rd"></i><span class="gb A">A</span><b>수아</b></i>
+        <i class="lc f e-wh" style="background-image:url(img/assets/chars/seoa_idle.png)"><span class="gb A">A</span><b>서아</b></i>
+        <i class="lc f e-bl" style="background-image:url(img/assets/chars/dohee_idle.png)"><span class="gb A">A</span><b>도희</b></i>
+        <i class="lc f e-pu" style="background-image:url(img/assets/chars/dahee_idle.png)"><span class="gb A">A</span><b>다희</b></i>
+        <i class="lc f e-pu" style="background-image:url(img/assets/chars/sora_idle.png)"><span class="gb A">A</span><b>소라</b></i>
+        <i class="lc f e-re" style="background-image:url(img/assets/chars/youngeun_idle.png)"><span class="gb B">B</span><b>영은</b></i>
+        <i class="lc f e-or" style="background-image:url(img/assets/chars/gyeol_idle.png)"><span class="gb B">B</span><b>결</b></i>
+        <i class="lc f e-wh" style="background-image:url(img/assets/chars/mio_idle.png)"><span class="gb B">B</span><b>미오</b></i>
+        <i class="lc f e-bl" style="background-image:url(img/assets/chars/seoyun_idle.png)"><span class="gb B">B</span><b>서윤</b></i>
+        <i class="lc f e-bl" style="background-image:url(img/assets/chars/haeun_idle.png)"><span class="gb B">B</span><b>해은</b></i>
+        <i class="lc f e-pu" style="background-image:url(img/assets/chars/ria_idle.png)"><span class="gb B">B</span><b>리아</b></i>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ================= 3 ================= -->
+<h3>3. 아이 상세 안 — 레벨 업 · 승급 · 각성 (D1-3, 「성장」 탭 대체)</h3>
+<p class="ctx">PD 결정으로 아이들 허브의 <b>「성장」 탭은 없어졌습니다</b>(탭 = 목록 · 성장 기록 · 장비). 키우기는 <b>아이 상세 A 한 곳</b>에서만, 한 번에 한 아이 · 한 단계씩(일괄 · ×10 · MAX 없음). 용어: 영구 레벨 올리기 = <b>레벨 업</b>, ★ 올리기 = <b>승급</b>, ★가 다 차면 같은 자리에서 <b>각성 N단계</b>. 바탕은 적용된 아이 상세 A이고, 그림 · 이름 · 별 · 단추 자리만 새로 그렸습니다(전투력 · 공격력 외 칸은 세레나 캡처 그대로). 레벨 업 순간은 #45 빛 고리를 그대로 씁니다. 지갑 예시: 구름 진주 42 · 기억 결정 150. 각성 효과 글자는 게임 그대로, 비용 · 전투력 수치는 예시입니다.</p>
+<div class="states" data-group="growth"><span>보는 아이</span><button type="button" data-k="pick" data-v="serena" aria-pressed="true">세레나 · 레벨 업 순간</button><button type="button" data-k="pick" data-v="aria">아리아 · Lv 상한 → 승급</button><button type="button" data-k="pick" data-v="karen">카렌 · 진주 모자람</button><button type="button" data-k="pick" data-v="flora">플로라 · ★6 → 각성 1단계</button></div>
+
+<section class="opt" data-choice="grow_a" data-choice-group="growth" data-choice-label="A · 패널 아래 키우기 줄">
+  <h2>A · 패널 아래 「키우기 줄」 — 지금 자리, 세 갈래가 한눈에 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">오른쪽 판 아래를 <b>세 칸 진행 줄(Lv · ★ · 각성)</b> + <b>큰 단추 둘</b>로. 지금 가장 먼저 할 일이 있는 칸이 금빛으로 뜨고, 단추 안에 비용과 바로 얻는 것(공격 +8.7%)이 함께. 상한이면 레벨 업이 「승급하면 Lv.30까지」로 바뀌고 승급 단추가 숨 쉽니다. 익숙하고 가장 가벼운 안.</p>
+  <div class="vp"><div class="scr G GA" data-pick="serena" data-g="A"></div></div>
+</section>
+
+<section class="opt" data-choice="grow_b" data-choice-group="growth" data-choice-label="B · 그림 위에서 바로">
+  <h2>B · 그림 위에서 바로 — Lv 메달을 누르면 레벨 업, 별 줄이 승급 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">왼쪽 위 <b>Lv 메달 자체가 레벨 업 단추</b>(아래 주황 꼬리표에 비용), 이름 아래 <b>별 줄이 남색 승급 판</b> — 다음 별이 금 테두리로 깜빡이고, ★가 다 차면 같은 판에 각성 마름모 다섯이 이어집니다. 오른쪽 판은 단추가 빠져 <b>「다음 레벨 미리보기」</b>와 이야기만. 아이 그림과 키우기가 한 몸.</p>
+  <div class="vp"><div class="scr G GB" data-pick="serena" data-g="B"></div></div>
+</section>
+
+<section class="opt" data-choice="grow_c" data-choice-group="growth" data-choice-label="C · 패널 안 키우기 탭">
+  <h2>C · 패널 안 「키우기」 탭 — 능력 · 스킬 · 장비 옆에 하나 더 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">허브 탭은 없어지고 <b>아이 상세 안의 네 번째 탭</b>으로. 큰 Lv 다이얼 · 다음 레벨 효과, <b>★1~★6 승급 길</b>(별마다 Lv 상한), <b>각성 5단계</b>(★6 뒤에 열림)를 한 장에 펼치고 맨 아래 단추 둘. 할 수 있는 게 있으면 「키우기」 탭에 빨간 점(허브에서 없어진 「성장」과 헷갈리지 않게 이름을 바꿈). 가장 자세하지만 한 번 더 누름.</p>
+  <div class="vp"><div class="scr G GC" data-pick="serena" data-g="C"></div></div>
+</section>
+<script>
+(()=>{
+const AS='img/assets/';
+const IP=`<img src="${AS}ui/icon_pearl.png" alt="구름 진주">`,IC=`<img src="${AS}ui/icon_crystal.png" alt="기억 결정">`;
+// 지갑 예시: 진주 42 · 결정 150
+const H={
+  serena:{n:'세레나',g:'SS',e:'e-pu',el:'별',role:'광역 딜러',lv:10,st:2,aw:0,ac:5,pow:'8,191',atk:'819',atk1:'890',pw1:'+440',lc:7,lg:'공격 +8.7%',sc:130,mode:'up'},
+  aria:{n:'아리아',g:'SS',e:'e-wh',el:'빛',role:'수호',lv:20,st:2,aw:0,ac:5,pow:'9,940',atk:'702',lc:9,sc:130,mode:'cap'},
+  karen:{n:'카렌',g:'S',e:'e-re',el:'불꽃',role:'단일 딜러',lv:12,st:2,aw:0,ac:4,pow:'5,412',atk:'603',atk1:'648',pw1:'+260',lc:58,lg:'공격 +7.5%',sc:104,mode:'lack'},
+  flora:{n:'플로라',g:'SS',e:'e-gr',el:'생명',role:'회복·지원',lv:60,st:6,aw:0,ac:5,pow:'21,306',atk:'1,488',sc:120,mode:'awk',awe:'공격력 +20%'}
+};
+const stars=(n,next)=>{let s='';for(let i=1;i<=6;i++)s+=i<=n?'★':(next&&i===n+1?'<em>★</em>':'<u>★</u>');return s};
+const dia=(h,big)=>{let s='';for(let i=1;i<=h.ac;i++)s+=`<i class="${i<=h.aw?'on':''}${i===h.aw+1&&h.mode==='awk'?' nx':''}"></i>`;return s};
+const cap=h=>h.st*10;
+function common(id,h,g){
+  const lvT=`Lv.${h.lv} / ${cap(h)}`;
+  let s=`<div class="art" style="--ci:url(${AS}cutin/${id}_cutin_cut.png)"></div>`;
+  s+=`<div class="vq v1">${h.pow}</div><div class="vq v2">${h.atk}</div>`;
+  s+=`<div class="nmb"><div class="tags"><i class="gr">${h.g}</i><i>● ${h.el}</i><i>${h.role}</i></div><b class="ol">${h.n}</b></div>`;
+  const burst=h.mode==='up';
+  s+=`<div class="med${burst?' burst lvc':''}${h.mode==='cap'?' capd':''}"><small>Lv</small><span class="nn"><span class="n1">${h.lv}</span>${burst?`<span class="n2">${h.lv+1}</span>`:''}</span>${burst?`<span class="fup">${h.lg}</span>`:''}</div>`;
+  if(g!=='B')s+=`<div class="inf"><div class="r1"><i class="st">${stars(h.st)}</i><span class="awk ol">각성 <em>${h.aw}/${h.ac}</em></span></div><small class="ol">${lvT} · 항해 Lv.1</small></div>`;
+  return s;
+}
+function lvBtn(h,cls=''){
+  if(h.mode==='cap')return `<span class="btn cap ${cls}">레벨 업<span class="pl">승급하면 Lv.${cap(h)+10}까지</span></span>`;
+  if(h.mode==='awk')return `<span class="btn cap ${cls}">레벨 업<span class="pl">Lv.${h.lv} 최고</span></span>`;
+  if(h.mode==='lack')return `<span class="btn no ${cls}">레벨 업<span class="pl">${IP}<s>42</s>/${h.lc}</span></span>`;
+  return `<span class="btn ${cls}">레벨 업<span class="pl">${IP}${h.lc} · ${h.lg}</span></span>`;
+}
+function stBtn(h,cls=''){
+  if(h.mode==='awk')return `<span class="btn aw2 glow ${cls}">각성 1단계<span class="pl">${IC}${h.sc}</span></span>`;
+  return `<span class="btn v${h.mode==='cap'?' glow':''} ${cls}">승급 ★${h.st+1}<span class="pl">${IC}${h.sc}</span></span>`;
+}
+const HINT={up:'레벨 업하면 <b>공격 +8.7% · 전투력 +440</b>',cap:'Lv 상한이에요 — <b>승급하면 상한 30 · 공격 +30.8%</b>',lack:'구름 진주가 <s>16</s> 모자라요 · 학교로 복귀하면 모여요',awk:'★6 완료 — <b>각성 1단계: 공격력 +20%</b>'};
+function A(id,h){
+  let s=common(id,h,'A');
+  const lvV=Math.round(h.lv/cap(h)*100),stV=Math.round(h.st/6*100),awV=Math.round(h.aw/h.ac*100);
+  const hot=h.mode==='up'||h.mode==='lack'?'l':h.mode==='cap'?'s':'w';
+  s+=`<div class="pp"><div class="strip"><div class="ch${hot==='l'?' hot':''}" style="--v:${lvV}%"><b>Lv<span>${h.lv} / ${cap(h)}</span></b><i></i></div><div class="ch s${hot==='s'?' hot':''}" style="--v:${stV}%"><b>승급<span>★${h.st} / 6</span></b><i></i></div><div class="ch w${hot==='w'?' hot':''}" style="--v:${awV}%"><b>각성<span>${h.st<6?'★6 뒤':h.aw+' / '+h.ac}</span></b><i></i></div></div>`;
+  s+=`<div class="row">${lvBtn(h)}${stBtn(h)}<span class="story">이야기</span><span class="hint">${HINT[h.mode]}</span></div></div>`;
+  return s;
+}
+function B(id,h){
+  let s=common(id,h,'B');
+  const lb=h.mode==='up'?`<span class="btn">▲ 레벨 업<span class="pl">${IP}${h.lc}</span></span><small class="ol">${h.lg}</small>`:h.mode==='lack'?`<span class="btn no">▲ 레벨 업<span class="pl">${IP}<s>42</s>/${h.lc}</span></span><small class="ol">진주 16 모자람</small>`:h.mode==='cap'?`<span class="btn cap">Lv 상한<span class="pl">승급 →</span></span>`:`<span class="btn cap">Lv 최고</span>`;
+  s+=`<div class="lvp">${lb}</div>`;
+  const max=h.mode==='awk';
+  s+=`<div class="spl"><div class="l"><i class="st">${stars(h.st,!max)}</i>${max?`<div class="dia">${dia(h)}</div>`:''}<small>Lv.${h.lv} / ${cap(h)} · ${max?'각성 '+h.aw+'/'+h.ac:'다음 ★ = Lv 상한 '+(cap(h)+10)}</small></div>${max?`<span class="btn aw2 glow">각성 1단계<span class="pl">${IC}${h.sc}</span></span>`:`<span class="btn v${h.mode==='cap'?' glow':''}">승급 ★${h.st+1}<span class="pl">${IC}${h.sc}</span></span>`}</div>`;
+  const pv=h.mode==='up'||h.mode==='lack'?`<h4>다음 레벨 (Lv.${h.lv+1})</h4><div>공격력<span>${h.atk} → <b>${h.atk1}</b></span></div><div>전투력<b>${h.pw1}</b></div>`:h.mode==='cap'?`<h4>승급 ★${h.st+1} 하면</h4><div>Lv 상한<span>${cap(h)} → <b>${cap(h)+10}</b></span></div><div>공격<b>+30.8%</b></div>`:`<h4>각성 1단계 하면</h4><div>공격력<b>+20%</b></div><div>다음 2단계<span>기본 스킬 위력 +30%</span></div>`;
+  s+=`<div class="pp"><div class="pv">${pv}</div><span class="story">이야기</span><span class="hint">키우기는 왼쪽 그림 위 · Lv 메달 · 별 판</span></div>`;
+  return s;
+}
+function C(id,h){
+  let s=common(id,h,'C');
+  const can=h.mode!=='lack'||true;
+  s+=`<div class="tabs"><span>능력</span><span>스킬</span><span>장비</span><span class="on">키우기${can?'<i class="rd"></i>':''}</span></div>`;
+  const lvV=Math.round(h.lv/cap(h)*100);
+  const nx=h.mode==='up'||h.mode==='lack'?`<h4>다음 레벨 Lv.${h.lv+1}</h4><span>공격력 ${h.atk} → <b>${h.atk1}</b></span><span>전투력 <b>${h.pw1}</b></span>${h.mode==='lack'?'<span>구름 진주 <s>16</s> 모자람</span>':''}`:h.mode==='cap'?`<h4>Lv 상한 ${cap(h)}</h4><span>승급하면 상한 <b>${cap(h)+10}</b></span><span>공격 <b>+30.8%</b></span>`:`<h4>Lv.${h.lv} 최고 · ★6 완료</h4><span>다음은 <b>각성 1단계</b></span><span>${h.awe}</span>`;
+  let nodes='';for(let i=1;i<=6;i++)nodes+=`<i class="${i<=h.st?'on':i===h.st+1?'nx':''}"><b>★</b>Lv.${i*10}</i>`;
+  const max=h.mode==='awk';
+  s+=`<div class="body"><div class="top"><div class="dial" style="--v:${lvV}%"><b><small>Lv</small>${h.lv}</b></div><div class="nx">${nx}</div></div>`;
+  s+=`<div class="path"><h4>승급 길<span>★${h.st} / 6 · 별마다 Lv 상한 +10</span></h4><div class="nodes" style="--v:${Math.round((h.st-1)/5*100)}%">${nodes}</div></div>`;
+  s+=`<div class="awr${max?'':' lk'}"><h4>각성<span>${max?h.aw+' / '+h.ac+' 단계':'★6이 되면 열려요'}</span></h4><div class="dd">${dia(h)}${max?`<span>1단계 · ${h.awe}</span>`:''}</div></div>`;
+  s+=`<div class="bts">${lvBtn(h)}${stBtn(h)}</div></div>`;
+  return s;
+}
+const F={A,B,C};
+document.querySelectorAll('.scr.G[data-g]').forEach(scr=>{
+  let s='<div class="bgh"></div><div class="hd">';
+  for(const id in H)s+=`<div class="p ${id} ${H[id].e}">${F[scr.dataset.g](id,H[id])}</div>`;
+  scr.innerHTML=s+'</div>';
+});
+})();
+</script>
+
+<!-- ================= 4 ================= -->
+<h3>4. 장비 목록 — 아이 · 착용 4칸 · 가방 (D1-4)</h3>
+<p class="ctx">작업대 A(장비를 누르면 열리는 짙은 보라 무대)와 이어지는 「공방 선반」. 공통: 장비 테 색 = 등급(일반 회색 · 희귀 파랑 · 영웅 보라 · 전설 금), 칸 왼쪽 위 숫자 = 단계, 오른쪽 아래 = 강화. 주황 맥박 = 연성할 수 있는 4개. ⓘ는 누르면 그 단추 옆 짧은 말풍선(장비 작업대와 같은 방식).</p>
+<div class="states" data-group="gear_list"><span>착용</span><button type="button" data-k="eq" data-v="full" aria-pressed="true">4칸 꽉 참</button><button type="button" data-k="eq" data-v="empty">빈 칸 2</button><span>가방</span><button type="button" data-k="bag" data-v="12" aria-pressed="true">12개</button><button type="button" data-k="bag" data-v="0">비어 있음</button><button type="button" data-k="bag" data-v="34">34개 (스크롤)</button></div>
+
+<section class="opt" data-choice="gear_a" data-choice-group="gear_list" data-choice-label="A · 마네킹 + 서랍">
+  <h2>A · 마네킹 + 서랍</h2>
+  <p class="cap">가운데 <b>아이 SD가 빛 받침 위에</b> 서고 착용 4칸이 둘레(리본 · 배지 · 부적 · 무기)에 점선으로 이어집니다. 오른쪽은 <b>부위 = 서랍 4개</b>, 고른 서랍이 쑥 나와 안쪽 칸에 가방 장비가 놓입니다. 아래 줄에 도감 · 색가루 · 일괄 연성.</p>
+  <div class="vp"><div class="scr A4" data-eq="full" data-bag="12">
+    <div class="bgc"></div><div class="dim"></div>
+    <div class="chr"><b class="hub"><img src="img/assets/ui/kit/nav_heroes.png" alt="">아이들</b><span class="sb">목록</span><span class="sb">성장 기록<i class="rd"></i></span><span class="sb on">장비</span><div class="wal"><span><img src="img/assets/ui/icon_dust.png" alt="색가루">50.0a</span><span><img src="img/assets/ui/icon_gem.png" alt="채색석">50,000</span></div><b class="xb">✕</b></div>
+    <div class="hl"><span class="e-wh"><i class="f" style="background-image:url(img/assets/chars/aria_idle.png)"></i>아리아<small>0/4</small></span><span class="e-pu"><i class="f" style="background-image:url(img/assets/chars/serena_idle.png)"></i>세레나<small>0/4</small></span><span class="e-re"><i class="f" style="background-image:url(img/assets/chars/karen_idle.png)"></i>카렌<small>0/4</small></span><span class="e-pu on"><i class="f" style="background-image:url(img/assets/chars/yuna_idle.png)"></i>유나<small class="tx" data-eq-full="4/4" data-eq-empty="2/4">4/4</small></span><span class="e-or"><i class="f" style="background-image:url(img/assets/chars/juhee_idle.png)"></i>주희<small>1/4</small></span><span class="e-pu"><i class="f" style="background-image:url(img/assets/chars/lumi_idle.png)"></i>루미<small>0/4</small></span><span class="e-re"><i class="f" style="background-image:url(img/assets/chars/suah_idle.png)"></i>수아<small>0/4</small></span><span class="e-wh"><i class="f" style="background-image:url(img/assets/chars/seoa_idle.png)"></i>서아<small>0/4</small></span></div>
+    <div class="stage">
+      <div class="nmr"><b>유나</b><span class="tx" data-eq-full="장비 공격 ×3.12" data-eq-empty="장비 공격 ×1.74">장비 공격 ×3.12</span></div>
+      <svg class="lns" viewBox="0 0 470 640" aria-hidden="true"><g fill="none" stroke="#ffe7a6" stroke-width="2" stroke-dasharray="3 7" opacity=".7"><path d="M112 190 Q170 210 205 250"/><path d="M358 190 Q300 210 265 250"/><path d="M112 400 Q160 390 200 380"/><path d="M358 400 Q310 390 270 380"/></g></svg>
+      <i class="dais"></i><img class="sd" src="img/assets/chars/yuna_idle.png" alt="유나">
+      <div class="slot" style="left:34px;top:120px"><span class="gt q3"><img src="img/assets/ui/gear_ribbon.png" alt="전설 리본"><em class="stg">4</em><em class="pl">+12</em></span>공격 +45%</div>
+      <div class="slot ex" style="right:34px;top:120px"><span class="gt q3 full"><img src="img/assets/ui/gear_badge.png" alt="전설 배지"><em class="stg">4</em><em class="pl">+12</em></span><span class="gt empty alt"><img src="img/assets/ui/gear_badge.png" alt="배지 빈 칸"></span><span class="tx" data-eq-full="보호막 +60%" data-eq-empty="비어 있음">보호막 +60%</span></div>
+      <div class="slot" style="left:34px;top:332px"><span class="gt q3"><img src="img/assets/ui/gear_charm.png" alt="전설 부적"><em class="stg">4</em><em class="pl">+12</em></span>공격 +26%</div>
+      <div class="slot ex" style="right:34px;top:332px"><span class="gt q3 full"><img src="img/assets/ui/gear_weapon.png" alt="전설 별 무기"><em class="stg">4</em><em class="pl">+12</em></span><span class="gt empty alt"><img src="img/assets/ui/gear_weapon.png" alt="무기 빈 칸"></span><span class="tx" data-eq-full="공격 +60%" data-eq-empty="비어 있음">공격 +60%</span></div>
+      <div class="setc">별빛 합창 <i class="tx" data-eq-full="◆◆◆◆" data-eq-empty="◆◆◇◇">◆◆◆◆</i> <span class="tx" data-eq-full="4세트 · 쿨 -8%" data-eq-empty="2세트 · 공격 +8%">4세트 · 쿨 -8%</span></div>
+    </div>
+    <div class="cabi">
+      <div class="drw"><span class="on"><img src="img/assets/ui/gear_ribbon.png" alt="">리본</span><span><img src="img/assets/ui/gear_badge.png" alt="">배지</span><span><img src="img/assets/ui/gear_charm.png" alt="">부적</span><span><img src="img/assets/ui/gear_weapon.png" alt="">무기</span></div>
+      <div class="tray"><span class="cnt tx" data-bag-12="리본 12" data-bag-0="리본 0" data-bag-34="리본 34 · 내려서 더 보기">리본 12</span>
+        <div class="bag">
+          <span class="gt q3"><img src="img/assets/ui/gear_ribbon.png" alt="전설 리본"><em class="stg">2</em></span>
+          <span class="gt q2"><img src="img/assets/ui/gear_ribbon.png" alt="영웅 리본"><em class="stg">1</em></span>
+          <span class="gt q2"><img src="img/assets/ui/gear_ribbon.png" alt="영웅 리본"><em class="stg">2</em><em class="pl">+3</em></span>
+          <span class="gt q1"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"><em class="stg">1</em></span>
+          <span class="gt q1"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"><em class="stg">3</em></span>
+          <span class="gt q0 m4"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">1</em></span>
+          <span class="gt q0 m4"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">1</em></span>
+          <span class="gt q0 m4"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">1</em></span>
+          <span class="gt q0 m4"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">1</em></span>
+          <span class="gt q0"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">2</em></span>
+          <span class="gt q0"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">3</em></span>
+          <span class="gt q1"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"><em class="stg">2</em></span>
+          <span class="gt q1 x34"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"><em class="stg">2</em></span>
+          <span class="gt q0 x34"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">4</em></span>
+          <span class="gt q2 x34"><img src="img/assets/ui/gear_ribbon.png" alt="영웅 리본"><em class="stg">3</em></span>
+          <span class="gt q0 x34"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">2</em></span>
+          <span class="gt q1 x34"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"><em class="stg">1</em></span>
+          <span class="gt q0 x34"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">3</em></span>
+        </div>
+        <div class="emp"><b>리본 서랍이 비었어요</b>장 보스 · 모험에서 얻어요</div>
+      </div>
+      <div class="foot"><span class="chipx"><img src="img/assets/ui/kit/crest.png" alt="">도감 12/80 · 모두 공격 +6%</span><span class="ii">i</span><span class="merge">일괄 연성<em>1묶음</em></span><span class="ii">i</span></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="gear_b" data-choice-group="gear_list" data-choice-label="B · 페그보드 벽">
+  <h2>B · 페그보드 벽 — 부위별 고리에 걸린 장비</h2>
+  <p class="cap">공방 벽의 <b>구멍판(페그보드)</b>. 왼쪽 위에 핀으로 꽂은 아이 이름표, 그 옆 고리 4개에 <b>착용 장비가 매달려</b> 살짝 흔들리고, 아래는 부위별 네 칸에 가방 장비가 걸려 있습니다. 서랍을 열 필요 없이 네 부위가 한눈에. 아래 꼬리표에 도감 · 색가루, 오른쪽 일괄 연성.</p>
+  <div class="vp"><div class="scr B4" data-eq="full" data-bag="12">
+    <div class="bgc"></div><div class="dim"></div>
+    <div class="chr"><b class="hub"><img src="img/assets/ui/kit/nav_heroes.png" alt="">아이들</b><span class="sb">목록</span><span class="sb">성장 기록<i class="rd"></i></span><span class="sb on">장비</span><div class="wal"><span><img src="img/assets/ui/icon_dust.png" alt="색가루">50.0a</span><span><img src="img/assets/ui/icon_gem.png" alt="채색석">50,000</span></div><b class="xb">✕</b></div>
+    <div class="pegb">
+      <div class="card e-pu"><i class="f" style="background-image:url(img/assets/chars/yuna_idle.png)"></i><div><b>유나</b><small class="tx" data-eq-full="장비 공격 ×3.12" data-eq-empty="장비 공격 ×1.74">장비 공격 ×3.12</small><span class="chg">‹ 아이 바꾸기 ›</span></div></div>
+      <div class="worn">
+        <div class="w"><span class="gt q3" style="--d:0s"><img src="img/assets/ui/gear_ribbon.png" alt="전설 리본"><em class="stg">4</em><em class="pl">+12</em></span>리본</div>
+        <div class="w ex"><span class="gt q3 full" style="--d:-.9s"><img src="img/assets/ui/gear_badge.png" alt="전설 배지"><em class="stg">4</em><em class="pl">+12</em></span><span class="gt empty alt"><img src="img/assets/ui/gear_badge.png" alt="배지 빈 칸"></span>배지</div>
+        <div class="w"><span class="gt q3" style="--d:-1.8s"><img src="img/assets/ui/gear_charm.png" alt="전설 부적"><em class="stg">4</em><em class="pl">+12</em></span>부적</div>
+        <div class="w ex"><span class="gt q3 full" style="--d:-2.7s"><img src="img/assets/ui/gear_weapon.png" alt="전설 별 무기"><em class="stg">4</em><em class="pl">+12</em></span><span class="gt empty alt"><img src="img/assets/ui/gear_weapon.png" alt="무기 빈 칸"></span>무기</div>
+        <span class="setc">별빛 합창 <i class="tx" data-eq-full="4/4" data-eq-empty="2/4">4/4</i></span>
+      </div>
+      <div class="cols">
+        <div class="col"><h5><img src="img/assets/ui/gear_ribbon.png" alt="">리본 <small class="tx" data-bag-12="5" data-bag-0="0" data-bag-34="12">5</small></h5><div class="bag"><span class="gt q2"><img src="img/assets/ui/gear_ribbon.png" alt="영웅 리본"><em class="stg">1</em></span><span class="gt q1"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"><em class="stg">1</em></span><span class="gt q0"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">2</em></span><span class="gt q0"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">3</em></span><span class="gt q1"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"><em class="stg">2</em></span><span class="gt q0 x34"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">1</em></span></div><div class="emp">비어 있음</div></div>
+        <div class="col"><h5><img src="img/assets/ui/gear_badge.png" alt="">배지 <small class="tx" data-bag-12="2" data-bag-0="0" data-bag-34="7">2</small></h5><div class="bag"><span class="gt q1"><img src="img/assets/ui/gear_badge.png" alt="희귀 배지"><em class="stg">2</em></span><span class="gt q0"><img src="img/assets/ui/gear_badge.png" alt="일반 배지"><em class="stg">1</em></span><span class="gt q2 x34"><img src="img/assets/ui/gear_badge.png" alt="영웅 배지"><em class="stg">1</em></span></div><div class="emp">비어 있음</div></div>
+        <div class="col"><h5><img src="img/assets/ui/gear_charm.png" alt="">부적 <small class="tx" data-bag-12="4" data-bag-0="0" data-bag-34="9">4</small></h5><div class="bag"><span class="gt q0 m4"><img src="img/assets/ui/gear_charm.png" alt="일반 부적"><em class="stg">1</em></span><span class="gt q0 m4"><img src="img/assets/ui/gear_charm.png" alt="일반 부적"><em class="stg">1</em></span><span class="gt q0 m4"><img src="img/assets/ui/gear_charm.png" alt="일반 부적"><em class="stg">1</em></span><span class="gt q0 m4"><img src="img/assets/ui/gear_charm.png" alt="일반 부적"><em class="stg">1</em></span><span class="gt q1 x34"><img src="img/assets/ui/gear_charm.png" alt="희귀 부적"><em class="stg">2</em></span></div><div class="emp">비어 있음</div></div>
+        <div class="col"><h5><img src="img/assets/ui/gear_weapon.png" alt="">무기 <small class="tx" data-bag-12="1" data-bag-0="0" data-bag-34="6">1</small></h5><div class="bag"><span class="gt q2"><img src="img/assets/ui/gear_weapon.png" alt="영웅 무기"><em class="stg">3</em></span><span class="gt q1 x34"><img src="img/assets/ui/gear_weapon.png" alt="희귀 무기"><em class="stg">1</em></span></div><div class="emp">비어 있음</div></div>
+      </div>
+      <div class="foot"><span class="tag">도감 12/80 · 모두 공격 +6%</span><span class="ii">i</span><span class="tag"><img src="img/assets/ui/icon_dust.png" alt="색가루" style="width:22px;height:22px">색가루 50.0a</span><span class="merge">일괄 연성<em>1묶음</em></span><span class="ii">i</span></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="gear_c" data-choice-group="gear_list" data-choice-label="C · 가방 격자 + 착용 띠">
+  <h2>C · 가방 중심 격자 + 위쪽 착용 띠</h2>
+  <p class="cap">위쪽 띠에 <b>아이(‹ › 넘기기) + 착용 4칸 + 세트</b>, 아래는 화면 대부분을 쓰는 <b>가방 격자</b>(한 줄 13칸). 장비가 많아도(30개 이상) 한 번에 가장 많이 보이는 안. 일괄 연성은 오른쪽 아래 떠 있는 단추, 도감 · 색가루는 왼쪽 아래 칩.</p>
+  <div class="vp"><div class="scr C4" data-eq="full" data-bag="12">
+    <div class="bgc"></div><div class="dim"></div>
+    <div class="chr"><b class="hub"><img src="img/assets/ui/kit/nav_heroes.png" alt="">아이들</b><span class="sb">목록</span><span class="sb">성장 기록<i class="rd"></i></span><span class="sb on">장비</span><div class="wal"><span><img src="img/assets/ui/icon_dust.png" alt="색가루">50.0a</span><span><img src="img/assets/ui/icon_gem.png" alt="채색석">50,000</span></div><b class="xb">✕</b></div>
+    <div class="strip">
+      <div class="who e-pu"><span class="ar">‹</span><i class="f" style="background-image:url(img/assets/chars/yuna_idle.png)"></i><div><b>유나</b><small class="tx" data-eq-full="장비 공격 ×3.12" data-eq-empty="장비 공격 ×1.74">장비 공격 ×3.12</small></div><span class="ar">›</span></div>
+      <div class="eq">
+        <div class="s"><span class="gt q3"><img src="img/assets/ui/gear_ribbon.png" alt="전설 리본"><em class="stg">4</em><em class="pl">+12</em></span>공격 +45%</div>
+        <div class="s ex"><span class="gt q3 full"><img src="img/assets/ui/gear_badge.png" alt="전설 배지"><em class="stg">4</em><em class="pl">+12</em></span><span class="gt empty alt"><img src="img/assets/ui/gear_badge.png" alt="배지 빈 칸"></span><span class="tx" data-eq-full="보호막 +60%" data-eq-empty="비어 있음">보호막 +60%</span></div>
+        <div class="s"><span class="gt q3"><img src="img/assets/ui/gear_charm.png" alt="전설 부적"><em class="stg">4</em><em class="pl">+12</em></span>공격 +26%</div>
+        <div class="s ex"><span class="gt q3 full"><img src="img/assets/ui/gear_weapon.png" alt="전설 별 무기"><em class="stg">4</em><em class="pl">+12</em></span><span class="gt empty alt"><img src="img/assets/ui/gear_weapon.png" alt="무기 빈 칸"></span><span class="tx" data-eq-full="공격 +60%" data-eq-empty="비어 있음">공격 +60%</span></div>
+      </div>
+      <div class="setc"><b>별빛 합창 <i class="tx" data-eq-full="◆◆◆◆" data-eq-empty="◆◆◇◇">◆◆◆◆</i></b><span>2세트 공격 +8%</span><span class="tx" data-eq-full="4세트 쿨 -8% · 치명 +4%" data-eq-empty="4세트까지 2부위">4세트 쿨 -8% · 치명 +4%</span></div>
+    </div>
+    <div class="gw">
+      <div class="fl"><span class="on">전체</span><span><img src="img/assets/ui/gear_ribbon.png" alt="">리본</span><span><img src="img/assets/ui/gear_badge.png" alt="">배지</span><span><img src="img/assets/ui/gear_charm.png" alt="">부적</span><span><img src="img/assets/ui/gear_weapon.png" alt="">무기</span><span>등급순 ▾</span><span class="cnt tx" data-bag-12="가방 12 / 200" data-bag-0="가방 0 / 200" data-bag-34="가방 34 / 200 · 내려서 더 보기">가방 12 / 200</span></div>
+      <div class="bag">
+        <span class="gt q3"><img src="img/assets/ui/gear_ribbon.png" alt="전설 리본"><em class="stg">2</em></span>
+        <span class="gt q2"><img src="img/assets/ui/gear_weapon.png" alt="영웅 무기"><em class="stg">3</em></span>
+        <span class="gt q2"><img src="img/assets/ui/gear_ribbon.png" alt="영웅 리본"><em class="stg">1</em></span>
+        <span class="gt q1"><img src="img/assets/ui/gear_badge.png" alt="희귀 배지"><em class="stg">2</em></span>
+        <span class="gt q1"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"><em class="stg">1</em></span>
+        <span class="gt q0 m4"><img src="img/assets/ui/gear_charm.png" alt="일반 부적"><em class="stg">1</em></span>
+        <span class="gt q0 m4"><img src="img/assets/ui/gear_charm.png" alt="일반 부적"><em class="stg">1</em></span>
+        <span class="gt q0 m4"><img src="img/assets/ui/gear_charm.png" alt="일반 부적"><em class="stg">1</em></span>
+        <span class="gt q0 m4"><img src="img/assets/ui/gear_charm.png" alt="일반 부적"><em class="stg">1</em></span>
+        <span class="gt q0"><img src="img/assets/ui/gear_badge.png" alt="일반 배지"><em class="stg">1</em></span>
+        <span class="gt q0"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">2</em></span>
+        <span class="gt q0"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">3</em></span>
+        <span class="gt q2 x34"><img src="img/assets/ui/gear_badge.png" alt="영웅 배지"><em class="stg">1</em></span>
+        <span class="gt q1 x34"><img src="img/assets/ui/gear_weapon.png" alt="희귀 무기"><em class="stg">1</em></span>
+        <span class="gt q1 x34"><img src="img/assets/ui/gear_charm.png" alt="희귀 부적"><em class="stg">2</em></span>
+        <span class="gt q0 x34"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">1</em></span>
+        <span class="gt q0 x34"><img src="img/assets/ui/gear_badge.png" alt="일반 배지"><em class="stg">2</em></span>
+        <span class="gt q1 x34"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"><em class="stg">3</em></span>
+        <span class="gt q0 x34"><img src="img/assets/ui/gear_weapon.png" alt="일반 무기"><em class="stg">2</em></span>
+        <span class="gt q2 x34"><img src="img/assets/ui/gear_charm.png" alt="영웅 부적"><em class="stg">1</em></span>
+        <span class="gt q0 x34"><img src="img/assets/ui/gear_charm.png" alt="일반 부적"><em class="stg">3</em></span>
+        <span class="gt q1 x34"><img src="img/assets/ui/gear_badge.png" alt="희귀 배지"><em class="stg">1</em></span>
+        <span class="gt q0 x34"><img src="img/assets/ui/gear_ribbon.png" alt="일반 리본"><em class="stg">4</em></span>
+        <span class="gt q0 x34"><img src="img/assets/ui/gear_weapon.png" alt="일반 무기"><em class="stg">1</em></span>
+        <span class="gt q1 x34"><img src="img/assets/ui/gear_charm.png" alt="희귀 부적"><em class="stg">1</em></span>
+        <span class="gt q2 x34"><img src="img/assets/ui/gear_ribbon.png" alt="영웅 리본"><em class="stg">2</em></span>
+      </div>
+      <div class="emp"><b>가방이 비었어요</b>장 보스 · 모험 · 잿빛성에서 장비를 얻어요</div>
+    </div>
+    <div class="chips"><span class="chipx">도감 12/80 · 모두 공격 +6%</span><span class="ii">i</span></div>
+    <div class="fab"><span class="ii">i</span><span class="merge">일괄 연성<em>1묶음</em></span></div>
+  </div></div>
+</section>
+
+<!-- ================= 5 ================= -->
+<h3>5. 각성 단계별 효과 창 (D1-5)</h3>
+<p class="ctx">아이 상세의 「단계별 효과 ›」를 누르면 뜨는 창입니다. 지금은 공용 결과 창에 글자 다섯 줄이라, <b>단계를 그림으로</b> 바꿉니다: 켜진 칸 = 이미 각성, 금빛 점선 고리 = 다음 칸. 효과 글자는 게임 그대로(1 공격력 +20% · 2 기본 스킬 위력 +30% · 3 고유 패시브 강화 · 4 궁극기 위력 +50% · 5 외형 · 궁극기 진화), SS · 신화는 5단계, S 이하는 4단계입니다. 켜진 칸 색 = 그 아이 속성 색, 신화는 무지개. 3단계 아래 작은 글자는 아이마다 다른 패시브(예시).</p>
+<div class="states" data-group="awaken"><span>아이</span><button type="button" data-k="who" data-v="ss" aria-pressed="true">세레나 · SS</button><button type="button" data-k="who" data-v="s">카렌 · S (4단계)</button><button type="button" data-k="who" data-v="myth">아르카 · 신화</button><span>각성</span><button type="button" data-k="st" data-v="0">0단계</button><button type="button" data-k="st" data-v="3" aria-pressed="true">3단계</button><button type="button" data-k="st" data-v="max">최대 (진화)</button></div>
+
+<section class="opt" data-choice="awaken_a" data-choice-group="awaken" data-choice-label="A · 별자리">
+  <h2>A · 별자리 잇기 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">밤하늘 창에 아이 컷인이 왼쪽에 서고, 오른쪽에 <b>별 다섯 개를 이은 별자리</b>. 각성한 별은 속성 색으로 켜지고, 열릴 때 별 사이 선이 차례로 그어집니다. 마지막 별은 큰 별이며, 최대가 되면 「궁극기 진화」 꼬리표와 컷인 빛이 켜집니다.</p>
+  <div class="vp"><div class="scr A5" data-who="ss" data-st="3">
+    <div class="bgc"></div><div class="dim"></div>
+    <div class="sky"><i class="tw"></i>
+      <i class="art wv w-ss" style="background-image:url(img/assets/cutin/serena_cutin_cut.png)"></i><i class="art wv w-s" style="background-image:url(img/assets/cutin/karen_cutin_cut.png)"></i><i class="art wv w-myth" style="background-image:url(img/assets/cutin/arca_cutin_cut.png)"></i>
+      <div class="hd5"><span class="gb SS wi w-ss">SS</span><span class="gb S wi w-s">S</span><span class="gb M wi w-myth">신화</span><b><span class="wi w-ss">세레나</span><span class="wi w-s">카렌</span><span class="wi w-myth">아르카</span></b><span class="cnt5">각성 <em><i class="vv v0">0</i><i class="vv v3">3</i><i class="vv vm"><i class="t5">5</i><i class="t4">4</i></i></em>/ <i class="t5">5</i><i class="t4">4</i></span></div>
+      <span class="hint5">★ 최고 다음부터 한 칸씩 · 효과는 쌓여요</span>
+      <div class="cons">
+        <svg viewBox="0 0 640 560" aria-hidden="true"><defs><linearGradient id="rb5" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#ff5f6d"/><stop offset=".2" stop-color="#ffb84d"/><stop offset=".4" stop-color="#ffe36b"/><stop offset=".6" stop-color="#5fd68b"/><stop offset=".8" stop-color="#4fb8ff"/><stop offset="1" stop-color="#e957bc"/></linearGradient></defs>
+          <g class="bl"><path d="M40 440L200 330"/><path d="M200 330L330 400"/><path d="M330 400L450 240"/><path class="s5" d="M450 240L560 90"/></g>
+          <path class="lo sx s2" style="--d:.2s" d="M40 440L200 330"/><path class="lo sx s3" style="--d:.5s" d="M200 330L330 400"/><path class="lo sx s4" style="--d:.8s" d="M330 400L450 240"/><path class="lo sx s5" style="--d:1.1s" d="M450 240L560 90"/>
+        </svg>
+        <div class="st sx s1" style="left:40px;top:440px;--d:0s"><i class="h"></i><i class="g"></i><i class="nx"></i><span class="no">1</span><b>공격력 +20%</b></div>
+        <div class="st sx s2" style="left:200px;top:330px;--d:.35s"><i class="h"></i><i class="g"></i><i class="nx"></i><span class="no">2</span><b>기본 스킬 위력 +30%</b></div>
+        <div class="st sx s3" style="left:330px;top:400px;--d:.65s"><i class="h"></i><i class="g"></i><i class="nx"></i><span class="no">3</span><b>고유 패시브 강화<small><span class="wi w-ss">매 2번째 기본 공격에 강화 폭발</span><span class="wi w-s">치명 피해 2배 → 2.5배</span><span class="wi w-myth">같은 속성 공격 ×1.5 · 신화 포함</span></small></b></div>
+        <div class="st sx s4" style="left:450px;top:240px;--d:.95s"><i class="h"></i><i class="g"></i><i class="nx"></i><span class="no">4</span><b>궁극기 위력 +50%</b></div>
+        <div class="st sx s5 big" style="left:560px;top:90px;--d:1.25s"><i class="h"></i><i class="g"></i><i class="nx"></i><span class="no">5</span><b>외형 · 궁극기 진화</b><span class="evo">✦ 궁극기 진화 + 마무리 일격</span></div>
+        <span class="s4n">S 이하는 여기까지</span>
+      </div>
+      <div class="nxt5"><i class="k">다음</i><span class="vv v0">1단계 · 공격력 +20%</span><span class="vv v3">4단계 · 궁극기 위력 +50%</span><span class="vv vm"><i class="t5">최대 각성 · 외형과 궁극기가 바뀌었어요</i><i class="t4">최대 각성 (S는 4단계)</i></span></div>
+      <b class="xb">✕</b>
+    </div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="awaken_b" data-choice-group="awaken" data-choice-label="B · 각성 계단">
+  <h2>B · 아래에서 위로 오르는 각성 계단 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">다섯 칸 계단 기둥에 효과가 새겨져 있고, <b>아이 SD가 지금 단계 칸 위에 서</b> 있습니다. 각성한 칸은 속성 색으로 차오르고, 다음 칸 위에 「다음」 꼬리표. 꼭대기에는 진화의 문이 있어 최대가 되면 빛살과 함께 열립니다. 상태를 바꾸면 아이가 계단을 깡충 오릅니다.</p>
+  <div class="vp"><div class="scr B5" data-who="ss" data-st="3">
+    <div class="bgc"></div><div class="dim"></div>
+    <div class="hall"><i class="shaft"></i><i class="floor"></i>
+      <div class="hd5"><span class="gb SS wi w-ss">SS</span><span class="gb S wi w-s">S</span><span class="gb M wi w-myth">신화</span><b><span class="wi w-ss">세레나</span><span class="wi w-s">카렌</span><span class="wi w-myth">아르카</span></b><span class="cnt5">각성 <em><i class="vv v0">0</i><i class="vv v3">3</i><i class="vv vm"><i class="t5">5</i><i class="t4">4</i></i></em>/ <i class="t5">5</i><i class="t4">4</i></span></div>
+      <span class="hint5">★ 최고 다음부터 한 칸씩 · 효과는 쌓여요</span>
+      <div class="nxt5"><i class="k">다음</i><span class="vv v0">1단계 · 공격력 +20%</span><span class="vv v3">4단계 · 궁극기 위력 +50%</span><span class="vv vm"><i class="t5">최대 각성 · 진화 완료</i><i class="t4">최대 각성 (S는 4단계)</i></span></div>
+      <div class="stairs">
+        <div class="gate s5"><span>진화의 문</span></div>
+        <div class="stp sx s1" style="left:0;height:96px;--d:0s"><span class="nxp">다음</span><span class="n">1</span><b>공격력 +20%</b></div>
+        <div class="stp sx s2" style="left:160px;height:166px;--d:.2s"><span class="nxp">다음</span><span class="n">2</span><b>기본 스킬 위력 +30%</b></div>
+        <div class="stp sx s3" style="left:320px;height:236px;--d:.4s"><span class="nxp">다음</span><span class="n">3</span><b>고유 패시브 강화</b><small><span class="wi w-ss">매 2번째 기본 공격에 강화 폭발</span><span class="wi w-s">치명 피해 2배 → 2.5배</span><span class="wi w-myth">같은 속성 공격 ×1.5 · 신화 포함</span></small></div>
+        <div class="stp sx s4" style="left:480px;height:306px;--d:.6s"><span class="nxp">다음</span><span class="n">4</span><b>궁극기 위력 +50%</b></div>
+        <div class="stp sx s5" style="left:640px;height:376px;--d:.8s"><span class="nxp">다음</span><span class="n">5</span><b>외형 · 궁극기 진화</b></div>
+        <span class="s4n">S 이하는 4단계가 꼭대기</span>
+        <div class="sd"><img class="wv w-ss" src="img/assets/chars/serena_idle.png" alt="세레나"><img class="wv w-s" src="img/assets/chars/karen_idle.png" alt="카렌"><img class="wv w-myth" src="img/assets/chars/arca_idle.png" alt="아르카"></div>
+      </div>
+      <b class="xb">✕</b>
+    </div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="awaken_c" data-choice-group="awaken" data-choice-label="C · 카드 뒷면 각인">
+  <h2>C · 카드 뒷면에 새겨진 각인 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">창이 열리면 아이 카드가 <b>뒤집혀 뒷면의 오각 각인</b>이 보입니다. 가운데 문장 둘레 다섯 홈이 각성한 만큼 스테인드글라스처럼 차고, 오른쪽에는 같은 순서의 효과 다섯 줄. 신화 카드는 테두리가 무지개로 돕니다. 소환 · 아이 상세 A의 카드와 같은 물건이라 이어지는 느낌.</p>
+  <div class="vp"><div class="scr C5" data-who="ss" data-st="3">
+    <div class="vel"></div>
+    <div class="cardw"><div class="flip">
+      <div class="face fr"><i class="wv w-ss" style="background-image:url(img/assets/cutin/serena_cutin_cut.png)"></i><i class="wv w-s" style="background-image:url(img/assets/cutin/karen_cutin_cut.png)"></i><i class="wv w-myth" style="background-image:url(img/assets/cutin/arca_cutin_cut.png)"></i><b><span class="wi w-ss">세레나</span><span class="wi w-s">카렌</span><span class="wi w-myth">아르카</span></b></div>
+      <div class="face bk"><i class="ring"></i>
+        <svg viewBox="0 0 340 540" aria-hidden="true"><path d="M170 102L243.5 328L51 188L289 188L96.5 328Z"/></svg>
+        <i class="crest"></i>
+        <div class="sg sx s1" style="left:170px;top:102px"><span>I</span><i class="nx"></i></div>
+        <div class="sg sx s2" style="left:289px;top:188px"><span>II</span><i class="nx"></i></div>
+        <div class="sg sx s3" style="left:243.5px;top:328px"><span>III</span><i class="nx"></i></div>
+        <div class="sg sx s4" style="left:96.5px;top:328px"><span>IV</span><i class="nx"></i></div>
+        <div class="sg sx s5" style="left:51px;top:188px"><span>V</span><i class="nx"></i></div>
+        <div class="foot5"><span class="wi w-ss">세레나</span><span class="wi w-s">카렌</span><span class="wi w-myth">아르카</span><em>각성 <i class="vv v0">0</i><i class="vv v3">3</i><i class="vv vm"><i class="t5">5</i><i class="t4">4</i></i> / <i class="t5">5</i><i class="t4">4</i></em></div>
+      </div>
+    </div></div>
+    <div class="hd5"><span class="gb SS wi w-ss">SS</span><span class="gb S wi w-s">S</span><span class="gb M wi w-myth">신화</span><b>각성 각인</b></div>
+    <div class="lst5">
+      <div class="row5 sx s1"><span class="rn">I</span><div><b>공격력 +20%</b></div><i class="ok">✓ 각성</i><span class="nxp">다음</span></div>
+      <div class="row5 sx s2"><span class="rn">II</span><div><b>기본 스킬 위력 +30%</b></div><i class="ok">✓ 각성</i><span class="nxp">다음</span></div>
+      <div class="row5 sx s3"><span class="rn">III</span><div><b>고유 패시브 강화</b><small><span class="wi w-ss">매 2번째 기본 공격에 강화 폭발</span><span class="wi w-s">치명 피해 2배 → 2.5배</span><span class="wi w-myth">같은 속성 공격 ×1.5 · 신화 포함</span></small></div><i class="ok">✓ 각성</i><span class="nxp">다음</span></div>
+      <div class="row5 sx s4"><span class="rn">IV</span><div><b>궁극기 위력 +50%</b></div><i class="ok">✓ 각성</i><span class="nxp">다음</span></div>
+      <div class="row5 sx s5 top"><span class="rn">V</span><div><b>외형 · 궁극기 진화</b><small>궁극기 뒤에 마무리 일격이 붙어요</small></div><i class="ok">✓ 진화</i><span class="nxp">다음</span></div>
+      <span class="s4n">S 이하는 IV까지 · 효과는 쌓여요</span>
+    </div>
+    <span class="hint5" style="left:calc(50% - 60px);top:640px">★ 최고 다음부터 한 칸씩 · 효과는 쌓여요</span>
+    <b class="xb">✕</b>
+  </div></div>
+</section>
+
+<!-- ================= 6 ================= -->
+<h3>6. 장비 연성 · 잠재 등급 상승 결과 (D1-6)</h3>
+<p class="ctx">「일괄 연성」(같은 세트 · 부위 · 등급 · 단계 4개 → 한 단계 위 1개)과 작업대의 「잠재 등급 상승!」 결과. 지금은 각성 창과 같은 공용 결과 창입니다. <b>섞고 · 굽고 · 칠하는</b> 공방 동작으로 바꿉니다. 아래 단추로 결과를 바꿉니다(수치 · 장비 조합은 예시, 잠재 줄 수치는 지금 작업대 캡처 그대로).</p>
+<div class="states" data-group="merge"><span>결과</span><button type="button" data-k="res" data-v="merge" aria-pressed="true">연성 3개 성공</button><button type="button" data-k="res" data-v="none">연성할 것 없음</button><button type="button" data-k="res" data-v="pot">잠재 등급 상승 (보랏빛 → 금빛)</button></div>
+
+<section class="opt" data-choice="merge_a" data-choice-group="merge" data-choice-label="A · 팔레트 물감 섞기">
+  <h2>A · 팔레트 위 네 방울이 하나로 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">나무 팔레트의 네 우물에 담긴 <b>같은 장비 4개가 물감 방울처럼 가운데로 모여 소용돌이</b>치고, 한 단계 위 장비가 톡 튀어나옵니다(계속 반복). 아래 띠에 이번에 만든 장비 전부. 잠재 상승은 <b>무지개 붓이 장비를 쓸고 지나가며</b> 테 색이 보랏빛 → 금빛으로 바뀝니다. 없을 때는 빈 우물 두 개가 「몇 개 더」를 보여 줍니다.</p>
+  <div class="vp"><div class="scr A6" data-res="merge">
+    <div class="bgc"></div><div class="dim"></div>
+    <div class="chr"><b class="hub"><img src="img/assets/ui/kit/nav_heroes.png" alt="">아이들</b><span class="sb">목록</span><span class="sb">성장 기록<i class="rd"></i></span><span class="sb on">장비</span><div class="wal"><span><img src="img/assets/ui/icon_dust.png" alt="색가루">50.0a</span><span><img src="img/assets/ui/icon_gem.png" alt="채색석">50,000</span></div><b class="xb">✕</b></div>
+    <div class="ttl6"><span class="rv r-merge">연성 완료!<small>새 장비 3개 · 세트는 그대로</small></span><span class="rv r-none">섞을 장비가 아직 없어요<small>미장착 · 미강화인 같은 장비 4개가 필요해요</small></span><span class="rv r-pot">잠재 등급 상승!<small>유나의 전설 리본</small></span></div>
+    <div class="pal"><div class="wood"></div><i class="hole"></i>
+      <i class="dab" style="left:16%;top:9%;--c:#ff8fc4"></i><i class="dab" style="left:31%;top:3%;--c:#ffe36b;--s:28px"></i><i class="dab" style="left:66%;top:3%;--c:#5fd68b"></i><i class="dab" style="left:83%;top:14%;--c:#4fb8ff;--s:30px"></i><i class="dab" style="left:90%;top:48%;--c:#8b6bff"></i><i class="dab" style="left:76%;top:84%;--c:#ff9a3c;--s:30px"></i><i class="dab" style="left:44%;top:89%;--c:#ff5f6d"></i>
+      <div class="rv r-merge" style="position:absolute;inset:0">
+        <i class="well" style="--x:-190px;--y:-90px"></i><i class="well" style="--x:190px;--y:-90px"></i><i class="well" style="--x:-160px;--y:100px"></i><i class="well" style="--x:160px;--y:100px"></i>
+        <span class="dp" style="--x:-190px;--y:-90px"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"></span><span class="dp" style="--x:190px;--y:-90px"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"></span><span class="dp" style="--x:-160px;--y:100px"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"></span><span class="dp" style="--x:160px;--y:100px"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"></span>
+        <i class="sw"></i>
+        <span class="nt gt q1"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본 2단계"><em class="stg">2</em></span>
+        <span class="nl">희귀 리본 <b>1단계 ×4 → 2단계</b></span>
+      </div>
+      <div class="rv r-none" style="position:absolute;inset:0">
+        <i class="well" style="--x:-190px;--y:-90px"></i><i class="well" style="--x:190px;--y:-90px"></i>
+        <span class="dp" style="--x:-190px;--y:-90px"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"></span><span class="dp" style="--x:190px;--y:-90px"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"></span>
+        <i class="well emp6" style="--x:-160px;--y:100px">+</i><i class="well emp6" style="--x:160px;--y:100px">+</i>
+        <div class="need6"><b>2 / 4</b>희귀 리본 1단계<small>2개 더 모이면 섞여요</small></div>
+      </div>
+      <div class="rv r-pot" style="position:absolute;inset:0">
+        <div class="ptile"><span class="gt q3"><img src="img/assets/ui/gear_ribbon.png" alt="전설 리본"><em class="stg">4</em><em class="pl">+12</em></span></div>
+        <i class="stroke6"></i><i class="brush6"></i>
+        <div class="pchg">잠재 <span class="potp pu">보랏빛</span> → <span class="potp gd6">금빛</span></div>
+      </div>
+    </div>
+    <div class="rv r-merge"><div class="res6">새 장비 3개<span class="gt q1" style="--d:1.2s"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본 2단계"><em class="stg">2</em></span><span class="gt q0" style="--d:1.35s"><img src="img/assets/ui/gear_charm.png" alt="일반 부적 2단계"><em class="stg">2</em></span><span class="gt q2" style="--d:1.5s"><img src="img/assets/ui/gear_badge.png" alt="영웅 배지 2단계"><em class="stg">2</em></span><span class="ok6">확인</span></div></div>
+    <div class="rv r-none"><div class="res6">얻는 곳 · 장 보스 · 모험 · 잿빛성<span class="ok6">확인</span></div></div>
+    <div class="rv r-pot"><div class="res6"><span class="ln6">공격 +18.0%</span><span class="ln6">치명타 확률 +8.0%</span><span class="ln6">보스 피해 +24.0%</span><span class="ok6">확인</span></div></div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="merge_b" data-choice-group="merge" data-choice-label="B · 가마에서 꺼낸 카드">
+  <h2>B · 가마에서 꺼낸 카드 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">공방 한쪽의 <b>타오르는 가마</b>에서 새 장비 카드가 불티와 함께 튀어나와 앞으로 옵니다. 여러 개면 카드가 겹쳐 쌓이고 「×3」, 옆에 만든 것 전부. 잠재 상승은 카드에 <b>금빛 유약</b>이 번쩍이며 테가 보랏빛 → 금빛. 연성할 게 없으면 가마가 식어 있고 칠판 팻말에 모자란 개수.</p>
+  <div class="vp"><div class="scr B6" data-res="merge">
+    <div class="bgc"></div><div class="dim"></div>
+    <div class="chr"><b class="hub"><img src="img/assets/ui/kit/nav_heroes.png" alt="">아이들</b><span class="sb">목록</span><span class="sb">성장 기록<i class="rd"></i></span><span class="sb on">장비</span><div class="wal"><span><img src="img/assets/ui/icon_dust.png" alt="색가루">50.0a</span><span><img src="img/assets/ui/icon_gem.png" alt="채색석">50,000</span></div><b class="xb">✕</b></div>
+    <div class="kiln"><div class="mouth"><i style="left:30px"></i><i style="left:84px;animation-delay:-.4s"></i><i style="left:138px;animation-delay:-.8s"></i></div></div>
+    <i class="spk" style="--x:-40px;--d:0s"></i><i class="spk" style="--x:20px;--d:-.5s"></i><i class="spk" style="--x:60px;--d:-1s"></i><i class="spk" style="--x:-10px;--d:-1.5s"></i><i class="spk" style="--x:90px;--d:-1.8s"></i>
+    <div class="rv r-merge">
+      <i class="stk" style="--r:9deg;--gc:#9a6bff"></i><i class="stk" style="--r:4deg;--gc:#9aa8bb"></i>
+      <div class="kc q1"><span class="stg6">2단계</span><span class="x3">×3</span><div class="ic6"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본"></div><b>희귀 리본</b><small>별빛 합창 · 공격 +6.6%</small></div>
+      <div class="side6"><h4>새 장비 3개</h4><div class="gl"><span class="gt q1"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본 2단계"><em class="stg">2</em></span><span class="gt q0"><img src="img/assets/ui/gear_charm.png" alt="일반 부적 2단계"><em class="stg">2</em></span><span class="gt q2"><img src="img/assets/ui/gear_badge.png" alt="영웅 배지 2단계"><em class="stg">2</em></span></div><p>같은 장비 4개 → 한 단계 위 1개 · 세트는 그대로</p></div>
+      <span class="ok6">확인</span>
+    </div>
+    <div class="rv r-none">
+      <div class="sign"><b>가마가 식었어요</b>같은 장비 4개가 모이면 구워져요<div class="cnt6"><i class="f6"></i><i class="f6"></i><i>+</i><i>+</i></div>희귀 리본 1단계 2/4 · 장 보스 · 모험에서</div>
+      <span class="ok6">확인</span>
+    </div>
+    <div class="rv r-pot">
+      <div class="kc q3"><i class="glz"></i><span class="stg6">4단계 +12</span><div class="ic6"><img src="img/assets/ui/gear_ribbon.png" alt="전설 리본"></div><b>전설 리본</b><small><span class="potp pu">보랏빛</span> → <span class="potp gd6">금빛</span></small></div>
+      <div class="side6"><h4>잠재 금빛!</h4><span class="ln6">공격 +18.0%</span><span class="ln6">치명타 확률 +8.0%</span><span class="ln6">보스 피해 +24.0%</span><p>유나 장착 중</p></div>
+      <span class="ok6">확인</span>
+    </div>
+  </div></div>
+</section>
+
+<section class="opt" data-choice="merge_c" data-choice-group="merge" data-choice-label="C · 창 없이 리본 알림">
+  <h2>C · 창 없이 작업대 위 리본 알림 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+  <p class="cap">결과 창을 띄우지 않고 <b>보던 화면 위에 리본이 휙</b> 지나갑니다. 연성은 보라 리본에 새 장비가 올라탔다가 가방 쪽으로 빨려 들어가고, 없을 때는 「일괄 연성」 아래 회색 메모가 붙었다 흔들립니다. 잠재 상승은 작업대 잠재 칸 위에 금빛 리본 + 세 줄이 반짝. 손이 가장 덜 가는 안 (바탕은 지금 게임 캡처).</p>
+  <div class="vp"><div class="scr C6" data-res="merge">
+    <div class="cap6"></div>
+    <div class="rv r-merge"><div class="sash"><div><b>연성 3</b><small>새 장비가 가방에</small></div><span class="gt q1" style="--d:0s"><img src="img/assets/ui/gear_ribbon.png" alt="희귀 리본 2단계"><em class="stg">2</em></span><span class="gt q0" style="--d:.15s"><img src="img/assets/ui/gear_charm.png" alt="일반 부적 2단계"><em class="stg">2</em></span><span class="gt q2" style="--d:.3s"><img src="img/assets/ui/gear_badge.png" alt="영웅 배지 2단계"><em class="stg">2</em></span></div></div>
+    <div class="rv r-none"><div class="memo6"><b>아직 섞을 게 없어요</b>같은 장비 4개가 모이면 연성돼요<div class="cnt6"><i class="f6"></i><i class="f6"></i><i>+</i><i>+</i></div></div></div>
+    <div class="rv r-pot"><i class="glow6" style="top:211px"></i><i class="glow6" style="top:271px;animation-delay:.2s"></i><i class="glow6" style="top:331px;animation-delay:.4s"></i><div class="rib6">잠재 <span class="potp pu">보랏빛</span> → <span class="potp gd6">금빛</span></div></div>
+    <span class="note6">어느 장비 목록 시안을 고르든 그 위에 띠만 얹음 · 바탕은 지금 게임 캡처</span>
+  </div></div>
+</section>
+</main>
+<script>
+const HC={heroes:'#c94a85',formation:'#5b44c8',summon:'#9a6a00',adventure:'#17706c',school:'#2f7350',shop:'#a8405a'};
+const HN={heroes:'아이들',formation:'편성',summon:'소환',adventure:'모험',school:'분교',shop:'상점'};
+const fit=()=>document.querySelectorAll('.vp').forEach(v=>{const s=v.querySelector('.scr');const k=v.clientWidth/s.offsetWidth;s.style.transform=`scale(${k})`;v.style.height=s.offsetHeight*k+'px'});
+addEventListener('resize',fit);
+document.querySelectorAll('.bar [data-res]').forEach(b=>b.addEventListener('click',()=>{document.documentElement.style.setProperty('--w',b.dataset.res);document.documentElement.dataset.w=b.dataset.res;document.querySelectorAll('.bar [data-res]').forEach(x=>x.setAttribute('aria-pressed',x===b));fit()}));
+const play=s=>{s.classList.remove('go');void s.offsetWidth;s.classList.add('go')};
+document.querySelectorAll('[data-replay]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();b.closest('.opt').querySelectorAll('.scr').forEach(play)}));
+document.querySelector('[data-replay-all]').addEventListener('click',()=>document.querySelectorAll('.scr').forEach(play));
+// 상태 단추: 그 묶음의 모든 화면에 data-<k>=<v>
+function setState(group,k,v){document.querySelectorAll(`.opt[data-choice-group="${group}"] .scr`).forEach(s=>{s.dataset[k]=v;s.querySelectorAll('.tx').forEach(e=>{const t=e.getAttribute(`data-${k}-${v}`);if(t!==null)e.textContent=t});if(k==='hub'){s.querySelectorAll('[data-h]').forEach(e=>e.classList.toggle('on',e.dataset.h===v));s.style.setProperty('--hc',HC[v]);s.querySelectorAll('.ht').forEach(t=>t.textContent=HN[v])}play(s)})}
+document.querySelectorAll('.states').forEach(bar=>bar.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{bar.querySelectorAll(`button[data-k="${b.dataset.k}"]`).forEach(x=>x.setAttribute('aria-pressed',x===b));setState(bar.dataset.group,b.dataset.k,b.dataset.v)})));
+// 시안 고르기 (묶음마다 하나)
+document.querySelectorAll('.opt[data-choice-group]').forEach(o=>o.addEventListener('click',()=>document.querySelectorAll(`.opt[data-choice-group="${o.dataset.choiceGroup}"]`).forEach(x=>x.classList.toggle('sel',x===o))));
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){play(en.target.querySelector('.scr'));io.unobserve(en.target)}}),{threshold:.35});
+document.querySelectorAll('.vp').forEach(v=>io.observe(v));
+fit();
+</script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+{
+  "entries": [
+    {
+      "file": "before_clear_1280_f1_1280x720.jpg",
+      "frames": [
+        "before_clear_1280_f1_1280x720.jpg",
+        "before_clear_1280_f2_1280x720.jpg",
+        "before_clear_1280_f3_1280x720.jpg",
+        "before_clear_1280_f4_1280x720.jpg",
+        "before_clear_1280_f5_1280x720.jpg",
+        "before_clear_1280_f6_1280x720.jpg",
+        "before_clear_1280_f7_1280x720.jpg",
+        "before_clear_1280_f8_1280x720.jpg"
+      ],
+      "id": "before_clear_1280",
+      "items": [
+        "clear-fever-b"
+      ],
+      "label": "정화 (before)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_fever_1280_f1_1280x720.jpg",
+      "frames": [
+        "before_fever_1280_f1_1280x720.jpg",
+        "before_fever_1280_f2_1280x720.jpg",
+        "before_fever_1280_f3_1280x720.jpg",
+        "before_fever_1280_f4_1280x720.jpg",
+        "before_fever_1280_f5_1280x720.jpg",
+        "before_fever_1280_f6_1280x720.jpg",
+        "before_fever_1280_f7_1280x720.jpg"
+      ],
+      "id": "before_fever_1280",
+      "items": [
+        "clear-fever-b"
+      ],
+      "label": "채색 폭주 (before)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_wind_1280_f1_1280x720.jpg",
+      "frames": [
+        "before_wind_1280_f1_1280x720.jpg",
+        "before_wind_1280_f2_1280x720.jpg",
+        "before_wind_1280_f3_1280x720.jpg",
+        "before_wind_1280_f4_1280x720.jpg",
+        "before_wind_1280_f5_1280x720.jpg"
+      ],
+      "id": "before_wind_1280",
+      "items": [
+        "clear-fever-b"
+      ],
+      "label": "순풍 가속 (before)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_clear_1280_f1_1280x720.jpg",
+      "frames": [
+        "after_clear_1280_f1_1280x720.jpg",
+        "after_clear_1280_f2_1280x720.jpg",
+        "after_clear_1280_f3_1280x720.jpg",
+        "after_clear_1280_f4_1280x720.jpg",
+        "after_clear_1280_f5_1280x720.jpg",
+        "after_clear_1280_f6_1280x720.jpg",
+        "after_clear_1280_f7_1280x720.jpg",
+        "after_clear_1280_f8_1280x720.jpg"
+      ],
+      "id": "after_clear_1280",
+      "items": [
+        "clear-fever-b"
+      ],
+      "label": "정화 (after)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_fever_1280_f1_1280x720.jpg",
+      "frames": [
+        "after_fever_1280_f1_1280x720.jpg",
+        "after_fever_1280_f2_1280x720.jpg",
+        "after_fever_1280_f3_1280x720.jpg",
+        "after_fever_1280_f4_1280x720.jpg",
+        "after_fever_1280_f5_1280x720.jpg",
+        "after_fever_1280_f6_1280x720.jpg",
+        "after_fever_1280_f7_1280x720.jpg"
+      ],
+      "id": "after_fever_1280",
+      "items": [
+        "clear-fever-b"
+      ],
+      "label": "채색 폭주 (after)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_wind_1280_f1_1280x720.jpg",
+      "frames": [
+        "after_wind_1280_f1_1280x720.jpg",
+        "after_wind_1280_f2_1280x720.jpg",
+        "after_wind_1280_f3_1280x720.jpg",
+        "after_wind_1280_f4_1280x720.jpg",
+        "after_wind_1280_f5_1280x720.jpg"
+      ],
+      "id": "after_wind_1280",
+      "items": [
+        "clear-fever-b"
+      ],
+      "label": "순풍 가속 (after)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_wind_dmg_1280_1280x720.jpg",
+      "id": "after_wind_dmg_1280",
+      "items": [
+        "clear-fever-b"
+      ],
+      "label": "순풍 중 하늘빛 피해 숫자",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_clear_1600_f1_1600x720.jpg",
+      "frames": [
+        "before_clear_1600_f1_1600x720.jpg",
+        "before_clear_1600_f2_1600x720.jpg",
+        "before_clear_1600_f3_1600x720.jpg",
+        "before_clear_1600_f4_1600x720.jpg",
+        "before_clear_1600_f5_1600x720.jpg",
+        "before_clear_1600_f6_1600x720.jpg",
+        "before_clear_1600_f7_1600x720.jpg",
+        "before_clear_1600_f8_1600x720.jpg"
+      ],
+      "id": "before_clear_1600",
+      "items": [
+        "clear-fever-b"
+      ],
+      "label": "정화 (before)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_fever_1600_f1_1600x720.jpg",
+      "frames": [
+        "before_fever_1600_f1_1600x720.jpg",
+        "before_fever_1600_f2_1600x720.jpg",
+        "before_fever_1600_f3_1600x720.jpg",
+        "before_fever_1600_f4_1600x720.jpg",
+        "before_fever_1600_f5_1600x720.jpg",
+        "before_fever_1600_f6_1600x720.jpg",
+        "before_fever_1600_f7_1600x720.jpg"
+      ],
+      "id": "before_fever_1600",
+      "items": [
+        "clear-fever-b"
+      ],
+      "label": "채색 폭주 (before)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_wind_1600_f1_1600x720.jpg",
+      "frames": [
+        "before_wind_1600_f1_1600x720.jpg",
+        "before_wind_1600_f2_1600x720.jpg",
+        "before_wind_1600_f3_1600x720.jpg",
+        "before_wind_1600_f4_1600x720.jpg",
+        "before_wind_1600_f5_1600x720.jpg"
+      ],
+      "id": "before_wind_1600",
+      "items": [
+        "clear-fever-b"
+      ],
+      "label": "순풍 가속 (before)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_clear_1600_f1_1600x720.jpg",
+      "frames": [
+        "after_clear_1600_f1_1600x720.jpg",
+        "after_clear_1600_f2_1600x720.jpg",
+        "after_clear_1600_f3_1600x720.jpg",
+        "after_clear_1600_f4_1600x720.jpg",
+        "after_clear_1600_f5_1600x720.jpg",
+        "after_clear_1600_f6_1600x720.jpg",
+        "after_clear_1600_f7_1600x720.jpg",
+        "after_clear_1600_f8_1600x720.jpg"
+      ],
+      "id": "after_clear_1600",
+      "items": [
+        "clear-fever-b"
+      ],
+      "label": "정화 (after)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_fever_1600_f1_1600x720.jpg",
+      "frames": [
+        "after_fever_1600_f1_1600x720.jpg",
+        "after_fever_1600_f2_1600x720.jpg",
+        "after_fever_1600_f3_1600x720.jpg",
+        "after_fever_1600_f4_1600x720.jpg",
+        "after_fever_1600_f5_1600x720.jpg",
+        "after_fever_1600_f6_1600x720.jpg",
+        "after_fever_1600_f7_1600x720.jpg"
+      ],
+      "id": "after_fever_1600",
+      "items": [
+        "clear-fever-b"
+      ],
+      "label": "채색 폭주 (after)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_wind_1600_f1_1600x720.jpg",
+      "frames": [
+        "after_wind_1600_f1_1600x720.jpg",
+        "after_wind_1600_f2_1600x720.jpg",
+        "after_wind_1600_f3_1600x720.jpg",
+        "after_wind_1600_f4_1600x720.jpg",
+        "after_wind_1600_f5_1600x720.jpg"
+      ],
+      "id": "after_wind_1600",
+      "items": [
+        "clear-fever-b"
+      ],
+      "label": "순풍 가속 (after)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_wind_dmg_1600_1600x720.jpg",
+      "id": "after_wind_dmg_1600",
+      "items": [
+        "clear-fever-b"
+      ],
+      "label": "순풍 중 하늘빛 피해 숫자",
+      "phase": "late",
+      "resolution": "1600x720"
+    }
+  ],
+  "tool": "tools/feedback_capture.gd",
+  "updated": "2026-11-11T12:58:25"
+}

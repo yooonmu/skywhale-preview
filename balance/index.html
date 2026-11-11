@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>구름고래 분교 · 성장 연구실</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="gaps.css"></head>
+<body><main>
+<header class="page-head"><div><div class="eyebrow">구름고래 분교 · 항해사의 연구 노트</div><h1>우리 아이, 얼마나 강해질까?</h1><p>성장을 바꾸고, 화력을 비교하고, 다음 목표를 골라 보세요.</p></div><span class="seal">실제 전투 기반<br><b>오프라인 성장 연구실</b></span></header>
+<nav class="tabs" aria-label="결과 화면"><button id="tab-hero" class="active" type="button">아이 성장</button><button id="tab-roster" type="button">전체 명단</button><button id="tab-gaps" type="button">격차 보기</button><span id="save-status">설정은 주소에 자동 저장됩니다</span></nav>
+<div class="workspace">
+<aside class="controls" aria-label="성장 설정">
+<section class="panel picker"><div class="section-head"><h2>함께 볼 아이</h2><button class="help" type="button" data-help="이름으로 찾거나 등급·역할·속성을 좁혀 보세요. 아이를 바꿔도 성장 설정은 유지됩니다." aria-label="아이 선택 도움말">?</button></div>
+<label class="search-label" for="search">이름 검색<input id="search" type="search" placeholder="예: 유나, 마린" autocomplete="off"></label>
+<details id="filter-details"><summary>등급 · 역할 · 속성 필터</summary><div id="filters"></div></details>
+<div id="hero-list" class="hero-list" aria-label="아이 목록"></div><div class="picker-pages"><button id="hero-prev" type="button">이전</button><span id="hero-page"></span><button id="hero-next" type="button">다음</button></div><p id="hero-count" class="fine"></p>
+</section>
+<section class="panel"><div class="section-head"><h2>성장 설정</h2><button id="reset" type="button" class="quiet">초기화</button></div><div id="growth-controls"></div>
+<div class="control-label"><label for="gear-preset">장비 한 번에 맞추기</label><button type="button" class="help" data-help="획득 날짜 예측이 아닌 장비 조합 예시입니다. 주능력·강화·잠재·세트는 게임의 실제 공식으로 계산합니다. 자세한 설정에서 부위별로 바꿀 수 있어요." aria-label="장비 프리셋 도움말">?</button></div>
+<select id="gear-preset"><option value="0">없음</option><option value="1">초반 · 희귀</option><option value="2">중반 · 영웅</option><option value="3">후반 · 전설</option><option value="4">최고 신화</option><option value="-1">직접 설정</option></select>
+<details><summary>장비 자세히 설정</summary><div id="gear-advanced"></div></details>
+<div class="control-label"><label for="growth-preset">영구 성장 한 번에 맞추기</label><button type="button" class="help" data-help="경제 시뮬레이션의 해당 아이 별·영구 레벨, 분교 연구, 체육관, 장비 도감을 가져옵니다. 전투 레벨·심장·장비·각성은 별도 설정입니다. 날짜별 도달을 보장하지 않습니다." aria-label="영구 성장 프리셋 도움말">?</button></div>
+<select id="growth-preset"></select><p id="preset-note" class="fine"></p>
+<details><summary>영구 성장 자세히 설정</summary><div id="permanent-controls"></div></details>
+<div class="control-label"><span>갑판 위치</span><button type="button" class="help" data-help="선두는 공격력, 후열은 스킬과 궁극기 쿨타임에 이점이 있어요. 체육관 레벨도 적용됩니다. 중립은 배치 효과를 끕니다." aria-label="갑판 위치 도움말">?</button></div>
+<div id="slot-buttons" class="segmented"><button data-slot="neutral" type="button">중립</button><button data-slot="front" type="button">선두</button><button data-slot="back" type="button">후열</button></div>
+<div id="adjacent-control"></div><div id="help-box" class="help-box" role="status" hidden></div>
+</section>
+</aside>
+<div class="results">
+<div id="hero-view">
+<section class="panel hero-heading"><div id="selected-hero"></div><div class="heading-actions"><button id="pin" class="primary" type="button">＋ 비교에 담기</button><button id="share" type="button">설정 링크 복사</button></div></section>
+<div class="headline" id="headline" aria-live="polite"></div><p id="forecast-note" class="fine"></p>
+<section class="panel"><div class="section-head"><h2>어디서 피해가 나오나요?</h2><label class="inline-label" for="scenario">상황<select id="scenario"><option value="mean">종합</option><option value="A">보스</option><option value="B">무리</option></select><button type="button" class="help" data-help="보스는 중립 보스 한 마리, 무리는 중립 적 여섯 마리입니다. 종합은 두 상황 DPS의 평균이에요." aria-label="상황 선택 도움말">?</button></label></div><div id="damage-split"></div><p class="fine">목표 20 / 40 / 40은 성장 전 역할 환경 기준입니다. 각성·장비로 비중은 달라집니다.</p></section>
+<section class="panel"><div class="section-head"><h2>레벨을 올리면</h2><label class="inline-label" for="chart-mode">비교 기준<select id="chart-mode"><option value="awaken">각성 단계별</option><option value="pins">담아 둔 설정</option><option value="tiers">등급 평균</option></select><button type="button" class="help" data-help="한 아이의 각성 단계별 성장, 담아 둔 네 설정, 전체 명단의 등급별 평균 중에서 고릅니다. 선택한 상황과 공통 성장 설정을 사용합니다." aria-label="그래프 비교 기준 도움말">?</button></label></div><div id="chart-max-control"></div><div id="chart-legend" class="legend"></div><canvas id="level-chart" role="img" aria-label="레벨에 따른 DPS 변화, 각성 단계·등급 평균·담아 둔 설정 비교"></canvas><p id="chart-note" class="fine"></p></section>
+<section class="panel"><div class="section-head"><h2>다음엔 무엇을 올릴까요?</h2><button type="button" class="help" data-help="현재 설정에서 한 번 바꾸었을 때 종합 DPS가 가장 많이 늘어나는 순서입니다. 재화 비용이나 투자 대비 효율 순서는 아닙니다." aria-label="다음 성장 추천 도움말">?</button></div><div id="upgrades"></div></section>
+<section class="panel"><div class="section-head"><h2>나란히 비교 <span id="pin-count" class="fine">0 / 4</span></h2><button id="clear-pins" class="quiet" type="button">모두 비우기</button></div><div id="compare-cards" class="compare-cards"></div></section>
+</div>
+<section id="roster-controls" class="panel" hidden>
+<div class="section-head"><h2>같은 기준으로 63명 비교</h2><button id="roster-baseline" type="button">성장 전으로</button></div>
+<div class="common-tools"><div><div class="control-label"><label for="roster-preset">비교할 성장 설정</label><button type="button" class="help" data-help="전체 명단과 격차 보기가 같은 설정을 공유합니다. 날짜 프리셋은 계정 연구·도감과 아이별 별·영구 레벨을 가져옵니다. 미보유 아이는 초기 성장, 전투 레벨 1·장비 없음·각성 없음으로 비교합니다. 직접 설정은 아이 성장 화면의 값을 전원에게 적용합니다." aria-label="전체 비교 성장 설정 도움말">?</button></div><select id="roster-preset"><option value="baseline">성장 전 · ★1 · 레벨 1</option><option value="current">아이 성장의 직접 설정</option></select></div>
+<label class="inline-label" for="roster-scenario">피해 기준<select id="roster-scenario"><option value="mean">종합 DPS</option><option value="A">보스 DPS</option><option value="B">무리 DPS</option></select></label><button id="roster-custom" type="button">직접 성장 조절</button></div>
+<p id="roster-setup"></p><p id="roster-note" class="fine"></p><div id="band-summary" class="band-summary"></div>
+</section>
+<div id="roster-view" hidden>
+<section class="panel"><h2 id="roster-bars-title">등급별 피해 밴드</h2><div id="roster-bars" class="roster-bars"></div></section>
+<section class="panel"><div class="section-head"><h2>전체 표</h2><span class="fine">열 제목을 누르면 등급 안에서 정렬</span></div><div class="table-scroll" tabindex="0" aria-label="전체 명단 표, 가로 스크롤"><table><thead><tr><th><button data-sort="name" type="button">아이</button></th><th><button data-sort="role" type="button">역할</button></th><th><button data-sort="A" type="button">보스 DPS</button></th><th><button data-sort="B" type="button">무리 DPS</button></th><th><button data-sort="mean" type="button">종합 DPS</button></th></tr></thead><tbody id="roster-table"></tbody></table></div></section>
+</div>
+<div id="gaps-view" hidden>
+<div class="gap-intro"><h2>격차를 한눈에</h2><p>성장 전·동일 성장의 보스·잡몹·종합에서 등급 간격을 비교하세요. 날짜 프리셋은 서로 다른 투자량을 반영하므로 등급 역전이 정상입니다.</p></div>
+<div class="gap-overview">
+<section class="panel"><h2>등급 × 역할 · 최소부터 최대까지</h2><p id="matrix-scale" class="fine"></p><div id="range-matrix" class="range-matrix"></div></section>
+<section class="panel"><h2>SS를 1로 보면</h2><p class="fine">등급 평균 비율 · 점선은 SS 평균</p><div id="tier-ratios" class="ratio-chart"></div><div id="gap-story" class="gap-story"></div></section>
+</div>
+<section class="panel"><h2 id="rank-title">63명 종합 DPS 순위</h2><p class="fine">실제 화력 내림차순 · 막대는 평타·스킬·궁극기 피해를 쌓은 것이고, 오른쪽 작은 숫자는 그 비율(%)입니다. 세로 점선은 각 등급 평균이며, 모든 막대는 같은 눈금을 씁니다. 막대에 마우스를 올리면 자세한 수치가 나옵니다.</p><div id="rank-controls" class="rank-controls"></div><div id="rank-legend" class="rank-legend"></div><div id="gap-ranked" class="rank-chart"></div></section>
+</div>
+<section class="panel evidence"><details><summary>얼마나 정확한가요? · 측정 범위와 공식</summary><p id="accuracy-summary"></p><div class="table-scroll" tabindex="0" aria-label="실제 전투 기대 DPS와 계산기 오차"><table><thead><tr><th>성장</th><th>기대 평균 오차</th><th>기대 최대 오차</th><th>구성 오차</th></tr></thead><tbody id="accuracy"></tbody></table></div><p class="fine">공격력·장비·별·각성은 실제 공식과 게임에서 내보낸 표를 사용합니다. 각성 0·3·5는 별도 실측입니다. 실제 초기 타이머·동작 잠금·가속을 내보내 준비된 스킬 → 평타 순서로 300초를 재생하고, 정수 시전 횟수와 마지막 타격 도착을 계산합니다. 치명타는 확률과 피해 배율의 기댓값을 반영합니다. 엄격한 등급 밴드는 실제 적중의 기대 DPS 기준이며 원래 확률 표본은 CSV/JSON에 별도로 보존합니다. 시전 경계와 공간 판정은 성장 후에도 오차를 만들 수 있습니다.</p><p class="fine">보스 한 마리와 중립 적 여섯 마리의 300초 측정입니다. 단합은 이 아이의 영구 레벨만, 도감은 전원 보유 선택 시 실제 성장 기록 합계를 반영합니다. 실제 처치·웨이브 공백·속성 상성·다른 아이의 영구 레벨·공명·항해사·결속·피버·순풍은 제외합니다. 출처: 게임의 공격력·장비·각성·성장 기록 계산, 전투 프로브, 경제 시뮬레이션.</p></details></section>
+</div></div>
+<footer><span id="data-note"></span><span>구름고래 분교 · 작은 선택으로 더 멀리</span></footer>
+</main><script src="data.js"></script><script src="presets.js"></script><script src="calculator.js"></script><script src="gaps.js"></script><script src="viewer.js"></script></body></html>

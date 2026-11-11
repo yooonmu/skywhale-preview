@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>구름고래 분교 · PD 피드백 70 진행판</title>
+<style>
+:root{--navy:#28305a;--lav:#6551c4;--line:#e4def5;--bg:#f6f3ff;--cream:#fffaf0;--gold:#d6b56d;
+--s0:#8a86a3;--s1:#2f7fd0;--s2:#1f7a52;--s3:#c4561c}
+*{box-sizing:border-box}body{margin:0;font-family:"Pretendard","Malgun Gothic",sans-serif;background:var(--bg);color:var(--navy);line-height:1.5}
+header{position:sticky;top:0;z-index:5;background:rgba(246,243,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:12px 16px}
+h1{font-size:20px;margin:0 0 2px}.sub{font-size:13px;color:#4f5683;margin:0 0 8px}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.grp{display:flex;flex-wrap:wrap;gap:5px;align-items:center}.grp b{font-size:12px;margin-right:2px}
+.grp button{font:inherit;font-size:13px;min-height:32px;padding:3px 11px;border:1px solid #c9bff2;background:#fff;color:var(--navy);border-radius:16px;cursor:pointer}
+.grp button.on{background:var(--lav);color:#fff;border-color:var(--lav)}
+input[type=search]{font:inherit;font-size:13px;min-height:32px;padding:4px 10px;border:1px solid #c9bff2;border-radius:16px;width:170px}
+label.chk{font-size:13px;display:flex;gap:4px;align-items:center}
+.stat{font-size:13px;margin-left:auto}
+main{max-width:1500px;margin:0 auto;padding:14px 16px 60px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(640px,1fr));gap:14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px;border-left:5px solid var(--s0)}
+.card[data-s="진행"]{border-left-color:var(--s1)}.card[data-s="완료"]{border-left-color:var(--s2)}.card[data-s="결정 대기"]{border-left-color:var(--s3)}
+.hd{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}.hd h2{font-size:17px;margin:0;flex:1 1 220px}
+.num{font-weight:800;color:var(--lav);font-size:15px}
+.badge{font-size:12px;font-weight:700;color:#fff;border-radius:10px;padding:1px 9px;background:var(--s0)}
+.badge[data-s="진행"]{background:var(--s1)}.badge[data-s="완료"]{background:var(--s2)}.badge[data-s="결정 대기"]{background:var(--s3)}
+.meta{font-size:12px;color:#5b6290}
+.note{background:var(--cream);border:1px solid #eadfc4;border-top:3px solid var(--gold);border-radius:10px 3px 10px 3px;padding:6px 10px;font-size:13px;margin:6px 0 8px;white-space:pre-wrap}
+.note.empty{color:#8a84a0;font-style:italic}
+.cap{border-top:1px dashed var(--line);padding-top:8px;margin-top:8px}
+.ct{font-size:13px;font-weight:700;margin-bottom:4px}.ct small{font-weight:400;color:#5b6290}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.side h3{font-size:11px;letter-spacing:.06em;margin:0 0 3px;color:#6651c2}
+.frames{display:flex;gap:4px;overflow-x:auto;padding-bottom:2px}
+.frames img{height:auto;width:100%;min-width:0;border-radius:5px;border:1px solid #e3dbef;display:block;cursor:zoom-in;background:#ddd}
+.frames.multi img{width:46%;flex:0 0 46%}
+.empty-slot{aspect-ratio:16/9;display:grid;place-items:center;border:1px dashed #cfc6f3;border-radius:6px;color:#7b74a0;font-size:12px;background:#faf8ff;text-align:center;padding:6px}
+.more{font:inherit;font-size:12px;margin-top:8px;min-height:30px;padding:2px 12px;border:1px solid #cfc6f3;background:#fff;border-radius:15px;cursor:pointer;color:var(--navy)}
+.nov{font-size:13px;color:#5b6290;background:#faf8ff;border:1px dashed #cfc6f3;border-radius:6px;padding:8px}
+dialog{border:0;border-radius:8px;padding:0;max-width:98vw;background:#111;color:#fff}
+dialog img{max-width:96vw;max-height:80vh;display:block;margin:auto}
+dialog .bar{display:flex;gap:8px;align-items:center;padding:8px 12px;font-size:14px}
+dialog button{font:inherit;min-height:34px;padding:2px 12px;border:0;border-radius:4px;background:var(--lav);color:#fff;cursor:pointer}
+dialog .t{flex:1}
+@media (max-width:700px){.grid{grid-template-columns:1fr}.stat{margin-left:0}}
+@media (max-width:480px){.pair{grid-template-columns:1fr}.frames.multi img{width:70%;flex-basis:70%}}
+</style></head><body>
+<header>
+<h1>PD 피드백 70 · 진행판</h1>
+<p class="sub">항목마다 지금 모습(BEFORE)과 고친 뒤(AFTER)를 같은 저장 · 같은 장면으로 찍어 나란히 둡니다. 그림을 누르면 크게 보고, 짧은 연출은 여러 장(←/→)으로 넘겨 봅니다. <span id="upd"></span></p>
+<div class="ctrl">
+<div class="grp" id="g-st"><b>상태</b></div>
+<div class="grp" id="g-area"><b>영역</b></div>
+<label class="chk"><input type="checkbox" id="wide"> 1600×720도 보기</label>
+<input type="search" id="q" placeholder="번호 · 제목 찾기" aria-label="번호 또는 제목 찾기">
+<span class="stat" id="stat"></span>
+</div>
+</header>
+<main><div class="grid" id="grid"></div></main>
+<dialog id="dlg"><div class="bar"><span class="t" id="dt"></span><button type="button" id="prev" aria-label="이전 장">←</button><button type="button" id="next" aria-label="다음 장">→</button><button type="button" id="close">닫기</button></div><img id="big" alt=""></dialog>
+<script src="data.js"></script>
+<script>
+const D = window.FB70 || {items: []}, ITEMS = D.items;
+const STATUSES = ["대기", "진행", "완료", "결정 대기"];
+const AREAS = [...new Set(ITEMS.map(i => i.area))];
+const st = {status: "all", area: "all", q: "", wide: false};
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const SHOW = 3;
+const open = {};
+function chips(id, list, get, set) {
+  const g = document.getElementById(id);
+  for (const [v, l] of list) {
+    const b = document.createElement("button"); b.type = "button"; b.textContent = l; b.dataset.v = v;
+    b.addEventListener("click", () => { set(v); sync(); render(); }); g.appendChild(b);
+  }
+  g._on = get;
+}
+function sync() { for (const id of ["g-st", "g-area"]) { const g = document.getElementById(id); g.querySelectorAll("button").forEach(b => b.classList.toggle("on", g._on(b.dataset.v))); } }
+chips("g-st", [["all", "전체"], ...STATUSES.map(s => [s, s])], v => st.status === v, v => st.status = v);
+chips("g-area", [["all", "전체"], ...AREAS.map(a => [a, a])], v => st.area === v, v => st.area = v);
+document.getElementById("q").addEventListener("input", e => { st.q = e.target.value.trim(); render(); });
+document.getElementById("wide").addEventListener("change", e => { st.wide = e.target.checked; render(); });
+if (D.updated) document.getElementById("upd").textContent = `BEFORE ${D.updated.before || "-"} · AFTER ${D.updated.after || "아직 없음"}`;
+function side(kind, files, cap) {
+  if (!files.length) return `<div class="side"><h3>${kind}</h3><div class="empty-slot">${kind === "AFTER" ? "AFTER 캡처 대기<br>(tools/feedback_capture_run.mjs artifacts/feedback70/after)" : "BEFORE 없음"}</div></div>`;
+  return `<div class="side"><h3>${kind}${files.length > 1 ? ` · ${files.length}장` : ""}</h3><div class="frames${files.length > 1 ? " multi" : ""}">${files.map((f, i) => `<img src="${esc(f)}" loading="lazy" alt="${esc(cap.label)} ${kind} ${i + 1}" data-files="${esc(JSON.stringify(files))}" data-i="${i}" data-t="${esc(`${cap.label} · ${cap.res} · ${kind}`)}">`).join("")}</div></div>`;
+}
+function render() {
+  const grid = document.getElementById("grid"); grid.innerHTML = "";
+  let shown = 0;
+  for (const it of ITEMS) {
+    if (st.status !== "all" && it.status !== st.status) continue;
+    if (st.area !== "all" && it.area !== st.area) continue;
+    if (st.q && !(String(it.n) === st.q || it.title.includes(st.q))) continue;
+    shown++;
+    const caps = it.caps.filter(c => st.wide || c.res.startsWith("1280") || !it.caps.some(o => o.id === c.id && o.res.startsWith("1280")));
+    const many = caps.length > SHOW && !open[it.n];
+    const card = document.createElement("section"); card.className = "card"; card.dataset.s = it.status; card.id = "item-" + it.n;
+    card.innerHTML = `<div class="hd"><span class="num">#${it.n}</span><h2>${esc(it.title)}</h2><span class="badge" data-s="${esc(it.status)}">${esc(it.status)}</span></div>
+      <div class="meta">${esc(it.area)} · 담당 ${esc(it.owner || "미정")} · 캡처 ${caps.length}개</div>
+      <div class="note${it.note ? "" : " empty"}">${esc(it.note || "메모 없음 (리드가 status.json에 적습니다)")}</div>
+      ${it.novisual ? `<div class="nov">화면 없음: ${esc(it.novisual)}</div>` : ""}
+      ${!caps.length && !it.novisual ? `<div class="nov">아직 이 항목의 캡처가 없습니다.</div>` : ""}
+      ${(many ? caps.slice(0, SHOW) : caps).map(c => `<div class="cap"><div class="ct">${esc(c.label)} <small>${esc(c.res)} · ${esc(c.id)}</small></div><div class="pair">${side("BEFORE", c.before, c)}${side("AFTER", c.after, c)}</div></div>`).join("")}
+      ${caps.length > SHOW ? `<button type="button" class="more">${many ? `캡처 ${caps.length - SHOW}개 더 보기` : "접기"}</button>` : ""}`;
+    card.querySelector(".more")?.addEventListener("click", () => { open[it.n] = !open[it.n]; render(); document.getElementById("item-" + it.n).scrollIntoView({block: "nearest"}); });
+    grid.appendChild(card);
+  }
+  const cnt = s => ITEMS.filter(i => i.status === s).length;
+  document.getElementById("stat").textContent = `${ITEMS.length}개 · ${STATUSES.map(s => `${s} ${cnt(s)}`).join(" · ")} · 표시 ${shown}`;
+}
+const dlg = document.getElementById("dlg"), big = document.getElementById("big"); let cur = {files: [], i: 0, t: ""};
+function show() { big.src = cur.files[cur.i]; big.alt = cur.t; document.getElementById("dt").textContent = `${cur.t}${cur.files.length > 1 ? ` (${cur.i + 1}/${cur.files.length})` : ""}`; document.getElementById("prev").hidden = document.getElementById("next").hidden = cur.files.length < 2; }
+document.getElementById("grid").addEventListener("click", e => { const im = e.target.closest("img[data-files]"); if (!im) return; cur = {files: JSON.parse(im.dataset.files), i: Number(im.dataset.i), t: im.dataset.t}; show(); dlg.showModal(); });
+const step = d => { cur.i = (cur.i + d + cur.files.length) % cur.files.length; show(); };
+document.getElementById("prev").addEventListener("click", () => step(-1));
+document.getElementById("next").addEventListener("click", () => step(1));
+document.getElementById("close").addEventListener("click", () => dlg.close());
+dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+document.addEventListener("keydown", e => { if (!dlg.open || cur.files.length < 2) return; if (e.key === "ArrowLeft") step(-1); if (e.key === "ArrowRight") step(1); });
+sync(); render();
+</script></body></html>
