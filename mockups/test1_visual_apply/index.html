@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>PD 플레이 테스트 1차 — 적용 전/후 (#3 · #16 · #23 · #27)</title>
+<style>
+body{margin:0;background:#1d1838;color:#eee8ff;font:15px/1.6 "Pretendard","Malgun Gothic",sans-serif;padding:28px 36px 60px}
+h1{font-size:26px;margin:0 0 6px}h2{font-size:20px;margin:36px 0 6px;color:#ffe2a0}
+p.n{margin:0 0 12px;color:#cfc4ff}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0 18px}
+figure{margin:0;background:#2a2350;border:1px solid #4b3f86;border-radius:12px;padding:10px}
+figcaption{font-weight:700;margin-bottom:6px}figcaption.a{color:#ffd67a}
+img,video{width:100%;display:block;border-radius:6px}
+.v{display:inline-block;padding:2px 10px;border-radius:99px;background:#3b3170;margin-left:8px;font-size:13px}
+</style></head><body>
+<h1>PD 플레이 테스트 1차 — 적용 전/후</h1>
+<p class="n">같은 상태 · 같은 입력으로 찍었습니다 (tools/test1_visual_capture.gd, --phase=before|after). 영상은 1280×720, 15fps.</p>
+<div id="list"></div>
+<script>
+const S=[
+ ["#3 보상 띠 — 화면 양끝까지","band",["1280x720","1600x720","1706x720","1280x960"],"band"],
+ ["#16 보상 판 뒤 빛 — 겹친 셰이더 빛 · 반짝이","popup",["1280x720","1600x720"],"popup"],
+ ["#23 소환 — 다른 메뉴와 같은 판 · 책갈피","summon_tab",["1280x720","1600x720"]],
+ ["#23 소환 — 확률 창","summon_rates",["1280x720","1600x720"]],
+ ["#23 소환 — 별가루 교환소","summon_dust",["1280x720","1600x720"]],
+ ["#27 스케치북 — 칠하기 전","paint_idle",["1280x720","1600x720"]],
+ ["#27 스케치북 — 문지르는 중 (가운데 점선 원 없음, 어디든 칠함)","paint_rub",["1280x720","1600x720"],"paint"],
+ ["#27 스케치북 — 다 칠한 뒤 (등급은 아직 안 보임)","paint_omen",["1280x720","1600x720"]],
+];
+let h="";
+for(const [t,k,ws,vid] of S){
+ h+=`<h2>${t}</h2>`;
+ for(const w of ws) h+=`<div class="row"><figure><figcaption>전 · ${w}</figcaption><img loading="lazy" src="before/${k}_${w}.jpg"></figure><figure><figcaption class="a">후 · ${w}</figcaption><img loading="lazy" src="after/${k}_${w}.jpg"></figure></div>`;
+ if(vid) h+=`<div class="row"><figure><figcaption>전 · 영상</figcaption><video src="before/${vid}.mp4" controls muted loop></video></figure><figure><figcaption class="a">후 · 영상</figcaption><video src="after/${vid}.mp4" controls muted loop></video></figure></div>`;
+}
+document.getElementById("list").innerHTML=h;
+</script>
+</body></html>
