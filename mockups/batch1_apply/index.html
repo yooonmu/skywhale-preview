@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>아이들 허브 1묶음 적용 — 시안 ↔ 게임 · 전 ↔ 후 (batch1_heroes · batch1_rev)</title>
+<style>
+:root{--navy:#2e2350;--line:#e2dbf5}
+*{box-sizing:border-box}
+body{margin:0;background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.5}
+.page{max-width:1240px;margin:0 auto;padding:20px 16px 64px}
+h1{font-size:22px;margin:0 0 6px}
+h2{font-size:18px;margin:34px 0 8px;padding-top:12px;border-top:2px solid var(--line)}
+p,li{font-size:14px;color:#4c4374}
+code{font-size:12.5px;background:#ebe5fb;padding:1px 5px;border-radius:4px}
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:8px;align-items:center;padding:8px 0;background:rgba(243,240,250,.95)}
+.bar button{font:inherit;font-size:13px;min-height:40px;padding:0 16px;border-radius:20px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--navy);color:#fff}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 14px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px}
+.pair figure{margin:0}
+.pair img{width:100%;display:block;border-radius:6px;background:#1d1838}
+.pair figcaption{font-size:12px;color:#6a6290;margin-top:4px;overflow-wrap:anywhere}
+.pair .t{grid-column:1/-1;font-size:14px;font-weight:700;color:#3b3166}
+.pair .t small{display:block;font-weight:400;color:#655c8c;font-size:13px}
+.vids{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:10px}
+.vids figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px}
+.vids video{width:100%;display:block;border-radius:6px;background:#1d1838}
+.vids figcaption{font-size:13px;color:#4c4374;margin-top:4px}
+.ok{display:inline-block;padding:1px 8px;border-radius:8px;background:#e3f7ea;color:#16704e;font-weight:700;font-size:12px}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>아이들 허브 1묶음 적용 — 시안 ↔ 게임 · 전 ↔ 후</h1>
+<p>PD가 고른 시안 <a href="../batch1_heroes/index.html">batch1_heroes</a>(메뉴 틀 A 「오른쪽 세로 책갈피」 · 목록 C 「큰 미리보기 + 목록」 · 키우기 줄 A · 장비 A 「마네킹 + 서랍」 · 각성 A 「별자리」)와
+<a href="../batch1_rev/index.html">batch1_rev</a>(연성 결과 A 「작업 일지 한 장」)를 게임에 넣은 결과입니다.
+시안 그림은 시안 HTML의 그 장면을 상태 단추를 누른 뒤 원래 크기로 찍었고(<code>build_mock.mjs</code>), 게임 그림은 같은 아이 · 같은 단계 · 같은 장비를 맞춰 실제 화면을 찍었습니다(<code>tools/batch1_capture.gd</code>).
+전 ↔ 후는 같은 저장(<code>tools/feedback_capture_run.mjs … late</code>)으로 바꾸기 전과 뒤를 찍은 것입니다.</p>
+<ul>
+<li>코드: 틀 <code>scripts/ui/hub_frame.gd</code>(+ <code>assets/ui/fx/hub_sheet</code> · <code>hub_mark</code>) · 목록 <code>scripts/ui/hero_list.gd</code>(+ <code>hero_preview</code> · <code>round_mask</code>) · 키우기 줄 <code>scripts/ui/hero_page.gd</code> · 장비 <code>scripts/ui/gear_page.gd</code>(+ <code>gear_stage</code> · <code>atelier_wood</code>) · 각성 <code>scripts/ui/awaken_sky.gd</code>(+ <code>awaken_sky</code>) · 연성 결과 <code>scripts/ui/merge_log.gd</code>(+ <code>ink_stamp</code>) · <code>scripts/menus.gd</code>는 부르는 줄만</li>
+<li>바꾸지 않은 것: 밸런스 · 장비 규칙 · 일괄 연성(<code>main.merge_all</code>, 한 번에 모두) · 소환 화면 안쪽(<code>summon_page.gd</code>, 틀이 그대로 담음) · 전투 HUD</li>
+<li>검사: release_ui <span class="ok">80/0</span> · back_button <span class="ok">68/0</span> · first_session <span class="ok">49/0</span> · guide_chain <span class="ok">0 실패</span> · fb70_overflow <span class="ok">42,210/0</span> · 안내 열쇠(hero:&lt;id&gt; · lv:&lt;id&gt; · star:&lt;id&gt; · 「장비」 책갈피 · GearUpChip · gear_up · gear_tab · CloseInfo · CloseBench) 실제 화면에서 모두 찾아짐</li>
+</ul>
+<div class="bar"><button type="button" data-w="1280" aria-pressed="true">1280×720</button><button type="button" data-w="1600" aria-pressed="false">1600×720</button></div>
+
+<h2>1. 메뉴 틀 A — 오른쪽 세로 책갈피 (여섯 허브 공통)</h2>
+<p>책갈피 = 종이 띠 두 겹(그림자 · 접힌 끝) + 금빛 가는 테, 고른 책갈피는 왼쪽으로 솟고 허브 색 리본이 됨. NEW · 빨간 점은 책갈피 귀에, 잠긴 허브는 자물쇠 + 흐림(LockGate). 바탕은 허브마다: 아이들 수채 종이 · 편성 짙은 갑판 · 소환 밤 도서관 · 모험 항해도 · 분교 칠판 · 상점 진열장.</p>
+<div id="frame"></div>
+<h2>2. 아이들 목록 C — 큰 미리보기 + 목록</h2>
+<p>갑판 아이 먼저(자리 번호), 빨간 점 = <code>Menus.can_grow</code>, 속성 거르기, 긴 이름은 칸에 맞춰 줄임. 한 번 누르면 왼쪽 큰 그림이 그 아이로 바뀌고, 고른 칩 · 큰 그림 · 「상세 보기 ›」를 누르면 상세.</p>
+<div id="list"></div>
+<h2>3. 아이 상세 — 패널 아래 키우기 줄 A</h2>
+<p>레벨 업(꾹 누르면 계속) · 승급 · 각성 N단계가 한 줄. 「성장 Lv · 영구 | 항해 Lv · 복귀하면 처음부터」와 「각성 단계별 효과」 판은 그대로.</p>
+<div id="grow"></div>
+<h2>4. 장비 목록 A — 마네킹 + 서랍</h2>
+<p>천 무대(조명 · 바닥 빛) 위 마네킹에 네 칸, 칸 테 = 등급 색(GradeStyle), 낀 칸은 빛이 숨 쉬고 위에 「장비 강화」 칩. 오른쪽 나무 서랍은 부위 손잡이를 누르면 열리고(미끄러짐 애니), 아래 세트 알약 · 도감 · 일괄 연성.</p>
+<div id="gear"></div>
+<h2>5. 각성 A — 별자리</h2>
+<p>별자리 선이 차례로 그려지고 각성한 별이 단계마다 켜짐. SS = 속성 색 빛, 신화 = 무지개, 다음 별은 점선 고리로 숨 쉼. 하늘 · 성운 · 별똥은 셰이더 겹 + 입자.</p>
+<div id="awaken"></div>
+<h2>6. 연성 결과 A — 작업 일지 한 장</h2>
+<p>줄마다 「재료 4개 ▶ 새 장비」를 잉크 도장처럼 찍음(재료는 밀리며 바램, 새 장비 톡 + 빛). 등급 상승 = 금빛 형광펜 + 「등급 상승!」 + 빛 터짐, 도감 NEW, 연쇄 = 「×16 ▶ ×4 ▶」. 연성할 것 없음 = 가장 가까운 묶음 n / 4. 작업대 덧칠로 잠재 등급이 오르면 같은 종이(「잠재 보랏빛 ▶ 금빛」 + 새 잠재 세 줄). 아무 데나 누르면 끝까지, 「연출 짧게」를 켜 두면 바로 결과.</p>
+<div id="merge"></div>
+<h2>7. 전 ↔ 후 (같은 저장)</h2>
+<div id="ba"></div>
+<h2>8. 움직임 (1280×720, webm)</h2>
+<div class="vids">
+<figure><video src="video/frame_switch.webm" controls muted loop playsinline></video><figcaption>책갈피로 허브 바꾸기 (아이들 → 편성 → 모험 → 분교 → 상점 → 아이들)</figcaption></figure>
+<figure><video src="video/list_preview.webm" controls muted loop playsinline></video><figcaption>목록 C: 한 번 = 미리보기, 고른 아이를 한 번 더 = 상세</figcaption></figure>
+<figure><video src="video/grow_levelup.webm" controls muted loop playsinline></video><figcaption>키우기 줄: 레벨 업 한 번 → 꾹 누르기</figcaption></figure>
+<figure><video src="video/gear_drawers.webm" controls muted loop playsinline></video><figcaption>장비: 서랍 손잡이(배지 → 부적 → 무기)</figcaption></figure>
+<figure><video src="video/awaken_open.webm" controls muted loop playsinline></video><figcaption>각성 별자리 열기 (세레나 3/5)</figcaption></figure>
+<figure><video src="video/merge_play.webm" controls muted loop playsinline></video><figcaption>연성 결과: 등급 상승 + 도감 NEW 줄이 찍힘</figcaption></figure>
+<figure><video src="video/merge_pot_play.webm" controls muted loop playsinline></video><figcaption>작업대 덧칠 → 잠재 등급 상승 (같은 일지)</figcaption></figure>
+</div>
+</main>
+<script>
+// [제목, 설명, 왼쪽 그림, 왼쪽 이름, 오른쪽 그림, 오른쪽 이름] — {W}는 1280 / 1600
+const G = "../../../../artifacts/feedback70/batch1_apply/game/", B = "../../../../artifacts/feedback70/batch1_apply/before/", A = "../../../../artifacts/feedback70/batch1_apply/after/";
+const HUBS = [["heroes", "아이들 · 수채 종이"], ["formation", "편성 · 짙은 갑판"], ["summon", "소환 · 밤 도서관 — 게임은 아직 책갈피 없음: summon_page.gd(fb-summon-impl)가 바깥 판을 감추고 화면 전체 무대를 씀"], ["adventure", "모험 · 항해도"], ["school", "분교 · 칠판"], ["shop", "상점 · 진열장"]];
+const SETS = {
+  frame: [
+    ...HUBS.map(([h, t]) => [t, "", `mock/frame_${h}_{W}x720.jpg`, "시안", `${G}frame_${h}_{W}x720.jpg`, "게임"]),
+    ["하위 화면 · 아이 도감 / 장비", "같은 틀 · 같은 책갈피, 위에 하위 탭", `${G}frame_hero_codex_{W}x720.jpg`, "게임 · 아이 도감", `${G}frame_gear_{W}x720.jpg`, "게임 · 장비"],
+    ["하위 화면 · 고래 강화 / 신화 상점", "", `${G}frame_whale_{W}x720.jpg`, "게임 · 고래 강화", `${G}frame_mythic_shop_{W}x720.jpg`, "게임 · 신화 상점"],
+  ],
+  list: [
+    ["세레나를 고름", "", "mock/list_{W}x720.jpg", "시안", `${G}list_serena_{W}x720.jpg`, "게임"],
+    ["카렌 · 플로라를 고름", "", `${G}list_karen_{W}x720.jpg`, "게임 · 카렌", `${G}list_flora_{W}x720.jpg`, "게임 · 플로라"],
+  ],
+  grow: [
+    ["세레나 · 레벨 업", "", "mock/grow_serena_{W}x720.jpg", "시안", `${G}grow_serena_{W}x720.jpg`, "게임"],
+    ["아리아 · Lv 상한 → 승급", "", "mock/grow_aria_{W}x720.jpg", "시안", `${G}grow_aria_{W}x720.jpg`, "게임"],
+    ["카렌 · 진주 모자람", "", "mock/grow_karen_{W}x720.jpg", "시안", `${G}grow_karen_{W}x720.jpg`, "게임"],
+    ["플로라 · ★6 → 각성", "", "mock/grow_flora_{W}x720.jpg", "시안", `${G}grow_flora_{W}x720.jpg`, "게임"],
+  ],
+  gear: [
+    ["유나 · 네 칸 꽉 참 · 가방", "", "mock/gear_{W}x720.jpg", "시안", `${G}gear_list_{W}x720.jpg`, "게임 (리본 서랍)"],
+    ["부적 서랍 · 주능력 두 줄", "", `${G}gear_list_charm_{W}x720.jpg`, "게임 (부적 서랍)", `${G}grow_yuna_gear_{W}x720.jpg`, "게임 · 상세 장비 탭"],
+  ],
+  awaken: [
+    ["세레나 SS · 3 / 5", "", "mock/awaken_ss_{W}x720.jpg", "시안", `${G}awaken_serena_{W}x720.jpg`, "게임"],
+    ["카렌 S · 3 / 4", "", "mock/awaken_s_{W}x720.jpg", "시안", `${G}awaken_karen_{W}x720.jpg`, "게임"],
+    ["아르카 신화 · 최대 (진화)", "", "mock/awaken_myth_{W}x720.jpg", "시안", `${G}awaken_arca_{W}x720.jpg`, "게임"],
+  ],
+  merge: [
+    ["등급 상승 + 도감 NEW", "", "mock/merge_up_{W}x720.jpg", "시안", `${G}merge_up_{W}x720.jpg`, "게임"],
+    ["연성 3개", "", "mock/merge_merge_{W}x720.jpg", "시안", `${G}merge_merge_{W}x720.jpg`, "게임"],
+    ["연쇄 (1단계 16 → 2단계 4 → 3단계 1)", "", "mock/merge_chain_{W}x720.jpg", "시안", `${G}merge_chain_{W}x720.jpg`, "게임"],
+    ["긴 연쇄 4 · 5단계 (QA 보강)", "3단계부터는 단계마다 한 칸(작은 장비 + 아래 수), 칸 사이 ▶ — 5단계(×1024)까지 재료 칸 안에 모두 보인다", `${G}merge_chain4_{W}x720.jpg`, "게임 · 4단계", `${G}merge_chain5_{W}x720.jpg`, "게임 · 5단계"],
+    ["연성할 것 없음", "", "mock/merge_none_{W}x720.jpg", "시안", `${G}merge_none_{W}x720.jpg`, "게임"],
+    ["잠재 등급 상승 (작업대 덧칠)", "", "mock/merge_pot_{W}x720.jpg", "시안", `${G}merge_pot_{W}x720.jpg`, "게임"],
+  ],
+  ba: [
+    ["아이들 허브 (목록)", "", `${B}menu_heroes_{W}x720.jpg`, "전", `${A}menu_heroes_{W}x720.jpg`, "후"],
+    ["아이 상세", "", `${B}hero_info_{W}x720.jpg`, "전", `${A}hero_info_{W}x720.jpg`, "후"],
+    ["아이 상세 · 유나", "", `${B}hero_info_yuna_{W}x720.jpg`, "전", `${A}hero_info_yuna_{W}x720.jpg`, "후"],
+    ["장비 목록", "", `${B}gear_list_{W}x720.jpg`, "전", `${A}gear_list_{W}x720.jpg`, "후"],
+    ["편성", "", `${B}formation_{W}x720.jpg`, "전", `${A}formation_{W}x720.jpg`, "후"],
+    ["소환", "", `${B}summon_pickup_{W}x720.jpg`, "전", `${A}summon_pickup_{W}x720.jpg`, "후"],
+    ["모험", "", `${B}adventure_hub_{W}x720.jpg`, "전", `${A}adventure_hub_{W}x720.jpg`, "후"],
+    ["분교", "", `${B}menu_school_{W}x720.jpg`, "전", `${A}menu_school_{W}x720.jpg`, "후"],
+    ["상점", "", `${B}menu_shop_{W}x720.jpg`, "전", `${A}menu_shop_{W}x720.jpg`, "후"],
+    ["고래 강화", "", `${B}menu_whale_{W}x720.jpg`, "전", `${A}menu_whale_{W}x720.jpg`, "후"],
+    ["아이 도감", "", `${B}hero_codex_{W}x720.jpg`, "전", `${A}hero_codex_{W}x720.jpg`, "후"],
+    ["잠긴 메뉴", "", `${B}locks_menu_{W}x720.jpg`, "전", `${A}locks_menu_{W}x720.jpg`, "후"],
+  ],
+};
+function render(w) {
+  for (const [id, rows] of Object.entries(SETS)) {
+    document.getElementById(id).innerHTML = rows.map(([t, d, a, an, b, bn]) => {
+      const L = a.replace("{W}", w), R = b.replace("{W}", w);
+      return `<div class="pair"><div class="t">${t}${d ? `<small>${d}</small>` : ""}</div>` +
+        `<figure><img loading="lazy" src="${L}" alt="${an}"><figcaption>${an} · ${L.split("/").pop()}</figcaption></figure>` +
+        `<figure><img loading="lazy" src="${R}" alt="${bn}"><figcaption>${bn} · ${R.split("/").pop()}</figcaption></figure></div>`;
+    }).join("");
+  }
+}
+document.querySelectorAll(".bar [data-w]").forEach(btn => btn.addEventListener("click", () => {
+  document.querySelectorAll(".bar [data-w]").forEach(x => x.setAttribute("aria-pressed", x === btn));
+  render(btn.dataset.w);
+}));
+render("1280");
+</script>
+</body>
+</html>
