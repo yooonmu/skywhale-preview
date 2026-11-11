@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<title>대결 B 「색 영토」 — 게임 적용 (시안 ↔ 게임)</title>
+<style>
+:root{--lav:#8f7fe0;--gold:#e8b94a;--cream:#fff8ec;--ink:#2d2650}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Pretendard","Noto Sans KR",system-ui,sans-serif;background:linear-gradient(180deg,#f4f0ff,#fff8ec);color:var(--ink)}
+header{padding:28px 40px 12px}
+h1{margin:0 0 6px;font-size:26px}
+h2{margin:36px 0 10px;font-size:21px;border-left:6px solid var(--lav);padding-left:10px}
+h3{margin:18px 0 8px;font-size:15px;color:#5a4fa0}
+p,li{font-size:14px;line-height:1.6}
+main{padding:0 40px 60px}
+nav a{display:inline-block;margin:4px 6px 0 0;padding:5px 12px;border-radius:999px;background:#fff;border:1px solid #d9d0ff;color:var(--ink);text-decoration:none;font-size:13px}
+.tabs button{border:1px solid #cfc4ff;background:#fff;border-radius:999px;padding:5px 14px;margin-right:6px;cursor:pointer;font-size:13px}
+.tabs button.on{background:#6a5bc4;color:#fff;border-color:#6a5bc4}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;align-items:start}
+.grid figure{margin:0;background:#fff;border-radius:12px;padding:8px;box-shadow:0 2px 10px #8f7fe022}
+.grid figcaption{font-size:12px;color:#6a6290;margin-bottom:6px;font-weight:600}
+.grid video{width:100%;border-radius:8px;display:block;background:#1d1838}
+.row{display:grid;grid-template-columns:120px 1fr 1fr 1fr;gap:10px;align-items:center;margin-bottom:10px}
+.row b{font-size:12px;color:#6a6290;line-height:1.4}
+.row img{width:100%;border-radius:6px;cursor:zoom-in;display:block}
+.colhead{font-size:12px;font-weight:700;color:#5a4fa0}
+table{border-collapse:collapse;font-size:13px;margin-top:6px}
+td,th{border:1px solid #e1dbff;padding:6px 10px;background:#fff;text-align:left}
+th{background:#f1edff}
+.ok{color:#1f7344;font-weight:700}
+.note{background:#fff;border:1px solid #eadfb8;border-radius:10px;padding:10px 14px}
+ul.tight li{margin:2px 0}
+#zoom{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;z-index:9}
+#zoom img{max-width:96vw;max-height:94vh}
+</style></head><body>
+<header>
+<h1>대결 B 「색 영토」 — 게임 적용</h1>
+<p>시안: <code>design/mockups/feedback70/battle_b2_rev/index.html</code> 2 대결 B · 게임: Godot 4.7.2 gl_compatibility 캡처 (<code>tools/duel_apply_capture.gd</code>, 같은 대본 · 같은 난수 씨앗으로 이전 / 적용).
+해상도 탭으로 1280×720 / 1600×720 을 바꿔 봅니다. 사진을 누르면 크게 보입니다.</p>
+<nav><a href="#video">움직임</a><a href="#states">상태별 시안 ↔ 게임</a><a href="#how">어떻게 그렸나</a><a href="#checks">검사 · 프레임 시간</a></nav>
+<div class="tabs" style="margin-top:12px"><button data-w="1280" class="on">1280×720</button><button data-w="1600">1600×720</button></div>
+</header>
+<main id="m"></main>
+<div id="zoom" onclick="this.style.display='none'"><img alt="확대"></div>
+<script>
+const STATES = [
+  {id:'start', mock:'start', title:'시작 50 : 50', desc:'상대 잿빛 고래와 함께 잿빛이 오른쪽에서 밀려와 가운데에서 붓질로 멈춘다. 남은 초 구슬이 경계 위에 톡.'},
+  {id:'slip', mock:'slip', title:'밀림', desc:'경계가 장밋빛 라일락 붓질로 우리 쪽에 다가오고, 잿빛 가루가 흘러든다. 구슬 아래 「잿빛이 다가와요」.'},
+  {id:'comeback', mock:'clutch', title:'역전!', desc:'몫이 가운데를 넘어 되찾는 순간: 붓질이 금빛으로 빛나고 금 · 우리 색 물감이 상대 쪽으로 터지며 옅은 금빛 물결이 스친다. 구슬 아래 「역전!」.'},
+  {id:'push', mock:'push', title:'밀어붙임 · 막판', desc:'우리 색이 넓어지고 물감 방울이 상대 쪽으로 튄다. 남은 5초부터 구슬이 붉게 초마다 톡, 경계가 잘게 떨린다.'},
+  {id:'win', mock:'win', title:'승리', desc:'경계가 한 번 숨을 고른 뒤 오른쪽 밖으로 쓸려 나가고, 남은 잿빛에 물감 웅덩이가 피며 하늘 전체에 색이 살아나는 물결이 지나간다. 금 판 「승리!」.'},
+  {id:'lose', mock:'lose', title:'패배', desc:'잿빛이 우리 고래까지 천천히 덮지만 어둡게 누르지 않는다(위 라벤더 · 아래 살구빛 해 질 녘, 원래 색이 조금 비침). 흔들림 없이 해 질 녘 판 「패배」.'},
+  {id:'rank', mock:'rank', title:'등급전', desc:'상대 판 위에 「VS · 항해사 등급전」 꼬리표, 판 안에 상대 이름 + 등급 점수 · 전투력. 회랑은 「VS · 기억의 회랑」 + 상대 전투력.'},
+];
+const CLIPS = [
+  {id:'win', title:'아슬아슬하게 이기는 대결 (시작 → 밀림 → 역전 → 승리)', both:true},
+  {id:'lose', title:'지는 대결 (마지막 7초 → 패배)', both:true},
+  {id:'rank', title:'등급전 (처음 9초)', only:'1600'},
+];
+const zoom = document.getElementById('zoom');
+function draw(w){
+  const m = document.getElementById('m');
+  const vids = CLIPS.filter(c=>!c.only||c.only===w).map(c=>`
+    <h3>${c.title}</h3>
+    <div class="grid">
+      <figure><figcaption>이전 (지금 게임)</figcaption><video src="video/before_${c.id}_${w}.webm" autoplay loop muted playsinline controls></video></figure>
+      <figure><figcaption>적용 (색 영토)</figcaption><video src="video/after_${c.id}_${w}.webm" autoplay loop muted playsinline controls></video></figure>
+    </div>`).join('') + (w==='1280'?'<p class="note">등급전 영상은 1600×720 탭에 있습니다.</p>':'');
+  const rows = STATES.map(s=>`<div class="row"><b>${s.title}<br><span style="font-weight:400">${s.desc}</span></b>
+      <img src="mock/mock_${s.mock}_${w}.jpg" alt="시안 ${s.title}">
+      <img src="shots/before_${s.id}_${w}.jpg" alt="이전 ${s.title}">
+      <img src="shots/after_${s.id}_${w}.jpg" alt="적용 ${s.title}"></div>`).join('');
+  m.innerHTML = `
+  <section id="video"><h2>움직임 (실시간 녹화 · 같은 대본)</h2>${vids}</section>
+  <section id="states"><h2>상태별 시안 ↔ 게임</h2>
+    <p>이전 열은 지금 게임의 같은 대결 같은 순간(대본 시각 비율)입니다. 적용 열은 장면이 알려 주는 영토 몫 · 사건(밀림 · 역전)으로 같은 상태를 골랐습니다.</p>
+    <div class="row"><span></span><span class="colhead">시안 B</span><span class="colhead">이전</span><span class="colhead">적용</span></div>
+    ${rows}</section>
+  <section id="how"><h2>어떻게 그렸나 (시안보다 나아진 점)</h2>
+  <ul class="tight">
+    <li><b>영토 = 하늘 · 월드만</b>: 화면 읽기 셰이더 한 장을 월드의 갑판 아이들 바로 뒤에 두어 하늘 · 콘텐츠 하늘 · 우리 고래 · 아이들만 바랩니다. HUD(5층) · 상대 탄 · 우리 탄 · 피해 숫자 · 머리 위 막대는 그 위라 원래 색 그대로 — 시안처럼 흑백 사본을 덮지 않습니다. 앞 구름 띠도 같은 경계 재질로 대결 동안만 바꿔 끼웁니다.</li>
+    <li><b>경계 = 살아 있는 물감 붓질 한 획</b>: 시안의 지그재그 선 대신, 크게 굽이치는 붓 흐름 + 잔물결, 붓 누름에 따라 바뀌는 굵기, 마른 붓 털 자국 두 겹, 가장자리에 고인 짙은 물감 · 얇은 가운데의 종이빛, 종이에 스민 번짐, 흩뿌린 물감 점, 우리 쪽 곁의 가는 금빛 마른 붓. 화면 위아래 밖까지 이어져 잘린 끝이 없고, 색은 라벤더 바탕에 하늘 · 금이 얼룩처럼 고여 세로 무지개 띠가 되지 않습니다.</li>
+    <li><b>기세</b>: 몫 = 대본의 양쪽 힘(보호막과 같은 값) 비율을 용수철로 따라가고, 우리 탄 · 상대 탄 · 쓰러짐마다 경계가 잠깐 밀리고 당겨집니다. 기세 쪽으로 붓질이 기울고 번짐 결이 흐르며, 물감 방울(우리 덱의 등급 · 속성 색, GradeStyle) 또는 잿빛 가루가 그쪽으로 튑니다.</li>
+    <li><b>역전 · 막판이 한눈에</b>: 아슬아슬한 대결은 이긴 쪽 아이가 먼저 쓰러져 한동안 밀리다 뒤집히는 대본(결과 · 보상은 그대로). 역전 순간 붓질 가운데의 가는 금선(3~5px) + 둘레 금빛 + 물감 터짐 + 금빛 물결 + 「역전!», 밀리면 「잿빛이 다가와요」, 남은 5초부터 붉은 구슬 · 떨리는 경계.</li>
+    <li><b>QA 대결 수정</b>: 대결 동안 퀘스트 판(과 안내 「이어서 안내」)을 숨기고, 등급전 퀘스트 횟수는 결과가 보일 때 셉니다(유나 · 손가락이 대결을 덮지 않음). 「역전!」 · 「잿빛이 다가와요」 꼬리표도 구슬과 같은 띠 안에 묶었습니다.</li>
+    <li><b>HUD B 재료 그대로</b>: 위 판 · 꼬리표 · 금테 구슬 · 결과 판은 hud_b_plate / hud_b_orb. 대결 동안 하단 메뉴 판 · 왼쪽 칩 · 순풍 · 복귀 · 콤보는 접고, 숨결은 자물쇠 + 「대결 중 쉼」.</li>
+    <li><b>가볍게</b>: 덮개는 경계 왼쪽 150px부터 오른쪽 끝까지만(화면 복사도 그 자리만), 입자 방출기 다섯 개는 대결 시작에 한 번 만들고 다시 씁니다.</li>
+  </ul></section>
+  <section id="checks"><h2>검사 · 프레임 시간</h2>
+  <table><tr><th>검사</th><th>결과</th></tr>
+  <tr><td>feedback70_battle_check</td><td class="ok" id="c_fb70">—</td></tr>
+  <tr><td>release_ui_check</td><td class="ok" id="c_rel">—</td></tr>
+  <tr><td>back_button_check (대결 = 건너뛰기 포함)</td><td class="ok" id="c_back">—</td></tr>
+  <tr><td>guide_chain_check (가이드 #41 · #42 등급전)</td><td class="ok" id="c_guide">—</td></tr></table>
+  <h3>대결 중 프레임 시간 (1600×720, gl_compatibility, 화면 동기 끔)</h3>
+  <table id="perf"><tr><th></th><th>평균</th><th>p95</th><th>GPU p50</th><th>GPU p95</th></tr></table>
+  <p class="note">이전 · 적용은 다른 실행이라 PC 부하가 달랐습니다(보통 전투 5.94 → 3.55 ms). 같은 실행의 보통 전투와 견주면 대결의 GPU 시간은 이전 +0.11 ms, 색 영토를 더한 지금 +0.12 ms — 영토 셰이더 · 화면 복사 몫은 이 PC에서 0.1 ms 아래입니다. 평균 프레임 시간은 채색 폭주 기준(약 5 ms) 안입니다.</p>
+  </section>`;
+  fillChecks();
+  m.querySelectorAll('.row img').forEach(i=>i.onclick=()=>{zoom.firstElementChild.src=i.src;zoom.style.display='flex'});
+}
+const CHECKS = {c_fb70:'34 / 35 — 실패 1: #36 이야기 알림 자리에 「순풍이 열렸어요」 알림이 먼저 섬 (알림 판 · 순풍 HUD 쪽, 대결 장면을 쓰지 않는 항목)', c_rel:'80 / 실패 0', c_back:'68 / 실패 0 (뒤로 = 건너뛰기 · 메뉴 먼저)', c_guide:'실패 0'};
+// [구간, 평균, p95, GPU p50, GPU p95] — 이전 · 적용은 다른 실행이라 같은 실행의 「보통 전투」와 비교해 읽는다
+const PERF = [
+  ['이전 · 보통 전투', 5.94, 9.42, 1.02, 2.54],
+  ['이전 · 대결', 4.85, 7.01, 1.13, 2.13],
+  ['적용 · 보통 전투', 3.55, 5.45, 0.52, 1.13],
+  ['적용 · 대결 (색 영토)', 3.23, 4.81, 0.64, 1.17],
+  ['적용 · 대결 끝 (승리 물결)', 2.69, 4.11, 0.71, 1.42],
+];
+function fillChecks(){
+  for (const k in CHECKS){const e=document.getElementById(k); if(e) e.textContent=CHECKS[k];}
+  const t=document.getElementById('perf');
+  PERF.forEach(r=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${r[0]}</td><td>${r[1]} ms</td><td>${r[2]} ms</td><td>${r[3]} ms</td><td>${r[4]} ms</td>`;t.appendChild(tr)});
+}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b)); draw(b.dataset.w);
+});
+draw('1280');
+</script>
+</body></html>
