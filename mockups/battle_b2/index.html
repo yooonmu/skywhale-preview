@@ -336,10 +336,11 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR
 .cbA{width:150px;text-align:right}
 .cbA .n{display:block;font-size:42px;font-weight:900;line-height:1;color:#fff8ec}
 .cbA .k{display:block;font-size:12px;font-weight:900;color:#ffd66b;letter-spacing:.06em;margin-top:1px}
-.gau{position:relative;margin:6px 0 0 auto;width:118px;height:10px;transform:skewX(-14deg);border-radius:3px;background:rgba(46,35,80,.7);box-shadow:0 0 0 1.5px #fff,0 2px 0 rgba(46,35,80,.25);overflow:hidden}
+/* <i>는 기본이 inline이라 크기가 0이 되어 막대가 안 보였다 → block */
+.gau{display:block;position:relative;margin:6px 0 0 auto;width:140px;height:12px;transform:skewX(-14deg);border-radius:3px;background:rgba(46,35,80,.7);box-shadow:0 0 0 1.5px #fff,0 2px 0 rgba(46,35,80,.25);overflow:hidden}
 .gau>i{position:absolute;left:0;top:0;bottom:0;width:var(--g);background:linear-gradient(90deg,#8fd6ff,#9978fa 55%,#ffd66b)}
 .gau>u{position:absolute;top:0;bottom:0;width:1.5px;background:rgba(255,255,255,.65)}
-.gl{display:block;margin-top:4px;font-size:11.5px;font-weight:800;color:#fff}
+.gl{display:block;margin-top:4px;font-size:12.5px;font-weight:900;color:#fff}
 .cbA.hot .n{color:#ffe08a;animation:bump 1.2s ease-out infinite;transform-origin:100% 60%}
 .cbA.hot .gau{box-shadow:0 0 0 1.5px #fff,0 0 12px rgba(255,191,46,.95)}
 .cbA.hot .gau>i{background:linear-gradient(90deg,#ffd66b,#ff9a6b 60%,#ff6b9a)}
@@ -579,7 +580,7 @@ body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR
 
 <section class="opt" data-choice="b2_combo_A" data-choice-group="3 콤보" data-choice-label="A 숫자 + 폭주까지 기운 막대">
 <h2>A 「숫자 + 폭주까지 기운 막대」 <small>글자는 그대로, 길이 보임</small></h2>
-<p class="cap">지금의 큰 전투 글자는 두고, 아래에 <b>보호막 막대와 같은 기운 막대</b>(하늘 → 라벤더 → 금)와 「폭주까지 N」. 62%를 넘으면 숫자 · 막대가 금 → 분홍으로 달아오릅니다.</p>
+<p class="cap">지금의 큰 전투 글자는 두고, 아래에 <b>보호막 막대와 같은 기운 막대</b>(하늘 → 라벤더 → 금)와 「폭주까지 N」. 62%를 넘으면 숫자 · 막대가 금 → 분홍으로 달아오릅니다. <b>자리: 오른쪽 위 재화 줄 아래</b>(보스 때는 보스 판 아래). <small>※ 처음 올린 판에서는 막대가 그려지지 않던 오류를 고쳤습니다.</small></p>
 <div class="vp" data-scene="normal" data-set="combo=A"></div>
 <div class="tiles">
 <figure class="tile"><div class="tv" data-scene="normal" data-set="combo=A;cn=24" data-crop="1000,80,280,140"></div><figcaption><b>24 / 80 (30%)</b> — 「폭주까지 56」.</figcaption></figure>

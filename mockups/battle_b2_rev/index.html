@@ -1,0 +1,1165 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 시안 · 전투 묶음 2 수정 (알림 · 대결)</title>
+<style>
+:root{--navy:#2e2350;--ink:#2e2350;--lav:#8b74e8;--gold:#ffbf2e;--rim:#e2b55c;--line:#e2dbf5}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;line-height:1.45}
+.page{max-width:1180px;margin:0 auto;padding:20px 16px 64px}
+.page>h1{font-size:22px;margin:0 0 4px}
+.page>h3{font-size:18px;margin:38px 0 8px;padding-top:12px;border-top:2px solid var(--line)}
+.lead{margin:0 0 12px;font-size:14px;color:#5a5180}
+.lead b{color:#4a33b0}
+.bar{position:sticky;top:0;z-index:30;display:flex;gap:6px 8px;flex-wrap:wrap;align-items:center;margin:0 0 16px;padding:8px 0;font-size:13px;background:rgba(243,240,250,.95)}
+.bar button{font:inherit;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.bar a{color:#4a33b0;font-weight:700;padding:12px 3px}
+.ref,.opt{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 18px}
+.opt{cursor:pointer}
+.opt[data-choice-selected],.opt.sel{outline:3px solid var(--lav);outline-offset:2px}
+.opt h2,.ref h2{font-size:17px;margin:0 0 2px}
+.opt h2 small{font-size:13px;color:#6a5f9e;margin-left:6px}
+.cap{margin:0 0 10px;font-size:14px;color:#4c4374}
+.cap b{color:#4a33b0}
+.fl{font-size:13px;font-weight:700;color:#5d5585;margin:12px 0 6px}
+.rules{margin:8px 0 0;padding:0 0 0 18px;font-size:13.5px;color:#4c4374}
+.rules b{color:#4a33b0}
+.nowg{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr));gap:10px}
+.nowg figure{margin:0}
+.nowg img{display:block;width:100%;border-radius:8px}
+.nowg figcaption{font-size:12.5px;color:#4c4374;margin-top:4px}
+.nowg figcaption b{color:#4a33b0}
+.w16{display:none}:root[data-w="1600"] .w12{display:none}:root[data-w="1600"] .w16{display:block}
+.vp{position:relative;width:100%;overflow:hidden;border-radius:8px;background:#1d1838}
+.scr{position:absolute;left:0;top:0;height:720px;transform-origin:0 0;overflow:hidden;font-size:16px}
+.scr>img.bg{position:absolute;left:0;top:0;width:100%;height:720px}
+.shot{margin:0 0 12px}
+.shot figcaption{font-size:13px;color:#4c4374;margin-top:5px}
+.shot figcaption b{color:#4a33b0}
+.duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:10px}
+.duo .shot{margin:0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:10px 14px;margin-top:6px}
+.tile{margin:0}
+.tile figcaption{font-size:12.5px;color:#4c4374;margin-top:4px}
+.tile figcaption b{color:#4a33b0}
+.tv{width:100%;overflow:hidden;border-radius:8px;background:#1d1838;position:relative}
+.tw{position:absolute;left:0;top:0;overflow:hidden;transform-origin:0 0}
+.tw>.scr{transform:none}
+/* 같은 순간 HUD 있는 캡처에서 확정 HUD B만 오려 붙인다 (나머지는 HUD 없는 캡처 위에 새로 그린다) */
+.kp{position:absolute;left:var(--x);top:var(--y);background-image:var(--hud);background-repeat:no-repeat;background-size:var(--sw) 720px;background-position:calc(-1 * var(--x)) calc(-1 * var(--y));pointer-events:none}
+.note{position:absolute;z-index:40;padding:2px 8px;border-radius:6px;background:rgba(255,255,255,.92);color:#2e2350;font-size:12px;font-weight:800;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.guide{position:absolute;z-index:39;height:0;border-top:2px dashed rgba(255,255,255,.95);filter:drop-shadow(0 0 2px rgba(46,35,80,.8))}
+
+/* ===== 묶음 1 수정안 CSS (battle_b1_rev 그대로) ===== */
+/* ---------- 움직임 ---------- */
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@property --h{syntax:'<percentage>';inherits:false;initial-value:0%}
+@keyframes spina{to{--a:360deg}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes sweep{0%{transform:translateX(-140%) skewX(-18deg)}55%,100%{transform:translateX(160%) skewX(-18deg)}}
+@keyframes psw{0%{transform:translateX(0) skewX(-20deg)}38%,100%{transform:translateX(var(--d)) skewX(-20deg)}}
+@keyframes tw{0%,100%{opacity:.15;transform:scale(.55)}50%{opacity:1;transform:scale(1)}}
+@keyframes glow{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes oglow{0%,100%{box-shadow:0 0 0 1.5px #fff,0 4px 0 rgba(46,35,80,.22),0 0 6px 1px rgba(255,191,46,.45)}50%{box-shadow:0 0 0 1.5px #fff,0 4px 0 rgba(46,35,80,.22),0 0 18px 6px rgba(255,191,46,.9)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes streak{to{background-position:-56px 0}}
+@keyframes pop{0%{transform:translate(-50%,6px) scale(.6);opacity:0}25%{transform:translate(-50%,-4px) scale(1.12);opacity:1}70%{opacity:1}100%{transform:translate(-50%,-16px) scale(1);opacity:0}}
+@keyframes flash{0%,100%{opacity:0}12%{opacity:.85}}
+@keyframes slidein{0%,10%{transform:translateX(-430px)}26%,100%{transform:translateX(0)}}
+@keyframes wave{to{background-position:12px 0}}
+@keyframes dash{to{stroke-dashoffset:-60}}
+@keyframes burst{0%{transform:scale(.85);opacity:1}100%{transform:scale(1.75);opacity:0}}
+@keyframes hold{0%{--h:0%}32%,100%{--h:100%}}
+@keyframes tfl{0%{opacity:0}5%{opacity:.95}22%,100%{opacity:0}}
+@keyframes shake{0%,30%,100%{transform:translateX(0)}4%,12%,20%{transform:translateX(-3px)}8%,16%,24%{transform:translateX(3px)}}
+@keyframes rise{0%{opacity:0;transform:translate(-50%,4px)}15%{opacity:1;transform:translate(-50%,-2px)}60%{opacity:1}100%{opacity:0;transform:translate(-50%,-18px)}}
+@keyframes press{0%,40%,100%{transform:scale(1)}50%,70%{transform:scale(.9)}}
+
+/* ---------- 공통 ---------- */
+.e-w{--el:#ffd75e;--el2:#fff3c4;--eld:#d9a514}
+.e-p{--el:#9a6bff;--el2:#e4d8ff;--eld:#6a3fd8}
+.e-o{--el:#ff9a3c;--el2:#ffe2c4;--eld:#d96a12}
+.e-r{--el:#f5b6ff;--el2:#fdeaff;--eld:#b06ad8}
+.pf{display:block;background-repeat:no-repeat}
+.ol{text-shadow:0 2px 0 #2e2350,1px 1px 0 #2e2350,-1px 1px 0 #2e2350,1px -1px 0 #2e2350,-1px -1px 0 #2e2350,0 0 3px #2e2350}
+.lki{display:inline-block;width:11px;height:9px;border-radius:2px;background:currentColor;position:relative;margin-top:5px;flex:none}
+.lki::before{content:"";position:absolute;left:2px;top:-6px;width:7px;height:7px;border:2px solid currentColor;border-bottom:0;border-radius:4px 4px 0 0;box-sizing:border-box}
+.shine{position:absolute;inset:0;overflow:hidden;border-radius:inherit;pointer-events:none}
+.shine::after{content:"";position:absolute;top:-10%;bottom:-10%;left:0;width:40%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);animation:sweep 2.6s ease-in-out infinite}
+
+/* =====================================================================
+   가족 재료 (수정안). 판은 HUD B 판 셰이더(assets/ui/hud_b_plate.gdshader)와 같은 규칙을 아래 스크립트가 그린다:
+   기울기 tan14°×높이 · 흰 테 2px · 안쪽 금선 1px · 아래로 딱 떨어지는 그림자 4px · 위쪽 광택 · 몇 초마다 훑는 빛
+   ===================================================================== */
+/* 판 그림(.pt svg) 위 글자: 판 색 위에서 읽힌다는 걸 검사 도구에도 알린다 (투명 그라데이션 = 그림 위 글자) */
+.P{position:absolute;isolation:isolate;background-image:linear-gradient(transparent,transparent)}
+.pt{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.pt>svg{position:absolute;left:-14px;top:-14px;overflow:visible}
+.psw{animation:psw 5.5s ease-in-out infinite}
+.pst{animation:tw 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+/* 금테 구슬 = 고래 숨결 구슬(vfx/shaders/breath_orb.gdshader): 금 테 → 게이지 고리(꺼짐 #423573) → 흰 틈 → 진주 유리 */
+.orb{position:absolute;width:var(--s,72px);height:var(--s,72px);border-radius:50%;--ci:9px;box-shadow:0 0 0 1.5px #fff,0 4px 0 rgba(46,35,80,.22)}
+.orb>.hl{position:absolute;inset:-5px;border-radius:50%;filter:blur(5px);opacity:.8}
+.orb>.rm{position:absolute;inset:0;border-radius:50%;background:linear-gradient(170deg,#fff6cf 0%,#f1cd78 36%,#c99a3e 70%,#a87a35 100%)}
+.orb>.g{position:absolute;inset:3px;border-radius:50%;background:conic-gradient(var(--gc,#ffc24a) 0 var(--p,0%),#423573 0 100%)}
+.orb>.core{position:absolute;inset:var(--ci);border-radius:50%;overflow:hidden;background:radial-gradient(circle at 38% 30%,#fff 0 12%,#eef4ff 42%,#c6b5f5 100%);box-shadow:0 0 0 1.5px #fff,inset 0 -6px 10px rgba(110,82,216,.22)}
+.orb>.sp{position:absolute;left:22%;top:11%;width:34%;height:19%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.85),rgba(255,255,255,0));pointer-events:none;z-index:4}
+.orb.rdy{animation:oglow 1.4s ease-in-out infinite}
+.orb.rdy>.g{background:conic-gradient(#ffd66b,#fff3c4,#ffbf2e,#fff3c4,#ffd66b)}
+.orb.rdy>.g::after{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from var(--a),rgba(255,255,255,0) 0 76%,rgba(255,255,255,.95) 88%,rgba(255,255,255,0) 97%);animation:spina 1.8s linear infinite}
+.orb>.n{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-weight:900;z-index:5;line-height:1}
+.orb>.n.soon{color:#ffe48a}
+.orb>.vl{position:absolute;inset:var(--ci);border-radius:50%;background:rgba(30,20,64,.42)}
+/* 잠김 시안 가 (scripts/ui/lock_gate.gd): 남색 22px 자물쇠 배지 + 흰 테 · 아래 가운데 #8b80c0 「Lv.N」 꼬리표 */
+.lkb{position:absolute;width:22px;height:22px;border-radius:50%;background:#2e2350;box-shadow:0 0 0 2px #fff,0 1px 3px rgba(26,15,61,.3);z-index:6}
+.lkb::before{content:"";position:absolute;left:6px;top:10px;width:10px;height:7px;border-radius:1.5px;background:#fff8ec}
+.lkb::after{content:"";position:absolute;left:7.5px;top:4.5px;width:7px;height:7px;border:2px solid #fff8ec;border-bottom:0;border-radius:4px 4px 0 0;box-sizing:border-box}
+.lkp{position:absolute;left:50%;transform:translateX(-50%);padding:0 6px;border-radius:8px;background:#8b80c0;color:#fff;font-size:11px;font-weight:800;line-height:16px;white-space:nowrap;text-shadow:0 0 2px #6f669a,0 0 1px #6f669a,0 0 1px #6f669a;z-index:6}
+
+/* ---------- 1 · 스킬 원판 (수정 B) ---------- */
+.deck{position:absolute;right:24px;top:526px;width:328px;height:166px}
+.dtop{position:absolute;right:0;top:0;display:flex;gap:8px;align-items:center;height:36px}
+.dcols{position:absolute;left:0;top:40px;display:flex;gap:8px}
+.col{position:relative;width:76px;height:126px}
+.col>.ut{left:0;top:0}
+.col>.dk{left:2px;top:40px}
+.col>.lvt{left:4px;top:106px}
+.col>.ulb{left:-6px;top:32px}
+.dk{--gc:var(--el)}
+.dk>.n{font-size:24px}
+.dk.ss>.rm{background:conic-gradient(from var(--a),var(--el),var(--el2),#fff,var(--el),var(--eld),var(--el));animation:spina 3s linear infinite}
+.dk.ss>.hl{background:conic-gradient(from var(--a),var(--el),transparent 30%,var(--el2) 50%,transparent 80%,var(--el));animation:spina 3s linear infinite}
+.dk.my>.rm,.dk.my>.hl{background:conic-gradient(from var(--a),#ff8db8,#ffcf6b,#9ff0b8,#8fd2ff,#c5a6ff,#ff8db8);animation:spina 2.4s linear infinite}
+.dk.my>.g{background:conic-gradient(#ff8db8 0,#ffcf6b calc(var(--p) * .25),#9ff0b8 calc(var(--p) * .5),#8fd2ff calc(var(--p) * .75),#c5a6ff var(--p),#423573 0 100%)}
+.dk.my.rdy>.g{background:conic-gradient(from var(--a),#ff8db8,#ffcf6b,#9ff0b8,#8fd2ff,#c5a6ff,#ff8db8);animation:spina 2.4s linear infinite}
+.lvt{width:68px;height:18px;display:flex;align-items:center;justify-content:center;padding-right:4px;font-size:11px;font-weight:800;color:#2e2350;white-space:nowrap}
+.ulb{width:50px;height:18px;display:flex;align-items:center;justify-content:center;padding-right:3px;font-size:11px;font-weight:900;color:#5a3200;animation:bob 1.4s ease-in-out infinite;z-index:7}
+.dk.prs{transform:scale(.9)}
+.dk.prs>.core::after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.6)}
+.burst{position:absolute;inset:-4px;border-radius:50%;border:3px solid #ffe48a;box-shadow:0 0 12px #ffbf2e;animation:burst 1.6s ease-out infinite;z-index:6}
+.unm{width:116px;height:26px;display:flex;align-items:center;justify-content:center;padding-right:4px;color:#ffe48a;font-size:13px;font-weight:900;white-space:nowrap}
+.hold{position:absolute;inset:-8px;border-radius:50%;background:conic-gradient(#fff 0 var(--h),rgba(255,255,255,.28) 0 100%);-webkit-mask:radial-gradient(closest-side,transparent calc(100% - 4px),#000 calc(100% - 3.5px));mask:radial-gradient(closest-side,transparent calc(100% - 4px),#000 calc(100% - 3.5px));animation:hold 1.8s linear infinite}
+.arw{position:absolute;color:#fff;font-size:22px;font-weight:900;text-shadow:0 1px 3px rgba(46,35,80,.7)}
+.solo{position:absolute;width:72px;height:72px}
+.solo>.dk{left:0;top:0}
+.solo>.lvt{left:2px;top:66px}
+.stag{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;padding:0 8px;border-radius:9px;background:rgba(29,24,56,.82);color:#fff;font-size:11.5px;font-weight:800;line-height:19px}
+
+/* ---------- 2 · 강화 꼬리표 (수정 A) ---------- */
+.ut{width:76px;height:30px;display:flex;align-items:center;justify-content:center;gap:3px;padding-right:6px;font-size:13px;font-weight:900;color:#2e2350;white-space:nowrap}
+.ut img{width:15px;height:15px}
+.ut::after{content:"";position:absolute;left:calc(50% - 9px);bottom:-6px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #fff;z-index:2}
+.co{width:16px;height:16px;border-radius:50%;flex:none;display:grid;place-items:center;background:linear-gradient(180deg,#ffe08a,#e39a2f);box-shadow:0 0 0 1.5px #fff;color:#5a3200;font-size:8px;line-height:1}
+.ut.ok .co{animation:bob 1.6s ease-in-out infinite}
+.ut sup{font-size:10px;color:#b77d16;margin-right:-1px;top:-.3em}
+.ut.no{color:#857e9e}
+.ut.no .co,.ut.no img{filter:grayscale(1);opacity:.55}
+.ut.no sup{color:#857e9e}
+.ut .fx{position:absolute;inset:1px 3px;border-radius:7px;background:rgba(255,226,130,.9);transform:skewX(-14deg);opacity:0;animation:tfl 2.4s ease-out infinite;animation-delay:calc(var(--i) * .18s);z-index:1}
+.upx{position:absolute;left:50%;top:-8px;z-index:8;white-space:nowrap;padding:0 8px;border-radius:9px;background:linear-gradient(180deg,#ffe48a,#f0a92a);color:#4a2a00;font-size:12px;font-weight:900;line-height:18px;box-shadow:0 0 0 1.5px #fff,0 2px 0 rgba(120,70,0,.35);opacity:0;animation:rise 2.4s ease-out infinite;animation-delay:calc(var(--i) * .18s + .1s)}
+.hold1{position:absolute;left:50%;top:-20px;z-index:8;color:#ffe48a;font-size:13px;font-weight:900;animation:rise 1s ease-out infinite;animation-delay:var(--d,0s);opacity:0}
+.hq{--s:36px;--ci:3px;position:relative}
+.hq>.core{display:grid;place-items:center;font-size:18px;font-weight:900;color:#5b46c4;background:radial-gradient(circle at 38% 30%,#fff 0 20%,#f6f2ff 60%,#e3d9fb)}
+.bk{position:relative;width:124px;height:36px;display:flex;align-items:center;justify-content:center;gap:8px;padding-right:8px;color:#fff;font-size:14px;font-weight:900;white-space:nowrap;text-shadow:0 1px 0 rgba(36,28,96,.75),0 0 3px rgba(36,28,96,.6)}
+.cnt{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(180deg,#ffe08a,#e39a2f);box-shadow:0 0 0 1.5px #fff;color:#4a2a00;font-size:12px;text-shadow:none}
+.bk.off{color:#6a6385;text-shadow:none}
+.bk.off .cnt{filter:grayscale(1);opacity:.7}
+.bk.prs{animation:press 2.4s ease-in-out infinite}
+.us{position:relative;width:136px;height:36px;display:flex;align-items:center;gap:2px;padding:0 9px 0 5px}
+.us>b{position:relative;flex:1;height:26px;display:grid;place-items:center;font-size:13px;font-weight:900;color:#d9d0ff;isolation:isolate;white-space:nowrap}
+.us>b.on{color:#4a2a00}
+.hlp{width:380px;padding:10px 26px 12px 16px;color:#fff;font-size:13px;line-height:1.5}
+.hlp b{display:block;color:#ffe48a;font-size:15px;margin-bottom:2px}
+.hlp::after{content:"";position:absolute;right:290px;bottom:-9px;border-left:8px solid transparent;border-right:8px solid transparent;border-top:9px solid #ffbf2e}
+
+/* ---------- 3 · 조작 구슬 (수정 C) ---------- */
+.ctl{position:absolute;right:358px;top:566px;width:200px;height:126px}
+.wo{--s:84px;left:14px;top:4px}
+.wo>.core{display:grid;place-items:center}
+.wo>.core img{width:46px;height:46px}
+.wo>.n{font-size:21px}
+.wo.on{--gc:#5fb6ff}
+.wo.on>.core{background:radial-gradient(circle at 38% 30%,#fff 0 10%,#bfe6ff 45%,#3f8cff)}
+.wo.on>.core::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(100deg,rgba(255,255,255,.4) 0 2px,transparent 2px 14px);animation:streak .9s linear infinite}
+.wo.on>.core img,.wo.cd>.core img,.wo.fv>.core img{opacity:.45}
+.wo.cd{--gc:#b5a2f3}
+.wo.fv{--gc:#ffd98a}
+.wo.cd>.core,.wo.fv>.core{background:radial-gradient(circle at 38% 30%,#fff 0 10%,#ddd6ee 50%,#9d94b8)}
+.wl{left:0;top:80px;width:112px;height:28px;display:flex;align-items:center;justify-content:center;padding-right:6px;color:#fff;font-size:13px;font-weight:900;white-space:nowrap;text-shadow:0 1px 0 rgba(36,28,96,.75),0 0 3px rgba(36,28,96,.6);z-index:6}
+.so{--s:54px;--ci:3px}
+.so>.core{display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#2e2350;line-height:1.15;background:radial-gradient(circle at 38% 30%,#fff 0 20%,#f6f2ff 60%,#e3d9fb)}
+.so>.core img{width:20px;height:20px}
+.so>.core b{font-size:13px}
+.ctl .rt{left:104px;top:0}
+.ctl .au{left:140px;top:62px}
+.so.on>.core{background:radial-gradient(circle at 38% 30%,#f4efff 0 10%,#b29bff 50%,#6a4fd6);color:#fff;text-shadow:0 1px 0 rgba(36,28,96,.7)}
+.so.on::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px dashed rgba(255,255,255,.95);animation:spin 5s linear infinite}
+.so.lk>.rm,.so.lk>.core{filter:grayscale(1)}
+.so.lk>.core{color:#6f6890}
+.so.lk>.lkb{right:-5px;top:-5px}
+.so.lk>.lkp{bottom:-8px}
+
+/* ---------- 4 · 메뉴 판 (수정 A) ---------- */
+.nv{left:12px;top:638px;width:446px;height:72px;display:flex;padding:0 12px 0 8px}
+.nv .c{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:1px}
+.nv .c+.c::before{content:"";position:absolute;left:0;top:15px;height:42px;width:1px;background:linear-gradient(180deg,rgba(214,170,90,0),rgba(214,170,90,.75),rgba(214,170,90,0));transform:skewX(-14deg)}
+.nv .dp{position:relative;width:54px;height:42px;display:grid;place-items:center}
+.nv .dp::before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse 50% 47% at 50% 56%,color-mix(in srgb,var(--hc) 24%,#fff) 0 46%,color-mix(in srgb,var(--hc) 55%,transparent) 63%,color-mix(in srgb,var(--hc) 20%,transparent) 71%,transparent 75%)}
+.nv .dp::after{content:"";position:absolute;right:4px;top:4px;width:15px;height:13px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--hc) 45%,transparent),transparent)}
+.nv .dp img{position:relative;width:34px;height:34px;z-index:1;filter:drop-shadow(0 1.5px 0 rgba(46,35,80,.18))}
+.nv .c>span{font-size:13px;font-weight:800;color:#2e2350;line-height:16px}
+.hc0{--hc:#ff8db8}.hc1{--hc:#9a84f0}.hc2{--hc:#ffcf5a}.hc3{--hc:#6cb8ff}.hc4{--hc:#4fd18b}.hc5{--hc:#ff9a6b}
+.rdot{position:absolute;top:6px;right:10px;width:12px;height:12px;border-radius:50%;background:#ff6b7d;box-shadow:0 0 0 2px #fff,0 1px 2px rgba(46,35,80,.35);z-index:3}
+.nw{left:50%;top:-10px;margin-left:-16px;width:38px;height:17px;display:grid;place-items:center;padding-right:3px;color:#fff;font-size:11px;font-weight:900;z-index:4}
+.nv .c.sp .dp::before{animation:glow 1.1s ease-in-out infinite}
+.nv .c.lk .dp::before{background:radial-gradient(ellipse 50% 47% at 50% 56%,#f1eff6 0 46%,rgba(150,142,175,.4) 63%,rgba(150,142,175,.15) 71%,transparent 75%)}
+.nv .c.lk .dp::after{display:none}
+.nv .c.lk img{filter:grayscale(1);opacity:.5}
+.nv .c.lk>span{color:#857e9e}
+.nv .c.lk .lkb{top:3px;right:8px}
+.nv .c.lk .lkp{bottom:-9px}
+.nv .c.pr::after{content:"";position:absolute;inset:7px 3px 6px;border-radius:9px;background:rgba(139,116,232,.18);box-shadow:inset 0 2px 4px rgba(46,35,80,.2);transform:skewX(-14deg);z-index:-1}
+.nv .c.pr img{transform:scale(.9)}
+.nv .c.pr .dp::before{transform:scale(1.12)}
+.nv .c.shk{animation:shake 2.6s ease-in-out infinite}
+.lt{position:absolute;display:flex;align-items:center;gap:14px;padding:12px 20px 12px 14px;border-radius:18px;background:#2e2350;box-shadow:0 8px 14px rgba(0,0,0,.4);color:#fff;white-space:nowrap;z-index:20}
+.lt .ic{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.13);display:grid;place-items:center;flex:none}
+.lt .ic img{width:30px;height:30px;filter:grayscale(1);opacity:.7}
+.lt .t1{display:block;font-size:18px;font-weight:800}
+.lt .t2{display:block;font-size:13px;color:rgba(255,255,255,.8)}
+.lt .t3{display:flex;align-items:center;gap:6px;margin-top:5px;font-size:13px;font-weight:800}
+.lt .lb{width:160px;height:8px;border-radius:4px;background:rgba(255,255,255,.18);overflow:hidden}
+.lt .lb>i{display:block;height:100%;background:linear-gradient(90deg,#ffe08a,#ffb84d)}
+.lt .tail{position:absolute;bottom:-11px;width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:12px solid #2e2350}
+
+/* ---------- 5 · 퀘스트 판 (수정 C) ---------- */
+.qs{left:16px;top:138px;width:364px;height:50px}
+.qs .qt{left:8px;top:8px;width:58px;height:34px;display:flex;align-items:center;justify-content:center;gap:2px;padding-right:5px;color:#fff;font-size:15px;font-weight:900;text-shadow:0 1px 0 rgba(36,28,96,.75),0 0 3px rgba(36,28,96,.55)}
+.qs .qt img{width:22px;height:22px}
+.qs .qx{position:absolute;left:76px;top:6px;width:254px}
+.qs .t{display:block;font-size:14px;font-weight:800;color:#2e2350;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:20px}
+.qs .r2{display:flex;align-items:center;gap:6px;margin-top:4px}
+.qs .qb{flex:1;height:6px;border-radius:3px;background:#e4dcfb;overflow:hidden;box-shadow:inset 0 1px 1px rgba(46,35,80,.15)}
+.qs .qb>i{display:block;height:100%;width:var(--q);background:linear-gradient(90deg,#a893f5,#6e52d8)}
+.qs .cn{font-size:12px;font-weight:900;color:#5b43c8;flex:none}
+.qs .rw{--s:46px;--ci:3px;left:334px;top:-1px}
+.qs .rw>.core{display:grid;place-items:center;background:radial-gradient(circle at 38% 30%,#fff 0 20%,#f6f2ff 60%,#e3d9fb)}
+.qs .rw img{width:28px;height:28px}
+.qs .amt{left:326px;top:38px;min-width:62px;height:19px;display:flex;align-items:center;justify-content:center;padding:0 9px 0 6px;color:#ffe48a;font-size:12px;font-weight:900;white-space:nowrap;z-index:6}
+.qs .rs{left:186px;top:44px;width:112px;height:22px;display:flex;align-items:center;justify-content:center;padding-right:4px;color:#fff;font-size:12px;font-weight:800;white-space:nowrap;text-shadow:0 1px 0 rgba(36,28,96,.7)}
+.qs.rd>.pt{filter:drop-shadow(0 0 7px rgba(255,191,46,.8))}
+.qs.rd .t{color:#7a3e00;font-size:15px}
+.qs.rd .cn{color:#a5560a}
+.qs.rd .qb{background:#ffe7a6}
+.qs.rd .qb>i{background:linear-gradient(90deg,#ffd979,#e39a2f)}
+.qs.rd .rw{animation:oglow 1.2s ease-in-out infinite,pulse 1.2s ease-in-out infinite}
+.qs.ex{width:380px;height:92px}
+.qs.ex .qx{top:8px;width:258px}
+.qs.ex .t{white-space:normal;line-height:19px}
+.qs.ex .qb{height:9px;border-radius:5px}
+.qs.ex .rw{left:344px;top:12px}
+.qs.ex .amt{left:336px;top:52px}
+.qs.slide{animation:slidein 4s ease-out infinite}
+
+
+/* =====================================================================
+   묶음 2 — 새 재료 없음: 크림 판 · 남색 유리 · 하늘 띠 · 금 꼬리표 · 금테 구슬 (묶음 1 수정안과 같은 판 규칙)
+   ===================================================================== */
+@property --oc{syntax:'<color>';inherits:true;initial-value:#2e2350}
+@keyframes ssoc{0%,100%{--oc:var(--el)}50%{--oc:var(--eld)}}
+@keyframes myoc{0%{--oc:#ff8db8}20%{--oc:#ffcf6b}40%{--oc:#4fd18b}60%{--oc:#3fa9ff}80%{--oc:#9a6bff}100%{--oc:#ff8db8}}
+@keyframes bump{0%,100%{transform:scale(1)}18%{transform:scale(1.22)}36%{transform:scale(.96)}50%{transform:scale(1)}}
+@keyframes flyin{0%{transform:translate(var(--fx),var(--fy)) scale(.6);opacity:0}15%{opacity:1}55%,100%{transform:translate(0,0) scale(1);opacity:0}}
+@keyframes up2{0%{opacity:0;transform:translateY(6px)}15%{opacity:1;transform:translateY(0)}70%{opacity:1}100%{opacity:0;transform:translateY(-22px)}}
+@keyframes down2{0%{opacity:0;transform:translateY(-6px)}15%{opacity:1}70%{opacity:1}100%{opacity:0;transform:translateY(26px)}}
+@keyframes fade{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes edge{0%,100%{opacity:.35}50%{opacity:.9}}
+@keyframes drop{0%{transform:translate(-50%,-60px) scale(1.5);opacity:0}18%{transform:translate(-50%,0) scale(1.38);opacity:1}62%{transform:translate(-50%,0) scale(1.38);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1);opacity:.0}}
+@keyframes bandin{0%{transform:translateX(-110%)}14%,86%{transform:translateX(0)}100%{transform:translateX(110%)}}
+@keyframes slidedn{0%{transform:translate(-50%,-70px)}12%,88%{transform:translate(-50%,0)}100%{transform:translate(-50%,-70px)}}
+@keyframes unroll{0%{clip-path:inset(0 50% 0 50%)}16%,100%{clip-path:inset(0 0 0 0)}}
+@keyframes tick{to{width:100%}}
+@keyframes hit{0%,100%{opacity:0}8%,70%{opacity:1}}
+@keyframes glint{0%,100%{filter:drop-shadow(0 0 0 rgba(255,214,107,0))}50%{filter:drop-shadow(0 0 7px rgba(255,214,107,.95))}}
+@keyframes vs{0%,100%{transform:scale(1) rotate(-6deg)}50%{transform:scale(1.08) rotate(-6deg)}}
+.E-red{--el:#ff5f4f;--eld:#c23b2e}.E-orange{--el:#ff9a3c;--eld:#d96a12}.E-white{--el:#ffd75e;--eld:#c99a12}.E-green{--el:#4fd18b;--eld:#23995a}.E-blue{--el:#3fa9ff;--eld:#1c6fc4}.E-purple{--el:#9a6bff;--eld:#6a3fd8}
+.ink{color:#2e2350}
+.ic{width:24px;height:24px;flex:none}
+.mn3{display:grid;gap:3px;width:18px}
+.mn3 i{display:block;height:3px;border-radius:2px;background:currentColor}
+
+/* ---------- 1 · 재화 줄 ---------- */
+.cu{display:flex;align-items:center;padding:0 10px 0 14px;height:44px}
+.cu .c{position:relative;flex:1;display:flex;align-items:center;justify-content:center;gap:6px;font-size:17px;font-weight:900;white-space:nowrap}
+.cu .c+.c::before{content:"";position:absolute;left:0;top:9px;height:26px;width:1px;transform:skewX(-14deg);background:linear-gradient(180deg,rgba(214,170,90,0),rgba(214,170,90,.85),rgba(214,170,90,0))}
+.cu .c img{width:26px;height:26px}
+.pl{--s:24px;--ci:2px;position:relative;flex:none}
+.pl>.core{display:grid;place-items:center;font-size:15px;font-weight:900;color:#5a3200;background:radial-gradient(circle at 38% 30%,#fff 0 18%,#ffe9a6 60%,#ffc85a)}
+.cuA{color:#2e2350}
+.mnA{width:62px;height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding-right:6px;color:#fff;font-size:11px;font-weight:800}
+.cuB{color:#fff}
+.cuB .c{text-shadow:0 1px 0 rgba(20,12,48,.7)}
+.cuB .c+.c::before{background:linear-gradient(180deg,rgba(255,214,107,0),rgba(255,214,107,.6),rgba(255,214,107,0))}
+.mo{--s:50px;--ci:3px}
+.mo>.core{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#2e2350;font-size:10.5px;font-weight:900;background:radial-gradient(circle at 38% 30%,#fff 0 20%,#f6f2ff 60%,#e3d9fb)}
+.ctg{width:132px;height:34px;display:flex;align-items:center;justify-content:flex-end;padding-right:16px;font-size:16px;font-weight:900;color:#2e2350;white-space:nowrap}
+.ctg>.orb{--s:38px;--ci:3px;left:-12px;top:-2px}
+.ctg>.orb>.core{display:grid;place-items:center;background:radial-gradient(circle at 38% 30%,#fff 0 20%,#f6f2ff 60%,#e3d9fb)}
+.ctg>.orb img{width:24px;height:24px}
+.ctg .pl{position:absolute;right:-6px;top:5px}
+.flyhit .num{display:inline-block;animation:bump 1.6s ease-out infinite;color:#b56d00}
+.fdot{position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#fff 0 30%,#ffd66b 60%,rgba(255,191,46,0));box-shadow:0 0 8px #ffbf2e;animation:flyin 1.6s ease-in infinite;z-index:9}
+.gtag{position:absolute;z-index:9;padding:0 9px;border-radius:9px;background:linear-gradient(180deg,#ffe48a,#f0a92a);color:#4a2a00;font-size:12.5px;font-weight:900;line-height:19px;white-space:nowrap;box-shadow:0 0 0 1.5px #fff,0 2px 0 rgba(120,70,0,.35);animation:up2 1.6s ease-out infinite}
+.hb{width:310px;padding:9px 14px 11px 18px;color:#fff;font-size:12.5px;line-height:1.5;z-index:12}
+.hb b{display:block;color:#ffe48a;font-size:14.5px;margin-bottom:1px}
+.hb::before{content:"";position:absolute;top:-8px;right:var(--tx,60px);border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:9px solid #ffbf2e}
+
+/* ---------- 2 · 왼쪽 버튼 ---------- */
+.sdA{--s:56px;--ci:3px}
+.sdA>.core{display:grid;place-items:center;background:radial-gradient(circle at 38% 30%,#fff 0 20%,#f6f2ff 60%,#e3d9fb)}
+.sdA>.core img{width:38px;height:38px}
+.snm{width:66px;height:19px;display:flex;align-items:center;justify-content:center;padding-right:4px;font-size:11.5px;font-weight:800;color:#2e2350;white-space:nowrap}
+.rd2{position:absolute;right:-1px;top:-1px;width:13px;height:13px;border-radius:50%;background:#ff6b7d;box-shadow:0 0 0 2px #fff,0 1px 2px rgba(46,35,80,.35);z-index:7}
+.tbB{height:46px;display:flex;align-items:center;gap:6px;padding:0 18px 0 18px;font-size:13.5px;font-weight:800;color:#2e2350;white-space:nowrap}
+.tbB img{width:36px;height:36px;filter:drop-shadow(0 1.5px 0 rgba(46,35,80,.18))}
+.tbB.sp>.pt{filter:drop-shadow(0 0 6px rgba(255,191,46,.9))}
+.chC{height:38px;display:flex;align-items:center;gap:4px;padding:0 14px 0 10px;font-size:13px;font-weight:800;color:#2e2350;white-space:nowrap}
+.chC img{width:30px;height:30px}
+.spk{animation:glint 1.4s ease-in-out infinite}
+
+/* ---------- 3 · 콤보 ---------- */
+.cbA{width:150px;text-align:right}
+.cbA .n{display:block;font-size:42px;font-weight:900;line-height:1;color:#fff8ec}
+.cbA .k{display:block;font-size:12px;font-weight:900;color:#ffd66b;letter-spacing:.06em;margin-top:1px}
+/* <i>는 기본이 inline이라 크기가 0이 되어 막대가 안 보였다 → block */
+.gau{display:block;position:relative;margin:6px 0 0 auto;width:140px;height:12px;transform:skewX(-14deg);border-radius:3px;background:rgba(46,35,80,.7);box-shadow:0 0 0 1.5px #fff,0 2px 0 rgba(46,35,80,.25);overflow:hidden}
+.gau>i{position:absolute;left:0;top:0;bottom:0;width:var(--g);background:linear-gradient(90deg,#8fd6ff,#9978fa 55%,#ffd66b)}
+.gau>u{position:absolute;top:0;bottom:0;width:1.5px;background:rgba(255,255,255,.65)}
+.gl{display:block;margin-top:4px;font-size:12.5px;font-weight:900;color:#fff}
+.cbA.hot .n{color:#ffe08a;animation:bump 1.2s ease-out infinite;transform-origin:100% 60%}
+.cbA.hot .gau{box-shadow:0 0 0 1.5px #fff,0 0 12px rgba(255,191,46,.95)}
+.cbA.hot .gau>i{background:linear-gradient(90deg,#ffd66b,#ff9a6b 60%,#ff6b9a)}
+.cold{opacity:.45;filter:grayscale(.6);animation:fade 1.6s ease-in-out infinite}
+.cbB{width:168px;height:52px;padding:4px 14px 0 22px;color:#fff}
+.cbB .r1{display:flex;align-items:baseline;justify-content:space-between}
+.cbB .k{font-size:11.5px;font-weight:900;color:#ffd66b;letter-spacing:.06em}
+.cbB .n{font-size:26px;font-weight:900;line-height:1.05}
+.seg{display:flex;gap:2px;margin-top:2px;margin-right:6px}
+.seg>i{flex:1;height:6px;border-radius:1.5px;background:rgba(255,255,255,.16);transform:skewX(-14deg)}
+.seg>i.on{background:linear-gradient(180deg,#ffe48a,#f0a92a)}
+.cbB.hot>.pt{filter:drop-shadow(0 0 8px rgba(255,191,46,.9))}
+.cbB.hot .seg>i.on{background:linear-gradient(180deg,#ffd0a0,#ff7d93)}
+.cbC{height:34px;display:flex;align-items:center;justify-content:center;gap:4px;padding:0 14px 0 18px;font-weight:900;color:#2e2350;white-space:nowrap;font-size:17px}
+.cbC small{font-size:11px;color:#6a5f9e}
+.cbC .fil{position:absolute;left:6px;top:4px;bottom:4px;width:var(--g);border-radius:6px;background:linear-gradient(90deg,rgba(143,214,255,.35),rgba(153,120,250,.35));transform:skewX(-14deg);z-index:-1}
+.cbC.big{height:46px;font-size:24px;color:#5a2a00;padding:0 18px 0 22px}
+.cbC.big small{color:#7a4200}
+
+/* ---------- 4 · 피해 숫자 ---------- */
+.dn{position:absolute;z-index:20;transform:translate(-50%,0);white-space:nowrap;font-weight:900;line-height:1;color:#fff8ec;--oc:#2e2350;text-shadow:0 2px 0 var(--oc),1.5px 1.5px 0 var(--oc),-1.5px 1.5px 0 var(--oc),1.5px -1.5px 0 var(--oc),-1.5px -1.5px 0 var(--oc),0 0 3px var(--oc);animation:up2 2.2s ease-out infinite;animation-delay:var(--d,0s)}
+.dn.t0{font-size:19px}
+.dn.t1{font-size:27px;color:#ffd66b}
+.dn.t2{font-size:42px;color:#fff0b8}
+.dn.wk{color:#ffc4a8}
+.dn .wd{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--el);box-shadow:0 0 0 2px #fff;margin-right:5px;vertical-align:2px;text-shadow:none}
+.dn .ct{display:inline-block;margin-left:5px;padding:0 6px;border-radius:5px;transform:skewX(-14deg) translateY(-4px);background:linear-gradient(180deg,#ffe48a,#f0a92a);color:#4a2a00;font-size:11px;line-height:17px;text-shadow:none;box-shadow:0 0 0 1.5px #fff;vertical-align:middle}
+.dn .rb{position:absolute;left:-8px;right:-8px;bottom:-5px;height:10px;border-radius:3px;transform:skewX(-14deg);background:linear-gradient(90deg,#6b9eff,#9978fa);box-shadow:0 0 0 1.5px #fff;z-index:-1}
+.dn.cB{--oc:var(--el)}
+.dn.cB.t0,.dn.cB.wk{color:#fff}
+.dn.ss{animation:up2 2.2s ease-out infinite,ssoc 1.2s linear infinite;animation-delay:var(--d,0s),0s}
+.dn.my{animation:up2 2.2s ease-out infinite,myoc 1.6s linear infinite;animation-delay:var(--d,0s),0s}
+.dn.cC.t0{font-size:14px;opacity:.75}
+.dn.fall{animation-name:down2}
+.dn.still{animation:none}
+.kr{position:absolute;z-index:20;transform:translate(-50%,0);display:flex;align-items:center;gap:2px;font-size:14px;font-weight:900;color:#ffe48a;animation:up2 1.8s ease-out infinite;animation-delay:var(--d,0s)}
+.kr img{width:16px;height:16px}
+.ut2{position:absolute;z-index:21;transform:translate(-50%,0);display:flex;align-items:center;gap:6px;height:40px;padding:0 16px 0 8px;animation:up2 2.6s ease-out infinite}
+.ut2 .orb{position:relative;--s:34px;--ci:3px}
+.ut2 b{font-size:30px;font-weight:900;color:#5a2a00;line-height:1}
+.heal{position:absolute;z-index:21;display:flex;align-items:center;gap:6px;animation:up2 2s ease-out infinite}
+.heal .hn{font-size:22px;font-weight:900;color:#eafff6;--oc:#127a62;text-shadow:0 2px 0 var(--oc),1.5px 1.5px 0 var(--oc),-1.5px 1.5px 0 var(--oc),1.5px -1.5px 0 var(--oc),-1.5px -1.5px 0 var(--oc)}
+.heal .hl2{height:22px;display:flex;align-items:center;padding:0 12px 0 10px;font-size:11.5px;font-weight:900;color:#fff;white-space:nowrap}
+.shg{position:absolute;z-index:3;border-radius:8px;box-shadow:0 0 14px 4px rgba(85,230,190,.85);animation:fade 2s ease-in-out infinite;pointer-events:none}
+.tot{height:30px;display:flex;align-items:center;gap:8px;padding:0 16px 0 14px;color:#fff;font-size:12px;font-weight:800;white-space:nowrap}
+.tot b{color:#ffe48a;font-size:16px}
+
+/* ---------- 5 · 적 체력 막대 ---------- */
+.hpA{position:absolute;z-index:15;width:58px;height:8px;transform:translateX(-50%)}
+.hpA .tr{position:absolute;inset:0;transform:skewX(-14deg);border-radius:2px;background:rgba(36,26,70,.82);box-shadow:0 0 0 1.5px #fff,0 2px 0 rgba(46,35,80,.3);overflow:hidden}
+.hpA .lag{position:absolute;left:0;top:0;bottom:0;width:var(--l);background:#ffe1e7}
+.hpA .fl2{position:absolute;left:0;top:0;bottom:0;width:var(--h);background:linear-gradient(180deg,#ff8da0,#e0445c)}
+.hpA .wd{position:absolute;left:-17px;top:-3px;width:13px;height:13px;border-radius:50%;background:var(--el);box-shadow:0 0 0 2px #fff,0 1px 2px rgba(46,35,80,.4)}
+.hpA.el .tr{box-shadow:0 0 0 1.5px #ffd66b,0 0 7px rgba(255,191,46,.9)}
+.hpA.el .fl2{background:linear-gradient(180deg,#ffe48a,#e39a2f)}
+.etag{position:absolute;z-index:16;transform:translateX(-50%);height:18px;display:flex;align-items:center;gap:3px;padding:0 9px 0 7px;color:#4a2a00;font-size:11px;font-weight:900;white-space:nowrap}
+.hpB{position:absolute;z-index:15;width:52px;height:4px;transform:translateX(-50%);border-radius:2px;background:rgba(255,255,255,.35);box-shadow:0 0 0 1px rgba(255,255,255,.85);animation:hit 2.4s ease-out infinite;animation-delay:var(--d,0s)}
+.hpB>i{display:block;height:100%;width:var(--h);border-radius:2px;background:#ff6b80}
+.hpB .wd{position:absolute;left:-12px;top:-3px;width:10px;height:10px;border-radius:50%;background:var(--el);box-shadow:0 0 0 1.5px #fff}
+.crown{position:absolute;z-index:16;transform:translateX(-50%);--s:24px;--ci:2px}
+.crown>.core{display:grid;place-items:center;font-size:13px;color:#b56d00;background:radial-gradient(circle at 38% 30%,#fff 0 18%,#ffe9a6 60%,#ffc85a)}
+.wv{height:34px;display:flex;align-items:center;gap:10px;padding:0 18px 0 16px;color:#2e2350;font-size:12.5px;font-weight:800;white-space:nowrap}
+.wv .cells{display:flex;gap:2px}
+.wv .cells>i{width:9px;height:12px;border-radius:2px;transform:skewX(-14deg);background:linear-gradient(180deg,#ff8da0,#e0445c)}
+.wv .cells>i.x{background:#e4dcfb}
+.wv .cells>i.g{background:linear-gradient(180deg,#ffe48a,#e39a2f)}
+
+/* ---------- 6 · 보스 경고 ---------- */
+.vig{position:absolute;inset:0;z-index:30;pointer-events:none;box-shadow:inset 0 0 90px 20px rgba(255,77,94,.55);animation:edge 1.2s ease-in-out infinite}
+.iaB{height:112px;display:flex;align-items:center;gap:18px;padding:0 40px 0 50px;color:#fff;z-index:31;animation:bandin 6s ease-in-out -1.5s infinite}
+.bos{position:relative;--s:96px;--ci:6px;flex:none}
+.bos>.core{background-repeat:no-repeat}
+.btag{height:24px;display:inline-flex;align-items:center;padding:0 12px 0 10px;color:#fff;font-size:13px;font-weight:900;letter-spacing:.08em}
+.it .k{display:block;color:#ffd66b;font-size:12.5px;font-weight:800;margin-top:6px}
+.it .t{display:block;font-size:34px;font-weight:900;line-height:1.1;text-shadow:0 2px 0 rgba(20,12,48,.6)}
+.it .s{display:flex;align-items:center;gap:8px;font-size:13.5px;color:#e9e3ff;margin-top:4px}
+.wch{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 10px 0 4px;border-radius:12px;background:#fff;color:#2e2350;font-size:12.5px;font-weight:800}
+.wch i{width:18px;height:18px;border-radius:50%;background:var(--el);box-shadow:inset 0 0 0 2px rgba(255,255,255,.6)}
+.scroll{position:absolute;z-index:31;animation:unroll 5s ease-out -1.5s infinite}
+.scroll .pg{position:absolute;left:18px;right:18px;top:12px;bottom:12px}
+.rod{position:absolute;top:0;bottom:0;width:18px;border-radius:9px;background:linear-gradient(90deg,#a87a35,#f1cd78 35%,#fff6cf 50%,#c99a3e 80%,#a87a35);box-shadow:0 0 0 1.5px #fff,0 4px 0 rgba(46,35,80,.25)}
+.rod::before,.rod::after{content:"";position:absolute;left:-4px;width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 38% 30%,#fff6cf,#f1cd78 45%,#a87a35);box-shadow:0 0 0 1.5px #fff}
+.rod::before{top:-14px}.rod::after{bottom:-14px}
+.win{position:absolute;width:132px;height:118px;border-radius:14px;background-repeat:no-repeat;box-shadow:0 0 0 2px #fff,0 0 0 3.5px #e2b55c,inset 0 0 18px rgba(46,35,80,.35);transform:skewX(-6deg)}
+.bpBig{position:absolute;z-index:31;transform-origin:50% 50%;animation:drop 4s ease-in-out -1.2s infinite}
+
+/* ---------- 7 · 알림 띠 ---------- */
+.nbA{height:62px;display:flex;align-items:center;justify-content:center;gap:12px;color:#fff;font-size:28px;font-weight:900;text-shadow:0 2px 0 rgba(36,28,96,.6);z-index:31}
+.nbA small{font-size:14px;font-weight:800;opacity:.92;letter-spacing:.04em}
+.tipA{height:34px;display:flex;align-items:center;gap:8px;padding:0 18px 0 16px;color:#2e2350;font-size:13.5px;font-weight:800;white-space:nowrap;z-index:31}
+.tipA .go{position:relative;flex:none;height:24px;display:flex;align-items:center;padding:0 10px 0 9px;color:#fff;font-size:12px;font-weight:900;margin-left:4px}
+.nbB{height:94px;display:flex;align-items:center;gap:16px;padding:0 34px 0 26px;z-index:31}
+.nbB .cl{--s:62px;--ci:4px;position:relative;flex:none}
+.nbB .cl>.core{display:grid;place-items:center;font-size:26px;font-weight:900}
+.nbB .tt{display:block;font-size:26px;font-weight:900;line-height:1.15}
+.nbB .ss2{display:block;font-size:14px;color:#4c4374;margin-top:3px}
+.nbB .ss2 b{color:#5b43c8}
+.nbC{height:44px;display:flex;align-items:center;gap:10px;padding:0 22px 0 10px;color:#fff;font-size:14px;font-weight:700;white-space:nowrap;z-index:31;animation:slidedn 5s ease-in-out -1.5s infinite}
+.nbC .cl{--s:32px;--ci:3px;position:relative;flex:none}
+.nbC .cl>.core{display:grid;place-items:center;font-size:15px;font-weight:900;color:#2e2350;background:radial-gradient(circle at 38% 30%,#fff 0 20%,#f6f2ff 60%,#e3d9fb)}
+.nbC b{color:#ffe48a;font-weight:900}
+.nbC .tm{position:absolute;left:20px;right:26px;bottom:5px;height:2px;border-radius:1px;background:rgba(255,255,255,.18);overflow:hidden}
+.nbC .tm>i{display:block;height:100%;width:0;background:#ffd66b;animation:tick 1.8s linear infinite}
+
+/* ---------- 8 · 모험 전투 ---------- */
+.adv{height:68px;display:flex;align-items:center;gap:12px;padding:0 18px 0 10px;color:#fff}
+.adv .cr{--s:54px;--ci:3px;position:relative;flex:none}
+.adv .cr>.core{background-size:cover;background-position:50% 40%}
+.adv .t{display:block;font-size:15px;font-weight:900}
+.adv .s{display:block;font-size:12px;color:#ffe48a;font-weight:800}
+.adv .qt2,.heal .hl2,.lvs .P,.tug .skp{position:relative;flex:none}
+.qt2{height:30px;display:flex;align-items:center;padding:0 14px 0 12px;color:#2e2350;font-size:12.5px;font-weight:900;white-space:nowrap;margin-left:auto}
+.orb>.core>img{width:62%;height:62%;object-fit:contain}
+.orb>.core{line-height:1}
+.rsn{height:20px;display:flex;align-items:center;padding:0 9px 0 8px;color:#fff;font-size:11px;font-weight:800;white-space:nowrap;z-index:8}
+.dim{opacity:.5;filter:grayscale(.5)}
+.lvs{display:flex;gap:6px;align-items:center}
+.lvs .P{width:58px;height:26px;display:flex;align-items:center;justify-content:center;padding-right:5px;font-size:12px;font-weight:900;color:#2e2350}
+.lvs .P.on{color:#fff}
+.lvs .P.ok{color:#6a5f9e}
+.lvs .gate{width:76px}
+.lvs .gate img{width:18px;height:18px;margin-right:2px}
+.chs{display:flex;gap:4px;align-items:center;height:40px;padding:0 16px 0 14px}
+.chs .k{display:flex;flex-direction:column;align-items:center;width:62px;font-size:10.5px;font-weight:800;color:#2e2350}
+.chs .k img{width:26px;height:26px}
+.chs .k.op img{filter:drop-shadow(0 0 5px rgba(255,191,46,.95))}
+.chs .k.lk img{filter:grayscale(1);opacity:.5}
+.chs .k.nx{color:#b56d00}
+.ins{--s:64px;--ci:4px;position:absolute}
+.ins>.core{display:grid;place-items:center}
+.ins img{width:44px;height:44px}
+
+/* ---------- 9 · 대결 ---------- */
+.rv{width:330px;height:96px;padding:8px 22px 0 30px;color:#fff}
+.rv .k{display:inline-flex;height:20px;align-items:center;padding:0 9px;border-radius:6px;transform:skewX(-14deg);background:linear-gradient(180deg,#9a84f0,#6a4fd6);font-size:11.5px;font-weight:900;box-shadow:0 0 0 1.5px #fff}
+.rv .k>span{transform:skewX(14deg)}
+.rv .t{display:block;font-size:20px;font-weight:900;margin-top:3px;line-height:1.15}
+.rv .s{display:block;font-size:12px;color:#ddd5ff}
+.rbar{position:relative;height:9px;margin-top:4px;margin-right:18px;border-radius:3px;transform:skewX(-14deg);background:rgba(255,255,255,.18);overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.5)}
+.rbar>i{position:absolute;left:0;top:0;bottom:0;width:var(--h);background:linear-gradient(180deg,#c9bdf7,#8b74e8)}
+.vso{--s:66px;--ci:4px}
+.vso>.core{display:grid;place-items:center;font-size:24px;font-weight:900;font-style:italic;color:#fff;background:radial-gradient(circle at 38% 30%,#ffd0dc 0 12%,#ff7d93 55%,#c23b5c);text-shadow:0 2px 0 rgba(90,10,30,.6)}
+.vso.anim{animation:vs 1.6s ease-in-out infinite}
+.skp{height:34px;display:flex;align-items:center;gap:4px;padding:0 16px 0 14px;color:#2e2350;font-size:13.5px;font-weight:900;white-space:nowrap}
+.tug{height:74px;display:flex;align-items:center;gap:14px;padding:0 20px 0 18px;color:#fff}
+.tug .sd2{display:flex;flex-direction:column;font-size:12px;font-weight:800;white-space:nowrap}
+.tug .sd2 b{font-size:15px}
+.tug .tb{position:relative;flex:1;height:16px;transform:skewX(-14deg);border-radius:4px;overflow:visible;background:rgba(255,255,255,.15);box-shadow:0 0 0 1.5px #fff}
+.tug .tb>i{position:absolute;top:0;bottom:0;border-radius:3px}
+.tug .tb>.me{left:0;width:var(--a);background:linear-gradient(180deg,#8ff0cf,#2fb593)}
+.tug .tb>.op{right:0;width:var(--b);background:linear-gradient(180deg,#d8cff7,#8b80c0)}
+.tug .tb>.vso{position:absolute;left:var(--j);top:50%;--s:44px;--ci:3px;transform:translate(-50%,-50%) skewX(14deg)}
+.tug .tb>.vso>.core{font-size:15px}
+.brk{position:absolute;z-index:22;font-size:13px;font-weight:900;color:#fff;padding:0 10px;height:22px;display:flex;align-items:center;white-space:nowrap}
+
+/* ===================== 수정 묶음 2 · 알림 ===================== */
+.ntab{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0 4px}
+.ntab th,.ntab td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.ntab th{background:#f6f3ff;color:#4a33b0;font-weight:800}
+.ntab td,.ntab th{word-break:keep-all;overflow-wrap:anywhere}
+@media (max-width:600px){.ntab{font-size:11.5px}.ntab th,.ntab td{padding:4px 3px}}
+.ntab td b{color:#4a33b0}
+.pr{display:inline-block;padding:0 8px;border-radius:9px;font-size:11.5px;font-weight:900;line-height:19px;white-space:nowrap}
+.pr1{background:#e9e6f3;color:#4f4877}.pr2{background:#e7e0ff;color:#4a33b0}.pr3{background:#ffe0e5;color:#b0283f}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:10px;margin-top:10px}
+.split>div{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px;color:#4c4374}
+.split h4{margin:0 0 4px;font-size:14px;color:#2e2350}
+@keyframes ndrop{from{transform:translateY(-16px);opacity:0}to{transform:none;opacity:1}}
+@keyframes nslide{from{transform:translateX(340px)}to{transform:none}}
+@keyframes drain{from{width:100%}to{width:0}}
+@keyframes hop{0%{transform:translateY(34px) scale(.8);opacity:0}60%{transform:translateY(-6px) scale(1.04);opacity:1}100%{transform:none;opacity:1}}
+@keyframes vg{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes peekin{0%,8%{transform:scale(0)}18%{transform:scale(1.12)}26%,82%{transform:scale(1)}92%,100%{transform:scale(0)}}
+.cw{position:absolute;transform:translateX(-50%);z-index:31}
+.nic{--s:46px;--ci:4px;position:relative;flex:none}
+.nic>.core{display:grid;place-items:center}
+.nic img{width:66%;height:66%;object-fit:contain}
+.nic.em>.rm{background:linear-gradient(170deg,#ffe0e6,#ff8da3 45%,#c23b5c)}
+.nic.em>.core{background:radial-gradient(circle at 38% 30%,#fff 0 14%,#ffe3e8 50%,#ffa3b5);color:#c23b4f;font-size:24px;font-weight:900}
+.nic.ev>.core{background:radial-gradient(circle at 38% 30%,#fff 0 14%,#fff3c4 50%,#ffd66b)}
+.ntx{display:flex;flex-direction:column;min-width:0}
+.ntx .t{font-size:17px;font-weight:900;line-height:1.2;white-space:nowrap;color:#2e2350}
+.ntx .s{font-size:12.5px;font-weight:700;color:#4c4374;white-space:nowrap}
+.go2{position:relative;flex:none;height:34px;display:flex;align-items:center;padding:0 16px 0 14px;color:#fff;font-size:14px;font-weight:900;white-space:nowrap;margin-left:auto}
+.go2.g{color:#4a2a00}
+.tp{position:relative;flex:none;height:28px;display:flex;align-items:center;padding:0 12px 0 10px;color:#4a2a00;font-size:13px;font-weight:900;white-space:nowrap;margin-left:auto}
+.tmr{position:absolute;left:28px;right:30px;bottom:6px;height:3px;border-radius:2px;background:rgba(139,116,232,.2);overflow:hidden}
+.tmr>i{display:block;height:100%;background:linear-gradient(90deg,#ffd66b,#ffbf2e);animation:drain var(--t,4s) linear infinite}
+.re2{position:absolute;right:22px;top:-11px;padding:0 9px;border-radius:9px;background:#2e2350;color:#ffe48a;font-size:11.5px;font-weight:900;line-height:20px;box-shadow:0 0 0 1.5px #fff;white-space:nowrap}
+.vigE{position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 110px 14px rgba(224,68,92,.5);animation:vg 1.2s ease-in-out infinite;z-index:3}
+.cnt2{height:22px;display:flex;align-items:center;padding:0 10px 0 8px;color:#4a2a00;font-size:12px;font-weight:900;white-space:nowrap;z-index:33}
+/* A · 위 가운데 판 */
+.nA{display:flex;align-items:center;gap:12px;padding:0 22px 0 20px;animation:ndrop .4s ease-out both}
+.nA.p2{width:480px;height:74px}
+.nA.p3{width:580px;height:88px}
+.nA.p3 .ntx .t{color:#fff;font-size:19px}.nA.p3 .ntx .s{color:#e4dcff}
+.nA.p1{position:relative;height:40px;gap:8px;padding:0 20px 0 8px;color:#fff;font-size:14px;font-weight:800;white-space:nowrap}
+.nA.p1 .nic{--s:32px;--ci:3px}
+.nA.p1 b{color:#ffe48a}
+.pk{z-index:30}
+/* B · 오른쪽 카드 더미 */
+.nB{display:flex;align-items:center;gap:10px;padding:0 16px 0 22px;animation:nslide .45s cubic-bezier(.2,.9,.3,1.15) both;z-index:31}
+.nB .stp{position:absolute;left:8px;top:9px;bottom:9px;width:5px;border-radius:3px;transform:skewX(-14deg);background:var(--pc)}
+.nB.p1{height:44px}.nB.p1 .nic{--s:30px;--ci:3px}.nB.p1 .ntx .t{font-size:14px}
+.nB.p2{height:70px}.nB.p2 .nic{--s:42px}
+.nB.p3{height:92px;animation:nslide .45s cubic-bezier(.2,.9,.3,1.15) both,shake 2.4s .6s infinite}
+.nB.p3 .ntx .t{color:#fff}.nB.p3 .ntx .s{color:#e4dcff;white-space:normal;line-height:1.3}
+.nB .ntx{flex:1}
+.nB .ntx .t{font-size:15px}
+.nB .ntx .s{white-space:normal;line-height:1.3;font-size:12px}
+.nB .go2{height:28px;font-size:12.5px;padding:0 11px 0 10px}
+.nB.old{opacity:.86;transform:scale(.93);transform-origin:100% 50%;animation:none}
+.tray{width:44px;height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#fff;font-size:12px;font-weight:900;z-index:31}
+.tray .c{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#ff6b7d;box-shadow:0 0 0 2px #fff;font-size:12px}
+.tray span{writing-mode:vertical-rl;letter-spacing:.1em}
+/* C · 유나가 전해 줌 */
+.yn{position:absolute;z-index:32;background-repeat:no-repeat;filter:drop-shadow(0 4px 0 rgba(46,35,80,.28)) drop-shadow(0 0 2px #fff);animation:hop .5s ease-out both}
+.nC{display:flex;align-items:center;gap:12px;padding:0 20px 0 44px;animation:ndrop .4s .15s both;z-index:31}
+.nC.p2{width:430px;height:84px}
+.nC.p3{width:500px;height:96px;animation:ndrop .4s .15s both,shake 2.4s .8s infinite}
+.nC.p3 .ntx .t{color:#fff;font-size:19px}.nC.p3 .ntx .s{color:#e4dcff;white-space:normal;line-height:1.3}
+.nC .seal{position:absolute;left:-22px;top:50%;margin-top:-26px;--s:52px}
+.lt3{z-index:30}
+.yf{--s:46px;--ci:3px}
+.yf>.core{background:#f6f2ff}
+.pkC{position:absolute;z-index:33;display:flex;align-items:center;gap:4px;animation:peekin 2.4s ease-out infinite;transform-origin:20% 50%}
+.pkC .orb{position:relative}
+.pkC .P{position:relative;height:26px;display:flex;align-items:center;padding:0 12px 0 10px;color:#4a2a00;font-size:13px;font-weight:900;white-space:nowrap}
+/* 지금 게임의 YunaToast (scripts/ui/yuna_toast.gd 그대로) */
+.yt{position:absolute;z-index:34;display:flex;align-items:center}
+.yt .fd{position:relative;width:74px;height:74px;border-radius:50%;box-shadow:0 0 0 3px #8b6bff,0 0 0 5px #fff,0 0 12px 4px rgba(255,214,107,.8);overflow:hidden;background:#f6f2ff;z-index:2}
+.yt .bb{margin-left:-14px;padding:10px 22px 11px 26px;border-radius:22px;background:#fff;border:3px solid #8b6bff;box-shadow:0 8px 14px rgba(6,3,24,.35)}
+.yt .bb b{display:block;font-size:17px;color:#2e2350;white-space:nowrap}.yt .bb span{display:block;font-size:12.5px;color:#4c4374;white-space:nowrap}
+.tapx{position:absolute;z-index:35;width:34px;height:34px;border-radius:50%;border:3px solid rgba(255,255,255,.95);box-shadow:0 0 8px rgba(46,35,80,.6);animation:burst 1.4s ease-out infinite}
+
+/* ===================== 수정 묶음 2 · 대결 ===================== */
+@keyframes pullR{to{background-position:28px 0}}
+@keyframes pullL{to{background-position:-28px 0}}
+@keyframes rshake{0%,100%{transform:translateY(0)}25%{transform:translateY(-1.5px)}75%{transform:translateY(1.5px)}}
+@keyframes chvR{0%{transform:translateX(-6px);opacity:.55}50%{opacity:1}100%{transform:translateX(10px);opacity:.55}}
+@keyframes chvL{0%{transform:translateX(6px);opacity:.55}50%{opacity:1}100%{transform:translateX(-10px);opacity:.55}}
+@keyframes fray{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--fx),var(--fy)) scale(.4);opacity:0}}
+@keyframes edge{0%,100%{transform:translateX(0)}50%{transform:translateX(var(--mv,6px))}}
+@keyframes drip{0%{transform:translate(0,0);opacity:0}15%{opacity:1}100%{transform:translate(var(--dx),var(--dy));opacity:0}}
+@keyframes flip{0%{transform:rotateY(90deg) scale(1.1)}60%{transform:rotateY(-10deg) scale(1.08)}100%{transform:none}}
+@keyframes cpulse{0%,100%{box-shadow:0 0 0 0 rgba(255,191,46,0)}50%{box-shadow:0 0 14px 4px rgba(255,191,46,.95)}}
+@keyframes dpulse{0%,100%{box-shadow:0 0 0 0 rgba(224,68,92,0)}50%{box-shadow:0 0 14px 4px rgba(224,68,92,.9)}}
+@keyframes wavec{0%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.dsk{height:34px;display:flex;align-items:center;gap:4px;padding:0 16px 0 14px;color:#2e2350;font-size:13.5px;font-weight:900;white-space:nowrap;z-index:21}
+.tmo{--s:50px;--ci:4px;z-index:23}
+.tmo>.core{display:grid;place-items:center;font-size:18px;font-weight:900;color:#2e2350}
+.tmo.hot>.core{color:#c23b4f}
+.rsl{height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:40;animation:ndrop .5s ease-out both}
+.rsl b{font-size:40px;font-weight:900;line-height:1.05}
+.rsl span{font-size:14px;font-weight:800}
+.rsl.w b{color:#5a2a00}.rsl.w span{color:#7a4200}
+.rsl.l b{color:#fff}.rsl.l span{color:#e4dcff}
+.ctag{height:24px;display:flex;align-items:center;padding:0 11px 0 9px;color:#4a2a00;font-size:13.5px;font-weight:900;white-space:nowrap;z-index:26;animation:bob 1s ease-in-out infinite}
+.ctag.dg{color:#fff}
+/* A · 물감 밧줄 */
+.rpw{height:86px;z-index:20}
+.rpw .end{position:absolute;top:8px;display:flex;flex-direction:column;align-items:center;width:80px;color:#fff;font-size:11.5px;font-weight:800;white-space:nowrap}
+.rpw .end .orb{position:relative;--s:46px;--ci:4px}
+.rpw .end .orb img{width:70%;height:70%;object-fit:contain}
+.rpw .end.op .orb>.rm{background:linear-gradient(170deg,#eeeef3,#b8b4c6 50%,#8a85a0)}
+.rpw .end.op img{filter:grayscale(1) brightness(.9)}
+.rpw .end b{font-size:15px;color:#ffe48a;line-height:1.1}
+.rpw .end.op b{color:#d6d2e4}
+.rpw .nm{position:absolute;top:6px;font-size:12px;font-weight:800;color:#ddd5ff;white-space:nowrap}
+.rope{position:absolute;left:96px;right:96px;top:38px;height:22px;border-radius:11px;box-shadow:0 0 0 2px #fff,0 3px 0 rgba(20,12,44,.4);background:repeating-linear-gradient(120deg,#d8d4e4 0 7px,#a39fb6 7px 14px)}
+.rope.mL{animation:none}
+.rope>.me{position:absolute;left:0;top:0;bottom:0;border-radius:9px 0 0 9px;width:var(--k);background:repeating-linear-gradient(120deg,#fff0b8 0 5px,#ffbf2e 5px 8px,#c7b6ff 8px 14px,#8b74e8 14px 21px,#8fd6ff 21px 28px);background-size:56px 100%}
+.rope.push>.me{animation:pullR .5s linear infinite}
+.rope.slip>.me{animation:pullL .5s linear infinite}
+.rope.strain{animation:rshake .18s linear infinite}
+.rope>.mid{position:absolute;left:50%;top:-6px;bottom:-6px;width:2px;margin-left:-1px;background:#fff;opacity:.85}
+.rope>.zn{position:absolute;top:-4px;bottom:-4px;width:12%;border:1.5px dashed rgba(255,228,138,.8);border-radius:6px}
+.rope>.zn.l{left:-2px}.rope>.zn.r{right:-2px;border-color:rgba(214,210,228,.8)}
+.knot{position:absolute;top:22px;--s:54px;--ci:4px;margin-left:-27px;z-index:3}
+.knot>.core{display:grid;place-items:center;font-size:17px;font-weight:900;color:#2e2350}
+.chv{position:absolute;top:28px;color:#ffe48a;font-size:30px;line-height:1;font-weight:900;letter-spacing:-8px;text-shadow:0 2px 0 #2e2350,1px 0 0 #2e2350,-1px 0 0 #2e2350,0 -1px 0 #2e2350;z-index:4}
+.rope>.me::after{content:"";position:absolute;right:-3px;top:-5px;bottom:-5px;width:6px;border-radius:3px;background:#fff;box-shadow:0 0 12px 4px #ffd66b}
+.rope.slip>.me::after{box-shadow:0 0 12px 4px #ff8da3}
+.chv.r{animation:chvR .7s linear infinite}.chv.l{animation:chvL .7s linear infinite;color:#ff9ab0}
+.fr{position:absolute;width:6px;height:6px;border-radius:50%;background:#d8d4e4;animation:fray 1.1s ease-out infinite;z-index:4}
+/* B · 색 영토 */
+.scr>img.ash{filter:grayscale(1) brightness(.74) contrast(.92);pointer-events:none}
+.edg{position:absolute;inset:0;pointer-events:none;overflow:visible}
+.edg.mv{animation:edge 1.6s ease-in-out infinite}
+.drp{position:absolute;width:12px;height:12px;border-radius:50%;animation:drip 1.2s ease-out infinite;pointer-events:none}
+.tr2{height:44px;display:flex;align-items:center;gap:8px;padding:0 18px 0 14px;font-size:13px;font-weight:800;white-space:nowrap;z-index:22}
+.tr2 b{font-size:22px;font-weight:900}
+.tr2.me{color:#2e2350}.tr2.me b{color:#6a3fd8}
+.tr2.op{color:#4f4877}.tr2.op b{color:#6f6890}
+.tr2 .orb{position:relative;--s:32px;--ci:3px}
+.tr2 .orb img{width:70%;height:70%;object-fit:contain}
+.tr2.op .orb img{filter:grayscale(1)}
+/* C · 깃발 칸 */
+.cel{display:flex;gap:4px;align-items:center;z-index:21}
+.cel .P{position:relative;width:40px;height:42px;display:grid;place-items:center;color:#fff;font-size:16px;font-weight:900}
+.cel .P.th{color:#8a85a0}
+.cel .P.fin{width:52px;height:52px}
+.cel .P.fin img{width:30px;height:30px}
+.cel .P.th.fin img{filter:grayscale(1);opacity:.75}
+.cel .P.fl{animation:flip .7s ease-out infinite alternate;transform-origin:50% 50%}
+.cel .P.ch{animation:cpulse 1s ease-in-out infinite;border-radius:8px}
+.cel .P.dg{animation:dpulse 1s ease-in-out infinite;border-radius:8px}
+.cel .P.wv{animation:wavec 1.2s ease-in-out infinite}
+.cel .sep{width:3px;height:56px;border-radius:2px;background:#ffe48a;box-shadow:0 0 0 1.5px #fff}
+.sco{--s:58px;--ci:4px;z-index:22}
+.sco>.core{display:grid;place-items:center;font-size:26px;font-weight:900;color:#5b43c8}
+.sco.op>.rm{background:linear-gradient(170deg,#eeeef3,#b8b4c6 50%,#8a85a0)}
+.sco.op>.core{color:#6f6890}
+.snm{height:20px;display:flex;align-items:center;padding:0 9px 0 8px;font-size:11.5px;font-weight:800;color:#fff;white-space:nowrap;z-index:22}
+/* 콤보 A 자리 표시 */
+.gbox{position:absolute;z-index:39;border:2px dashed #fff;border-radius:10px;box-shadow:0 0 0 2px rgba(46,35,80,.6);pointer-events:none}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>전투 묶음 2 수정 · 알림 · 대결 (+ 콤보 A 자리)</h1>
+<p class="lead">바탕은 지금까지 확정된 한 벌입니다 — <b>HUD B</b> · <b>묶음 1 수정안</b> · 묶음 2에서 고른 <b>재화 C · 왼쪽 C · 콤보 A · 적 막대 얇은 선</b>(피해 숫자는 지금 게임 그대로라 그리지 않음). 그 위에 <b>알림</b>과 <b>대결</b>만 다시 그렸습니다. 둘 다 <b>자세가 다른 세 안</b>이고, 안마다 같은 상태들을 나란히 보여 줍니다. 재료는 그대로 다섯 가지(크림 판 · 남색 유리 · 하늘 띠 · 금 꼬리표 · 금테 구슬)와 같은 판 규칙입니다. 문구는 지금 게임 문구, 숫자 일부는 예시입니다.</p>
+<div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button><a href="#n">1 알림</a><a href="#d">2 대결</a><a href="#cb">콤보 A 자리</a></div>
+
+<!-- ======================================================= 1 알림 -->
+<h3 id="n">1 · 알림 — 무엇을 · 얼마나 세게 · 어디서 · 얼마나 오래 · 눌러서 어디로</h3>
+<div class="ref"><h2>지금 게임과 목적</h2>
+<p class="cap">지금은 실패 · 도시락 · 하늘 이벤트 · 모험 시작이 <b>모두 같은 크림 띠</b>(hud.gd banner, 1.4초)로 화면 가운데를 지나가고, 눌러도 아무 데로도 가지 않습니다. 이야기 열림 · 분교 끝은 유나 말풍선(YunaToast)으로 떠서 「내가 한 일」 반응과 섞입니다.</p>
+<div class="nowg"><figure><img src="orig/now_bt_retry_1280x720.jpg" alt="RETRY 지금"><figcaption><b>RETRY · 보호막 붕괴</b> — 고칠 곳으로 갈 수 없음</figcaption></figure><figure><img src="orig/now_bt_shower_banner_1280x720.jpg" alt="색 소나기 지금"><figcaption><b>색 소나기</b> — 1.4초 뒤 사라져 무엇을 누를지 놓침</figcaption></figure></div>
+<table class="ntab">
+<thead><tr><th>무엇이 생겼나</th><th>예 (지금 문구)</th><th>세기</th><th>얼마나</th><th>누르면</th></tr></thead>
+<tbody>
+<tr><td>작은 소식 · 자동으로 처리됨</td><td>도시락! 보호막을 되살렸어요 · 빛물감 +5 · 수호신 Lv 도달 · 퀘스트 완료</td><td><span class="pr pr1">낮음</span></td><td>1.6초, 버튼 없음, 전투를 가리지 않음</td><td>(퀘스트 완료는 퀘스트 판이 대신 반짝임)</td></tr>
+<tr><td>할 수 있는 일이 생김</td><td>주희의 이야기가 열렸어요 · 과학실 연구가 끝났어요 · 순풍이 열렸어요</td><td><span class="pr pr2">보통</span></td><td>4초 (금 실선이 줄어듦), 놓치면 그 버튼에 빨간 점</td><td>「보러 가기 ▶」 이야기 · 「분교로 ▶」 · 「써 보기 ▶」</td></tr>
+<tr><td>지금만 할 수 있음 (화면 안 행동)</td><td>색 소나기! · 무지개 다리!</td><td><span class="pr pr2">보통 · 금</span></td><td>이벤트가 끝날 때까지 남은 시간</td><td>버튼 대신 「남은 15초」 — 하늘의 물방울을 누름</td></tr>
+<tr><td>막힘 · 실패</td><td>RETRY · 보호막이 깨졌어요 / 시간 초과</td><td><span class="pr pr3">높음</span></td><td>다시 시작(1.8초) 동안 + 화면 가장자리 붉은 숨</td><td>고칠 곳: 「고래 강화 ▶」 · 「강화 ▶」 · 「복귀 ▶」</td></tr>
+</tbody></table>
+<div class="split">
+<div><h4>알림 vs 완료 알림(YunaToast, 확정 C) — 역할 나눔</h4><b>완료 알림 = 내가 누른 것의 대답</b>(추천 편성 · 새 덱 탭 · 되돌림 · 신화 1명 제한). 누른 자리 옆, 얼굴 원 + 말풍선, 버튼 없음, 2.4초.<br><b>알림 = 내가 누르지 않았는데 생긴 일.</b> 정해진 한 자리, 갈 곳 버튼. → 지금 YunaToast로 뜨는 <b>이야기 열림 · 분교 끝은 알림으로 옮김</b>을 제안합니다 (확인 필요).</div>
+<div><h4>알림이 아닌 것 (다른 담당)</h4>잠긴 버튼 누름 = 잠김 알림(LockGate) · CLEAR · 폭주 · 순풍 띠 = B3 · 보스 등장 = 보스 경고 A · VS · 승패 = 대결(아래 2) · 모험 시작 띠 = 모험 C.<br><b>쌓임 규칙(세 안 공통)</b>: 한 번에 하나만 크게, 높음은 앞으로 끼어듦, 같은 종류는 합침(「빛물감 +5」 두 번 → +10).</div>
+</div></div>
+
+<section class="opt" data-choice="b2r_n_A" data-choice-group="1 알림" data-choice-label="A 위 가운데 알림 판">
+<h2>A 「위 가운데 알림 판」 <small>늘 같은 자리 · 아이콘 + 동사 + 갈 곳 버튼</small></h2>
+<p class="cap">위 판들 바로 아래(보스 때는 보스 판 아래) <b>가운데 한 자리</b>. 세기는 재료로 구분: 낮음 = 작은 <b>남색 유리 알약</b>, 보통 = <b>크림 판 + 종류 구슬 + 라벤더 버튼 + 줄어드는 금 실선</b>, 높음 = <b>남색 판 + 붉은 구슬 + 금 버튼</b>과 화면 가장자리 붉은 숨. 쌓이면 뒤에 판 모서리가 비치고 「다음 N개」. <b>비용</b>: 눈이 전투(오른쪽 아래)에서 위로 한 번 올라가야 함.</p>
+<div class="vp" data-scene="normal" data-set="n=A;nt=story"></div>
+<div class="tiles">
+<figure class="tile"><div class="tv" data-scene="normal" data-set="n=A;nt=lunch" data-crop="300,40,700,200"></div><figcaption><b>낮음 · 도시락</b> — 남색 알약 1.6초, 버튼 없음.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="normal" data-set="n=A;nt=shower" data-crop="300,40,700,200"></div><figcaption><b>보통 · 색 소나기</b> — 금 별 판 + 「남은 15초」, 실선이 15초 동안 줄어듦.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="normal" data-set="n=A;nt=retry" data-crop="240,20,800,260"></div><figcaption><b>높음 · RETRY</b> — 「고래 강화 ▶」, 「1.8초 뒤 다시 시작」 꼬리표, 가장자리 붉은 숨.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="normal" data-set="n=A;nt=story,school,unlock" data-crop="300,40,700,220"></div><figcaption><b>세 개가 한꺼번에</b> — 앞의 것 4초 → 다음, 「다음 2개」.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="boss" data-set="n=A;nt=school" data-crop="300,40,900,300"></div><figcaption><b>보스 스테이지</b> — 보스 판 아래로 내려옴.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="normal" data-set="n=A;nt=story;yt=1" data-crop="0,40,1280,680"></div><figcaption><b>완료 알림과 같이</b> — 완료 알림은 누른 자리(편성) 옆, 알림은 위 가운데: 겹치지 않음.</figcaption></figure>
+</div></section>
+
+<section class="opt" data-choice="b2r_n_B" data-choice-group="1 알림" data-choice-label="B 오른쪽 카드 더미">
+<h2>B 「오른쪽에서 밀려드는 카드 더미」 <small>눈이 머무는 쪽 · 여러 개를 동시에</small></h2>
+<p class="cap">눈이 머무는 <b>오른쪽(적 · 스킬 원판 위)</b>으로 카드가 밀려 들어옵니다. 왼쪽 끝 <b>세기 색 띠</b>(회보라 · 라벤더 · 금 · 붉음)와 카드 크기로 세기를 알리고, 새 카드가 위, 앞의 것은 작아져 아래로. 놓친 것은 화면 끝 <b>「알림」 탭</b>에 숫자로 남아 나중에 열어 봅니다. <b>비용</b>: 오른쪽 적 일부를 가림.</p>
+<div class="vp" data-scene="normal" data-set="n=B;nt=story"></div>
+<div class="tiles">
+<figure class="tile"><div class="tv" data-scene="normal" data-set="n=B;nt=lunch" data-crop="880,170,400,280"></div><figcaption><b>낮음 · 도시락</b> — 얇은 카드, 1.6초.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="normal" data-set="n=B;nt=shower" data-crop="880,170,400,280"></div><figcaption><b>보통 · 색 소나기</b> — 금 띠 + 「남은 15초」.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="normal" data-set="n=B;nt=retry" data-crop="760,120,520,400"></div><figcaption><b>높음 · RETRY</b> — 남색 큰 카드가 흔들리고 오른쪽 가장자리가 붉게.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="normal" data-set="n=B;nt=unlock,story,lunch;tray=2" data-crop="880,170,400,420"></div><figcaption><b>세 개가 한꺼번에</b> — 새 것이 위, 놓친 2개는 「알림」 탭.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="boss" data-set="n=B;nt=school" data-crop="760,40,520,420"></div><figcaption><b>보스 스테이지</b> — 보스 판 · 콤보 아래로.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="normal" data-set="n=B;nt=story;yt=1" data-crop="0,40,1280,680"></div><figcaption><b>완료 알림과 같이</b> — 왼쪽 아래 대답, 오른쪽 카드.</figcaption></figure>
+</div></section>
+
+<section class="opt" data-choice="b2r_n_C" data-choice-group="1 알림" data-choice-label="C 유나가 편지로 전해 줌">
+<h2>C 「유나가 편지로 전해 줌」 <small>사람이 알려 주는 느낌 · 가장 눈에 띔</small></h2>
+<p class="cap">보통 · 높음은 <b>유나가 뱃머리 앞에 톡 올라와 편지 판을 내밉니다</b>(기쁨 / 놀람 그림). 편지 왼쪽 <b>금테 봉인 구슬</b>이 종류, 오른쪽이 갈 곳 버튼. 낮음은 몸 대신 <b>유나 얼굴만 그 자리에서 빼꼼</b>(도시락은 보호막 옆, 퀘스트 완료는 퀘스트 판 옆). 완료 알림(얼굴 원 + 말풍선, 버튼 없음)과 달리 <b>몸 전체 + 편지 + 버튼</b>이라 둘이 헷갈리지 않습니다. <b>비용</b>: 화면 가운데를 가장 많이 가림.</p>
+<div class="vp" data-scene="normal" data-set="n=C;nt=story"></div>
+<div class="tiles">
+<figure class="tile"><div class="tv" data-scene="normal" data-set="n=C;nt=lunch" data-crop="100,340,600,220"></div><figcaption><b>낮음 · 도시락</b> — 보호막 옆에서 얼굴만 빼꼼.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="normal" data-set="n=C;nt=quest" data-crop="0,80,700,220"></div><figcaption><b>낮음 · 퀘스트 완료</b> — 퀘스트 판 옆.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="normal" data-set="n=C;nt=shower" data-crop="380,200,700,260"></div><figcaption><b>보통 · 색 소나기</b> — 금 별 편지 + 「남은 15초」.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="normal" data-set="n=C;nt=retry" data-crop="340,180,760,300"></div><figcaption><b>높음 · RETRY</b> — 놀란 유나 + 남색 편지 + 「고래 강화 ▶」.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="normal" data-set="n=C;nt=story,school,unlock" data-crop="380,200,760,280"></div><figcaption><b>세 개가 한꺼번에</b> — 편지 뭉치 「편지 3통 · 다음 ▶」.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="boss" data-set="n=C;nt=school" data-crop="0,40,1280,680"></div><figcaption><b>보스 스테이지</b> — 같은 자리(보스 앞 하늘).</figcaption></figure>
+</div></section>
+
+<!-- ======================================================= 2 대결 -->
+<h3 id="d">2 · 대결 — 줄다리기</h3>
+<div class="ref"><h2>지금 게임과 공통 규칙</h2>
+<p class="cap">지금은 오른쪽 위 이름판의 작은 막대 하나라, 20초 동안 누가 이기고 있는지 · 기세가 어느 쪽인지 · 역전 순간이 보이지 않습니다.</p>
+<div class="nowg"><figure><img src="orig/now_bt_soul_1280x720.jpg" alt="회랑 지금"><figcaption><b>기억의 회랑</b></figcaption></figure><figure><img src="orig/now_inv_duel_1280x720.jpg" alt="등급전 지금"><figcaption><b>등급전</b></figcaption></figure><figure><img src="orig/now_bt_duel_end_1280x720.jpg" alt="승리 지금"><figcaption><b>승리 띠</b></figcaption></figure></div>
+<ul class="rules"><li><b>힘</b> = 양쪽 남은 힘(고래 보호막 + 남은 아이)의 비율. <b>기세</b> = 최근 2초 동안 어느 쪽으로 움직였나(화살 · 흐름 방향). <b>역전</b> = 가운데 선을 넘는 순간 금빛 「역전!」. <b>남은 시간</b> = 20초(duel_scene.gd), 5초부터 붉음.</li><li>세 안 모두 항해 부품(퀘스트 · 메뉴 판 · 순풍 · 복귀)은 접고, 숨결은 <b>잠김 가 「대결 중 쉼」</b>, 스킬 원판 · 강화 · 자동은 그대로. 「건너뛰기 ▶▶」는 오른쪽 위 크림 꼬리표.</li></ul></div>
+
+<section class="opt" data-choice="b2r_d_A" data-choice-group="2 대결" data-choice-label="A 물감 밧줄">
+<h2>A 「물감 밧줄」 <small>이어진 힘 · HUD 판 안에서 읽힘</small></h2>
+<p class="cap">위 가운데 <b>남색 판 안의 밧줄</b> — 우리 쪽은 금 · 라벤더 · 하늘 물감이 꼬인 줄, 상대 쪽은 잿빛 줄. <b>매듭(금테 구슬)</b> 자리가 힘이고 그 안에 남은 초. 당기는 쪽으로 줄무늬가 흐르고 <b>›››</b> 화살이 기세. 역전 때 줄이 팽팽하게 떨리고, 이기면 잿빛 줄이 끊어지며 조각이 튐. 양 끝 점선 칸 = 거의 끝.</p>
+<div class="vp" data-scene="duel" data-set="duel=A;vst=push"></div>
+<div class="tiles">
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=A;vst=start" data-crop="330,50,950,150"></div><figcaption><b>시작 50 : 50</b> — 20초.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=A;vst=slip" data-crop="330,50,950,160"></div><figcaption><b>밀림 34%</b> — 줄이 거꾸로 흐르고 분홍 ‹‹‹.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=A;vst=clutch" data-crop="330,30,950,170"></div><figcaption><b>역전!</b> — 남은 4초, 줄이 떨리고 매듭이 금빛.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=A;vst=win" data-crop="200,40,1080,320"></div><figcaption><b>승리</b> — 잿빛 줄이 끊어지고 금 판 「승리!」.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=A;vst=lose" data-crop="200,40,1080,320"></div><figcaption><b>패배</b> — 매듭이 우리 끝까지, 해 질 녘 판.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=A;vst=rank" data-crop="330,50,950,150"></div><figcaption><b>등급전</b> — 폭풍섬 하랑.</figcaption></figure>
+</div></section>
+
+<section class="opt" data-choice="b2r_d_B" data-choice-group="2 대결" data-choice-label="B 색 영토">
+<h2>B 「색 영토」 <small>하늘 전체가 줄다리기 · 가장 크게 느껴짐</small></h2>
+<p class="cap">두 고래 사이 <b>하늘 자체가 경계</b>: 우리 쪽은 원래 색, 상대 쪽은 잿빛으로 바랩니다. 경계선은 <b>하늘 → 라벤더 → 금 물감 붓질</b>이 밀고 당기며 물감 방울이 튀는 쪽이 기세. 위에는 「우리 색 62%」 · 「잿빛 38%」 판과 경계를 따라다니는 초 구슬만. 이기면 하늘 전체가 물들고, 지면 잿빛이 우리 고래까지 덮습니다. <b>비용</b>: 화면 처리가 가장 무거움(가장자리 마스크 + 흑백).</p>
+<div class="vp" data-scene="duel" data-set="duel=B;vst=push"></div>
+<div class="tiles">
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=B;vst=start" data-crop="0,0,1280,720"></div><figcaption><b>시작 50 : 50</b></figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=B;vst=slip" data-crop="0,0,1280,720"></div><figcaption><b>밀림 34%</b> — 경계가 분홍, 잿빛 방울이 우리 쪽으로.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=B;vst=clutch" data-crop="0,0,1280,720"></div><figcaption><b>역전!</b> — 경계가 금빛으로 가운데를 넘음.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=B;vst=win" data-crop="0,0,1280,720"></div><figcaption><b>승리</b> — 하늘 전체가 원래 색.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=B;vst=lose" data-crop="0,0,1280,720"></div><figcaption><b>패배</b> — 잿빛이 우리 고래까지.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=B;vst=rank" data-crop="0,0,1280,720"></div><figcaption><b>등급전</b></figcaption></figure>
+</div></section>
+
+<section class="opt" data-choice="b2r_d_C" data-choice-group="2 대결" data-choice-label="C 깃발 칸 뺏기">
+<h2>C 「깃발 칸 뺏기」 <small>끊어진 칸 · 점수처럼 6 : 4</small></h2>
+<p class="cap">위 가운데 <b>기운 칸 10개</b>(우리 = 하늘 띠 + 별, 상대 = 잿빛) + 양 끝 <b>결정 칸</b>(휘장). 앞선 쪽이 칸을 하나씩 <b>뒤집으며</b>(금빛 번쩍) 양쪽 금테 구슬에 <b>점수</b>가 뜹니다. 「3칸 연속!」이 기세, 가운데 금선을 넘으면 「역전!」, 결정 칸까지 남은 칸 수가 위기 · 기회. <b>비용</b>: 힘이 10% 단위로만 보임.</p>
+<div class="vp" data-scene="duel" data-set="duel=C;vst=push"></div>
+<div class="tiles">
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=C;vst=start" data-crop="200,30,1080,180"></div><figcaption><b>시작 5 : 5</b></figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=C;vst=slip" data-crop="200,30,1080,180"></div><figcaption><b>밀림 3 : 7</b> — 「결정 칸까지 3칸」, 다음 칸이 붉게.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=C;vst=clutch" data-crop="200,30,1080,180"></div><figcaption><b>역전!</b> — 가운데를 넘는 칸이 뒤집힘.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=C;vst=win" data-crop="200,30,1080,330"></div><figcaption><b>승리</b> — 10칸 + 결정 칸이 물결치며 「승리!」.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=C;vst=lose" data-crop="200,30,1080,330"></div><figcaption><b>패배</b> — 모두 잿빛.</figcaption></figure>
+<figure class="tile"><div class="tv" data-scene="duel" data-set="duel=C;vst=rank" data-crop="200,30,1080,180"></div><figcaption><b>등급전</b></figcaption></figure>
+</div></section>
+
+<!-- ======================================================= 콤보 A 자리 -->
+<h3 id="cb">덧붙임 · 콤보 A는 어디에 있었나</h3>
+<div class="ref"><h2>오른쪽 위 재화 줄 아래 (보스 때는 보스 판 아래)</h2>
+<p class="cap">처음 시안(battle_b2)에서 콤보 A의 <b>기운 막대가 그려지지 않았습니다</b> — 막대 요소가 크기 0으로 잡혀(CSS 오류) 숫자 · 「COMBO」 · 「폭주까지 N」 글자만 하늘 위에 떠 흰 하늘에 묻혔습니다. 원래 시안 페이지도 고쳤고(막대 140 × 12px), 아래는 고친 모습입니다.</p>
+<div class="duo"><figure class="shot"><div class="vp" data-scene="normal" data-set="cbnote=1;cst=hot;cn=58"></div><figcaption><b>항해</b> — 58 / 80 달아오름.</figcaption></figure><figure class="shot"><div class="vp" data-scene="boss" data-set="cbnote=1"></div><figcaption><b>보스</b> — 보스 판 아래.</figcaption></figure></div>
+</div>
+</main>
+
+<script>
+// 판: 묶음 1 수정안과 같은 엔진 — assets/ui/hud_b_plate.gdshader 규칙(기울기 tan14°×높이, 흰 테 2px, 안쪽 금선 1px, 아래로 떨어지는 그림자, 위쪽 광택, 훑는 빛)
+const MAT={
+  cream:{a:'#ffffff',b:'#f4f0ff',rim:'#ffffff',line:'rgba(227,194,120,.6)',sh:'rgba(46,35,80,.2)',sy:4,gl:.55},
+  navy:{a:'rgba(46,35,80,.95)',b:'rgba(84,54,143,.95)',rim:'#ffbf2e',line:'rgba(255,230,158,.3)',sh:'rgba(31,20,56,.3)',sy:4,gl:.12},
+  lav:{a:'#9a84f0',b:'#6a4fd6',rim:'#ffffff',line:'rgba(255,255,255,.35)',sh:'rgba(46,35,80,.25)',sy:3,gl:.25},
+  sky:{a:'#6b9eff',b:'#9978fa',rim:'#ffffff',line:'rgba(255,219,128,.85)',sh:'rgba(46,35,80,.25)',sy:3,gl:.28},
+  gold:{a:'#ffe08a',b:'#e39a2f',rim:'#ffffff',line:'rgba(255,255,255,.5)',sh:'rgba(120,70,0,.3)',sy:3,gl:.35},
+  claim:{a:'#fff8de',b:'#ffd36b',rim:'#ffffff',line:'rgba(214,140,20,.8)',sh:'rgba(150,96,10,.3)',sy:4,gl:.5},
+  gray:{a:'#f3f1f7',b:'#dedae8',rim:'#ffffff',line:'rgba(150,142,175,.35)',sh:'rgba(46,35,80,.14)',sy:3,gl:.3},
+  wind:{a:'#8fd6ff',b:'#3f8cff',rim:'#ffffff',line:'rgba(255,255,255,.55)',sh:'rgba(30,60,140,.3)',sy:3,gl:.3},
+  dusk:{a:'#8d82c4',b:'#5b4d93',rim:'#ffffff',line:'rgba(255,255,255,.25)',sh:'rgba(46,35,80,.25)',sy:3,gl:.15},
+  red:{a:'#ff7d93',b:'#d9384f',rim:'#ffffff',line:'rgba(255,255,255,.4)',sh:'rgba(120,20,40,.3)',sy:2,gl:.25}
+};
+const TAN=Math.tan(14*Math.PI/180);
+let PID=0;
+const f=n=>n.toFixed(2);
+function rpath(P,r){
+  let d='';
+  P.forEach((p1,i)=>{
+    const p0=P[(i+P.length-1)%P.length],p2=P[(i+1)%P.length];
+    const v1=[p0[0]-p1[0],p0[1]-p1[1]],v2=[p2[0]-p1[0],p2[1]-p1[1]],l1=Math.hypot(...v1),l2=Math.hypot(...v2),rr=Math.min(r,l1/2,l2/2);
+    d+=(i?'L':'M')+f(p1[0]+v1[0]/l1*rr)+' '+f(p1[1]+v1[1]/l1*rr)+'Q'+f(p1[0])+' '+f(p1[1])+' '+f(p1[0]+v2[0]/l2*rr)+' '+f(p1[1]+v2[1]/l2*rr);
+  });
+  return d+'Z';
+}
+function inset(P,d){
+  const n=P.length,L=P.map((a,i)=>{const b=P[(i+1)%n],dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy);return [[a[0]-dy/l*d,a[1]+dx/l*d],[dx,dy]]});
+  return P.map((_,i)=>{const [p,u]=L[(i+n-1)%n],[q,v]=L[i],t=((q[0]-p[0])*v[1]-(q[1]-p[1])*v[0])/(u[0]*v[1]-u[1]*v[0]);return [p[0]+u[0]*t,p[1]+u[1]*t]});
+}
+function drawPlate(el){
+  const m=MAT[el.dataset.plate],w=el.offsetWidth,h=el.offsetHeight;
+  if(!m||!w||!h)return;
+  const sk=h*TAN,r=+(el.dataset.r||Math.min(12,h*.3)),P=[['sl' in el.dataset?0:sk,0],[w,0],[w-sk,h],[0,h]],id='pl'+(++PID),pad=14;
+  const o=rpath(P,r),i2=rpath(inset(P,2),Math.max(1,r-2)),i4=rpath(inset(P,4.5),Math.max(1,r-4.5));
+  const sw=el.dataset.sweep;
+  let extra='';
+  if(sw)extra+=`<rect class="psw" x="${f(-w*.35)}" y="-6" width="${f(Math.max(22,w*.2))}" height="${h+12}" fill="url(#${id}s)" style="--d:${f(w*1.6)}px;animation-duration:${sw}s;animation-delay:${-(PID*.83%(+sw)).toFixed(2)}s"/>`;
+  if('stars' in el.dataset)[[.22,.3],[.58,.22],[.86,.62]].forEach(([sx,sy],j)=>{const x=sx*w,y=sy*h;extra+=`<path class="pst" d="M${f(x)} ${f(y-3.2)}L${f(x+.9)} ${f(y-.9)}L${f(x+3.2)} ${f(y)}L${f(x+.9)} ${f(y+.9)}L${f(x)} ${f(y+3.2)}L${f(x-.9)} ${f(y+.9)}L${f(x-3.2)} ${f(y)}L${f(x-.9)} ${f(y-.9)}Z" fill="#fff2c4" style="animation-delay:${-(j*.9+PID*.37).toFixed(2)}s"/>`});
+  el.innerHTML=`<svg width="${w+pad*2}" height="${h+pad*2}" viewBox="${-pad} ${-pad} ${w+pad*2} ${h+pad*2}" aria-hidden="true"><defs><linearGradient id="${id}g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${m.a}"/><stop offset="1" stop-color="${m.b}"/></linearGradient><linearGradient id="${id}h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="${m.gl}"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><linearGradient id="${id}s" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".7"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><clipPath id="${id}c"><path d="${i2}"/></clipPath></defs><path d="${o}" fill="${m.sh}" transform="translate(0 ${m.sy})"/><path d="${o}" fill="${m.rim}"/><path d="${i2}" fill="url(#${id}g)"/><g clip-path="url(#${id}c)"><rect x="0" y="0" width="${w}" height="${f(h*.5)}" fill="url(#${id}h)"/>${extra}</g><path d="${i4}" fill="none" stroke="${m.line}" stroke-width="1"/></svg>`;
+}
+MAT.mint={a:'#8ff0d8',b:'#2fb593',rim:'#ffffff',line:'rgba(255,255,255,.5)',sh:'rgba(20,110,90,.3)',sy:3,gl:.3};
+MAT.ember={a:'#ff9ab0',b:'#e0445c',rim:'#ffffff',line:'rgba(255,255,255,.45)',sh:'rgba(120,20,40,.3)',sy:3,gl:.3};
+const AS='img/assets/';
+// 얼굴 기준점: scripts/ui/portrait_anchors.gd ANCHORS [얼굴 가운데 x, y, 얼굴 높이, 원본 폭, 높이]
+const ANC={yerin:[261,205,130,404,751],yuna:[323,186,131,553,698],serena:[330,201,121,557,684],juhee:[249,195,113,465,680],arca:[617,389,198,1094,1382]};
+function pf(root){root.querySelectorAll('.pf[data-id]').forEach(el=>{
+  const a=ANC[el.dataset.id],bw=+el.dataset.bw,bh=+el.dataset.bh,round=bw<60,z=round?2.0:2.3,cy=round?.5:.46,k=bh/(a[2]*z);
+  el.style.width=bw+'px';el.style.height=bh+'px';el.style.backgroundSize=`${a[3]*k}px ${a[4]*k}px`;el.style.backgroundPosition=`${bw/2-a[0]*k}px ${bh*cy-a[1]*k}px`;});}
+const Pl=(cls,mat,inner,o={})=>`<div class="P ${cls}"${o.st?` style="${o.st}"`:''}><i class="pt" data-plate="${mat}"${o.r!=null?` data-r="${o.r}"`:''}${o.sw?` data-sweep="${o.sw}"`:''}${o.stars?' data-stars':''}${o.sl?' data-sl':''}${o.mir?' style="transform:scaleX(-1)"':''}></i>${inner}</div>`;
+const Orb=(cls,inner,o={})=>`<div class="orb ${cls}"${o.st?` style="${o.st}"`:''}>${o.hl?'<i class="hl"></i>':''}<i class="rm"></i>${o.g?'<i class="g"></i>':''}<i class="core"${o.cst?` style="${o.cst}"`:''}>${inner}</i>${o.vl?'<i class="vl"></i>':''}${o.n!=null?`<b class="n ol">${o.n}</b>`:''}<i class="sp"></i>${o.after||''}</div>`;
+const at=(x,y,html,extra='')=>`<div style="position:absolute;left:${x}px;top:${y}px;${extra}">${html}</div>`;
+const img=(p,a='')=>`<img src="${AS}${p}" alt="${a}">`;
+const LOCK=t=>`<i class="lkb"></i><b class="lkp">${t}</b>`;
+
+// 장면: 같은 순간 HUD 있음(hud) · 없음(world). 확정 HUD B 칸만 hud 그림에서 오려 붙인다
+const SC={
+  normal:{bg:'b2_normal',keep:['tl','sh','br'],cd:{1280:[0,25,24,26],1600:[0,23,22,25]},ret:'+3',cn:{1280:39,1600:51}},
+  boss:{bg:'b2_boss',keep:['tl','sh','br','bp'],cd:{1280:[0,17,16,18],1600:[0,15,14,17]},ret:'+5',cn:{1280:12,1600:24},boss:true},
+  intro:{bg:'b2_intro',bg16:'b2_boss',keep:['tl','sh','br'],cd:{1280:[0,13,16,14],1600:[0,13,16,14]},ret:'+5',cn:{1280:69,1600:69},hud16:'b2_boss'},
+  element:{bg:'b2_element',keep:['tl','sh','br','bp'],cd:{1280:[0,6,6,8],1600:[0,6,6,8]},ret:'+5',cn:{1280:0,1600:0},adv:'element'},
+  castle:{bg:'b2_castle',keep:['tl','sh','br','bp'],cd:{1280:[0,0,0,0],1600:[0,0,0,0]},ret:'+5',cn:{1280:0,1600:0},adv:'castle'},
+  temple:{bg:'b2_temple',keep:['tl','sh','br','bp'],cd:{1280:[0,0,0,0],1600:[0,0,0,0]},ret:'+5',cn:{1280:0,1600:0},adv:'temple'},
+  duel:{bg:'b2_duel',keep:['tl','sh'],cd:{1280:[0,0,0,0],1600:[0,0,0,0]},ret:'+5',cn:{1280:0,1600:0},duel:true}
+};
+const KEEP={tl:[8,6,332,132],sh:[22,452,420,54],br:[460,622,258,96],bp:[-712,64,656,116]};
+// 적 머리 위 자리 (캡처에서 잰 좌표): [x, 머리 y, 약점 속성, 황금 잿빛, 남은 체력 %]
+const FOES={
+  1280:[[668,170,'blue',0,.8],[630,232,'red',0,.45],[836,240,'green',0,1],[912,196,'purple',1,.7],[1000,222,'orange',1,1],[1040,300,'white',0,.6],[1140,318,'blue',0,.3],[1100,376,'red',0,.9],[938,432,'green',0,.55],[1168,436,'purple',0,1]],
+  1600:[[530,196,'blue',0,.8],[648,258,'red',1,.6],[716,200,'green',1,1],[820,234,'purple',1,.85],[662,326,'orange',0,.4],[842,310,'white',0,1],[888,372,'blue',0,.7],[880,440,'red',0,.5],[1012,402,'green',0,1],[1160,382,'purple',0,.35],[1242,350,'orange',0,1],[1300,230,'white',0,.9],[1388,474,'blue',0,1],[1532,360,'red',0,.75],[592,420,'green',0,.6]]
+};
+const HEROES=[['yerin','e-w'],['yuna','e-p'],['serena','e-p ss'],['juhee','e-o']];
+
+function keep(id,W,hudUrl){const [x,y,w,h]=KEEP[id];const L=x<0?W+x:x;return `<i class="kp" style="--x:${L}px;--y:${y}px;width:${w}px;height:${h}px"></i>`}
+
+// ---------- 묶음 1 수정안 (확정) ----------
+function B1(s,W,o){
+  let h='';
+  const cd=s.cd[W];
+  if(o.quest!=='hide'){
+    h+=`<div class="P qs${o.quest==='dim'?' dim':''}"><i class="pt" data-plate="cream" data-sl data-sweep="6.5"></i><div class="P qt"><i class="pt" data-plate="lav" data-r="8" data-stars></i>${img('ui/kit/side_quest.png','퀘스트')}<b>19</b></div><div class="qx"><span class="t">「편성」에서 카렌을 「선두」에 세우기</span><div class="r2"><i class="qb" style="--q:4%"><i></i></i><b class="cn">0 / 1</b></div></div>${Orb('rw',img('ui/icon_gem.png','채색석'))}${Pl('amt','navy','200',{r:6})}${o.quest==='dim'?'':Pl('rs','lav','이어서 안내 ▶',{r:6})}</div>`;
+    if(o.quest==='dim')h+=at(150,192,Pl('rsn','navy','모험 뒤에 이어서',{r:6}),'z-index:8');
+  }
+  if(o.nav!==false){
+    const NV=[['heroes','아이들',1],['formation','편성',0],['summon','소환',1],['adventure','모험',0],['school','분교',0],['shop','상점',0]];
+    h+=`<div class="P nv"><i class="pt" data-plate="cream" data-sweep="7" data-stars></i>${NV.map((n,i)=>`<b class="c hc${i}"><i class="dp">${img('ui/kit/nav_'+n[0]+'.png')}</i><span>${n[1]}</span>${n[2]?'<i class="rdot"></i>':''}</b>`).join('')}</div>`;
+  }
+  if(o.ctl!==false){
+    h+='<div class="ctl">';
+    if(o.wind==='lock')h+=`${Orb('wo lk',img('ui/kit/side_wind.png','순풍'),{after:'<i class="lkb" style="right:-2px;top:-2px"></i>'})}${Pl('wl','gray','<span style="color:#6f6890">'+(o.windTxt||'모험 중 쉼')+'</span>')}`;
+    else if(o.wind!=='hide')h+=`${Orb('wo rdy',img('ui/kit/side_wind.png','순풍'),{g:1,st:'--p:100%'})}${Pl('wl','sky','순풍 가속!',{sw:4})}`;
+    if(o.ret==='quit')h+=Orb('so rt quit',`${img('ui/kit/side_return.png','그만두기')}<b style="font-size:11px">그만두기</b>`);
+    else if(o.ret==='lock')h+=Orb('so rt lk',`${img('ui/icon_pearl.png','구름 진주')}복귀`,{after:LOCK('대결 중')});
+    else if(o.ret!=='hide')h+=Orb('so rt',`${img('ui/icon_pearl.png','구름 진주')}복귀 ${s.ret}`);
+    if(o.auto!==false)h+=Orb('so au',`<b>수동</b>`,o.autoSt?{st:o.autoSt}:{});
+    h+='</div>';
+  }
+  if(o.deck!==false){
+    h+=`<div class="deck"><div class="dtop">${Orb('hq','?')}${Pl('bk','sky','일괄 강화<b class="cnt">4</b>',{sw:5})}${Pl('us','navy','<b class="on"><i class="pt" data-plate="gold" data-r="6"></i>×1</b><b>×10</b><b>MAX</b>',{r:9})}</div><div class="dcols">`;
+    const cost=[443,443,12,443];
+    HEROES.forEach(([id,el],i)=>{
+      const c=cd[i],rdy=!c;
+      h+=`<div class="col">${Pl('ut ok','cream',`<b class="co">▲</b>${img('ui/icon_gold.png','바람 조각')}${cost[i]}`,{r:7,sw:5.5})}${Orb(`dk ${el}${rdy?' rdy':''}`,`<i class="pf" data-id="${id}" data-bw="54" data-bh="54" style="background-image:url(${AS}chars/${id}_idle.png)"></i>`,{hl:el.includes('ss'),g:1,st:`--p:${rdy?100:Math.max(8,100-c*1.6)}%`,vl:!rdy,n:rdy?null:c})}${Pl('lvt','cream',i==2?'항해 Lv.1':'항해 Lv.14',{r:6})}${rdy?Pl('ulb','gold','궁극기',{r:5}):''}</div>`;
+    });
+    h+='</div></div>';
+  }
+  return h;
+}
+
+// ---------- 1 재화 줄 ----------
+const CUR={n:['1.00c','200a','50,000'],long:['12.3b','999.9a','99,999']};
+function cur(W,v,st){
+  const n=st==='long'?CUR.long:CUR.n,ico=['ui/icon_gold.png','ui/icon_pearl.png','ui/icon_gem.png'],nm=['바람 조각','구름 진주','채색석'];
+  const fly=st==='fly';
+  const cell=i=>`<span class="c${fly&&i==0?' flyhit':''}">${img(ico[i],nm[i])}<span class="num">${n[i]}</span>${i==2?Orb('pl','+'):''}</span>`;
+  let h='';
+  if(v==='A'){
+    h+=Pl('cu cuA','cream',[0,1,2].map(cell).join(''),{sw:7,st:`position:absolute;left:${W-500}px;top:12px;width:428px`});
+    h+=Pl('mnA','navy','<i class="mn3"><i></i><i></i><i></i></i>메뉴',{r:9,st:`position:absolute;left:${W-84}px;top:8px`});
+  }else if(v==='B'){
+    h+=Pl('cu cuB','navy',[0,1,2].map(cell).join(''),{sw:7,st:`position:absolute;left:${W-500}px;top:12px;width:420px`});
+    h+=Orb('mo','<i class="mn3"><i></i><i></i><i></i></i>메뉴',{st:`position:absolute;left:${W-70}px;top:8px`});
+  }else{
+    [0,1,2].forEach(i=>{h+=Pl('ctg'+(fly&&i==0?' flyhit':''),'cream',`${Orb(fly&&i==0?'rdy':'',img(ico[i],nm[i]))}<span class="num">${n[i]}</span>${i==2?Orb('pl','+'):''}`,{r:7,st:`position:absolute;left:${W-560+i*156}px;top:16px`})});
+    h+=Orb('mo','<i class="mn3"><i></i><i></i><i></i></i>메뉴',{st:`position:absolute;left:${W-70}px;top:8px`});
+  }
+  if(fly){
+    const tx=v==='C'?W-528:W-450;
+    for(let k=0;k<3;k++)h+=`<i class="fdot" style="left:${tx}px;top:30px;--fx:${-160-k*60}px;--fy:${180+k*40}px;animation-delay:${k*.18}s"></i>`;
+    h+=`<b class="gtag" style="left:${tx-10}px;top:58px">+1.2b</b>`;
+  }
+  if(st==='help'){
+    h+=Pl('hb','navy','<b>바람 조각</b>이번 항해에서 쓰는 돈이에요. 적을 정화하면 모이고, 아이 강화·고래 강화에 써요. 학교로 복귀하면 사라져요.',{r:10,st:`position:absolute;left:${W-560}px;top:68px;--tx:${v==='C'?230:150}px`});
+  }
+  return h;
+}
+
+// ---------- 2 왼쪽 버튼 ----------
+function side(v,st){
+  const q=st==='quiet',it=[['side_palette.png','색 지도',!q],['side_story.png','이야기',!q]];
+  let h='';
+  if(v==='A'){
+    it.forEach((b,i)=>{const y=236+i*84;
+      h+=Orb('sdA'+(i==1&&!q?' rdy':''),img('ui/kit/'+b[0],b[1]),{st:`position:absolute;left:18px;top:${y}px`,after:b[2]&&i==0?'<i class="rd2"></i>':''});
+      h+=Pl('snm','cream',b[1],{r:6,st:`position:absolute;left:12px;top:${y+52}px`});});
+    if(st==='gain')h+=`<b class="gtag" style="left:82px;top:246px">빛물감 +5</b>`;
+  }else if(v==='B'){
+    it.forEach((b,i)=>{const y=236+i*58;
+      h+=Pl('tbB'+(i==1&&!q?' sp':''),'cream',`${img('ui/kit/'+b[0],b[1])}${b[1]}${b[2]&&i==0?'<i class="rd2" style="right:6px;top:-4px"></i>':''}`,{sl:1,sw:i==1&&!q?3:null,st:`position:absolute;left:-4px;top:${y}px;width:118px`});});
+    if(st==='gain')h+=`<b class="gtag" style="left:120px;top:240px">빛물감 +5</b>`;
+  }else{
+    it.forEach((b,i)=>{
+      h+=Pl('chC'+(i==1&&!q?' spk':''),'cream',`${img('ui/kit/'+b[0],b[1])}${b[1]}${b[2]&&i==0?'<i class="rd2" style="right:4px;top:-5px"></i>':''}`,{r:8,sw:i==1&&!q?3:null,st:`position:absolute;left:${20+i*124}px;top:214px;width:116px`});});
+    if(st==='gain')h+=`<b class="gtag" style="left:40px;top:258px">빛물감 +5</b>`;
+  }
+  return h;
+}
+
+// ---------- 3 콤보 ----------
+function combo(W,v,n,st,top){
+  const g=Math.min(100,n/80*100),left=80-n,hot=st==='hot',cold=st==='cold';
+  const ticks=[30,62].map(t=>`<u style="left:${t}%"></u>`).join('');
+  if(v==='A')return `<div class="cbA${hot?' hot':''}${cold?' cold':''}" style="position:absolute;left:${W-226}px;top:${top}px"><b class="n ol">${n}</b><b class="k ol">COMBO</b><i class="gau" style="--g:${g}%"><i></i>${ticks}</i><b class="gl ol">폭주까지 ${left}</b></div>`;
+  if(v==='B'){const on=Math.round(g/10);return Pl('cbB'+(hot?' hot':'')+(cold?' cold':''),'navy',`<div class="r1"><b class="k">COMBO</b><b class="n">${n}</b></div><div class="seg">${Array.from({length:10},(_,i)=>`<i${i<on?' class="on"':''}></i>`).join('')}</div>`,{r:9,sw:hot?2.5:7,st:`position:absolute;left:${W-238}px;top:${top}px`})}
+  const big=g>=62;
+  return Pl('cbC'+(big?' big':'')+(cold?' cold':''),big?'gold':'cream',`<i class="fil" style="--g:${g}%"></i>×${n}<small>${big?'폭주 직전!':'콤보'}</small>`,{r:8,sw:big?2.2:null,stars:big,st:`position:absolute;left:${W-(big?232:200)}px;top:${top}px`});
+}
+
+// ---------- 5 적 체력 막대 ----------
+function hp(W,v,st){
+  const F=FOES[W];let h='';
+  if(v==='C'){
+    const n=F.length,left=F.filter(f=>f[4]>0).length;
+    h+=Pl('wv','cream',`이번 무리<span class="cells">${F.map(f=>`<i class="${f[3]?'g':''}"></i>`).join('')}${Array.from({length:Math.max(0,15-n)},()=>'<i class="x"></i>').join('')}</span><b>${n} / 15</b>`,{sw:7,st:`position:absolute;left:${W-620}px;top:74px`});
+  }
+  F.forEach((f,i)=>{
+    const [x,y,el,eli,p]=f,E=HEL[el];
+    if(v==='A'){h+=`<div class="hpA ${E}${eli?' el':''}" style="left:${x}px;top:${y-14}px;--h:${p*100}%;--l:${Math.min(100,p*100+14)}%"><i class="tr"><i class="lag"></i><i class="fl2"></i></i><i class="wd"></i></div>`;
+      if(eli)h+=Pl('etag','gold','✦ 황금 ×3',{r:6,st:`position:absolute;left:${x}px;top:${y-38}px`});}
+    else if(v==='B'){if(p<1)h+=`<div class="hpB ${E}" style="left:${x}px;top:${y-10}px;--h:${p*100}%;--d:${(i%4)*.4}s"><i></i><i class="wd"></i></div>`;
+      if(eli)h+=Orb('crown','♛',{st:`left:${x}px;top:${y-34}px`});}
+    else if(eli){h+=`<div class="hpA ${E} el" style="left:${x}px;top:${y-14}px;--h:${p*100}%;--l:${p*100}%"><i class="tr"><i class="lag"></i><i class="fl2"></i></i></div>`;}
+  });
+  if(st==='elite'){const e=F.find(f=>f[3]);h+=Pl('hb','navy','<b>황금 잿빛</b>체력 ×3 · 바람 조각 ×6 — 금빛으로 물든 잿빛이에요.',{r:10,st:`position:absolute;left:${e[0]-120}px;top:${e[1]+64}px;width:250px;--tx:180px`});}
+  return h;
+}
+
+// =====================================================================
+//  알림 — 무엇을(NT) · 얼마나 세게(p 1 낮음 · 2 보통 · 3 높음) · 어디서(안마다) · 얼마나 오래 · 눌러서 어디로(go)
+//  문구는 지금 게임 문구(hud.gd story_notice · school_notice, main.gd RETRY · 도시락, sky_events.gd) 그대로, 일부 숫자는 예시
+// =====================================================================
+const NT={
+  story:{p:2,ic:'ui/kit/side_story.png',t:'주희의 이야기가 열렸어요',s:'「이야기」를 누르면 볼 수 있어요',go:'보러 가기'},
+  school:{p:2,ic:'ui/kit/nav_school.png',t:'과학실 연구가 끝났어요',s:'분교가 조금 더 든든해졌어요',go:'분교로'},
+  unlock:{p:2,ic:'ui/kit/side_wind.png',t:'순풍이 열렸어요',s:'바람이 다 차면 59초 동안 빨라져요',go:'써 보기'},
+  shower:{p:2,ev:1,ic:'ui/kit/side_palette.png',t:'색 소나기!',s:'떨어지는 큰 물방울을 눌러 빛물감을 모아요',tm:'15초'},
+  lunch:{p:1,ic:'ui/kit/side_whale.png',t:'도시락!',s:'보호막을 되살렸어요 (남은 1개)',ax:250,ay:430},
+  paint:{p:1,ic:'ui/kit/side_palette.png',t:'빛물감 +5',s:'색이 돌아와요',ax:30,ay:262},
+  quest:{p:1,ic:'ui/kit/side_quest.png',t:'퀘스트 완료!',s:'보상을 받아요',ax:392,ay:144},
+  retry:{p:3,ic:'!',t:'보호막이 깨졌어요',s:'고래 강화로 보호막을 키우면 더 오래 버틸 수 있어요',go:'고래 강화',re:'1.8초 뒤 다시 시작'}
+};
+const HEL={white:'E-white',purple:'E-purple',red:'E-red',orange:'E-orange',green:'E-green',blue:'E-blue'};
+const PC={1:'#b9b2d6',2:'#8b74e8',3:'#e0445c',ev:'#ffbf2e'};
+const nico=(n,c='')=>n.ic==='!'?Orb('nic em'+c,'!'):Orb('nic'+(n.ev?' ev':'')+c,img(n.ic,n.t));
+const ntx=n=>`<div class="ntx"><b class="t">${n.t}</b><span class="s">${n.s}</span></div>`;
+const ngo=(n,sm)=>n.go?Pl('go2'+(n.p===3?' g':''),n.p===3?'gold':'lav',n.go+' ▶',{r:7,sw:n.p===3?2.4:null}):n.tm?Pl('tp','gold','남은 '+n.tm,{r:6}):'';
+const tmr=n=>n.p===1?'':`<i class="tmr" style="--t:${n.p===3?1.8:n.ev?15:4}s"><i></i></i>`;
+// 유나 감정 그림(assets/chars/emote, 1536×1024 투명): 몸이 있는 칸 [x0,y0,x1,y1]
+const EMO={joy:[420,80,1030,950],surprise:[438,88,1000,950]};
+function emo(nm,h,x,y){const b=EMO[nm],k=h/(b[3]-b[1]),w=(b[2]-b[0])*k;
+  return `<i class="yn" role="img" aria-label="유나" style="left:${x}px;top:${y}px;width:${w.toFixed(1)}px;height:${h}px;background-image:url(${AS}chars/emote/yuna_${nm}.png);background-size:${(1536*k).toFixed(1)}px ${(1024*k).toFixed(1)}px;background-position:${(-b[0]*k).toFixed(1)}px ${(-b[1]*k).toFixed(1)}px"></i>`}
+const yface=(s=40)=>`<i class="pf" data-id="yuna" data-bw="${s}" data-bh="${s}" style="background-image:url(${AS}chars/yuna_idle.png)"></i>`;
+// 지금 게임의 완료 알림(YunaToast): 누른 자리 가까이 얼굴 원 + 흰 말풍선, 버튼 없음
+const yToast=(x,y,t,s)=>`<i class="tapx" style="left:${x+40}px;top:${y+104}px"></i><div class="yt" style="left:${x}px;top:${y}px"><i class="fd">${yface(74)}</i><div class="bb"><b>${t}</b><span>${s}</span></div></div>`;
+
+// A · 위 가운데 알림 판 — 위 판들 바로 아래 한 자리, 한 번에 하나
+function nA(W,keys,boss){
+  const y=boss?188:74;let h='';
+  const n=NT[keys[0]];
+  if(n.p===1)return `<div class="cw" style="left:${W/2}px;top:${y+8}px">${Pl('nA p1','navy',`${nico(n)}<span><b>${n.t}</b> ${n.s}</span>`,{r:9,st:'position:relative'})}</div>`;
+  const w=n.p===3?580:480,L=(W-w)/2;
+  if(keys.length>1){
+    h+=Pl('pk','cream','',{r:9,st:`left:${L+22}px;top:${y+16}px;width:${w-44}px;height:${n.p===3?88:74}px;opacity:.75`});
+    h+=Pl('pk','cream','',{r:9,st:`left:${L+11}px;top:${y+8}px;width:${w-22}px;height:${n.p===3?88:74}px;opacity:.9`});
+    h+=Pl('cnt2','gold',`다음 ${keys.length-1}개`,{r:6,st:`position:absolute;left:${L+w-96}px;top:${y+(n.p===3?92:78)}px`});
+  }
+  h+=Pl('nA p'+n.p,n.p===3?'navy':'cream',`${nico(n)}${ntx(n)}${ngo(n)}${tmr(n)}${n.re?`<b class="re2">${n.re}</b>`:''}`,{sw:n.p===3?null:6,stars:n.ev,st:`left:${L}px;top:${y}px;z-index:31`});
+  if(n.p===3)h=`<i class="vigE"></i>`+h;
+  return h;
+}
+// B · 오른쪽 카드 더미 — 새 카드가 위, 앞의 것은 작아져 아래로, 놓친 것은 화면 끝 「알림」 탭
+function nB(W,keys,o,boss){
+  // 콤보 A 아래에서 시작 (보스 때는 콤보가 보스 판 아래로 내려가므로 더 아래)
+  let h='',y=boss?300:206;
+  keys.forEach((k,i)=>{const n=NT[k],old=i>0;
+    const hh=n.p===1?44:n.p===2?70:92,w=n.p===3?370:330;
+    h+=Pl(`nB p${n.p}${old?' old':''}`,n.p===3?'navy':'cream',`<i class="stp" style="--pc:${n.ev?PC.ev:PC[n.p]}"></i>${nico(n)}${ntx(n)}${n.p>1&&!old?ngo(n):''}${old?'':tmr(n)}${n.re&&!old?`<b class="re2">${n.re}</b>`:''}`,{sl:1,st:`left:${W-w-12}px;top:${y}px;width:${w}px`});
+    y+=hh*(old?.93:1)+8;
+  });
+  if(o.tray)h+=Pl('tray','navy',`<i class="c">${o.tray}</i><span>알림</span>`,{r:8,sl:1,st:`left:${W-52}px;top:${y+4}px`});
+  if(keys.some(k=>NT[k].p===3))h=`<i class="vigE" style="box-shadow:inset -120px 0 90px -40px rgba(224,68,92,.55)"></i>`+h;
+  return h;
+}
+// C · 유나가 편지로 전해 줌 — 뱃머리 앞에 유나가 톡 올라와 편지 판을 내민다. 낮음은 그 자리에 얼굴만 빼꼼
+function nC(W,keys){
+  const n=NT[keys[0]];let h='';
+  if(n.p===1)return `<div class="pkC" style="left:${n.ax}px;top:${n.ay}px">${Orb('yf',yface(40))}${Pl('','gold',`${n.t} <span style="font-weight:700;margin-left:4px">${n.s}</span>`,{r:6})}</div>`;
+  const X=540,Y=n.p===3?268:286,w=n.p===3?500:430;
+  h+=emo(n.p===3?'surprise':'joy',n.p===3?178:162,X-118,Y-34);
+  if(keys.length>1){
+    h+=Pl('lt3','cream','',{r:10,st:`left:${X+16}px;top:${Y+14}px;width:${w}px;height:84px;transform:rotate(3deg);opacity:.85`});
+    h+=Pl('lt3','cream','',{r:10,st:`left:${X+8}px;top:${Y+7}px;width:${w}px;height:84px;transform:rotate(1.5deg);opacity:.92`});
+    h+=Pl('cnt2','gold',`편지 ${keys.length}통 · 다음 ▶`,{r:6,st:`position:absolute;left:${X+w-150}px;top:${Y+(n.p===3?100:88)}px`});
+  }
+  h+=Pl('nC p'+n.p,n.p===3?'navy':'cream',`${Orb('seal'+(n.p===3?' em':''),n.ic==='!'?'!':img(n.ic,n.t),{cst:n.p===3?'display:grid;place-items:center;color:#c23b4f;font-size:26px;font-weight:900;background:radial-gradient(circle at 38% 30%,#fff 0 14%,#ffe3e8 50%,#ffa3b5)':'display:grid;place-items:center'})}${ntx(n)}${ngo(n)}${tmr(n)}${n.re?`<b class="re2">${n.re}</b>`:''}`,{sw:n.p===3?null:6,stars:n.ev,st:`left:${X}px;top:${Y}px`});
+  if(n.p===3)h=`<i class="vigE"></i>`+h;
+  return h;
+}
+
+// =====================================================================
+//  대결 — 줄다리기. 힘 = 양쪽 남은 힘(보호막 + 남은 아이)의 비율, 20초(duel_scene.gd dur)
+//  vst: start(50) · push(62, 우리가 밀어붙임) · slip(34, 밀림) · clutch(52, 역전) · win · lose · rank(등급전)
+// =====================================================================
+const DS={start:{k:50,t:20,m:0},push:{k:62,t:12,m:1},slip:{k:34,t:9,m:-1},clutch:{k:52,t:4,m:1,c:1},win:{k:100,t:0,m:1,end:'w'},lose:{k:0,t:0,m:-1,end:'l'},rank:{k:58,t:14,m:1}};
+const DTX=v=>v==='rank'?{kk:'VS · 항해사 등급전',tt:'폭풍섬 하랑',pw:'21,328'}:{kk:'VS · 기억의 회랑',tt:'1단계 · 잿빛 교실',pw:'4,686'};
+function dEnd(W,d,o){
+  if(!d.end)return '';
+  const tt=DTX(o.vst).tt;
+  return d.end==='w'?Pl('rsl w','gold',`<b>승리!</b><span>${tt}</span>`,{sw:3,stars:1,st:`left:${(W-460)/2}px;top:236px;width:460px`})
+    :Pl('rsl l','dusk',`<b>패배</b><span>아이들을 더 키워 다시 도전해요</span>`,{sw:5,st:`left:${(W-460)/2}px;top:236px;width:460px`});
+}
+const whaleOrb=op=>Orb('',img('ui/kit/side_whale.png',op?'잿빛 고래':'우리 고래'));
+// A · 물감 밧줄: 위 가운데 남색 판 안 밧줄. 매듭(남은 초) 자리가 힘의 비율
+function duelA(W,v){
+  const d=DS[v]||DS.push,x=DTX(v),L=352,R=W-212,w=R-L,tw=w-192;let h='';
+  const kx=96+tw*d.k/100,cls=(d.m>0?'push':d.m<0?'slip':'')+(d.c?' strain':'');
+  h+=Pl('rpw','navy',`<span class="nm" style="left:100px">우리 고래</span><span class="nm" style="right:110px">${x.kk} · ${x.tt}</span>
+    <div class="end" style="left:8px">${whaleOrb(0)}<b>${d.k}%</b></div><div class="end op" style="right:8px">${whaleOrb(1)}<b>${100-d.k}%</b></div>
+    <div class="rope ${cls}" style="--k:${d.k}%"><i class="me"></i><i class="zn l"></i><i class="zn r"></i><i class="mid"></i></div>
+    ${d.end?'':Orb('knot'+(d.t<=5?' rdy':''),`${d.t}`,{st:`left:${kx}px`})}
+    ${d.m&&!d.end?`<b class="chv ${d.m>0?'r':'l'}" style="left:${d.m>0?kx+30:kx-58}px">${d.m>0?'›››':'‹‹‹'}</b>`:''}
+    ${d.end==='w'?[0,1,2,3,4].map(i=>`<i class="fr" style="left:${w-120}px;top:44px;--fx:${20+i*8}px;--fy:${-20+i*10}px;animation-delay:${i*.15}s"></i>`).join(''):''}`,{sw:7,st:`left:${L}px;top:68px;width:${w}px`});
+  if(d.c)h+=Pl('ctag','gold','역전!',{r:6,st:`left:${L+kx-26}px;top:44px`});
+  if(v==='slip')h+=Pl('ctag dg','ember','밀리고 있어요 · 스킬을 아껴 두세요',{r:6,st:`left:${L+kx-120}px;top:160px`});
+  h+=Pl('dsk','cream','건너뛰기 ▶▶',{r:7,st:`left:${W-196}px;top:92px`});
+  return h+dEnd(W,d,{vst:v});
+}
+// B · 색 영토: 두 고래 사이 하늘이 경계선. 우리 색은 그대로, 잿빛 쪽은 회색으로 바래고, 경계는 물감 붓질
+function duelB(W,v){
+  const d=DS[v]||DS.push,x=DTX(v);let h='';
+  const bx=d.end==='w'?W+40:d.end==='l'?-40:Math.round(W*(.1+.8*d.k/100));
+  const pts=[];for(let i=0;i<=12;i++){const y=i*60;pts.push([bx+((i%2?1:-1)*(10+(i*7)%14)),y])}
+  const poly=`polygon(${pts.map(p=>p[0]+'px '+p[1]+'px').join(',')},${W+60}px 720px,${W+60}px 0)`;
+  const path='M'+pts.map(p=>p.join(' ')).join(' L');
+  const mv=d.m>0?'14px':d.m<0?'-14px':'0px';
+  // 바랜 쪽 = 같은 바탕 그림의 흑백 사본을 경계 모양으로 잘라 덮음 (backdrop-filter는 뒤에 오는 HUD까지 바래게 그려져서 쓰지 않음)
+  h+=`<img class="bg ash" src="orig/b2_duel_world_${W}x720.jpg" alt="" style="clip-path:${poly}">`;
+  if(!d.end){
+    const col=d.c?'#ffd66b':d.m<0?'#ff8da3':'url(#eg)';
+    h+=`<svg class="edg${d.m?' mv':''}" style="--mv:${mv}" width="${W}" height="720" viewBox="0 0 ${W} 720" aria-hidden="true"><defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd6ff"/><stop offset=".5" stop-color="#b9a4ff"/><stop offset="1" stop-color="#ffd66b"/></linearGradient></defs><path d="${path}" fill="none" stroke="#fff" stroke-width="16" stroke-linejoin="round" opacity=".6"/><path d="${path}" fill="none" stroke="${col}" stroke-width="9" stroke-linejoin="round"/></svg>`;
+    if(d.m)for(let i=0;i<6;i++)h+=`<i class="drp" style="left:${bx}px;top:${180+i*70}px;background:${d.m>0?['#8fd6ff','#b9a4ff','#ffd66b'][i%3]:'#a39fb6'};--dx:${d.m*(30+i*6)}px;--dy:${(i%2?-1:1)*14}px;animation-delay:${i*.18}s"></i>`;
+    h+=Orb('tmo'+(d.t<=5?' hot rdy':''),`${d.t}`,{st:`left:${bx-25}px;top:78px`});
+    if(d.c)h+=Pl('ctag','gold','역전!',{r:6,st:`left:${bx-30}px;top:138px`});
+    if(v==='slip')h+=Pl('ctag dg','ember','잿빛이 다가와요',{r:6,st:`left:${bx-60}px;top:138px`});
+  }
+  // 바닥 층(바랜 하늘 · 경계)만 — 판 · 결과는 scene()이 HUD 위에 얹는다
+  return h;
+}
+// C · 깃발 칸 뺏기: 10칸 + 양 끝 결정 칸. 2초마다 앞선 쪽이 한 칸씩 뒤집는다 — 6 : 4가 한눈에
+function duelC(W,v){
+  const d=DS[v]||DS.push,x=DTX(v),n=d.end==='w'?10:d.end==='l'?0:Math.round(d.k/10);let h='';
+  const front=d.m>0?n-1:n;
+  let cells=`<div class="P fin${n>=10?' wv':''}"><i class="pt" data-plate="gold" data-r="8"></i>${img('ui/kit/crest.png','우리 결정 칸')}</div>`;
+  for(let i=0;i<10;i++){
+    const me=i<n,fl=!d.end&&i===front&&d.m;
+    const ch=!d.end&&((d.c&&i===front)||(v==='push'&&i===n));
+    const dg=!d.end&&v==='slip'&&i===n;
+    cells+=`${i===5?'<i class="sep"></i>':''}<div class="P${me?'':' th'}${fl?' fl':''}${ch?' ch':''}${dg?' dg':''}${d.end==='w'?' wv':''}" style="${d.end==='w'?`animation-delay:${i*.08}s`:''}"><i class="pt" data-plate="${me?'sky':'gray'}" data-r="6"${me?' data-stars':''}></i>${me?'✦':'·'}</div>`;
+  }
+  cells+=`<div class="P th fin"><i class="pt" data-plate="gray" data-r="8"></i>${img('ui/kit/crest.png','상대 결정 칸')}</div>`;
+  // 왼쪽 위 통합 판(~x340) · 점수 구슬과 겹치지 않게
+  const cw=10*40+9*4+7+2*(52+4),L=Math.max(426,(W-cw)/2);
+  h+=`<div class="cel" style="position:absolute;left:${L}px;top:80px">${cells}</div>`;
+  h+=Orb('sco',`${n}`,{st:`left:${L-74}px;top:72px`});
+  h+=Orb('sco op',`${10-n}`,{st:`left:${L+cw+16}px;top:72px`});
+  h+=Pl('snm','navy','우리 고래',{r:6,st:`left:${L-80}px;top:136px`});
+  h+=Pl('snm','navy',x.tt,{r:6,st:`left:${L+cw+4}px;top:136px`});
+  if(!d.end)h+=Orb('tmo'+(d.t<=5?' hot rdy':''),`${d.t}`,{st:`left:${W/2-25}px;top:136px`});
+  if(d.m>0&&!d.end&&!d.c)h+=Pl('ctag','gold','3칸 연속!',{r:6,st:`left:${L+56+front*44}px;top:48px`});
+  if(d.c)h+=Pl('ctag','gold','역전! 가운데를 넘었어요',{r:6,st:`left:${L+56+front*44-60}px;top:48px`});
+  if(v==='slip')h+=Pl('ctag dg','ember','결정 칸까지 3칸',{r:6,st:`left:${L+30}px;top:48px`});
+  h+=Pl('dsk','cream','건너뛰기 ▶▶',{r:7,st:`left:${W-196}px;top:150px`});
+  h+=Pl('snm','lav',x.kk,{r:6,st:`left:${W/2-70}px;top:52px;${d.m>0||d.c||v==='slip'?'display:none':''}`});
+  return h+dEnd(W,d,{vst:v});
+}
+
+// ---------- 장면 조립 (PD 확정: 재화 C · 왼쪽 C · 콤보 A · 피해 숫자 지금 그대로 · 적 막대 얇은 선(B) · 모험 C) ----------
+function parse(s){const o={};(s||'').split(';').filter(Boolean).forEach(p=>{const [k,v]=p.split('=');o[k]=v});return o}
+function scene(key,set,W){
+  const s=SC[key],o=parse(set);
+  const world=`orig/${s.bg}_world_${W}x720.jpg`,hud=`orig/${s.bg}_hud_${W}x720.jpg`;
+  let h=`<div class="scr" style="width:${W}px;--hud:url(${hud});--sw:${W}px"><img class="bg" src="${world}" alt="${key} ${W}">`;
+  if(s.duel&&o.duel==='B')h+=duelB(W,o.vst||'push');
+  s.keep.forEach(k=>{h+=keep(k,W)});
+  const b1=s.duel?{quest:'hide',nav:false,wind:'hide',ret:'hide'}:{};
+  h+=B1(s,W,b1);
+  if(s.duel)h+=`<div style="position:absolute;left:470px;top:630px;width:236px;height:80px;z-index:5"><div style="position:absolute;inset:0;filter:grayscale(1);opacity:.9">${Pl('','gray','<span style="color:#6f6890;font-size:17px;font-weight:900">고래 숨결</span>',{st:'left:52px;top:18px;width:170px;height:44px;display:flex;align-items:center;justify-content:center;padding-left:18px'})}${Orb('',img('ui/kit/side_whale.png','고래 숨결'),{st:'--s:76px;left:0;top:2px',cst:'display:grid;place-items:center'})}</div><i class="lkb" style="left:54px;top:-2px"></i>${Pl('rsn','navy','대결 중 쉼',{r:6,st:'left:110px;top:-12px'})}</div>`;
+  h+=cur(W,'C');
+  if(!s.duel)h+=side('C');
+  if(!s.duel)h+=combo(W,'A',+(o.cn||s.cn[W]),o.cst,s.boss?194:96);
+  if(key==='normal')h+=hp(W,'B');
+  if(o.yt)h+=yToast(96,520,'추천 편성 · 불꽃 덱','지금 아이들로 가장 센 조합이에요');
+  if(o.nt){const ks=o.nt.split(',');h+=o.n==='A'?nA(W,ks,s.boss):o.n==='B'?nB(W,ks,o,s.boss):nC(W,ks);}
+  if(s.duel)h+=o.duel==='A'?duelA(W,o.vst||'push'):o.duel==='C'?duelC(W,o.vst||'push'):'';
+  if(s.duel&&o.duel==='B'){const v=o.vst||'push',d=DS[v];const x=DTX(v);
+    h+=Pl('tr2 me','cream',`${whaleOrb(0)}우리 색 <b>${d.k}%</b>`,{st:`left:352px;top:76px`});
+    h+=Pl('tr2 op','gray',`${whaleOrb(1)}${x.tt} <b>${100-d.k}%</b>`,{st:`left:${W-440}px;top:76px`});
+    h+=Pl('dsk','cream','건너뛰기 ▶▶',{r:7,st:`left:${W-196}px;top:130px`})+dEnd(W,d,{vst:v});}
+  if(o.cbnote){const t=s.boss?194:96;h+=`<i class="gbox" style="left:${W-236}px;top:${t-10}px;width:172px;height:96px"></i><b class="note" style="left:${W-420}px;top:${t+30}px">콤보 A는 여기 →</b>`;}
+  return h+'</div>';
+}
+
+let W=1280;
+function build(){
+  document.querySelectorAll('.vp[data-scene]').forEach(v=>{v.innerHTML=scene(v.dataset.scene,v.dataset.set,W)});
+  document.querySelectorAll('.tv[data-scene]').forEach(v=>{
+    if(v.dataset.done)return;
+    const [x,y,w,h]=v.dataset.crop.split(',').map(Number);
+    v.dataset.tw=w;v.dataset.th=h;
+    v.innerHTML=`<div class="tw" style="width:${w}px;height:${h}px"><div style="position:absolute;left:${-x}px;top:${-y}px;width:1280px;height:720px">${scene(v.dataset.scene,v.dataset.set,1280)}</div></div>`;
+    v.dataset.done=1;
+  });
+  pf(document);
+  document.querySelectorAll('.pt[data-plate]').forEach(el=>{if(!el.firstChild)drawPlate(el)});
+}
+const fit=()=>{
+  document.querySelectorAll('.vp').forEach(v=>{const s=v.querySelector('.scr');if(!s)return;const k=v.clientWidth/s.offsetWidth;s.style.transform=`scale(${k})`;v.style.height=720*k+'px'});
+  document.querySelectorAll('.tv').forEach(v=>{const w=+v.dataset.tw,h=+v.dataset.th,k=Math.min(1,v.clientWidth/w);v.firstElementChild.style.transform=`scale(${k})`;v.style.height=h*k+'px';v.style.maxWidth=w+'px'});
+};
+build();
+let lastW=0;new ResizeObserver(()=>{const w=document.body.clientWidth;if(w!==lastW){lastW=w;requestAnimationFrame(fit)}}).observe(document.body);
+document.querySelectorAll('.bar [data-res]').forEach(b=>b.addEventListener('click',()=>{W=+b.dataset.res;document.documentElement.dataset.w=b.dataset.res;document.querySelectorAll('.bar [data-res]').forEach(x=>x.setAttribute('aria-pressed',x===b));build();fit()}));
+document.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>document.querySelectorAll(`.opt[data-choice-group="${o.dataset.choiceGroup}"]`).forEach(x=>x.classList.toggle('sel',x===o))));
+fit();
+</script>
+</body>
+</html>
