@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>타이틀 로고 반영 — 붓과 리본 + B1 (전/후)</title>
+<style>
+:root{--ink:#3b2c7a;--soft:#6d6496;--line:#e3dcf5;--k:.5}
+@media (min-width:1560px){:root{--k:.6}}
+@media (max-width:760px){:root{--k:.26}body{padding:16px 10px 40px}.icons,.row{flex-direction:column}.adapt{width:120px;height:120px}.adapt img{left:-30px;top:-30px;width:180px;height:180px}}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(#f6f0ff,#fffaf2);color:var(--ink);font:15px/1.6 "Pretendard","Malgun Gothic",sans-serif;padding:28px 32px 60px}
+h1{margin:0 0 4px;font-size:26px}h2{font-size:20px;margin:34px 0 8px;padding-top:12px;border-top:2px solid var(--line)}
+p{margin:2px 0}.dim{color:var(--soft);font-size:13.5px}
+.row{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start;margin:8px 0}
+figure{margin:0}figcaption{font-size:12.5px;color:var(--soft)}
+figcaption b{color:var(--ink)}
+img.cap{display:block;border-radius:8px;width:calc(1280px * var(--k))}img.cap.w1600{width:calc(1600px * var(--k))}
+.tag{display:inline-block;border-radius:6px;padding:0 8px;margin-right:4px;font-size:12px;color:#fff;background:#6d6496}
+code{word-break:break-all}img.cap{max-width:100%}figure{max-width:100%}.live,.tile,.lock{max-width:100%}.adapt{flex:none}table{display:block;overflow-x:auto}.tag.a{background:var(--ink)}
+.icons{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-end}
+.tile{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.tile.dark{background:#1f1a33;color:#fff}
+.i192{width:192px;height:192px;border-radius:40px;display:block}
+.i48{width:48px;height:48px;border-radius:11px;display:block}
+.z48{width:144px;height:144px;border-radius:30px;image-rendering:pixelated;display:block}
+.adapt{position:relative;width:160px;height:160px;overflow:hidden}
+.adapt img{position:absolute;left:-40px;top:-40px;width:240px;height:240px}
+.adapt.circle{border-radius:50%}.adapt.squircle{border-radius:38px}
+.home{display:flex;gap:16px;padding:14px 18px;border-radius:14px;background:linear-gradient(160deg,#2b2450,#4b3d86)}
+.home div{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:#fff}
+.home .ad{position:relative;width:52px;height:52px;border-radius:50%;overflow:hidden}.home .ad img{position:absolute;left:-13px;top:-13px;width:78px;height:78px}
+/* 움직임 미리보기: 게임 셰이더 · 트윈과 같은 동작을 CSS로 */
+.live{position:relative;width:300px;height:300px;border-radius:12px;background:linear-gradient(170deg,#6f5bd0,#a28cff 60%,#ffe3ee)}
+.live img{position:absolute;left:18px;top:18px;width:264px;height:264px}
+@property --a{syntax:'<angle>';inherits:false;initial-value:0deg}
+@property --b{syntax:'<angle>';inherits:false;initial-value:0deg}
+.live .rain{-webkit-mask-image:conic-gradient(from 270deg at 49.2% 62.1%,transparent var(--b),#000 calc(var(--b) + 8deg),#000 var(--a),transparent calc(var(--a) + 8deg));mask-image:conic-gradient(from 270deg at 49.2% 62.1%,transparent var(--b),#000 calc(var(--b) + 8deg),#000 var(--a),transparent calc(var(--a) + 8deg));animation:draw 6s ease-in-out infinite}
+@keyframes draw{0%{--a:-8deg;--b:-8deg}38%{--a:190deg;--b:-8deg}80%{--a:190deg;--b:-8deg}100%{--a:190deg;--b:190deg}}
+.live .brush{transform-origin:93.9% 13.6%;animation:nod 3s ease-in-out infinite}
+@keyframes nod{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+@media (prefers-reduced-motion:reduce){.live .rain,.live .brush{animation:none}}
+.lock{background:linear-gradient(170deg,#6f5bd0,#a28cff 60%,#ffe3ee);border-radius:12px;padding:10px 16px;width:min(100%,820px)}.lock img{width:100%;display:block}
+table{border-collapse:collapse;font-size:13px}td,th{border:1px solid var(--line);padding:4px 8px;text-align:left;vertical-align:top}
+code{font-size:12.5px;background:#f1ecfd;border-radius:4px;padding:0 4px}
+</style></head><body>
+<h1>타이틀 로고 반영 — 마크 「붓과 리본」 + B1 물감 붓글씨</h1>
+<p>PD 확정 C4 마크를 다듬어(칠한 붓 · 한 획으로 그은 무지개 · 진주빛 물림쇠 · 접힌 리본 · 종이 결 · 수채 번짐) 게임에 넣었다. 왼쪽이 <b>전</b>(지금까지의 게임), 오른쪽이 <b>후</b>. 모두 실제 게임을 같은 상태로 찍은 그림 (<code>tools/title_apply_capture.gd</code>: 2.5초 뒤 움직임을 멈추고 로고 높이 고정, 무지개는 다 그려진 순간).</p>
+<p class="dim">앱 이름 글자(레인보우 아틀리에 · 하늘을 물들이는 소녀들)는 그대로. 벡터 원본은 <code>svg/</code>, 게임용 2배 PNG는 <code>assets/brand/logo/</code> (SVG 필터는 미리 구움). 생성기: <code>design/mockups/feedback70/title_apply/build.cjs</code>.</p>
+
+<h2>1. 타이틀 화면 (준비 완료)</h2>
+<div class="row"><figure><img class="cap" src="before/title_1280.png" alt=""><figcaption><span class="tag">전</span>1280×720</figcaption></figure>
+<figure><img class="cap" src="after/title_1280.png" alt=""><figcaption><span class="tag a">후</span>1280×720</figcaption></figure></div>
+<div class="row"><figure><img class="cap w1600" src="before/title_1600.png" alt=""><figcaption><span class="tag">전</span>1600×720</figcaption></figure>
+<figure><img class="cap w1600" src="after/title_1600.png" alt=""><figcaption><span class="tag a">후</span>1600×720</figcaption></figure></div>
+
+<h2>2. 로딩 화면 (게이지 진행 중) — 오른쪽 아래 구석 마크</h2>
+<div class="row"><figure><img class="cap" src="before/loading_1280.png" alt=""><figcaption><span class="tag">전</span>1280×720</figcaption></figure>
+<figure><img class="cap" src="after/loading_1280.png" alt=""><figcaption><span class="tag a">후</span>1280×720 · 구석 마크 72px (작은 판), 천천히 숨 쉬듯 커졌다 작아지고 게이지와 함께 사라진다</figcaption></figure></div>
+<div class="row"><figure><img class="cap w1600" src="before/loading_1600.png" alt=""><figcaption><span class="tag">전</span>1600×720</figcaption></figure>
+<figure><img class="cap w1600" src="after/loading_1600.png" alt=""><figcaption><span class="tag a">후</span>1600×720</figcaption></figure></div>
+
+<h2>3. 앱 아이콘</h2>
+<div class="icons">
+<div class="tile"><img class="i192" src="before/icon_192.png" alt=""><figcaption><span class="tag">전</span>192px</figcaption></div>
+<div class="tile"><img class="i192" src="after/icon_192.png" alt=""><figcaption><span class="tag a">후</span>192px (본판)</figcaption></div>
+<div class="tile"><div class="row"><img class="i48" src="before/icon_48.png" alt=""><img class="i48" src="after/icon_48.png" alt=""></div><figcaption>48px 실제 크기 — <span class="tag">전</span> · <span class="tag a">후</span> (작은 판)</figcaption></div>
+<div class="tile"><div class="row"><img class="z48" src="before/icon_48.png" alt=""><img class="z48" src="after/icon_48.png" alt=""></div><figcaption>48px를 3배로 (픽셀 그대로)</figcaption></div>
+</div>
+<p style="margin-top:12px"><b>안드로이드 적응형 아이콘</b> (앞 432 투명 + 뒤 432 바탕, 런처가 원 · 둥근 사각으로 자름)</p>
+<div class="icons">
+<div class="tile"><div class="row"><div class="adapt circle"><img src="before/icon_bg_432.png" alt=""><img src="before/icon_fg_432.png" alt=""></div><div class="adapt squircle"><img src="before/icon_bg_432.png" alt=""><img src="before/icon_fg_432.png" alt=""></div></div><figcaption><span class="tag">전</span></figcaption></div>
+<div class="tile"><div class="row"><div class="adapt circle"><img src="img/assets_brand_logo_icon_bg_432.png" alt=""><img src="img/assets_brand_logo_icon_fg_432.png" alt=""></div><div class="adapt squircle"><img src="img/assets_brand_logo_icon_bg_432.png" alt=""><img src="img/assets_brand_logo_icon_fg_432.png" alt=""></div></div><figcaption><span class="tag a">후</span> 마크 전체가 안전 원(66%) 안</figcaption></div>
+<div class="tile dark"><div class="home"><div><div class="ad"><img src="img/assets_brand_logo_icon_bg_432.png" alt=""><img src="img/assets_brand_logo_icon_fg_432.png" alt="" style="position:absolute"></div>레인보우 아…</div><div><img class="i48" src="after/icon_48.png" alt="" style="border-radius:50%">PC 바로가기</div></div><figcaption style="color:#cfc6f0">홈 화면 크기 (적응형 52px · PC 48px)</figcaption></div>
+</div>
+<p class="dim">PC: <code>assets/brand/logo/app_icon.ico</code> (16 · 24 · 32 · 48은 작은 판, 64 · 128 · 256은 본판) → 프로젝트 <code>config/windows_native_icon</code> · Windows 내보내기 <code>application/icon</code>. 프로젝트 아이콘 <code>config/icon</code> = <code>icon_512.png</code>.</p>
+
+<h2>4. 마크 · 짝 · 움직임</h2>
+<div class="row">
+<figure><div class="live"><img src="img/assets_brand_logo_mark_back.png" alt=""><img class="rain" src="img/assets_brand_logo_mark_rain.png" alt=""><img src="img/assets_brand_logo_mark_front.png" alt=""><img class="brush" src="img/assets_brand_logo_mark_brush.png" alt=""></div>
+<figcaption>게임과 같은 겹 4장 (판 · 무지개 · 구름+리본 · 붓). 무지개는 붓 쪽으로 그려지고(2.3초) 머문 뒤 왼쪽부터 마르듯 사라진다 (6초 한 바퀴, <code>title_mark_rain.gdshader</code>). 붓은 자루 끝을 축으로 ±2° 끄덕인다 (3초).</figcaption></figure>
+<figure><div class="tile"><img src="svg/mark_brush.svg" alt="" width="264" height="264"></div><figcaption>원본 벡터 <code>svg/mark_brush.svg</code></figcaption></figure>
+<figure><div class="tile"><img src="svg/mark_brush_small.svg" alt="" width="132" height="132"></div><figcaption>작은 판 <code>svg/mark_brush_small.svg</code> (리본 글자 · 금선 · 결 없이 굵게)</figcaption></figure>
+</div>
+<figure class="lock"><img src="svg/lockup_b1.svg" alt=""></figure>
+<p class="dim">가로 짝 <code>svg/lockup_b1.svg</code>. 게임에서 B1은 6초마다 글자 면에 빛 한 줄이 지나가고(<code>title_logo_sweep.gdshader</code>), 붓 자국 밑줄을 따라 반짝이 넷이 차례로 켜진다. 로고 전체는 지금처럼 위아래로 3px 떠 있다.</p>
+
+<h2>5. 파일</h2>
+<table><tr><th>게임 파일</th><th>쓰는 곳</th></tr>
+<tr><td><code>assets/brand/logo/wordmark_b1.png</code> (1692×522) · <code>wordmark_b1_face.png</code> (846×261, 빛 줄기 자리)</td><td>타이틀 B1 글자</td></tr>
+<tr><td><code>assets/brand/logo/mark_back · mark_rain · mark_front · mark_brush.png</code> (각 416×416)</td><td>타이틀 마크 겹</td></tr>
+<tr><td><code>assets/brand/logo/mark_small_144.png</code></td><td>로딩 구석 (72px 표시)</td></tr>
+<tr><td><code>assets/brand/logo/icon_192 · icon_512 · icon_1024.png</code></td><td>안드로이드 기본 · 프로젝트 · 스토어용</td></tr>
+<tr><td><code>assets/brand/logo/icon_fg_432 · icon_bg_432.png</code></td><td>안드로이드 적응형 앞 · 뒤</td></tr>
+<tr><td><code>assets/brand/logo/app_icon.ico</code></td><td>PC (Windows 실행 파일 · 창)</td></tr></table>
+</body></html>
