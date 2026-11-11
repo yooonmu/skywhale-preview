@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>묶음 3 복귀 루프 적용 — 지금 ↔ 적용 · 시안 ↔ 게임 (batch3_return D3-1 C · D3-2 C · D3-4 C)</title>
+<style>
+:root{--navy:#2e2350;--line:#e2dbf5}
+*{box-sizing:border-box}
+body{margin:0;background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.5}
+.page{max-width:1240px;margin:0 auto;padding:20px 16px 64px}
+h1{font-size:22px;margin:0 0 6px}
+h2{font-size:18px;margin:34px 0 8px;padding-top:12px;border-top:2px solid var(--line)}
+p,li{font-size:14px;color:#4c4374}
+code{font-size:12.5px;background:#ebe5fb;padding:1px 5px;border-radius:4px}
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:8px;align-items:center;padding:8px 0;background:rgba(243,240,250,.95)}
+.bar button{font:inherit;font-size:13px;min-height:40px;padding:0 16px;border-radius:20px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--navy);color:#fff}
+.bar .sp{width:14px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 14px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px}
+.pair figure{margin:0}
+.pair img{width:100%;display:block;border-radius:6px;background:#1d1838}
+.pair figcaption{font-size:12px;color:#6a6290;margin-top:4px;overflow-wrap:anywhere}
+.pair .t{grid-column:1/-1;font-size:14px;font-weight:700;color:#3b3166}
+.pair .t small{display:block;font-weight:400;color:#655c8c;font-size:13px}
+.vids{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vids figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px}
+.vids video{width:100%;display:block;border-radius:6px;background:#1d1838}
+.vids figcaption{font-size:13px;color:#4c4374;margin-top:4px}
+.ok{display:inline-block;padding:1px 8px;border-radius:8px;background:#e3f7ea;color:#16704e;font-weight:700;font-size:12px}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>묶음 3 복귀 루프 적용 — 지금 ↔ 적용 · 시안 ↔ 게임</h1>
+<p>PD가 고른 <a href="../batch3_return/index.html">batch3_return</a>의 D3-1 C 「학교를 바라보는 고래 그림 카드」 · D3-2 C 「유나 한마디」 · D3-4 C 「기록 리본」을 게임에 넣었습니다.
+D3-3 귀환 연출(「모항으로 귀환」 띠 · 흰 섬광)은 다시 그리는 중이라 손대지 않았습니다. 게임 그림은 실제 버튼 신호로 「복귀」 → 확인 → 「복귀하기」 → 연출 → 귀환 보상을 돌며 찍었고(<code>tools/batch3_capture.gd</code>), 지금 그림은 같은 도구 · 같은 상태로 바꾸기 전에 찍었습니다. 시안 그림은 <code>build_mock.mjs</code>.</p>
+<ul>
+<li>코드: 확인 카드 <code>scripts/ui/return_card.gd</code>(+ <code>return_card</code> · <code>return_window</code> · <code>return_sky</code> 셰이더) · 짧은 항해 <code>scripts/ui/return_hint.gd</code>(YunaToast 식구) · 기록 리본 <code>scripts/ui/return_ribbon.gd</code>(+ <code>return_ribbon</code>) · 부르는 줄 <code>hud.gd _ask_return</code> · <code>reward_deco.gd</code> · <code>main.gd return_to_school</code>(deco에 best · record · quest)</li>
+<li>그대로: 「새벽 구름바다」 윗 그림(<code>levelup_art.gd</code>) · 띠 카드 비행(<code>reward_band.gd</code>) · 귀환 연출 · 진주 계산 · 저장. 「못 채운 의뢰」 문구는 뺐습니다(#49).</li>
+<li>안내 열쇠: 「복귀」 버튼(<code>hud:return_btn</code>)과 확인 카드의 「복귀하기」(<code>t:=복귀하기</code>) 그대로 — 아래 「손가락 안내」 그림에서 실제로 짚힘. 뒤로 가기 = 「더 항해」(닫기만), 짧은 항해 알림은 뒤로 가기로 알림만 닫힘.</li>
+<li>검사: release_ui <span class="ok">80/0</span> · back_button <span class="ok">70/0</span> · fb70_overflow <span class="ok">42,210/0</span> · first_session <span class="ok">49/0</span> · guide_chain <span class="ok">0 실패</span></li>
+</ul>
+<div class="bar"><button type="button" data-w="1280" aria-pressed="true">1280×720</button><button type="button" data-w="1600" aria-pressed="false">1600×720</button><span class="sp"></span><button type="button" data-m="now" aria-pressed="true">지금 ↔ 적용</button><button type="button" data-m="mock" aria-pressed="false">시안 ↔ 게임</button></div>
+<h2>D3-1 · 학교로 복귀 확인 — 고래 그림 카드</h2>
+<p>잎 모양 모서리 크림 카드(금은 바깥 · 안쪽 실선만). 그림 창 = 저녁 하늘 셰이더 + 구름바다 두 겹(흐름) + 해 쪽 테두리빛 고래(둥실) + 바람 줄기 · 빛 알갱이, 아래는 물결선으로 종이에 녹아듦. 받는 진주는 숫자가 굴러 오르고, 처음부터 다시 출항하는 것 · 지금 STAGE → 분교 점선 항로.</p>
+<div id="d31"></div>
+<h2>D3-2 · 복귀 불가 (짧은 항해) — 유나 한마디</h2>
+<p>창 없이 YunaToast 자리(전투 중 = 위 HUD 아래 가운데, 누르기 통과)에 놀란 유나 + 크림 말풍선(뾰족 꼬리 · 「유나」 이름표) + 진주가 모이는 STAGE까지 칸 줄. 「STAGE n」은 실제 진주 계산으로 찾습니다(이 계정은 22). 누른 「복귀」 버튼이 살짝 도리질.</p>
+<div id="d32"></div>
+<h2>D3-4 · 귀환 보상 — 기록 리본</h2>
+<p>제목 아래 두 겹 비단 리본(양 끝 제비 꼬리)이 왼쪽에서 펼쳐짐: 「이번 항해 STAGE n까지」. 이번 항해가 기록 끝이면 산호빛 「최고 기록」 꼬리표 톡 + 별빛. 이 복귀로 복귀 퀘스트가 끝나면 라벤더 인장이 쾅 + 「복귀 퀘스트 완료 · 보상 · 퀘스트 칸에서 받아요」(받은 뒤 안내가 퀘스트 칸을 짚음).</p>
+<div id="d34"></div>
+<h2>움직임 (1280×720, webm)</h2>
+<div class="vids">
+<figure><video src="video/now_ask_open.webm" controls muted loop playsinline></video><figcaption>지금 · 「복귀」 → 확인 창</figcaption></figure>
+<figure><video src="video/ask_open.webm" controls muted loop playsinline></video><figcaption>적용 · 「복귀」 → 그림 카드</figcaption></figure>
+<figure><video src="video/now_ask_open.webm" controls muted loop playsinline></video><figcaption>지금 · 확인 창 (STAGE가 올라도 그대로)</figcaption></figure>
+<figure><video src="video/ask_live.webm" controls muted loop playsinline></video><figcaption>적용 · 그림 카드가 열린 채 STAGE 26 → 27 (진주 숫자 굴러 바뀜)</figcaption></figure>
+<figure><video src="video/now_short_s3.webm" controls muted loop playsinline></video><figcaption>지금 · STAGE 3에서 「복귀」</figcaption></figure>
+<figure><video src="video/short_s3.webm" controls muted loop playsinline></video><figcaption>적용 · STAGE 3에서 「복귀」 (전투는 계속)</figcaption></figure>
+<figure><video src="video/now_return_flow.webm" controls muted loop playsinline></video><figcaption>지금 · 복귀 → 연출 → 귀환 보상</figcaption></figure>
+<figure><video src="video/return_flow.webm" controls muted loop playsinline></video><figcaption>적용 · 복귀 → 연출(그대로) → 귀환 보상 + 기록 리본 (최고 기록)</figcaption></figure>
+</div>
+</main>
+<script>
+// [제목, 설명, 이름, (지금 쪽 이름)] — 지금 = now/, 적용 = game/, 시안 = mock/ ({W} = 1280 / 1600)
+const SETS = {
+  d31: [["진주 n개", "", "ask"], ["열린 채 STAGE가 오름 (QA 고침)", "전투는 계속: STAGE 알약 · 항로 · 받는 진주가 바로 바뀜 = 「복귀하기」로 받는 값", "ask_live", "ask"],["복귀 퀘스트 손가락 안내 — 「복귀」 버튼", "안내 1칸: hud:return_btn", "guide_btn"], ["복귀 퀘스트 손가락 안내 — 「복귀하기」", "안내 2칸: t:=복귀하기 (카드 안 버튼을 실제로 짚음)", "guide_ask"]],
+  d32: [["STAGE 1", "", "short_s1"], ["STAGE 3", "", "short_s3"], ["위 알림 띠가 떠 있을 때 (QA 고침)", "띠(금 시간 줄 포함) 아래에 놓임 · 꼬리는 얼굴 테 밖에서 보임", "short_notice", "short_s3"]],
+  d34: [["진주만 (기록 아래)", "", "reward"], ["이번 항해 = 최고 기록", "", "reward_record"], ["복귀 퀘스트 완료와 연달아", "안내 중: 「받기」를 짚고, 받은 뒤 퀘스트 칸으로", "guide_reward"], ["받은 뒤 (퀘스트 칸 안내)", "", "guide_after"]],
+};
+const MOCK = new Set(["ask", "guide_ask", "short_s1", "short_s3", "reward", "reward_record", "guide_reward"]);
+let W = "1280", MODE = "now";
+function render() {
+  for (const [id, rows] of Object.entries(SETS)) {
+    document.getElementById(id).innerHTML = rows.filter(([, , n]) => MODE === "now" || MOCK.has(n)).map(([t, d, n, nn]) => {
+      const L = MODE === "now" ? `now/${nn || n}_${W}x720.jpg` : `mock/${n}_${W}x720.jpg`, R = `game/${n}_${W}x720.jpg`;
+      const ln = MODE === "now" ? "지금" : "시안", rn = MODE === "now" ? "적용" : "게임";
+      return `<div class="pair"><div class="t">${t}${d ? `<small>${d}</small>` : ""}</div>` +
+        `<figure><img loading="lazy" src="${L}" alt="${ln} ${t}"><figcaption>${ln} · ${L}</figcaption></figure>` +
+        `<figure><img loading="lazy" src="${R}" alt="${rn} ${t}"><figcaption>${rn} · ${R}</figcaption></figure></div>`;
+    }).join("");
+  }
+}
+document.querySelectorAll(".bar button").forEach(b => b.addEventListener("click", () => {
+  const k = b.dataset.w ? "w" : "m";
+  document.querySelectorAll(`.bar [data-${k}]`).forEach(x => x.setAttribute("aria-pressed", x === b));
+  if (b.dataset.w) W = b.dataset.w; else MODE = b.dataset.m;
+  render();
+}));
+render();
+</script>
+</body>
+</html>
