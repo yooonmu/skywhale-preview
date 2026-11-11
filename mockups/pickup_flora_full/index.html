@@ -23,7 +23,7 @@ h1{font-size:19px;margin:0 0 6px}
 </style></head><body>
 <header>
 <h1>플로라 픽업 · 그림 비교 (실제 게임 화면)</h1>
-<p class="lead">실제 게임의 픽업 소환 화면에서 그림만 바꿔 끼워 찍었습니다(게임 파일은 바꾸지 않음). 새 그림 두 장은 녹스 비교 그림처럼 SD가 아닌 일반 비율이고, 그림체는 지금 컷인 그대로입니다. 새 그림은 AI 생성(OpenAI GPT Image 2) 비교용입니다.</p>
+<p class="lead">실제 게임의 픽업 소환 화면에서 그림만 바꿔 끼워 찍었습니다(게임 파일은 바꾸지 않음). A · B는 녹스 비교 그림처럼 SD가 아닌 일반 비율에 지금 컷인 그림체 그대로이고, C는 같은 장면을 승준이 보내 준 그림체(가는 선 · 밝은 파스텔)로 그린 것입니다. 새 그림은 AI 생성(OpenAI GPT Image 2) 비교용입니다.</p>
 <div class="bar" role="group" aria-label="화면 폭">
 <button type="button" data-w="1280" aria-pressed="true">1280×720</button>
 <button type="button" data-w="1600" aria-pressed="false">1600×720</button>
@@ -39,15 +39,24 @@ h1{font-size:19px;margin:0 0 6px}
 <div class="card"><h2>B · 일반 비율 + 화사하게 <em>봄 아침</em></h2>
 <p>A를 더 화사하게: 맑은 파스텔 하늘, 오른쪽 위에서 쏟아지는 햇살과 번짐, 머리카락 · 카디건 테두리빛, 더 선명한 벚꽃 분홍과 잎 초록, 반짝임을 더했습니다.</p>
 <img data-src="game/flora_pick_bright_{W}x720.jpg" alt="화사한 일반 비율 플로라 픽업 화면"></div>
-<div class="card"><h2>나란히 · 지금 ↔ B</h2>
+<div class="card"><h2>C · 첨부 그림체 <em>가는 선 · 밝은 파스텔</em></h2>
+<p>B와 같은 장면 · 구도에 그림체만 바꿨습니다: 검은 굵은 테두리 대신 가는 갈색 · 색 선, 하얀빛이 많은 밝은 파스텔, 부드럽게 번지는 그림자, 결이 살아 있는 머리카락과 잔머리, 빛이 겹친 큰 눈.</p>
+<img data-src="game/flora_pick_soft_{W}x720.jpg" alt="첨부 그림체 플로라 픽업 화면"></div>
+<div class="card"><h2>나란히 · B ↔ C</h2>
+<div class="side">
+<figure><img data-src="game/flora_pick_bright_{W}x720.jpg" alt="B 화사하게"><figcaption>B · 지금 그림체 · 일반 비율 + 화사하게</figcaption></figure>
+<figure><img data-src="game/flora_pick_soft_{W}x720.jpg" alt="C 첨부 그림체"><figcaption>C · 첨부 그림체</figcaption></figure>
+</div></div>
+<div class="card"><h2>나란히 · 지금 ↔ C</h2>
 <div class="side">
 <figure><img data-src="game/flora_pick_now_{W}x720.jpg" alt="지금"><figcaption>지금</figcaption></figure>
-<figure><img data-src="game/flora_pick_bright_{W}x720.jpg" alt="B 화사하게"><figcaption>B · 일반 비율 + 화사하게</figcaption></figure>
+<figure><img data-src="game/flora_pick_soft_{W}x720.jpg" alt="C 첨부 그림체"><figcaption>C · 첨부 그림체</figcaption></figure>
 </div></div>
 <div class="card"><h2>그림 원본 (UI 없음)</h2>
 <div class="side">
 <figure><img src="flora_full_key.png" alt="A 원본"><figcaption>A · 일반 비율</figcaption></figure>
 <figure><img src="flora_full_bright.png" alt="B 원본"><figcaption>B · 일반 비율 + 화사하게</figcaption></figure>
+<figure><img src="flora_soft_key.png" alt="C 원본"><figcaption>C · 첨부 그림체</figcaption></figure>
 </div></div>
 </div>
 <script>
