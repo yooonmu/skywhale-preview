@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ko" data-w="1280">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 · 전투 묶음 1 적용 — 시안 ↔ 게임</title>
+<style>
+:root{--navy:#2e2350;--lav:#8b74e8;--line:#e2dbf5}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;line-height:1.45}
+.page{max-width:1560px;margin:0 auto;padding:20px 16px 64px}
+h1{font-size:22px;margin:0 0 4px}
+h2{font-size:18px;margin:30px 0 8px;padding-top:12px;border-top:2px solid var(--line)}
+h3{font-size:15px;margin:16px 0 6px}
+h3 small{font-weight:700;color:#6a5f9e;font-size:12.5px;margin-left:6px}
+.lead{margin:0 0 12px;font-size:14px;color:#5a5180;max-width:1180px}
+.lead b,.cap b{color:#4a33b0}
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 0;background:rgba(243,240,250,.94);font-size:13px}
+.bar button{font:inherit;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.bar a{color:#4a33b0;font-weight:700;padding:12px 4px}
+.w16{display:none}:root[data-w="1600"] .w12{display:none}:root[data-w="1600"] .w16{display:block}
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:10px}
+.stack{display:grid;gap:8px}
+figure{margin:0}
+figure img{display:block;width:100%;height:auto;border-radius:8px;background:#1d1838}
+figcaption{font-size:12.5px;color:#4c4374;margin-top:4px}
+figcaption b{color:#2e2350}
+.tag{display:inline-block;padding:1px 8px;border-radius:9px;font-size:12px;font-weight:800;color:#fff;margin-right:6px}
+.t-m{background:#5b43c8}.t-a{background:#1d7a55}.t-b{background:#625b80}
+.cap{font-size:13.5px;color:#4c4374;margin:0 0 8px}
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:10px;align-items:start}
+.box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin:0 0 12px}
+.box h3{margin:0 0 4px}
+.only{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:10px}
+table{border-collapse:collapse;font-size:13.5px;width:100%;max-width:1000px;background:#fff;border-radius:12px;overflow:hidden}
+td,th{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{color:#5a5180}
+.ok{color:#17703c;font-weight:800;white-space:nowrap}
+ul.notes{font-size:13.5px;color:#4c4374;padding-left:18px}
+ul.notes b{color:#4a33b0}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>전투 묶음 1 적용 · 시안 ↔ 게임</h1>
+<p class="lead">PD가 승인한 <a href="../battle_b1_rev/index.html">battle_b1_rev</a>의 <b>수정안 다섯</b>(스킬칸 B · 강화 A · 조작 줄 C · 메뉴 바 A · 퀘스트 C)을 확정 HUD B와 한 벌로 게임에 넣은 결과입니다. <b>시안</b>은 시안 페이지 「한 벌」 세 장을 Chrome으로 원래 크기(1280 · 1600 × 720)로 찍은 것이고, <b>적용 전 · 적용 후</b>는 시안 바탕 캡처와 같은 순간(스테이지 33 · 보스 40 · SS + 신화 덱, 같은 덱 · 쿨타임 · 퀘스트 19 「카렌을 선두에」)을 <code>tools/battle_b1_capture.gd</code>로 실제 게임에서 다시 만든 것입니다. 전투 세계(적 · 이펙트 · 콤보 · 재화 숫자)는 찍은 저장과 시각이 달라 다르고, 비교 대상은 HUD입니다.</p>
+<div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button><a href="#set">한 벌</a><a href="#parts">부품별</a><a href="#deck">스킬칸 · 강화</a><a href="#ctrl">조작 줄</a><a href="#nav">메뉴 판</a><a href="#quest">퀘스트 판</a><a href="#checks">검사</a><a href="#notes">시안과 다른 점</a></div>
+
+<h2 id="set">한 벌 — 다섯 부품 + 확정 HUD B</h2>
+<h3>일반 스테이지 33</h3>
+<p class="cap">왼쪽 메뉴 판 → 고래 숨결 → 순풍 · 복귀 · 수동 구슬 → 스킬 원판까지 <b>크림 판 · 금테 구슬 · 하늘 띠</b> 세 재료로 한 줄. 퀘스트는 통합 판 바로 밑에 같은 판으로 붙습니다.</p>
+<div class="trio">
+  <figure><img class="w12" src="img/mock_normal_1280x720.png" alt="시안 일반 1280"><img class="w16" src="img/mock_normal_1600x720.png" alt="시안 일반 1600"><figcaption><span class="tag t-m">시안</span>battle_b1_rev 「한 벌」 첫 장</figcaption></figure>
+  <figure><img class="w12" src="img/after/b1_normal_1280x720.jpg" alt="적용 후 일반 1280"><img class="w16" src="img/after/b1_normal_1600x720.jpg" alt="적용 후 일반 1600"><figcaption><span class="tag t-a">적용 후</span>artifacts/battle_b1/after/b1_normal</figcaption></figure>
+  <figure><img class="w12" src="img/before/b1_normal_1280x720.jpg" alt="적용 전 일반 1280"><img class="w16" src="img/before/b1_normal_1600x720.jpg" alt="적용 전 일반 1600"><figcaption><span class="tag t-b">적용 전</span>artifacts/battle_b1/before/b1_normal (HUD B만 들어간 상태)</figcaption></figure>
+</div>
+<h3>보스 스테이지 40 (잿빛 파수꾼)</h3>
+<p class="cap">기운 보스 판의 <b>남색 유리 · 금 테</b>가 오른쪽 아래 단위 스위치(×1 · ×10 · MAX)에 다시 나와 위아래가 이어집니다.</p>
+<div class="trio">
+  <figure><img class="w12" src="img/mock_boss_1280x720.png" alt="시안 보스 1280"><img class="w16" src="img/mock_boss_1600x720.png" alt="시안 보스 1600"><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img class="w12" src="img/after/b1_boss_1280x720.jpg" alt="적용 후 보스 1280"><img class="w16" src="img/after/b1_boss_1600x720.jpg" alt="적용 후 보스 1600"><figcaption><span class="tag t-a">적용 후</span>b1_boss</figcaption></figure>
+  <figure><img class="w12" src="img/before/b1_boss_1280x720.jpg" alt="적용 전 보스 1280"><img class="w16" src="img/before/b1_boss_1600x720.jpg" alt="적용 전 보스 1600"><figcaption><span class="tag t-b">적용 전</span>b1_boss</figcaption></figure>
+</div>
+<h3>SS · 신화 덱 (세레나 SS · 아르카 신화)</h3>
+<p class="cap">GradeStyle 규칙 그대로: <b>SS = 그 아이 속성 색이 흐르는 테</b>, <b>신화 = 무지개 테 + 무지개 고리</b>. 나머지 재료가 같아 등급 테만 눈에 띕니다.</p>
+<div class="trio">
+  <figure><img class="w12" src="img/mock_myth_1280x720.png" alt="시안 SS 신화 1280"><img class="w16" src="img/mock_myth_1600x720.png" alt="시안 SS 신화 1600"><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img class="w12" src="img/after/b1_myth_1280x720.jpg" alt="적용 후 SS 신화 1280"><img class="w16" src="img/after/b1_myth_1600x720.jpg" alt="적용 후 SS 신화 1600"><figcaption><span class="tag t-a">적용 후</span>b1_myth</figcaption></figure>
+  <figure><img class="w12" src="img/before/b1_myth_1280x720.jpg" alt="적용 전 SS 신화 1280"><img class="w16" src="img/before/b1_myth_1600x720.jpg" alt="적용 전 SS 신화 1600"><figcaption><span class="tag t-b">적용 전</span>b1_myth</figcaption></figure>
+</div>
+
+<h2 id="parts">부품별 — 위 한 벌에서 같은 자리를 잘라 나란히</h2>
+<div class="box"><h3>1 · 스킬칸 + 2 · 강화 줄<small>스킬 B 「물감 원판」 · 강화 A 「금빛 꼬리표 + 세 칸 스위치」</small></h3>
+<p class="cap">금테 구슬 원판 안에 초상, 쿨타임만큼 <b>속성 색 고리</b>가 차고 남은 초가 가운데. 준비되면 금빛 고리가 돌고 「궁극기」 꼬리표. <b>짧게 누르기 = 궁극기, 길게 누르기 = 아이 정보</b>(바깥 흰 호가 차오름). 비용 꼬리표(▲ · 바람 조각 · 비용)가 원판 위에 붙어 한 몸이고, 위 줄에 「?」 구슬 · 일괄 강화(올릴 수 있는 칸 수 금 동전) · 남색 유리 단위 스위치.</p>
+<div class="trio">
+  <figure><img class="w12" src="img/crop/skill_mock_1280.png" alt=""><img class="w16" src="img/crop/skill_mock_1600.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img class="w12" src="img/crop/skill_after_1280.png" alt=""><img class="w16" src="img/crop/skill_after_1600.png" alt=""><figcaption><span class="tag t-a">적용 후</span></figcaption></figure>
+  <figure><img class="w12" src="img/crop/skill_before_1280.png" alt=""><img class="w16" src="img/crop/skill_before_1600.png" alt=""><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div></div>
+<div class="box"><h3>등급 테 — SS · 신화<small>같은 원판, 테만 다름</small></h3>
+<div class="trio">
+  <figure><img class="w12" src="img/crop/myth_mock_1280.png" alt=""><img class="w16" src="img/crop/myth_mock_1600.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img class="w12" src="img/crop/myth_after_1280.png" alt=""><img class="w16" src="img/crop/myth_after_1600.png" alt=""><figcaption><span class="tag t-a">적용 후</span>세레나 보라 흐름 테 · 아르카 무지개 테 + 무지개 고리</figcaption></figure>
+  <figure><img class="w12" src="img/crop/myth_before_1280.png" alt=""><img class="w16" src="img/crop/myth_before_1600.png" alt=""><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div></div>
+<div class="box"><h3>3 · 조작 줄<small>조작 줄 C 「구슬 셋」</small></h3>
+<p class="cap">순풍은 고래 숨결 구슬과 같은 <b>큰 금테 구슬 + 하늘 띠 이름표</b>, 복귀 · 자동/수동은 작은 형제 구슬. 복귀는 없앤 배속 버튼 자리.</p>
+<div class="trio">
+  <figure><img class="w12" src="img/crop/ctrl_mock_1280.png" alt=""><img class="w16" src="img/crop/ctrl_mock_1600.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img class="w12" src="img/crop/ctrl_after_1280.png" alt=""><img class="w16" src="img/crop/ctrl_after_1600.png" alt=""><figcaption><span class="tag t-a">적용 후</span></figcaption></figure>
+  <figure><img class="w12" src="img/crop/ctrl_before_1280.png" alt=""><img class="w16" src="img/crop/ctrl_before_1600.png" alt=""><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div></div>
+<div class="box"><h3>4 · 하단 메뉴 바 + 고래 숨결<small>메뉴 바 A 「기운 판 + 허브 물감」</small></h3>
+<p class="cap">여섯 칸을 <b>크림 기운 판 하나</b>로 묶고 칸마다 허브 물감 방울 + 그림 아이콘. 빨간 점은 지금 할 일이 있을 때만 — 아이들 = 목록 카드 점과 같은 조건(<code>Menus.can_grow</code>: 레벨 업 · 승급 · 각성) 또는 도감 보상.</p>
+<div class="stack">
+  <figure><img class="w12" src="img/crop/nav_mock_1280.png" alt=""><img class="w16" src="img/crop/nav_mock_1600.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img class="w12" src="img/crop/nav_after_1280.png" alt=""><img class="w16" src="img/crop/nav_after_1600.png" alt=""><figcaption><span class="tag t-a">적용 후</span></figcaption></figure>
+  <figure><img class="w12" src="img/crop/nav_before_1280.png" alt=""><img class="w16" src="img/crop/nav_before_1600.png" alt=""><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div></div>
+<div class="box"><h3>5 · 퀘스트 카드<small>퀘스트 C 「통합 판 밑에 붙는 같은 판」</small></h3>
+<p class="cap">통합 판처럼 왼쪽 곧고 오른쪽만 14° · 번호는 STAGE 배지와 같은 라벤더 판 · 보상은 판 끝에 걸린 <b>금테 구슬 + 남색 수량표</b> · 진행 막대는 글자 아래 얇게 · 「이어서 안내 ▶」 꼬리표는 판 아래 테에.</p>
+<div class="trio">
+  <figure><img class="w12" src="img/crop/quest_mock_1280.png" alt=""><img class="w16" src="img/crop/quest_mock_1600.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img class="w12" src="img/crop/quest_after_1280.png" alt=""><img class="w16" src="img/crop/quest_after_1600.png" alt=""><figcaption><span class="tag t-a">적용 후</span></figcaption></figure>
+  <figure><img class="w12" src="img/crop/quest_before_1280.png" alt=""><img class="w16" src="img/crop/quest_before_1600.png" alt=""><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div></div>
+
+<h2 id="deck">스킬칸 B · 강화 A — 상태 (1280, 같은 상태 · 같은 자리)</h2>
+<div class="box"><h3>바람 조각 모자람</h3><p class="cap">시안 <a href="../battle_b1_rev/index.html#g2">강화 A 「바람 조각 모자람」</a>: 모자란 칸만 잿빛 판 · 동전 흑백, 일괄 강화 숫자 = 올릴 수 있는 칸 수.</p>
+<div class="pair"><figure><img src="img/after/st_deck_poor_1280x720.png" alt="적용 후"><figcaption><span class="tag t-a">적용 후</span></figcaption></figure><figure><img src="img/before/st_deck_poor_1280x720.png" alt="적용 전"><figcaption><span class="tag t-b">적용 전</span></figcaption></figure></div></div>
+<div class="box"><h3>단위 ×10</h3><p class="cap">남색 스위치 안 금 꼬리표가 ×10 칸으로 미끄러지고, 꼬리표는 「▲<sup>10</sup> 비용」.</p>
+<div class="pair"><figure><img src="img/after/st_deck_x10_1280x720.png" alt="적용 후"><figcaption><span class="tag t-a">적용 후</span></figcaption></figure><figure><img src="img/before/st_deck_x10_1280x720.png" alt="적용 전"><figcaption><span class="tag t-b">적용 전</span></figcaption></figure></div></div>
+<div class="box"><h3>단위 MAX</h3><p class="cap">칸마다 지금 올릴 수 있는 만큼 「▲<sup>N</sup> 비용」.</p>
+<div class="pair"><figure><img src="img/after/st_deck_max_1280x720.png" alt="적용 후"><figcaption><span class="tag t-a">적용 후</span></figcaption></figure><figure><img src="img/before/st_deck_max_1280x720.png" alt="적용 전"><figcaption><span class="tag t-b">적용 전</span></figcaption></figure></div></div>
+
+<h2 id="ctrl">조작 줄 C — 상태</h2>
+<div class="box"><h3>순풍 사용 중 59초 · 자동</h3><p class="cap">시안 <a href="../battle_b1_rev/index.html#g3">조작 줄 C</a>: 하늘색 고리가 남은 시간만큼 · 유리 속 바람결 · 「2배속 · 59초」 띠(<code>main.wind_speed_text()</code>). 자동 = 도는 흰 점선 고리.</p>
+<div class="pair"><figure><img src="img/after/st_wind_on_1280x720.png" alt="적용 후"><figcaption><span class="tag t-a">적용 후</span></figcaption></figure><figure><img src="img/before/st_wind_on_1280x720.png" alt="적용 전"><figcaption><span class="tag t-b">적용 전</span></figcaption></figure></div></div>
+<div class="box"><h3>순풍 쉬는 중 4:05 · 수동</h3><p class="cap">남색 고리 위로 연보라가 다시 차오르고, 이름 띠는 해 질 녘 보라 「다시 차는 중」.</p>
+<div class="pair"><figure><img src="img/after/st_wind_cd_1280x720.png" alt="적용 후"><figcaption><span class="tag t-a">적용 후</span></figcaption></figure><figure><img src="img/before/st_wind_cd_1280x720.png" alt="적용 전"><figcaption><span class="tag t-b">적용 전</span></figcaption></figure></div></div>
+<div class="box"><h3>첫 항해 — 바람 모으는 중 · 복귀 잠김</h3><p class="cap">모은 만큼 연금빛 고리, 복귀는 잠김 가(잿빛 + 남색 자물쇠 LockMark + 「Lv.4」, LockGate).</p>
+<div class="pair"><figure><img src="img/after/st_first_1280x720.png" alt="적용 후"><figcaption><span class="tag t-a">적용 후</span></figcaption></figure><figure><img src="img/before/st_first_1280x720.png" alt="적용 전"><figcaption><span class="tag t-b">적용 전</span></figcaption></figure></div></div>
+
+<h2 id="nav">메뉴 바 A — 상태</h2>
+<div class="box"><h3>새 소식</h3><p class="cap">시안 <a href="../battle_b1_rev/index.html#g4">메뉴 바 A</a>: 빨간 점(흰 테), 방금 열린 허브는 빨간 「NEW」 + 물감 방울이 숨 쉼 (캡처는 분교).</p>
+<div class="pair"><figure><img src="img/after/st_nav_new_1280x720.png" alt="적용 후"><figcaption><span class="tag t-a">적용 후</span></figcaption></figure><figure><img src="img/before/st_nav_new_1280x720.png" alt="적용 전"><figcaption><span class="tag t-b">적용 전</span></figcaption></figure></div></div>
+<div class="box"><h3>잠김 (항해사 Lv.5 — 모험 Lv.7)</h3><p class="cap">잿빛 방울 · 흑백 그림 · 흐린 이름 + 남색 자물쇠 배지 + 판 아래 테에 걸친 「Lv.N」. 누르면 흔들리고 레벨 막대 알림(LockGate 그대로), 풀릴 때 UnlockFx가 같은 「glyph」에서 품.</p>
+<div class="pair"><figure><img src="img/after/st_nav_locked_1280x720.png" alt="적용 후"><figcaption><span class="tag t-a">적용 후</span></figcaption></figure><figure><img src="img/before/st_nav_locked_1280x720.png" alt="적용 전"><figcaption><span class="tag t-b">적용 전</span></figcaption></figure></div></div>
+
+<h2 id="quest">퀘스트 C — 상태</h2>
+<div class="box"><h3>보상 받기</h3><p class="cap">시안 <a href="../battle_b1_rev/index.html#g5">퀘스트 C</a>: 판 전체 금빛 · 빛이 자주 훑음 · 번호 판 금 꼬리표 · 보상 구슬이 숨 쉼. 손가락은 구슬 오른쪽 테를 가리켜 수량표를 가리지 않습니다 (「0 / 0」은 캡처에서 목표를 0으로 둔 값).</p>
+<div class="pair"><figure><img src="img/after/st_q_ready_1280x720.png" alt="적용 후"><figcaption><span class="tag t-a">적용 후</span></figcaption></figure><figure><img src="img/before/st_q_ready_1280x720.png" alt="적용 전"><figcaption><span class="tag t-b">적용 전</span></figcaption></figure></div></div>
+<div class="box"><h3>경험치만 주는 퀘스트 (이 저장에서는 이미 완료)</h3><p class="cap">적용 전 캡처와 같은 상태라 「보상 받기!」로 찍혔습니다. 진행 중 모습은 아래 「적용 후에만 있는 칸」.</p>
+<div class="pair"><figure><img src="img/after/st_q_exp_1280x720.png" alt="적용 후"><figcaption><span class="tag t-a">적용 후</span></figcaption></figure><figure><img src="img/before/st_q_exp_1280x720.png" alt="적용 전"><figcaption><span class="tag t-b">적용 전</span></figcaption></figure></div></div>
+<div class="box"><h3>긴 문구 (이 저장에서는 이미 완료)</h3><p class="cap">위와 같은 까닭으로 「보상 받기!」.</p>
+<div class="pair"><figure><img src="img/after/st_q_long_1280x720.png" alt="적용 후"><figcaption><span class="tag t-a">적용 후</span></figcaption></figure><figure><img src="img/before/st_q_long_1280x720.png" alt="적용 전"><figcaption><span class="tag t-b">적용 전</span></figcaption></figure></div></div>
+<div class="box"><h3>적용 후에만 있는 칸 — 진행 중 모습</h3><p class="cap">시안 상태 칸(경험치만 · 긴 문구 · 펼침)과 같은 모습을 진행 중으로 맞춰 따로 찍었습니다.</p>
+<div class="only">
+  <figure><img src="img/after/st_q_exp_run_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span><b>경험치만</b> — 보상 구슬에 assets/ui/icon_exp.png, 수량표 「EXP 10」</figcaption></figure>
+  <figure><img src="img/after/st_q_long_run_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span><b>긴 문구 · 한 줄 판(50)</b> — 끝을 줄임표로</figcaption></figure>
+  <figure><img src="img/after/st_q_long_open_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span><b>누르면 펼침(92)</b> — 띄어쓰기에서 두 줄 + 굵은 막대, 4초 뒤 접힘</figcaption></figure>
+</div></div>
+
+<h2 id="checks">검사 (마지막 수정 뒤)</h2>
+<table>
+  <tr><th>검사</th><th>결과</th><th>무엇을</th></tr>
+  <tr><td>battle_b1_layout_check (새)</td><td class="ok">4638 / 실패 0</td><td>1280 · 1600 × 상태 9가지(×1 · ×10 · MAX · 순풍 · 잠김 · 보스 · 긴 퀘스트 등): 엄지 구역 부품끼리 · 왼쪽 위 판과 겹치지 않음, 화면 안, 글자가 칸 안</td></tr>
+  <tr><td>release_ui_check</td><td class="ok">80 / 실패 0</td><td>레벨 이름 · 설정 화면</td></tr>
+  <tr><td>back_button_check</td><td class="ok">65 / 실패 0</td><td>뒤로 가기</td></tr>
+  <tr><td>first_session_check (창 모드)</td><td class="ok">49 / 실패 0</td><td>새 계정 타이틀 → 프롤로그 → 안내 deck · color · quest · ult · controls (안내 손가락이 짚는 버튼)</td></tr>
+  <tr><td>guide_chain_check</td><td class="ok">실패 0</td><td>안내 이어짐</td></tr>
+  <tr><td>fb70_overflow_check</td><td class="ok">41043 / 실패 0</td><td>글자 넘침 · 길게 누르기 「hold keeps the same page and button 1600」 포함</td></tr>
+</table>
+
+<h2 id="notes">시안과 다른 점 · 남긴 것</h2>
+<ul class="notes">
+  <li><b>왼쪽 보조 줄(의뢰 · 색 지도 · 이야기)</b>은 이번 묶음에서 바꾸지 않았습니다 (전투 묶음 2). 시안 바탕에 있는 「의뢰」는 피드백 #49 「의뢰 없애기」(대기)와 묶여 있습니다. 퀘스트 판이 펼쳐질 때만 그만큼 내려갔다 돌아옵니다.</li>
+  <li><b>재화 · 전투력 · 콤보 · 적</b>은 시안 바탕이 다른 저장에서 찍은 캡처라 다릅니다. HUD 부품은 같은 덱 · 같은 쿨타임 · 같은 퀘스트로 맞췄습니다. 통합 판 진행 줄 앞 「순풍 ·」은 이 캡처 순간 순풍이 켜져 있어서입니다.</li>
+  <li><b>구슬 금빛 후광</b>은 시안 그림자처럼 구슬 둘레로 둥글게 퍼지고 셰이더 여백 안에서 0이 됩니다 (여백 끝에서 잘려 순풍 구슬 둘레에 네모 그늘이 보이던 것을 고침). 진행 수 「0 / 1」은 보상 구슬 흰 테보다 5px 앞에서 끊습니다.</li>
+  <li><b>「NEW」</b>는 게임 안에서 항해사 레벨이 올라 방금 열린 허브에만 붙고, 처음 누르면 사라집니다 (불러온 저장의 열린 허브에는 붙지 않음).</li>
+  <li><b>강화 꼬리표의 금 동전 · 「궁극기」 꼬리표</b>는 위치만 살짝 오르내려(다시 그리지 않음) 매 프레임 비용이 없습니다. 구슬 · 판 · 물감 방울은 각각 셰이더 하나(그리기 한 번)입니다.</li>
+  <li>안내 손가락이 짚는 열쇠 이름(<code>hud:wind_btn</code> · <code>hud:return_btn</code> · <code>hud:buy_btn</code> · <code>hud:bulk_btn</code> · <code>card:</code> · <code>up:</code> · <code>hub:</code> · <code>quest</code>)은 그대로이고, 둥근 구슬은 안내 구멍도 원으로 밝힙니다.</li>
+</ul>
+</main>
+<script>
+document.querySelectorAll('.bar [data-res]').forEach(b=>b.addEventListener('click',()=>{document.documentElement.dataset.w=b.dataset.res;document.querySelectorAll('.bar [data-res]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)))}));
+</script>
+</body>
+</html>
