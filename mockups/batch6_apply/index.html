@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 · 분교 묶음 6 적용 — 시안 ↔ 게임</title>
+<style>
+:root{--navy:#2e2350;--lav:#8b74e8;--line:#e2dbf5}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;line-height:1.45}
+.page{max-width:1480px;margin:0 auto;padding:20px 16px 64px}
+h1{font-size:22px;margin:0 0 4px}
+h2{font-size:18px;margin:30px 0 8px;padding-top:12px;border-top:2px solid var(--line)}
+h3{font-size:15px;margin:0 0 4px}
+.lead{margin:0 0 12px;font-size:14px;color:#5a5180}
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 0;background:rgba(243,240,250,.94);font-size:13px}
+.bar button{font:inherit;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.bar a{color:#4a33b0;font-weight:700;padding:12px 4px}
+.w16{display:none}:root[data-w="1600"] .w12{display:none}:root[data-w="1600"] .w16{display:block}
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:10px}
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(560px,100%),1fr));gap:10px}
+figure{margin:0}
+figure img,figure video{display:block;width:100%;border-radius:8px;background:#1d1838}
+figcaption{font-size:12.5px;color:#4c4374;margin-top:4px}
+.tag{display:inline-block;padding:1px 8px;border-radius:9px;font-size:12px;font-weight:800;color:#fff;margin-right:6px}
+.t-m{background:#5b3fc4}.t-a{background:#1d7a57}.t-b{background:#625a80}
+.cap{font-size:13.5px;color:#4c4374;margin:0 0 8px}
+.state{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin:0 0 12px}
+ul.notes{font-size:13.5px;color:#4c4374;padding-left:18px}
+ul.notes b{color:#4a33b0}
+code{font-size:12.5px;background:#ebe6fb;padding:0 4px;border-radius:4px}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>분교 · 고래 묶음 6 적용 · 시안 ↔ 게임</h1>
+<p class="lead">PD가 고른 <a href="../batch6_school/index.html">batch6_school</a>의 <b>D6-1 A 「인형집 단면」</b>(분교 탭)과 <b>D6-4 A 「종 + 리본」</b>(분교 완성 알림)을 게임에 넣은 결과입니다. 같은 저장(STAGE 33 · 과학실 3 · 체육관 2 · 급식실 1)에서 <code>tools/batch6_apply_capture.gd</code>가 실제 경로(하단 「분교」 단추 · <code>Menus.open(hud, "school")</code> · <code>hud.school_notice</code>)로 띄워 <b>시안 · 적용 후 · 적용 전</b>을 나란히 놓았습니다. 전투 장면(적 · 숫자)은 찍은 순간마다 다릅니다. <b>D6-2 고래 강화</b>는 PD 결정(심장 없앰 · 숨결 합침, 시안 <a href="../batch6_school/index.html#s-merge">batch6_school 「합침 A+」</a>)대로 넣었습니다 — 적용 전 사진은 예전 게임 캡처(batch6_school/now)입니다.</p>
+<div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button><a href="#d61">D6-1 분교</a><a href="#d62">D6-2 고래 강화</a><a href="#d64">D6-4 완성 알림</a><a href="#motion">움직임 (영상)</a><a href="#notes">시안과 다른 점</a></div>
+
+<h2 id="d61">D6-1 분교 · A 인형집 단면</h2>
+<p class="lead">칠판 머리줄 아래 판 안쪽이 오후 하늘(셰이더, 구름이 천천히 흐름)이 되고, 구름 위에 뜬 분교 단면의 세 교실이 그림 속 방입니다. 방마다 테이프로 붙인 반투명 종이 이름표 + 「짓기」, 방에는 만난 아이가 가구 뒤에 서 있고 창빛 띠 · 먼지 알갱이가 움직입니다. 오른쪽은 호두나무 테 과학실 칠판(뾰족한 꼬리가 과학실을 가리킴) — 연구 다섯 줄은 분필 글자 + 라벤더 「연구」.</p>
+<div id="school"></div>
+
+<h2 id="d62">D6-2 고래 강화 · A 해부도 + 숨결 합침 (심장 없앰)</h2>
+<p class="lead">PD 결정 (11/12): 「심장 강화」와 그 효과(모든 아이 공격 +6%/Lv · 바람 조각 생산)를 통째로 없애고, 「고래 숨결」 하위 탭을 고래 강화 한 화면(시안 「합침 A+」)에 합쳤습니다. 크림 도면지(모눈 · 작도 원 · 종이 결) 위 보호막 막(셰이더: 가장자리 육각 결 · 무지갯빛 테 · 반사 호 · 훑는 빛)에 싸인 고래가 숨 쉬듯 오르내리고, 머리 위 숨결 진주는 #64 숨결 버튼과 같은 구슬(지금 게이지가 그대로 차오름)에서 숨결 알갱이가 피어오릅니다. 점선 지시선 ① · ②가 이 화면만의 「도면 명세표」(크림 종이 + 남보라 두 줄 테 + 금빛 가는 테 + 놋쇠 집게)로 이어집니다.</p>
+<div id="whale"></div>
+
+<h2 id="d64">D6-4 분교 완성 알림 · A 종 + 리본</h2>
+<p class="lead">위 가운데 알림 판(보통 세기, 4초 금 실선)은 그대로 두고 얼굴만 바꿨습니다: 구슬 안 금종이 위 고리를 축으로 세 번 울리고(울릴 때마다 양옆 소리 물결 두 줄), 판 아래 왼쪽에 장밋빛 제비꼬리 리본 「교실 완성 · 연구 완료」가 내려와 걸립니다. 놓치면 판이 작아지며 살짝 굽은 길로 하단 「분교」 칸에 날아가 닿고, 그 칸이 톡 튀며 금빛 고리 + 빨간 점이 켜집니다. 단추 글자 「분교로 ▶」.</p>
+<div id="note"></div>
+
+<h2 id="motion">움직임 · 적용 후 ↔ 적용 전</h2>
+<p class="lead">게임 화면을 그대로 찍은 영상(30fps · H.264 · 텔레비전 범위 BT.709)입니다. 1280 / 1600 단추로 바뀝니다.</p>
+<div id="clips"></div>
+
+<h2 id="notes">시안과 다른 점 · 그대로 둔 것 · 확인</h2>
+<ul class="notes">
+<li><b>시안보다 올린 것 (D6-1)</b>: 방 그림을 새로 그린 층 그림(뒤 벽 · 앞 가구 두 장, <code>assets/ui/school/room_*_bg/fg.png</code>, <code>tools/school_art_build.mjs</code>)으로 나눠 아이가 실험대 · 배식대 뒤에 서게 함 · 하늘은 게임 하늘 그림을 라벤더 오후로 물들이고 앞 · 뒤 구름 띠가 반대로 흐르는 셰이더(<code>school_sky</code>) · 방 빛(창빛 띠 · 등 두 개 · 먼지, <code>school_room</code>) · 분필 결로 성긴 칠판 글자(<code>school_chalk</code>) · 결이 45도로 맞물린 호두나무 테 + 같은 나무 꼬리 + 지운 자국 · 분필 가루 · 창빛이 있는 칠판 면을 한 장으로(<code>school_board</code>) · 손으로 뜯은 가장자리의 반투명 종이 이름표(<code>school_note</code>) · 테이프 세 색 · 지붕 간판 리본에 「단계 N」. 시안의 집 아래 덩굴 두 덩이는 넣지 않았습니다.</li>
+<li><b>상태</b>: 짓는 중 = 방에 천막 · 사다리 + 아이 머리 위 남은 시간 + 「바로 완성 💎」 · 연구 중 = 분필 진행 막대 + 「바로 완성」 · 진주 부족 = 단추가 잿빛(누르면 유나 한마디, YunaToast) · 최대 = 라벤더 꼬리표 · 과학실 먼저 = 칠판이 가라앉고 잠금 배지 「과학실 Lv.1」 + 「과학실을 먼저 지어 주세요」, 빈 교실은 「아직 비어 있는 교실」 · 완성 직후 = 「완성!」 도장 · 방이 환해짐 · 아이가 두 번 뜀 + 유나 한마디(화면을 연 채 완성되면 위 알림 · 「분교」 반짝임은 다시 띄우지 않음).</li>
+<li><b>시안과 다른 점</b>: 이름표 효과는 게임 글(<code>GameData.ROOMS</code> desc)을 두 줄로 줄여 넣어 시안보다 한 줄 길고, 남은 시간을 이름표 셋째 줄에 둠 · 완성 직후 유나 한마디는 YunaToast 자리 규칙대로 화면 가운데 아래에 뜸(시안은 칠판 위) · 1600에서는 판이 넓어져 집과 칠판 사이가 벌어짐.</li>
+<li><b>D6-4</b>: 판 크기 · 자리 · 4초 실선 · 놓침 규칙은 정해진 알림 판(<code>scripts/hud_b2.gd</code> NoticeBand) 그대로, 얼굴(<code>_bell</code> · <code>_ribbon</code>)과 놓친 판이 날아가는 길(<code>_fly_home</code>)만 더함. 종 그림 <code>assets/ui/school/bell.png</code>, 리본 <code>ribbon_rose.png</code>. 날아가는 끝은 실제 하단 「분교」 칸 가운데(<code>menu_btns["school"]</code>의 실제 위치)라 1280 · 1600 모두 같은 자리.</li>
+<li><b>D6-2 고래 강화 (심장 없앰)</b>: <code>scripts/ui/whale_page.gd</code> + 셰이더 <code>whale_sheet</code> · <code>whale_dome</code> · <code>whale_spec</code>, 구슬은 숨결 버튼의 <code>breath_orb</code>, 부품 <code>assets/ui/whale/</code>(나침반 · 놋쇠 집게). 숫자는 0.25초마다 글자만 고치고(예전: 0.5초마다 화면 전체를 다시 지음), 레벨 · 살 수 있는지가 바뀔 때만 다시 짓습니다. 심장은 게임에서 모두 뺐습니다(공격 배율 · 바람 조각 생산 · 방치 보상 · 저장 · 밸런스 모델 · 도움말). 연구 「심장 효율」은 <b>없앴습니다</b>(다른 효과로 바꾸면 새 수치가 생겨 밸런스 때 정하기로). 예전 저장의 「heart」 · 「심장 효율」 값은 읽지 않고, 하던 「심장 효율」 연구만 버립니다(불러오기 멈춤 없음). 가이드 「고래 강화」 단추 · 숨결 단추 이름(BreathUpgrade_*, BreathAutoToggle)은 그대로.</li>
+<li><b>시안과 다른 점 (D6-2)</b>: 숨결 진주는 시안의 정지 그림 대신 지금 숨결 게이지가 그대로 차오르고, 줄마다 구슬도 그 강화 레벨만큼 차오름 · 진주 부족은 잿빛 단추 + 유나 한마디 · 자동 잠김은 정해진 잠금 배지 + 「Lv.15」.</li>
+<li><b>그대로 둔 것</b>: 오른쪽 책갈피 틀 · 칠판 머리줄(<code>hub_frame.gd</code>), 가이드가 짚는 「과학실 › 짓기」 · 「색의 공명 › 연구」(글자 그대로 한 개씩, <code>tutorial._find_text</code>로 1280 · 1600 모두 찾음), 「고래 강화」 탭(아직 그대로), 분교 수치 · 비용 · 저장.</li>
+<li><b>확인</b>: <code>--check-only</code>(school_page · hud · hud_b2 · menus) 통과 · 렌더링 실행에서 셰이더 · 스크립트 오류 없음 · <code>release_ui_check --releaseui</code> · <code>back_button_check --backcheck</code> · <code>fb70_overflow_check --fb70overflow</code> · <code>battle_b1_layout_check --b1layout</code>(놓친 분교 알림 빨간 점 · 「분교로 ▶」가 분교 화면을 엶 포함) · <code>guide_chain_check</code>.</li>
+</ul>
+</main>
+<script>
+const SCHOOL=[["base","기본","안내가 짚는 「과학실 › 짓기」 · 「색의 공명 › 연구」가 글자 그대로 하나씩."],["build","짓는 중 (체육관)","천막 · 사다리 + 남은 시간 + 「바로 완성」."],["study","연구 중 (색의 공명)","분필 진행 막대 + 「바로 완성」."],["poor","진주 부족","단추가 잿빛, 누르면 유나 한마디."],["max","최대 (체육관 Lv.10)","라벤더 꼬리표."],["lock","과학실 먼저 (잠김)","칠판이 가라앉고 잠금 배지 「과학실 Lv.1」."],["done","완성 직후 (과학실 Lv.4)","「완성!」 도장 · 방이 환해짐 · 아이가 뜀 · 유나 한마디."]];
+const NOTE=[["note_room_f1","교실 완성 · 0.5초","판이 내려오고 종이 울리기 시작."],["note_room_f2","교실 완성 · 1.5초","리본 「교실 완성」이 걸리고 금 실선이 줄어듦."],["note_room_f3","교실 완성 · 4.3초 (놓침)","판이 작아지며 하단 「분교」로 날아감."],["note_room_f4","교실 완성 · 5.6초","「분교」 칸에 빨간 점."],["note_study_f2","연구 완료 · 1.5초","리본 「연구 완료」."],["note_both_f2","교실 → 연구가 연달아 · 1.5초","같은 판이 새 글로 바뀜."]];
+const CLIPS=[["school_open","전투 → 하단 「분교」 → 화면이 열림 → 「과학실 › 짓기」 (안내가 짚는 단추)"],["school_done","화면을 연 채 과학실이 완성됨"],["whale_up","고래 강화 해부도: 열림 → 「고래 강화」 → 「숨결 강화」 (적용 전 영상은 없음 — 예전 화면은 위 사진)"],["note_room","전투 위 알림: 뜸 → 종 → 실선이 줄어듦 → 놓침 (분교 칸)"],["note_both","교실 완성 뒤 1.5초에 연구 완료가 이어짐"]];
+const img=(src,alt)=>['1280','1600'].map(w=>`<img class="w${w.slice(0,2)}" src="${src}_${w}x720.jpg" alt="${alt} ${w}" loading="lazy">`).join('');
+const fig=(src,alt,t,cls,label)=>`<figure>${img(src,alt)}<figcaption><span class="tag ${cls}">${t}</span>${label}</figcaption></figure>`;
+const trio=(id,name,cap,mock,before=true,src='batch6_school A')=>`<div class="state"><h3>${name}</h3><p class="cap">${cap}</p><div class="trio">${mock?fig('mock/'+mock,'시안 '+name,'시안','t-m',src):''}${fig('shots/after_'+id,'적용 후 '+name,'적용 후','t-a','게임')}${before?fig('shots/before_'+id,'적용 전 '+name,'적용 전','t-b','게임'):''}</div></div>`;
+document.getElementById('school').innerHTML=SCHOOL.map(([s,n,c])=>trio('school_'+s,n,c,'school_'+s)).join('');
+document.getElementById('note').innerHTML=NOTE.map(([s,n,c])=>trio(s,n,c,s)).join('')+`<div class="state"><h3>교실 → 연구가 연달아 · 3.8초 (적용 후만)</h3><p class="cap">앞 판이 끝나면 뒤에 쌓여 있던 「연구 완료」 판이 이어서 뜹니다 (판 모서리 둘 + 「다음 1개」 → 두 번째 판).</p><div class="trio">${fig('shots/after_note_both_f3','적용 후 연달아 둘째 판','적용 후','t-a','게임')}</div></div>`;
+const WHALE=[["base","강화 가능","왼쪽 아래 ① 「고래 보호막」, 오른쪽 ② 「고래 숨결」 세 줄 + 자동 숨결. 하위 탭 · 심장 카드 없음. 가이드가 짚는 「고래 강화」 단추는 ① 카드에 글자 그대로 하나.",true],["poor","진주 부족","단추가 잿빛 (누르면 유나 한마디 「구름 진주가 N개 모자라요」).",false],["max","숨결 위력 최대","위력 줄 단추가 「최대 · 다 올렸어요」, 구슬이 가득 차 빛이 테를 돈다.",false],["first","숨결 열리기 전","세 줄을 종이로 덮고 잠금 배지 + 「첫 숨결」 + 열리는 때.",false],["lv","자동 잠김 (Lv.15 전)","자동 숨결 줄에 잠금 배지 + 「Lv.15」 (누르면 레벨 막대 알림).",false],["auto","자동 ON","스위치가 켜지고 「자동 숨결 ON」.",false],["up","「고래 강화」 직후","막이 한 번 환해지고 금빛 고리가 퍼짐, Lv 꼬리표가 톡 튐.",false],["bup","「숨결 강화」(위력) 직후","그 줄 구슬에서 금빛 고리 · Lv 꼬리표 톡, 숨결 진주에 반짝임.",false]];
+document.getElementById('whale').innerHTML=WHALE.map(([s,n,c,b])=>trio('whale_'+s,n,c,'whale_'+s,b,'batch6_school 합침 A+')).join('')+`<div class="state"><h3>적용 전 · 「고래 숨결」 하위 탭 (1280만 남아 있는 실제 캡처)</h3><p class="cap">예전에는 숨결 강화가 하위 탭 뒤에 따로 있었습니다.</p><div class="trio"><figure><img src="shots/before_whale_breathtab_1280x720.jpg" alt="적용 전 숨결 탭" loading="lazy"><figcaption><span class="tag t-b">적용 전</span>게임 · 숨결 탭</figcaption></figure></div></div>`;
+const vid=(tag,id,w,t,cls)=>`<figure class="w${w.slice(0,2)}"><video src="media/${tag}_${id}_${w}.mp4" poster="media/${tag}_${id}_${w}.jpg" controls muted loop playsinline preload="none"></video><figcaption><span class="tag ${cls}">${t}</span>${w}×720</figcaption></figure>`;
+document.getElementById('clips').innerHTML=CLIPS.map(([id,cap])=>`<div class="state"><h3>${cap}</h3><div class="pair">${['1280','1600'].map(w=>vid('after',id,w,'적용 후','t-a')+(id==='whale_up'?'':vid('before',id,w,'적용 전','t-b'))).join('')}</div></div>`).join('');
+const set=w=>{document.documentElement.dataset.w=w;document.querySelectorAll('[data-res]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.res===w)));document.querySelectorAll('video').forEach(v=>{if(!v.closest('.w'+w.slice(0,2)))v.pause()})};
+document.querySelectorAll('[data-res]').forEach(b=>b.onclick=()=>set(b.dataset.res));
+set(new URLSearchParams(location.search).get('w')==='1600'?'1600':'1280');
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Ti
+
+SECTION go_late
+SECTION school_1280
+SHOT after_school_base_1280x720.jpg
+SHOT after_school_build_1280x720.jpg
+SHOT after_school_study_1280x720.jpg
+SHOT after_school_poor_1280x720.jpg
+SHOT after_school_max_1280x720.jpg
+SHOT after_school_lock_1280x720.jpg
+SHOT after_school_done_1280x720.jpg
+SECTION note_1280
+SHOT after_note_room_f1_1280x720.jpg
+SHOT after_note_room_f2_1280x720.jpg
+SHOT after_note_room_f3_1280x720.jpg
+SHOT after_note_room_f4_1280x720.jpg
+SHOT after_note_study_f1_1280x720.jpg
+SHOT after_note_study_f2_1280x720.jpg
+SHOT after_note_both_f1_1280x720.jpg
+SHOT after_note_both_f2_1280x720.jpg
+SHOT after_note_both_f3_1280x720.jpg
+SECTION whale_1280
+SHOT after_whale_base_1280x720.jpg
+SHOT after_whale_poor_1280x720.jpg
+SHOT after_whale_max_1280x720.jpg
+SHOT after_whale_first_1280x720.jpg
+SHOT after_whale_lv_1280x720.jpg
+SHOT after_whale_auto_1280x720.jpg
+SHOT after_whale_up_1280x720.jpg
+SHOT after_whale_bup_1280x720.jpg
+SECTION school_1600
+SHOT after_school_base_1600x720.jpg
+SHOT after_school_build_1600x720.jpg
+SHOT after_school_study_1600x720.jpg
+SHOT after_school_poor_1600x720.jpg
+SHOT after_school_max_1600x720.jpg
+SHOT after_school_lock_1600x720.jpg
+SHOT after_school_done_1600x720.jpg
+SECTION note_1600
+SHOT after_note_room_f1_1600x720.jpg
+SHOT after_note_room_f2_1600x720.jpg
+SHOT after_note_room_f3_1600x720.jpg
+SHOT after_note_room_f4_1600x720.jpg
+SHOT after_note_study_f1_1600x720.jpg
+SHOT after_note_study_f2_1600x720.jpg
+SHOT after_note_both_f1_1600x720.jpg
+SHOT after_note_both_f2_1600x720.jpg
+SHOT after_note_both_f3_1600x720.jpg
+SECTION whale_1600
+SHOT after_whale_base_1600x720.jpg
+SHOT after_whale_poor_1600x720.jpg
+SHOT after_whale_max_1600x720.jpg
+SHOT after_whale_first_1600x720.jpg
+SHOT after_whale_lv_1600x720.jpg
+SHOT after_whale_auto_1600x720.jpg
+SHOT after_whale_up_1600x720.jpg
+SHOT after_whale_bup_1600x720.jpg
+SECTION video
+VIDEO after_school_open_1280 frames=126
+VIDEO after_school_done_1280 frames=97
+VIDEO after_whale_up_1280 frames=120
+VIDEO after_note_room_1280 frames=152
+VIDEO after_note_both_1280 frames=187
+VIDEO after_school_open_1600 frames=121
+VIDEO after_school_done_1600 frames=108
+VIDEO after_whale_up_1600 frames=125
+VIDEO after_note_room_1600 frames=155
+VIDEO after_note_both_1600 frames=164
+B6_GUIDE {"고래 강화@1280":true,"고래 강화@1600":true,"과학실>짓기@1280":true,"과학실>짓기@1600":true,"색의 공명>연구@1280":true,"색의 공명>연구@1600":true}
+FEEDBACK_DONE phase=late entries=36 failures=[]

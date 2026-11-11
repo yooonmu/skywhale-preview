@@ -1,0 +1,624 @@
+{
+  "entries": [
+    {
+      "file": "before_school_base_1280x720.jpg",
+      "id": "before_school_base",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 before · base",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_school_build_1280x720.jpg",
+      "id": "before_school_build",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 before · build",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_school_study_1280x720.jpg",
+      "id": "before_school_study",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 before · study",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_school_poor_1280x720.jpg",
+      "id": "before_school_poor",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 before · poor",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_school_max_1280x720.jpg",
+      "id": "before_school_max",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 before · max",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_school_lock_1280x720.jpg",
+      "id": "before_school_lock",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 before · lock",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_school_done_1280x720.jpg",
+      "id": "before_school_done",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 before · done",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_note_room_f1_1280x720.jpg",
+      "frames": [
+        "before_note_room_f1_1280x720.jpg",
+        "before_note_room_f2_1280x720.jpg",
+        "before_note_room_f3_1280x720.jpg",
+        "before_note_room_f4_1280x720.jpg"
+      ],
+      "id": "before_note_room",
+      "items": [
+        "D6-4"
+      ],
+      "label": "분교 완성 알림 before · 교실",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_note_study_f1_1280x720.jpg",
+      "frames": [
+        "before_note_study_f1_1280x720.jpg",
+        "before_note_study_f2_1280x720.jpg"
+      ],
+      "id": "before_note_study",
+      "items": [
+        "D6-4"
+      ],
+      "label": "분교 완성 알림 before · 연구",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_note_both_f1_1280x720.jpg",
+      "frames": [
+        "before_note_both_f1_1280x720.jpg",
+        "before_note_both_f2_1280x720.jpg"
+      ],
+      "id": "before_note_both",
+      "items": [
+        "D6-4"
+      ],
+      "label": "분교 완성 알림 before · 둘이 연달아",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_school_base_1600x720.jpg",
+      "id": "before_school_base",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 before · base",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_school_build_1600x720.jpg",
+      "id": "before_school_build",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 before · build",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_school_study_1600x720.jpg",
+      "id": "before_school_study",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 before · study",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_school_poor_1600x720.jpg",
+      "id": "before_school_poor",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 before · poor",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_school_max_1600x720.jpg",
+      "id": "before_school_max",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 before · max",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_school_lock_1600x720.jpg",
+      "id": "before_school_lock",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 before · lock",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_school_done_1600x720.jpg",
+      "id": "before_school_done",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 before · done",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_note_room_f1_1600x720.jpg",
+      "frames": [
+        "before_note_room_f1_1600x720.jpg",
+        "before_note_room_f2_1600x720.jpg",
+        "before_note_room_f3_1600x720.jpg",
+        "before_note_room_f4_1600x720.jpg"
+      ],
+      "id": "before_note_room",
+      "items": [
+        "D6-4"
+      ],
+      "label": "분교 완성 알림 before · 교실",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_note_study_f1_1600x720.jpg",
+      "frames": [
+        "before_note_study_f1_1600x720.jpg",
+        "before_note_study_f2_1600x720.jpg"
+      ],
+      "id": "before_note_study",
+      "items": [
+        "D6-4"
+      ],
+      "label": "분교 완성 알림 before · 연구",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_note_both_f1_1600x720.jpg",
+      "frames": [
+        "before_note_both_f1_1600x720.jpg",
+        "before_note_both_f2_1600x720.jpg"
+      ],
+      "id": "before_note_both",
+      "items": [
+        "D6-4"
+      ],
+      "label": "분교 완성 알림 before · 둘이 연달아",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_school_base_1280x720.jpg",
+      "id": "after_school_base",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 after · base",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_school_build_1280x720.jpg",
+      "id": "after_school_build",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 after · build",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_school_study_1280x720.jpg",
+      "id": "after_school_study",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 after · study",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_school_poor_1280x720.jpg",
+      "id": "after_school_poor",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 after · poor",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_school_max_1280x720.jpg",
+      "id": "after_school_max",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 after · max",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_school_lock_1280x720.jpg",
+      "id": "after_school_lock",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 after · lock",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_school_done_1280x720.jpg",
+      "id": "after_school_done",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 after · done",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_note_room_f1_1280x720.jpg",
+      "frames": [
+        "after_note_room_f1_1280x720.jpg",
+        "after_note_room_f2_1280x720.jpg",
+        "after_note_room_f3_1280x720.jpg",
+        "after_note_room_f4_1280x720.jpg"
+      ],
+      "id": "after_note_room",
+      "items": [
+        "D6-4"
+      ],
+      "label": "분교 완성 알림 after · 교실",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_note_study_f1_1280x720.jpg",
+      "frames": [
+        "after_note_study_f1_1280x720.jpg",
+        "after_note_study_f2_1280x720.jpg"
+      ],
+      "id": "after_note_study",
+      "items": [
+        "D6-4"
+      ],
+      "label": "분교 완성 알림 after · 연구",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_note_both_f1_1280x720.jpg",
+      "frames": [
+        "after_note_both_f1_1280x720.jpg",
+        "after_note_both_f2_1280x720.jpg",
+        "after_note_both_f3_1280x720.jpg"
+      ],
+      "id": "after_note_both",
+      "items": [
+        "D6-4"
+      ],
+      "label": "분교 완성 알림 after · 둘이 연달아",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_whale_base_1280x720.jpg",
+      "id": "after_whale_base",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · base",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_whale_poor_1280x720.jpg",
+      "id": "after_whale_poor",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · poor",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_whale_max_1280x720.jpg",
+      "id": "after_whale_max",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · max",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_whale_first_1280x720.jpg",
+      "id": "after_whale_first",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · first",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_whale_lv_1280x720.jpg",
+      "id": "after_whale_lv",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · lv",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_whale_auto_1280x720.jpg",
+      "id": "after_whale_auto",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · auto",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_whale_up_1280x720.jpg",
+      "id": "after_whale_up",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · up",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_whale_bup_1280x720.jpg",
+      "id": "after_whale_bup",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · bup",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_school_base_1600x720.jpg",
+      "id": "after_school_base",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 after · base",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_school_build_1600x720.jpg",
+      "id": "after_school_build",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 after · build",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_school_study_1600x720.jpg",
+      "id": "after_school_study",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 after · study",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_school_poor_1600x720.jpg",
+      "id": "after_school_poor",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 after · poor",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_school_max_1600x720.jpg",
+      "id": "after_school_max",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 after · max",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_school_lock_1600x720.jpg",
+      "id": "after_school_lock",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 after · lock",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_school_done_1600x720.jpg",
+      "id": "after_school_done",
+      "items": [
+        "D6-1"
+      ],
+      "label": "분교 after · done",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_note_room_f1_1600x720.jpg",
+      "frames": [
+        "after_note_room_f1_1600x720.jpg",
+        "after_note_room_f2_1600x720.jpg",
+        "after_note_room_f3_1600x720.jpg",
+        "after_note_room_f4_1600x720.jpg"
+      ],
+      "id": "after_note_room",
+      "items": [
+        "D6-4"
+      ],
+      "label": "분교 완성 알림 after · 교실",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_note_study_f1_1600x720.jpg",
+      "frames": [
+        "after_note_study_f1_1600x720.jpg",
+        "after_note_study_f2_1600x720.jpg"
+      ],
+      "id": "after_note_study",
+      "items": [
+        "D6-4"
+      ],
+      "label": "분교 완성 알림 after · 연구",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_note_both_f1_1600x720.jpg",
+      "frames": [
+        "after_note_both_f1_1600x720.jpg",
+        "after_note_both_f2_1600x720.jpg",
+        "after_note_both_f3_1600x720.jpg"
+      ],
+      "id": "after_note_both",
+      "items": [
+        "D6-4"
+      ],
+      "label": "분교 완성 알림 after · 둘이 연달아",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_whale_base_1600x720.jpg",
+      "id": "after_whale_base",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · base",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_whale_poor_1600x720.jpg",
+      "id": "after_whale_poor",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · poor",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_whale_max_1600x720.jpg",
+      "id": "after_whale_max",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · max",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_whale_first_1600x720.jpg",
+      "id": "after_whale_first",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · first",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_whale_lv_1600x720.jpg",
+      "id": "after_whale_lv",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · lv",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_whale_auto_1600x720.jpg",
+      "id": "after_whale_auto",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · auto",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_whale_up_1600x720.jpg",
+      "id": "after_whale_up",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · up",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_whale_bup_1600x720.jpg",
+      "id": "after_whale_bup",
+      "items": [
+        "D6-2"
+      ],
+      "label": "고래 강화 after · bup",
+      "phase": "late",
+      "resolution": "1600x720"
+    }
+  ],
+  "tool": "tools/feedback_capture.gd",
+  "updated": "2026-11-12T02:00:50"
+}
