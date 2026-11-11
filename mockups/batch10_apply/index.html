@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 · 설정 묶음 10 적용 — 시안 ↔ 게임</title>
+<style>
+:root{--navy:#2e2350;--lav:#8b74e8;--line:#e2dbf5}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;line-height:1.45}
+.page{max-width:1480px;margin:0 auto;padding:20px 16px 64px}
+h1{font-size:22px;margin:0 0 4px}
+h2{font-size:18px;margin:30px 0 8px;padding-top:12px;border-top:2px solid var(--line)}
+h3{font-size:15px;margin:0 0 4px}
+.lead{margin:0 0 12px;font-size:14px;color:#5a5180}
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 0;background:rgba(243,240,250,.94);font-size:13px}
+.bar button{font:inherit;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.bar a{color:#4a33b0;font-weight:700;padding:12px 4px}
+.w16{display:none}:root[data-w="1600"] .w12{display:none}:root[data-w="1600"] .w16{display:block}
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:10px}
+figure{margin:0}
+figure img,figure video{display:block;width:100%;border-radius:8px;background:#1d1838}
+figcaption{font-size:13px;color:#4c4374;margin-top:4px}
+.none{display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;border-radius:8px;border:2px dashed #c9bff0;background:#fbfaff;color:#6a5f95;font-size:14px;padding:16px;text-align:center}:root[data-w="1600"] .none{aspect-ratio:20/9}
+.tag{display:inline-block;padding:1px 8px;border-radius:9px;font-size:12px;font-weight:800;color:#fff;margin-right:6px}
+.t-m{background:#5b3fc4}.t-a{background:#1d7a57}.t-b{background:#625a80}
+.cap{font-size:13.5px;color:#4c4374;margin:0 0 8px}
+.state{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin:0 0 12px}
+ul.notes{font-size:13.5px;color:#4c4374;padding-left:18px}
+ul.notes b{color:#4a33b0}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>설정 묶음 10 적용 · 시안 ↔ 게임</h1>
+<p class="lead">PD가 고른 <a href="../batch10_settings/index.html">batch10_settings</a>의 <b>D10-1 A · D10-2 B · D10-3 B · D10-4 B</b>를 게임에 넣은 결과입니다. 같은 늦은 계정 저장에서 <code>batch10_apply/tools/apply_capture.gd</code>가 실제 버튼이 부르는 함수(more_btn → SettingsPanel.open · Tab_* · CreditRoll · open_cheats)로 띄워 <b>시안 · 적용 후 · 적용 전</b>을 나란히 놓았습니다. 전투 장면(적 · 숫자)은 찍은 순간마다 다릅니다. 시안은 고른 안의 기본 상태만 있습니다.</p>
+<div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button><a href="#d101">메뉴 → 톱니 구슬</a><a href="#d102">설정 탭</a><a href="#d103">만든 사람들</a><a href="#d104">소리 창</a><a href="#pt1">플레이 테스트 1차</a><a href="#motion">움직임</a><a href="#notes">시안과 다른 점</a></div>
+<h2 id="pt1">PD 플레이 테스트 1차 · #31 탭 누르기 · #39 유나 빼고 판 가운데</h2>
+<p class="lead"><b>#31</b> 탭이 잘 안 눌리던 원인: 고르지 않은 탭은 판 밑에 깔리는데, 판의 그림자 자리(위로 48px)가 누르기를 받아 탭 아래쪽 대부분을 가로챘습니다. 이제 판은 누르기를 받지 않고, 탭은 72px로 키워 <b>폭 전체 × 위끝부터 판 가장자리까지 64px</b>가 눌립니다(판에 묻힌 아래 8px은 빼서 판과 겹치지 않음). 탭 폭도 124 · 176 · 124 → 140 · 200 · 140px. 아래 「1차 후」 사진과 영상의 탭 넘김은 모두 판 가장자리 6px 위를 진짜로 누른 것입니다(예전에 빗나가던 자리). <b>#39</b> 판 옆 유나 전신을 빼고 판을 화면 가운데로 옮겼습니다. 탭 · 종이 · 리넨 판 모양은 그대로입니다. 「준비 중」 칸을 눌렀을 때 뜨는 작은 유나 알림(YunaToast)은 확정된 공용 알림이라 그대로 둡니다.</p>
+<div id="pt1box"></div>
+<div id="sections"></div>
+<h2 id="motion">움직임 (게임 녹화 · 적용 후)</h2>
+<p class="lead">게임 화면을 프레임마다 찍어 실제 시각대로 묶은 mp4(yuv420p · tv 범위)입니다. 설정: 탭 넘김 · 스위치. 만든 사람들: 흐름 → 누르고 있기(빨리) → 끌어 넘김 → 「끝으로」.</p>
+<div id="videos"></div>
+<h2 id="notes">시안과 다른 점 · 그대로 둔 것</h2>
+<ul class="notes">
+<li><b>D10-1 톱니 구슬</b>: 펼침 메뉴(more_box)를 없애고 오른쪽 위 금테 구슬 하나를 누르면 바로 설정이 열립니다. 시안의 금빛 톱니 그림과 라벤더 이름 띠를 그대로 옮겼습니다. 「개발」 렌치 구슬은 디버그 빌드 + skywhale/dev_cheats에서만 만들어지고, 출시 판에는 노드가 없습니다. 시안의 빨간 점은 설정에 「할 일」이 생기는 경우가 없어 넣지 않았습니다(빨간 점 = 할 일 규칙).</li>
+<li><b>D10-2 견출지 탭</b>: 게임 · 알림 · 절전 · 계정 세 탭, 판은 화면 가운데(플레이 테스트 1차 #39로 시안의 오른쪽 유나 전신은 뺌). 계정 탭의 「준비 중」 넷(계정 연동 · 고객 문의 · 쿠폰 · 약관)은 따로 늘어놓지 않고 「준비 중이에요」 카드 하나에 묶었습니다. 누르면 유나 알림이 뜨고, 없는 기능을 있는 척하지 않습니다. 만든 사람들 · 앱 버전만 진짜 줄로 남겼습니다.</li>
+<li><b>D10-3 흐르는 크레딧</b>: 누르고 있으면 빨리 흐르고, 끌거나 휠로 넘기며, 「끝으로」 단추로 바로 끝에 갑니다. 고래 아래 구름은 회색 평면 대신 위가 밝고 아래가 라벤더로 그늘지는 부피 셰이더로 그렸습니다. 라이선스 전문은 종이 시트로 열립니다.</li>
+<li><b>D10-4 개발 메뉴로만</b>: 출시 판 설정에서 「소리 설정」 줄과 SoundPanel 입구를 없앴습니다(볼륨 두 줄은 게임 탭에 그대로). 사운드 테스트 · 진단은 개발 클립보드 창에만 남습니다.</li>
+<li><b>뒤로 버튼</b>: 설정 · 만든 사람들 · 라이선스 종이 · 개발 클립보드 모두 한 번에 한 겹씩 닫힙니다(back_button_check 73/0).</li>
+<li><b>그대로 둔 것</b>: 게임 수치 · 저장 값, 볼륨 · 컷신 · 절전 설정의 동작, 재화 줄 C · YunaToast · 위 가운데 알림 판 · LockGate · 오른쪽 책갈피 메뉴, 검사 노드 이름(More · Dev · Tab_* · glyph).</li>
+</ul>
+</main>
+<script>
+// st: [적용 후 파일, 적용 전 파일(없으면 ''), 1600 적용 전 있음, 제목, 설명]
+const S=[
+ {id:'d101',t:'D10-1 메뉴 펼침 · A 톱니 구슬 하나, 누르면 바로 설정',mock:'menu_a',st:[
+  ['battle','now_battle',1,'전투 · 오른쪽 위','「메뉴」 펼침 구슬 → 「설정」 톱니 구슬. 출시 판 모습(개발 구슬 숨김).'],
+  ['battle_dev','now_more',1,'개발 빌드 · 펼침 자리','전: 펼침 메뉴 칸. 후: 톱니 구슬 아래 작은 「개발」 구슬만.']]},
+ {id:'d102',t:'D10-2 설정 · B 견출지 탭 (플레이 테스트 1차 #39로 유나 전신은 뺌)',mock:'set_b',st:[
+  ['settings_game','now_settings',1,'게임 탭','볼륨 · 컷신 · 프레임 · 언어.'],
+  ['settings_power','now_power',0,'알림 · 절전 탭','알림 · 방치 절전 (power_save.gd 값 그대로).'],
+  ['settings_account','',0,'계정 탭','준비 중 넷은 카드 하나에 묶음. 만든 사람들 · 앱 버전만 줄로.'],
+  ['settings_soon','',0,'준비 중 칸을 누름','유나 알림으로 「준비 중」을 알림.']]},
+ {id:'d103',t:'D10-3 만든 사람들 · B 흐르는 크레딧',mock:'cred_b',st:[
+  ['credits','now_credits',1,'처음','달 · 별 · 솜구름 위 고래, 아래 「끝으로」 단추와 넘김 안내.'],
+  ['credits_end','',0,'「끝으로」','기다리지 않고 바로 끝.'],
+  ['credits_license','',0,'라이선스 전문','종이 시트. 뒤로 버튼 = 시트만 닫힘.']]},
+ {id:'d104',t:'D10-4 소리 창 · B 개발 메뉴로만',mock:'snd_b',st:[
+  ['dev_sound','now_sound_dev',0,'개발 클립보드 · 사운드 테스트 · 진단','디버그 빌드만. 출시 판에는 입구가 없음.'],
+  ['','now_sound',1,'출시 판 「소리 설정」 창','적용 후에는 없음 — 볼륨은 설정 · 게임 탭에.']]}
+];
+const fig=(tag,lab,src,ext,has16)=>`<figure><img class="w12" src="${src}_1280x720.${ext}" alt="${lab} 1280" loading="lazy">${has16?`<img class="w16" src="${src}_1600x720.${ext}" alt="${lab} 1600" loading="lazy">`:`<div class="w16 none">이 상태의 1600 「적용 전」 사진은 없습니다 (1280만 찍음)</div>`}<figcaption><span class="tag t-${tag}">${lab}</span>${src}</figcaption></figure>`;
+const empty=(tag,lab,msg)=>`<figure><div class="none">${msg}</div><figcaption><span class="tag t-${tag}">${lab}</span></figcaption></figure>`;
+document.getElementById('sections').innerHTML=S.map(s=>`<h2 id="${s.id}">${s.t}</h2>`+s.st.map((x,i)=>`<div class="state"><h3>${x[3]}</h3><p class="cap">${x[4]}</p><div class="trio">${i===0?fig('m','시안','mock/'+s.mock,'png',1):''}${x[0]?fig('a','적용 후','after/'+x[0],'jpg',1):empty('a','적용 후','이 창은 출시 판에서 없어졌습니다')}${x[1]?fig('b','적용 전','before/'+x[1],'jpg',x[2]):empty('b','적용 전','적용 전에는 없던 상태입니다')}</div></div>`).join('')).join('');
+const P=[['settings_game','게임 탭'],['settings_power','알림 · 절전 탭 (판 가장자리 위를 눌러 넘김)'],['settings_account','계정 탭']];
+const pf=(dir,src,lab,tag)=>`<figure><img class="w12" src="${dir}/${src}_1280x720.jpg" alt="${lab} 1280" loading="lazy"><img class="w16" src="${dir}/${src}_1600x720.jpg" alt="${lab} 1600" loading="lazy"><figcaption><span class="tag t-${tag}">${lab}</span>${dir}/${src}</figcaption></figure>`;
+const pv=(dir,lab,tag)=>`<figure><video class="w12" src="${dir}/settings_1280.mp4" poster="${dir}/settings_1280.jpg" controls muted loop playsinline preload="metadata"></video><video class="w16" src="${dir}/settings_1600.mp4" poster="${dir}/settings_1600.jpg" controls muted loop playsinline preload="metadata"></video><figcaption><span class="tag t-${tag}">${lab}</span>${dir}/settings_*.mp4</figcaption></figure>`;
+document.getElementById('pt1box').innerHTML=P.map(p=>`<div class="state"><h3>${p[1]}</h3><div class="trio">${pf('after',p[0],'1차 후','a')}${pf('pt1_before',p[0],'1차 전','b')}</div></div>`).join('')+`<div class="state"><h3>움직임 · 구슬 → 탭 넘김 → 준비 중 칸</h3><div class="trio">${pv('video','1차 후','a')}${pv('pt1_before','1차 전','b')}</div></div>`;
+const V=[['settings','설정 · 탭 넘김'],['credits','만든 사람들 · 빨리 · 넘김 · 끝으로']];
+document.getElementById('videos').innerHTML=V.map(v=>`<div class="state"><h3>${v[1]}</h3><div class="trio">${[1280,1600].map(w=>`<figure><video src="video/${v[0]}_${w}.mp4" poster="video/${v[0]}_${w}.jpg" controls muted loop playsinline preload="metadata"></video><figcaption><span class="tag t-a">적용 후 ${w}</span>video/${v[0]}_${w}.mp4</figcaption></figure>`).join('')}</div></div>`).join('');
+const set=w=>{document.documentElement.dataset.w=w;document.querySelectorAll('[data-res]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.res===w)))};
+document.querySelectorAll('[data-res]').forEach(b=>b.onclick=()=>set(b.dataset.res));
+set(new URLSearchParams(location.search).get('w')==='1600'?'1600':'1280');
+</script>
+</body>
+</html>
