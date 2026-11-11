@@ -1,0 +1,32 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Ti
+
+--res://assets/ui/fx/adv_dial.gdshader--
+   47 |  float ang = atan(p.x, -p.y); 
+   48 |  float a = ang - rot;
+E  49->  float TAU = 6.2831853;
+   50 |  float r_out = R - 6.0;
+   51 |  float r_wood = R - 44.0;
+SHADER ERROR: Redefinition of 'TAU'.
+   at: (null) (res://assets/ui/fx/adv_dial.gdshader:49)
+   GDScript backtrace (most recent call first):
+       [0] _plan (res://scripts/shader_warm.gd:66)
+       [1] startup_slice (res://scripts/main.gd:606)
+ERROR: Shader compilation failed.
+   at: set_code (drivers/gles3/storage/material_storage.cpp:2695)
+   GDScript backtrace (most recent call first):
+       [0] _plan (res://scripts/shader_warm.gd:66)
+       [1] startup_slice (res://scripts/main.gd:606)
+SHOT quit_title_1280x720.jpg
+SECTION go_late
+SECTION b11_perf
+PERF {"avg_ms":27.64,"frames":109,"gpu_p50_ms":6.661,"gpu_p95_ms":13.501,"label":"battle","p95_ms":63.26,"renderer":"gl_compatibility","width":1280}
+PERF {"avg_ms":27.99,"frames":108,"gpu_p50_ms":12.869,"gpu_p95_ms":35.394,"label":"sleep_drawall","p95_ms":43.54,"renderer":"gl_compatibility","width":1280}
+PERF {"avg_ms":8.86,"frames":341,"gpu_p50_ms":6.524,"gpu_p95_ms":19.625,"label":"sleep_skyonly","p95_ms":26.33,"renderer":"gl_compatibility","width":1280}
+PERF {"avg_ms":39.04,"frames":77,"gpu_p50_ms":13.186,"gpu_p95_ms":37.745,"label":"battle","p95_ms":102.31,"renderer":"gl_compatibility","width":1280}
+PERF {"avg_ms":36.25,"frames":89,"gpu_p50_ms":12.786,"gpu_p95_ms":37.948,"label":"sleep_drawall","p95_ms":80.39,"renderer":"gl_compatibility","width":1280}
+PERF {"avg_ms":7.01,"frames":428,"gpu_p50_ms":2.629,"gpu_p95_ms":8.651,"label":"sleep_skyonly","p95_ms":11.97,"renderer":"gl_compatibility","width":1280}
+PERF {"avg_ms":40.64,"frames":76,"gpu_p50_ms":9.524,"gpu_p95_ms":38.206,"label":"battle","p95_ms":87.84,"renderer":"gl_compatibility","width":1280}
+PERF {"avg_ms":34.25,"frames":88,"gpu_p50_ms":15.089,"gpu_p95_ms":24.696,"label":"sleep_drawall","p95_ms":49.49,"renderer":"gl_compatibility","width":1280}
+PERF {"avg_ms":6.98,"frames":431,"gpu_p50_ms":5.843,"gpu_p95_ms":11.382,"label":"sleep_skyonly","p95_ms":13.76,"renderer":"gl_compatibility","width":1280}
+FEEDBACK_DONE phase=late entries=1 failures=[]

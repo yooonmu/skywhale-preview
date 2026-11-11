@@ -1,0 +1,206 @@
+{
+  "entries": [
+    {
+      "file": "quit_title_1280x720.jpg",
+      "id": "quit_title",
+      "items": [
+        "batch11"
+      ],
+      "label": "게임 종료 · 타이틀 위",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "quit_battle_1280x720.jpg",
+      "id": "quit_battle",
+      "items": [
+        "batch11"
+      ],
+      "label": "게임 종료 · 전투 위",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "save_restored_1280x720.jpg",
+      "id": "save_restored",
+      "items": [
+        "batch11"
+      ],
+      "label": "저장 손상 · 백업에서 되살림",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "save_fresh_1280x720.jpg",
+      "id": "save_fresh",
+      "items": [
+        "batch11"
+      ],
+      "label": "저장 손상 · 처음부터",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "fail_gems_1280x720.jpg",
+      "id": "fail_gems",
+      "items": [
+        "batch11"
+      ],
+      "label": "실패 알림 · 채색석 (장비 작업대)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "fail_mat_1280x720.jpg",
+      "id": "fail_mat",
+      "items": [
+        "batch11"
+      ],
+      "label": "실패 알림 · 재료 (긴 글)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "fail_clock_1280x720.jpg",
+      "id": "fail_clock",
+      "items": [
+        "batch11"
+      ],
+      "label": "기기 시간 확인 (전투 위)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "power_just_1280x720.jpg",
+      "id": "power_just",
+      "items": [
+        "batch11"
+      ],
+      "label": "방치 절전 · 막 절전",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "power_ten_1280x720.jpg",
+      "id": "power_ten",
+      "items": [
+        "batch11"
+      ],
+      "label": "방치 절전 · 10분",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "power_cine_1280x720.jpg",
+      "id": "power_cine",
+      "items": [
+        "batch11"
+      ],
+      "label": "방치 절전 · 연출 중",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "quit_title_1600x720.jpg",
+      "id": "quit_title",
+      "items": [
+        "batch11"
+      ],
+      "label": "게임 종료 · 타이틀 위",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "quit_battle_1600x720.jpg",
+      "id": "quit_battle",
+      "items": [
+        "batch11"
+      ],
+      "label": "게임 종료 · 전투 위",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "save_restored_1600x720.jpg",
+      "id": "save_restored",
+      "items": [
+        "batch11"
+      ],
+      "label": "저장 손상 · 백업에서 되살림",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "save_fresh_1600x720.jpg",
+      "id": "save_fresh",
+      "items": [
+        "batch11"
+      ],
+      "label": "저장 손상 · 처음부터",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "fail_gems_1600x720.jpg",
+      "id": "fail_gems",
+      "items": [
+        "batch11"
+      ],
+      "label": "실패 알림 · 채색석 (장비 작업대)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "fail_mat_1600x720.jpg",
+      "id": "fail_mat",
+      "items": [
+        "batch11"
+      ],
+      "label": "실패 알림 · 재료 (긴 글)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "fail_clock_1600x720.jpg",
+      "id": "fail_clock",
+      "items": [
+        "batch11"
+      ],
+      "label": "기기 시간 확인 (전투 위)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "power_just_1600x720.jpg",
+      "id": "power_just",
+      "items": [
+        "batch11"
+      ],
+      "label": "방치 절전 · 막 절전",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "power_ten_1600x720.jpg",
+      "id": "power_ten",
+      "items": [
+        "batch11"
+      ],
+      "label": "방치 절전 · 10분",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "power_cine_1600x720.jpg",
+      "id": "power_cine",
+      "items": [
+        "batch11"
+      ],
+      "label": "방치 절전 · 연출 중",
+      "phase": "late",
+      "resolution": "1600x720"
+    }
+  ],
+  "tool": "tools/feedback_capture.gd",
+  "updated": "2026-11-11T23:58:49"
+}

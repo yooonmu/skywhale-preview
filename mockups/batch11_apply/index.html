@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 · 시스템 안내 묶음 11 적용 — 시안 ↔ 게임</title>
+<style>
+:root{--navy:#2e2350;--lav:#8b74e8;--line:#e2dbf5}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;line-height:1.45}
+.page{max-width:1480px;margin:0 auto;padding:20px 16px 64px}
+h1{font-size:22px;margin:0 0 4px}
+h2{font-size:18px;margin:30px 0 8px;padding-top:12px;border-top:2px solid var(--line)}
+h3{font-size:15px;margin:0 0 4px}
+.lead{margin:0 0 12px;font-size:14px;color:#5a5180}
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 0;background:rgba(243,240,250,.94);font-size:13px}
+.bar button{font:inherit;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.bar a{color:#4a33b0;font-weight:700;padding:12px 4px}
+.w16{display:none}:root[data-w="1600"] .w12{display:none}:root[data-w="1600"] .w16{display:block}
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:10px}
+figure{margin:0}
+figure img,figure video{display:block;width:100%;border-radius:8px;background:#1d1838}
+figcaption{font-size:12.5px;color:#4c4374;margin-top:4px}
+.tag{display:inline-block;padding:1px 8px;border-radius:9px;font-size:12px;font-weight:800;color:#fff;margin-right:6px}
+.t-m{background:#5b3fc4}.t-a{background:#1d7a57}.t-b{background:#625a80}
+.cap{font-size:13.5px;color:#4c4374;margin:0 0 8px}
+.state{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin:0 0 12px}
+ul.notes{font-size:13.5px;color:#4c4374;padding-left:18px}
+ul.notes b{color:#4a33b0}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>시스템 안내 묶음 11 적용 · 시안 ↔ 게임</h1>
+<p class="lead">PD가 고른 <a href="../batch11_system/index.html">batch11_system</a>의 <b>D11-1 A · D11-2 A · D11-3 C · D11-4 B(+단추 흔들림)</b>을 게임에 넣은 결과입니다. 같은 저장(STAGE 33)에서 <code>tools/feedback_capture.gd</code>가 실제 경로(PowerSave · BackNav.ask_quit · main._notify_corrupt_save · Economy 실패 알림 · 기기 시간 경고)로 띄워 <b>시안 · 적용 후 · 적용 전</b>을 나란히 놓았습니다. 전투 장면(적 · 숫자)은 찍은 순간마다 다릅니다. 시안은 고른 안의 기본 상태만 있습니다.</p>
+<div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button><a href="#d111">방치 절전</a><a href="#d112">게임 종료</a><a href="#d113">저장 손상</a><a href="#d114">실패 알림</a><a href="#motion">움직임</a><a href="#notes">시안과 다른 점</a></div>
+<div id="sections"></div>
+<h2 id="motion">움직임 (게임 녹화 · 적용 후 ↔ 적용 전)</h2>
+<p class="lead">1280×720 녹화입니다. 절전은 실제 절전 프레임 제한 그대로라 일부러 느리게 움직입니다.</p>
+<div id="videos"></div>
+<h2 id="notes">시안과 다른 점 · 그대로 둔 것</h2>
+<ul class="notes">
+<li><b>방치 절전</b>: 별 반짝임은 셰이더 하나(시간만 넘김)로 그리고, 고래 실루엣 · 구름 두 겹은 게임 그림을 남보라로 다시 물들여 달빛 테를 얹었습니다. 시안의 탁한 구름 대신 먼 구름은 위가 안개처럼 사라지게 했습니다. 「절전 중」 표 · STAGE · 절전한 지 시간 · 그동안 모은 바람 조각을 화면 가운데 아래에 고정해 로딩 화면과 다르게 읽힙니다. power_save.gd의 들어가는 조건 · 프레임 제한 · 누르면 깨기는 그대로입니다.</li>
+<li><b>게임 종료</b>: 전투 위에서는 유나가 말풍선 오른쪽(적 쪽)에 서서 왼쪽 HUD를 가리지 않습니다. 타이틀 위에서는 유나를 따로 세우지 않고, 키 아트 속 유나 얼굴을 꼬리로 가리킵니다(말풍선은 로고 · 얼굴 아래). 뒤로 버튼 한 번 더 = 취소, 「종료하기」만 종료.</li>
+<li><b>저장 손상</b>: 쪽지에 「되살린 저장 · 사라진 것 · 손상된 파일」 세 줄, 사라진 것은 진홍. 유나는 책을 꼭 껴안은 사과 자세 · 땀방울 · 떨림 표시로 시안보다 크게 그렸습니다. 처음부터 상태에서는 되살린 줄을 빼고 머리말이 main.gd 그대로 바뀝니다.</li>
+<li><b>실패 알림</b>: YunaToast 자리 규칙 그대로, 테만 붉게. 원인 단추가 짧게 흔들리고 테에 붉은 맥박 한 번 · 양끝 작은 먼지 구름. 같은 단추를 연달아 눌러도 흔들림은 하나만 돕니다. 폭발 · 화면 흔들림 · 깜빡임 없음.</li>
+<li><b>QA 수정 (qa-b11-system)</b>: ① 종료 창이 떠 있는 동안 손가락 안내 층(안내 유나 · 말풍선 · 손가락 · 어둠)의 그리기만 숨기고, 창이 사라지면(취소 · 뒤로 가기) 다시 보임 — 안내 단계는 건드리지 않음. ② 절전 밤하늘은 보일 때마다 화면 폭이 바뀌었으면 새로 짬. ③ 실패 알림은 원인 단추 판에서 20px 띄움. ④ 밤하늘이 다 덮은 뒤에는 화면이 밤하늘 층만 그림(전투 · HUD는 처리만 계속, visible은 그대로), 별 반짝임 판은 수평선 바로 아래까지만. 같은 전투에서 번갈아 세 번 잰 GPU 그리기 시간 중앙값: 1280 절전 12.8–15.1ms → 2.6–6.5ms, 1600 44.6–62.1ms → 8.1–12.4ms (상한 · 화면 동기 끈 측정, 다른 작업이 GPU를 같이 쓰는 PC라 절대값보다 같은 회차의 차이를 보세요).</li>
+<li><b>그대로 둔 것</b>: 글(back_nav.gd ask_quit · main.gd _notify_corrupt_save · power_save.gd · economy.gd FAIL_TEXT), 노드 이름, 게임 수치 · 저장, 위 가운데 알림 판 · LockGate · 오른쪽 책갈피 메뉴.</li>
+</ul>
+</main>
+<script>
+const S=[
+ {id:'d111',t:'D11-1 방치 절전 · A 밤하늘 고래 실루엣',mock:'power_a',st:[['power_just','막 절전','들어온 직후. 「절전 중」 표가 먼저, 글은 그 아래.'],['power_ten','10분','시간 · 바람 조각이 늘어난 상태.'],['power_cine','연출 중','연출 뒤에 들어온 경우도 같은 화면.'],['power_resized','폭을 바꾼 뒤 다시 잠듦 (QA 2)','1600 칸 = 1280에서 잠듦 → 깨움 → 1600으로 넓혀 다시 잠듦(QA 재현 순서), 1280 칸 = 그 반대. 구름 띠 · 고래 · 달 · 별 판이 새 폭에 맞음.',null]]},
+ {id:'d112',t:'D11-2 게임 종료 · A 손 흔드는 유나 + 말풍선',mock:'quit_a',st:[['quit_battle','전투 위','유나는 오른쪽, 왼쪽 HUD · 고래 보호막 · 아래 메뉴는 그대로 보임.'],['quit_title','타이틀 위','키 아트 유나와 겹치지 않게 따로 세우지 않고 꼬리로 가리킴.'],['quit_guide','손가락 안내 중 (QA 1)','「편성」 안내가 떠 있을 때 뒤로 가기. 안내 유나 · 말풍선 · 손가락은 창이 떠 있는 동안 숨어 유나가 하나만 보임. 오른쪽은 QA가 찍은 고치기 전(1280만).','qa'],['quit_guide_back','취소 뒤','뒤로 가기 한 번 더 = 취소. 안내가 같은 단계 · 같은 손가락 자리로 그대로 돌아옴.',null]]},
+ {id:'d113',t:'D11-3 저장 손상 · C 유나 사과 + 붙인 쪽지',mock:'save_c',st:[['save_restored','백업에서 되살림','되살린 저장 · 사라진 것 · 손상된 파일 세 줄.'],['save_fresh','처음부터','되살린 줄 없이 머리말만 바뀜.']]},
+ {id:'d114',t:'D11-4 실패 알림 · B YunaToast 자리 · 붉은 테 + 단추 흔들림',mock:'fail_b',st:[['fail_gems','채색석 (장비 작업대)','원인 단추 판 위로 20px 띄워 뜸(QA 3): 흔들리는 단추 · 붉은 맥박 테 · 먼지 구름이 유나 얼굴 테에 가리지 않음.'],['fail_mat','재료 (긴 글)','긴 글도 한 줄.'],['fail_clock','기기 시간 확인 (전투 위)','같은 붉은 테 계열, 흔들 단추가 없으면 흔들림 없음.']]}
+];
+const fig=(tag,cls,lab,src)=>`<figure><img class="w12" src="${src}_1280x720.${tag==='m'?'png':'jpg'}" alt="${lab} 1280" loading="lazy"><img class="w16" src="${src}_1600x720.${tag==='m'?'png':'jpg'}" alt="${lab} 1600" loading="lazy"><figcaption><span class="tag t-${tag}">${lab}</span>${src}</figcaption></figure>`;
+document.getElementById('sections').innerHTML=S.map(s=>`<h2 id="${s.id}">${s.t}</h2>`+s.st.map((x,i)=>`<div class="state"><h3>${x[1]}</h3><p class="cap">${x[2]}</p><div class="trio">${i===0?fig('m','m','시안','mock/'+s.mock):''}${fig('a','a','적용 후','after/'+x[0])}${x[3]===undefined?fig('b','b','적용 전','before/'+x[0]):x[3]==='qa'?`<figure><img src="qa/qa_${x[0]}_1280x720.jpg" alt="QA 고치기 전" loading="lazy"><figcaption><span class="tag t-b">QA 고치기 전</span>qa/qa_${x[0]}_1280x720.jpg</figcaption></figure>`:''}</div></div>`).join('')).join('');
+const V=[['v_power','방치 절전'],['v_quit','게임 종료 · 전투'],['v_quit_title','게임 종료 · 타이틀'],['v_save','저장 손상'],['v_fail','실패 알림 · 단추 흔들림'],['v_clock','기기 시간 확인']];
+document.getElementById('videos').innerHTML=V.map(v=>`<div class="state"><h3>${v[1]}</h3><div class="trio"><figure><video src="after/${v[0]}.mp4" controls muted loop playsinline preload="metadata"></video><figcaption><span class="tag t-a">적용 후</span>after/${v[0]}.mp4</figcaption></figure><figure><video src="before/${v[0]}.mp4" controls muted loop playsinline preload="metadata"></video><figcaption><span class="tag t-b">적용 전</span>before/${v[0]}.mp4</figcaption></figure></div></div>`).join('');
+const set=w=>{document.documentElement.dataset.w=w;document.querySelectorAll('[data-res]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.res===w)))};
+document.querySelectorAll('[data-res]').forEach(b=>b.onclick=()=>set(b.dataset.res));
+set(new URLSearchParams(location.search).get('w')==='1600'||/w1600/.test(location.hash)?'1600':'1280');
+</script>
+</body>
+</html>

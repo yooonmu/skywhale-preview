@@ -1,0 +1,26 @@
+{
+  "entries": [
+    {
+      "file": "quit_title_1280x720.jpg",
+      "id": "quit_title",
+      "items": [
+        "batch11"
+      ],
+      "label": "게임 종료 · 타이틀 위",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "quit_title_1600x720.jpg",
+      "id": "quit_title",
+      "items": [
+        "batch11"
+      ],
+      "label": "게임 종료 · 타이틀 위",
+      "phase": "late",
+      "resolution": "1600x720"
+    }
+  ],
+  "tool": "tools/feedback_capture.gd",
+  "updated": "2026-11-12T01:37:54"
+}

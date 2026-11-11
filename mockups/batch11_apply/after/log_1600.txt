@@ -1,0 +1,23 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Ti
+
+SHOT quit_title_1600x720.jpg
+SECTION go_late
+SECTION b11_quit
+SHOT quit_battle_1600x720.jpg
+SHOT quit_guide_1600x720.jpg
+SHOT quit_guide_back_1600x720.jpg
+GUIDE cur=formation visible=true root=true finger=true quit=false
+SECTION b11_save
+SHOT save_restored_1600x720.jpg
+SHOT save_fresh_1600x720.jpg
+SECTION b11_fail
+SHOT fail_gems_1600x720.jpg
+SHOT fail_mat_1600x720.jpg
+SHOT fail_clock_1600x720.jpg
+SECTION b11_power
+SHOT power_just_1600x720.jpg
+SHOT power_ten_1600x720.jpg
+SHOT power_cine_1600x720.jpg
+SHOT power_resized_1280x720.jpg
+FEEDBACK_DONE phase=late entries=13 failures=[]

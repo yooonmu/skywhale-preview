@@ -1,0 +1,53 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Ti
+
+SCRIPT ERROR: Parse Error: Static function "open()" not found in base "SoundPanel".
+   at: GDScript::reload (res://scripts/settings_panel.gd:135)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/hud.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/ui/yuna_toast.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://tools/feedback_capture.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://design/mockups/feedback70/batch11_apply/tools/apply_capture.gd:0)
+ERROR: Failed to load script "res://design/mockups/feedback70/batch11_apply/tools/apply_capture.gd" with error "Compilation failed".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+--res://assets/ui/fx/school_sky.gdshader--
+   32 |  float fd = sd_box(fp, fh, fp.y < 0.0 ? 0.0 : (fp.x < 0.0 ? r_left : 0.0));
+   33 |  COLOR = vec4(ft, fa * (1.0 - smoothstep(-0.8, 0.6, fd)));
+E  34->  return;
+   35 |  }
+   36 |  
+SHADER ERROR: Using 'return' in the 'fragment' processor function is incorrect.
+   at: (null) (res://assets/ui/fx/school_sky.gdshader:34)
+   GDScript backtrace (most recent call first):
+       [0] _plan (res://scripts/shader_warm.gd:66)
+       [1] startup_slice (res://scripts/main.gd:606)
+ERROR: Shader compilation failed.
+   at: set_code (drivers/gles3/storage/material_storage.cpp:2695)
+   GDScript backtrace (most recent call first):
+       [0] _plan (res://scripts/shader_warm.gd:66)
+       [1] startup_slice (res://scripts/main.gd:606)
+SHOT quit_title_1280x720.jpg
+CLIP v_quit_title
+SECTION go_late
+SECTION b11_quit
+SHOT quit_battle_1280x720.jpg
+CLIP v_quit
+SECTION b11_save
+SHOT save_restored_1280x720.jpg
+SHOT save_fresh_1280x720.jpg
+CLIP v_save
+SECTION b11_fail
+SHOT fail_gems_1280x720.jpg
+SHOT fail_mat_1280x720.jpg
+CLIP v_fail
+SHOT fail_clock_1280x720.jpg
+CLIP v_clock
+SECTION b11_power
+SHOT power_just_1280x720.jpg
+SHOT power_ten_1280x720.jpg
+SHOT power_cine_1280x720.jpg
+CLIP v_power
+FEEDBACK_DONE phase=late entries=10 failures=[]
