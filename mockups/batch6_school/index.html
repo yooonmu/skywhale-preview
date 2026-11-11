@@ -427,6 +427,73 @@ html[data-w="1600"] .bk2{background-image:url(a/b/bt_1600.jpg)}
 .badge{position:absolute;z-index:8;left:350px;top:630px;width:30px;opacity:0;filter:drop-shadow(0 2px 2px rgba(40,30,90,.35))}
 .scr.go .badge{animation:bdg .45s cubic-bezier(.2,1.5,.4,1) 5.3s forwards}
 @keyframes bdg{from{opacity:0;transform:translateY(-6px) scale(.5)}to{opacity:1;transform:none}}
+/* ===== PD 결정 반영: 고래 강화 하나로 (보호막 + 숨결) — 해부도 A를 따뜻한 도면지로, 심장 자리에 숨결 진주 ===== */
+.decide{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0 4px}
+.decide div{background:#241e48;border:1px solid #4a3f94;border-radius:10px;padding:8px 10px;font-size:13px;color:#d9d2fa}
+.decide b{display:block;font:15px Gowun,serif;color:#ffe7a6}
+.mg{background:radial-gradient(70% 90% at 22% 8%,rgba(255,244,214,.75),transparent 60%),radial-gradient(60% 80% at 92% 100%,rgba(176,160,236,.38),transparent 65%),linear-gradient(180deg,rgba(255,250,238,.55),rgba(232,222,250,.5)),url(a/s/tex_draft.jpg) 0 0/420px}
+.mg::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(84,70,170,.1) 0 1px,transparent 1px 24px),repeating-linear-gradient(90deg,rgba(84,70,170,.1) 0 1px,transparent 1px 24px),repeating-linear-gradient(0deg,rgba(84,70,170,.16) 0 1px,transparent 1px 120px),repeating-linear-gradient(90deg,rgba(84,70,170,.16) 0 1px,transparent 1px 120px)}
+.mg::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 90px rgba(90,60,140,.28);background:radial-gradient(40px 40px at calc(50% + 120px) 470px,transparent 70%,rgba(150,110,70,.10) 74%,transparent 80%)}
+.mg .cmp{position:absolute;left:calc(50% + 86px);bottom:18px;width:104px;opacity:.3;z-index:1}
+.mg .dome{position:absolute;left:calc(50% - 470px);top:22px;width:650px;opacity:.9;z-index:2}
+.mg .wh{position:absolute;left:calc(50% - 418px);top:66px;width:548px;z-index:3;filter:drop-shadow(0 12px 16px rgba(50,30,110,.3))}
+.mg .plume{position:absolute;left:calc(50% - 4px);top:8px;width:120px;height:150px;z-index:3;pointer-events:none;background:radial-gradient(40% 30% at 50% 78%,rgba(255,255,255,.9),transparent 70%),radial-gradient(34% 26% at 40% 52%,rgba(232,214,255,.85),transparent 70%),radial-gradient(30% 22% at 62% 30%,rgba(255,214,236,.75),transparent 70%),radial-gradient(26% 18% at 46% 12%,rgba(214,236,255,.6),transparent 70%);filter:blur(2px);animation:plume 4s ease-in-out infinite alternate}
+@keyframes plume{to{transform:translateY(-6px) scale(1.05,1.08);opacity:.85}}
+.mg .pearl{position:absolute;left:calc(50% + 22px);top:118px;z-index:5}
+.mg .pearl .lv{font-size:12px;padding:0 8px;bottom:-14px}
+.mg .tag{position:absolute;z-index:6;font:12px Pre;color:#4a3a9a;background:rgba(255,252,244,.92);border:1px solid rgba(84,70,170,.45);border-radius:10px;padding:0 8px;white-space:nowrap}
+.mg svg.lead{position:absolute;left:calc(50% - 564px);top:0;width:1128px;height:564px;z-index:4;pointer-events:none}
+.sp{position:absolute;z-index:6;padding:12px 14px 14px;background:url(a/s/tex_paper.jpg) 0 0/260px;border-radius:3px;box-shadow:0 0 0 1px rgba(232,194,122,.9),0 14px 24px rgba(40,24,90,.32),0 2px 0 rgba(255,255,255,.6) inset}
+.sp::before{content:"";position:absolute;inset:5px;border:1.5px solid rgba(70,58,160,.55);box-shadow:inset 0 0 0 2.5px rgba(255,255,255,.6),inset 0 0 0 3.5px rgba(70,58,160,.3);pointer-events:none}
+.sp::after{content:"";position:absolute;right:16px;top:-12px;width:20px;height:44px;border:3px solid #c9a24e;border-bottom:0;border-radius:10px 10px 0 0;box-shadow:inset 0 0 0 2px #fff2c0,1px 2px 2px rgba(60,40,10,.35);transform:rotate(8deg)}
+.sp .no{position:absolute;left:-14px;top:-14px;width:30px;height:30px;border-radius:50%;background:#fff8ea;box-shadow:0 0 0 1.5px #463aa0,0 0 0 4px rgba(255,248,234,.9),0 3px 6px rgba(40,24,90,.3);display:grid;place-items:center;font:15px Gowun,serif;color:#463aa0}
+.sp h4{position:relative;margin:2px 0 6px;font:21px Gowun,serif;color:#2c2470;display:flex;align-items:center;gap:8px}
+.sp h4 small{font:12px Pre;color:#6d63a8;margin-left:auto;margin-right:30px}
+.sp{word-break:keep-all}
+.sp h4{white-space:nowrap}
+.sp.sh h4{flex-wrap:wrap;row-gap:0}
+.sp.sh h4 small{flex-basis:100%;margin:0}
+.bz .au b span{color:#c8701a!important}
+.mg .plume{z-index:4;opacity:1}
+.mg .plume::after{content:"";position:absolute;left:30%;top:-10%;width:40%;height:70%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.7),transparent);filter:blur(4px)}
+.sp ul{position:relative;margin:4px 0 8px;padding:0;list-style:none;font:13px/1.65 Pre;color:#4d4888}
+.sp ul b{color:#2f62c8}
+.sp .own{position:relative;font:12.5px Pre;color:#6f6aa0;margin:0 0 8px;display:flex;align-items:center;gap:4px}
+.sp .own img{width:20px}
+.sp .act{width:100%}
+.sp.sh{left:calc(50% - 542px);top:322px;width:300px;transform:rotate(-.6deg)}
+.sp.bz{right:calc(50% - 548px);top:16px;width:350px;transform:rotate(.4deg)}
+.bz .row{position:relative;display:grid;grid-template-columns:70px 1fr;gap:4px 12px;padding:9px 0 10px;border-top:1.5px dashed rgba(70,58,160,.28)}
+.bz .row:first-of-type{border-top:0}
+.bz .row .orb{position:relative;left:auto;top:auto;grid-row:1/3;margin-top:4px}
+.bz .row .orb .lv{font-size:11px;padding:0 7px;bottom:-11px}
+.bz .row h5{margin:0;font:17px Gowun,serif;color:#2c2470}
+.bz .row p{margin:0 0 6px;font:12px/1.45 Pre;color:#5a5590}
+.bz .row p b{color:#2f62c8}
+.bz .row .act,.bz .row .mxr{grid-column:2;height:34px;font-size:15px;min-width:0}
+.bz .row .act .c img{width:20px;height:20px}
+.bz .row .mxr{display:none;font-size:14px}
+.scr[data-st=max] .bz .row.pw .act{display:none}
+.scr[data-st=max] .bz .row.pw .mxr{display:flex}
+.bz .au{position:relative;display:flex;align-items:center;gap:10px;margin-top:6px;padding:8px 10px;border-radius:8px;background:linear-gradient(90deg,rgba(70,58,160,.1),rgba(70,58,160,.04));box-shadow:inset 0 0 0 1px rgba(70,58,160,.3);font:12px Pre;color:#4d4888}
+.bz .au b{display:block;font:15px Gowun,serif;color:#2c2470}
+.bz .au .tg{flex:none}
+.bz .au .lock{margin-left:auto}
+.bz .cover{position:absolute;inset:44px 8px 8px;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:rgba(248,244,236,.82);backdrop-filter:blur(1.5px);text-align:center;font:14px Pre;color:#4a3a9a}
+.bz .cover b{font:18px Gowun,serif;color:#2c2470}
+.mg .ttl{position:absolute;left:calc(50% - 222px);bottom:16px;width:300px;z-index:5;padding:8px 12px;border:1.5px solid rgba(70,58,160,.55);box-shadow:inset 0 0 0 3px rgba(255,250,238,.7),inset 0 0 0 4px rgba(70,58,160,.3);background:rgba(255,250,238,.6);color:#3d3490;font:12px Pre;display:grid;grid-template-columns:1fr auto;align-items:end}
+.mg .ttl b{grid-column:1/3;font:22px Gowun,serif;letter-spacing:3px;color:#2c2470}
+.mg .ttl i{font-style:normal;justify-self:end;display:flex;gap:0}
+.mg .ttl i s{display:block;width:18px;height:5px;background:#3d3490;text-decoration:none}
+.mg .ttl i s:nth-child(2n){background:transparent;box-shadow:inset 0 0 0 1px #3d3490}
+.mg .ring{left:calc(50% - 480px);top:14px;width:670px;height:380px}
+.scr.go .mg .ring{animation:ring 1s ease-out .2s both}
+.scr.go .mg .pop{animation:pop .6s cubic-bezier(.2,1.6,.4,1) .2s both}
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.18)}100%{transform:none}}
+.hc{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.hc .opt{margin:0}
+.hc .opt p{margin:4px 0 0;font-size:13.5px;color:#d9d2fa}
+.hc .opt p.n{color:#ffe7a6}
 </style>
 </head>
 <body>
@@ -435,7 +502,52 @@ html[data-w="1600"] .bk2{background-image:url(a/b/bt_1600.jpg)}
 <h1>묶음 6 · 분교 · 고래 <small>design/feedback70/ui_inventory.html #g6 · D6-1 ~ D6-4</small></h1>
 <p class="lead">화면마다 A · B · C 를 누르면 「고름」이 붙고, 맨 위 「결과 복사」로 한 번에 복사합니다. 화면 위 상태 단추로 카드에 적힌 상태를 바꿔 볼 수 있습니다. <b>묶음 규칙</b>: 분교 탭 = 학교(교실 · 칠판 · 분필), 고래 강화 탭 = 고래 도크(바다빛 · 계기 · 밧줄)로 서로 다른 장소, 숨결 탭은 #64 숨결 버튼의 「금테 · 금빛 게이지 고리 · 진주 유리구슬」 언어. 세 방향은 색이 아니라 <b>자세</b>(그림 속 장소 / 벽에 걸린 판 / 지도 · 도면 · 카드)가 다릅니다. <b>정해진 것은 그대로</b>: 오른쪽 책갈피 틀 · 칠판 머리줄(hub_frame.gd), 대답은 유나 알림(YunaToast), 위 가운데 알림 판(hud_b2.gd 7 · 보통 2), 잠금 배지 + 「Lv.N」, 낱말 「고래 강화」「심장 강화」「숨결 강화」, 가이드가 짚는 「과학실 › 짓기」「색의 공명 › 연구」「고래 강화」 단추(글자 그대로 · 한 개씩). 그림은 모두 게임 안 그림 · 이번에 만든 부품(a/s)이고 수치는 예시입니다.</p>
 <div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button><button type="button" data-replay-all>▶ 등장 다시 보기</button><button type="button" class="copy" data-copy>결과 복사</button>
-<nav class="toc"><a href="#s-school">D6-1 분교</a><a href="#s-whale">D6-2 고래 강화</a><a href="#s-breath">D6-3 숨결 강화</a><a href="#s-note">D6-4 완성 알림</a></nav></div>
+<nav class="toc"><a href="#s-merge" data-g="merge">합침 · 고래 강화</a><a href="#s-heart" data-g="heart">심장 처리</a><a href="#s-school">D6-1 분교</a><a href="#s-whale">D6-2 고래 강화</a><a href="#s-breath">D6-3 숨결 강화</a><a href="#s-note">D6-4 완성 알림</a></nav></div>
+<div class="decide"><div><b>D6-1 분교 · A 확정</b>인형집 단면 — 게임에 적용 (batch6_apply)</div><div><b>D6-2 고래 강화 · A 확정</b>해부도 — 아래 「합침」으로 다시 그림</div><div><b>D6-3 숨결 탭 · 없앰</b>심장을 빼고 숨결을 고래 강화 한 화면에 합침</div><div><b>D6-4 완성 알림 · A 확정</b>종 + 리본 — 게임에 적용 (batch6_apply)</div></div>
+
+<h3 id="s-merge">합침 · 고래 강화 하나 (보호막 + 숨결) <small>PD 결정 · scripts/menus.gd _whale + _whale_breath → 한 화면 · 심장 빠짐 · 아직 게임에는 넣지 않음 (PD 확인 뒤)</small></h3>
+<p class="sub">해부도 A를 그대로 키웠습니다: 도면지를 따뜻한 크림 · 남보라 잉크로(차가운 파랑을 뺌), 심장이 있던 자리에 <b>숨결 진주</b>(#64 숨결 버튼과 같은 금테 · 게이지 고리 · 진주 유리구슬)가 고래 머리 위에서 숨을 내쉬고, 지시선 ①은 보호막 막으로, ②는 숨결 진주로 갑니다. 하위 탭(「보호막 · 심장 / 고래 숨결」)은 없어지고, 가이드가 짚는 「고래 강화」 단추(whale_shield_btn)는 ① 카드에 글자 그대로 하나. 카드는 이 화면만의 「도면 명세표」(크림 종이 + 남보라 두 줄 테 + 금빛 가는 테 + 놋쇠 클립)입니다.</p>
+<div class="states" data-group="merge"><span>상태</span><button type="button" data-v="base" aria-pressed="true">강화 가능</button><button type="button" data-v="poor" aria-pressed="false">진주 부족</button><button type="button" data-v="up" aria-pressed="false">보호막 레벨 업</button><button type="button" data-v="bup" aria-pressed="false">숨결 레벨 업</button><button type="button" data-v="from41" aria-pressed="false">보호막 막대(#41)에서 들어옴</button><button type="button" data-v="first" aria-pressed="false">숨결 열리기 전</button><button type="button" data-v="lv" aria-pressed="false">자동 잠김 (Lv.15 전)</button><button type="button" data-v="auto" aria-pressed="false">자동 ON</button><button type="button" data-v="max" aria-pressed="false">숨결 위력 최대</button></div>
+<section class="ref"><div class="refs"><img src="now/frame_whale_1280x720.jpg" alt="지금 고래 강화"><img src="now/inv_whale_breath_1280x720.jpg" alt="지금 숨결 탭"></div><div><h2>지금</h2><p class="cap">「보호막 · 심장」 탭(흰 카드 둘)과 「고래 숨결」 탭(고래 그림 카드 셋 + 자동 숨결 띠)이 따로. 숨결은 탭을 한 번 더 눌러야 보이고, 심장은 바람 조각(전투 재화)이라 이 화면에서 혼자 다른 재화를 씀.</p></div></section>
+
+<section class="opt sel" data-choice="merge_a" data-l="A+" data-choice-group="merge" data-choice-label="A+ · 해부도 한 장 (보호막 ① + 숨결 진주 ②)">
+<h2>A+ · 해부도 한 장 — 보호막 막 ① · 숨결 진주 ② <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 해부도 A 부품(도면지 · 막 · 고래 그림) + 숨결 구슬 셰이더(#64 breath_orb 재사용) + 명세표 판 1종. 게임에서는 _whale · _whale_breath 두 함수가 한 화면이 되고 하위 탭 · 심장 카드가 빠짐. 강화가 하나 더 생기면 명세표에 줄 하나.</p>
+<p class="verdict">정직한 평: 해부도의 「무엇을 손보나」가 두 갈래로 바로 읽히고, 숨결이 탭 뒤에 숨지 않아 좋음. 오른쪽 명세표가 꽉 차(세 줄 + 자동) 글자가 12px까지 내려감 — 게임에서는 효과 둘째 줄을 ⓘ로 접을 여지. 숨결 진주 위 숨 줄기는 CSS 흐림이라 게임에서는 셰이더로 더 부드럽게.</p>
+<div class="vp"><div class="scr" data-tab="whale"><div class="board"><div class="bi"><div class="bd mg">
+ <img class="cmp" src="a/s/compass.svg" alt="">
+ <img class="dome" src="a/s/dome.svg" alt="">
+ <img class="wh" src="a/w/whale_giant.png" alt="">
+ <i class="plume" style="left:calc(50% + 28px)"></i>
+ <div class="orb pop" style="--s:76px;--p:.62;--c:#c9a6ff;left:calc(50% + 50px);top:112px;z-index:5"><span class="gl"><i class="pt"></i><img class="ic" src="a/i/side_whale.png" alt=""></span></div>
+ <span class="tag" style="left:calc(50% + 54px);top:196px">숨결 진주</span>
+ <span class="tag" style="left:calc(50% - 452px);top:146px">보호막 막</span>
+ <i class="ring hid" data-on="up"></i>
+ <svg class="lead" viewBox="0 0 1128 564"><g fill="none" stroke="#463aa0" stroke-width="1.5" stroke-dasharray="6 4" opacity=".8"><path d="M84,320 V252 L116,214"/><path d="M760,150 C740,150 716,150 694,150"/></g><g fill="#fff8ea" stroke="#463aa0" stroke-width="1.6"><circle cx="116" cy="214" r="5"/><circle cx="694" cy="150" r="5"/></g></svg>
+ <div class="sp sh"><span class="no">①</span><h4>고래 보호막 <span class="lvc pop tx" data-x-up="Lv.13">Lv.12</span><small>진주 · 복귀해도 남음</small></h4><ul><li>레벨마다 최대 보호막 <b>+20%</b></li><li>지금 최대 보호막 <b class="tx" data-x-up="31.3a">26.1a</b></li></ul><div class="own"><img src="a/i/icon_pearl.png" alt="">보유 <span class="tx" data-x-poor="2">200a</span></div><span style="position:relative;display:block"><span class="act"><span>고래 강화</span><span class="c"><img src="a/i/icon_pearl.png" alt=""><b class="tx" data-x-up="4">3</b></span></span><i class="gd hid" data-on="from41" style="inset:0"></i></span><div class="upf hid" data-on="up" style="right:24px;top:-12px">Lv.13!</div></div>
+ <div class="sp bz"><span class="no">②</span><h4>고래 숨결 <small>진주 · 복귀해도 남음</small></h4>
+  <div class="row pw"><i data-orb="power" data-s="62"></i><h5>숨결 위력</h5><p>보스에게 팀 전투력 비례 피해 · 피해 <b class="tx" data-x-bup="1.04b" data-x-max="2.17b">868a</b> (레벨마다 +20%)</p><span class="act sm"><span>숨결 강화</span><span class="c"><img src="a/i/icon_pearl.png" alt=""><b class="tx" data-x-bup="31">26</b></span></span><span class="mxr">최대 · 다 올렸어요</span></div>
+  <div class="row"><i data-orb="charge" data-s="62"></i><h5>충전 속도</h5><p>처치 · 궁극기 명중 충전량 <b>×1.4</b> · 순풍 중 추가 2배</p><span class="act sm"><span>숨결 강화</span><span class="c"><img src="a/i/icon_pearl.png" alt=""><b>17</b></span></span></div>
+  <div class="row"><i data-orb="stain" data-s="62"></i><h5>색 얼룩 지속시간</h5><p>보스가 받는 피해 +15% · 색 얼룩 <b>12초</b> 지속 (레벨마다 +1초)</p><span class="act sm"><span>숨결 강화</span><span class="c"><img src="a/i/icon_pearl.png" alt=""><b>7</b></span></span></div>
+  <div class="au" data-auto2></div>
+  <div class="cover hid" data-on="first"><span class="lock"><i></i><b>첫 숨결</b></span><b>아직 숨결이 열리지 않았어요</b>첫 항해 약 2분 뒤, 가득 찬 숨결과 함께 열려요</div>
+ </div>
+ <div class="ttl"><b>채색고래 해부도</b>제7호 · 보호막 · 숨결<i><s></s><s></s><s></s><s></s></i></div>
+ <div class="hid" data-on="from41" style="position:absolute;left:calc(50% - 542px);top:290px;z-index:7;font:13px Pre;color:#fff;background:#463aa0;padding:4px 12px;border-radius:12px">보호막 칸에서 왔어요 · ① 고래 강화를 먼저 보여 줘요</div>
+ <div class="upf hid" data-on="bup" style="left:calc(50% - 10px);top:66px">숨결 위력 Lv.8!</div>
+ <div class="yt no hid" data-on="poor" style="left:calc(50% - 250px);top:420px"><i class="f"></i><div class="m"><b>진주가 1개 모자라요</b>전투에서 구름 진주를 모아 와요</div></div>
+</div></div></div></div></div>
+</section>
+
+<h3 id="s-heart">심장 처리 · 저장 옮기기 <small>조사: main.gd heart_level · heart_cost · upgrade_heart · heart_income · team_mult_base · content_power · 저장 「heart」 · school.gd heart_discount(연구 「심장 효율」) · tools/balance_sim.js</small></h3>
+<p class="sub"><b>심장이 하는 일</b>: 바람 조각(전투 재화)으로 사는 항해 성장(복귀하면 0). 레벨마다 모든 아이 공격 +6%(팀 배율, 단합 · 항해사 배율과 곱), 초당 바람 조각 생산(방치 보상에도 들어감), 비용 30 × 1.3^Lv × (1 − 5% × 「심장 효율」 연구). 이 화면 말고 사는 곳은 없음(일괄 강화는 아이들만). 퀘스트 · 가이드 · 업적은 심장을 쓰지 않음. 밸런스 모델(tools/balance_sim.js)은 전투 바람 조각을 아이 넷 + 심장 다섯으로 나눈다고 보고 벽을 계산 — <b>심장을 빼고 그 몫을 아이들에게 돌리면 그 모델의 항해 전투력이 STAGE 33에서 ×0.65, 100에서 ×0.56, 200에서 ×0.45, 600에서 ×0.29</b>.</p>
+<p class="sub"><b>추천 (한두 줄)</b>: 심장 카드 · 「심장 강화」 단추만 없애고 효과는 <b>전투의 「일괄 강화」</b>가 아이들과 함께 가장 싼 순서로 사게 접는다 — 수치 · 밸런스 모델 · 저장 키 「heart」가 그대로라 옛 저장은 옮길 것이 없고(복귀하면 0이라 오래 남지도 않음), 연구 「심장 효율」은 글만 「일괄 강화 속 고래 심장 비용 -5%」로. 아예 없앤다면 불러올 때 그 레벨까지 쓴 바람 조각을 돌려주고 키를 버리면 저장은 안 깨지지만, 벽이 당겨져 HP 곡선을 다시 맞춰야 함.</p>
+<div class="hc">
+<section class="opt sel" data-choice="heart_fold" data-l="①" data-choice-group="heart" data-choice-label="① 일괄 강화로 접기 (수치 · 저장 그대로)"><h2>① 일괄 강화로 접기 <span class="rec">추천</span></h2><p class="n">비용: main.buy_all 후보에 심장 한 줄 + 일괄 강화 연출에 「고래 심장 Lv.N」 한 줄. 저장 · 밸런스 바뀜 없음.</p><p>장단: 화면이 보호막 + 숨결로 깔끔해지고 지금보다 심장을 더 자주 사게 됨(지금은 메뉴를 열어야 삼). 심장이 눈에 덜 띔.</p></section>
+<section class="opt" data-choice="heart_drop" data-l="②" data-choice-group="heart" data-choice-label="② 아예 없앰 + 돌려주기 (HP 곡선 다시)"><h2>② 아예 없애고 돌려주기</h2><p class="n">비용: 불러올 때 heart Lv까지 쓴 바람 조각 환급 · 「심장 효율」 연구 진주 환급(또는 다른 연구로 바꿈) · 스테이지 HP 곡선 · balance_sim 다시.</p><p>장단: 가장 단순한 규칙. 그대로 두면 모델 전투력 −35%(33칸) ~ −71%(600칸)라 벽이 크게 당겨짐.</p></section>
+<section class="opt" data-choice="heart_shield" data-l="③" data-choice-group="heart" data-choice-label="③ 보호막에 합치기 (비추천)"><h2>③ 보호막에 합치기</h2><p class="n">비용: 고래 강화 레벨마다 공격 배율 + 저장 환산식.</p><p>장단: 진주로 사는 영구 강화에 공격력이 붙어 복귀해도 남음 — 「복귀하면 0」 항해 성장 고리가 깨지고 진주 가치가 크게 바뀜. 비추천.</p></section>
+</div>
+
 <h3 id="s-school">D6-1 · 분교 (교실 · 연구) <small>scripts/menus.gd _school · 탭 「분교」 = 학교</small></h3>
 <p class="sub">교실 셋(과학실 · 체육관 · 급식실)은 그림 속 방, 연구 다섯은 칠판. 가이드가 짚는 「과학실 › 짓기」「색의 공명 › 연구」는 글자 그대로 한 개씩 둡니다.</p>
 <div class="states" data-group="school"><span>상태</span><button type="button" data-v="base" aria-pressed="true">기본</button><button type="button" data-v="build" aria-pressed="false">짓는 중</button><button type="button" data-v="study" aria-pressed="false">연구 중</button><button type="button" data-v="poor" aria-pressed="false">진주 부족</button><button type="button" data-v="max" aria-pressed="false">최대</button><button type="button" data-v="lock" aria-pressed="false">과학실 먼저 (잠김)</button><button type="button" data-v="done" aria-pressed="false">완성 직후</button></div>
@@ -724,7 +836,10 @@ document.querySelectorAll('[data-bt]').forEach(e=>{const b=BR[e.dataset.bt];e.in
 const AUTO_LV=15;
 const AUTO=`<div class="tg"><i></i></div><div><b>자동 숨결 <span class="tx" data-x-auto="ON" style="color:#ffd66e">OFF</span></b><span class="tx" data-x-first="아직 숨결을 한 번도 안 썼어요 · 한 번 직접 누르면 그다음부터 자동" data-x-auto="충전되면 고래가 알아서 숨을 내쉬어요" data-x-lv="항해사 Lv.${AUTO_LV}에 열려요">첫 숨결을 직접 쓴 뒤, 충전되면 자동 사용</span></div><span class="lock hid" data-on="lv"><i></i><b>Lv.${AUTO_LV}</b></span>`;
 document.querySelectorAll('[data-auto]').forEach(e=>e.innerHTML=AUTO);
-const GROUPS={school:'D6-1 분교 (교실 · 연구)',whale:'D6-2 고래 강화 (보호막 · 심장)',breath:'D6-3 숨결 강화 탭',note:'D6-4 분교 완성 알림 (위 가운데)'};
+// 합친 고래 강화: 명세표 안 자동 숨결 줄 · 숨결 위력 레벨 업 상태의 구슬 꼬리표
+document.querySelectorAll('[data-auto2]').forEach(e=>e.innerHTML=AUTO);
+document.querySelectorAll('.bz .row.pw .orb .lv').forEach(e=>e.setAttribute('data-x-bup','Lv.8 / 20'));
+const GROUPS={merge:'합침 · 고래 강화 (보호막 + 숨결)',heart:'심장 처리',school:'D6-1 분교 (교실 · 연구)',whale:'D6-2 고래 강화 (보호막 · 심장)',breath:'D6-3 숨결 강화 탭',note:'D6-4 분교 완성 알림 (위 가운데)'};
 // 정해진 틀 (hub_frame.gd): 칠판 머리줄 + 오른쪽 책갈피 6장, 분교가 골라짐
 const MKS=[['아이들','heroes','#c94a85'],['편성','formation','#5b44c8'],['소환','summon','#9a6a00'],['모험','adventure','#17706c'],['분교','school','#2f7350'],['상점','shop','#a8405a']];
 const X='<svg viewBox="0 0 24 24"><path d="M5,5 L19,19 M19,5 L5,19" stroke="#4a3f6e" stroke-width="2.6" stroke-linecap="round"/></svg>';
