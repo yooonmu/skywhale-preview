@@ -1,0 +1,218 @@
+{
+  "entries": [
+    {
+      "file": "scene_log_1280x720.jpg",
+      "id": "scene_log",
+      "items": [
+        "batch9"
+      ],
+      "label": "이야기 장면 · 항해 일지",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "scene_flora_1280x720.jpg",
+      "id": "scene_flora",
+      "items": [
+        "batch9"
+      ],
+      "label": "SS 이야기 장면 · 플로라 (긴 대사)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "scene_overlay_1280x720.jpg",
+      "id": "scene_overlay",
+      "items": [
+        "batch9"
+      ],
+      "label": "배경 없이 전투 위",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "menu_main_1280x720.jpg",
+      "id": "menu_main",
+      "items": [
+        "batch9"
+      ],
+      "label": "이야기 목록 · 메인",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "menu_ss_1280x720.jpg",
+      "id": "menu_ss",
+      "items": [
+        "batch9"
+      ],
+      "label": "이야기 목록 · SS",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "scene_narr_1280x720.jpg",
+      "id": "scene_narr",
+      "items": [
+        "batch9"
+      ],
+      "label": "이야기 장면 · 내레이션",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "scene_talk_1280x720.jpg",
+      "id": "scene_talk",
+      "items": [
+        "batch9"
+      ],
+      "label": "이야기 장면 · 대사 (카렌)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "notice_f1_1280x720.jpg",
+      "frames": [
+        "notice_f1_1280x720.jpg",
+        "notice_f2_1280x720.jpg",
+        "notice_f3_1280x720.jpg",
+        "notice_f4_1280x720.jpg"
+      ],
+      "id": "notice",
+      "items": [
+        "batch9"
+      ],
+      "label": "이야기 열림 알림 (합류 보스 정화 직후)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "reward_join_1280x720.jpg",
+      "id": "reward_join",
+      "items": [
+        "batch9"
+      ],
+      "label": "첫 감상 보상 · 아이 합류 (카렌)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "reward_ss_1280x720.jpg",
+      "id": "reward_ss",
+      "items": [
+        "batch9"
+      ],
+      "label": "SS 이야기 첫 감상 보상 (플로라)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "menu_main_1600x720.jpg",
+      "id": "menu_main",
+      "items": [
+        "batch9"
+      ],
+      "label": "이야기 목록 · 메인",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "menu_ss_1600x720.jpg",
+      "id": "menu_ss",
+      "items": [
+        "batch9"
+      ],
+      "label": "이야기 목록 · SS",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "scene_narr_1600x720.jpg",
+      "id": "scene_narr",
+      "items": [
+        "batch9"
+      ],
+      "label": "이야기 장면 · 내레이션",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "scene_talk_1600x720.jpg",
+      "id": "scene_talk",
+      "items": [
+        "batch9"
+      ],
+      "label": "이야기 장면 · 대사 (카렌)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "scene_log_1600x720.jpg",
+      "id": "scene_log",
+      "items": [
+        "batch9"
+      ],
+      "label": "이야기 장면 · 항해 일지",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "scene_flora_1600x720.jpg",
+      "id": "scene_flora",
+      "items": [
+        "batch9"
+      ],
+      "label": "SS 이야기 장면 · 플로라 (긴 대사)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "scene_overlay_1600x720.jpg",
+      "id": "scene_overlay",
+      "items": [
+        "batch9"
+      ],
+      "label": "배경 없이 전투 위",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "notice_f1_1600x720.jpg",
+      "frames": [
+        "notice_f1_1600x720.jpg",
+        "notice_f2_1600x720.jpg",
+        "notice_f3_1600x720.jpg",
+        "notice_f4_1600x720.jpg"
+      ],
+      "id": "notice",
+      "items": [
+        "batch9"
+      ],
+      "label": "이야기 열림 알림 (합류 보스 정화 직후)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "reward_join_1600x720.jpg",
+      "id": "reward_join",
+      "items": [
+        "batch9"
+      ],
+      "label": "첫 감상 보상 · 아이 합류 (카렌)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "reward_ss_1600x720.jpg",
+      "id": "reward_ss",
+      "items": [
+        "batch9"
+      ],
+      "label": "SS 이야기 첫 감상 보상 (플로라)",
+      "phase": "late",
+      "resolution": "1600x720"
+    }
+  ],
+  "tool": "tools/feedback_capture.gd",
+  "updated": "2026-11-11T23:52:11"
+}

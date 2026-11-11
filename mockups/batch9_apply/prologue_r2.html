@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>D9-4 프롤로그 2차 시안 · C 붓이 화면을 칠하며</title>
+<style>
+@font-face{font-family:"B9Serif";src:url(fonts/GowunBatang-Bold.ttf) format("truetype");font-display:block}
+@font-face{font-family:"B9Brush";src:url(fonts/NanumBrushScript-Regular.ttf) format("truetype");font-display:block}
+*{box-sizing:border-box}
+html,body{margin:0;background:#0d0a1c;color:#e9e2ff;font-family:"B9Serif","Gowun Batang","Noto Serif KR","Batang","Malgun Gothic",serif}
+#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#000}
+#cv{position:absolute;left:0;top:0;z-index:1}
+.nar{position:absolute;left:0;width:100%;text-align:center;pointer-events:none;z-index:5}
+.nar .row{display:block;white-space:nowrap;font-size:30px;line-height:46px;letter-spacing:.5px}
+.nar i{font-style:normal;display:inline-block;white-space:pre;text-shadow:0 2px 12px rgba(10,6,26,.75),0 0 2px rgba(10,6,26,.7)}
+.nar .nm{font-family:"B9Brush","Nanum Brush Script",cursive;font-size:52px;line-height:46px;display:inline-block;padding:0 6px 0 4px;vertical-align:top;margin-top:-4px;
+ background:linear-gradient(90deg,#ff9ec7,#ffd36b 27%,#9ff0bf 50%,#94d8ff 73%,#cdb2ff);-webkit-background-clip:text;background-clip:text;color:transparent;
+ filter:drop-shadow(0 2px 2px rgba(8,4,22,.7)) drop-shadow(0 0 10px rgba(255,236,250,.35))}
+#bar{display:flex;gap:10px;align-items:center;padding:10px 12px;width:1280px;font:13px/1.4 "Malgun Gothic",sans-serif;color:#cfc5f2;background:#15112a;border-top:1px solid #2c2550}
+#bar button{font:inherit;color:#fff;background:#3b2f78;border:1px solid #6b5bc0;border-radius:6px;padding:4px 10px;cursor:pointer}
+#bar input[type=range]{flex:1}
+#bar a{color:#e9c56a}
+body.rec #bar{display:none}
+</style>
+</head>
+<body>
+<!-- 잿빛 = grey_world.gdshader: (밝기 × 0.7 + (0.45, 0.47, 0.52) × 0.3) × 0.82, 밝기 = 0.299R + 0.587G + 0.114B -->
+<svg width="0" height="0" style="position:absolute"><filter id="ash" color-interpolation-filters="sRGB"><feColorMatrix type="matrix"
+ values=".171626 .336938 .065436 0 .1107  .171626 .336938 .065436 0 .11562  .171626 .336938 .065436 0 .12792  0 0 0 1 0"/></filter></svg>
+<div id="stage"><canvas id="cv" width="1280" height="720"></canvas></div>
+<div id="bar"><button id="pp">일시정지</button><input id="sc" type="range" min="0" max="33.5" step="0.01" value="0"><span id="tm">0.0s</span>
+ <span>폭 <a href="?w=1280">1280</a> · <a href="?w=1600">1600</a></span></div>
+<script>
+"use strict";
+/* 프롤로그 2차 시안 (묶음 9 D9-4 C 「붓이 화면을 칠하며」). 그림은 모두 실제 게임에서 찍은 층:
+   pro_back = 하늘 층(화면 고정) · pro_whale = 넓은 화면의 고래(투명) · pro_front = 앞 구름(투명) · pro_battle/pro_talk = 전투 화면 · 유나 첫 대사(대사창 D9-3 A).
+   잿빛 = 게임 grey_world.gdshader와 같은 식. 붓 자국은 절차 생성(심 · 붓털 · 마른 결 · 튄 물감, 양 끝은 늘 뾰족하게 가늘어진다).
+   ?w=1600 · ?t=초(그 순간에 멈춤) · ?rec=1(녹화: window.__render(t)) */
+const Q=new URLSearchParams(location.search);
+const W=Q.get('w')==='1600'?1600:1280,H=720,REC=Q.has('rec');
+if(REC)document.body.classList.add('rec');
+const DUR=33.5;
+const stage=document.getElementById('stage');stage.style.width=W+'px';document.getElementById('bar').style.width=W+'px';
+const cv=document.getElementById('cv');cv.width=W;cv.height=H;const X=cv.getContext('2d');
+const ZW=W===1600?0.8465:0.7932, RW=ZW/0.7932;   // 넓은 화면 배율 (main.wide_zoom)
+const CAMW=[-155,361],CAMB=[W/2,360],PC=[-155,500];
+const wp=(x,y)=>[(x-640)*RW+W/2,(y-360)*RW+360];   // 1280 넓은 화면 좌표 → 이 폭의 고래 그림 좌표
+const sx=x=>x*W/1280;
+
+/* ---------- 수학 ---------- */
+const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const ss=(a,b,v)=>{const t=cl((v-a)/(b-a));return t*t*(3-2*t)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const eo=t=>1-Math.pow(1-t,3);
+const sine=t=>-(Math.cos(Math.PI*cl(t))-1)/2;
+function key(t,ks){if(t<=ks[0][0])return ks[0][1];for(let i=1;i<ks.length;i++){if(t<=ks[i][0]){const a=ks[i-1],b=ks[i];return lerp(a[1],b[1],sine((t-a[0])/(b[0]-a[0])))}}return ks[ks.length-1][1]}
+function rnd(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const mk=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c};
+
+/* ---------- 그림 ---------- */
+const IMG={};
+function load(k,src){return new Promise((ok,no)=>{const i=new Image();i.onload=()=>{IMG[k]=i;ok()};i.onerror=()=>no(src);i.src=src})}
+// 잿빛 그림: 위 SVG 색 행렬 필터 (file://에서도 되도록 픽셀을 읽지 않는다)
+function greyOf(img){const c=mk(img.width,img.height),x=c.getContext('2d');x.filter='url(#ash)';x.drawImage(img,0,0);x.filter='none';return c}
+let G={},grain,rays,cC,cG,mG,mC,tmp,tmp2;
+
+/* ---------- 붓 ---------- */
+function sample(pts,step){const p=[];
+ for(let i=0;i<pts.length-1;i++){const p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(pts.length-1,i+2)];
+  const n=Math.max(2,Math.ceil(Math.hypot(p2[0]-p1[0],p2[1]-p1[1])/step));
+  for(let j=0;j<n;j++){const t=j/n,t2=t*t,t3=t2*t,f=k=>.5*(2*p1[k]+(-p0[k]+p2[k])*t+(2*p0[k]-5*p1[k]+4*p2[k]-p3[k])*t2+(-p0[k]+3*p1[k]-3*p2[k]+p3[k])*t3);p.push([f(0),f(1)])}}
+ p.push(pts[pts.length-1].slice());
+ const L=[0];for(let i=1;i<p.length;i++)L.push(L[i-1]+Math.hypot(p[i][0]-p[i-1][0],p[i][1]-p[i-1][1]));
+ const len=L[L.length-1],u=L.map(v=>v/len),n=p.map((_,i)=>{const a=p[Math.max(0,i-1)],b=p[Math.min(p.length-1,i+1)],dx=b[0]-a[0],dy=b[1]-a[1],m=Math.hypot(dx,dy)||1;return[-dy/m,dx/m]});
+ return{p,L,u,n,len}}
+/* 붓 한 번 = 길이(px) 위의 폭 그림:
+   시작은 둥글게 눌러 앉고(capIn), 끝 tout 구간에서 심이 좁아지다 둥글게 끝난 뒤(coreEnd) 붓털만 갈라져 길이가 제각각 마른 꼬리로 흩어진다.
+   움직이는 동안의 머리도 둥근 붓 머리 + 앞으로 살짝 나온 붓털. 어디에도 곧게 잘린 끝이 없다 */
+const cap=x=>{x=cl(x);return Math.sqrt(1-(1-x)*(1-x))};
+function prep(s){
+ s.P=sample(s.pts,3);const len=s.P.len,r=rnd(s.seed*977+13),n=Math.ceil(len/6)+2;
+ s.capIn=Math.min(s.w*.42,len*.2);s.tail=(s.tout??.3)*len;s.coreEnd=len-s.tail*.6;s.capOut=Math.min(s.w*.32,s.tail*.5);
+ s.nw=new Float32Array(n);s.nl=new Float32Array(n);s.nr=new Float32Array(n);
+ const ph=[r()*6.3,r()*6.3,r()*6.3,r()*6.3,r()*6.3];
+ for(let i=0;i<n;i++){const d=i*6;s.nw[i]=.07*Math.sin(d/110+ph[0])+.04*Math.sin(d/47+ph[1]);
+  s.nl[i]=.03*Math.sin(d/37+ph[2])+.018*Math.sin(d/13+ph[3]);s.nr[i]=.03*Math.sin(d/41+ph[4])+.018*Math.sin(d/15+ph[1])}
+ const dry=s.dry??.5,lw=v=>Math.max(.8,s.w*v);
+ // 꼬리 붓털: 심이 끝나기 조금 앞에서 시작해 길이가 제각각 (끝으로 갈수록 옅고 가늘게)
+ s.tb=[];for(let i=0;i<(s.nt??Math.round(26+s.w/12));i++){const o=(r()*2-1)*.95;s.tb.push({o,d0:s.coreEnd-s.tail*(.25+.5*r()),d1:s.coreEnd+(len-s.coreEnd)*(.3+.7*Math.sqrt(r())),lw:lw(.012+.028*r()),a:.55+.45*r()})}
+ // 가장자리 잔털: 폭 바깥으로 살짝 삐져나온 짧은 털
+ s.eb=[];for(let i=0;i<(s.ne??Math.round(10+len/60));i++){const d0=r()*len*.9;s.eb.push({o:(r()<.5?-1:1)*(.9+.14*r()),d0,d1:d0+len*(.03+.12*r()),lw:lw(.004+.01*r()),a:.35+.5*r()})}
+ // 마른 결: 심 안쪽을 지우는 가는 줄 (뒤쪽일수록 많다) + 처음부터 끝까지 옅은 결 몇 줄
+ s.gb=[];for(let i=0;i<(s.ng??Math.round(16+s.w/14));i++){const long=r()<.08,d0=long?r()*len*.3:len*(.5+.42*r());s.gb.push({o:(r()*2-1)*.9,d0,d1:long?d0+len*(.3+.3*r()):d0+len*(.04+.16*r()),lw:lw(.004+.013*r()),a:(long?.08+.12*r():.3+.6*r())*dry})}
+ s.sp=[];for(let i=0;i<(s.nsp||0);i++)s.sp.push({u:.08+r()*.9,side:r()<.5?-1:1,d:1.04+r()*1.2,rad:.8+r()*r()*6.5,ex:.55+r()*.9,rot:r()*3});
+ s.sk=[];for(let i=0;i<(s.nsk||0);i++)s.sk.push({u:.05+r()*.93,o:(r()*2-1)*.8,sz:2.5+r()*4.5,life:.55+r()*.5,dy:-8-r()*22});
+ // 가장자리 마른 결: 심 테두리 안쪽은 물감이 덜 묻은 가는 틈(cut), 바깥은 삐져나온 털 — 테두리가 매끈하게 오린 모양으로 보이지 않게
+ s.rg=[];for(let i=0;i<(s.nrg??Math.round(len/8));i++){const cut=r()<.55,side=r()<.5?-1:1,d0=r()*len*.94;
+  s.rg.push({cut,o:side*(cut?.78+.2*r():.99+.13*r()),d0,d1:d0+len*(.02+.14*r()),lw:lw(cut?.006+.018*r():.004+.011*r()),a:cut?.55+.45*r():.4+.5*r()})}
+ return s}
+function noiseAt(arr,L){return arr[Math.min(arr.length-1,(L/6)|0)]}
+const headOf=(s,p)=>p>=1?1e9:p*s.P.len;
+// 심 폭 (0..1): 둥근 시작 · 끝쪽에서 좁아짐 · 둥근 끝 · 움직이는 동안 둥근 머리
+function coreW(s,d,hd){if(d>s.coreEnd)return 0;const len=s.P.len;
+ return cap(d/s.capIn)*(1-.32*ss(len-s.tail,s.coreEnd,d))*cap((s.coreEnd-d)/s.capOut)*cap((hd-d)/(s.w*.38))}
+// 붓털이 퍼지는 폭: 끝까지 0이 되지 않는다 (털이 한 점으로 모이지 않게), 머리보다 5px 앞까지
+function brW(s,d,hd){const len=s.P.len;return(.06+.94*cap((d+2)/s.capIn))*(1-.26*ss(len-s.tail,len,d))*cap((hd+5-d)/(s.w*.3))}
+// 심: 가장자리가 부드럽게 물결치는 다각형. 가장자리 선(L/R)을 돌려준다
+function core(c,s,p,fill){const P=s.P,hd=headOf(s,p),Lp=[],Rp=[];
+ for(let i=0;i<P.p.length;i++){const d=P.L[i];if(d>hd||d>s.coreEnd)break;const hw=s.w*.5*coreW(s,d,hd)*(1+noiseAt(s.nw,d));
+  const el=hw*(1+noiseAt(s.nl,d)),er=hw*(1+noiseAt(s.nr,d));
+  Lp.push([P.p[i][0]+P.n[i][0]*el,P.p[i][1]+P.n[i][1]*el]);Rp.push([P.p[i][0]-P.n[i][0]*er,P.p[i][1]-P.n[i][1]*er])}
+ if(Lp.length<2)return null;c.beginPath();c.moveTo(Lp[0][0],Lp[0][1]);for(let i=1;i<Lp.length;i++)c.lineTo(Lp[i][0],Lp[i][1]);
+ for(let i=Rp.length-1;i>=0;i--)c.lineTo(Rp[i][0],Rp[i][1]);c.closePath();if(fill){c.fillStyle=fill;c.fill()}return{L:Lp,R:Rp}}
+// 털 한 가닥: d0 → d1을 따라가며 끝 40%에서 옅고 가늘어진다. inside = 심 폭 안(마른 결), 아니면 털 폭(brW)
+// 옅어지는 자리는 털 전체 길이(b.d1) 기준 — 그리는 중에도 털마다 자리가 달라 여러 털이 한 줄에서 끊긴 금이 생기지 않고, 그레이디언트라 계단도 없다
+const rgbOf=s=>s[0]==='#'?[1,3,5].map(i=>parseInt(s.slice(i,i+2),16)):s.match(/[\d.]+/g).map(Number);
+function hair(c,s,b,p,inside,alpha=1){const P=s.P,hd=headOf(s,p),d1=Math.min(b.d1,hd+5);if(d1<=b.d0)return;
+ const pts=[],ds=[];for(let i=0;i<P.p.length;i++){const d=P.L[i];if(d<b.d0)continue;if(d>d1)break;
+  const k=inside?coreW(s,d,hd)*.96:brW(s,d,hd),hw=s.w*.5*k*(1+noiseAt(s.nw,d));pts.push([P.p[i][0]+P.n[i][0]*hw*b.o,P.p[i][1]+P.n[i][1]*hw*b.o]);ds.push(d)}
+ // 붓이 아직 움직이는 중이면(머리에서 잘린 털) 머리 쪽도 젖은 물감처럼 옅어진다 — 털 끝이 둥근 막대처럼 보이지 않게
+ const n=pts.length;if(n<2)return;const f0=b.d0+(b.d1-b.d0)*.6,tr=d1<b.d1,fh=tr?Math.max(b.d0,d1-s.w*.8):1e9;
+ const aAt=d=>(1-.9*cl((d-f0)/(b.d1-f0)))*(tr?1-.85*cl((d-fh)/Math.max(1,d1-fh)):1);let j=0;while(j<n-1&&ds[j]<Math.min(f0,fh))j++;
+ const run=(a,z)=>{c.beginPath();c.moveTo(pts[a][0],pts[a][1]);for(let i=a+1;i<=z;i++)c.lineTo(pts[i][0],pts[i][1]);c.stroke()};
+ c.globalAlpha=b.a*alpha;c.lineWidth=b.lw;if(j>0)run(0,j);
+ if(j<n-1){const st=c.strokeStyle,[R,G,B,A=1]=rgbOf(st),g=c.createLinearGradient(pts[j][0],pts[j][1],pts[n-1][0],pts[n-1][1]);
+  for(let k=0;k<=4;k++)g.addColorStop(k/4,`rgba(${R},${G},${B},${A*aAt(ds[j]+(ds[n-1]-ds[j])*k/4)})`);c.strokeStyle=g;c.lineWidth=b.lw*.8;run(j,n-1);c.strokeStyle=st}
+ c.globalAlpha=1}
+const pAt=(s,t)=>s.prog?s.prog(t):eo(cl((t-s.t0)/s.dur))*(t>=s.t0?1:0);
+function spatter(c,s,p){for(const d of s.sp){if(d.u>p)continue;const P=s.P,i=Math.min(P.p.length-1,Math.round(d.u*(P.p.length-1))),hw=s.w*.5*brW(s,P.L[i],1e9);
+ const x=P.p[i][0]+P.n[i][0]*hw*d.d*d.side,y=P.p[i][1]+P.n[i][1]*hw*d.d*d.side;c.beginPath();c.ellipse(x,y,d.rad*d.ex,d.rad,d.rot,0,6.283);c.fill()}}
+// 가리개 붓 (잿빛 · 색): tmp에 심 → 마른 결 지우기 → 꼬리 · 가장자리 털 · 튄 물감 → 가리개에 얹는다
+function maskStroke(m,s,t){const p=pAt(s,t);if(p<=0)return null;const c=tmp.getContext('2d');c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,W,H);
+ const e=core(c,s,p,'#fff');c.lineCap='round';c.lineJoin='round';
+ c.globalCompositeOperation='destination-out';c.strokeStyle='#000';for(const b of s.gb)hair(c,s,b,p,true);for(const b of s.rg)if(b.cut)hair(c,s,b,p,true);
+ c.globalCompositeOperation='source-over';c.strokeStyle='#fff';for(const b of s.tb)hair(c,s,b,p,false);for(const b of s.eb)hair(c,s,b,p,false);for(const b of s.rg)if(!b.cut)hair(c,s,b,p,true);
+ c.fillStyle='#fff';spatter(c,s,p);m.drawImage(tmp,0,0);return e}
+// 무지개 띠: 붓털마다 색이 다른 붓 (위가 빨강 → 아래가 보라), 아래에 옅은 빛. 꼬리는 색 털이 갈라진다
+function rainbow(X,s,t,alpha,m){const p=pAt(s,t);if(p<=0||alpha<=0)return;
+ // 바깥 옅은 빛은 바로, 색 붓털 · 마른 결은 따로 그려 결을 지운 뒤 얹는다 (물감이 덜 묻은 줄이 비친다)
+ X.save();setM(X,m);X.globalAlpha=alpha*.45;X.shadowColor='rgba(255,236,252,.9)';X.shadowBlur=22;core(X,s,p,'rgba(255,250,255,.3)');X.restore();
+ const c=tmp.getContext('2d');c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,W,H);setM(c,m);c.lineCap='round';c.lineJoin='round';
+ const r=rnd(s.seed);for(let i=0;i<s.rb;i++){const o=-1+2*(i+.5)/s.rb+(r()-.5)*.04,h=(o*.5+.5)*280;c.strokeStyle=`hsl(${352-h},86%,${71+7*Math.abs(o)}%)`;
+  const d1=s.coreEnd+(s.P.len-s.coreEnd)*(.25+.75*r());hair(c,s,{o:o*.92,d0:s.capIn*.3*r(),d1,lw:s.w/(s.rb*.42)*(.8+.4*r()),a:.66+.3*r()},p,false)}
+ c.globalCompositeOperation='destination-out';c.strokeStyle='#000';for(const b of s.gb)hair(c,s,b,p,true);c.globalCompositeOperation='source-over';
+ c.strokeStyle='rgba(255,255,255,.9)';for(const b of s.eb)hair(c,s,b,p,false,.7);
+ c.setTransform(1,0,0,1,0,0);X.save();X.setTransform(1,0,0,1,0,0);X.globalAlpha=alpha;X.drawImage(tmp,0,0);X.restore()}
+// 먹 번짐 (자막 뒤): 흐린 그림자 심 + 옅은 심 + 마른 꼬리 털
+function ink(c,s,t,alpha){const p=pAt(s,t);if(p<=0||alpha<=0)return;c.save();
+ c.shadowColor=`rgba(12,8,28,${.6*alpha})`;c.shadowBlur=24;c.shadowOffsetX=W*3;c.translate(-W*3,0);core(c,s,p,'#000');c.restore();c.save();c.lineCap='round';
+ core(c,s,p,`rgba(18,12,38,${.16*alpha})`);c.strokeStyle='rgba(16,10,34,1)';for(const b of s.tb)hair(c,s,b,p,false,alpha*.26);c.restore()}
+function gold(c,s,t,alpha){const p=pAt(s,t);if(p<=0||alpha<=0)return;c.save();c.lineCap='round';c.shadowColor='rgba(255,214,140,.8)';c.shadowBlur=8;
+ core(c,s,p,`rgba(236,190,92,${.9*alpha})`);c.shadowBlur=0;c.strokeStyle='rgb(255,246,214)';for(const b of s.tb)hair(c,s,b,p,false,alpha*.85);c.restore()}
+// 물감이 고인 가장자리: 색 붓 자국 둘레가 살짝 짙다 (번진 선)
+function edges(c,e,a){if(!e||a<=0)return;c.save();c.lineJoin='round';c.filter='blur(1.4px)';c.globalCompositeOperation='multiply';
+ for(const side of[e.L,e.R]){c.strokeStyle=`rgba(156,124,212,${.12*a})`;c.lineWidth=3.2;c.beginPath();side.forEach((q,i)=>i?c.lineTo(q[0],q[1]):c.moveTo(q[0],q[1]));c.stroke()}
+ c.restore()}
+function star(c,x,y,r,a,rot=0,col='255,246,214'){if(a<=0)return;c.save();c.translate(x,y);c.rotate(rot);c.globalAlpha=a;
+ const g=c.createRadialGradient(0,0,0,0,0,r*2.4);g.addColorStop(0,`rgba(${col},.9)`);g.addColorStop(1,`rgba(${col},0)`);c.fillStyle=g;c.beginPath();c.arc(0,0,r*2.4,0,6.283);c.fill();
+ c.fillStyle='#fff';c.beginPath();for(let i=0;i<8;i++){const rr=i%2?r*.22:r*1.6,an=i*Math.PI/4;c.lineTo(Math.cos(an)*rr,Math.sin(an)*rr)}c.closePath();c.fill();c.restore()}
+
+/* ---------- 대본 · 시각표 ---------- */
+const PRO=['어느 날, 하늘에서 색이 사라지기 시작했다.','잿빛이 지나간 자리에는 색도, 이름도, 기억도 남지 않았다.','그런데 잿빛 구름을 가르고, 단 하나의 색이 나타났다.','무지개를 두른 거대한 고래, \'채색고래\'. 그 등에는 작은 학교가 하나 있었다.'];
+const LINES=[{rows:[PRO[0]],t0:1.25,t1:5.9,cy:350},
+ {rows:[PRO[1]],t0:6.7,t1:11.5,cy:350,dis:[['색도,',9.7],['이름도,',10.05],['기억도',10.4]]},
+ {rows:[PRO[2]],t0:12.1,t1:17.1,cy:630},
+ {rows:PRO[3].split('. ').map((r,i,a)=>i<a.length-1?r+'.':r),t0:17.8,t1:23.0,cy:606,name:'채색고래'}];
+// 잿빛이 색을 지우는 마른 붓 (오른쪽 위 → 왼쪽 아래, 재가 내려앉는 방향)
+const SG=[[1.7,1.25,360,[[1380,60],[1050,130],[700,90],[330,190],[-120,150]]],[2.5,1.3,380,[[1400,340],[1000,280],[620,360],[260,300],[-140,380]]],
+ [3.3,1.25,400,[[1390,570],[980,610],[600,520],[240,610],[-130,560]]],[4.1,1.1,300,[[1380,230],[900,450],[500,430],[80,520],[-150,470]]]]
+ .map((a,i)=>prep({t0:a[0],dur:a[1],w:a[2],pts:a[3].map(q=>[sx(q[0]),q[1]]),seed:11+i,dry:.85,tin:.1,tout:.34,nb:70}));
+// 고래가 두른 무지개 (고래 머리가 지나가는 만큼 칠해진다)
+const ARC=[[-160,520],[80,330],[330,212],[640,166],[950,198],[1170,288],[1330,420]].map(q=>[sx(q[0]),q[1]]);
+let headX=0;
+const arcProg=t=>{const fly=cl((headX+sx(160))/(sx(1330)+sx(160)));return Math.max(fly*.93,t<16.55?0:.93+.07*eo(cl((t-16.55)/.8)))};
+const SC=[prep({prog:arcProg,w:260,pts:ARC,seed:31,dry:.35,tin:.14,tout:.3,nsp:26,nsk:0})];
+const RB=prep({prog:arcProg,w:44,pts:ARC.map(q=>[q[0],q[1]-6]),seed:33,dry:.8,tout:.32,rb:30,ne:18,ng:26});
+// 색이 돌아오는 큰 붓 셋 + 빈 곳을 메우는 작은 붓
+[[23.75,1.0,430,[[-150,140],[250,60],[700,150],[1050,70],[1430,170]]],[24.45,1.05,450,[[1430,420],[1050,330],[640,420],[260,320],[-150,400]]],
+ [25.15,1.0,440,[[-160,650],[300,570],[700,670],[1060,590],[1440,660]]]].forEach((a,i)=>SC.push(prep({t0:a[0],dur:a[1],w:a[2],pts:a[3].map(q=>[sx(q[0]),q[1]]),seed:41+i,dry:.5,tin:.1,tout:.3,nsp:34,nsk:16})));
+[[25.6,200,250,-.4],[25.72,1000,240,.3],[25.84,640,520,.1],[25.96,150,520,-.2],[26.08,1150,500,.5],[26.2,500,30,0],[26.3,900,690,-.3],[26.4,80,30,.2],[26.48,1220,40,-.1],[26.56,640,250,.25]]
+ .forEach((a,i)=>{const r=rnd(500+i),L=260+r()*160,an=a[3]+(r()-.5)*.6,cx=sx(a[1]),cy=a[2];
+  SC.push(prep({t0:a[0],dur:.42,w:140+r()*80,pts:[[cx-Math.cos(an)*L/2,cy-Math.sin(an)*L/2],[cx+(r()-.5)*40,cy+(r()-.5)*30],[cx+Math.cos(an)*L/2,cy+Math.sin(an)*L/2]],seed:60+i,dry:.55,tin:.16,tout:.36,nsp:10,nsk:5}))});
+// 자막 뒤 먹 번짐 (글자 폭을 잰 뒤 measure에서 만든다)
+let INK=[],GOLD=null;
+
+/* ---------- 재 · 꽃잎 · 안개 ---------- */
+const ASH=[...Array(120)].map((_,i)=>{const r=rnd(i*7919+3);return{x:r(),y:r(),s:1+r()*2.2,v:.55+r()*.9,ph:r()*6.3,h:r()}});
+const MIST=[...Array(22)].map((_,i)=>{const r=rnd(900+i);return{ts:12.7+i*.17+r()*.1,ox:(r()-.5)*90,oy:(r()-.6)*150,r0:30+r()*40,gr:90+r()*90,life:1.2+r()*.6}});
+let flakes=[];   // 글자가 부서질 때 나오는 재 (글자 자리는 처음 한 번 잰다)
+
+/* ---------- 카메라 ---------- */
+function camAt(t){const d=sine(cl((t-25.2)/3.4)),pr=ss(17.5,23,t)*(1-ss(25.2,26,t)*0);
+ const z0=ZW*(1+.045*pr),c0=[CAMW[0]+40*pr,CAMW[1]-6*pr];return{z:lerp(z0,1,d),c:[lerp(c0[0],CAMB[0],d),lerp(c0[1],CAMB[1],d)],d}}
+function whaleOff(t){const k=cl((t-12.6)/4.0),e=eo(k);let wx=-2600*(1-e),wy=-170*Math.pow(1-e,2),th=.06*Math.pow(1-e,2);
+ const idle=ss(16.4,17.6,t)*(1-ss(25.2,28.2,t));wy+=7*Math.sin((t-16.6)*1.1)*idle;th+=.004*Math.sin((t-16.6)*1.1+.7)*idle;return{wx,wy,th}}
+// 층 그림은 게임을 멈춘 한 순간에 넓은 화면 · 전투 화면을 함께 찍었으므로, 카메라 식(main.cam_wide → cam_battle)만으로 전투 화면과 정확히 겹친다
+function whaleM(t){const cam=camAt(t),o=whaleOff(t);let m=new DOMMatrix().translate(W/2,360).scale(cam.z).translate(-cam.c[0],-cam.c[1]);
+ m=m.translate(PC[0]+o.wx,PC[1]+o.wy).rotate(o.th*57.2958).translate(-PC[0],-PC[1]).translate(CAMW[0],CAMW[1]).scale(1/ZW).translate(-W/2,-360);return m}
+function backM(t){const s=key(t,[[0,1.075],[11.6,1.05],[17.5,1.045],[23,1.055],[25.2,1.05],[28.6,1]]),dx=key(t,[[0,sx(26)],[11.6,sx(-14)],[17.5,sx(8)],[23,0],[28.6,0]]),dy=key(t,[[0,8],[11.6,-4],[23,0],[28.6,0]]);
+ return new DOMMatrix().translate(W/2+dx,H/2+dy).scale(s).translate(-W/2,-H/2)}
+function frontM(t){const s=key(t,[[0,1.12],[11.6,1.09],[17.5,1.06],[23,1.08],[28.6,1]]),dx=key(t,[[0,sx(40)],[11.6,sx(-24)],[17.5,sx(12)],[23,0],[28.6,0]]),dy=key(t,[[0,24],[12.4,24],[14.6,52],[17.5,30],[23,12],[28.6,0]]);
+ return new DOMMatrix().translate(W/2+dx,H+dy).scale(s).translate(-W/2,-H)}
+const setM=(c,m)=>c.setTransform(m.a,m.b,m.c,m.d,m.e,m.f);
+
+/* ---------- 자막 ---------- */
+const NAR=[];
+function buildText(){for(const l of LINES){const d=document.createElement('div');d.className='nar';const rows=[];let idx=0;
+ l.rows.forEach(row=>{const r=document.createElement('span');r.className='row';let s=row;
+  if(l.name&&s.includes(l.name)){const [a,b]=s.split(l.name);put(r,a);const nm=document.createElement('span');nm.className='nm';nm.textContent=l.name;r.appendChild(nm);l.nmEl=nm;l.nmAt=idx;idx+=1;put(r,b)}else put(r,s);
+  d.appendChild(r);rows.push(r)});
+ function put(r,s){for(const ch of s){const i=document.createElement('i');i.textContent=ch;i.dataset.k=idx++;r.appendChild(i)}}
+ d.style.top=(l.cy-l.rows.length*23)+'px';stage.appendChild(d);l.el=d;l.chars=[...d.querySelectorAll('i')];NAR.push(l)}}
+function measure(){const sr=stage.getBoundingClientRect();for(const l of LINES){l.box=l.chars.map(c=>{const b=c.getBoundingClientRect();return[b.left-sr.left+b.width/2,b.top-sr.top+b.height/2]});
+  if(l.dis){l.disIdx=[];const txt=l.chars.map(c=>c.textContent).join('');for(const [w,td] of l.dis){const at=txt.indexOf(w);for(let j=0;j<w.length;j++)l.disIdx[at+j]={td:td+j*.07,j}}}
+  if(l.nmEl){const b=l.nmEl.getBoundingClientRect();l.nmBox=[b.left-sr.left,b.top-sr.top,b.width,b.height]}}
+ INK=LINES.map((l,i)=>{let wmax=0;for(const r of l.el.querySelectorAll('.row')){let a=1e9,b=-1e9;for(const c of r.children){const q=c.getBoundingClientRect();a=Math.min(a,q.left);b=Math.max(b,q.right)}wmax=Math.max(wmax,b-a)}
+  const half=wmax/2+46,y=l.cy+(l.rows.length>1?0:3);
+  return prep({t0:l.t0-.3,dur:.75,w:l.rows.length>1?124:78,pts:[[W/2-half-50,y+6],[W/2-half*.35,y-4],[W/2+half*.35,y+3],[W/2+half+50,y-5]],seed:80+i,dry:.4,tout:l.rows.length>1?.16:.24,nt:l.rows.length>1?18:26})});
+ const l4=LINES[3];if(l4.nmBox){const[x,y,w,h]=l4.nmBox,ts=l4.t0+.3+l4.nmAt*.05;
+  GOLD=prep({t0:ts+.55,dur:.6,w:6,pts:[[x+4,y+h+5],[x+w*.45,y+h+9],[x+w+10,y+h+3]],seed:91,dry:1,tout:.45,nt:8,ne:0})}
+ flakes=[];for(const l of LINES){if(!l.dis)continue;l.chars.forEach((c,i)=>{const d=l.disIdx[i];if(!d)return;const r=rnd(1200+i);for(let k=0;k<7;k++)flakes.push({x:l.box[i][0]+(r()-.5)*18,y:l.box[i][1]+(r()-.5)*20,td:d.td+r()*.2,vx:-20-r()*40,vy:10+r()*40,s:1+r()*2.4,life:1.1+r()*.7})})}}
+const mixc=(a,b,k)=>`rgb(${a.map((v,i)=>Math.round(lerp(v,b[i],k))).join(',')})`;
+function textAt(t){for(const l of NAR){const vis=t>l.t0-.2&&t<l.t1+1;l.el.style.display=vis?'block':'none';if(!vis)continue;
+ const ex=cl((t-l.t1)/.7);
+ l.chars.forEach((c,i)=>{const k=+c.dataset.k,ts=l.t0+.3+k*.05,r=cl((t-ts)/.55),e=eo(r);let op=e*(1-ex),bl=(1-e)*6+ex*3,ty=(1-e)*8-ex*6,tx=0,rot=0;
+  let col=mixc([255,216,138],[255,248,234],ss(.25,1,r));
+  const d=l.disIdx&&l.disIdx[i];if(d){const q=cl((t-d.td)/1.0);op*=1-ss(0,1,q);tx=-30*q-d.j*3;ty+=40*q*q;rot=-24*q;bl+=q*2.5;if(q>0)col=mixc([255,248,234],[150,150,166],ss(0,.4,q))}
+  c.style.opacity=op.toFixed(3);c.style.filter=bl>.05?`blur(${bl.toFixed(2)}px)`:'none';c.style.transform=`translate(${tx.toFixed(1)}px,${ty.toFixed(1)}px) rotate(${rot.toFixed(1)}deg)`;c.style.color=col});
+ if(l.nmEl){const ts=l.t0+.3+l.nmAt*.05,q=cl((t-ts)/.9),X=-14+q*126;l.nmEl.style.webkitMaskImage=l.nmEl.style.maskImage=`linear-gradient(90deg,#000 0,#000 ${X}%,transparent ${X+14}%)`;l.nmEl.style.opacity=(1-ex).toFixed(3)}}}
+
+// 게임 SkipTag와 같은 모양: 크림 종이 꼬리표(왼쪽 뾰족 · 쇠고리 구멍 · 금 테), 오른쪽 위를 축으로 3° 기울어 끈에 걸림
+function skipTag(c,a){const x1=W-23,y0=24,x0=x1-154,y1=y0+49,my=(y0+y1)/2;c.save();c.globalAlpha=a;
+ c.strokeStyle='rgba(176,132,52,.9)';c.lineWidth=1.6;c.beginPath();c.moveTo(x0+24,my-1);c.bezierCurveTo(x0+26,y0-14,x0+36,-6,x0+52,-2);c.stroke();
+ c.translate(x1,y0);c.rotate(3*Math.PI/180);c.translate(-x1,-y0);
+ const path=()=>{c.beginPath();c.moveTo(x0+22,y0);c.lineTo(x1,y0);c.lineTo(x1,y1);c.lineTo(x0+22,y1);c.lineTo(x0,my);c.closePath()};
+ c.shadowColor='rgba(20,10,40,.35)';c.shadowBlur=8;c.shadowOffsetY=3;path();const g=c.createLinearGradient(0,y0,0,y1);g.addColorStop(0,'#fffcf3');g.addColorStop(.7,'#f8f0dc');g.addColorStop(1,'#eadbb4');c.fillStyle=g;c.fill();
+ c.shadowColor='transparent';c.strokeStyle='rgba(205,168,92,.95)';c.lineWidth=1.4;path();c.stroke();
+ c.strokeStyle='rgba(216,176,96,.75)';c.lineWidth=2;c.beginPath();c.moveTo(x0+24,y1-3);c.lineTo(x1-2,y1-3);c.stroke();
+ c.fillStyle='#d8b25c';c.beginPath();c.arc(x0+21,my,6.2,0,6.283);c.fill();c.fillStyle='#6b5aa6';c.beginPath();c.arc(x0+21,my,3.6,0,6.283);c.fill();
+ c.fillStyle='#45366a';c.font='17px B9Serif,"Gowun Batang",serif';c.textBaseline='middle';c.fillText('건너뛰기',x0+38,my+1);const tw=c.measureText('건너뛰기').width;
+ c.fillStyle='#b8892a';c.font='12px "Malgun Gothic",sans-serif';c.fillText('▶▶',x0+38+tw+8,my+1);c.restore()}
+
+/* ---------- 한 장 그리기 ---------- */
+function render(t){
+ const bm=backM(t),fm=frontM(t),wm=whaleM(t),cam=camAt(t);
+ const o=whaleOff(t);headX=wm.transformPoint(new DOMPoint(...wp(1215,470))).x;
+ // 두 세계: 색 · 잿빛 (고래는 어느 쪽에서든 색 — 「단 하나의 색」)
+ for(const [cv2,back,front,halo] of [[cC,IMG.back,IMG.front,0],[cG,G.back,G.front,1]]){const c=cv2.getContext('2d');c.setTransform(1,0,0,1,0,0);c.globalAlpha=1;
+  setM(c,bm);c.drawImage(back,0,0,W,H);
+  const wc=wm.transformPoint(new DOMPoint(...wp(640,470)));
+  if(halo){const a=ss(12.8,14.5,t)*(1-ss(24,26,t));if(a>0){c.setTransform(1,0,0,1,0,0);const g=c.createRadialGradient(wc.x,wc.y-40,40,wc.x,wc.y-40,W*.62);
+   g.addColorStop(0,`rgba(214,196,255,${.42*a})`);g.addColorStop(.45,`rgba(255,190,226,${.18*a})`);g.addColorStop(1,'rgba(214,196,255,0)');c.fillStyle=g;c.fillRect(0,0,W,H)}}
+  if(t>12.5){setM(c,wm);c.drawImage(IMG.whale,0,0,W,H)}
+  setM(c,fm);c.drawImage(front,0,0,W,H)}
+ // 가리개: 잿빛(지움) · 색(되찾음) — 하늘 좌표
+ const g=mG.getContext('2d'),m=mC.getContext('2d');g.setTransform(1,0,0,1,0,0);m.setTransform(1,0,0,1,0,0);g.clearRect(0,0,W,H);m.clearRect(0,0,W,H);
+ // 가리개가 다 채워진 뒤에는 붓을 그리지 않는다 (덮여서 보이지 않음)
+ const gf=ss(4.9,6.1,t);if(gf<1)SG.forEach(s=>maskStroke(g,s,t));if(gf>0){g.globalAlpha=gf;g.fillStyle='#fff';g.fillRect(0,0,W,H);g.globalAlpha=1}
+ const cf=ss(26.5,27.4,t),cEdges=cf<1?SC.map(s=>maskStroke(m,s,t)):[];if(cf>0){m.globalAlpha=cf;m.fillStyle='#fff';m.fillRect(0,0,W,H);m.globalAlpha=1}
+ // 합치기: 색 위에 (잿빛 × 잿빛 가리개 × (1 − 색 가리개))
+ X.setTransform(1,0,0,1,0,0);X.globalCompositeOperation='source-over';X.globalAlpha=1;X.drawImage(cC,0,0);
+ const k=tmp2.getContext('2d');k.setTransform(1,0,0,1,0,0);k.globalCompositeOperation='source-over';k.clearRect(0,0,W,H);k.drawImage(cG,0,0);
+ // 가리개는 살짝 흐려서 얹는다 (붓 자국 가장자리가 종이에 스민 듯 부드럽게)
+ k.filter='blur(1.3px)';k.globalCompositeOperation='destination-in';setM(k,bm);k.drawImage(mG,0,0);k.globalCompositeOperation='destination-out';k.drawImage(mC,0,0);k.filter='none';k.globalCompositeOperation='source-over';k.setTransform(1,0,0,1,0,0);
+ X.drawImage(tmp2,0,0);
+ // 색 붓 자국 가장자리 (물감이 고인 선) · 잿빛 붓의 결 (붓이 지나간 방향으로 옅은 줄)
+ setM(X,bm);const ea=1-ss(26.3,27.2,t);cEdges.forEach((e,i)=>edges(X,e,ea*(i===0?.6:1)));
+ const gl=1-ss(5.4,6.8,t);if(gl>0){X.save();X.lineCap='round';X.globalCompositeOperation='screen';X.strokeStyle='rgb(112,112,122)';for(const s of SG){const p=pAt(s,t);if(p<=0)continue;for(const b of s.gb)hair(X,s,{...b,o:cl(b.o+.07,-.95,.95),a:.5},p,true,gl*.22)}X.restore()}
+ // 해: 색이 돌아오면 빛이 번지고 빛살이 돈다
+ const sun=bm.transformPoint(new DOMPoint(sx(130),110)),sa=ss(24.6,26.6,t)*(1-.35*ss(28,29.5,t));
+ if(sa>0){X.setTransform(1,0,0,1,0,0);X.globalCompositeOperation='screen';const sg=X.createRadialGradient(sun.x,sun.y,0,sun.x,sun.y,520);sg.addColorStop(0,`rgba(255,246,222,${.55*sa})`);sg.addColorStop(.35,`rgba(255,214,170,${.2*sa})`);sg.addColorStop(1,'rgba(255,214,170,0)');
+  X.fillStyle=sg;X.fillRect(0,0,W,H);X.save();X.translate(sun.x,sun.y);X.rotate(t*.04);X.globalAlpha=.55*sa;X.drawImage(rays,-900,-900,1800,1800);X.restore();X.globalCompositeOperation='source-over'}
+ // 무지개 띠 (고래가 지나간 만큼) — 색이 다 돌아오면 반짝임으로 흩어진다
+ const ra=ss(12.7,13.3,t)*(1-ss(24.6,26.4,t));rainbow(X,RB,t,ra,bm);setM(X,bm);
+ if(t>24.6&&t<27){const q=cl((t-24.6)/2.2),r=rnd(77);for(let i=0;i<40;i++){const u=r(),P=RB.P,j=Math.round(u*(P.p.length-1)),off=(r()-.5)*40;star(X,P.p[j][0]+P.n[j][0]*off,P.p[j][1]+P.n[j][1]*off-30*q*r(),2+r()*3,Math.sin(Math.PI*cl(q*1.3-r()*.3))*.9,r()*3)}}
+ // 붓 머리의 반짝임
+ for(const s of SC){if(!s.sk.length)continue;const p=pAt(s,t);for(const d of s.sk){if(d.u>p)continue;const born=s.t0+s.dur*d.u*.85,q=cl((t-born)/d.life);if(q<=0||q>=1)continue;
+  const P=s.P,j=Math.round(d.u*(P.p.length-1)),hw=s.w*.5*brW(s,P.L[j],1e9);star(X,P.p[j][0]+P.n[j][0]*hw*d.o,P.p[j][1]+P.n[j][1]*hw*d.o+d.dy*q,d.sz,Math.sin(Math.PI*q),q*2)}}
+ X.setTransform(1,0,0,1,0,0);
+ // 고래가 구름을 가르며 들어온다: 머리 앞 안개
+ for(const p of MIST){const q=cl((t-p.ts)/p.life);if(q<=0||q>=1)continue;const ow=whaleOff(p.ts),hm=whaleM(p.ts),h=hm.transformPoint(new DOMPoint(...wp(1150,500)));
+  const x=h.x+p.ox-60*q,y=h.y+p.oy,r=p.r0+p.gr*eo(q),a=.42*Math.sin(Math.PI*q)*(1-ss(16.6,17.6,t));if(a<=0)continue;const mg=X.createRadialGradient(x,y,0,x,y,r);
+  mg.addColorStop(0,`rgba(232,232,240,${a})`);mg.addColorStop(1,'rgba(232,232,240,0)');X.fillStyle=mg;X.beginPath();X.arc(x,y,r,0,6.283);X.fill()}
+ // 학교에 금빛이 훑고 종이 반짝인다
+ const sw=cl((t-19.4)/2.0);if(sw>0&&sw<1){const c=tmp.getContext('2d');c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,W,H);c.globalCompositeOperation='source-over';setM(c,wm);c.drawImage(IMG.whale,0,0,W,H);
+  c.setTransform(1,0,0,1,0,0);c.globalCompositeOperation='source-in';const a=wm.transformPoint(new DOMPoint(...wp(250,300))),b=wm.transformPoint(new DOMPoint(...wp(700,460)));
+  const x0=lerp(a.x-260,b.x+120,sw),lg=c.createLinearGradient(x0-140,a.y,x0+140,b.y);lg.addColorStop(0,'rgba(255,214,140,0)');lg.addColorStop(.5,`rgba(255,226,160,${.55*Math.sin(Math.PI*sw)})`);lg.addColorStop(1,'rgba(255,214,140,0)');
+  c.fillStyle=lg;c.fillRect(0,0,W,H);c.globalCompositeOperation='source-over';X.globalCompositeOperation='screen';X.drawImage(tmp,0,0);X.globalCompositeOperation='source-over'}
+ const bell=wm.transformPoint(new DOMPoint(...wp(441,342))),bq=cl((t-21.0)/1.1);if(bq>0&&bq<1){star(X,bell.x,bell.y,7+9*Math.sin(Math.PI*bq),Math.sin(Math.PI*bq),bq*1.5);
+  X.save();X.strokeStyle=`rgba(255,236,190,${.6*(1-bq)})`;X.lineWidth=2.5*(1-bq)+.5;X.beginPath();X.arc(bell.x,bell.y,10+60*eo(bq),0,6.283);X.stroke();X.restore()}
+ // 고래의 노래: 옅은 소리 결 두 겹이 퍼진다
+ for(const [d0,a0] of[[23.2,.34],[23.55,.2]]){const pq=cl((t-d0)/1.6);if(pq<=0||pq>=1)continue;const wc=wm.transformPoint(new DOMPoint(...wp(700,430)));X.save();X.globalCompositeOperation='screen';X.shadowColor='rgba(255,236,250,.9)';X.shadowBlur=26;
+  X.strokeStyle=`rgba(255,240,252,${a0*Math.sin(Math.PI*pq)})`;X.lineWidth=22*(1-pq)+2;X.beginPath();X.arc(wc.x,wc.y,60+W*.75*eo(pq),0,6.283);X.stroke();X.restore()}
+ // 고래가 오기 전: 왼쪽 먼 구름 속에서 빛이 먼저 비친다
+ const tq=ss(11.9,13.2,t)*(1-ss(13.8,15.2,t));if(tq>0){const tx=sx(40),ty=400,tg=X.createRadialGradient(tx,ty,0,tx,ty,W*.42);X.save();X.globalCompositeOperation='screen';
+  tg.addColorStop(0,`rgba(255,226,250,${.55*tq})`);tg.addColorStop(.4,`rgba(200,180,255,${.22*tq})`);tg.addColorStop(1,'rgba(200,180,255,0)');X.fillStyle=tg;X.fillRect(0,0,W,H);X.restore()}
+ // 재 → 꽃잎
+ const aA=ss(1.8,5.2,t)*(1-ss(23.8,25.2,t)),pA=ss(24.0,25.2,t)*(1-ss(27.6,29.0,t)),lA=ss(.3,1.2,t)*(1-ss(1.9,3.6,t));
+ for(const a of ASH){const ax=((a.x*(W+200)-t*22*a.v)%(W+200)+W+200)%(W+200)-100,ay=((a.y*(H+60)+t*52*a.v)%(H+60))-30;
+  // 처음: 색이 있는 하늘에 떠 있던 빛 알갱이가, 잿빛이 지나가며 재로 바뀐다
+  if(lA>0&&a.v>.9){const lx=a.x*W,ly=a.y*H*.8-t*8*a.v;X.globalAlpha=lA*(.4+.5*Math.sin(t*2.2+a.ph*3)**2);const lg=X.createRadialGradient(lx,ly,0,lx,ly,a.s*4);
+   lg.addColorStop(0,'rgba(255,240,200,.95)');lg.addColorStop(1,'rgba(255,220,160,0)');X.fillStyle=lg;X.beginPath();X.arc(lx,ly,a.s*4,0,6.283);X.fill()}
+  if(aA>0){X.globalAlpha=aA*(.3+.4*a.v);X.fillStyle='#d8d9df';X.beginPath();X.ellipse(ax+Math.sin(t*1.3+a.ph)*4,ay,a.s*1.25,a.s*.8,a.ph+t*.6,0,6.283);X.fill()}
+  if(pA>0){const t0=24,bx=((a.x*(W+200)-t0*22*a.v)%(W+200)+W+200)%(W+200)-100,by=((a.y*(H+60)+t0*52*a.v)%(H+60))-30,dt=t-t0;
+   const px=bx+dt*14+Math.sin(dt*1.6+a.ph)*14,py=by-dt*(26+34*a.v);X.save();X.translate(px,py);X.rotate(a.ph+dt*(1+a.v));X.globalAlpha=pA*.85;
+   X.fillStyle=`hsl(${[330,42,150,200,265][Math.floor(a.h*5)]},90%,${82+a.v*6}%)`;X.beginPath();X.ellipse(0,0,a.s*2.4,a.s*1.3,0,0,6.283);X.fill();X.restore()}}
+ X.globalAlpha=1;
+ for(const f of flakes){const q=cl((t-f.td)/f.life);if(q<=0||q>=1)continue;X.globalAlpha=(1-q)*.8;X.fillStyle='#cfd0d8';X.beginPath();X.arc(f.x+f.vx*q,f.y+f.vy*q+30*q*q,f.s*(1-q*.4),0,6.283);X.fill()}
+ X.globalAlpha=1;
+ // 자막 뒤 먹 번짐 · 이름 밑 금 붓
+ INK.forEach((s,i)=>{const l=LINES[i];ink(X,s,t,1-ss(l.t1+.05,l.t1+.75,t))});
+ if(GOLD)gold(X,GOLD,t,1-ss(LINES[3].t1,LINES[3].t1+.7,t));
+ // 잿빛일수록 가장자리 그늘, 종이 결
+ const gv=ss(2,6,t)*(1-ss(24,27,t));const vg=X.createRadialGradient(W/2,H*.48,H*.35,W/2,H*.5,W*.75);vg.addColorStop(0,'rgba(8,6,18,0)');vg.addColorStop(1,`rgba(8,6,18,${.18+.3*gv})`);X.fillStyle=vg;X.fillRect(0,0,W,H);
+ X.globalCompositeOperation='soft-light';X.globalAlpha=.5;X.fillStyle=X.createPattern(grain,'repeat');X.fillRect(0,0,W,H);X.globalAlpha=1;X.globalCompositeOperation='source-over';
+ // 갑판으로 다가가 실제 전투 화면 → 유나 첫 대사 (대사창 D9-3 A, 글자는 왼쪽부터 번진다)
+ const ba=ss(28.5,29.05,t);if(ba>0){X.globalAlpha=ba;X.drawImage(IMG.battle,0,0,W,H);X.globalAlpha=1}
+ const ta=ss(29.45,29.9,t);if(ta>0){X.globalAlpha=ta;X.drawImage(IMG.talk0,0,0,W,H);X.globalAlpha=1}
+ const wq=cl((t-30.05)/1.35);if(wq>0){const c=tmp.getContext('2d');c.setTransform(1,0,0,1,0,0);c.globalCompositeOperation='source-over';c.clearRect(0,0,W,H);c.drawImage(IMG.talk,0,0,W,H);
+  c.globalCompositeOperation='destination-in';const x=lerp(80,W*.62,wq),lg=c.createLinearGradient(x-70,0,x+10,0);lg.addColorStop(0,'#000');lg.addColorStop(1,'rgba(0,0,0,0)');c.fillStyle=lg;c.fillRect(0,0,W,H);c.globalCompositeOperation='source-over';
+  X.drawImage(tmp,0,560,W,110,0,560,W,110)}
+ if(t>=31.5)X.drawImage(IMG.talk,0,560,W,110,0,560,W,110);
+ // 건너뛰기: 대사창(D9-3 A)과 같은 끈에 매단 종이 꼬리표 (처음부터)
+ const ka=ss(.4,1.1,t)*(1-ta);if(ka>0)skipTag(X,ka);
+ // 처음: 검정에서 열린다
+ const bk=1-ss(0,1.1,t);if(bk>0){X.fillStyle=`rgba(0,0,0,${bk})`;X.fillRect(0,0,W,H)}
+ textAt(t)}
+
+/* ---------- 준비 · 재생 ---------- */
+window.__ready=(async()=>{
+ const ext=W===1600?'1600':'1280';
+ await Promise.all([load('back',`pro/pro_back_${ext}.jpg`),load('whale',`pro/pro_whale_${ext}.webp`),load('front',`pro/pro_front_${ext}.webp`),
+  load('battle',`pro/pro_battle_${ext}.jpg`),load('talk0',`pro/pro_talk0_${ext}.jpg`),load('talk',`pro/pro_talk_${ext}.jpg`)]);
+ try{await Promise.race([document.fonts.load('30px B9Serif'),new Promise(r=>setTimeout(r,2500))]);await Promise.race([document.fonts.load('52px B9Brush'),new Promise(r=>setTimeout(r,2500))])}catch(e){}
+ G.back=greyOf(IMG.back);G.front=greyOf(IMG.front);
+ cC=mk(W,H);cG=mk(W,H);mG=mk(W,H);mC=mk(W,H);tmp=mk(W,H);tmp2=mk(W,H);
+ grain=mk(256,256);{const c=grain.getContext('2d'),d=c.createImageData(256,256),r=rnd(5);for(let i=0;i<d.data.length;i+=4){const v=128+(r()-.5)*90;d.data[i]=d.data[i+1]=d.data[i+2]=v;d.data[i+3]=255}c.putImageData(d,0,0)}
+ rays=mk(1800,1800);{const c=rays.getContext('2d'),r=rnd(9);c.translate(900,900);for(let i=0;i<22;i++){const an=i/22*6.283+r()*.12,wd=.025+r()*.05,len=500+r()*400;
+  const lg=c.createLinearGradient(0,0,Math.cos(an)*len,Math.sin(an)*len);lg.addColorStop(0,'rgba(255,244,214,.55)');lg.addColorStop(1,'rgba(255,244,214,0)');c.fillStyle=lg;
+  c.beginPath();c.moveTo(0,0);c.lineTo(Math.cos(an-wd)*len,Math.sin(an-wd)*len);c.lineTo(Math.cos(an+wd)*len,Math.sin(an+wd)*len);c.closePath();c.fill()}}
+ buildText();measure();return true})();
+window.__render=async t=>{await window.__ready;render(t);return true};
+(async()=>{await window.__ready;if(REC)return;
+ const pp=document.getElementById('pp'),sc=document.getElementById('sc'),tm=document.getElementById('tm');
+ let playing=!Q.has('t'),base=performance.now()/1000-(parseFloat(Q.get('t'))||0),cur=parseFloat(Q.get('t'))||0;
+ pp.textContent=playing?'일시정지':'재생';pp.onclick=()=>{playing=!playing;pp.textContent=playing?'일시정지':'재생';base=performance.now()/1000-cur};
+ sc.oninput=()=>{cur=+sc.value;base=performance.now()/1000-cur;render(cur);tm.textContent=cur.toFixed(1)+'s'};
+ const loop=()=>{if(playing){cur=(performance.now()/1000-base)%(DUR+1.5);sc.value=cur;tm.textContent=cur.toFixed(1)+'s';render(Math.min(cur,DUR))}requestAnimationFrame(loop)};
+ render(cur);loop()})();
+</script>
+</body>
+</html>
