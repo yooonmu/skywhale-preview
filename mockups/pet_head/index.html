@@ -60,7 +60,7 @@ figcaption small{display:block;font-weight:500;color:#6a6290}
 .snap.k{background-image:url(assets/karen_head.jpg)}
 .snap.n{background-image:url(assets/nox_head.jpg)}
 .snap .lbl{position:absolute;left:8px;top:8px;z-index:3;padding:2px 9px;border-radius:9px;background:rgba(20,16,50,.72);color:#fff;font-size:12px}
-.snap .hd{position:absolute;width:52px;height:57px;z-index:2;filter:drop-shadow(0 3px 4px rgba(46,35,80,.35)) drop-shadow(0 0 6px rgba(255,255,255,.55))}
+.snap .hd{position:absolute;z-index:2;transform-origin:50% 60%;filter:drop-shadow(3px 5px 3px rgba(60,40,70,.3))}
 .snap .bl{position:absolute;width:46px;height:22px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,110,140,.55),rgba(255,120,150,.22) 60%,transparent);mix-blend-mode:multiply;z-index:1}
 .snap .sw{position:absolute;z-index:2;pointer-events:none}
 .sbub{position:absolute;z-index:3}
@@ -107,7 +107,6 @@ body.solo .vp{border-radius:0;box-shadow:none}
 .note i svg{width:14px;height:14px}
 .note b{color:#127a49}
 .note.muted b{color:#6a6290}
-.hand{left:0;top:0;width:74px;height:81px;pointer-events:none;opacity:0;transform-origin:42px 53px;filter:drop-shadow(0 3px 4px rgba(46,35,80,.38)) drop-shadow(0 0 7px rgba(255,255,255,.55));will-change:transform,opacity}
 .pan.hov{cursor:none}
 .aitag{right:14px;bottom:8px;font-size:12px;color:rgba(255,255,255,.86);text-shadow:0 1px 2px rgba(0,0,0,.65);pointer-events:none}
 .cap{position:absolute;top:5px;left:calc(var(--px) + 330px);transform:translateX(-50%);display:flex;align-items:center;gap:9px;height:32px;padding:0 16px 0 8px;border-radius:16px;background:rgba(30,22,64,.86);color:#fff;font-size:15px;white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(255,231,166,.55),0 6px 14px rgba(10,6,30,.35);opacity:0;pointer-events:none;transition:opacity .25s}
@@ -119,7 +118,7 @@ body.solo .vp{border-radius:0;box-shadow:none}
 <body>
 <div class="page">
 <h1>「머리 쓰다듬기」 시안 — 플로라 아이 정보창</h1>
-<p class="lead"><span class="ai">AI 생성 샘플 그림</span>플로라 그림과 표정 3장(놀람 · 기쁨 ^^ · 토라짐+헝클어진 머리)은 AI(OpenAI GPT Image 2)로 만든 비교용 샘플이며 게임에 없습니다. 바탕은 새 일반 비율 그림을 넣어 찍은 <b>실제 정보창 캡처</b>이고, 그림 칸 안(얼굴 · 머리카락 · 효과 · 말풍선)만 시안입니다. 게임 파일은 바꾸지 않았습니다.<br>그림 칸 위쪽, 머리 위를 <b>누른 채 좌우로 문지르면</b> 쓰다듬기입니다(마우스 끌기 · 터치 모두). 톡 누르기만 하면 특별한 반응은 없습니다.</p>
+<p class="lead"><span class="ai">AI 생성 샘플 그림</span>플로라 그림, 표정 3장(놀람 · 기쁨 ^^ · 토라짐), 헝클 때 삐친 머리카락 가닥, 쓰다듬는 손 그림은 AI(OpenAI GPT Image 2)로 만든 비교용 샘플이며 게임에 없습니다. 바탕은 새 일반 비율 그림을 넣어 찍은 <b>실제 정보창 캡처</b>이고, 그림 칸 안(얼굴 · 머리카락 · 효과 · 말풍선)만 시안입니다. 게임 파일은 바꾸지 않았습니다.<br>그림 칸 위쪽, 머리 위를 <b>누른 채 좌우로 문지르면</b> 쓰다듬기입니다(마우스 끌기 · 터치 모두). 톡 누르기만 하면 특별한 반응은 없습니다.</p>
 <div class="bar" role="group" aria-label="보기">
 <button type="button" data-w="1280" aria-pressed="true">1280×720</button>
 <button type="button" data-w="1600" aria-pressed="false">1600×720</button>
@@ -147,18 +146,12 @@ body.solo .vp{border-radius:0;box-shadow:none}
 <div class="bub" id="bub"></div>
 <div class="note" id="note"><i><svg viewBox="0 0 20 20"><path d="M10 17.2C4.6 13.3 2 10.6 2 7.4 2 5 3.9 3.2 6.1 3.2c1.6 0 3 .9 3.9 2.2.9-1.3 2.3-2.2 3.9-2.2C16.1 3.2 18 5 18 7.4c0 3.2-2.6 5.9-8 9.8Z" fill="#fff"/></svg></i><span id="noteT"></span></div>
 <div class="aitag">AI 생성 샘플 그림</div>
-<div class="hand" id="hand"><svg viewBox="0 0 100 110" width="74" height="81"><defs><linearGradient id="hg" gradientUnits="userSpaceOnUse" x1="0" y1="8" x2="0" y2="104"><stop offset="0" stop-color="#ffffff"/><stop offset=".65" stop-color="#fff8ef"/><stop offset="1" stop-color="#ffe9dc"/></linearGradient></defs>
-<g fill="#5b47a8" stroke="#5b47a8" stroke-width="7" stroke-linejoin="round"><rect x="30" y="16" width="14" height="50" rx="7"/><rect x="44" y="9" width="14" height="57" rx="7"/><rect x="58" y="13" width="14" height="53" rx="7"/><rect x="72" y="25" width="12" height="42" rx="6"/><rect x="28" y="44" width="58" height="56" rx="24"/><rect x="-7.5" y="-19" width="15" height="38" rx="7.5" transform="translate(23 66) rotate(-38)"/></g>
-<g fill="url(#hg)"><rect x="30" y="16" width="14" height="50" rx="7"/><rect x="44" y="9" width="14" height="57" rx="7"/><rect x="58" y="13" width="14" height="53" rx="7"/><rect x="72" y="25" width="12" height="42" rx="6"/><rect x="28" y="44" width="58" height="56" rx="24"/><rect x="-7.5" y="-19" width="15" height="38" rx="7.5" transform="translate(23 66) rotate(-38)"/></g>
-<path d="M44 33v24M58 28v29M72 37v22" stroke="#cdbff3" stroke-width="2.2" stroke-linecap="round"/>
-<path d="M35 20.5c1.6-2 4.2-2.3 5.8-.6M49 13.5c1.6-2 4.2-2.3 5.8-.6M63 17.5c1.6-2 4.2-2.3 5.8-.6" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none" opacity=".9"/>
-<ellipse cx="66" cy="76" rx="9" ry="6" fill="#ffd3dc" opacity=".55"/></svg></div>
 </div>
 </div></div></div>
 
 <div class="steps" id="steps">
 <button class="st" data-go="1"><em>1</em><b>첫 손길 · 놀람</b>눈이 동그래지고 「앗…!」</button>
-<button class="st" data-go="2"><em>2</em><b>계속 쓰다듬기 · 기쁨</b>눈 감고 ^^ · 홍조 · 머리카락 · 꽃관이 손을 따라 흔들림</button>
+<button class="st" data-go="2"><em>2</em><b>계속 쓰다듬기 · 기쁨</b>눈 감고 ^^ · 홍조 · 손 아래 앞머리가 눌리고 쓸림 · 옆머리가 늦게 따라옴</button>
 <button class="st" data-go="3"><em>3</em><b>충분히 · 꽃이 핌</b>꽃 · 초록 물감 방울 · 「후후, 기분 좋아요…」 · 친밀도 +1</button>
 <button class="st" data-go="4"><em>4</em><b>너무 오래 · 헝클</b>머리가 헝클어지고 「머리 다 헝클어졌잖아요~!」</button>
 <div class="cnt">쓰다듬은 횟수<b id="cnt">0</b></div>
@@ -168,9 +161,9 @@ body.solo .vp{border-radius:0;box-shadow:none}
 <h2>단계별 정지 화면 <em>자동 재생에서 찍은 실제 프레임</em></h2>
 <div class="stills">
 <figure><img data-src="assets/still_1_{W}.jpg" alt="1단계 놀람"><figcaption>① 첫 손길 <small>좌우 한 번(약 30px 이상 문지름)부터 · 놀란 눈 · 「앗…!」</small></figcaption></figure>
-<figure><img data-src="assets/still_2_{W}.jpg" alt="2단계 기쁨"><figcaption>② 계속 · 4번째부터 <small>눈 감고 ^^ · 홍조 · 머리 위가 손 방향으로 기울고 눌림</small></figcaption></figure>
+<figure><img data-src="assets/still_2_{W}.jpg" alt="2단계 기쁨"><figcaption>② 계속 · 4번째부터 <small>눈 감고 ^^ · 홍조 · 손 아래 앞머리가 눌리고 손 쪽으로 쓸림</small></figcaption></figure>
 <figure><img data-src="assets/still_3_{W}.jpg" alt="3단계 꽃"><figcaption>③ 충분히 · 14번째 <small>꽃 · 물감 방울이 머리 위에서 차례로 피어오름 · 친밀도 +1 · 오늘 1/1</small></figcaption></figure>
-<figure><img data-src="assets/still_4_{W}.jpg" alt="헝클"><figcaption>④ 너무 오래 · 30번째 <small>삐친 머리카락 · 토라진 얼굴 · 고개를 흔듦</small></figcaption></figure>
+<figure><img data-src="assets/still_4_{W}.jpg" alt="헝클"><figcaption>④ 너무 오래 · 30번째 <small>앞머리 결이 어긋나고 삐친 가닥이 남음 · 토라진 얼굴</small></figcaption></figure>
 </div>
 </section>
 
@@ -191,7 +184,7 @@ body.solo .vp{border-radius:0;box-shadow:none}
 <div class="snap n" id="snapN2"><span class="lbl">녹스 · 친밀도 높음</span></div>
 </div>
 <div class="tx"><h3>녹스 <span class="tg" style="background:linear-gradient(90deg,#ff6a8a,#ffb020,#3fcf86,#19b4ff,#9a6bff)">신화</span></h3>
-<p><b>친밀도가 낮으면</b> 첫 손길에서 손을 툭 쳐냅니다(손 아이콘이 옆으로 튕겨 나감) — <span class="ln">「…손, 치워.」</span> 단계가 오르지 않습니다.</p>
+<p><b>친밀도가 낮으면</b> 첫 손길에서 손을 툭 쳐냅니다(손이 옆으로 튕겨 나감) — <span class="ln">「…손, 치워.」</span> 단계가 오르지 않습니다.</p>
 <p><b>친밀도가 높으면</b> 가만히 눈을 내리깔고 있습니다 — <span class="ln">「…조금만이야.」</span> 꽃 대신 무지개 조각이 조용히 반짝입니다.</p>
 <p style="color:#6a6290">기준(가안): 친밀도 단계 3 미만 = 쳐냄 · 쳐낼 때는 오늘 1/1을 쓰지 않음. 정지 화면의 얼굴은 원래 그림(외치는 얼굴) 그대로 — 높은 친밀도용 「눈을 내리깐 얼굴」 칸이 따로 필요합니다.</p></div>
 </div>
@@ -202,12 +195,12 @@ body.solo .vp{border-radius:0;box-shadow:none}
 <h2>63명에 넣는다면 · 아이 한 명당 비용 <em>이 시안에서 실제로 든 것 기준</em></h2>
 <table class="cost">
 <tr><th>항목</th><th>아이 한 명</th><th>63명</th><th>근거</th></tr>
-<tr><td>표정 칸 생성 (놀람 · 기쁨 ^^+홍조 · 토라짐 → 그 위에 헝클 머리)</td><td><b>4번</b> + 다시 뽑기 여유 1번</td><td>약 <b>315번</b> 생성</td><td>플로라는 4번 모두 첫 번째에 통과 (1번 약 20초). 「얼굴(헝클은 정수리 · 앞머리)만 바꾸라」는 같은 문장에 그림만 바꿔 씀</td></tr>
+<tr><td>표정 칸 생성 (놀람 · 기쁨 ^^+홍조 · 토라짐) + 헝클 머리 1장(삐친 가닥만 잘라 씀)</td><td><b>4번</b> + 다시 뽑기 여유 1번</td><td>약 <b>315번</b> 생성</td><td>플로라는 4번 모두 첫 번째에 통과 (1번 약 20초). 「얼굴만 바꾸라」는 같은 문장에 그림만 바꿔 씀. 손 그림은 모든 아이 공용 1장</td></tr>
 <tr><td>맞추기 · 이음새 (자동 정렬 + 얼굴 칸 · 눈 칸 지정 + 확인)</td><td>약 <b>25분</b></td><td>약 <b>26시간</b></td><td>정렬 · 색 맞춤 · 가장자리는 스크립트. 사람은 눈 · 얼굴 칸 숫자 4개와 4배 확대 확인만</td></tr>
-<tr><td>머리카락 흔들림 지도 (정수리 · 머리 전체 · 헝클 칸)</td><td>약 <b>5분</b></td><td>약 <b>5시간</b></td><td>배경 없는 판의 모양에서 자동, 머리 · 목 위치만 지정 (레벨 원 자리는 공통)</td></tr>
+<tr><td>머리카락 지도 (앞머리 눌림 · 옆머리 · 삐친 가닥 · 꽃관 같은 장식 · 머리 덩어리) + 헝클 가닥</td><td>약 <b>20분</b></td><td>약 <b>21시간</b></td><td>머리카락 · 장식은 색으로 자동 선택, 사람은 영역을 다각형 몇 개로 지정(플로라: 다각형 6개 + 눈 2곳 + 목 위치). 헝클 가닥은 머리 밖으로 삐친 부분만 자동으로 따고, 머리 위에 얹을 복사 위치 4곳만 지정</td></tr>
 <tr><td>대사 (놀람 · 좋아요 · 헝클 + 성격 반응 1줄)</td><td><b>4줄</b></td><td><b>252줄</b></td><td>기존 아이별 말투표(hero_react_lines)와 같은 방식 · 성격 3갈래(보통 · 츤데레 · 쳐냄)</td></tr>
-<tr><td>게임 용량</td><td>머리 칸 3장 ≈ 0.17~0.35MB</td><td>≈ <b>11~22MB</b></td><td>머리 둘레만 잘라 WebP로 저장(이 시안 크기 실측 1장 55KB, 원래 그림 크기면 약 2배). 정보창을 연 아이만 불러옴</td></tr>
-<tr class="tot"><td>합계 (사람 시간)</td><td>약 <b>40분</b> + 대사</td><td>약 <b>5~6일</b> (1인)</td><td>생성 확인 10분 + 맞추기 25분 + 흔들림 지도 5분. 대사 쓰기 · 검수 별도. 그림을 새로 그리면 그 그림 기준으로 다시 만들어야 함</td></tr>
+<tr><td>게임 용량</td><td>머리 칸 3장 + 머리카락 지도 · 헝클 가닥 ≈ 0.27~0.5MB</td><td>≈ <b>17~32MB</b></td><td>머리 둘레만 잘라 WebP로 저장(이 시안 크기 실측 1장 55KB, 원래 그림 크기면 약 2배). 지도 3장(PNG 실측 44 · 76 · 29KB)은 한 장으로 묶으면 약 0.1MB. 정보창을 연 아이만 불러옴</td></tr>
+<tr class="tot"><td>합계 (사람 시간)</td><td>약 <b>55분</b> + 대사</td><td>약 <b>7~8일</b> (1인)</td><td>생성 확인 10분 + 맞추기 25분 + 머리카락 지도 · 헝클 가닥 20분. 대사 쓰기 · 검수 별도. 그림을 새로 그리면 그 그림 기준으로 다시 만들어야 함</td></tr>
 </table>
 <ul>
 <li class="no">일반 비율 새 그림이 있는 아이는 지금 13명뿐입니다. 나머지 50명은 서 있는 SD 그림이라, 같은 방식으로 SD 얼굴에 표정 칸을 만들거나(더 작고 단순 — 빠름) 새 그림이 나온 뒤에 만들어야 합니다.</li>
@@ -223,9 +216,11 @@ body.solo .vp{border-radius:0;box-shadow:none}
 <ul>
 <li><b>판정:</b> 머리 위 타원(점선) 안에서 누른 채 좌우로 30px 넘게 문지를 때마다 1번. 톡 누르기 · 머리 밖에서 끌기는 세지 않습니다(공용 터치 효과만 나옴).</li>
 <li><b>단계:</b> 1번 → 놀람 · 4번 → 기쁨 · 14번 → 꽃 + 친밀도 +1 (하루 1번) · 30번 → 헝클. 단계마다 최소 머무는 시간(0.9초 · 2초 · 3초)이 있어 빨리 문질러도 건너뛰지 않습니다. 손을 떼면 2~3초 뒤 처음으로.</li>
-<li><b>머리카락:</b> 그림 한 장 + 흔들림 지도(정수리 · 머리 전체 · 헝클 칸)로 화면을 살짝 비트는 방식 — 손 쪽으로 기울고, 손 아래가 눌리고, 뗀 뒤 한두 번 출렁입니다. 얼굴 · 레벨 원은 움직이지 않습니다.</li>
-<li><b>표정:</b> 머리 둘레 칸 3장을 겹쳐 바꿉니다(놀람 · 기쁨 0.11초). 놀람 · 기쁨은 얼굴만 다르고, 헝클 칸만 정수리 · 앞머리까지 달라서 0.32초 동안 머리카락을 손 방향으로 살짝 비틀며 바꿉니다. 꽃관 · 땋은 머리 · 테두리는 원래 그림 그대로.</li>
-<li><b>손 · 자국:</b> 손 아이콘은 그림 칸 안 머리 위에서만 보입니다. 끌 때 빛가루는 게임 공용 터치 효과(TouchFx 끌기 가루)와 같은 색으로 흉내 냈습니다.</li>
+<li><b>머리 덩어리:</b> 얼굴 · 눈 · 두개골 윤곽 · 꽃관은 비틀지 않습니다. 손에 밀려 최대 약 0.4° 기울고 1px 끄덕이는 것만 한 덩어리로 움직입니다.</li>
+<li><b>머리카락만 움직임:</b> 칠한 지도 안의 머리카락만 변형합니다 — 손 아래 정수리 · 앞머리는 눌리고 손이 가는 쪽으로 최대 약 9px 끌리며(손 둘레만, 결마다 끌리는 양이 조금씩 다름, 손보다 0.1초쯤 늦게 따라가고 떼면 한 번 출렁여 제자리), 옆머리 · 땋은 머리는 뿌리부터 늦게 따라왔다 되돌아오고(끝 ±3~4px), 꽃관 위 삐친 가닥 · 오른쪽 잔머리는 손이 방향을 바꿀 때 튕깁니다.</li>
+<li><b>헝클:</b> 그림을 바꾸지 않습니다. 앞머리 결 덩어리가 옆으로 어긋나고 정수리가 부푼 채로 남고, 삐친 가닥 9개(AI 헝클 그림에서 머리 밖으로 삐친 부분만 따 옴)가 겹칩니다. 4단계 동안 유지, 처음으로 돌아갈 때 고개를 털며 정리.</li>
+<li><b>표정:</b> 머리 둘레 칸 4장(보통 · 놀람 · 기쁨 · 토라짐)을 0.11초 겹쳐 바꿉니다 — 모두 얼굴만 다릅니다.</li>
+<li><b>손:</b> 플로라 그림체(같은 갈색 선 · 셀 음영 · 왼쪽 위 빛)로 그린 선생님 손이 오른쪽 위에서 들어옵니다. 소매는 그림 칸 테두리에 닿기 전에 둥글게 사라져 곧게 잘린 끝이 없습니다. 손은 정수리 곡면을 따라 미끄러지고 손목이 곡면을 따라 기웁니다. 누르면 내려앉아 머리카락에 오른쪽 아래로 그림자가 지고, 손끝은 앞머리 결 아래로 살짝 묻힙니다. 마우스를 올리면 살짝 떠 있는 손, 떼면 팔이 들어온 쪽으로 빠져나갑니다. 머리 밖을 끌 때만 공용 끌기 가루(TouchFx 색).</li>
 </ul>
 </div>
 </div>
@@ -261,15 +256,23 @@ let T=0;
 const IN={down:false,x:300,y:200,vx:0,vy:0,t:0,dx0:0,dy0:0,dt0:0,moved:0,touch:false,over:false,src:'mouse'};
 const SW={dir:0,start:0,ext:0,counted:false};
 let strokes=0,lastStroke=-99,stage=0,stageT=0,todayDone=false,exprHoldUntil=0;
-const spring={sx:0,svx:0,sy:0,svy:0,tl:0,tv:0};
-let contact=0,ruffle=0;   // ruffle = 머리가 헝클어지는 / 털어 정리하는 순간의 짧은 비틀림 (그림이 바뀌는 동안만)
+// 머리는 한 덩어리: 아주 작은 기울임(th, 라디안) · 끄덕임(ny, px)만. 움직이는 건 머리카락 —
+// 손 아래 쓸림(dx), 옆머리 · 땋은 머리(sR/sL: 뿌리 1 → 끝 2), 삐친 가닥(fa: 꽃관 위 호, fr: 오른쪽 잔머리), 헝클(messy)
+const HD0={th:0,thv:0,ny:0,nyv:0,sL1:0,vL1:0,sL2:0,vL2:0,sR1:0,vR1:0,sR2:0,vR2:0,fa:0,fav:0,fr:0,frv:0,lagX:222,lagV:0,dx:0,dxv:0,messy:0};
+const HD={...HD0};
+const HAND0={x:222,y:56,a:-.04,vx:0,lift:1,liftV:0,A:0,px:222};   // 그려지는 손 (머리 캔버스 좌표 · 손등 가운데가 닿는 점)
+const HSZ=96;   // 손 텍스처(512) 한 변이 화면에서 차지하는 px — 손목~손끝 약 72px (아이 머리 폭의 0.4배)
+const HAND={...HAND0};
+const sp=(o,k,kv,tg,w,z,dt)=>{o[kv]+=(w*w*(tg-o[k])-2*z*w*o[kv])*dt;o[k]+=o[kv]*dt};
+const surf=x=>52+((x-222)/72)**2*26;   // 정수리 곡면: 손바닥이 닿는 높이 (가운데가 가장 높고 양옆으로 내려감)
+let contact=0,press=0;
 let expr={from:'neutral',to:'neutral',t:-1,dur:.11};
-let handA=0,handTilt=0,handPress=0;
 const trail=[];const parts=[];const rings=[];let glows=[];
 let auto=null;
 
 // ---------- 그림 · 텍스처 ----------
-const EXPR=['neutral','surprised','happy','messy'];   // messy = 토라진 얼굴 + 헝클어진 앞머리 · 정수리 (표정 칸과 같은 방식으로 만든 한 장)
+const EXPR=['neutral','surprised','happy','pout'];   // 얼굴만 다른 머리 칸 4장 (헝클은 그림 교체가 아니라 머리카락 변형 + 삐친 가닥 겹침)
+const MAPS=['hair','head','plate','fly','hand'];
 const imgs={};
 const load=s=>new Promise((r,j)=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>j(new Error(s));i.src=s});
 const headC=$('#head'),fxC=$('#fx'),glC=$('#glow');
@@ -280,47 +283,105 @@ function initGL(){
   try{gl=headC.getContext('webgl',{premultipliedAlpha:false,preserveDrawingBuffer:true,antialias:false,alpha:false})}catch(e){gl=null}
   if(!gl){document.body.classList.add('nogl');return}
   const vs=`attribute vec2 p;varying vec2 v;void main(){v=vec2(p.x*.5+.5,.5-p.y*.5);gl_Position=vec4(p,0.,1.);}`;
+  // 지도: tM = R 손 아래 눌림 · 쓸림(정수리 · 앞머리), G 옆머리 · 땋은 머리, B 삐친 가닥
+  //       tN = R 머리(얼굴 · 두개골 · 꽃관 · 머리카락 뿌리) — 한 덩어리로만 움직임, G 머리카락 뿌리→끝 길이, B 꽃관
+  //       tP = 꽃관을 지운 머리카락(쓸린 머리카락이 꽃 그림을 끌고 가지 않게), tF = 헝클 때 삐친 가닥, tH = 손
   const fs=`precision highp float;varying vec2 v;
-uniform sampler2D tA,tB,tW;uniform float mixF,contact,messy,press,tilt;uniform vec2 size,hand,hvel,sway,pivot;
+#define ANC vec2(.3929,.6230)
+#define TIPN vec2(-.336,.942)
+#define TIPC .7397
+uniform sampler2D tA,tB,tM,tN,tP,tF,tH,tQ;
+uniform float mixF,press,messy,handA,lift,th,ny,fa,fr,sL1,sL2,sR1,sR2;
+uniform vec2 size,pivot,hand,drag,hsc;uniform vec2 hrot;
 float h21(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h21(i),h21(i+vec2(1.,0.)),f.x),mix(h21(i+vec2(0.,1.)),h21(i+vec2(1.,1.)),f.x),f.y);}
+vec2 rotA(vec2 r,float a){float c=cos(a),s=sin(a);return vec2(c*r.x-s*r.y,s*r.x+c*r.y);}
+vec3 headAt(vec2 p){vec2 uv=p/size;return mix(texture2D(tA,uv).rgb,texture2D(tB,uv).rgb,mixF);}
+vec2 handUV(vec2 p){vec2 q=p-hand;q=vec2(hrot.x*q.x+hrot.y*q.y,-hrot.y*q.x+hrot.x*q.y);return ANC+q/hsc;}
+float inside(vec2 u){return step(0.,u.x)*step(u.x,1.)*step(0.,u.y)*step(u.y,1.);}
 void main(){
- vec2 px=v*size;vec4 w=texture2D(tW,v);
- float top=1.-smoothstep(10.,150.,px.y)*.55;
- vec2 d=sway*w.r*top;
- vec2 q=px-hand;float g=exp(-dot(q,q)/(2.*50.*50.));
- d+=clamp(hvel*.0055,vec2(-3.5),vec2(3.5))*w.r*g*contact;
- d.y+=press*2.4*w.r*g;
- vec2 r=px-pivot;float c=cos(tilt),s=sin(tilt);
- d+=(vec2(c*r.x-s*r.y,s*r.x+c*r.y)-r)*w.g;
- // 헝클어지는 / 털어 정리하는 순간: 그림이 바뀌는 동안 정수리 · 앞머리를 손 방향으로 쓸고 결을 군데군데 비틀어 「확」 바뀌지 않게
- vec2 n=vec2(vn(px*.06+3.1),vn(px*.06+17.7))-.5;vec2 n2=vec2(vn(px*.14+9.3),vn(px*.14+41.2))-.5;
- float hi=1.-smoothstep(20.,135.,px.y);
- d+=(vec2(3.2,.8)*hi+n*5.+n2*2.)*messy*w.b;
- vec2 uv=(px-d)/size;
- vec4 col=mix(texture2D(tA,uv),texture2D(tB,uv),mixF);
- gl_FragColor=vec4(col.rgb,1.);}`;
+ vec2 px=v*size;
+ vec4 M=texture2D(tM,v),N=texture2D(tN,v);
+ float edge=smoothstep(0.,18.,px.x)*smoothstep(0.,18.,size.x-px.x)*smoothstep(0.,18.,size.y-px.y);
+ // 머리 한 덩어리: 목을 축으로 아주 작게 기울고 끄덕임 (얼굴 · 눈 · 두개골 윤곽은 비틀리지 않음)
+ vec2 r=px-pivot;vec2 dR=(rotA(r,th)-r+vec2(0.,ny))*N.r*edge;
+ // 손 아래: 정수리 · 앞머리가 눌리고 손이 가는 쪽으로 끌림 — 결마다 끌리는 양이 조금씩 달라 덩어리로 출렁이지 않게
+ // 옆으로 끌리는 양은 좌우로만 흐린 지도(tQ)를 써서, 지도 가장자리에서 그림이 접히거나 찢어지지 않게
+ vec2 q=(px-hand)/vec2(56.,44.);float g=exp(-.5*dot(q,q));
+ float strand=.85+.3*vn(vec2(px.x*.09-px.y*.03,px.y*.02));
+ vec2 dP=(drag*strand*texture2D(tQ,v).r+vec2(0.,press*2.4)*M.r)*g;
+ // 헝클: 앞머리 결 덩어리가 옆으로 어긋나고 정수리가 부풀어 오른 채로 남음
+ float hi=1.-smoothstep(40.,120.,px.y);
+ vec2 dMs=vec2((vn(vec2(px.x*.075+3.,px.y*.022))-.5)*8.,(vn(vec2(px.x*.05+9.,px.y*.03))-.5)*2.4-2.*hi)*messy*M.r;
+ // 옆머리 · 땋은 머리: 뿌리가 먼저, 끝이 늦게 따라오고 되돌아옴
+ float sw=mix(mix(sR1,sR2,N.g),mix(sL1,sL2,N.g),1.-step(205.,px.x));
+ vec2 dS=vec2(sw,-abs(sw)*.12*N.g)*M.g;
+ // 삐친 가닥: 꽃관 위 호는 뿌리를 축으로 튕기고, 오른쪽 잔머리는 끝이 흔들림
+ vec2 ra=px-vec2(162.,33.);
+ vec2 dF=(px.x<205.?rotA(ra,fa)-ra:vec2(fr*clamp((px.y-118.)/100.,0.,1.),0.))*M.b;
+ vec2 dH=(dP+dMs+dS+dF)*edge;
+ vec2 uvH=px-dR-dH;
+ vec3 col=headAt(uvH);
+ vec4 pl=texture2D(tP,uvH/size);col=mix(col,pl.rgb,pl.a*smoothstep(.4,1.6,length(dH)));
+ // 꽃관은 머리와 한 덩어리 (머리카락 위에 다시 얹음)
+ vec2 uvC=px-dR;float cA=texture2D(tN,uvC/size).b;col=mix(col,headAt(uvC),cA);
+ // 헝클 때만 보이는 삐친 가닥 (손에 같이 쓸림)
+ vec4 fl=texture2D(tF,(px-dR-drag*g*1.1-vec2(fr*.5,press*2.*g)-dMs*.5)/size);col=col*(1.-fl.a*messy)+fl.rgb*messy;
+ float lum=dot(col,vec3(.3,.55,.15));
+ // 손 그림자: 머리카락 위에만, 들면 옅고 멀어짐
+ float onHair=clamp(M.r*1.6+N.b+N.r*.5,0.,1.);
+ vec2 hu=handUV(px-vec2(4.,6.)-lift*vec2(6.,12.));
+ float shd=texture2D(tH,hu,3.).a*inside(hu)*handA*(.34-.22*lift)*onHair;
+ col*=1.-shd*vec3(.85,.95,.8);
+ // 손: 손끝 언저리는 앞머리 결의 선이 손가락 위로 지나가고(그림 속 머리카락 선을 그대로 씀), 손끝이 머리카락 속으로 살짝 묻힘
+ // tipd = 손끝 줄(검지~새끼 손톱 끝)까지의 거리(텍스처 단위, 0 = 손끝)
+ vec2 hv=handUV(px);vec4 hc=texture2D(tH,hv)*inside(hv);
+ float hairHere=clamp(M.r*2.2,0.,1.)*(1.-lift);
+ float tipd=dot(hv,TIPN)-TIPC;
+ float over=(smoothstep(-.13,-.05,tipd)*smoothstep(.5,.3,lum)*.7+smoothstep(-.02,.01,tipd)*.45)*hairHere;
+ // 소매는 그림 자체에서 둥글게 사라지고, 혹시 남은 끝도 그림 칸 위 테두리에 닿기 전에 흐려짐 (곧게 잘린 끝 없음)
+ float ha=handA*(1.-over)*smoothstep(1.,12.,px.y);
+ col=col*(1.-hc.a*ha)+hc.rgb*ha;
+ gl_FragColor=vec4(col,1.);}`;
   const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);if(!gl.getShaderParameter(o,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(o));return o};
   prog=gl.createProgram();gl.attachShader(prog,sh(gl.VERTEX_SHADER,vs));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(prog);gl.useProgram(prog);
   const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
   const loc=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
-  for(const n of ['tA','tB','tW','mixF','contact','messy','press','tilt','size','hand','hvel','sway','pivot'])U[n]=gl.getUniformLocation(prog,n);
-  const mk=src=>{const t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,src);
-    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);return t};
+  for(const n of ['tA','tB','tM','tN','tP','tF','tH','tQ','mixF','press','messy','handA','lift','th','ny','fa','fr','sL1','sL2','sR1','sR2','size','pivot','hand','drag','hsc','hrot'])U[n]=gl.getUniformLocation(prog,n);
+  // 손 · 삐친 가닥은 미리 곱한 알파(가장자리 검은 테 없음), 손은 밉맵(작게 그릴 때 선이 깨지지 않게 · 그림자 흐림)
+  const mk=(src,pm,mip)=>{const t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,!!pm);
+    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,src);if(mip)gl.generateMipmap(gl.TEXTURE_2D);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,mip?gl.LINEAR_MIPMAP_LINEAR:gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);return t};
   for(const e of EXPR)tex[e]=mk(imgs[e]);
-  tex.w=mk(imgs.weight);
-  gl.uniform1i(U.tA,0);gl.uniform1i(U.tB,1);gl.uniform1i(U.tW,2);
+  tex.hair=mk(imgs.hair);tex.head=mk(imgs.head);tex.plate=mk(imgs.plate);tex.fly=mk(imgs.fly,true);tex.hand=mk(imgs.hand,true,true);
+  gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,false);
+  tex.dragQ=mk(dragMask(imgs.hair));
+  ['tA','tB','tM','tN','tP','tF','tH','tQ'].forEach((n,i)=>gl.uniform1i(U[n],i));
+  [[2,'hair'],[3,'head'],[4,'plate'],[5,'fly'],[6,'hand'],[7,'dragQ']].forEach(([i,n])=>{gl.activeTexture(gl.TEXTURE0+i);gl.bindTexture(gl.TEXTURE_2D,tex[n])});
   gl.uniform2f(U.size,HX.w,HX.h);gl.uniform2f(U.pivot,PIVOT.x,PIVOT.y);
   gl.viewport(0,0,HX.w,HX.h);
 }
+// 옆으로 끌리는 양의 지도: 머리카락 지도 R을 좌우로만 흐림(상자 흐림 3번 ≈ 가우스, 반경 7px).
+// 위아래로는 흐리지 않아 앞머리 아래 얼굴로 번지지 않고, 좌우 가장자리는 끌림이 완만히 줄어 접히지 않음
+function dragMask(img){
+  const w=img.width,h=img.height,c=document.createElement('canvas');c.width=w;c.height=h;const g=c.getContext('2d');g.drawImage(img,0,0);
+  const id=g.getImageData(0,0,w,h),d=id.data,a=new Float32Array(w),b=new Float32Array(w),r=7;
+  for(let y=0;y<h;y++){for(let x=0;x<w;x++)a[x]=d[(y*w+x)*4];
+    for(let pass=0;pass<3;pass++){let s=0;for(let x=-r;x<=r;x++)s+=a[clamp(x,0,w-1)];
+      for(let x=0;x<w;x++){b[x]=s/(2*r+1);s+=a[Math.min(w-1,x+r+1)]-a[Math.max(0,x-r)]}a.set(b)}
+    for(let x=0;x<w;x++){const i=(y*w+x)*4;d[i]=d[i+1]=d[i+2]=a[x];d[i+3]=255}}
+  g.putImageData(id,0,0);return c}
 function drawHead(){
   const m=expr.t<0?1:clamp((T-expr.t)/expr.dur,0,1);
   if(!gl)return;
   gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,tex[expr.from]);
   gl.activeTexture(gl.TEXTURE1);gl.bindTexture(gl.TEXTURE_2D,tex[expr.to]);
-  gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,tex.w);
-  gl.uniform1f(U.mixF,m);gl.uniform1f(U.contact,contact);gl.uniform1f(U.messy,ruffle*.8);gl.uniform1f(U.press,contact*handPress);gl.uniform1f(U.tilt,spring.tl);
-  gl.uniform2f(U.hand,IN.x-HX.x,IN.y-HX.y);gl.uniform2f(U.hvel,IN.vx,IN.vy);gl.uniform2f(U.sway,spring.sx,spring.sy);
+  const L=clamp(HAND.lift,0,1.3),sq=1-.05*press;
+  gl.uniform1f(U.mixF,m);gl.uniform1f(U.press,press);gl.uniform1f(U.messy,HD.messy);gl.uniform1f(U.handA,HAND.A);gl.uniform1f(U.lift,L);
+  gl.uniform1f(U.th,HD.th);gl.uniform1f(U.ny,HD.ny);gl.uniform1f(U.fa,HD.fa);gl.uniform1f(U.fr,HD.fr);
+  gl.uniform1f(U.sL1,HD.sL1);gl.uniform1f(U.sL2,HD.sL2);gl.uniform1f(U.sR1,HD.sR1);gl.uniform1f(U.sR2,HD.sR2);
+  // 들 때는 살짝 위로, 사라질 때는 팔이 들어온 쪽(오른쪽 위)으로 빠져나감 (제자리에서 투명해지지 않게)
+  gl.uniform2f(U.hand,HAND.x+L*3+(1-HAND.A)*34,HAND.y-L*10-(1-HAND.A)*28);gl.uniform2f(U.drag,HD.dx,0);gl.uniform2f(U.hsc,HSZ,HSZ*sq);gl.uniform2f(U.hrot,Math.cos(HAND.a),Math.sin(HAND.a));
   gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
 }
 
@@ -423,16 +484,21 @@ function caption(k){if(!auto||NOCAP)return;$('#capN').textContent=CAPS[k][0];$('
 function setExpr(e,dur=.11){if(expr.to===e)return;expr={from:expr.to,to:e,t:T,dur}}
 function enter(k){
   const prev=stage;stage=k;stageT=T;
-  if(k===0){strokes=0;exprHoldUntil=(prev===2||prev===3)?T+.7:T;if(prev===4){setExpr('neutral',.5);ruffle=.7;spring.tv-=.12}if(auto&&prev>0)caption(0)}
-  if(k===1){setExpr('surprised');say('앗…!',1.7);spring.svy-=40;spring.tv-=.06;caption(1)}
+  // 4 → 0: 고개를 살짝 흔들어 머리를 정리 (헝클은 그때까지 남아 있음)
+  if(k===0){strokes=0;exprHoldUntil=(prev===2||prev===3)?T+.7:T;if(prev===4){setExpr('neutral');HD.thv-=.09;kick(-1.4)}if(auto&&prev>0)caption(0)}
+  // 놀람: 머리가 움찔 올라가고 삐친 가닥이 튐
+  if(k===1){setExpr('surprised');say('앗…!',1.7);HD.nyv-=26;kick(1.6);caption(1)}
   if(k===2){setExpr('happy');caption(2)}
   if(k===3){setExpr('happy');bloom();say('후후, 기분 좋아요…',3.4);if(!todayDone){todayDone=true;notice('친밀도 <b>+1</b> · 오늘 1/1',false,.55)}else notice('오늘 친밀도 <b>1/1</b> · 내일 또 올라요',true,.55);caption(3)}
-  if(k===4){setExpr('messy',.32);ruffle=1;say('머리 다 헝클어졌잖아요~!',3.4);spring.tv+=.16;caption(4)}
+  if(k===4){setExpr('pout');say('머리 다 헝클어졌잖아요~!',3.4);HD.thv+=.1;kick(1.2);caption(4)}
   syncSteps();
 }
+function kick(d){HD.fav+=d*.4;HD.frv+=d*8}
 function stroke(){
   strokes++;lastStroke=T;
-  if(stage>=2){for(let i=0;i<2;i++)parts.push(P('sk',IN.x+R(-30,30),IN.y+R(-22,10),R(-20,20),R(-40,-10),0,R(.5,.8),R(.5,.8),1));if(strokes%3===0)parts.push(P(rnd()<.5?'bl':'lf',IN.x+R(-20,20),IN.y-6,R(-30,30),R(-70,-40),25,R(.35,.5),R(1,1.4),R(0,2)|0))}
+  // 반짝임은 손끝(앞머리 쪽) 언저리, 꽃잎은 손 옆에서 피어올라 손등에 얹히지 않게
+  const fx0=HAND.x+HX.x-Math.sin(HAND.a)*36,fy0=HAND.y+Math.cos(HAND.a)*36,side=rnd()<.5?-1:1;
+  if(stage>=2){for(let i=0;i<2;i++)parts.push(P('sk',fx0+R(-34,34),fy0+R(-6,12),R(-20,20),R(-40,-10),0,R(.5,.8),R(.5,.8),1));if(strokes%3===0){const p=P('bl',HAND.x+HX.x+side*R(52,64),HAND.y+R(-4,10),side*R(10,30),R(-70,-40),25,R(.35,.5),R(1,1.4),R(0,2)|0);p.occ=1;parts.push(p)}}
   $('#cnt').textContent=strokes;
 }
 function update(dt){
@@ -443,17 +509,36 @@ function update(dt){
   else if(stage===3){if(strokes>=30&&T-stageT>=3)enter(4);else if(since>3.2)enter(0)}
   else if(stage===4){if(since>3)enter(0)}
   if(stage===0&&T>=exprHoldUntil&&expr.to!=='neutral')setExpr('neutral');
-  ruffle*=Math.exp(-dt*2.6);
-  // 접촉 · 손 속도
-  const on=IN.down&&onHead(IN.x,IN.y);
-  contact=lerp(contact,on?1:0,1-Math.exp(-dt*(on?14:5)));
-  // 머리카락 스프링: 손이 움직이는 쪽으로 쓸리고, 손 아래는 눌림. 떼면 한두 번 출렁
-  const tx=clamp(IN.vx*.011,-5.5,5.5)*contact,ty=contact*1.4;
-  spring.svx+=((tx-spring.sx)*150-spring.svx*11)*dt;spring.sx+=spring.svx*dt;
-  spring.svy+=((ty-spring.sy)*150-spring.svy*11)*dt;spring.sy+=spring.svy*dt;
-  const tt=contact*(clamp((IN.x-HIT.cx)/HIT.rx,-1,1)*.012+(stage>=2&&stage<4?.006:0));
-  spring.tv+=((tt-spring.tl)*55-spring.tv*5.2)*dt;spring.tl+=spring.tv*dt;
-  handPress=lerp(handPress,IN.down?1:0,1-Math.exp(-dt*12));
+  // ---- 손: 정수리 곡면을 따라 미끄러짐 (손바닥이 닿는 점은 머리 위 띠 안으로) ----
+  const onH=onHead(IN.x,IN.y),on=IN.down&&onH;
+  const want=on||(IN.over&&!IN.down&&!IN.touch&&onH);
+  // 좌우는 정수리 폭(약 ±46px) 안으로 부드럽게 눌러 담음 — 손이 꽃관 왼쪽 끝이나 머리 밖 하늘로 나가지 않게
+  const tx=220+46*Math.tanh((IN.x-HX.x-220)/50),s0=surf(tx),ty=clamp(IN.y-HX.y,s0-22,s0+8);
+  if(HAND.A<.02){HAND.x=tx;HAND.y=ty;HAND.px=tx;HD.lagX=tx}
+  HAND.A=lerp(HAND.A,want?1:0,1-Math.exp(-dt*(want?16:14)));
+  HAND.x=lerp(HAND.x,tx,1-Math.exp(-dt*32));HAND.y=lerp(HAND.y,ty,1-Math.exp(-dt*32));
+  HAND.vx=lerp(HAND.vx,(HAND.x-HAND.px)/dt,1-Math.exp(-dt*18));HAND.px=HAND.x;
+  sp(HAND,'lift','liftV',on?0:1,20,.55,dt);                                   // 내려앉을 때 아주 살짝 눌렸다 멈춤
+  const at=-.04+.12*clamp((HAND.x-222)/75,-1.2,1.2)+clamp(HAND.vx*.00025,-.07,.07);  // 손목이 곡면의 법선을 따르고, 손끝은 움직임보다 조금 늦게 (팔 기울기는 그림에 들어 있음)
+  HAND.a=lerp(HAND.a,at,1-Math.exp(-dt*14));
+  contact=lerp(contact,on?1:0,1-Math.exp(-dt*(on?16:6)));
+  press=contact*clamp(1-HAND.lift,0,1);
+  // ---- 손 아래 머리카락: 손이 가는 쪽으로 끌리고(손을 따라오는 닻과의 차이), 떼면 한 번 되돌아옴 ----
+  // 최대 약 7px(+되돌아올 때 2px 넘침) — 손보다 0.1초쯤 늦게 따라가고, 손을 떼면 한 번 출렁이며 제자리로
+  sp(HD,'lagX','lagV',HAND.x,8,1,dt);
+  sp(HD,'dx','dxv',7*Math.tanh((HAND.x-HD.lagX)*.09)*press,11,.5,dt);
+  // ---- 머리 한 덩어리: 손이 미는 쪽으로 0.4° 안쪽 기울임 + 손에 눌려 1px 끄덕임 ----
+  sp(HD,'th','thv',press*(clamp(HD.dx/5,-1,1)*.006+clamp((HAND.x-222)/80,-1,1)*.004),7,.8,dt);
+  sp(HD,'ny','nyv',press*1.2,10,.7,dt);
+  // ---- 옆머리 · 땋은 머리: 뿌리는 손에 끌린 정수리와 머리 기울기를 따라가고, 끝은 늦게 따라오고 되돌아옴 (끝 ±2~3px) ----
+  const drive=HD.dx*.45+HD.th*160;
+  sp(HD,'sR1','vR1',drive*.5,11,.55,dt);sp(HD,'sR2','vR2',HD.sR1*1.3,6.5,.4,dt);
+  sp(HD,'sL1','vL1',drive*.4,9,.55,dt);sp(HD,'sL2','vL2',HD.sL1*1.4,5.2,.38,dt);
+  // ---- 삐친 가닥: 손이 방향을 바꿀 때 튕기고 늦게 멈춤 ----
+  const dn=press*clamp(HD.dx/5,-1,1);
+  sp(HD,'fa','fav',dn*.03,15,.16,dt);sp(HD,'fr','frv',dn*1.4,13,.18,dt);
+  // ---- 헝클: 4단계에서 남고, 처음으로 돌아갈 때 정리 ----
+  HD.messy=lerp(HD.messy,stage===4?1:0,1-Math.exp(-dt*(stage===4?5:2.4)));
   // 입자
   for(const p of parts){p.age+=dt;if(p.age<0)continue;const dr=Math.exp(-p.drag*dt);p.vx*=dr;p.vy*=dr;p.vy+=p.g*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.r+=p.vr*dt}
   for(let i=parts.length-1;i>=0;i--)if(parts[i].age>parts[i].life)parts.splice(i,1);
@@ -468,8 +553,10 @@ function bloom(){
   glows.push({x:292,y:62,r:170,life:2.3,age:0,peak:.58,spr:'glow'});
   glows.push({x:340,y:90,r:140,life:2.1,age:-.3,peak:.38,spr:'gglow'});
   const ARC=[[236,30],[266,36],[292,54],[308,80],[316,108]];
-  const org=()=>{const t=rnd()*(ARC.length-1),i=Math.floor(t),f=t-i,a=ARC[i],b=ARC[Math.min(ARC.length-1,i+1)];return V(lerp(a[0],b[0],f)+R(-5,5),lerp(a[1],b[1],f)+R(-3,5))};
-  for(let i=0;i<18;i++){const o=org(),left=i%6===3,a=(left?R(-140,-110):R(-58,8))*Math.PI/180,sp=R(48,118),lay=left?0:i%4===0?0:i%7===0?2:1;
+  // 손바닥 아래에서 나온 꽃은 손등에 붙은 무늬처럼 보이므로, 손 가장자리(날아갈 쪽)로 옮겨서 피운다
+  const org=(left=false)=>{const t=rnd()*(ARC.length-1),i=Math.floor(t),f=t-i,a=ARC[i],b=ARC[Math.min(ARC.length-1,i+1)];const o=V(lerp(a[0],b[0],f)+R(-5,5),lerp(a[1],b[1],f)+R(-3,5));
+    if(underHand(o.x,o.y)>.3)o.x=HAND.x+HX.x+4+(left?-1:1)*R(46,54);return o};
+  for(let i=0;i<18;i++){const left=i%6===3,o=org(left),a=(left?R(-140,-110):R(-58,8))*Math.PI/180,sp=R(48,118),lay=left?0:i%4===0?0:i%7===0?2:1;
     parts.push(P('bl',o.x,o.y,Math.cos(a)*sp,Math.sin(a)*sp,R(3,14),lay===2?R(1,1.15):lay===0?R(.48,.6):R(.74,1.05),R(2.6,3.4),i%2,lay,i*.055+R(0,.05),.8))}
   for(let i=0;i<10;i++){const o=org(),a=R(-80,-34)*Math.PI/180,sp=R(100,145),lay=i%4===1?0:i%6===0?2:1;
     parts.push(P('dr',o.x,o.y,Math.cos(a)*sp,Math.sin(a)*sp,R(160,185),lay===2?R(.9,1.05):lay===0?R(.45,.55):R(.6,.85),R(1.7,2.2),0,lay,.08+i*.085+R(0,.05),.6,R(-.4,.4)))}
@@ -477,15 +564,17 @@ function bloom(){
   for(let i=0;i<12;i++){parts.push(P('sk',R(280,430),R(30,170),R(-8,8),R(-22,-4),0,R(.45,.85),R(.8,1.3),0,1,.1+i*.09,1))}
 }
 function onHead(x,y){return ((x-HIT.cx)/(HIT.rx+16))**2+((y-HIT.cy)/(HIT.ry+20))**2<=1}
+// 그려진 손이 덮는 범위(그림 칸 좌표): 손끝 왼쪽 36px ~ 소매 오른쪽 40px · 위 32 ~ 아래 26px
+function underHand(x,y){if(HAND.A<.05)return 0;const dx=(x-(HAND.x+HX.x+2))/42,dy=(y-(HAND.y+HX.y-3))/34;return HAND.A*(1-ss(.7,1.05,Math.hypot(dx,dy)))}
 
 // ---------- 그리기 ----------
-const handEl=$('#hand'),hintEl=$('#hint'),hitEl=$('#hit'),rimEl=$('#rim'),panEl=$('#pan');
+const hintEl=$('#hint'),hitEl=$('#hit'),rimEl=$('#rim'),panEl=$('#pan');
 let hintA=1;
 function render(){
   drawHead();
   fx.clearRect(0,0,646,638);gw.clearRect(0,0,646,638);
-  // 손끝 자국: 크림 빛 리본 + 공용 끌기 가루 색
-  if(trail.length>1){
+  // 손끝 자국: 크림 빛 리본 + 공용 끌기 가루 색 — 머리 위에서는 손 그림이 대신하므로 머리 밖을 끌 때만
+  if(trail.length>1&&HAND.A<.5){
     for(let pass=0;pass<2;pass++){const g=pass?fx:gw;g.lineCap='round';g.lineJoin='round';
       for(let i=1;i<trail.length;i++){const a=trail[i-1],b=trail[i];const k=1-(T-b.t)/.34;if(k<=0)continue;
         g.strokeStyle=pass?`rgba(255,253,244,${(k*.8).toFixed(3)})`:`rgba(200,180,255,${(k*.42).toFixed(3)})`;g.lineWidth=pass?1.2+2.4*k:4+8*k;g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.stroke()}}}
@@ -500,15 +589,11 @@ function render(){
     else if(p.type==='lf'){img=lay===1?SP.lf:SP.lfB;sz=24}
     else if(p.type==='dot'){img=SP.dot[p.variant];sz=8;gw.globalAlpha=fade*.95;const s=sz*p.s;gw.drawImage(img,p.x-s/2,p.y-s/2,s,s);continue}
     else{img=SP.sk;sz=22;const tw=Math.sin(Math.min(1,p.age/p.life)*Math.PI);fx.globalAlpha=tw*.95;const s=sz*p.s*(.6+.4*tw);fx.save();fx.translate(p.x,p.y);fx.rotate(p.age*.8);fx.drawImage(img,-s/2,-s/2,s,s);fx.restore();continue}
-    const s=sz*p.s*pop;fx.globalAlpha=fade*(lay===0?.72:lay===2?.9:1);
+    const s=sz*p.s*pop;fx.globalAlpha=fade*(lay===0?.72:lay===2?.9:1)*(lay===0||p.occ?1-underHand(p.x,p.y):1);   // 뒤 칸 입자 · 손 옆 꽃잎은 손등 뒤로 숨음
     fx.save();fx.translate(p.x,p.y);fx.rotate(p.type==='dr'?Math.atan2(p.vy,p.vx)-Math.PI/2:p.r);if(p.type==='dr'){const st=clamp(Math.hypot(p.vx,p.vy)/260,0,.35);fx.scale(1-st*.3,1+st)}fx.drawImage(img,-s/2,-s/2,s,s);fx.restore()}
   fx.globalAlpha=1;gw.globalAlpha=1;
-  // 손
-  const showHand=IN.over||IN.down;handA=lerp(handA,showHand&&(onHead(IN.x,IN.y)||IN.down)?1:0,.3);
-  handTilt=lerp(handTilt,clamp(IN.vx*.03,-16,16),.25);
-  const oy=IN.touch?-26:0;
-  handEl.style.opacity=handA.toFixed(3);handEl.style.transform=`translate(${(IN.x-42).toFixed(1)}px,${(IN.y-53+oy).toFixed(1)}px) rotate(${handTilt.toFixed(2)}deg) scale(${(1-.05*handPress).toFixed(3)})`;
-  panEl.classList.toggle('hov',handA>.5&&!IN.touch);
+  // 손은 머리 캔버스 안에 그림 — 마우스 화살표는 손이 포인터 바로 아래 있을 때만 숨김
+  panEl.classList.toggle('hov',HAND.A>.5&&!IN.touch&&Math.hypot(IN.x-HX.x-HAND.x,IN.y-HX.y-HAND.y)<36);
   // 머리 위 판정 칸: 쓰다듬기 전에는 보이고, 쓰다듬는 동안은 옅게
   const idle=stage===0&&T-lastStroke>1.2&&!IN.down;hintA=lerp(hintA,idle?1:0,.12);
   hintEl.style.opacity=hintA.toFixed(3);hitEl.style.opacity=(.18+.82*hintA).toFixed(3);rimEl.style.strokeDashoffset=(-T*9).toFixed(1);
@@ -520,10 +605,10 @@ function inDown(x,y,touch){IN.down=true;IN.touch=touch;IN.x=x;IN.y=y;IN.dx0=x;IN
 function inMove(x,y,dt){const dx=x-IN.x,dy=y-IN.y;if(dt>0){IN.vx=lerp(IN.vx,dx/dt,.35);IN.vy=lerp(IN.vy,dy/dt,.35)}IN.x=x;IN.y=y;
   if(!IN.down)return;IN.moved+=Math.hypot(dx,dy);
   if(Math.hypot(dx,dy)>0)trail.push({x,y,t:T});
-  if(IN.moved>10&&rnd()<Math.min(1,Math.hypot(dx,dy)/6))parts.push(P('dot',x+R(-4,4),y+R(-4,4),R(-20,20),R(-10,20),70,R(.5,1.1),R(.5,.9),1+(rnd()*3|0),1,0,1.5));
+  if(IN.moved>10&&!onHead(x,y)&&rnd()<Math.min(1,Math.hypot(dx,dy)/6))parts.push(P('dot',x+R(-4,4),y+R(-4,4),R(-20,20),R(-10,20),70,R(.5,1.1),R(.5,.9),1+(rnd()*3|0),1,0,1.5));
   if(!onHead(x,y))return;
   if(SW.dir===0){if(Math.abs(x-SW.start)>8)SW.dir=Math.sign(x-SW.start),SW.ext=x}
-  else{if(SW.dir*(x-SW.ext)>0)SW.ext=x;else if(SW.dir*(SW.ext-x)>8){SW.start=SW.ext;SW.dir=-SW.dir;SW.ext=x;SW.counted=false}}
+  else{if(SW.dir*(x-SW.ext)>0)SW.ext=x;else if(SW.dir*(SW.ext-x)>8){SW.start=SW.ext;SW.dir=-SW.dir;SW.ext=x;SW.counted=false;kick(SW.dir*.5)}}
   if(SW.dir!==0&&!SW.counted&&Math.abs(SW.ext-SW.start)>=30){SW.counted=true;stroke()}}
 function inUp(){if(!IN.down)return;IN.down=false;if(IN.moved<10&&T-IN.dt0<.45){rings.push({x:IN.x,y:IN.y,age:0});if(auto)caption('tap')}}
 const toPan=e=>{const r=panEl.getBoundingClientRect();const k=646/r.width;return [(e.clientX-r.left)*k,(e.clientY-r.top)*k]};
@@ -548,7 +633,7 @@ function autoInput(t){
   if(t>=14.8){const k=ss(14.8,15.7,t);return {x:lerp(270,560,k),y:lerp(70,250,k),over:k<.8,down:false}}
   const rest=ss(7.95,8.4,t)-ss(9.3,9.7,t);
   const A=52*ss(2.2,2.75,t)*(1-ss(7.95,8.4,t))+40*ss(9.3,9.7,t)+18*ss(10.6,11,t);
-  const cx=lerp(258,215,rest),ph=phase(t);
+  const cx=lerp(258,228,rest),ph=phase(t);
   const x=cx+A*Math.sin(ph*Math.PI*2);
   const y=lerp(cy+Math.pow((x-cx)/58,2)*9+Math.sin(ph*Math.PI*4)*1.5,62,rest);
   return {x,y,over:true,down:true};
@@ -560,8 +645,8 @@ function stepAuto(dt){if(!auto)return;auto.t+=dt;const s=autoInput(auto.t);
   if(auto.t>AUTO_END)stopAuto()}
 function startAuto(){reset();auto={t:0};IN.x=520;IN.y=230;$('#playBtn').setAttribute('aria-pressed','true');$('#capN').textContent='▶';$('#capT').textContent='자동 재생 · 플로라 머리 쓰다듬기';$('#cap').classList.toggle('on',!NOCAP)}
 function stopAuto(){auto=null;IN.down=false;IN.over=false;$('#playBtn').setAttribute('aria-pressed','false');$('#cap').classList.remove('on')}
-function reset(){strokes=0;lastStroke=-99;stage=0;stageT=T;todayDone=false;exprHoldUntil=0;expr={from:'neutral',to:'neutral',t:-1,dur:.11};ruffle=0;
-  Object.assign(spring,{sx:0,svx:0,sy:0,svy:0,tl:0,tv:0});parts.length=0;rings.length=0;glows=[];trail.length=0;bub=null;note=null;IN.down=false;$('#cnt').textContent=0;syncSteps()}
+function reset(){strokes=0;lastStroke=-99;stage=0;stageT=T;todayDone=false;exprHoldUntil=0;expr={from:'neutral',to:'neutral',t:-1,dur:.11};
+  Object.assign(HD,HD0);Object.assign(HAND,HAND0);contact=0;press=0;parts.length=0;rings.length=0;glows=[];trail.length=0;bub=null;note=null;IN.down=false;$('#cnt').textContent=0;syncSteps()}
 function syncSteps(){document.querySelectorAll('.st').forEach(b=>{const k=+b.dataset.go;b.classList.toggle('on',k===stage);b.classList.toggle('done',stage>k)})}
 // 단계 바로 보기: 그 단계에 막 들어간 순간으로 맞춘 뒤 이어서 움직인다
 function jump(k){if(auto)stopAuto();reset();strokes=[0,1,4,14,30][k];lastStroke=T+1.2;IN.x=262;IN.y=70;
@@ -582,28 +667,31 @@ $('#resetBtn').onclick=()=>{stopAuto();reset()};
 document.querySelectorAll('.st').forEach(b=>b.onclick=()=>jump(+b.dataset.go));
 
 // ---------- 카렌 · 녹스 정지 화면 ----------
-const HAND_SVG=$('#hand svg').outerHTML.replace('id="hg"','id="hg2"').replace('url(#hg)','url(#hg2)');
 function sbub(host,text,x,y,side,aim,fs=15){const w=Math.ceil(measure(text,fs))+4+28,h=fs*1.3+2+18;const s=bubbleSVG(w,h,side,sub(aim,V(x,y)));
   const d=document.createElement('div');d.className='sbub';d.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${h}px`;d.innerHTML=s.svg+`<span style="font-size:${fs}px">${text}</span>`;host.appendChild(d)}
-function hand(host,x,y,rotDeg,op=1){const d=document.createElement('div');d.className='hd';d.style.cssText=`left:${x-30}px;top:${y-37}px;transform:rotate(${rotDeg}deg);opacity:${op}`;d.innerHTML=HAND_SVG;d.querySelector('svg').setAttribute('width',52);d.querySelector('svg').setAttribute('height',57);host.appendChild(d)}
+// 정보창과 같은 손 그림 (x, y = 손등 가운데가 닿는 점 · 텍스처 (0.393, 0.623), 팔 기울기는 그림에 들어 있음)
+function hand(host,x,y,rotDeg,op=1,size=96){const d=document.createElement('img');d.className='hd';d.src='assets/hand.png';d.alt='';
+  d.style.cssText=`left:${x-size*.393}px;top:${y-size*.623}px;width:${size}px;height:${size}px;transform-origin:39.3% 62.3%;transform:rotate(${rotDeg}deg);opacity:${op}`;host.appendChild(d)}
 function blush(host,x,y){const d=document.createElement('div');d.className='bl';d.style.left=(x-23)+'px';d.style.top=(y-11)+'px';host.appendChild(d)}
 function swish(host,x,y,w){const d=document.createElementNS('http://www.w3.org/2000/svg','svg');d.setAttribute('class','sw');d.setAttribute('viewBox','0 0 100 60');d.style.cssText=`left:${x}px;top:${y}px;width:${w}px;height:${w*.6}px`;
   d.innerHTML='<g fill="none" stroke="#fff" stroke-linecap="round" style="filter:drop-shadow(0 0 3px rgba(157,140,255,.95))"><path d="M8 44C30 18 62 10 92 14" stroke-width="4"/><path d="M18 54C40 34 64 28 88 30" stroke-width="2.6" opacity=".8"/><path d="M4 30C20 12 40 4 60 4" stroke-width="2" opacity=".6"/></g>';host.appendChild(d)}
 async function initSnaps(){await document.fonts.load('15px PDB').catch(()=>{});
-  const k=300/560,K=$('#snapK');hand(K,262*k,62*k,-12);blush(K,232*k,252*k);blush(K,330*k,243*k);sbub(K,'애, 애 취급하지 마!',58,176,'top',V(290*k,226*k));
-  const n=250/560,N1=$('#snapN1'),N2=$('#snapN2');swish(N1,150,20,92);hand(N1,236,40,34,.92);sbub(N1,'…손, 치워.',72,144,'top',V(338*n,270*n));
-  hand(N2,330*n,92*n,-6);blush(N2,292*n,268*n);blush(N2,380*n,262*n);sbub(N2,'…조금만이야.',62,144,'top',V(338*n,270*n))}
+  // 소매가 칸 안에서 사라지게(칸 테두리에 잘리지 않게) 손 위치 · 기울기를 잡음
+  const k=300/560,K=$('#snapK');hand(K,262*k,50,15);blush(K,232*k,252*k);blush(K,330*k,243*k);sbub(K,'애, 애 취급하지 마!',58,176,'top',V(290*k,226*k));
+  const n=250/560,N1=$('#snapN1'),N2=$('#snapN2');swish(N1,150,20,92);hand(N1,182,46,34,.92,80);sbub(N1,'…손, 치워.',72,144,'top',V(338*n,270*n));
+  hand(N2,330*n,50,12,1,84);blush(N2,292*n,268*n);blush(N2,380*n,262*n);sbub(N2,'…조금만이야.',62,144,'top',V(338*n,270*n))}
 
 // ---------- 시작 ----------
 let last=0;
 function frame(now){const dt=Math.min(.05,(now-last)/1000||0);last=now;tick(dt);requestAnimationFrame(frame)}
 function tick(dt){const n=Math.max(1,Math.round(dt/(1/60)));const h=dt/n;for(let i=0;i<n;i++){T+=h;stepAuto(h);update(h)}render()}
-window.__pet={tick,startAuto,jump,state:()=>({T,stage,strokes,auto:!!auto,autoT:auto?auto.t:null}),setW};
+window.__pet={tick,startAuto,jump,state:()=>({T,stage,strokes,auto:!!auto,autoT:auto?auto.t:null}),motion:()=>({HD:{...HD},HAND:{...HAND},press,down:IN.down,rings:rings.map(r=>[r.x|0,r.y|0,+r.age.toFixed(2)])}),setW};
 (async()=>{
   if(REC)document.body.classList.add('solo');
   setW(W);
-  const L=await Promise.all([...EXPR.map(e=>load(FLORA_TEX[e])),load(FLORA_TEX.weight),document.fonts.load('18px PDB').catch(()=>{})]);
-  EXPR.forEach((e,i)=>imgs[e]=L[i]);imgs.weight=L[EXPR.length];
+  const KEYS=[...EXPR,...MAPS];
+  const L=await Promise.all([...KEYS.map(e=>load(FLORA_TEX[e])),document.fonts.load('18px PDB').catch(()=>{})]);
+  KEYS.forEach((e,i)=>imgs[e]=L[i]);
   initSprites();initGL();initSnaps();syncSteps();render();
   window.__ready=true;
   if(!REC)requestAnimationFrame(frame);
