@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ko" data-w="1280">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 · 전투 묶음 2 적용 — 시안 ↔ 게임</title>
+<style>
+:root{--navy:#2e2350;--lav:#8b74e8;--line:#e2dbf5}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;line-height:1.45}
+.page{max-width:1560px;margin:0 auto;padding:20px 16px 64px}
+h1{font-size:22px;margin:0 0 4px}
+h2{font-size:18px;margin:30px 0 8px;padding-top:12px;border-top:2px solid var(--line)}
+h3{font-size:15px;margin:16px 0 6px}
+h3 small{font-weight:700;color:#5a4f8f;font-size:12.5px;margin-left:6px}
+.lead{margin:0 0 12px;font-size:14px;color:#4c4374;max-width:1180px}
+.lead b,.cap b{color:#4a33b0}
+.bar{position:sticky;top:0;z-index:5;display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 0;background:rgba(243,240,250,.94);font-size:13px}
+.bar button{font:inherit;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.bar a{color:#4a33b0;font-weight:700;padding:12px 4px}
+.w16{display:none}:root[data-w="1600"] .w12{display:none}:root[data-w="1600"] .w16{display:block}
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:10px}
+.tri{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:10px;align-items:start}
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:10px;align-items:start}
+.seq{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(360px,100%),1fr));gap:8px}
+figure{margin:0}
+figure img{display:block;width:100%;height:auto;border-radius:8px;background:#1d1838}
+figcaption{font-size:12.5px;color:#4c4374;margin-top:4px}
+figcaption b{color:#2e2350}
+.tag{display:inline-block;padding:1px 8px;border-radius:9px;font-size:12px;font-weight:800;color:#fff;margin-right:6px}
+.t-m{background:#5b43c8}.t-a{background:#1d7a55}.t-b{background:#5f5880}
+.cap{font-size:13.5px;color:#4c4374;margin:0 0 8px}
+.box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin:0 0 12px}
+.box h3{margin:0 0 4px}
+.none{display:grid;place-items:center;min-height:120px;border-radius:8px;background:#ebe6f8;color:#5a4f8f;font-size:13px;text-align:center;padding:12px}
+table{border-collapse:collapse;font-size:13.5px;width:100%;max-width:1000px;background:#fff;border-radius:12px;overflow:hidden}
+td,th{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+th{color:#4c4374}
+.ok{color:#17703c;font-weight:800}
+ul.notes{font-size:13.5px;color:#4c4374;padding-left:18px}
+ul.notes b{color:#4a33b0}
+code{font-size:12.5px}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>전투 묶음 2 적용 · 시안 ↔ 게임</h1>
+<p class="lead">PD가 고른 <a href="../battle_b2/index.html">battle_b2</a> 일곱 가지(재화 줄 + 메뉴 C · 왼쪽 버튼 C · 콤보 A · 피해 숫자는 지금 방식 · 적 체력 얇은 선 · 보스 등장 A · 모험 전투 C)와 <a href="../battle_b2_rev/index.html">battle_b2_rev</a> <b>알림 A 「위 가운데 알림 판」</b>을 확정 HUD B · 전투 묶음 1과 한 벌로 게임에 넣은 결과입니다. <b>시안</b>은 시안 페이지의 장면 함수를 Chrome으로 원래 크기(1280 · 1600 × 720)로 그려 찍은 것, <b>적용 전 · 적용 후</b>는 시안 바탕과 같은 순간(스테이지 33 · 보스 40 · 원소섬 · 잿빛성 · 신전, 같은 덱 · 쿨타임 · 퀘스트 19)을 <code>tools/battle_b2_apply_capture.gd</code>로 실제 게임에서 다시 만든 것입니다. 적 · 이펙트 · 재화 숫자는 찍은 저장과 시각이 달라 다르고, 비교 대상은 HUD입니다.</p>
+<div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button><a href="#set">한 벌</a><a href="#cur">1 재화</a><a href="#side">2 왼쪽 · 빛물감</a><a href="#combo">3 콤보</a><a href="#dmg">4 피해 숫자</a><a href="#hp">5 적 체력</a><a href="#intro">6 보스 등장</a><a href="#adv">7 모험</a><a href="#note">알림 A</a><a href="#checks">검사</a><a href="#notes">시안과 다른 점</a></div>
+
+<h2 id="set">한 벌 — 일곱 부품 + HUD B + 묶음 1</h2>
+<h3>일반 스테이지 33 · 콤보 39</h3>
+<p class="cap">오른쪽 위는 <b>재화마다 크림 꼬리표 + 앞에 걸린 금테 구슬</b>과 <b>「메뉴」 구슬</b>, 왼쪽은 퀘스트 판 아래 <b>가로 칩 둘</b>(색 지도 · 이야기), 콤보 아래 <b>폭주까지 기운 막대 + 「폭주까지 N」</b>, 적은 머리 위 <b>얇은 체력 선 하나</b>.</p>
+<div class="trio">
+  <figure><img class="w12" src="img/mock/mock_normal_1280x720.png" alt="시안 일반 1280"><img class="w16" src="img/mock/mock_normal_1600x720.png" alt="시안 일반 1600"><figcaption><span class="tag t-m">시안</span>battle_b2_rev 확정 한 벌 (normal)</figcaption></figure>
+  <figure><img class="w12" src="img/after/b2_normal_1280x720.jpg" alt="적용 후 일반 1280"><img class="w16" src="img/after/b2_normal_1600x720.jpg" alt="적용 후 일반 1600"><figcaption><span class="tag t-a">적용 후</span>artifacts/battle_b2/after/b2_normal</figcaption></figure>
+  <figure><img class="w12" src="img/before/b2_normal_1280x720.jpg" alt="적용 전 일반 1280"><img class="w16" src="img/before/b2_normal_1600x720.jpg" alt="적용 전 일반 1600"><figcaption><span class="tag t-b">적용 전</span>artifacts/battle_b2/before/b2_normal</figcaption></figure>
+</div>
+<h3>보스 스테이지 40 (잿빛 파수꾼) · 콤보 12</h3>
+<p class="cap">콤보와 기운 막대는 보스 판(약점 알약까지) 아래로 내려옵니다.</p>
+<div class="trio">
+  <figure><img class="w12" src="img/mock/mock_boss_1280x720.png" alt="시안 보스 1280"><img class="w16" src="img/mock/mock_boss_1600x720.png" alt="시안 보스 1600"><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img class="w12" src="img/after/b2_boss_1280x720.jpg" alt="적용 후 보스 1280"><img class="w16" src="img/after/b2_boss_1600x720.jpg" alt="적용 후 보스 1600"><figcaption><span class="tag t-a">적용 후</span>b2_boss</figcaption></figure>
+  <figure><img class="w12" src="img/before/b2_boss_1280x720.jpg" alt="적용 전 보스 1280"><img class="w16" src="img/before/b2_boss_1600x720.jpg" alt="적용 전 보스 1600"><figcaption><span class="tag t-b">적용 전</span>b2_boss</figcaption></figure>
+</div>
+
+<h2 id="cur">1 · 재화 줄 + 메뉴 C <small>「재화마다 꼬리표 + 메뉴 구슬」</small></h2>
+<p class="cap">꼬리표 폭은 고정이라 12.3b · 999,999 같은 긴 숫자에도 줄이 출렁이지 않습니다. 「+」(상점)는 살 수 있는 채색석에만. 처치 빛은 <b>바람 조각 구슬 가운데</b>로 빨려 들고, 닿는 프레임에 숫자가 톡 커지며 금 꼬리표 「+N」이 솟습니다. 누르면 남색 유리 도움말.</p>
+<div class="box"><h3>평소</h3><div class="tri">
+  <figure><img src="img/mock/st_cur_normal_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img src="img/after/st_cur_normal_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span></figcaption></figure>
+  <figure><img src="img/before/st_cur_normal_1280x720.png" alt=""><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div></div>
+<div class="box"><h3>긴 숫자 (12.3b · 999,999 · 99,999)</h3><div class="tri">
+  <figure><img src="img/mock/st_cur_long_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img src="img/after/st_cur_long_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span></figcaption></figure>
+  <figure><img src="img/before/st_cur_long_1280x720.png" alt=""><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div></div>
+<div class="box"><h3>빛이 닿음 (+1.20b)</h3><div class="tri">
+  <figure><img src="img/mock/st_cur_fly_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img src="img/after/st_cur_fly_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span>구슬 금빛 숨 · 숫자 톡 · 금 꼬리표</figcaption></figure>
+  <figure><img src="img/before/st_cur_fly_1280x720.png" alt=""><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div></div>
+<div class="box"><h3>누름 → 도움말</h3><div class="tri">
+  <figure><img src="img/mock/st_cur_help_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img src="img/after/st_cur_help_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span>문구는 게임 HELP 「gold」 그대로</figcaption></figure>
+  <figure><img src="img/before/st_cur_help_1280x720.png" alt=""><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div></div>
+
+<h2 id="side">2 · 왼쪽 버튼 C <small>「퀘스트 판 아래 가로 칩」 + 빛물감 들어오는 연출</small></h2>
+<p class="cap">색 지도 칩의 원형 그림은 <code>ColormapHudBadge</code>(지금 장소 그림 + %)가 그대로 얹힙니다. PD 요청대로 <b>빛물감이 들어오는 길을 눈으로 따라갈 수 있게</b>: 얻은 자리에서 물감 방울 셋(분홍 · 금 · 하늘, 흰 테 두른 짙은 물감 알 + 남보라 그늘)이 톡 튀어 오른 뒤 <b>물감 리본 꼬리</b>(머리 쪽 굵게, 흰 윤기 줄)와 별가루를 남기며 위로 휘어 칩으로 빨려 들고, 닿으면 <b>물감 색 고리 + 빛 고리 + 세 물감 별가루</b>, 그림이 톡 커졌다 돌아오며 칩 아래 금 꼬리표 「빛물감 +N」. 밝은 하늘에서도 읽히도록 방울과 고리는 더하기 섞기가 아니라 보통 섞기입니다.</p>
+<div class="box"><h3>빛물감 들어오는 길 — 0.12초 간격 (적용 후)</h3>
+<div class="seq">
+  <figure><img src="img/after/st_paint_seq_0_1280x720.png" alt="0.12초"><figcaption>0.12초 — 톡 튀어 오름</figcaption></figure>
+  <figure><img src="img/after/st_paint_seq_1_1280x720.png" alt="0.24초"><figcaption>0.24초 — 셋이 차례로 출발</figcaption></figure>
+  <figure><img src="img/after/st_paint_seq_2_1280x720.png" alt="0.36초"><figcaption>0.36초</figcaption></figure>
+  <figure><img src="img/after/st_paint_seq_3_1280x720.png" alt="0.48초"><figcaption>0.48초 — 리본 꼬리</figcaption></figure>
+  <figure><img src="img/after/st_paint_seq_4_1280x720.png" alt="0.60초"><figcaption>0.60초</figcaption></figure>
+  <figure><img src="img/after/st_paint_seq_5_1280x720.png" alt="0.72초"><figcaption>0.72초 — 칩에 닿기 직전</figcaption></figure>
+</div></div>
+<div class="box"><h3>평소</h3><div class="tri">
+  <figure><img src="img/mock/st_side_normal_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img src="img/after/st_side_normal_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span></figcaption></figure>
+  <figure><img src="img/before/st_side_normal_1280x720.png" alt=""><figcaption><span class="tag t-b">적용 전</span>세로 동그라미 셋</figcaption></figure>
+</div></div>
+<div class="box"><h3>빛물감 +5 닿음</h3><div class="tri">
+  <figure><img src="img/mock/st_side_gain_pop_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img src="img/after/st_side_gain_pop_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span>첫 방울이 닿아 터지는 순간, 둘째 · 셋째가 리본을 끌며 들어옴</figcaption></figure>
+  <figure><img src="img/before/st_side_gain_pop_1280x720.png" alt=""><figcaption><span class="tag t-b">적용 전</span>칩 위에 글자만 솟음</figcaption></figure>
+</div></div>
+<div class="box"><h3>할 일 없음</h3><div class="tri">
+  <figure><img src="img/mock/st_side_quiet_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img src="img/after/st_side_quiet_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span></figcaption></figure>
+  <figure><img src="img/before/st_side_quiet_1280x720.png" alt=""><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div></div>
+
+<h2 id="combo">3 · 콤보 A <small>「숫자 + 폭주까지 기운 막대」</small></h2>
+<p class="cap">PD: 시안에서 막대가 안 보였음 → <b>시안(118×10)보다 크게(168×15)</b>, 흰 테 2px · 짙은 남색 홈 · 하늘 → 라벤더 → 금 물, 30% · 62% 눈금, 아래 「폭주까지 N」. <b>62%부터 달아오름</b>(숫자 금빛 · 막대 금 → 산호 → 분홍 + 금빛 번짐), 2.5초 끊기면 흐려짐.</p>
+<div class="box"><h3>24 · 58 달아오름 · 31 끊김 · 보스 판 아래</h3>
+<div class="tri">
+  <figure><img src="img/mock/st_combo_24_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span>24</figcaption></figure>
+  <figure><img src="img/after/st_combo_24_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span>24 · 「폭주까지 56」</figcaption></figure>
+  <figure><img src="img/before/st_combo_24_1280x720.png" alt=""><figcaption><span class="tag t-b">적용 전</span>24</figcaption></figure>
+  <figure><img src="img/mock/st_combo_58_hot_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span>58 달아오름</figcaption></figure>
+  <figure><img src="img/after/st_combo_58_hot_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span>58 달아오름 (≥62%)</figcaption></figure>
+  <figure><img src="img/before/st_combo_58_hot_1280x720.png" alt=""><figcaption><span class="tag t-b">적용 전</span>58</figcaption></figure>
+  <figure><img src="img/mock/st_combo_31_cold_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span>31 끊김</figcaption></figure>
+  <figure><img src="img/after/st_combo_31_cold_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span>31 끊김 — 흐려짐</figcaption></figure>
+  <figure><img src="img/before/st_combo_31_cold_1280x720.png" alt=""><figcaption><span class="tag t-b">적용 전</span>31</figcaption></figure>
+  <figure><img src="img/mock/st_combo_boss_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span>보스 12</figcaption></figure>
+  <figure><img src="img/after/st_combo_boss_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span>보스 판 아래</figcaption></figure>
+  <figure><img src="img/before/st_combo_boss_1280x720.png" alt=""><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div></div>
+
+<h2 id="dmg">4 · 피해 숫자 <small>지금 게임 방식 유지 · 보스 근처 겹침만</small></h2>
+<p class="cap">글꼴 · 색 · 크기는 그대로. 보스 판이 떠 있으면 숫자가 떠오른 끝까지 <b>판 · 약점 알약 아래 16px</b>를 넘지 않고(<code>hud.dmg_ceiling</code>), 같은 자리 연타는 대각선으로 비켜 쌓입니다. (시안 없음)</p>
+<div class="box"><h3>보스 연타 — 같은 자리 스킬 숫자 넷 + 평타 · 궁극기</h3><div class="pair">
+  <figure><img src="img/after/st_dmg_boss_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span>보스 판 아래로 비켜 쌓임</figcaption></figure>
+  <figure><img src="img/before/st_dmg_boss_1280x720.png" alt=""><figcaption><span class="tag t-b">적용 전</span>숫자가 보스 판 · 약점 알약을 덮음</figcaption></figure>
+</div></div>
+
+<h2 id="hp">5 · 적 체력 <small>얇은 선 하나 · 잡몹 속성 표시 없음 · 황금 잿빛은 금빛 선</small></h2>
+<p class="cap">PD 결정대로 시안 B의 속성 점 · 왕관 구슬은 넣지 않았습니다. 잡몹은 머리 위 얇은 선 하나, <b>황금 잿빛</b>은 같은 선을 금빛으로만 살짝 구분합니다. 보스는 보스 판.</p>
+<div class="box"><h3>무리 (셋째 · 넷째가 황금 잿빛)</h3><div class="tri">
+  <figure><img src="img/mock/st_hp_field_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span>속성 점 · 왕관 (PD가 뺌)</figcaption></figure>
+  <figure><img src="img/after/st_hp_field_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span>얇은 선 · 금빛 선</figcaption></figure>
+  <figure><img src="img/before/st_hp_field_1280x720.png" alt=""><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div></div>
+
+<h2 id="intro">6 · 보스 등장 A <small>「남색 띠가 화면을 가로지름」</small></h2>
+<p class="cap">남색 유리 띠가 왼쪽에서 들어와 머물다 오른쪽으로 빠지고, 금테 구슬 속 보스 그림 + 「BOSS N」 꼬리표 + 이름. 장 보스 · 첫 항해 경고도 같은 띠.</p>
+<div class="trio">
+  <figure><img src="img/mock/mock_intro_1280x720.png" alt="시안 보스 등장"><figcaption><span class="tag t-m">시안</span>intro A</figcaption></figure>
+  <figure><img src="img/after/b2_intro_1280x720.jpg" alt="적용 후 보스 등장"><figcaption><span class="tag t-a">적용 후</span>보통 보스 (가운데 순간)</figcaption></figure>
+  <figure><img src="img/before/b2_intro_1280x720.jpg" alt="적용 전 보스 등장"><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div>
+<div class="pair" style="margin-top:10px">
+  <figure><img src="img/after/b2_intro_chapter_1280x720.jpg" alt=""><figcaption><span class="tag t-a">적용 후</span>장 보스 (스테이지 100)</figcaption></figure>
+  <figure><img src="img/before/b2_intro_chapter_1280x720.jpg" alt=""><figcaption><span class="tag t-b">적용 전</span>장 보스</figcaption></figure>
+  <figure><img src="img/after/b2_intro_first_1280x720.jpg" alt=""><figcaption><span class="tag t-a">적용 후</span>첫 항해 경고 「잿빛 파수꾼이 다가와요!」 (<code>hud.boss_warn</code>)</figcaption></figure>
+  <figure><img src="img/before/b2_intro_first_1280x720.jpg" alt=""><figcaption><span class="tag t-b">적용 전</span>크림 띠</figcaption></figure>
+</div>
+
+<h2 id="adv">7 · 모험 전투 C <small>「안 되는 건 숨기고 집중」 + 「그만두기」 가운데 맨 위</small></h2>
+<p class="cap">순풍 · 복귀 · 퀘스트 · 하단 메뉴 · 왼쪽 칩을 숨기고 콘텐츠별 위쪽 줄(원소섬 Lv 계단 · 잿빛성 장비 상자 · 신전 계급)만. PD 요청대로 <b>「그만두기」는 화면 가운데 맨 위, 빨강 판 + 흰 ✕</b>로 잘 보이게 (시안은 시간 판 위 작은 꼬리표).</p>
+<h3>원소섬</h3>
+<div class="trio">
+  <figure><img class="w12" src="img/mock/mock_adv_element_1280x720.png" alt=""><img class="w16" src="img/mock/mock_adv_element_1600x720.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img class="w12" src="img/after/b2_adv_element_1280x720.jpg" alt=""><img class="w16" src="img/after/b2_adv_element_1600x720.jpg" alt=""><figcaption><span class="tag t-a">적용 후</span></figcaption></figure>
+  <figure><img class="w12" src="img/before/b2_adv_element_1280x720.jpg" alt=""><img class="w16" src="img/before/b2_adv_element_1600x720.jpg" alt=""><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div>
+<h3>잿빛성</h3>
+<div class="trio">
+  <figure><img class="w12" src="img/mock/mock_adv_castle_1280x720.png" alt=""><img class="w16" src="img/mock/mock_adv_castle_1600x720.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img class="w12" src="img/after/b2_adv_castle_1280x720.jpg" alt=""><img class="w16" src="img/after/b2_adv_castle_1600x720.jpg" alt=""><figcaption><span class="tag t-a">적용 후</span></figcaption></figure>
+  <figure><img class="w12" src="img/before/b2_adv_castle_1280x720.jpg" alt=""><img class="w16" src="img/before/b2_adv_castle_1600x720.jpg" alt=""><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div>
+<h3>신전</h3>
+<div class="trio">
+  <figure><img class="w12" src="img/mock/mock_adv_temple_1280x720.png" alt=""><img class="w16" src="img/mock/mock_adv_temple_1600x720.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img class="w12" src="img/after/b2_adv_temple_1280x720.jpg" alt=""><img class="w16" src="img/after/b2_adv_temple_1600x720.jpg" alt=""><figcaption><span class="tag t-a">적용 후</span></figcaption></figure>
+  <figure><img class="w12" src="img/before/b2_adv_temple_1280x720.jpg" alt=""><img class="w16" src="img/before/b2_adv_temple_1600x720.jpg" alt=""><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+</div>
+
+<h2 id="note">알림 A <small>「위 가운데 알림 판」 (battle_b2_rev)</small></h2>
+<p class="cap"><b>내가 누르지 않았는데 생긴 일</b>은 위 판들 바로 아래 가운데(보스 때는 보스 판 아래) 한 자리, 한 번에 하나. <b>내가 누른 것의 대답</b>은 그대로 유나 한 줄 알림(YunaToast) — 「이야기 열림」(<code>hud.story_notice</code>) · 「분교 연구 끝」(<code>hud.school_notice</code>)은 YunaToast에서 이 판으로 옮겼습니다.
+<br>낮음 = 남색 알약 1.6초 · 버튼 없음(도시락 · 빛물감) / 보통 = 크림 판 · 4초 동안 줄어드는 금 실선 · 「보러 가기 ▶」 「분교로 ▶」 「써 보기 ▶」, <b>놓치면 그 버튼에 빨간 점</b>(그 화면을 열면 지움) / 색 소나기 · 무지개 다리 = 금 별 판 + 「남은 N초」, 이벤트가 끝나면 함께 접힘 / 높음 = 남색 판 · 붉은 「!」 구슬 · 금 「고래 강화 ▶」(시간 초과 = 「강화 ▶」, 두 번 막히면 「복귀 ▶」) · 「1.8초 뒤 다시 시작」 · <b>화면 가장자리 붉은 숨</b>. 쌓임: 높음은 앞으로 끼어들고 밀린 것은 그 뒤에 다시, 같은 종류는 합침(빛물감 +5 두 번 → +10), 뒤에 판 모서리 둘 + 「다음 N개」.</p>
+<div class="box"><h3>낮음 · 도시락</h3><div class="tri">
+  <figure><img src="img/mock/st_n_lunch_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img src="img/after/st_n_lunch_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span></figcaption></figure>
+  <div class="none">적용 전 = 화면 가운데를 지나가는 크림 띠 「도시락!」(아래 RETRY와 같은 띠, 1.4초)</div>
+</div></div>
+<div class="box"><h3>보통 · 색 소나기 「남은 15초」</h3><div class="tri">
+  <figure><img src="img/mock/st_n_shower_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img src="img/after/st_n_shower_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span></figcaption></figure>
+  <figure><img src="img/before/n_shower_1280x720.jpg" alt=""><figcaption><span class="tag t-b">적용 전</span>가운데 크림 띠, 1.4초 뒤 사라짐 (시안 orig/now_bt_shower_banner)</figcaption></figure>
+</div></div>
+<div class="box"><h3>높음 · RETRY (보호막 붕괴)</h3><div class="tri">
+  <figure><img src="img/mock/st_n_retry_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img src="img/after/st_n_retry_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span>가장자리 붉은 숨은 아래 전체 화면</figcaption></figure>
+  <figure><img src="img/before/n_retry_1280x720.jpg" alt=""><figcaption><span class="tag t-b">적용 전</span>고칠 곳으로 갈 수 없음 (시안 orig/now_bt_retry)</figcaption></figure>
+</div></div>
+<div class="box"><h3>셋이 한꺼번에 · 이야기 → 분교 → 순풍</h3><div class="tri">
+  <figure><img src="img/mock/st_n_stack_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img src="img/after/st_n_stack_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span>「다음 2개」</figcaption></figure>
+  <figure><img src="img/before/n_story_1280x720.jpg" alt=""><figcaption><span class="tag t-b">적용 전</span>이야기 열림 = 유나 말풍선(YunaToast, QA fb_rewards 캡처)</figcaption></figure>
+</div></div>
+<div class="box"><h3>보스 판이 있을 때 · 분교 연구 끝</h3><div class="tri">
+  <figure><img src="img/mock/st_n_boss_1280x720.png" alt=""><figcaption><span class="tag t-m">시안</span></figcaption></figure>
+  <figure><img src="img/after/st_n_boss_1280x720.png" alt=""><figcaption><span class="tag t-a">적용 후</span>보스 판 아래</figcaption></figure>
+  <figure><img src="img/before/n_school_1280x720.jpg" alt=""><figcaption><span class="tag t-b">적용 전</span>분교 끝 = 유나 말풍선 (보스 아닌 장면)</figcaption></figure>
+</div></div>
+<h3>전체 화면</h3>
+<div class="trio">
+  <figure><img class="w12" src="img/mock/mock_n_retry_1280x720.png" alt=""><img class="w16" src="img/mock/mock_n_retry_1600x720.png" alt=""><figcaption><span class="tag t-m">시안</span>높음 · RETRY</figcaption></figure>
+  <figure><img class="w12" src="img/after/b2_n_retry_1280x720.jpg" alt=""><img class="w16" src="img/after/b2_n_retry_1600x720.jpg" alt=""><figcaption><span class="tag t-a">적용 후</span>높음 · RETRY + 가장자리 붉은 숨</figcaption></figure>
+  <figure><img class="w12" src="img/before/n_retry_1280x720.jpg" alt=""><div class="none w16">적용 전 1600 캡처 없음</div><figcaption><span class="tag t-b">적용 전</span></figcaption></figure>
+  <figure><img class="w12" src="img/mock/mock_n_stack_1280x720.png" alt=""><img class="w16" src="img/mock/mock_n_stack_1600x720.png" alt=""><figcaption><span class="tag t-m">시안</span>셋 쌓임</figcaption></figure>
+  <figure><img class="w12" src="img/after/b2_n_stack_1280x720.jpg" alt=""><img class="w16" src="img/after/b2_n_stack_1600x720.jpg" alt=""><figcaption><span class="tag t-a">적용 후</span>셋 쌓임</figcaption></figure>
+  <figure><img class="w12" src="img/before/n_story_1280x720.jpg" alt=""><img class="w16" src="img/before/n_story_1600x720.jpg" alt=""><figcaption><span class="tag t-b">적용 전</span>YunaToast</figcaption></figure>
+  <figure><img class="w12" src="img/mock/mock_n_boss_1280x720.png" alt=""><img class="w16" src="img/mock/mock_n_boss_1600x720.png" alt=""><figcaption><span class="tag t-m">시안</span>보스 · 분교</figcaption></figure>
+  <figure><img class="w12" src="img/after/b2_n_boss_1280x720.jpg" alt=""><img class="w16" src="img/after/b2_n_boss_1600x720.jpg" alt=""><figcaption><span class="tag t-a">적용 후</span>보스 · 분교</figcaption></figure>
+  <figure><img class="w12" src="img/before/n_school_1280x720.jpg" alt=""><img class="w16" src="img/before/n_school_1600x720.jpg" alt=""><figcaption><span class="tag t-b">적용 전</span>YunaToast</figcaption></figure>
+</div>
+
+<h2 id="checks">검사 (마지막 수정 뒤)</h2>
+<table>
+  <tr><th>검사</th><th>결과</th><th>무엇을</th></tr>
+  <tr><td>battle_b1_layout_check (넓힘)</td><td class="ok">17250 / 실패 0</td><td>1280 · 1600: 묶음 1 상태 9가지 + 보스 판 · 콤보 · 모험 셋(숨김 · 「그만두기」 가운데 맨 위) · 빛물감 금 꼬리표 · 「폭주까지 N」 · 62% 달아오름 · 보스 연타 숫자 천장 · 보스 등장 띠 · <b>알림 A</b>(낮음 · 이벤트 「남은 15초」 · 높음 · 셋 쌓임 「다음 2개」, 보스 있음/없음, 합침 +10 · 높음 끼어듦 · 놓침 빨간 점 · 「분교로 ▶」 → 분교 화면) — 부품끼리 겹침 · 화면 밖 · 글자 넘침 · 엔진 오류</td></tr>
+  <tr><td>feedback70_battle_check</td><td class="ok">35 / 실패 0</td><td>처치 빛이 바람 조각 구슬에 닿는 프레임에 숫자 · 「+」는 채색석에만 · 이야기 열림 → 알림 판 「보러 가기」 · 분교 끝 → 알림 판</td></tr>
+  <tr><td>release_ui_check</td><td class="ok">80 / 실패 0</td><td>레벨 이름 · 설정 화면</td></tr>
+  <tr><td>back_button_check</td><td class="ok">68 / 실패 0</td><td>뒤로 가기 (알림 판은 뒤로 가기 대상이 아님)</td></tr>
+  <tr><td>first_session_check (창 모드)</td><td class="ok">49 / 실패 0</td><td>새 계정 → 안내 deck · color · quest · ult · controls</td></tr>
+  <tr><td>guide_chain_check</td><td class="ok">실패 0</td><td>안내 이어짐</td></tr>
+  <tr><td>fb70_overflow_check</td><td class="ok">42210 / 실패 0</td><td>글자 넘침</td></tr>
+</table>
+
+<h2 id="notes">시안과 다른 점 · 남긴 것</h2>
+<ul class="notes">
+  <li><b>적 체력</b>: 시안 B의 속성 점 · 황금 잿빛 왕관 구슬은 PD 결정으로 넣지 않았습니다 (얇은 선 하나, 황금 잿빛은 금빛 선).</li>
+  <li><b>「그만두기」</b>: 시안은 시간 판 위 작은 꼬리표, 게임은 PD 요청대로 화면 가운데 맨 위 빨강 판.</li>
+  <li><b>콤보 막대</b>: PD가 시안에서 막대를 못 봐서 시안보다 크고(168×15) 홈을 짙게 했습니다.</li>
+  <li><b>빛물감</b>: 시안은 칩 옆 금 꼬리표만, 게임은 PD 요청대로 날아 들어오는 길(물감 방울 + 리본 꼬리) + 닿는 터짐을 더했습니다. 빛물감을 얻으면 알림 A 낮음 「빛물감 +N · 색이 돌아와요」도 뜨고, 색 소나기 중에는 알림 판 뒤에 쌓여 합쳐졌다가 끝나면 한 번 뜹니다.</li>
+  <li><b>순풍이 열렸어요</b>는 첫 항해에서 바람이 처음 다 모인 순간에만 뜹니다(「써 보기 ▶」 = 순풍 쓰기, 놓치면 순풍 구슬에 빨간 점). 같은 순간 안내(유나 손가락)가 순풍 구슬을 짚는 것은 그대로입니다.</li>
+  <li><b>재화 · 전투력 · 적 · 이펙트</b>는 시안 바탕이 다른 저장에서 찍은 캡처라 다릅니다(시안 1.00c ↔ 게임 1.00b 등). 이야기 알림의 아이 이름도 저장에 따라 다릅니다(시안 주희 ↔ 게임 카렌).</li>
+  <li><b>적용 전 알림</b>은 이전 코드로 다시 돌릴 수 없어, 같은 HUD에서 찍힌 기존 캡처(시안 orig/now_bt_retry · now_bt_shower_banner, QA artifacts/qa/fb_rewards/shots/toast)를 썼습니다. 도시락 띠는 기존 캡처가 없습니다.</li>
+  <li><b>대결 장면</b>은 PD 시안 대기라 이번에 넣지 않았습니다.</li>
+</ul>
+</main>
+<script>
+document.querySelectorAll('.bar [data-res]').forEach(b=>b.addEventListener('click',()=>{document.documentElement.dataset.w=b.dataset.res;document.querySelectorAll('.bar [data-res]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)))}));
+</script>
+</body>
+</html>
