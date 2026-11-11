@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="ko" data-w="1280">
+<head>
+<meta charset="utf-8">
+<title>구름고래 분교 · 묶음 11 「시스템 안내」 시안</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+@font-face{font-family:Gowun;src:url(a/GowunBatang-Bold.ttf)}
+@font-face{font-family:Pre;src:url(a/Pretendard-Bold.otf)}
+:root{--w:1280}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:radial-gradient(1200px 600px at 20% -10%,#3b2f6e,transparent),#1d1838;color:#efeaff;font:15px/1.6 Pre,"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif}
+.page{max-width:1420px;margin:0 auto;padding:28px 28px 120px}
+h1{font:30px/1.3 Gowun,"Malgun Gothic",serif;margin:0 0 8px;color:#fff}
+h1 small{font:15px Pre,"Malgun Gothic",sans-serif;color:#c9bff0;margin-left:10px}
+.lead{color:#d6cff5;max-width:1220px;margin:0 0 14px}
+.lead b{color:#ffe7a6}
+.page>.bar{position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 0;background:linear-gradient(#1d1838 75%,rgba(29,24,56,0))}
+.bar button{font:14px Pre,"Malgun Gothic",sans-serif;border:1px solid #6d5fb5;background:#2c2558;color:#e9e3ff;border-radius:8px;padding:6px 12px;cursor:pointer}
+.bar button[aria-pressed=true]{background:#7b68e0;color:#fff;border-color:#b6a8ff}
+.bar .copy{background:linear-gradient(#ffd98a,#e9a94a);color:#3a2410;border-color:#ffe7b0}
+.toc{display:flex;gap:4px;flex-wrap:wrap;margin-left:8px}
+.toc a{color:#cfc5ff;text-decoration:none;font-size:13.5px;padding:4px 9px;border-radius:7px;background:#28224f}
+.toc a.cur{background:#4a3f94;color:#fff}
+.toc a i{font-style:normal;color:#ffd98a}
+.page>h3{font:24px Gowun,"Malgun Gothic",serif;margin:46px 0 4px;color:#fff;scroll-margin-top:70px}
+.page>h3 small{font:14px Pre,"Malgun Gothic",sans-serif;color:#bdb2ee;margin-left:8px}
+.sub{color:#cfc6f4;margin:0 0 10px;max-width:1220px}
+.sub b{color:#ffe7a6}
+.states{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 12px}
+.states span{color:#bdb2ee;font-size:13px;align-self:center;margin-right:4px}
+.states button{font:13.5px Pre,"Malgun Gothic",sans-serif;border:1px solid #5d50a8;background:#251f4c;color:#e1dbff;border-radius:20px;padding:4px 13px;cursor:pointer}
+.states button[aria-pressed=true]{background:#efe6ff;color:#2a2058;border-color:#fff}
+.ref{display:grid;grid-template-columns:repeat(var(--n,1),400px) 1fr;gap:14px;align-items:start;background:#241e48;border-radius:14px;padding:12px;margin-bottom:14px}
+.ref h2{font:17px Gowun,"Malgun Gothic",serif;margin:0 0 4px;color:#ffe7a6}
+.ref img{width:100%;border-radius:8px;display:block}
+.ref .cap{margin:0;color:#d4ccf6;font-size:14px}
+.opt{position:relative;background:#262050;border:2px solid #3a3172;border-radius:16px;padding:12px 14px 14px;margin:0 0 16px;cursor:pointer;transition:border-color .2s}
+.opt:hover{border-color:#6f60c8}
+.opt.sel{border-color:#ffd98a;box-shadow:0 0 0 3px rgba(255,217,138,.25)}
+.opt.sel>h2::after{content:"고름";font:13px Pre,"Malgun Gothic",sans-serif;background:#ffd98a;color:#3a2410;border-radius:6px;padding:1px 8px;margin-left:8px}
+.opt>h2{font:19px Gowun,"Malgun Gothic",serif;margin:0 0 2px;color:#fff;display:flex;align-items:center;gap:8px}
+.rec{font:12.5px Pre,"Malgun Gothic",sans-serif;background:linear-gradient(90deg,#ff9fd0,#b49bff,#8fd8ff);color:#fff;border-radius:6px;padding:1px 8px;text-shadow:0 1px 0 rgba(60,30,90,.5)}
+.rp{margin-left:auto;font:13px Pre,"Malgun Gothic",sans-serif;background:#352d6c;color:#e9e3ff;border:1px solid #6d5fb5;border-radius:8px;padding:3px 10px;cursor:pointer}
+.cost{margin:0 0 4px;color:#d9d2fa;font-size:14px}
+.cost b{color:#ffe7a6}
+.verdict{margin:0 0 10px;color:#b3a9e6;font-size:13.5px}
+.vp{position:relative;width:100%;overflow:hidden;border-radius:10px;background:#000}
+.hid{display:none!important}
+#toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#2f2759;color:#fff;border:1px solid #8f78ee;border-radius:10px;padding:10px 18px;white-space:pre;font:13px/1.5 Pre,"Malgun Gothic",sans-serif;opacity:0;transition:opacity .3s;z-index:99;pointer-events:none}
+
+/* ================= 화면 공통 ================= */
+.scr{--o:calc((var(--w) - 1280) * .5px);position:absolute;left:0;top:0;width:calc(var(--w)*1px);height:720px;transform-origin:0 0;overflow:hidden;font-family:Pre,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;color:#3a2f5c}
+.scr *{box-sizing:border-box}
+.scr img{display:block}
+.ab{position:absolute}
+.bg{position:absolute;inset:0;background:center/cover no-repeat}
+.bg[data-k=battle]{background-image:url(a/b/battle_1280.jpg)}
+.bg[data-k=title]{background-image:url(a/b/title_1280.jpg)}
+.bg[data-k=story]{background-image:url(a/b/story_1280.jpg)}
+.bg[data-k=gear]{background-image:url(a/b/gear_1280.jpg)}
+.bg[data-k=shop]{background-image:url(a/b/shop_1280.jpg)}
+html[data-w="1600"] .bg[data-k=battle]{background-image:url(a/b/battle_1600.jpg)}
+html[data-w="1600"] .bg[data-k=title]{background-image:url(a/b/title_1600.jpg)}
+html[data-w="1600"] .bg[data-k=story]{background-image:url(a/b/story_1600.jpg)}
+html[data-w="1600"] .bg[data-k=gear]{background-image:url(a/b/gear_1600.jpg)}
+html[data-w="1600"] .bg[data-k=shop]{background-image:url(a/b/shop_1600.jpg)}
+.dim{position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(26,16,58,.42),rgba(12,8,30,.72))}
+.spk{position:absolute;width:26px;height:26px;background:url(a/i/sparkle4.png) center/contain no-repeat;pointer-events:none;animation:tw 2.8s ease-in-out infinite;z-index:8}
+@keyframes tw{0%,100%{opacity:.25;transform:scale(.5) rotate(0)}50%{opacity:1;transform:scale(1) rotate(45deg)}}
+/* 시스템 창 단추 (기운 판 · 남색 = 확정 행동 · 크림 = 물러나기) */
+.sb{position:relative;display:inline-flex;align-items:center;justify-content:center;height:48px;min-width:150px;padding:0 22px;transform:skewX(-10deg);border-radius:8px;font:18px Pre,"Malgun Gothic",sans-serif;white-space:nowrap;overflow:hidden}
+.sb>span{transform:skewX(10deg);display:inline-flex;align-items:center;gap:7px}
+.sb.nv{background:linear-gradient(180deg,#6a5ec0 0,#3a3088 45%,#231b5a);color:#fff;box-shadow:inset 0 1.5px 0 rgba(255,255,255,.4),inset 0 0 0 1.5px rgba(255,231,166,.6),0 4px 0 #160f3a,0 9px 16px rgba(20,10,50,.4)}
+.sb.nv span{text-shadow:0 1px 1px rgba(10,5,40,.6)}
+.sb.nv::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.28) 45%,transparent 60%);transform:translateX(-120%);animation:sweep 5s ease-in-out infinite}
+@keyframes sweep{0%,62%{transform:translateX(-120%)}90%,100%{transform:translateX(120%)}}
+.sb.cr{background:linear-gradient(180deg,#fffdf6,#ece2fa);color:#3a2f6a;box-shadow:inset 0 1.5px 0 #fff,inset 0 0 0 1.5px #cdbdf0,0 4px 0 #a99bd0,0 9px 16px rgba(20,10,50,.28)}
+.sb.sm{height:40px;min-width:118px;font-size:16px;padding:0 16px}
+.hint{position:absolute;display:flex;align-items:center;gap:7px;font:13.5px Pre,"Malgun Gothic",sans-serif;color:#efe8ff;text-shadow:0 1px 3px rgba(10,5,30,.8);white-space:nowrap}
+.hint svg{width:18px;height:18px;flex:none}
+/* 유나 알림 (YunaToast · 정해진 부품) */
+.yt{position:absolute;z-index:12;display:flex;align-items:center}
+.yt .f{width:74px;height:74px;border-radius:50%;background:url(a/c/yuna_face.webp) 50% 4%/190% auto no-repeat,#e6dcff;box-shadow:0 0 0 3px #fff,0 0 0 6px var(--rim,#8b6bff),0 8px 14px rgba(6,3,24,.35);position:relative;z-index:2;flex:none}
+.yt .m{position:relative;margin-left:-4px;padding:11px 22px 12px 26px;border-radius:22px;background:var(--bub,#fff);box-shadow:0 0 0 3px var(--rim,#8b6bff),0 8px 14px rgba(6,3,24,.35);font:13px/1.45 Pre,"Malgun Gothic",sans-serif;color:#4c4374;white-space:nowrap}
+.yt .m b{display:block;font:18px/1.35 Pre,"Malgun Gothic",sans-serif;color:var(--ink,#2e2350)}
+.yt .m::before{content:"";position:absolute;left:-15px;top:50%;margin-top:-9px;border:9px solid transparent;border-right:14px solid var(--rim,#8b6bff);border-left:0}
+.yt .m::after{content:"";position:absolute;left:-9px;top:50%;margin-top:-6px;border:6px solid transparent;border-right:10px solid var(--bub,#fff);border-left:0}
+.yt .drop{position:absolute;left:58px;top:-4px;width:15px;transform:rotate(20deg);z-index:3}
+/* 위 가운데 알림 판 (정해진 부품) */
+.nb{position:absolute;left:calc(50% - 250px);top:84px;width:500px;height:72px;z-index:20}
+.nb .pl{position:absolute;inset:0;border-radius:14px 4px 14px 4px;background:linear-gradient(180deg,#fffdf6,#f6eedd);box-shadow:0 0 0 1.5px #e4c27a,0 10px 20px rgba(30,20,80,.35)}
+.nb .ko{position:absolute;left:8px;top:2px;width:68px;height:68px;border-radius:50%;padding:5px;background:conic-gradient(#fff3c4,#ffd66e,#e4a63c,#fff3c4);box-shadow:0 0 0 1.5px #b8761c,0 6px 12px rgba(30,20,80,.4)}
+.nb .ko span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 38% 30%,#fff,#efe8ff 40%,#bfaee8);box-shadow:inset 0 -6px 12px rgba(80,50,150,.3);font:28px Gowun,serif;color:#a3203c}
+.nb .tt{position:absolute;left:90px;top:10px;right:16px}
+.nb .tt b{display:block;font:19px Gowun,"Malgun Gothic",serif;color:#2f2654}
+.nb .tt small{font:13px Pre,"Malgun Gothic",sans-serif;color:#776c98}
+.nb .ln{position:absolute;left:20px;right:20px;bottom:6px;height:2px;background:linear-gradient(90deg,#e4a63c,#ffe08a)}
+.rise{opacity:1}
+.scr.go .rise{animation:rise .55s cubic-bezier(.2,1.2,.4,1) both;animation-delay:calc(var(--d,0) * 1s)}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}}
+.scr.go .pop{animation:pop .5s cubic-bezier(.2,1.5,.4,1) both;animation-delay:calc(var(--d,0) * 1s)}
+@keyframes pop{from{opacity:0;transform:scale(.86)}}
+
+/* ============================== D11-1 방치 절전 ============================== */
+.pw-l1{font:22px/1.4 Gowun,"Malgun Gothic",serif;color:#fff6e4;letter-spacing:.5px}
+.pw-l2{display:inline-flex;align-items:center;gap:6px;font:16px Pre,"Malgun Gothic",sans-serif;color:#ffe7a6}
+.pw-l2 img{width:24px;height:24px;filter:drop-shadow(0 0 6px rgba(255,214,110,.6))}
+.pw-l2 em{font-style:normal;color:#fff3c4}
+.pwtag{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 14px 0 8px;border-radius:14px;background:linear-gradient(180deg,rgba(60,48,130,.7),rgba(24,18,60,.7));box-shadow:inset 0 0 0 1px rgba(255,231,166,.55),0 0 18px rgba(140,120,255,.25);font:14px Pre,"Malgun Gothic",sans-serif;color:#efe6ff}
+.pwtag img{width:22px;height:22px}
+/* A 잠든 고래 밤하늘 */
+.pwA .ns{position:absolute;inset:0;background:url(a/s/tex_night.jpg) right top/cover}
+.pwA .moon{position:absolute;right:120px;top:26px;width:150px}
+/* 구름 바다: 따뜻한 낮 구름을 그대로 어둡게 하면 갈색이 되므로, 흑백 → 남보라로 다시 물들이고 윗면만 달빛 테 */
+.pwA .cf{position:absolute;left:-4%;width:108%;bottom:-70px;filter:grayscale(1) sepia(1) hue-rotate(222deg) saturate(2.6) brightness(.28) contrast(1.2);-webkit-mask:linear-gradient(180deg,transparent 0,#000 34%);mask:linear-gradient(180deg,transparent 0,#000 34%)}
+.pwA .cn{position:absolute;left:-10%;width:120%;bottom:-230px;filter:grayscale(1) sepia(1) hue-rotate(220deg) saturate(2.8) brightness(.27) contrast(1.3) drop-shadow(0 -2px 0 rgba(214,200,255,.55))}
+/* 1600은 구름 그림이 폭에 맞춰 커지므로 더 내려 윗면이 글 뒤를 지나지 않게 */
+html[data-w="1600"] .pwA .cn{bottom:-340px}
+.pwA .mist{position:absolute;left:0;right:0;bottom:0;height:320px;pointer-events:none;background:radial-gradient(ellipse 30% 34% at 80% 46%,rgba(255,236,190,.14),transparent 70%),radial-gradient(ellipse 50% 36% at 38% 50%,rgba(150,128,255,.16),transparent 70%),linear-gradient(180deg,transparent 50%,rgba(6,4,20,.6));-webkit-mask:linear-gradient(180deg,transparent,#000 30%);mask:linear-gradient(180deg,transparent,#000 30%)}
+.pwA .wh{position:absolute;left:calc(50% - 380px);top:196px;width:720px;height:288px;animation:bob 7s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-9px) rotate(-.6deg)}}
+.pwA .wh img{width:100%;filter:grayscale(1) sepia(1) hue-rotate(218deg) saturate(2) brightness(.2) contrast(1.15) drop-shadow(0 -1.5px 0 rgba(206,190,255,.75)) drop-shadow(0 0 22px rgba(110,90,220,.45))}
+.pwA .lamp{position:absolute;left:497px;top:34px;width:62px;height:62px;border-radius:50%;background:radial-gradient(circle,#fffbe6 0,#ffd877 14%,rgba(255,170,80,.55) 32%,rgba(255,170,80,0) 70%);animation:flick 3.4s ease-in-out infinite}
+@keyframes flick{0%,100%{opacity:1}40%{opacity:.82}60%{opacity:.95}}
+.pwA .win{position:absolute;width:5px;height:6px;border-radius:1px;background:#ffd98a;box-shadow:0 0 8px 2px rgba(255,200,110,.6)}
+.pwA .cap{position:absolute;left:0;right:0;top:500px;display:flex;flex-direction:column;align-items:center;gap:6px;text-shadow:0 2px 10px rgba(4,3,16,.9)}
+.pwA .cap .hint{position:static;color:#cfc4f2;margin-top:8px}
+/* B 시계 하나 */
+.pwB .shade{position:absolute;inset:0;background:radial-gradient(ellipse 55% 70% at 50% 46%,rgba(22,14,52,.84),rgba(4,2,12,.93))}
+.pwB .clk{position:absolute;left:calc(50% - 170px);top:128px;width:340px;height:340px}
+.pwB .clk>img{position:absolute;inset:0;width:100%;height:100%;opacity:.9}
+.pwB .clk .glow{position:absolute;inset:40px;border-radius:50%;background:radial-gradient(circle,rgba(130,110,240,.22),rgba(130,110,240,0) 70%)}
+.pwB .mk{position:absolute;left:50%;top:50%;width:0;height:0;transform:rotate(var(--a,6deg))}
+.pwB .mk img{position:absolute;left:-17px;top:-188px;width:34px;filter:drop-shadow(0 0 8px rgba(255,220,140,.8))}
+.pwB[data-st=ten] .mk{--a:0deg}.pwB[data-st=cine] .mk{--a:72deg}
+.pwB .lb{position:absolute;left:0;right:0;top:104px;text-align:center;font:15px Pre,"Malgun Gothic",sans-serif;color:#bfb2ea;letter-spacing:2px}
+.pwB .tm{position:absolute;left:0;right:0;top:122px;text-align:center;font:88px/1.1 Gowun,"Malgun Gothic",serif;color:#fff6e4;letter-spacing:3px;text-shadow:0 0 22px rgba(255,214,140,.35),0 3px 0 rgba(20,10,50,.6)}
+.pwB .st{position:absolute;left:0;right:0;top:232px;text-align:center;font:16px Pre,"Malgun Gothic",sans-serif;color:#e6dcff}
+.pwB .tag{position:absolute;left:calc(50% - 50px);top:90px}
+.pwB .gl{position:absolute;left:0;right:0;top:494px;display:flex;justify-content:center}
+.pwB .hint{left:0;right:0;top:540px;justify-content:center;color:#bfb2ea}
+/* C 아래 작은 카드 */
+.pwC .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,4,18,.8),rgba(6,4,18,.88))}
+.pwC .cd{position:absolute;left:calc(50% - 270px);bottom:70px;width:540px;height:100px;filter:drop-shadow(0 10px 18px rgba(0,0,0,.55))}
+.pwC .cd::before{content:"";position:absolute;inset:0;clip-path:polygon(26px 0,calc(100% - 26px) 0,100% 50%,calc(100% - 26px) 100%,26px 100%,0 50%);background:linear-gradient(100deg,#b8761c,#ffe7a6 22%,#e4a63c 50%,#fff3c4 78%,#b8761c)}
+.pwC .cd::after{content:"";position:absolute;inset:2px;clip-path:polygon(25px 0,calc(100% - 25px) 0,100% 50%,calc(100% - 25px) 100%,25px 100%,0 50%);background:radial-gradient(ellipse 50% 90% at 22% 30%,rgba(140,120,255,.28),transparent),linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.25)),url(a/s/tex_vel_navy.jpg) 0 0/360px}
+.pwC .md{position:absolute;left:30px;top:6px;width:88px;height:88px;z-index:2}
+.pwC .md>img{width:100%}
+.pwC .md .wsm{position:absolute;left:12px;top:30px;width:64px;height:40px;overflow:hidden;border-radius:0 0 30px 30px}
+.pwC .md .wsm img{width:80px;margin-left:-6px;margin-top:6px;filter:brightness(.92) saturate(.9) drop-shadow(0 0 4px rgba(255,255,255,.35))}
+.pwC .md .mn{position:absolute;right:6px;top:2px;width:34px}
+.pwC .tx3{position:absolute;left:132px;right:30px;top:12px;z-index:2;display:flex;flex-direction:column;gap:2px}
+.pwC .tx3 .r1{display:flex;align-items:center;gap:8px}
+.pwC .tx3 .r1 .pw-l1{font-size:18px}
+.pwC .chip{font:13px Pre,"Malgun Gothic",sans-serif;color:#1b1546;background:linear-gradient(180deg,#d8ccff,#a894ff);border-radius:10px;padding:1px 9px;box-shadow:inset 0 1px 0 #fff}
+.pwC .hint{left:0;right:0;bottom:36px;justify-content:center;color:#cfc4f2}
+
+/* ============================== D11-2 게임 종료 ============================== */
+/* A 배웅 */
+.qA .dim{background:radial-gradient(ellipse 60% 70% at 50% 52%,rgba(40,26,84,.38),rgba(14,8,34,.74))}
+/* 유나는 말풍선 오른쪽(적이 서는 하늘 쪽)에 둔다 — 왼쪽 HUD(퀘스트 · 아이들 · 고래 보호막 수치)와 아래 메뉴를 가리지 않게.
+   1280: 말풍선 x 390~852 · 유나 x 910~1177 / y 180~520 → 콤보 막대(y≤170) · 일괄 강화 줄(y≥535) 사이 */
+.qA .grp{position:absolute;left:calc(50% - 250px);top:150px;width:800px;height:400px}
+.qA .halo{position:absolute;left:470px;top:0;width:360px;height:400px;border-radius:50%;background:radial-gradient(ellipse at 50% 45%,rgba(255,236,190,.42),rgba(200,170,255,.18) 45%,transparent 70%)}
+.qA .yu{position:absolute;left:520px;top:30px;height:340px;filter:drop-shadow(0 10px 14px rgba(20,8,50,.45))}
+.qA .shd{position:absolute;left:560px;top:352px;width:190px;height:22px;border-radius:50%;background:radial-gradient(ellipse,rgba(20,8,50,.5),transparent 70%)}
+.qA .wave{position:absolute;left:484px;top:74px;width:90px;height:74px}
+.qA .bub{position:absolute;left:0;top:40px;width:462px;height:262px;filter:drop-shadow(0 14px 22px rgba(20,8,50,.45))}
+.qA .bub .bd{position:absolute;inset:0;border-radius:26px;padding:3px;background:linear-gradient(135deg,#fff3c4,#e4a63c 30%,#c9b4ff 60%,#fff3c4 85%,#c48a2a)}
+.qA .bub .in{position:absolute;inset:3px;border-radius:23px;background:radial-gradient(ellipse 80% 70% at 85% 0%,rgba(255,236,200,.75),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.4),rgba(214,196,255,.38)),url(a/s/tex_pearl.jpg) 0 0/420px;overflow:hidden}
+.qA .bub .in::after{content:"";position:absolute;left:14px;right:14px;top:14px;bottom:14px;border-radius:16px;border:1.5px dashed rgba(180,150,230,.55)}
+.qA .tail{position:absolute;right:-30px;top:58px;width:40px;height:44px;transform:scaleX(-1)}
+.qA .rb{position:absolute;left:24px;top:-22px;width:210px;height:46px;z-index:3}
+.qA .rb img{position:absolute;inset:0;width:100%;height:100%}
+.qA .rb span{position:absolute;left:0;right:0;top:4px;text-align:center;font:19px Gowun,"Malgun Gothic",serif;color:#fff;text-shadow:0 1px 2px rgba(40,20,90,.7)}
+.qA h4{position:absolute;left:36px;top:46px;margin:0;font:32px/1.2 Gowun,"Malgun Gothic",serif;color:#2f2654}
+.qA .vy{position:absolute;left:36px;right:28px;top:102px;margin:0;display:flex;align-items:center;gap:10px;font:16.5px/1.5 Pre,"Malgun Gothic",sans-serif;color:#4c4374}
+.qA .vy .wi{flex:none;width:74px;height:46px;border-radius:12px;background:linear-gradient(180deg,#e8f0ff,#d6c8ff);box-shadow:inset 0 0 0 1.5px rgba(139,107,255,.5);display:grid;place-items:center;overflow:hidden}
+.qA .vy .wi img{width:70px;margin-top:4px}
+.qA .h8{display:inline-block;padding:0 9px;border-radius:9px;background:linear-gradient(180deg,#fff3c4,#ffd877);color:#6a4210;box-shadow:inset 0 0 0 1px #e4a63c}
+.qA .btns{position:absolute;right:30px;bottom:30px;display:flex;gap:14px;z-index:2}
+.qA .hint{left:0;width:462px;justify-content:center;top:318px}
+.scr.go .qA .yu{animation:wavein .7s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes wavein{from{opacity:0;transform:translateX(-30px)}}
+.scr.go .qA .bub{animation:pop .55s cubic-bezier(.2,1.4,.4,1) both .25s}
+.qA .wave path{animation:wv 1.6s ease-in-out infinite}
+@keyframes wv{0%,100%{opacity:.25}50%{opacity:1}}
+/* B 고래 등불 */
+.qB .dim{background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(20,12,44,.55),rgba(6,4,18,.82))}
+.qB .pn{position:absolute;left:calc(50% - 330px);top:196px;width:660px;height:292px;filter:drop-shadow(0 18px 26px rgba(0,0,0,.55))}
+.qB .pn::before{content:"";position:absolute;inset:0;clip-path:polygon(22px 0,calc(100% - 22px) 0,100% 22px,100% calc(100% - 22px),calc(100% - 22px) 100%,22px 100%,0 calc(100% - 22px),0 22px);background:linear-gradient(135deg,#fff3c4,#c48a2a 22%,#ffe7a6 46%,#b8761c 70%,#f6d98a)}
+.qB .pn .gs{position:absolute;inset:3px;clip-path:polygon(20px 0,calc(100% - 20px) 0,100% 20px,100% calc(100% - 20px),calc(100% - 20px) 100%,20px 100%,0 calc(100% - 20px),0 20px);background:radial-gradient(ellipse 46% 80% at 22% 50%,rgba(255,196,110,.5),rgba(255,160,90,.12) 55%,transparent 75%),linear-gradient(180deg,rgba(255,255,255,.06),rgba(0,0,0,.25)),url(a/s/tex_dusk.jpg) 0 0/400px}
+.qB .pn .gs::after{content:"";position:absolute;inset:9px;clip-path:polygon(14px 0,calc(100% - 14px) 0,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0 calc(100% - 14px),0 14px);box-shadow:inset 0 0 0 1px rgba(255,231,166,.55)}
+.qB .warm{position:absolute;inset:3px;clip-path:inherit;pointer-events:none}
+.qB .lt{position:absolute;left:84px;top:-36px;width:124px;z-index:4;transform-origin:62px 6px;animation:swing 5.5s ease-in-out infinite}
+@keyframes swing{0%,100%{transform:rotate(-2.4deg)}50%{transform:rotate(2.4deg)}}
+.qB .lt img{width:100%}
+.qB .lt .off{position:absolute;left:0;top:0;opacity:0}
+.qB .cnr{position:absolute;width:44px;height:44px;opacity:.9}
+.qB .tb{position:absolute;left:262px;right:36px;top:34px}
+.qB .lab{display:flex;align-items:center;gap:10px;font:16px Gowun,"Malgun Gothic",serif;color:#ffe7a6;letter-spacing:2px}
+.qB .lab::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(255,231,166,.7),transparent)}
+.qB h4{margin:10px 0 6px;font:32px/1.2 Gowun,"Malgun Gothic",serif;color:#fff6e4;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.qB p{margin:0;font:16.5px/1.6 Pre,"Malgun Gothic",sans-serif;color:#e6dcff}
+.qB p b{color:#ffd98a}
+.qB .btns{position:absolute;right:36px;bottom:30px;display:flex;gap:14px}
+.qB .sb.gl{background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.04));color:#f3ecff;box-shadow:inset 0 0 0 1.5px rgba(230,220,255,.55),0 4px 0 rgba(10,6,30,.6),0 8px 14px rgba(0,0,0,.3)}
+.qB .sb.am{background:linear-gradient(180deg,#ffe3a0 0,#f6b65a 48%,#d8823a);color:#4a2408;box-shadow:inset 0 1.5px 0 rgba(255,255,255,.75),inset 0 0 0 1.5px #fff1c8,0 4px 0 #9a5420,0 9px 16px rgba(60,20,10,.4)}
+.qB .sb.am svg{width:16px;height:20px}
+.qB .hint{left:0;right:0;top:508px;justify-content:center}
+.scr.go .qB .lt .on{animation:lampoff 2.6s ease both}
+.scr.go .qB .lt .off{animation:lampon 2.6s ease both}
+.scr.go .qB .pn .gs{animation:dark 2.6s ease both}
+@keyframes lampoff{0%,35%{opacity:1}55%,80%{opacity:0}100%{opacity:1}}
+@keyframes lampon{0%,35%{opacity:0}55%,80%{opacity:1}100%{opacity:0}}
+@keyframes dark{0%,35%{filter:none}55%,80%{filter:brightness(.55) saturate(.7)}100%{filter:none}}
+/* C 작은 확인 카드 */
+.qC .dim{background:rgba(14,8,34,.5)}
+.qC .cd{position:absolute;left:calc(50% - 218px);top:238px;width:436px;height:212px;transform:skewX(-6deg);filter:drop-shadow(0 14px 22px rgba(20,8,50,.45))}
+.qC .cd .fr{position:absolute;inset:0;border-radius:12px;background:linear-gradient(135deg,#fff3c4,#e4a63c 40%,#fff3c4 70%,#c48a2a)}
+.qC .cd .pp{position:absolute;inset:2px;border-radius:10px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(226,214,255,.5)),url(a/s/tex_pearl.jpg) 0 0/380px}
+.qC .cd .hb{position:absolute;left:0;right:0;top:0;height:46px;background:linear-gradient(90deg,#7d63dc,#a58cff 60%,#c9b4ff);box-shadow:inset 0 -2px 0 rgba(255,231,166,.8),inset 0 1px 0 rgba(255,255,255,.4)}
+.qC .cd .hb::after{content:"";position:absolute;right:-20px;top:-30px;width:140px;height:100px;background:radial-gradient(circle,rgba(255,255,255,.35),transparent 60%)}
+/* 카드 두께: 아래로 한 겹 더 (금 옆면) — 납작한 종이 한 장이 아니라 손에 쥔 카드처럼 */
+.qC .cd .ed{position:absolute;left:4px;right:-4px;top:7px;bottom:-7px;border-radius:12px;background:linear-gradient(180deg,#c48a2a,#7a4c14)}
+.qC .cd .hb i{position:absolute;inset:0;background:radial-gradient(circle,rgba(255,246,210,.9) 0 1px,transparent 1.6px) 0 0/22px 14px;opacity:.35;-webkit-mask:linear-gradient(90deg,transparent 30%,#000);mask:linear-gradient(90deg,transparent 30%,#000)}
+.qC .cd .lt{position:absolute;left:-30%;top:0;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg)}
+.qC .cd .pp::after{content:"";position:absolute;inset:54px 10px 10px;border-radius:6px;box-shadow:inset 0 0 0 1px rgba(196,138,42,.45)}
+.qC .ct{position:absolute;inset:0;transform:skewX(6deg)}
+.qC .ht{position:absolute;left:62px;top:9px;display:flex;align-items:center;gap:8px;font:19px Gowun,"Malgun Gothic",serif;color:#fff;letter-spacing:1px;text-shadow:0 1px 2px rgba(40,20,90,.6)}
+.qC .md{position:absolute;left:-16px;top:-18px;width:62px;height:62px;border-radius:50%;background:conic-gradient(from 200deg,#fff3c4,#c48a2a,#ffe7a6,#b8761c,#fff3c4);box-shadow:0 4px 8px rgba(40,20,80,.4),inset 0 0 0 1.5px #4a2b45;display:grid;place-items:center;z-index:3}
+.qC .md::before{content:"";position:absolute;inset:6px;border-radius:50%;background:radial-gradient(circle at 40% 30%,#d6c8ff,#7d63dc 60%,#4b39a8);box-shadow:inset 0 0 0 1.5px #4a2b45}
+.qC .md img{position:relative;width:34px;filter:drop-shadow(0 0 6px rgba(255,240,190,.9))}
+.qC .q{position:absolute;left:32px;top:64px;font:23px Gowun,"Malgun Gothic",serif;color:#2f2654}
+.qC .s{position:absolute;left:32px;right:24px;top:102px;font:15px/1.5 Pre,"Malgun Gothic",sans-serif;color:#5a5078}
+.qC .s b{color:#4b39a8;background:linear-gradient(180deg,transparent 58%,rgba(255,216,119,.75) 58% 92%,transparent 92%);padding:0 2px}
+.qC .btns{position:absolute;right:26px;bottom:20px;display:flex;gap:10px}
+.qC .wm{position:absolute;right:-24px;top:50px;width:210px;opacity:.2;-webkit-mask:linear-gradient(90deg,transparent,#000 50%);mask:linear-gradient(90deg,transparent,#000 50%)}
+.qC .spk{z-index:4}
+.qC .hint{left:0;right:0;top:468px;justify-content:center}
+
+/* ============================== D11-3 저장 손상 ============================== */
+/* A 일지의 찢긴 쪽 */
+.svA .dim{background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(26,16,58,.5),rgba(10,6,26,.8))}
+.svA .bk{position:absolute;left:calc(50% - 404px);top:112px;width:808px;height:480px;filter:drop-shadow(0 20px 28px rgba(0,0,0,.55))}
+.svA .cov{position:absolute;inset:0;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.3)),url(a/s/tex_leather.jpg) 0 0/400px;box-shadow:inset 0 0 0 2px rgba(20,10,40,.6),inset 0 2px 0 rgba(255,255,255,.15)}
+.svA .cov::after{content:"";position:absolute;inset:7px;border-radius:15px;border:1.5px solid rgba(228,194,122,.65)}
+.svA .pg{position:absolute;top:16px;bottom:18px;background:linear-gradient(90deg,rgba(120,80,40,0) 70%,rgba(120,80,40,.28)),url(a/s/tex_parch.jpg) 0 0/360px}
+.svA .pl{left:18px;width:384px;border-radius:12px 4px 4px 12px}
+.svA .pr{left:406px;width:384px;border-radius:4px 12px 12px 4px;background:linear-gradient(270deg,rgba(120,80,40,0) 70%,rgba(120,80,40,.3)),url(a/s/tex_parch.jpg) 100px 40px/360px;filter:brightness(.9) saturate(.85)}
+.svA .spine{position:absolute;left:392px;width:24px;top:12px;bottom:14px;background:linear-gradient(90deg,transparent,rgba(40,20,10,.35) 45%,rgba(40,20,10,.35) 55%,transparent);z-index:3}
+.svA .stack{position:absolute;left:12px;right:12px;bottom:10px;height:12px;border-radius:0 0 14px 14px;background:repeating-linear-gradient(180deg,#f3e3c2 0 2px,#d9c19a 2px 3px)}
+.svA .lp{position:absolute;left:50px;top:42px;width:320px}
+.svA .lp .k{font:14px Gowun,"Malgun Gothic",serif;color:#8a6a4a;letter-spacing:3px;display:flex;align-items:center;gap:8px}
+.svA .lp .k::after{content:"";flex:1;height:1px;background:rgba(138,106,74,.4)}
+.svA .lp h4{margin:16px 0 10px;font:27px/1.3 Gowun,"Malgun Gothic",serif;color:#3a2547}
+.svA .lp p{margin:0;font:16px/1.65 Pre,"Malgun Gothic",sans-serif;color:#5a4636}
+.svA .env{position:absolute;left:50px;top:290px;width:320px;display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:10px;background:rgba(255,250,236,.55);box-shadow:inset 0 0 0 1px rgba(160,120,80,.35);font:14.5px/1.45 Pre,"Malgun Gothic",sans-serif;color:#5a4636}
+.svA .env img{width:46px;flex:none}
+.svA .seal{position:absolute;left:300px;top:250px;width:84px;transform:rotate(12deg);z-index:2}
+.svA .ok{position:absolute;left:50px;bottom:40px}
+.svA .tp{position:absolute;left:406px;top:16px;width:384px;height:286px;-webkit-mask:url(a/s/torn_h.svg) 0 100%/100% 90px no-repeat,linear-gradient(#000,#000) 0 0/100% calc(100% - 88px) no-repeat;mask:url(a/s/torn_h.svg) 0 100%/100% 90px no-repeat,linear-gradient(#000,#000) 0 0/100% calc(100% - 88px) no-repeat;background:linear-gradient(270deg,rgba(120,80,40,0) 70%,rgba(120,80,40,.28)),url(a/s/tex_parch.jpg) 0 0/360px;border-radius:4px 12px 0 0;z-index:2}
+.svA .tps{position:absolute;left:406px;top:22px;width:384px;height:286px;-webkit-mask:url(a/s/torn_h.svg) 0 100%/100% 90px no-repeat,linear-gradient(#000,#000) 0 0/100% calc(100% - 88px) no-repeat;mask:url(a/s/torn_h.svg) 0 100%/100% 90px no-repeat,linear-gradient(#000,#000) 0 0/100% calc(100% - 88px) no-repeat;background:rgba(60,30,10,.35);filter:blur(3px);z-index:1}
+.svA[data-st=fresh] :is(.tp,.tps){height:120px}
+.svA .bm{position:absolute;left:720px;top:-8px;width:36px;height:150px;z-index:4;filter:drop-shadow(0 3px 3px rgba(40,20,10,.35))}
+.svA .rp1{position:absolute;left:446px;top:56px;width:290px;z-index:3}
+.svA .rp1 .k{font:14px Gowun,"Malgun Gothic",serif;color:#8a6a4a;letter-spacing:3px}
+.svA .rp1 .dt{margin-top:10px;font:24px/1.3 Gowun,"Malgun Gothic",serif;color:#3a2547}
+.svA .rp1 .stg{display:inline-flex;align-items:center;gap:8px;margin-top:8px;font:20px Gowun,"Malgun Gothic",serif;color:#5b44c8}
+.svA .rp1 .stg i{width:10px;height:10px;transform:rotate(45deg);background:linear-gradient(135deg,#ffe08a,#e4a63c);box-shadow:0 0 0 1px #8a5a14}
+.svA .rp1 .here{display:inline-block;margin-top:12px;padding:3px 12px;border-radius:12px;background:rgba(107,85,216,.12);box-shadow:inset 0 0 0 1px rgba(107,85,216,.4);font:13.5px Pre,"Malgun Gothic",sans-serif;color:#5b44c8}
+.svA .ink{position:absolute;left:446px;top:214px;width:290px;height:44px;z-index:3;opacity:.4}
+/* 찢긴 쪽 아래 = 그 밑장: 그림자 진 종이 + 흐려진 고래 잉크 그림 + 지워져 가는 글줄 + 떨어진 종이 조각 */
+.svA .under{position:absolute;left:406px;top:282px;width:384px;height:180px;z-index:1;overflow:hidden;border-radius:0 0 12px 4px;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(70,40,20,.28),transparent 70%),linear-gradient(180deg,rgba(60,36,18,.12),rgba(60,36,18,0) 40%)}
+.svA .under img{position:absolute;left:-8px;top:86px;width:230px;opacity:.3;mix-blend-mode:multiply;filter:grayscale(1) sepia(1) saturate(1.2) brightness(.8) contrast(1.6);-webkit-mask:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent),linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent);-webkit-mask-composite:source-in;mask:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent),linear-gradient(90deg,transparent,#000 20%,#000 80%,transparent);mask-composite:intersect}
+.svA[data-st=fresh] .under{top:118px;height:344px}
+.svA .gone{position:absolute;left:432px;top:322px;width:330px;z-index:2;text-align:right}
+.svA .gone svg{display:block;width:300px;height:46px;margin:0 auto 10px}
+.svA .gone p{margin:0;display:inline-flex;align-items:center;gap:10px;font:17px/1.45 Gowun,"Malgun Gothic",serif;color:#7a4a3a;text-align:left}
+.svA .gone p i{flex:none;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff4e4,#e8c9a8);box-shadow:inset 0 0 0 1.5px rgba(138,90,60,.55);display:grid;place-items:center;font:700 16px/1 Gowun,serif;color:#9a4a3a;font-style:normal}
+.svA[data-st=fresh] .gone{top:190px}
+.svA .scw{position:absolute;z-index:3;filter:drop-shadow(0 3px 2px rgba(60,30,10,.4))}
+.svA .scw i{display:block;background:radial-gradient(ellipse 70% 60% at 50% 40%,transparent 50%,rgba(120,80,40,.3)),linear-gradient(180deg,transparent 46%,rgba(106,74,46,.45) 46% 52%,transparent 52%),url(a/s/tex_parch.jpg) 140px 20px/300px;filter:brightness(.94) saturate(1.1)}
+.svA[data-st=fresh] .scw{display:none}
+/* B 단정한 시스템 카드 */
+.svB .dim{background:radial-gradient(ellipse 60% 70% at 50% 50%,rgba(26,16,58,.42),rgba(10,6,26,.74))}
+.svB .sc{position:absolute;left:calc(50% - 330px);top:146px;width:660px;height:416px;filter:drop-shadow(0 18px 28px rgba(14,6,40,.5))}
+.svB .sc .fr{position:absolute;inset:0;border-radius:20px 6px 20px 6px;background:linear-gradient(135deg,#fff3c4,#c9b4ff 35%,#e4a63c 60%,#fff3c4 80%,#b39bff)}
+.svB .sc .pp{position:absolute;inset:2px;border-radius:18px 5px 18px 5px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(238,230,255,.35)),url(a/s/tex_pearl.jpg) 0 0/420px}
+.svB .sc .wash{position:absolute;left:-40px;top:0;width:460px;height:118px;transform:skewX(-18deg);background:linear-gradient(90deg,rgba(139,107,255,.26),rgba(139,107,255,.08) 70%,transparent);box-shadow:inset -2px 0 0 rgba(255,231,166,.6)}
+.svB .sc .sh{position:absolute;left:26px;top:20px;width:74px}
+.svB .sc h4{position:absolute;left:116px;top:28px;margin:0;font:26px/1.25 Gowun,"Malgun Gothic",serif;color:#2a2058}
+.svB .sc .ss{position:absolute;left:118px;top:68px;font:15px Pre,"Malgun Gothic",sans-serif;color:#5d5288}
+.svB .fx{position:absolute;left:30px;right:30px;top:126px;border-radius:12px;background:rgba(255,255,255,.62);box-shadow:inset 0 0 0 1px rgba(160,140,220,.35),0 2px 0 rgba(255,255,255,.8)}
+.svB .fx .r{display:flex;align-items:center;min-height:50px;padding:0 20px;border-bottom:1px solid rgba(180,150,230,.35)}
+.svB .fx .r:last-child{border-bottom:0}
+.svB .fx dt{width:176px;flex:none;font:15px Pre,"Malgun Gothic",sans-serif;color:#7a6f9a;display:flex;align-items:center;gap:8px}
+.svB .fx dt i{width:7px;height:7px;transform:rotate(45deg);background:#b39bff}
+.svB .fx dd{margin:0;font:17.5px Pre,"Malgun Gothic",sans-serif;color:#2a2058;display:flex;align-items:center;gap:10px}
+.svB .fx dd small{font:13.5px Pre,"Malgun Gothic",sans-serif;color:#7a6f9a}
+.svB .fx dd img{width:34px}
+.svB .fx .r.warn dd{color:#9a3a52}
+.svB .ok{position:absolute;right:30px;bottom:24px}
+.svB .nt{position:absolute;left:32px;bottom:34px;font:13.5px Pre,"Malgun Gothic",sans-serif;color:#7a6f9a}
+/* C 유나 사과 */
+.svC .dim{background:radial-gradient(ellipse 60% 70% at 55% 50%,rgba(26,16,58,.42),rgba(10,6,26,.76))}
+/* 유나는 편지 오른쪽(적이 서는 하늘 쪽) — 왼쪽 HUD · 고래 보호막 수치 · 아래 메뉴를 가리지 않게.
+   1280: 편지 x 460~1000 / y 130~490 · 유나 x 1014~1190 / y 204~522 (콤보 「폭주까지」 글 y≤198 아래) */
+.svC .ys{position:absolute;left:calc(50% + 374px);top:204px;height:318px;filter:drop-shadow(0 12px 18px rgba(10,4,30,.5))}
+.svC .lt{position:absolute;left:calc(50% - 180px);top:130px;width:540px;height:360px;filter:drop-shadow(0 16px 24px rgba(14,6,40,.5))}
+.svC .lt .bd{position:absolute;inset:0;border-radius:30px;background:linear-gradient(160deg,#ffd6e2,#c9b4ff 50%,#ffe7a6)}
+.svC .lt .in{position:absolute;inset:3px;border-radius:27px;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 20% 0%,rgba(255,220,232,.6),transparent 60%),linear-gradient(180deg,rgba(255,252,244,.82),rgba(255,246,236,.7)),url(a/s/tex_parch.jpg) 0 0/360px}
+.svC .lt .in::after{content:"";position:absolute;inset:12px;border-radius:20px;border:1.5px dashed rgba(214,120,150,.45)}
+.svC .tail{position:absolute;right:-44px;top:118px;width:56px;height:46px;transform:scaleX(-1)}
+.svC .nm{position:absolute;left:30px;top:-20px;width:150px;height:44px;z-index:3}
+.svC .nm img{position:absolute;inset:0;width:100%;height:100%}
+.svC .nm span{position:absolute;left:0;right:0;top:4px;text-align:center;font:18px Gowun,"Malgun Gothic",serif;color:#fff;text-shadow:0 1px 2px rgba(20,10,60,.7)}
+.svC .say{position:absolute;left:40px;right:36px;top:42px;margin:0;font:23px/1.5 Gowun,"Malgun Gothic",serif;color:#3a2547}
+.svC .say small{display:block;font:17px/1.55 Gowun,"Malgun Gothic",serif;color:#5a4060}
+.svC .slip{position:absolute;left:36px;right:36px;top:150px;padding:16px 20px 14px;transform:rotate(-1.2deg);background:linear-gradient(180deg,#fffdf6,#f4ead6);box-shadow:0 6px 12px rgba(80,50,30,.18),inset 0 0 0 1px rgba(160,120,80,.25);border-radius:4px}
+.svC .slip::before{content:"";position:absolute;left:calc(50% - 50px);top:-12px;width:100px;height:22px;transform:rotate(2deg);background:repeating-linear-gradient(90deg,rgba(185,166,255,.75) 0 8px,rgba(214,200,255,.75) 8px 16px);box-shadow:0 1px 2px rgba(60,30,90,.2)}
+.svC .slip p{margin:0 0 6px;display:flex;gap:10px;font:15.5px/1.5 Pre,"Malgun Gothic",sans-serif;color:#4c3a4a}
+.svC .slip p b{flex:none;width:96px;font:14px Pre,"Malgun Gothic",sans-serif;color:#9a7a8a}
+.svC .ok{position:absolute;right:36px;bottom:28px}
+
+/* ============================== D11-4 알림 띠 ============================== */
+.press{position:absolute;border-radius:12px;pointer-events:none;z-index:9}
+/* A 경고 리본 */
+.rbn{position:absolute;z-index:12;height:52px;display:flex;align-items:stretch;transform:rotate(-1.5deg);filter:drop-shadow(0 7px 10px rgba(60,6,24,.45))}
+.rbn .l{width:42px;height:52px;flex:none}
+.rbn .m{flex:1;height:52px;background:url(a/s/rib_m.svg) 0 0/100% 100%;display:flex;align-items:center;padding:0 6px 0 12px}
+.rbn .r{width:52px;height:64px;flex:none;margin-left:-2px}
+.rbn .t{font:16px Pre,"Malgun Gothic",sans-serif;color:#fff;white-space:nowrap;text-shadow:0 1px 2px rgba(80,0,20,.75)}
+.rbn .t small{display:block;font:13.5px Pre,"Malgun Gothic",sans-serif;color:#ffe4ea;margin-top:1px}
+.rbn .pin{position:absolute;left:-14px;top:-6px;width:60px;height:60px;z-index:2}
+.rbn .tl{position:absolute;top:47px;width:28px;height:24px}
+.rbn.two{height:66px}.rbn.two .l{height:66px}.rbn.two .m{height:66px}.rbn.two .r{height:80px}.rbn.two .pin{top:1px}
+.pressA{box-shadow:0 0 0 3px rgba(255,77,94,.85),0 0 18px 4px rgba(255,77,94,.45)}
+.scr.go .rbn{animation:rbin .45s cubic-bezier(.2,1.5,.4,1) both}
+@keyframes rbin{from{opacity:0;transform:rotate(-1.5deg) translateY(10px) scaleX(.6)}}
+/* B 유나 알림 · 붉은 테 */
+.ytR{--rim:#e0445a;--bub:#fff3f5;--ink:#5a1428}
+.scr.go .ytR .f{animation:pop .35s cubic-bezier(.2,1.6,.4,1) both}
+.scr.go .ytR .m{animation:ytx .45s cubic-bezier(.2,1.4,.4,1) both .12s;transform-origin:0 50%}
+@keyframes ytx{from{opacity:0;transform:scaleX(.2)}}
+/* C 단추 흔들림 + 말풍선 */
+.pressC{background:rgba(255,77,94,.16);box-shadow:inset 0 0 0 2.5px #ff4d5e,0 0 14px rgba(255,77,94,.4)}
+.shk{position:absolute;width:20px;height:44px;z-index:10}
+/* 말풍선: 장밋빛 → 진홍 → 금 그라데이션 테 + 윗빛 + 바깥 붉은 번짐, 꼬리는 테와 같은 진홍 */
+.bbl{position:absolute;z-index:12;padding:10px 20px 11px 12px;border-radius:18px;border:2.5px solid transparent;background:linear-gradient(180deg,#fffefb,#ffeef1) padding-box,linear-gradient(120deg,#ffb3c1,#d8344f 45%,#a3203c 70%,#ffd877) border-box;box-shadow:0 0 18px rgba(255,77,94,.35),0 10px 16px rgba(60,6,24,.32);display:flex;align-items:center;gap:10px;white-space:nowrap}
+.bbl .hl{position:absolute;left:12px;right:12px;top:3px;height:9px;border-radius:9px;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,0));pointer-events:none}
+.bbl .ex{position:relative;width:30px;height:30px;flex:none;border-radius:50%;background:radial-gradient(circle at 38% 30%,#ffb3c1,#d8344f 55%,#8c1630);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.85),0 0 0 2px #e4a63c,0 0 0 3.2px #4a2b45,0 2px 4px rgba(60,6,24,.4);color:#fff;font:800 17px/30px Pre,"Malgun Gothic",sans-serif;text-align:center;text-shadow:0 1px 1px rgba(80,0,20,.6)}
+.bbl b{font:16.5px Pre,"Malgun Gothic",sans-serif;color:#5a1428}
+.bbl::before{content:"";position:absolute;left:var(--tx,50%);bottom:-19px;margin-left:-12px;border:12px solid transparent;border-top:18px solid #b52641;border-bottom:0}
+.bbl::after{content:"";position:absolute;left:var(--tx,50%);bottom:-13px;margin-left:-8.5px;border:8.5px solid transparent;border-top:13.5px solid #ffeef1;border-bottom:0}
+.puf{position:absolute;width:34px;height:22px;z-index:10;pointer-events:none}
+.scr.go .pressC{animation:shake .5s ease both}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(2px)}}
+.scr.go .bbl{animation:pop .4s cubic-bezier(.2,1.6,.4,1) both .25s}
+</style>
+</head>
+<body>
+<div class="page">
+<h1>묶음 11 · 시스템 안내 <small>design/feedback70/ui_inventory.html #g11 · D11-1 ~ D11-4</small></h1>
+<p class="lead">화면마다 A · B · C 를 누르면 「고름」이 붙고, 맨 위 「결과 복사」로 한 번에 복사합니다. 화면 위 상태 단추로 카드에 적힌 상태를 바꿔 볼 수 있고, 주소에 <b>?w=1600</b> 을 붙이면 1600×720으로 열립니다. 그림은 처음부터 끝 상태로 보이고, 「▶ 다시」를 눌러야 움직임이 재생됩니다. <b>묶음 규칙</b>: 시스템 안내는 가이드 · 도움말(묶음 7: 스케치북 쪽지 · 단어장 카드 · 작은 리본)과 섞이지 않게 <b>판 결을 화면마다 따로</b> 씁니다 — 절전 = 밤하늘 · 종료 = 진주 종이 말풍선 / 저녁 유리 등불 / 기운 카드 · 저장 손상 = 가죽 일지 / 진주 시스템 카드 / 편지 말풍선 · 실패 = 진홍 공단 리본. 복귀 확인(묶음 3 C 「고래 그림 카드」)과 겹치는 고래 그림 판은 쓰지 않습니다. <b>정해진 것은 그대로</b>: 유나 알림(YunaToast) · 위 가운데 알림 판 · 뒤로 가기 규칙(종료 창에서 뒤로 한 번 더 = 취소) · 타이틀 키 아트. <b>글과 값은 게임 그대로</b>(back_nav.gd ask_quit · main.gd _notify_corrupt_save · power_save.gd · economy.gd FAIL_TEXT · warn_clock), 시간 · 바람 조각 수 · 되살린 날짜만 예시입니다.</p>
+<div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button><button type="button" data-replay-all>▶ 움직임 모두 다시</button><button type="button" class="copy" data-copy>결과 복사</button>
+<nav class="toc"><a href="#s-power">D11-1 방치 절전</a><a href="#s-quit">D11-2 게임 종료</a><a href="#s-save">D11-3 저장 손상</a><a href="#s-fail">D11-4 실패 알림</a></nav></div>
+
+<!-- ============================== D11-1 ============================== -->
+<h3 id="s-power">D11-1 · 방치 절전 화면 <small>scripts/power_save.gd · 방향 「잠든 고래 밤하늘」</small></h3>
+<p class="sub">조작이 180초 없으면 화면을 덮고 30fps로 내립니다. 아무 곳이나 누르면 돌아오고, 그 누르기는 게임에 넘기지 않습니다. 절전 중에도 수입은 그대로라 「항해는 그대로 이어져요」가 사실입니다. 이야기 · 연출 중(STAGE 없음)에는 「절전한 지 m:ss」 한 줄만 나옵니다.</p>
+<div class="states" data-group="power"><span>상태</span><button type="button" data-v="just" aria-pressed="true">막 절전 (0:01)</button><button type="button" data-v="ten" aria-pressed="false">10분</button><button type="button" data-v="cine" aria-pressed="false">연출 중 · STAGE 없음</button></div>
+<section class="ref" style="--n:1"><div><img data-now="now_power" alt="지금 방치 절전"></div><div><h2>지금</h2><p class="cap">전투 화면을 84% 검게 덮고 가운데에 흰 확인창과 같은 판(78% 투명)을 띄움. 절전인데 화면 가운데가 가장 밝은 흰 판이라 OLED에서 오히려 빛을 많이 쓰고, 「확인창」처럼 보여 눌러야 할 것 같은 인상. 「절전 중」 꼬리표가 하늘색이라 묶음 색과도 따로 놂.</p></div></section>
+
+<section class="opt" data-choice="pw_a" data-l="A" data-choice-group="power" data-choice-label="A · 밤하늘 고래 실루엣">
+<h2>A · 밤하늘 고래 실루엣 — 화면 전체가 잠든 밤, 고래 등불 하나만 켜짐 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost"><b>비용 중</b> — 밤하늘 그림 1장(1600×720 JPG 약 50KB) + 기존 고래 · 구름 그림을 셰이더 한 장(흑백 → 남보라 물들이기 + 윗면 달빛 테)으로 밤빛 처리. 정지 그림이라 30fps 절전에도 그릴 것이 거의 없음(고래 흔들림 · 등불 깜빡임만). 화면 대부분이 거의 검은색이라 OLED 전력은 지금보다 적음. 글은 1분마다 몇 px씩 옮겨 화면 잔상을 막아야 함.</p>
+<p class="verdict">정직한 평: 방향 「잠든 고래 밤하늘」을 그대로 그림으로 옮겨 셋 중 가장 「완성된 게임 화면」 같음. 전투 화면이 완전히 가려져 지금 무슨 일이 일어나는지는 글로만 알 수 있음. 실루엣 고래가 화면 한가운데라 짧게 보면 로딩 화면으로 오해할 수 있음 — 맨 아래 「화면을 누르면 돌아와요」가 그 오해를 푸는 유일한 단서.</p>
+<div class="vp"><div class="scr pwA">
+ <i class="ns"></i><img class="moon" src="a/s/moon.svg" alt="">
+ <img class="cf" src="a/b/cloud_far.png" alt="">
+ <div class="wh"><img src="a/c/whale.webp" alt=""><i class="lamp"></i><i class="win" style="left:188px;top:76px"></i><i class="win" style="left:203px;top:78px"></i><i class="win" style="left:228px;top:68px;height:5px"></i><i class="win" style="left:162px;top:84px;width:4px"></i></div>
+ <img class="cn" src="a/b/cloud_near.png" alt=""><i class="mist"></i>
+ <i class="spk" style="left:18%;top:90px;width:18px;height:18px"></i><i class="spk" style="left:64%;top:60px;width:14px;height:14px;animation-delay:1.2s"></i><i class="spk" style="left:36%;top:170px;width:12px;height:12px;animation-delay:.6s"></i>
+ <div class="cap">
+  <span class="pwtag"><img src="a/s/moon.svg" alt="">절전 중</span>
+  <b class="pw-l1 tx" data-x-ten="STAGE 33 항해 중 · 절전한 지 10:00" data-x-cine="절전한 지 3:12">STAGE 33 항해 중 · 절전한 지 0:01</b>
+  <span class="pw-l2" data-off="cine"><img src="a/i/icon_gold.png" alt="">그동안 모은 바람 조각 <em class="tx" data-x-ten="+2,410">+4</em></span>
+  <span class="hint">화면을 누르면 돌아와요 · 항해는 그대로 이어져요</span>
+ </div>
+</div></div>
+</section>
+
+<section class="opt" data-choice="pw_b" data-l="B" data-choice-group="power" data-choice-label="B · 시계 하나">
+<h2>B · 시계 하나 — 판 없이 큰 숫자와 금 시계 고리만 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost"><b>비용 소</b> — 시계 고리 SVG 1장 + 초승달 표지 1개(초마다 6° 돎). 판 · 그림이 없어 가장 가볍고, 뒤 전투가 어둡게 비쳐 「게임은 돌고 있다」가 보임. 지금 한 줄인 info 글을 「경과 시간」 · 「STAGE」 · 「바람 조각」 세 칸으로 나눠야 함.</p>
+<p class="verdict">정직한 평: 가장 조용하고 읽기 쉬움 — 멀리서도 「얼마나 쉬었나」가 한눈에. 대신 큰 숫자가 화면 가운데에 계속 같은 자리라 잔상 위험이 셋 중 가장 크고(고리째 천천히 떠다니게 해야 함), 고래 · 분교 같은 게임다운 그림이 없어 「앱 잠금 화면」처럼 담백함.</p>
+<div class="vp"><div class="scr pwB">
+ <i class="bg" data-k="battle" data-off="cine"></i><i class="bg hid" data-k="story" data-on="cine"></i><i class="shade"></i>
+ <span class="pwtag tag"><img src="a/s/moon.svg" alt="">절전 중</span>
+ <div class="clk"><i class="glow"></i><img src="a/s/clock_ring.svg" alt=""><i class="mk"><img src="a/s/moon.svg" alt=""></i>
+  <small class="lb">절전한 지</small>
+  <b class="tm tx" data-x-ten="10:00" data-x-cine="3:12">0:01</b>
+  <span class="st" data-off="cine">STAGE 33 항해 중</span>
+ </div>
+ <div class="gl" data-off="cine"><span class="pw-l2"><img src="a/i/icon_gold.png" alt="">그동안 모은 바람 조각 <em class="tx" data-x-ten="+2,410">+4</em></span></div>
+ <span class="hint">화면을 누르면 돌아와요 · 항해는 그대로 이어져요</span>
+</div></div>
+</section>
+
+<section class="opt" data-choice="pw_c" data-l="C" data-choice-group="power" data-choice-label="C · 아래 작은 카드">
+<h2>C · 아래 작은 카드 — 어두운 전투 위, 화면 아래 남색 벨벳 표 한 장 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost"><b>비용 소</b> — 양끝이 뾰족한 벨벳 표 1장 + 잠든 고래 메달. 지금 코드의 자리(가운데 CenterContainer)만 아래로 옮기고 판 모양을 바꾸면 됨. 밝은 면적이 가장 작아 전력은 셋 중 가장 적음.</p>
+<p class="verdict">정직한 평: 「확인창」 느낌이 사라지고 화면 가운데가 비어 절전답게 보임. 세 줄이 한 판에 다 들어가 정보 손실 없음. 다만 그림 몫이 작아 인상은 약하고, 전투 HUD가 어둡게 다 비쳐 「멈춘 화면」인지 「절전」인지 첫눈에 덜 분명함.</p>
+<div class="vp"><div class="scr pwC">
+ <i class="bg" data-k="battle" data-off="cine"></i><i class="bg hid" data-k="story" data-on="cine"></i><i class="shade"></i>
+ <div class="cd rise"><div class="md"><img src="a/s/medal_sleep.svg" alt=""><div class="wsm"><img src="a/c/whale.webp" alt=""></div><img class="mn" src="a/s/moon.svg" alt=""></div>
+  <div class="tx3"><div class="r1"><span class="chip">절전 중</span><b class="pw-l1 tx" data-x-ten="STAGE 33 항해 중 · 절전한 지 10:00" data-x-cine="절전한 지 3:12">STAGE 33 항해 중 · 절전한 지 0:01</b></div>
+  <span class="pw-l2" data-off="cine"><img src="a/i/icon_gold.png" alt="">그동안 모은 바람 조각 <em class="tx" data-x-ten="+2,410">+4</em></span></div></div>
+ <span class="hint">화면을 누르면 돌아와요 · 항해는 그대로 이어져요</span>
+</div></div>
+</section>
+
+<!-- ============================== D11-2 ============================== -->
+<h3 id="s-quit">D11-2 · 게임 종료 확인 <small>scripts/back_nav.gd ask_quit · 방향 「배웅」</small></h3>
+<p class="sub">뒤로 가기로 맨 아래 화면까지 오면 맨 위 층에 뜹니다(타이틀 · 이야기처럼 HUD가 숨은 화면에서도). <b>뒤로 가기를 한 번 더 누르면 취소</b>, 「종료하기」는 저장한 뒤 끝냅니다. 「최대 8시간」 = main.gd OFFLINE_CAP.</p>
+<div class="states" data-group="quit"><span>상태</span><button type="button" data-v="battle" aria-pressed="true">전투 위</button><button type="button" data-v="title" aria-pressed="false">타이틀 위</button><button type="button" data-v="story" aria-pressed="false">이야기 위</button></div>
+<section class="ref" style="--n:1"><div><img data-now="now_quit" alt="지금 게임 종료"></div><div><h2>지금</h2><p class="cap">모든 확인창이 쓰는 같은 흰 기운 판(Hud.build_modal) + 보라 이름표 + 취소 / 주황 「종료하기」. 저장 손상 · 복귀 확인과 판이 같아 「무슨 창인지」는 제목을 읽어야 앎. 「8시간 항해」라는 좋은 소식이 본문 둘째 줄에 묻혀 있음.</p></div></section>
+
+<section class="opt" data-choice="quit_a" data-l="A" data-choice-group="quit" data-choice-label="A · 배웅하는 아이">
+<h2>A · 배웅하는 아이 — 손 흔드는 유나 + 그 아이의 말풍선이 확인창 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost"><b>비용 중</b> — 타이틀 키 아트의 유나 그림(손 흔드는 자세) 재사용 + 진주 종이 말풍선 판 1종 + 「최대 8시간」 금 칩. 새 그림 없음. 유나는 말풍선 오른쪽(적이 서는 하늘 쪽)에 서서 왼쪽 HUD · 고래 보호막 수치 · 아래 메뉴 · 콤보 글은 1280 · 1600 모두 가리지 않음(가리는 것은 적과 피해 숫자뿐).</p>
+<p class="verdict">정직한 평: 방향 「배웅」을 가장 그대로 살림 — 끄려는 순간에 아이가 손을 흔들어 「다녀와요」 같은 정서가 생기고, 8시간 항해가 고래 그림과 금 칩으로 먼저 눈에 들어옴. 약점: 타이틀 위에서는 키 아트의 유나와 같은 그림이 두 번 보임(어둡게 덮어도 겹쳐 보임), 이야기 위에서는 대사창 인물과 섞여 보일 수 있음.</p>
+<div class="vp"><div class="scr qA">
+ <i class="bg" data-k="battle" data-on="battle"></i><i class="bg hid" data-k="title" data-on="title"></i><i class="bg hid" data-k="story" data-on="story"></i><i class="dim"></i>
+ <div class="grp"><i class="halo"></i>
+  <svg class="wave" viewBox="0 0 110 90"><path d="M30,20 C14,32 10,50 16,66" fill="none" stroke="#fff6d2" stroke-width="3.2" stroke-linecap="round"/><path d="M44,10 C24,26 20,52 28,74" fill="none" stroke="#fff6d2" stroke-width="2.4" stroke-linecap="round" style="animation-delay:.3s"/></svg>
+  <img class="yu" src="a/c/yuna_wave.webp" alt=""><i class="shd"></i>
+  <i class="spk" style="left:740px;top:60px"></i><i class="spk" style="left:500px;top:250px;width:18px;height:18px;animation-delay:1s"></i>
+  <div class="bub"><div class="bd"></div><div class="in"></div>
+   <svg class="tail" viewBox="0 0 40 44"><defs><linearGradient id="qat" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e4a63c"/><stop offset="1" stop-color="#fff3c4"/></linearGradient></defs><path d="M38,4 L2,24 L38,40 Z" fill="#f6efff" stroke="url(#qat)" stroke-width="3" stroke-linejoin="round"/><path d="M40,6 V38" stroke="#f6efff" stroke-width="5"/></svg>
+   <div class="rb"><img src="a/s/ban_lav.svg" alt=""><span>게임 종료</span></div>
+   <h4>종료할까요?</h4>
+   <p class="vy"><span class="wi"><img src="a/c/whale.webp" alt=""></span><span>고래는 꺼 둔 동안에도 <b class="h8">최대 8시간</b> 항해해요.</span></p>
+   <div class="btns"><span class="sb cr"><span>취소</span></span><span class="sb nv"><span>종료하기</span></span></div>
+  </div>
+  <span class="hint"><svg viewBox="0 0 20 20"><path d="M8,5 L3,10 L8,15 M3,10 H12 C15,10 17,12 17,15" fill="none" stroke="#ffe7a6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>뒤로 버튼을 한 번 더 누르면 닫혀요</span>
+ </div>
+</div></div>
+</section>
+
+<section class="opt" data-choice="quit_b" data-l="B" data-choice-group="quit" data-choice-label="B · 고래 등불 끄기">
+<h2>B · 고래 등불 끄기 — 저녁 유리판에 뱃머리 등불, 「종료하기」를 누르면 불이 꺼짐 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost"><b>비용 중</b> — 등불 SVG 켜짐/꺼짐 2장(판 윗변 고리에 걸림) + 저녁 유리 질감 1장. 등불이 꺼지는 0.8초를 기다린 뒤 끝내야 해서 종료가 그만큼 늦어짐(저장은 그 사이에). 「▶ 다시」 = 불이 꺼졌다 다시 켜지는 미리보기.</p>
+<p class="verdict">정직한 평: 판 결(어두운 유리 + 따뜻한 불빛)이 다른 확인창과 확실히 달라 「이건 끄는 창」이 첫눈에 구분됨. 은은한 고급감은 셋 중 가장 높음. 대신 사람(아이)이 없어 「배웅」 정서는 약하고, 어두운 판 위 글이라 밝은 전투 화면 위에서 대비는 좋지만 타이틀처럼 밝은 키 아트 위에서는 판만 무겁게 떠 보임.</p>
+<div class="vp"><div class="scr qB">
+ <i class="bg" data-k="battle" data-on="battle"></i><i class="bg hid" data-k="title" data-on="title"></i><i class="bg hid" data-k="story" data-on="story"></i><i class="dim"></i>
+ <div class="pn pop"><div class="gs"></div>
+  <img class="cnr" src="a/s/corner.svg" alt="" style="right:14px;top:14px;transform:scaleX(-1)"><img class="cnr" src="a/s/corner.svg" alt="" style="left:14px;bottom:14px;transform:scaleY(-1)"><img class="cnr" src="a/s/corner.svg" alt="" style="right:14px;bottom:14px;transform:scale(-1)">
+  <div class="lt"><img class="on" src="a/s/lantern_on.svg" alt=""><img class="off" src="a/s/lantern_off.svg" alt=""></div>
+  <div class="tb"><div class="lab">게임 종료</div><h4>종료할까요?</h4><p>고래는 꺼 둔 동안에도 <b>최대 8시간</b> 항해해요.</p></div>
+  <div class="btns"><span class="sb gl"><span>취소</span></span><span class="sb am"><span><svg viewBox="0 0 16 20"><path d="M8,1 C12,7 14,10 13,14 C12,18 4,18 3,14 C2,10 4,7 8,1 Z" fill="#fff3c4" stroke="#7a3a10" stroke-width="1.4"/><path d="M8,8 C10,11 10,13 9,15 C8,16 7,15 7,13 C7,12 7,10 8,8 Z" fill="#e88a2a"/></svg>종료하기</span></span></div>
+ </div>
+ <span class="hint"><svg viewBox="0 0 20 20"><path d="M8,5 L3,10 L8,15 M3,10 H12 C15,10 17,12 17,15" fill="none" stroke="#ffe7a6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>뒤로 버튼을 한 번 더 누르면 닫혀요</span>
+</div></div>
+</section>
+
+<section class="opt" data-choice="quit_c" data-l="C" data-choice-group="quit" data-choice-label="C · 작은 확인 카드">
+<h2>C · 작은 확인 카드 — 기운 진주 카드 한 장, 가장 짧게 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost"><b>비용 최소</b> — 판 1종(기운 진주 종이 + 금 옆면 두께 + 라벤더 머리 띠) + 금 메달 1개. 지금 build_modal 자리 · 크기를 줄이고 판만 바꾸면 끝. 움직임 추가 없음.</p>
+<p class="verdict">정직한 평: 가장 빠르고 방해가 적음 — 자주 끄는 사람에게는 이게 가장 편함. 금 메달 · 카드 두께 · 「최대 8시간」 금 밑줄로 지금보다 한 단계 고급스러워졌지만, 여전히 지금 창을 작게 다듬은 것에 가까워 「배웅」 방향은 거의 살지 않고, 다른 확인창(복귀 · 저장 손상)과도 판 결이 가까워 세 창이 비슷해 보일 위험이 남음.</p>
+<div class="vp"><div class="scr qC">
+ <i class="bg" data-k="battle" data-on="battle"></i><i class="bg hid" data-k="title" data-on="title"></i><i class="bg hid" data-k="story" data-on="story"></i><i class="dim"></i>
+ <div class="cd pop"><div class="ed"></div><div class="fr"></div><div class="pp"><div class="hb"><i></i></div><i class="lt"></i></div>
+  <div class="ct"><img class="wm" src="a/c/whale.webp" alt=""><span class="md"><img src="a/s/spark.svg" alt=""></span><div class="ht">게임 종료</div><div class="q">종료할까요?</div><div class="s">고래는 꺼 둔 동안에도 <b>최대 8시간</b> 항해해요.</div>
+  <i class="spk" style="left:410px;top:-10px;width:18px;height:18px"></i><i class="spk" style="left:-6px;top:170px;width:14px;height:14px;animation-delay:1s"></i>
+  <div class="btns"><span class="sb cr sm"><span>취소</span></span><span class="sb nv sm"><span>종료하기</span></span></div></div>
+ </div>
+ <span class="hint"><svg viewBox="0 0 20 20"><path d="M8,5 L3,10 L8,15 M3,10 H12 C15,10 17,12 17,15" fill="none" stroke="#ffe7a6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>뒤로 버튼을 한 번 더 누르면 닫혀요</span>
+</div></div>
+</section>
+
+<!-- ============================== D11-3 ============================== -->
+<h3 id="s-save">D11-3 · 저장 손상 안내 <small>scripts/main.gd _notify_corrupt_save · 방향 「차분한 시스템 카드 — 되살린 날짜 · 무엇이 사라졌는지」</small></h3>
+<p class="sub">시작할 때 한 번, 출석 · 항해일지보다 먼저 뜹니다(QA R50). 「확인」뿐이고 닫은 뒤 스테이지 · 출석이 이어집니다. 되살린 날짜 · 스테이지는 백업 파일에서 읽은 값(예시), 손상된 파일은 <b>save.json.corrupt-날짜</b>로 기기에 남습니다.</p>
+<div class="states" data-group="save"><span>상태</span><button type="button" data-v="restored" aria-pressed="true">백업에서 되살림</button><button type="button" data-v="fresh" aria-pressed="false">처음부터</button></div>
+<section class="ref" style="--n:2"><div><img data-now="now_restored" alt="지금 백업에서 되살림"></div><div><img data-now="now_corrupt" alt="지금 처음부터"></div><div><h2>지금</h2><p class="cap">종료 확인과 똑같은 흰 판 + 주황 「확인」. 네 줄이 같은 크기 · 같은 색이라 가장 중요한 「되살린 날짜」와 「그 뒤는 사라졌을 수 있어요」가 다른 줄과 구분되지 않음. 주황 단추가 「좋은 일」처럼 보여 분위기도 어긋남.</p></div></section>
+
+<section class="opt" data-choice="save_a" data-l="A" data-choice-group="save" data-choice-label="A · 일지의 찢긴 쪽">
+<h2>A · 일지의 찢긴 쪽 — 펼친 가죽 일지, 되살린 날 다음 쪽이 찢겨 나감 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost"><b>비용 중</b> — 가죽 · 종이 질감 2장 + 찢긴 끝 마스크 + 책갈피 · 밀랍 봉인 SVG + 찢긴 쪽 밑장(그림자 · 고래 잉크 스케치 · 지워져 가는 글줄 · 떨어진 종이 조각 2개). 날짜와 스테이지를 따로 받아야 해서 save_restored 글을 두 값으로 나눠야 함(코드 한 줄). 판이 808px로 셋 중 가장 큼.</p>
+<p class="verdict">정직한 평: 「어디까지 남았고 무엇이 사라졌나」가 그림 하나(찢긴 쪽)로 설명되어 가장 직관적이고 기억에 남음. 위험: 항해일지(묶음 2 방치 보상 팝업)와 「일지」라는 소재가 겹쳐, 시작할 때 이 창 다음에 항해일지가 이어 뜨면 둘이 같은 책처럼 읽힐 수 있음. 찢긴 종이가 「잃어버렸다」를 강하게 말해 처음부터 상태에서는 다소 아프게 느껴짐.</p>
+<div class="vp"><div class="scr svA">
+ <i class="bg" data-k="battle"></i><i class="dim"></i>
+ <div class="bk pop"><div class="cov"></div><i class="stack"></i>
+  <div class="pg pl"></div><div class="pg pr"></div><i class="tps"></i><div class="tp"></div><i class="spine"></i>
+  <div class="lp"><div class="k">항해 일지 · 저장</div><h4 class="tx" data-x-fresh="저장을 읽지 못했어요">예전 저장으로 되돌렸어요</h4><p class="tx" data-x-fresh="저장 파일이 손상되어 처음부터 시작해요.">저장 파일이 손상되어<br>예전 백업에서 이어 가요.</p></div>
+  <div class="env"><img src="a/s/envelope.svg" alt=""><span>손상된 파일은 기기에<br>보관해 두었어요.</span></div><img class="seal" src="a/s/seal.svg" alt="">
+  <span class="sb nv ok"><span>확인</span></span>
+  <img class="bm" src="a/s/bookmark.svg" alt="" data-off="fresh">
+  <div class="rp1" data-off="fresh"><div class="k">되살린 저장</div><div class="dt">2026년 11월 10일 21:40</div><div class="stg"><i></i>스테이지 31</div><br><span class="here">여기서 이어 가요</span></div>
+  <svg class="ink" data-off="fresh" viewBox="0 0 290 44" preserveAspectRatio="none"><path d="M2,10 C40,6 80,12 120,9 S200,6 240,10 M2,30 C30,26 70,33 110,29 S170,26 200,30" fill="none" stroke="#6a4a2e" stroke-width="2" stroke-linecap="round"/></svg>
+  <div class="under"><img src="a/c/whale.webp" alt=""></div>
+  <div class="gone"><svg viewBox="0 0 300 46" data-off="fresh"><defs><linearGradient id="svgh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6a4a2e" stop-opacity=".5"/><stop offset=".55" stop-color="#6a4a2e" stop-opacity=".16"/><stop offset="1" stop-color="#6a4a2e" stop-opacity="0"/></linearGradient></defs><path d="M6,12 C40,8 70,15 108,11 S186,8 226,12 S278,11 296,12" fill="none" stroke="url(#svgh)" stroke-width="2" stroke-linecap="round" stroke-dasharray="46 6 22 9 8 14 3 18"/><path d="M6,34 C34,30 62,37 98,33 S160,30 196,34" fill="none" stroke="url(#svgh)" stroke-width="2" stroke-linecap="round" stroke-dasharray="34 8 12 12 5 16"/></svg><p class="tx" data-x-fresh="<i>!</i>처음부터 시작해요."><i>!</i><span>그 뒤의 진행은<br>사라졌을 수 있어요.</span></p></div>
+  <span class="scw" style="left:500px;top:306px;transform:rotate(-14deg)"><i style="width:62px;height:30px;clip-path:polygon(0 18%,22% 0,48% 10%,76% 2%,100% 20%,94% 58%,100% 86%,70% 100%,44% 88%,18% 100%,4% 74%)"></i></span>
+  <span class="scw" style="left:740px;top:428px;transform:rotate(22deg)"><i style="width:40px;height:24px;clip-path:polygon(0 30%,30% 0,60% 14%,100% 0,90% 50%,100% 100%,56% 84%,20% 100%,8% 60%)"></i></span>
+ </div>
+</div></div>
+</section>
+
+<section class="opt" data-choice="save_b" data-l="B" data-choice-group="save" data-choice-label="B · 단정한 시스템 카드">
+<h2>B · 단정한 시스템 카드 — 되감기 방패 + 사실 네 줄 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost"><b>비용 소</b> — 진주 카드 판 1종 + 방패 아이콘 1개 + 표(줄 넷). 지금 본문을 「무엇 | 값」 표로 나누는 일(글은 그대로). 다른 확인창과 판이 다르도록 모서리를 대각(둥근 · 각진)으로 둠.</p>
+<p class="verdict">정직한 평: 방향 「차분한 시스템 카드」에 가장 정확함. 되살린 날짜 · 스테이지 · 사라졌을 수 있는 것 · 보관한 파일이 줄마다 갈려 고객 문의 때도 그대로 읽어 줄 수 있음. 감정 표현은 없음 — 드물지만 신뢰가 걸린 화면이라 그게 장점. 약점: 그림 몫이 방패 하나뿐이라 셋 중 가장 「시스템」스럽고 게임 개성은 적음.</p>
+<div class="vp"><div class="scr svB">
+ <i class="bg" data-k="battle"></i><i class="dim"></i>
+ <div class="sc pop"><div class="fr"></div><div class="pp"><i class="wash"></i></div>
+  <img class="sh" src="a/s/shield.svg" alt="">
+  <h4 class="tx" data-x-fresh="저장을 읽지 못했어요">예전 저장으로 되돌렸어요</h4>
+  <div class="ss tx" data-x-fresh="저장 파일이 손상되어 처음부터 시작해요.">저장 파일이 손상되어 예전 백업에서 이어 가요.</div>
+  <dl class="fx" style="margin:0">
+   <div class="r" data-off="fresh"><dt><i></i>되살린 저장</dt><dd>2026년 11월 10일 21:40</dd></div>
+   <div class="r" data-off="fresh"><dt><i></i>이어 갈 곳</dt><dd>스테이지 31</dd></div>
+   <div class="r warn" data-off="fresh"><dt><i></i>사라졌을 수 있는 것</dt><dd>그 뒤의 진행</dd></div>
+   <div class="r hid" data-on="fresh"><dt><i></i>이어 갈 곳</dt><dd>처음부터 시작해요</dd></div>
+   <div class="r"><dt><i></i>손상된 파일</dt><dd><img src="a/s/envelope.svg" alt="">기기에 보관해 두었어요</dd></div>
+  </dl>
+  <span class="sb nv ok"><span>확인</span></span>
+ </div>
+</div></div>
+</section>
+
+<section class="opt" data-choice="save_c" data-l="C" data-choice-group="save" data-choice-label="C · 유나 사과">
+<h2>C · 유나 사과 — 책을 끌어안은 유나 + 편지 말풍선, 사실은 붙인 쪽지에 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost"><b>비용 소</b> — 유나 감정 그림(슬픔) 재사용 + 편지 말풍선 판 1종 + 쪽지. 유나 대사 두 줄은 새로 써야 함(시안 글: 「미안해요…」). 사실 세 줄은 지금 글 그대로.</p>
+<p class="verdict">정직한 평: 같은 나쁜 소식이 가장 부드럽게 전해지고, 쪽지에 사실이 따로 있어 정보도 빠지지 않음. 위험: 게임 잘못(저장 손상)을 캐릭터가 사과하는 것이 귀여움으로 넘기려는 느낌을 줄 수 있고, 시작하자마자 큰 유나가 한 번 더 나오면 곧 이어지는 출석 · 항해일지 창과 합쳐 「창이 너무 많다」로 느껴질 수 있음.</p>
+<div class="vp"><div class="scr svC">
+ <i class="bg" data-k="battle"></i><i class="dim"></i>
+ <img class="ys rise" src="a/c/yuna_sad.webp" alt="">
+ <div class="lt pop" style="--d:.15"><div class="bd"></div><div class="in"></div>
+  <svg class="tail" viewBox="0 0 56 46"><defs><linearGradient id="sct" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffd6e2"/><stop offset="1" stop-color="#c9b4ff"/></linearGradient></defs><path d="M54,4 L2,30 L54,40 Z" fill="#fffaf0" stroke="url(#sct)" stroke-width="3" stroke-linejoin="round"/><path d="M56,6 V38" stroke="#fffaf0" stroke-width="6"/></svg>
+  <div class="nm"><img src="a/s/ban_navy.svg" alt=""><span>유나</span></div>
+  <p class="say">미안해요…<small class="tx" data-x-fresh="저장 파일을 읽지 못해서 처음부터 시작해요.">저장 파일이 손상돼서 예전 백업에서 이어 가요.</small></p>
+  <div class="slip"><p data-off="fresh"><b>되살린 저장</b>2026년 11월 10일 21:40 · 스테이지 31</p><p data-off="fresh"><b>사라진 것</b>그 뒤의 진행은 사라졌을 수 있어요.</p><p><b>손상된 파일</b>손상된 파일은 기기에 보관해 두었어요.</p></div>
+  <span class="sb nv ok"><span>확인</span></span>
+ </div>
+</div></div>
+</section>
+
+<!-- ============================== D11-4 ============================== -->
+<h3 id="s-fail">D11-4 · 비전투 알림 띠 (구매 실패 · 기기 시간 확인) <small>scripts/economy.gd tell · warn_clock → hud.banner · 방향 「경고 리본」</small></h3>
+<p class="sub">지금은 전투 띠(정화 · 보스)와 같은 큰 띠에 빨간 글자. 실패한 단추는 보통 미리 꺼지므로(덧칠 · 강화는 모자라면 회색) 이 알림은 <b>서버가 거절했거나 값이 막 바뀐 드문 경우</b>에 뜹니다. 장비 작업대(무지개 덧칠 = 채색석 · 잠재 덧칠 = 색가루 · 신화 승격 = 재료) · 상점 결제(서버) · 입장할 때 기기 시간. 글은 FAIL_TEXT · warn_clock 그대로.</p>
+<div class="states" data-group="fail"><span>상태</span><button type="button" data-v="gems" aria-pressed="true">채색석 부족</button><button type="button" data-v="dust" aria-pressed="false">색가루 부족</button><button type="button" data-v="mat" aria-pressed="false">재료 부족</button><button type="button" data-v="clock" aria-pressed="false">기기 시간</button><button type="button" data-v="net" aria-pressed="false">서버 실패</button></div>
+<section class="ref" style="--n:2"><div><img data-now="now_fail_gems" alt="지금 채색석 부족"></div><div><img data-now="now_clock" alt="지금 기기 시간"></div><div><h2>지금</h2><p class="cap">화면 위쪽 가운데의 큰 크림 띠 + 44px 빨간 글자가 1.4초. 전투 연출 띠와 같은 판이라 「실패」가 「축하」와 같은 무게로 크게 뜨고, 누른 단추와 멀리 떨어져 무엇이 안 됐는지 이어지지 않음. 메뉴가 열려 있으면 메뉴 아래에 깔려 거의 안 보임.</p></div></section>
+
+<section class="opt" data-choice="fail_a" data-l="A" data-choice-group="fail" data-choice-label="A · 붉은 리본">
+<h2>A · 붉은 리본 — 누른 단추 바로 위, 금 핀이 꽂힌 진홍 공단 리본 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost"><b>비용 소</b> — 리본 3조각(왼끝 · 늘어나는 몸 · 접힌 제비꼬리) + 금 경고 핀 + 아래 뾰족 꼬리. 자리는 YunaToast.tap_at(마지막 누른 곳)을 그대로 씀. 누른 단추에 붉은 테 0.6초. 기기 시간은 누른 단추가 없어 위 HUD 아래 가운데에 두 줄 리본.</p>
+<p class="verdict">정직한 평: 방향 「경고 리본」 그대로 — 단추 바로 위에 꼬리가 단추를 찔러 「이게 안 됐다」가 자리로 이어짐. 진홍 공단 결이라 빨강이지만 싸구려 경고창 같지 않음. 약점: 묶음 7의 「장비 분해 작은 리본」(D7-4 B)과 「리본」이라는 꼴이 겹쳐, 둘 다 고르면 성공 · 실패가 색으로만 갈림 — 여기 리본은 금 핀 · 진홍 · 아래 꼬리로 구분했음. 재료 부족 글은 31자라 리본이 470px로 김.</p>
+<div class="vp"><div class="scr fail" data-fail="A"></div></div>
+</section>
+
+<section class="opt" data-choice="fail_b" data-l="B" data-choice-group="fail" data-choice-label="B · 완료 알림 자리 · 붉은 테">
+<h2>B · 완료 알림(YunaToast)과 같은 자리 · 색만 다름 — 붉은 테 유나 말풍선 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost"><b>비용 최소</b> — 이미 있는 YunaToast 「막힌 일」(회색 풍선 + 땀방울)의 테 색만 진홍으로. economy.tell에서 hud.banner 대신 YunaToast.pop(…, false, false) 한 줄. 자리 규칙(메뉴 위 = 누른 곳 위 · 전투 중 = 위 가운데)도 그대로.</p>
+<p class="verdict">정직한 평: 가장 싸고 게임 전체 알림 말투가 하나로 모임 — 「유나가 알려 줌」이 성공 · 실패 모두에 통함. 대신 얼굴 + 말풍선이 커서 장비 작업대처럼 단추가 몰린 곳에서는 옆 칸(잠재 줄)을 가리고, 「안 됐다」가 색(붉은 테)으로만 갈려 색맹 · 작은 화면에서는 성공 알림과 헷갈릴 수 있음.</p>
+<div class="vp"><div class="scr fail" data-fail="B"></div></div>
+</section>
+
+<section class="opt" data-choice="fail_c" data-l="C" data-choice-group="fail" data-choice-label="C · 단추 흔들림 + 말풍선">
+<h2>C · 단추 흔들림 + 말풍선 — 누른 단추가 좌우로 떨고 그 위에 뾰족 꼬리 말풍선 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost"><b>비용 소</b> — 단추마다 흔들림(0.5초) + 붉은 테 말풍선 1종. 단추 노드를 알아야 해서 tell(res)에 「누른 단추」를 넘겨야 함(부르는 곳 6군데 수정). 기기 시간은 누른 단추가 없어 정해진 「위 가운데 알림 판」으로 보냄.</p>
+<p class="verdict">정직한 평: 「안 됨」을 몸으로 느끼게 해 가장 빨리 알아챔 — 모바일 게임에서 익숙한 문법. 말풍선이 작아 화면을 가장 덜 가림. 약점: 흔들림은 움직임이라 정지 화면(그리고 움직임 줄이기 설정)에서는 붉은 테만 남아 힘이 빠지고, 기기 시간만 다른 부품으로 떠서 다섯 상태가 한 식구로 보이지 않음.</p>
+<div class="vp"><div class="scr fail" data-fail="C"></div></div>
+</section>
+
+</div>
+<div id="toast"></div>
+<script>
+// ---------- D11-4: 상태마다 바탕 · 누른 단추 자리(1280 기준, 1600은 +160 가운데 정렬) · 글 (economy.gd FAIL_TEXT · warn_clock) ----------
+const FAIL={
+ gems:{bg:'gear',b:[773,476,302,62],t:'채색석이 모자라요'},
+ dust:{bg:'gear',b:[773,400,302,62],t:'색가루가 모자라요'},
+ mat:{bg:'gear',b:[60,242,280,63],t:'같은 부위의 미장착·미강화 은빛 전설 장비가 모자라요'},
+ clock:{bg:'battle',b:null,t:'기기 시간 확인',s:'시계가 이전으로 바뀌었어요 · 하루 보상은 원래 시각이 지나면 다시 열려요'},
+ net:{bg:'shop',b:[75,594,290,51],t:'서버와 연결하지 못했어요. 잠시 뒤 다시 해 주세요'}};
+const X=x=>`calc(var(--o) + ${x}px)`;
+// 글 폭 어림 (Pretendard Bold 16px ≈ 한 글자 15.6px · 빈칸 5px)
+const tw=(s,px)=>[...s].reduce((a,c)=>a+(c===' '?px*.32:/[\u3131-\uD79D]/.test(c)?px*.98:px*.6),0);
+const SHK='<svg viewBox="0 0 20 44"><defs><linearGradient id="shg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8aa0" stop-opacity="0"/><stop offset=".5" stop-color="#e0445a"/><stop offset="1" stop-color="#ff8aa0" stop-opacity="0"/></linearGradient></defs><path d="M15,2 C6,13 6,31 15,42" fill="none" stroke="url(#shg)" stroke-width="3.4" stroke-linecap="round"/><path d="M8,10 C2,17 2,27 8,34" fill="none" stroke="url(#shg)" stroke-width="2.4" stroke-linecap="round" opacity=".7"/><path d="M3,17 C1,20 1,24 3,27" fill="none" stroke="#ffb3c1" stroke-width="1.8" stroke-linecap="round" opacity=".7"/></svg>';
+// 단추 아래 양 끝에서 피어오르는 작은 먼지 구름 (흔들림이 「쿵」 하고 멈춘 느낌, 정지 화면에서도 남음)
+const PUF='<svg viewBox="0 0 34 22"><defs><radialGradient id="pfg" cx=".45" cy=".35" r=".7"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#e6dcff"/></radialGradient></defs><path d="M5,19 C1,19 1,13 5,12 C5,7 11,5 14,9 C16,4 24,4 25,10 C30,9 33,14 30,18 C29,20 27,20 26,20 Z" fill="url(#pfg)" stroke="#b39bff" stroke-width="1.4" stroke-linejoin="round" opacity=".92"/></svg>';
+function failA(k,f){
+ if(!f.b){const w=Math.round(tw(f.s,13.5)+150);return `<div class="rbn two" data-on="${k}" style="left:calc(50% - ${w/2}px);top:142px;width:${w}px"><img class="pin" src="a/s/pin_warn.svg" alt=""><img class="l" src="a/s/rib_l.svg" alt=""><div class="m"><span class="t">${f.t}<small>${f.s}</small></span></div><img class="r" src="a/s/rib_r.svg" alt=""></div>`}
+ const [x,y,bw,bh]=f.b,cx=x+bw/2,w=Math.round(tw(f.t,16)+120),l=Math.max(16,Math.min(1280-w-150,cx-w*.45));
+ return `<i class="press pressA" data-on="${k}" style="left:${X(x)};top:${y}px;width:${bw}px;height:${bh}px"></i><div class="rbn" data-on="${k}" style="left:${X(l)};top:${y-74}px;width:${w}px"><img class="pin" src="a/s/pin_warn.svg" alt=""><img class="l" src="a/s/rib_l.svg" alt=""><div class="m"><span class="t">${f.t}</span></div><img class="r" src="a/s/rib_r.svg" alt=""><img class="tl" src="a/s/rib_tail.svg" alt="" style="left:${Math.round(cx-l-14)}px"></div>`}
+function failB(k,f){
+ const w=Math.round(74+tw(f.b?f.t:f.s,f.b?18:13)+44);
+ // YunaToast.pop: 전투(가린 것 없음)이면 STAGE 판 바로 아래 가운데, 메뉴 위면 누른 곳 위(왼쪽으로 0.35 · 위 34px)
+ if(!f.b)return `<div class="yt ytR" data-on="${k}" style="left:calc(50% - ${w/2}px);top:138px"><i class="f"></i><img class="drop" src="a/s/drop.svg" alt=""><div class="m"><b>${f.t}</b>${f.s}</div></div>`;
+ const [x,y,bw]=f.b,tap=[x+bw*.55,y+28],l=Math.max(12,Math.min(1280-w-150,tap[0]-w*.35));
+ return `<div class="yt ytR" data-on="${k}" style="left:${X(l)};top:${tap[1]-74-34}px"><i class="f"></i><img class="drop" src="a/s/drop.svg" alt=""><div class="m"><b>${f.t}</b></div></div>`}
+function failC(k,f){
+ if(!f.b)return `<div class="nb" data-on="${k}"><div class="pl"></div><div class="ko"><span>!</span></div><div class="tt"><b>${f.t}</b><small>${f.s}</small></div><div class="ln" style="background:linear-gradient(90deg,#e0445a,#ff9fb0)"></div></div>`;
+ const [x,y,bw,bh]=f.b,cx=x+bw/2,w=Math.round(tw(f.t,16)+72),l=Math.max(16,Math.min(1280-w-150,cx-w/2));
+ return `<i class="press pressC" data-on="${k}" style="left:${X(x)};top:${y}px;width:${bw}px;height:${bh}px"></i><i class="shk" data-on="${k}" style="left:${X(x-24)};top:${y+bh/2-22}px">${SHK}</i><i class="shk" data-on="${k}" style="left:${X(x+bw+4)};top:${y+bh/2-22}px;transform:scaleX(-1)">${SHK}</i><i class="puf" data-on="${k}" style="left:${X(x-20)};top:${y+bh-14}px">${PUF}</i><i class="puf" data-on="${k}" style="left:${X(x+bw-14)};top:${y+bh-14}px;transform:scaleX(-1)">${PUF}</i><div class="bbl" data-on="${k}" style="left:${X(l)};top:${y-70}px;--tx:${Math.round(cx-l)}px"><i class="hl"></i><span class="ex">!</span><b>${f.t}</b></div>`}
+document.querySelectorAll('.scr.fail').forEach(s=>{const fn={A:failA,B:failB,C:failC}[s.dataset.fail];s.innerHTML=['gear','battle','shop'].map(b=>`<i class="bg" data-k="${b}" data-on="${Object.keys(FAIL).filter(k=>FAIL[k].bg===b).join(' ')}"></i>`).join('')+Object.entries(FAIL).map(([k,f])=>fn(k,f)).join('')});
+
+const GROUPS={power:'D11-1 방치 절전',quit:'D11-2 게임 종료 확인',save:'D11-3 저장 손상 안내',fail:'D11-4 비전투 알림 띠'};
+const fit=()=>document.querySelectorAll('.vp').forEach(v=>{const s=v.querySelector('.scr');const k=v.clientWidth/s.offsetWidth;s.style.transform=`scale(${k})`;v.style.height=s.offsetHeight*k+'px'});
+addEventListener('resize',fit);
+const setW=w=>{document.documentElement.style.setProperty('--w',w);document.documentElement.dataset.w=w;document.querySelectorAll('.bar [data-res]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.res===String(w)));document.querySelectorAll('img[data-now]').forEach(i=>i.src=`now/${i.dataset.now}_${w}x720.jpg`);fit()};
+document.querySelectorAll('.bar [data-res]').forEach(b=>b.addEventListener('click',()=>setW(b.dataset.res)));
+// 움직임은 누를 때만 (기본 화면은 끝 상태). 애니메이션 시계가 멈춘 창에서도 5초 뒤 끝 상태로 돌아온다
+const play=s=>{clearTimeout(s._t);s.classList.remove('go');void s.offsetWidth;s.classList.add('go');s._t=setTimeout(()=>s.classList.remove('go'),5000)};
+document.querySelectorAll('[data-replay]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();b.closest('.opt').querySelectorAll('.scr').forEach(play)}));
+document.querySelector('[data-replay-all]').addEventListener('click',()=>document.querySelectorAll('.scr').forEach(play));
+document.querySelectorAll('.tx').forEach(e=>e.dataset.x0=e.innerHTML);
+function setState(group,v,anim){document.querySelectorAll(`.opt[data-choice-group="${group}"] .scr`).forEach(s=>{s.dataset.st=v;s.querySelectorAll('[data-on]').forEach(e=>e.classList.toggle('hid',!e.dataset.on.split(' ').includes(v)));s.querySelectorAll('[data-off]').forEach(e=>e.classList.toggle('hid',e.dataset.off.split(' ').includes(v)));s.querySelectorAll('.tx').forEach(e=>{const t=e.getAttribute('data-x-'+v);e.innerHTML=t!==null?t:e.dataset.x0});if(anim)play(s)})}
+document.querySelectorAll('.states').forEach(bar=>{bar.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{bar.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));setState(bar.dataset.group,b.dataset.v,true)}));const p=bar.querySelector('button[aria-pressed=true]');setState(bar.dataset.group,p.dataset.v,false)});
+document.querySelectorAll('.opt[data-choice-group]').forEach(o=>o.addEventListener('click',()=>{const g=o.dataset.choiceGroup;document.querySelectorAll(`.opt[data-choice-group="${g}"]`).forEach(x=>x.classList.toggle('sel',x===o));updToc()}));
+function updToc(){document.querySelectorAll('.toc a').forEach(a=>{const g=a.getAttribute('href').slice(3);let i=a.querySelector('i');if(!i){i=document.createElement('i');a.appendChild(i)}const s=document.querySelector(`.opt.sel[data-choice-group="${g}"]`);i.textContent=s?' · '+s.dataset.l:' · ?'})}
+document.querySelector('[data-copy]').addEventListener('click',()=>{const lines=['[구름고래 분교 · 묶음 11 시스템 안내 시안 선택]',...Object.keys(GROUPS).map(g=>{const s=document.querySelector(`.opt.sel[data-choice-group="${g}"]`);return `${GROUPS[g]}: ${s?s.dataset.choiceLabel+(s.querySelector('.rec')?' (추천안)':''):'(미선택)'}`})];const txt=lines.join('\n');const done=()=>{const t=document.getElementById('toast');t.textContent='복사했어요\n'+txt;t.style.opacity=1;setTimeout(()=>t.style.opacity=0,2600)};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(done,()=>fb(txt,done))}else fb(txt,done)});
+function fb(txt,done){const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}ta.remove();done()}
+const secs=[...document.querySelectorAll('.page>h3')];
+addEventListener('scroll',()=>{let cur=secs[0];secs.forEach(h=>{if(h.getBoundingClientRect().top<160)cur=h});document.querySelectorAll('.toc a').forEach(a=>a.classList.toggle('cur',a.getAttribute('href')==='#'+cur.id))},{passive:true});
+updToc();
+// ?w=1600 → 1600×720으로 열기 · ?cap=<data-choice>&st=<상태> → 화면 하나만 원래 크기로 (캡처용)
+const Q=new URLSearchParams(location.search);
+setW(Q.get('w')==='1600'?'1600':'1280');
+if(Q.get('cap')){const o=document.querySelector(`.opt[data-choice="${Q.get('cap')}"]`);if(Q.get('st'))setState(o.dataset.choiceGroup,Q.get('st'),false);const s=o.querySelector('.scr');document.body.innerHTML='';document.body.style.background='#000';document.body.appendChild(s);s.style.transform='none'}
+</script>
+</body>
+</html>

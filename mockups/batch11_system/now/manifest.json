@@ -1,0 +1,186 @@
+{
+  "entries": [
+    {
+      "file": "now_battle_1280x720.jpg",
+      "id": "now_battle",
+      "items": [
+        "batch11"
+      ],
+      "label": "전투 (시안 바탕)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "now_battle_1600x720.jpg",
+      "id": "now_battle",
+      "items": [
+        "batch11"
+      ],
+      "label": "전투 (시안 바탕)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "now_quit_1280x720.jpg",
+      "id": "now_quit",
+      "items": [
+        "batch11"
+      ],
+      "label": "게임 종료 확인",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "now_quit_1600x720.jpg",
+      "id": "now_quit",
+      "items": [
+        "batch11"
+      ],
+      "label": "게임 종료 확인",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "now_corrupt_1280x720.jpg",
+      "id": "now_corrupt",
+      "items": [
+        "batch11"
+      ],
+      "label": "저장 손상 · 처음부터",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "now_corrupt_1600x720.jpg",
+      "id": "now_corrupt",
+      "items": [
+        "batch11"
+      ],
+      "label": "저장 손상 · 처음부터",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "now_restored_1280x720.jpg",
+      "id": "now_restored",
+      "items": [
+        "batch11"
+      ],
+      "label": "저장 손상 · 백업에서 되살림",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "now_restored_1600x720.jpg",
+      "id": "now_restored",
+      "items": [
+        "batch11"
+      ],
+      "label": "저장 손상 · 백업에서 되살림",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "now_fail_gems_1280x720.jpg",
+      "id": "now_fail_gems",
+      "items": [
+        "batch11"
+      ],
+      "label": "구매 실패 띠 · 채색석",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "now_fail_gems_1600x720.jpg",
+      "id": "now_fail_gems",
+      "items": [
+        "batch11"
+      ],
+      "label": "구매 실패 띠 · 채색석",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "now_clock_1280x720.jpg",
+      "id": "now_clock",
+      "items": [
+        "batch11"
+      ],
+      "label": "기기 시간 확인 띠",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "now_clock_1600x720.jpg",
+      "id": "now_clock",
+      "items": [
+        "batch11"
+      ],
+      "label": "기기 시간 확인 띠",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "now_power_1280x720.jpg",
+      "id": "now_power",
+      "items": [
+        "batch11"
+      ],
+      "label": "방치 절전 · 막 절전",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "now_power_1600x720.jpg",
+      "id": "now_power",
+      "items": [
+        "batch11"
+      ],
+      "label": "방치 절전 · 막 절전",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "now_gear_1280x720.jpg",
+      "id": "now_gear",
+      "items": [
+        "batch11"
+      ],
+      "label": "장비 작업대 (시안 바탕)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "now_gear_1600x720.jpg",
+      "id": "now_gear",
+      "items": [
+        "batch11"
+      ],
+      "label": "장비 작업대 (시안 바탕)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "bg_battle_1280x720.jpg",
+      "id": "bg_battle",
+      "items": [
+        "batch11"
+      ],
+      "label": "전투 (시안 바탕 · 알림 없음)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "bg_battle_1600x720.jpg",
+      "id": "bg_battle",
+      "items": [
+        "batch11"
+      ],
+      "label": "전투 (시안 바탕 · 알림 없음)",
+      "phase": "late",
+      "resolution": "1600x720"
+    }
+  ],
+  "tool": "tools/feedback_capture.gd",
+  "updated": "2026-11-11T22:38:00"
+}
