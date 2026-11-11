@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="ko" data-v="glass" data-w="1280" data-l="big">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 · 톤 정제 시안 「캐릭터는 귀엽게, UI는 세련되게」</title>
+<style>
+/* ===== 문서 껍데기 ===== */
+:root{--ink:#2a2246;--ink2:#5d5480;--paperbg:#f4f1f8;--line:#e3ddef}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--paperbg);color:var(--ink);font-family:"Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;line-height:1.5}
+.page{max-width:1240px;margin:0 auto;padding:18px 16px 80px}
+h1{font-size:24px;margin:0 0 4px;letter-spacing:-.2px}
+h2.sec{font-size:19px;margin:36px 0 10px;padding-top:12px;border-top:1px solid var(--line)}
+h3{font-size:16px;margin:18px 0 6px}
+p.lead,.note{font-size:14px;color:var(--ink2);margin:0 0 10px}
+.bar{position:sticky;top:0;z-index:50;display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 0;background:rgba(244,241,248,.95);font-size:14px}
+.bar b{margin-left:6px}
+.bar a{display:inline-flex;align-items:center;min-height:36px;padding:0 8px;color:var(--ink)}
+.bar button{font:inherit;min-height:40px;padding:0 16px;border-radius:8px;border:1px solid #cfc6e6;background:#fff;color:var(--ink);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;margin:0 0 16px}
+table.au{width:100%;border-collapse:collapse;font-size:14px}
+table.au th,table.au td{border-bottom:1px solid var(--line);padding:8px 6px;vertical-align:top;text-align:left}
+table.au img{width:220px;border-radius:6px;display:block}
+.sev{display:inline-block;min-width:44px;text-align:center;padding:1px 8px;border-radius:4px;font-size:13px;font-weight:700;color:#fff}
+.s3{background:#b8364f}.s2{background:#9a5a14}.s1{background:#5f5980}.keep{background:#2c6e52}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pair figure{margin:0}.pair figcaption{font-size:13px;color:var(--ink2);margin:4px 0 0}
+.pair .tag{font-size:13px;font-weight:700;margin:0 0 4px}
+/* 크게 보기: 칸 폭 1280 = 게임 1280 화면을 1:1로 */
+:root[data-l="big"] .page{max-width:1312px}:root[data-l="big"] .pair{grid-template-columns:1fr;gap:18px}
+.meas{font-size:13px;font-weight:600;color:#2c6e52;margin:4px 0 0}.meas.bad{color:#b8364f}
+.roles{display:flex;flex-wrap:wrap;gap:4px 16px;margin:6px 0 0;color:var(--ink)}
+.roles i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:5px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+.vp{position:relative;width:100%;overflow:hidden;border-radius:6px;background:#1b1733;aspect-ratio:1280/720}
+:root[data-w="1600"] .vp.wide{aspect-ratio:1600/720}
+.vp>img{width:100%;height:100%;object-fit:cover;display:block}
+.scr{position:absolute;left:0;top:0;width:1280px;height:720px;transform-origin:0 0;overflow:hidden;font-size:16px}
+:root[data-w="1600"] .wide .scr{width:1600px}
+.w16{display:none}:root[data-w="1600"] .w16{display:block}:root[data-w="1600"] .w12x{display:none}
+ul.pts{margin:6px 0 0;padding-left:18px;font-size:14px;color:var(--ink2)}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
+.opts label{font-size:14px;border:1px solid #cfc6e6;border-radius:8px;padding:6px 12px;background:#fff;cursor:pointer}
+.opts input{margin:0 8px 0 0;width:24px;height:24px;vertical-align:-6px}
+
+/* ===== 디자인 토큰 (두 갈래: 유리·금선 / 종이·수채) ===== */
+:root{
+  --navy:#241c45;--navy2:#342a63;--lav:#8a76e6;--lav-d:#5e4bbf;--lav-l:#e9e3ff;
+  --gold:#c9a24e;--gold-l:#f1dfa9;--gold-d:#8e6a22;--cream:#fbf7ef;--rose:#d9667f;
+  --hair:1px;--r-s:4px;--r-m:6px;--r-l:10px;--lean:-8deg;
+  --t-xl:600 34px/1.15 "Gowun Batang","Pretendard",serif;
+  --t-ttl:700 22px/1.2 "Pretendard",sans-serif;
+  --t-body:500 15px/1.4 "Pretendard",sans-serif;
+  --t-cap:500 15px/1.35 "Pretendard",sans-serif;
+  --t-num:700 18px/1 "Pretendard",sans-serif;
+  --e1:0 1px 2px rgba(20,12,48,.18),0 4px 12px rgba(20,12,48,.10);
+  --e2:0 2px 4px rgba(20,12,48,.18),0 12px 28px rgba(20,12,48,.20);
+  /* 유리·금선: 라벤더빛 유리 + 금선, 크림은 정보 시트·보상 카드·말풍선 */
+  --pan:linear-gradient(180deg,rgba(104,86,186,.76),rgba(58,46,120,.86));
+  --pan-ink:#f8f4ff;--pan-ink2:#e0d8ff;--pan-rim:rgba(241,223,169,.55);
+  --pan-blur:blur(14px) saturate(1.2);
+  --chip:linear-gradient(180deg,rgba(92,76,170,.80),rgba(54,43,114,.88));
+  --acc:#f1dfa9;--acc2:#e1d8ff;--on-bg:#fff;--on-bg2:#ece6ff;--on-sh:0 2px 12px rgba(20,12,48,.6);
+  --deep:radial-gradient(ellipse 80% 70% at 60% 30%,#6c5ac8,#2c2366 70%,#1d1748);
+  --track:rgba(255,255,255,.18);--ok:#a8ecc9;--port-bg:linear-gradient(180deg,#5a4aa6,#2e2668);
+  --band:rgba(70,56,140,.88);--on-band:#fff;--on-band2:#ece6ff;
+  --dim:radial-gradient(ellipse 70% 65% at 50% 48%,rgba(80,62,170,.5),rgba(22,16,56,.86));
+  --fade:linear-gradient(90deg,transparent 28%,rgba(44,35,102,.5) 58%,rgba(44,35,102,.6));--bgb:.6;
+  --pri:linear-gradient(180deg,#f6e7bd,#d8b25e 55%,#b98b34);--pri-ink:#2a1f0c;
+  --sec:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.04));--sec-ink:#f4efff;
+  --sheet:linear-gradient(180deg,rgba(251,247,239,.97),rgba(240,235,250,.97));--sheet-ink:#241c45;
+  --tex:none;
+}
+:root[data-v="paper"]{
+  /* 종이·수채: 크림 종이 + 옅은 라벤더 수채 번짐, 금선은 같다 */
+  --pan:radial-gradient(120% 90% at 85% 0%,rgba(190,172,250,.30),transparent 60%),linear-gradient(180deg,#fbf7ef,#f2ecf8);
+  --pan-ink:#241c45;--pan-ink2:#6a6090;--pan-rim:rgba(185,139,52,.55);
+  --pan-blur:none;
+  --acc:#8e6a22;--acc2:#5e4bbf;--on-bg:#241c45;--on-bg2:#4a4070;--on-sh:0 0 10px rgba(251,247,239,.95),0 0 2px rgba(251,247,239,.9);
+  --deep:radial-gradient(ellipse 70% 60% at 70% 20%,rgba(190,172,250,.55),transparent 60%),linear-gradient(110deg,#f6f0e4,#e6def8);
+  --track:rgba(36,28,69,.14);--ok:#2f7d5b;--port-bg:linear-gradient(180deg,#efe9fb,#d6ccf2);
+  --band:rgba(251,247,239,.95);--on-band:#241c45;--on-band2:#5d5480;
+  --dim:radial-gradient(ellipse 70% 65% at 50% 48%,rgba(251,247,239,.6),rgba(222,214,244,.92));
+  --fade:linear-gradient(90deg,transparent 28%,rgba(246,240,228,.55) 58%,rgba(246,240,228,.65));--bgb:.95;
+  --chip:linear-gradient(180deg,rgba(251,247,239,.94),rgba(238,232,248,.94));
+  --sec:linear-gradient(180deg,#fff,#f1ecfa);--sec-ink:#342a63;
+  --pri:linear-gradient(180deg,#43357e,#2c2260);--pri-ink:#f8eecd;
+  --tex:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .28 0 0 0 0 .5 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===== 부품 ===== */
+.scr{color:var(--pan-ink)}
+.pn{position:absolute;background:var(--tex),var(--pan);backdrop-filter:var(--pan-blur);-webkit-backdrop-filter:var(--pan-blur);border-radius:var(--r-m);box-shadow:var(--e2),inset 0 0 0 var(--hair) var(--pan-rim),inset 0 1px 0 rgba(255,255,255,.18);color:var(--pan-ink)}
+/* 금선 모서리 장식: 짧은 L자 두 개 (세로 기둥 대신) */
+.pn.orn::before,.pn.orn::after{content:"";position:absolute;width:18px;height:18px;border:1px solid var(--gold-l);opacity:.9}
+.pn.orn::before{left:5px;top:5px;border-right:0;border-bottom:0;border-top-left-radius:3px}
+.pn.orn::after{right:5px;bottom:5px;border-left:0;border-top:0;border-bottom-right-radius:3px}
+.sheet{position:absolute;background:var(--tex),var(--sheet);border-radius:var(--r-l);box-shadow:var(--e2),inset 0 0 0 1px rgba(201,162,78,.5);color:var(--sheet-ink)}
+.hl{height:1px;background:linear-gradient(90deg,transparent,var(--gold) 18%,var(--gold-l) 50%,var(--gold) 82%,transparent);opacity:.8}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding:0 22px;font:700 17px/1 "Pretendard",sans-serif;letter-spacing:.3px;border-radius:var(--r-s);position:relative;white-space:nowrap}
+.btn.pri{background:var(--pri);color:var(--pri-ink);box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 -1px 0 rgba(0,0,0,.15) inset,var(--e1)}
+.btn.sec{background:var(--sec);color:var(--sec-ink);box-shadow:inset 0 0 0 1px var(--pan-rim),var(--e1)}
+.btn.lean{clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);border-radius:0;padding:0 30px}
+.btn small{font:500 15px/1 "Pretendard";opacity:.9}
+.sheet .cap{color:#5d5480}
+.btn.pri::after{content:"";position:absolute;left:12%;right:12%;bottom:5px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent)}
+.chip{position:absolute;display:flex;align-items:center;gap:8px;height:36px;padding:0 12px 0 6px;background:var(--chip);backdrop-filter:var(--pan-blur);-webkit-backdrop-filter:var(--pan-blur);border-radius:18px 4px 4px 18px;box-shadow:inset 0 0 0 1px var(--pan-rim),var(--e1);font:700 17px/1 "Pretendard";color:var(--pan-ink);font-variant-numeric:tabular-nums}
+.chip svg{width:26px;height:26px;flex:none}
+.chip .plus{width:20px;height:20px;border-radius:3px;display:grid;place-items:center;font-size:15px;background:var(--pri);color:var(--pri-ink);margin-left:4px}
+.tab{position:relative;padding:8px 2px;font:600 17px/1 "Pretendard";color:var(--pan-ink2)}
+.tab.on{color:var(--pan-ink)}
+.tab.on::after{content:"";position:absolute;left:-4px;right:-4px;bottom:-2px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.badge{display:inline-flex;align-items:center;height:24px;padding:0 8px;font:700 15px/1 "Pretendard";border-radius:3px;letter-spacing:.4px}
+.b-ss{background:linear-gradient(135deg,#f6e2a6,#c9973c);color:#2a1f0c}
+.b-s{background:linear-gradient(135deg,#e9e3ff,#a594ee);color:#241c45}
+.b-a{background:#5e4bbf;color:#fff}.b-b{background:#4f6b96;color:#fff}
+.b-my{background:linear-gradient(110deg,#ffd9e6,#e5dcff 35%,#cdeefa 65%,#fff1c9);color:#241c45}
+.b-el{background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px currentColor;color:var(--pan-ink2);font-weight:600}
+.dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--rose);box-shadow:0 0 0 2px rgba(255,255,255,.85)}
+.ttl{font:var(--t-ttl);letter-spacing:-.2px}
+.cap{font:var(--t-cap);color:var(--pan-ink2)}
+.num{font:var(--t-num);font-variant-numeric:tabular-nums}
+.serif{font-family:"Gowun Batang","Noto Serif KR",serif}
+/* 툴팁/말풍선: 뾰족한 꼬리 */
+.tip{position:absolute;background:var(--tex),var(--sheet);color:var(--sheet-ink);border-radius:var(--r-m);padding:12px 16px;font:var(--t-body);box-shadow:var(--e2),inset 0 0 0 1px rgba(201,162,78,.55)}
+.tip::after{content:"";position:absolute;width:18px;height:14px;background:#f6f1f6;clip-path:polygon(0 0,100% 0,30% 100%);bottom:-13px;left:var(--tx,40px);filter:drop-shadow(0 1px 0 rgba(201,162,78,.55))}
+.tip .who{position:absolute;left:14px;top:-14px;font:700 15px/1 "Pretendard";padding:5px 10px;background:var(--navy);color:var(--gold-l);border-radius:2px;letter-spacing:.5px}
+.toast{position:absolute;display:flex;align-items:center;gap:10px;padding:0 22px;height:44px;font:600 15px/1 "Pretendard";color:#f4efff;background:linear-gradient(90deg,transparent,rgba(30,22,64,.9) 12%,rgba(30,22,64,.9) 88%,transparent)}
+.toast::before,.toast::after{content:"";position:absolute;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,var(--gold-l),transparent)}
+.toast::before{top:0}.toast::after{bottom:0}
+.port{position:relative;border-radius:var(--r-s);overflow:hidden;background:var(--port-bg);box-shadow:inset 0 0 0 1px rgba(241,223,169,.35)}
+.port img{width:100%;height:100%;object-fit:cover;display:block}
+.port .nm{position:absolute;left:0;right:0;bottom:0;padding:16px 6px 5px;font:600 15px/1 "Pretendard";color:#fff;background:linear-gradient(transparent,rgba(16,10,40,.85));text-align:left}
+.port .bd{position:absolute;left:4px;top:4px}
+.port.g-ss{box-shadow:inset 0 0 0 1px #e8c97a,0 0 0 1px rgba(232,201,122,.35)}
+.port.on{outline:2px solid var(--gold-l);outline-offset:1px}
+@keyframes sweep{0%,60%{transform:translateX(-120%)}100%{transform:translateX(220%)}}
+.sweep{position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:inherit}
+.sweep::after{content:"";position:absolute;top:0;bottom:0;width:30%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.22),transparent);animation:sweep 6s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+/* 토큰 표 */
+.tok{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.tok>div{border:1px solid var(--line);border-radius:8px;padding:10px;background:#fff;font-size:13px}
+.sw{display:flex;gap:6px;margin:6px 0}.sw i{flex:1;height:36px;border-radius:4px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.ratio{display:flex;height:22px;border-radius:4px;overflow:hidden;margin:6px 0}
+.compbg{position:relative;padding:22px;border-radius:8px;background:url(art/bg_sky.png) center/cover;min-height:120px}
+.compbg.dk{background:linear-gradient(180deg,#2a2152,#15112f)}
+.row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.row>.rel{position:relative}
+.ic{width:72px;height:72px}
+.icrow{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-end}
+.icrow figure{margin:0;text-align:center;font-size:13px;color:var(--ink2)}
+</style>
+</head>
+<body>
+<!-- ===== 아이콘 (선명한 층 · 왼쪽 위 빛 하나 · 얇은 짙은 테 대신 색 경계) ===== -->
+<svg width="0" height="0" style="position:absolute">
+<defs>
+<linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff4cf"/><stop offset=".45" stop-color="#e2bd66"/><stop offset="1" stop-color="#9a7128"/></linearGradient>
+<linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e9e4ff" stop-opacity=".55"/><stop offset=".25" stop-color="#ffffff" stop-opacity=".18"/><stop offset=".75" stop-color="#b9acef" stop-opacity=".12"/><stop offset="1" stop-color="#6b5bc0" stop-opacity=".45"/></linearGradient>
+<linearGradient id="gDust" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff2c2"/><stop offset=".5" stop-color="#e9c46a"/><stop offset="1" stop-color="#b48a2e"/></linearGradient>
+<linearGradient id="gCork" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7a5636"/><stop offset=".4" stop-color="#b8875a"/><stop offset="1" stop-color="#6b4a2c"/></linearGradient>
+<linearGradient id="gPr1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#ffd3e2"/><stop offset=".7" stop-color="#c9b8ff"/><stop offset="1" stop-color="#7f6be0"/></linearGradient>
+<linearGradient id="gPr2" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d5f3ff"/><stop offset=".5" stop-color="#9fb8ff"/><stop offset="1" stop-color="#5a46b8"/></linearGradient>
+<linearGradient id="gPr3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6d6"/><stop offset="1" stop-color="#f0a8c4"/></linearGradient>
+<linearGradient id="gGem" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe1ee"/><stop offset=".5" stop-color="#d77fb8"/><stop offset="1" stop-color="#6f4fc8"/></linearGradient>
+<radialGradient id="gPearl" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#dfe6ff"/><stop offset="1" stop-color="#8f9fd8"/></radialGradient>
+<linearGradient id="gWind" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6d6"/><stop offset=".5" stop-color="#e3be62"/><stop offset="1" stop-color="#a9802e"/></linearGradient>
+</defs>
+<!-- 별가루: 금빛 가루가 든 유리 약병 (항아리·자루 대신) -->
+<symbol id="i-dust" viewBox="0 0 64 64">
+ <ellipse cx="32" cy="58" rx="15" ry="2.6" fill="#140c30" opacity=".22"/>
+ <path d="M24 22h16v5c7 3 11 9 11 16 0 9-8 15-19 15S13 52 13 43c0-7 4-13 11-16z" fill="#2b2160" opacity=".35"/>
+ <clipPath id="cpv"><path d="M24 22h16v5c7 3 11 9 11 16 0 9-8 15-19 15S13 52 13 43c0-7 4-13 11-16z"/></clipPath>
+ <g clip-path="url(#cpv)"><path d="M10 40c8-3 14 2 22-1s14-2 22 0v20H10z" fill="url(#gDust)"/>
+  <g fill="#fff8de"><circle cx="22" cy="46" r="1"/><circle cx="30" cy="50" r=".8"/><circle cx="38" cy="45" r="1.1"/><circle cx="43" cy="51" r=".8"/><circle cx="27" cy="54" r=".7"/></g>
+  <g fill="#fff3c4" opacity=".9"><circle cx="34" cy="33" r=".9"/><circle cx="28" cy="29" r=".6"/><circle cx="38" cy="36" r=".7"/></g></g>
+ <path d="M24 22h16v5c7 3 11 9 11 16 0 9-8 15-19 15S13 52 13 43c0-7 4-13 11-16z" fill="url(#gGlass)" stroke="#d9d0ff" stroke-opacity=".8" stroke-width="1"/>
+ <path d="M18 38c1-4 4-7 7-8" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none" opacity=".8"/>
+ <rect x="22.5" y="18" width="19" height="5" rx="1.5" fill="url(#gGold)"/>
+ <path d="M25 8h14l-1 10H26z" fill="url(#gCork)"/>
+ <path d="M27 10h3v7h-3z" fill="#fff" opacity=".18"/>
+ <path d="M48 12l1.2 3.3L52.5 16.5l-3.3 1.2L48 21l-1.2-3.3L43.5 16.5l3.3-1.2z" fill="#fff4cf"/>
+</symbol>
+<!-- 신화 조각: 무지개 빛이 갈라지는 긴 프리즘 결정 파편 -->
+<symbol id="i-myth" viewBox="0 0 64 64">
+ <ellipse cx="32" cy="58" rx="13" ry="2.4" fill="#140c30" opacity=".22"/>
+ <path d="M30 4l14 18-6 33-14-6-6-26z" fill="url(#gPr2)"/>
+ <path d="M30 4l-12 19 6 26 7-21z" fill="url(#gPr1)"/>
+ <path d="M30 4l1 24 13-6z" fill="url(#gPr3)" opacity=".9"/>
+ <path d="M31 28l7 27-14-6z" fill="#4c3aa6" opacity=".55"/>
+ <path d="M24 49l7-21 7 27z" fill="url(#gPr1)" opacity=".35"/>
+ <path d="M21 22l3 14" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".85"/>
+ <path d="M30 4l14 18-6 33-14-6-6-26z" fill="none" stroke="#f6f0ff" stroke-opacity=".65" stroke-width=".9" stroke-linejoin="round"/>
+ <g opacity=".85"><path d="M44 30l12-3" stroke="#ff9fbe" stroke-width="1.4"/><path d="M44 32l12 0" stroke="#ffe08a" stroke-width="1.4"/><path d="M44 34l12 3" stroke="#8fd8ff" stroke-width="1.4"/></g>
+ <path d="M12 10l1 2.6 2.6 1-2.6 1L12 17l-1-2.4-2.6-1 2.6-1z" fill="#fff"/>
+</symbol>
+<!-- 채색석 (기존 상징 유지, 결을 정리) -->
+<symbol id="i-gem" viewBox="0 0 64 64">
+ <path d="M18 14h28l10 12-24 32L8 26z" fill="url(#gGem)"/>
+ <path d="M18 14l6 12h16l6-12z" fill="#fff" opacity=".35"/>
+ <path d="M8 26h48L32 58z" fill="#3b2a86" opacity=".18"/>
+ <path d="M24 26l8 32 8-32" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="1"/>
+ <path d="M18 14h28l10 12-24 32L8 26z" fill="none" stroke="#fde8f3" stroke-opacity=".8" stroke-width="1" stroke-linejoin="round"/>
+ <path d="M16 24l4-6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+</symbol>
+<symbol id="i-pearl" viewBox="0 0 64 64"><circle cx="32" cy="33" r="18" fill="url(#gPearl)"/><path d="M14 40c6-4 14-3 18 1 4-4 12-5 18-1-3 9-10 13-18 13s-15-4-18-13z" fill="#fff" opacity=".7"/><ellipse cx="25" cy="25" rx="6" ry="3.5" transform="rotate(-30 25 25)" fill="#fff" opacity=".9"/></symbol>
+<symbol id="i-wind" viewBox="0 0 64 64"><path d="M38 6l12 16-14 36-12-14z" fill="url(#gWind)"/><path d="M38 6l-14 38 12 14z" fill="#fff" opacity=".22"/><path d="M38 6l12 16-14 36-12-14z" fill="none" stroke="#fff3cc" stroke-opacity=".8" stroke-width="1"/><path d="M8 30c8-4 14 2 22-2M10 40c6-3 10 1 16-1" stroke="#d9e7ff" stroke-width="2" stroke-linecap="round" fill="none" opacity=".8"/></symbol>
+<symbol id="i-crys" viewBox="0 0 64 64"><path d="M32 4l12 14-12 42-12-42z" fill="#b8a6ff"/><path d="M32 4l-12 14 12 42z" fill="#e7e0ff"/><path d="M20 18h24l-12 42z" fill="#6c56d1" opacity=".5"/><path d="M32 4l12 14-12 42-12-42z" fill="none" stroke="#f3eeff" stroke-width="1"/></symbol>
+<symbol id="i-palette" viewBox="0 0 64 64"><path d="M32 8C16 8 6 19 6 32s10 24 22 24c5 0 6-4 4-7s0-7 5-7h7c7 0 14-4 14-12C58 18 47 8 32 8z" fill="#f2e6cf"/><path d="M32 8C16 8 6 19 6 32s10 24 22 24c5 0 6-4 4-7s0-7 5-7h7c7 0 14-4 14-12C58 18 47 8 32 8z" fill="none" stroke="#b48a2e" stroke-width="1.2"/><circle cx="20" cy="24" r="4.5" fill="#e0708a"/><circle cx="32" cy="18" r="4.5" fill="#e9c46a"/><circle cx="44" cy="23" r="4.5" fill="#79b7e8"/><circle cx="17" cy="37" r="4.5" fill="#8a76e6"/><circle cx="48" cy="34" r="3.5" fill="#fff"/></symbol>
+</svg>
+
+<div class="page">
+<h1>톤 정제 시안 — 「캐릭터는 귀엽게, UI는 세련되게」</h1>
+<p class="lead">구조(배치·흐름·부품 종류)는 그대로 두고 <b>재질·두께·모서리·색 비율·아이콘·움직임</b>만 바꾼다. 위 띠에서 두 갈래 체계와 화면 폭을 고른다. 왼쪽 = 지금(1280×720 실제 캡처), 오른쪽 = 새 디자인(같은 상태 · 같은 배치).</p>
+<div class="bar">
+ <b>체계</b><button data-set="v" data-val="glass" aria-pressed="true">A 「유리·금선」</button><button data-set="v" data-val="paper" aria-pressed="false">B 「종이·수채」</button>
+ <b>폭</b><button data-set="w" data-val="1280" aria-pressed="true">1280×720</button><button data-set="w" data-val="1600" aria-pressed="false">1600×720 (전투 HUD · 소환만)</button>
+ <b>보기</b><button data-set="l" data-val="big" aria-pressed="true">크게 (1:1 · 위아래)</button><button data-set="l" data-val="side" aria-pressed="false">나란히</button>
+ <span id="measAll" class="meas"></span>
+ <a href="#s1">0 감사</a> · <a href="#s2">1 토큰</a> · <a href="#s3">2 부품</a> · <a href="#s4">3 아이콘</a> · <a href="#s5">4 화면 6종</a> · <a href="#s6">5 정리</a>
+</div>
+
+<!-- ================= 0. 감사 ================= -->
+<h2 class="sec" id="s1">0. 감사 — 지금 화면에서 「어려 보이는 · 싼」 곳</h2>
+<p class="note">캡처 원본: <code>artifacts/feedback70/tone_audit/</code> (feedback_capture fresh+late, 1280·1600, 약 400장). 심각도 <span class="sev s3">상</span> = 첫인상을 바로 아동용으로 끌어내림, <span class="sev s2">중</span> = 반복 노출로 싸 보임, <span class="sev s1">하</span> = 다듬기. <span class="sev keep">유지</span> = 이미 톤에 맞음.</p>
+<div class="card"><table class="au">
+<tr><th>화면</th><th>문제 (왜 어려 보이나)</th><th>심각도</th></tr>
+<tr><td><img src="now/hud_mid_1280x720.jpg" alt=""><small>전투 HUD</small></td><td><ul class="pts">
+<li><b>모든 부품이 흰 크림 알약</b>(좌상 카드·의뢰 줄·재화 칩·탭 3개·하단 탭) — 같은 무게의 둥근 흰 판이 10개 이상 떠 있어 「아동 학습앱」 인상. 위계 없음.</li>
+<li>하단 탭 아이콘이 <b>스티커식 굵은 외곽선 + 채도 높은 평면색</b>, 잠금 표시는 둥근 회색 자물쇠 배지.</li>
+<li>궁극기 동그라미 = <b>두꺼운 금 고리 + 파스텔 내부 + 아래 리본 꼬리표</b> → 장난감 메달. 「순풍 가속!」 「궁극기」 리본 꼬리표 과다.</li>
+<li>COMBO 숫자: 굵은 흰 글자 + 검은 외곽선 (만화 효과음 느낌).</li></ul></td><td><span class="sev s3">상</span></td></tr>
+<tr><td><img src="now/menu_heroes_1280x720.jpg" alt=""><small>아이들 목록</small></td><td><ul class="pts"><li>속성 필터 = 색 점 + 흰 알약 6개, 등급 배지가 사탕색 사각(SS 노랑/S 주황/A 보라/B 하늘) + 빨간 점 남발.</li><li>「상세 보기」 = <b>젤리 같은 노랑 둥근 버튼</b>.</li><li>오른쪽 세로 깃발 탭이 원색(분홍·남·황·청록·초록) 깃발 → 색 소음. 핑크 형광펜 밑줄 탭.</li></ul></td><td><span class="sev s3">상</span></td></tr>
+<tr><td><img src="now/hero_info_yuna_1280x720.jpg" alt=""><small>아이 상세</small></td><td><ul class="pts"><li>오른쪽 판이 <b>큰 둥근 모서리(약 36px) 크림 카드</b>, 스탯 카드도 둥근 흰 블록 → 모바일 웹 앱 같음.</li><li>「레벨 업」 주황 그라데이션 + 「승급」 보라 젤리 버튼 둘이 경쟁.</li><li>좌상 성장 메달: 두꺼운 금 원 + 큰 숫자 = 장난감 훈장.</li></ul></td><td><span class="sev s2">중</span></td></tr>
+<tr><td><img src="now/summon_pickup_1280x720.jpg" alt=""><small>소환</small></td><td><ul class="pts"><li>배너 목록이 <b>물방울(핀) 모양 액자</b> + 교환소가 <b>무지개 가루 자루</b> → 장난감.</li><li>「10회 소환」 크림·주황 둥근 버튼, 「무료 1회」 보라 둥근 버튼. 신화 조각 딱지 알약.</li><li>캐릭터 그림·이름 띠·대사 서체는 <b>유지</b>.</li></ul></td><td><span class="sev s2">중</span></td></tr>
+<tr><td><img src="now/gacha_ten_result_1280x720.jpg" alt=""><small>10회 결과</small></td><td><ul class="pts"><li><b>별가루 = 노란 항아리/주머니 + 금가루 더미</b>, 중복 = 갈색 쿠키 같은 원형 도장.</li><li>아래 <b>통(tub) 두 개</b>: 둥근 유리 단지 + 무지개 반원 → 장난감 저금통. 숫자 「43」 버블 서체.</li><li>바탕 물방울 점무늬 = 유아용 벽지.</li></ul></td><td><span class="sev s3">상</span></td></tr>
+<tr><td><img src="now/reward_popup_1280x720.jpg" alt=""><small>보상 받기</small></td><td><ul class="pts"><li>흰 카드 9장 + <b>주황 젤리 「받기」</b>. 빛살은 있지만 판이 평평한 흰 종이라 무게감 없음.</li><li>아이콘 조명 방향·외곽선이 제각각(구름 진주=물방울 만화, 색가루=무지개 단지).</li></ul></td><td><span class="sev s2">중</span></td></tr>
+<tr><td><img src="now/menu_shop_1280x720.jpg" alt=""><small>상점</small></td><td><ul class="pts"><li>같은 보석 6개를 크기만 바꿔 반복, <b>주황 젤리 가격 버튼 8개</b>, 빨간 「첫 구매」 알약 → 마트 전단.</li><li>와인색 머리띠 + 분홍 판 + 주황 버튼 = 색 비율 붕괴.</li></ul></td><td><span class="sev s3">상</span></td></tr>
+<tr><td><img src="now/menu_school_1280x720.jpg" alt=""><small>분교</small></td><td><ul class="pts"><li>칠판·나무 액자·인형집 단면 = 세계관은 좋으나 <b>굵은 갈색 테·초록 칠판·주황 「짓기」 알약</b>이 겹쳐 무거움.</li><li>연구 아이콘이 원형 크림 배지 속 만화 아이콘.</li></ul></td><td><span class="sev s2">중</span></td></tr>
+<tr><td><img src="now/stage_clear_transition_f3_1280x720.jpg" alt=""><small>스테이지 정화</small></td><td><ul class="pts"><li>만화 해 아이콘 + 크림 판 + 「정화!」 굵은 글자 → 스티커. 빛살은 좋음(<b>유지</b>).</li></ul></td><td><span class="sev s2">중</span></td></tr>
+<tr><td><img src="now/guide_summon_1_1280x720.jpg" alt=""><small>안내 말풍선</small></td><td><ul class="pts"><li>말풍선은 꼬리가 뾰족해 좋음(<b>유지</b>). 손가락 커서 = 만화 장갑, 「빛나는 곳을 눌러요」 노랑 알약은 유아어.</li></ul></td><td><span class="sev s1">하</span></td></tr>
+<tr><td><img src="now/adv_battle_castle_1280x720.jpg" alt=""><img src="now/adv_battle_element_1280x720.jpg" alt="" style="margin-top:4px"><small>모험 전투 (잿빛성 · 속성 수호신)</small></td><td><ul class="pts"><li><b>빨간 젤리 「그만두기」 알약</b> + 흰 둥근 재화 알약 3개 + 금색 원형 「설정·개발」 메달 = 장난감 버튼 줄.</li><li>보스 막대는 남색 판·금테로 결이 맞음(<b>유지</b>), 아래 <b>Lv 알약 5개(흰·노랑)</b>와 「약점 빛」 흰 알약은 사탕색.</li><li>궁극기 = <b>두꺼운 원형 메달 + 버블 숫자</b>, 위에 흰 알약 「443」 4개 → 가장 아동용으로 보이는 묶음. 데미지 숫자 노란 외곽선 버블.</li></ul></td><td><span class="sev s3">상</span></td></tr>
+<tr><td><img src="now/castle_reward_1280x720.jpg" alt=""><small>모험 보상 (잿빛성)</small></td><td><ul class="pts"><li><b>분홍·주황·노랑 깃발을 꽂은 장난감 성</b> 일러스트가 진행도 = 놀이공원 간판. 큰 「RAMPART」 외곽 글자.</li><li>기운 남색 띠·흰 카드 3장 구조는 좋음. 카드 위 <b>분홍 그라데이션 머리띠</b>와 둥근 아이콘 액자는 사탕색.</li></ul></td><td><span class="sev s2">중</span></td></tr>
+<tr><td><img src="now/return_ask_1280x720.jpg" alt=""><img src="now/return_reward_1280x720.jpg" alt="" style="margin-top:4px"><small>복귀 묻기 · 귀환 보상</small></td><td><ul class="pts"><li>복귀 창: <b>모서리 약 30px 흰 둥근 카드 + 두꺼운 크림 테</b>, 제목 Black 굵기, 「+0」 파랑 기울임 버블 숫자.</li><li>귀환 보상: 빛살·기운 띠는 좋음(<b>유지</b>). 카드 위 <b>원색 머리띠(하늘·주황·분홍)</b>, 「귀환 보상」 주황→분홍 리본 + 빈 진행 막대(크림→보라)가 미완성처럼 보임.</li><li>캡처 시점에 아이콘이 아직 퍼지는 빛(별 모양)이라 내용이 안 보임 → 연출 없이도 아이콘이 보이게(정지 상태 확인 필요).</li></ul></td><td><span class="sev s2">중</span></td></tr>
+<tr><td><img src="now/title_ready_1280x720.jpg" alt=""><small>타이틀</small></td><td><ul class="pts"><li>기운 판·금선·빛 훑기 — 승인된 기준 화면. <b>이 결을 전 화면으로 넓히는 것이 이번 제안의 뼈대.</b></li></ul></td><td><span class="sev keep">유지</span></td></tr>
+</table>
+<p class="note" style="margin-top:10px"><b>움직임</b>: <code>UiSoft.juice</code>가 누를 때 0.95 → 놓을 때 1.03 → TRANS_BACK으로 튕김 = 젤리 반동(전 버튼 공통) <span class="sev s2">중</span>. 탭 바꿀 때 판이 x 0.25→1로 늘어나는 것도 고무줄 느낌. <b>유지</b>: 빛 훑기(Sheen), 컷인, 소환 연출, 캐릭터 SD 그림 전부.</p>
+<p class="note">이 밖의 화면(편성·모험 6쪽·고래·장비·각성·레벨 업/귀환·이야기·설정·시스템 창·토스트)도 같은 부품을 쓰므로 같은 5가지 문제가 반복된다: ① 흰 둥근 알약 ② 젤리 주황/노랑 버튼 ③ 사탕색 등급/알림 배지 ④ 장난감 사물 아이콘(단지·자루·항아리·쿠키 도장) ⑤ 튕기는 반동.</p>
+</div>
+
+<!-- ================= 1. 토큰 ================= -->
+<h2 class="sec" id="s2">1. 디자인 체계 — 토큰</h2>
+<div class="opts"><b style="font-size:14px">두 갈래:</b>
+<label><input type="radio" name="vv" value="glass" checked>A 「유리·금선」 — 라벤더빛 반투명 유리 판 + 1px 금선, 크림은 정보 시트·보상 카드·말풍선. 블루 아카이브·전투 위에서 가장 잘 읽힘.</label>
+<label><input type="radio" name="vv" value="paper">B 「종이·수채」 — 크림 종이 판 + 옅은 라벤더 수채 번짐 + 금선, 주 버튼은 남색 에나멜. 아틀리에 세계관에 더 가깝고 밝음.</label></div>
+<div class="tok">
+<div><b>색 비율</b> (UI 면적 기준 · 캐릭터 그림 제외)<br>A 유리·금선<div class="ratio"><i style="flex:34;background:#7a66d0"></i><i style="flex:26;background:#2c2366"></i><i style="flex:28;background:#fbf7ef"></i><i style="flex:10;background:#c9a24e"></i><i style="flex:2;background:#d9667f"></i></div>라벤더 유리 34 · 남색 그늘 26 · 크림 시트 28 · 금 10 · 장미 2<br>B 종이·수채<div class="ratio"><i style="flex:52;background:#fbf7ef"></i><i style="flex:24;background:#cbbdf5"></i><i style="flex:12;background:#2c2260"></i><i style="flex:10;background:#c9a24e"></i><i style="flex:2;background:#d9667f"></i></div>크림 종이 52 · 라벤더 수채 24 · 남색 글자·주 버튼 12 · 금 10 · 장미 2. <b>주황·노랑 버튼 색 폐지.</b></div>
+<div><b>팔레트</b><div class="sw"><i style="background:#241c45"></i><i style="background:#342a63"></i><i style="background:#5e4bbf"></i><i style="background:#8a76e6"></i><i style="background:#e9e3ff"></i></div><div class="sw"><i style="background:#8e6a22"></i><i style="background:#c9a24e"></i><i style="background:#f1dfa9"></i><i style="background:#fbf7ef"></i><i style="background:#d9667f"></i></div>채도는 지금보다 15~25% 낮춘다. 원색 속성색은 1px 테·점에만.</div>
+<div><b>글자</b> (한글)<br><span style="font:600 28px/1.2 'Gowun Batang',serif">고운바탕 28 — 이름·제목</span><br><span style="font:700 20px/1.3 Pretendard">Pretendard Bold 20 — 판 제목</span><br><span style="font:500 15px/1.4 Pretendard">Pretendard Medium 15 — 본문</span><br><span style="font:500 15px/1.35 Pretendard">15 — 보조·라벨 (게임 1280 기준 최소, 13 미만 금지)</span><br>숫자 = Pretendard tabular, 외곽선 없음, 그림자 1px. 둥근 버블 서체·검은 외곽선 글자 폐지.</div>
+<div><b>모서리</b><div class="row" style="margin:6px 0"><i style="width:44px;height:30px;border:1px solid #c9a24e;border-radius:4px"></i><i style="width:44px;height:30px;border:1px solid #c9a24e;border-radius:6px"></i><i style="width:44px;height:30px;border:1px solid #c9a24e;border-radius:10px"></i></div>4 버튼·배지 / 6 판·칩 / 10 시트. 원(⌀)은 아바타·재화 머리에만. 지금 18~36px → 4~10px. 기울기 −8°는 주 버튼·제목 판에만.</div>
+<div><b>선</b><div class="hl" style="margin:10px 0"></div>1px 금 헤어라인(끝은 반드시 투명으로 사라짐 — 잘린 끝 금지), 판 안쪽 1px 테. 2px 이상 테·검은 외곽선 금지. 모서리 장식은 짧은 L자 금선.</div>
+<div><b>재질</b><br>A 유리: blur 14 · 남색 78~86% · 위 1px 하이라이트.<br>B 종이: 크림 + 결 노이즈 5% + 수채 번짐 1곳(판당 ≤1).<br>공통 에나멜(주 버튼): 위 밝음→아래 어둠 3단 + 아래 1px 빛줄. 브러시드 메탈: 금 테에만.</div>
+<div><b>그림자·높이</b><div class="row" style="margin:8px 0;gap:18px"><i style="width:50px;height:30px;background:#fff;border-radius:6px;box-shadow:var(--e1)"></i><i style="width:50px;height:30px;background:#fff;border-radius:6px;box-shadow:var(--e2)"></i></div>e1 칩·버튼 / e2 판·팝업. 넓고 옅게(남색 18%). 스티커식 아래로 밀린 진한 그림자 금지.</div>
+<div><b>움직임</b><br>누름: scale 0.97, 90ms ease-out → 놓음 1.0, 160ms cubic(.2,.8,.2,1). <b>넘침(1.03)·BACK 튕김 금지.</b><br>등장: 12px 미끄러짐 + 페이드 220ms. 탭: 금 밑줄이 옆으로 180ms 이동.<br>보상·소환만 큰 연출 허용.</div>
+<div><b>효과 절제</b><br>한 화면에 상시 움직이는 효과 ≤2 (빛 훑기 6초마다 1번, 빛가루 1층). 반짝이는 4각별은 아이콘당 ≤1. 빨간 점은 행동 가능할 때만.</div>
+</div>
+
+<!-- ================= 2. 부품 ================= -->
+<h2 class="sec" id="s3">2. 부품 시트</h2>
+<div class="card">
+<h3>버튼 · 탭 · 칩 · 배지 (전투 바탕 위)</h3>
+<div class="compbg"><div class="row">
+ <span class="btn pri lean">10회 소환 <small>1,600</small><span class="sweep"></span></span>
+ <span class="btn pri">레벨 업</span>
+ <span class="btn sec">승급 ★3</span>
+ <span class="btn sec" style="opacity:.55">잠김 · Lv.7</span>
+ <span class="rel" style="width:150px;height:36px"><span class="chip" style="left:0;top:0"><svg><use href="#i-gem"/></svg>57,856<span class="plus">+</span></span></span>
+ <span class="rel" style="width:120px;height:36px"><span class="chip" style="left:0;top:0"><svg><use href="#i-dust"/></svg>2</span></span>
+</div>
+<div class="row" style="margin-top:16px">
+ <span class="pn" style="position:relative;display:flex;gap:22px;padding:6px 18px"><span class="tab on">목록</span><span class="tab">성장 기록</span><span class="tab">장비</span></span>
+ <span class="badge b-my">신화</span><span class="badge b-ss">SS</span><span class="badge b-s">S</span><span class="badge b-a">A</span><span class="badge b-b">B</span><span class="badge b-el" style="color:#f1dfa9">● 별</span>
+</div></div>
+<h3>판 · 카드 · 토스트 · 말풍선</h3>
+<div class="compbg dk" style="height:260px">
+ <div class="pn orn" style="left:20px;top:20px;width:300px;height:130px;padding:16px"><div class="ttl">과학실 칠판</div><div class="hl" style="margin:8px 0"></div><div class="cap">레벨당 모든 아이 공격력 +5%</div><div class="cap">연구 최대 Lv.1</div></div>
+ <div class="port g-ss" style="position:absolute;left:340px;top:20px;width:92px;height:116px"><img src="art/p_ignis.png" alt=""><span class="bd badge b-ss">SS</span><span class="nm">이그니</span><i class="dot" style="right:5px;top:5px"></i></div>
+ <div class="port" style="position:absolute;left:442px;top:20px;width:92px;height:116px"><img src="art/p_yuna.png" alt=""><span class="bd badge b-a">A</span><span class="nm">유나</span></div>
+ <div class="toast" style="left:560px;top:30px;width:340px">보상을 받았어요 · 채색석 +30</div>
+ <div class="tip" style="left:560px;top:110px;width:360px;--tx:60px"><span class="who">유나</span>고래가 첫 출석 선물로 채색석 1,600개를 줬어요. 「소환」을 눌러요.</div>
+ <div style="position:absolute;left:20px;top:170px;display:flex;gap:10px">
+  <div class="sheet" style="position:relative;width:96px;height:72px;display:grid;place-items:center"><svg class="ic" style="width:40px;height:40px"><use href="#i-myth"/></svg><b class="num" style="font-size:15px">+3</b></div>
+  <div class="sheet" style="position:relative;width:96px;height:72px;display:grid;place-items:center"><svg style="width:40px;height:40px"><use href="#i-dust"/></svg><b class="num" style="font-size:15px">+7</b></div>
+ </div>
+</div>
+</div>
+
+<!-- ================= 3. 아이콘 ================= -->
+<h2 class="sec" id="s4">3. 아이콘 — 장난감 대신 아틀리에 도구</h2>
+<div class="card">
+<div class="icrow">
+ <figure><svg class="ic" style="width:120px;height:120px"><use href="#i-dust"/></svg><figcaption><b>별가루 (새)</b><br>코르크·금띠 유리 약병 속 금가루</figcaption></figure>
+ <figure><svg class="ic" style="width:120px;height:120px"><use href="#i-myth"/></svg><figcaption><b>신화 조각 (새)</b><br>빛을 세 갈래로 쪼개는 프리즘 파편</figcaption></figure>
+ <figure><svg class="ic"><use href="#i-gem"/></svg><figcaption>채색석</figcaption></figure>
+ <figure><svg class="ic"><use href="#i-pearl"/></svg><figcaption>구름 진주</figcaption></figure>
+ <figure><svg class="ic"><use href="#i-wind"/></svg><figcaption>바람 조각</figcaption></figure>
+ <figure><svg class="ic"><use href="#i-crys"/></svg><figcaption>기억 결정</figcaption></figure>
+ <figure><svg class="ic"><use href="#i-palette"/></svg><figcaption>색의 공명(연구)</figcaption></figure>
+ <figure style="background:#241c45;padding:10px;border-radius:8px"><svg style="width:40px;height:40px"><use href="#i-dust"/></svg> <svg style="width:40px;height:40px"><use href="#i-myth"/></svg> <svg style="width:28px;height:28px"><use href="#i-dust"/></svg> <svg style="width:28px;height:28px"><use href="#i-myth"/></svg><figcaption style="color:#c9bff0">어두운 바탕 · 28/40px</figcaption></figure>
+</div>
+<p class="note" style="margin-top:10px">규칙: 빛은 왼쪽 위 하나, 외곽선 대신 밝은 1px 테두리, 3~4개 면으로 층을 나눔, 반짝이 4각별 ≤1, 바닥 그림자 타원 옅게. 항아리·자루·저금통·통(tub)·쿠키 도장 폐지 → 약병·물감 튜브·팔레트·붓·프리즘.</p>
+</div>
+
+<!-- ================= 4. 화면 6종 ================= -->
+<h2 class="sec" id="s5">4. 화면 6종 — 지금 ↔ 새 디자인 (같은 구조)</h2>
+
+<!-- 4-1 전투 HUD -->
+<h3>① 전투 HUD <small class="note">(1280 / 1600)</small></h3>
+<div class="pair">
+<figure><p class="tag">지금</p><div class="vp wide"><img class="w12x" src="now/hud_mid_1280x720.jpg" alt=""><img class="w16" src="now/hud_mid_1600x720.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div></figure>
+<figure><p class="tag">새 디자인</p><div class="vp wide"><div class="scr" id="hud">
+ <div style="position:absolute;inset:0;background:url(art/bg_sky.png) center/cover"></div>
+ <img src="art/whale_v4.png" alt="" style="position:absolute;left:-120px;top:330px;width:900px;opacity:.95">
+ <!-- 좌상 프로필 -->
+ <div class="pn orn" style="left:16px;top:14px;width:344px;height:130px;padding:12px 16px">
+  <div style="display:flex;gap:10px;align-items:center"><div class="port" style="width:44px;height:44px;border-radius:50%"><img src="art/p_yuna.png" alt=""></div>
+  <div style="flex:1"><div style="font:700 17px/1.2 Pretendard">항해사 <span style="color:var(--acc)">Lv.3</span></div><div class="cap">전투력 18.3a</div></div>
+  <div style="text-align:right"><div class="cap" style="letter-spacing:2px">STAGE</div><div style="font:600 30px/1 'Gowun Batang',serif;color:var(--acc)">33</div></div></div>
+  <div class="hl" style="margin:8px 0 6px"></div>
+  <div class="cap" style="display:flex;justify-content:space-between"><span><b style="color:var(--pan-ink)">다음</b> 레벨 업·승급·복귀</span><span>EXP 80</span></div>
+  <div style="height:4px;margin-top:6px;border-radius:2px;background:var(--track)"><i style="display:block;width:28%;height:100%;border-radius:2px;background:linear-gradient(90deg,#8a76e6,#f1dfa9)"></i></div>
+ </div>
+ <!-- 퀘스트 줄 -->
+ <div class="pn" style="left:16px;top:154px;width:500px;height:52px;display:flex;align-items:center;gap:10px;padding:0 12px">
+  <span class="badge b-a">19</span><span style="font:600 16px/1.2 Pretendard;flex:1">「편성」에서 카렌을 「선두」에 세우기</span><span class="cap">0/1</span><svg style="width:26px;height:26px"><use href="#i-gem"/></svg><span class="num" style="font-size:16px">200</span>
+ </div>
+ <!-- 작은 탭 3 -->
+ <div style="position:absolute;left:16px;top:216px;display:flex;gap:8px">
+  <div class="pn" style="position:relative;height:38px;padding:0 14px;display:flex;align-items:center;gap:6px;font:600 15px/1 Pretendard"><svg style="width:22px;height:22px"><use href="#i-palette"/></svg>색 지도<i class="dot" style="right:-3px;top:-3px"></i></div>
+  <div class="pn" style="position:relative;height:38px;padding:0 14px;display:flex;align-items:center;font:600 15px/1 Pretendard">이야기</div>
+  <div class="pn" style="position:relative;height:38px;padding:0 14px;display:flex;align-items:center;gap:6px;font:600 15px/1 Pretendard">의뢰 <span class="cap">1/3</span></div>
+ </div>
+ <!-- 재화 -->
+ <div class="chip" style="right:378px;top:16px;width:140px;justify-content:space-between"><svg><use href="#i-wind"/></svg>20.8a</div>
+ <div class="chip" style="right:228px;top:16px;width:140px;justify-content:space-between"><svg><use href="#i-pearl"/></svg>0</div>
+ <div class="chip" style="right:66px;top:16px;width:150px;justify-content:space-between"><svg><use href="#i-gem"/></svg>3,056<span class="plus">+</span></div>
+ <div class="pn" style="right:16px;top:12px;width:46px;height:46px;display:grid;place-items:center;font:600 15px/1 Pretendard">설정</div>
+ <!-- 콤보 -->
+ <div style="position:absolute;right:30px;top:96px;text-align:right">
+  <div style="font:600 46px/1 'Gowun Batang',serif;color:#fff;text-shadow:0 2px 8px rgba(30,20,80,.55)">22</div>
+  <div style="font:700 15px/1 Pretendard;letter-spacing:3px;color:var(--gold-l);text-shadow:0 1px 3px rgba(30,20,80,.8)">COMBO · 폭주까지 58</div>
+  <div style="width:240px;height:4px;margin:8px 0 0 auto;background:rgba(36,28,69,.6);border-radius:2px"><i style="display:block;width:42%;height:100%;background:linear-gradient(90deg,#8a76e6,#f1dfa9);border-radius:2px"></i></div>
+ </div>
+ <!-- 하단 탭: 잠긴 칸은 이름 아래 줄에 해금 레벨 -->
+ <div class="pn" style="left:16px;bottom:12px;width:480px;height:80px;display:flex;justify-content:space-around;align-items:center;padding:0 6px">
+  <div style="text-align:center;position:relative;min-width:62px"><svg style="width:30px;height:30px"><use href="#i-crys"/></svg><div style="font:600 15px/1.2 Pretendard">아이들</div><i class="dot" style="right:2px;top:0"></i></div>
+  <div style="text-align:center;min-width:62px"><svg style="width:30px;height:30px"><use href="#i-palette"/></svg><div style="font:600 15px/1.2 Pretendard">편성</div></div>
+  <div style="text-align:center;position:relative;min-width:62px"><svg style="width:30px;height:30px"><use href="#i-gem"/></svg><div style="font:600 15px/1.2 Pretendard">소환</div><i class="dot" style="right:2px;top:0"></i></div>
+  <div style="text-align:center;opacity:.62;min-width:62px"><svg style="width:26px;height:26px"><use href="#i-wind"/></svg><div style="font:600 15px/1.1 Pretendard">모험</div><div class="cap" style="line-height:1.1">Lv.7</div></div>
+  <div style="text-align:center;opacity:.62;min-width:62px"><svg style="width:26px;height:26px"><use href="#i-pearl"/></svg><div style="font:600 15px/1.1 Pretendard">분교</div><div class="cap" style="line-height:1.1">Lv.5</div></div>
+  <div style="text-align:center;min-width:62px"><svg style="width:30px;height:30px"><use href="#i-dust"/></svg><div style="font:600 15px/1.2 Pretendard">상점</div></div>
+ </div>
+ <!-- 고래 숨결 -->
+ <div class="btn pri lean" style="position:absolute;left:512px;bottom:24px;height:56px;width:236px;flex-direction:column;align-items:flex-start;gap:5px">고래 숨결<small>준비 완료 · TAP</small><span class="sweep"></span></div>
+ <!-- 궁극기: 일괄 강화 줄을 카드 위로 올려 가로 겹침 제거 -->
+ <div style="position:absolute;right:16px;bottom:12px;display:flex;flex-direction:column;align-items:flex-end;gap:8px" id="ults">
+  <div class="pn" style="position:relative;height:40px;padding:0 14px;display:flex;align-items:center;gap:10px;font:600 15px/1 Pretendard">일괄 강화 <span class="badge b-s">4</span> <span class="cap">×1 · ×10 · MAX</span></div>
+  <div style="display:flex;gap:10px">
+  <div class="port" style="width:66px;height:84px"><img src="art/p_aria.png" alt=""><span class="nm">Lv.14</span></div>
+  <div class="port" style="width:66px;height:84px"><img src="art/p_yuna.png" alt=""><span class="nm">27초</span><div style="position:absolute;inset:0;background:rgba(20,14,48,.55);display:grid;place-items:center;font:600 22px/1 'Gowun Batang',serif;color:#fff">27</div></div>
+  <div class="port on" style="width:66px;height:84px"><img src="art/p_karen.png" alt=""><span class="nm">궁극기</span></div>
+  <div class="port" style="width:66px;height:84px"><img src="art/p_serena.png" alt=""><span class="nm">29초</span><div style="position:absolute;inset:0;background:rgba(20,14,48,.55);display:grid;place-items:center;font:600 22px/1 'Gowun Batang',serif;color:#fff">29</div></div>
+  </div>
+ </div>
+</div></div>
+<figcaption>흰 알약 → 라벤더빛 유리 판(위계: 프로필만 금 모서리). 궁극기 메달 → 세로 초상 카드(준비=금테, 대기=어둡게+숫자). 콤보 숫자 외곽선 제거, 고운바탕. 일괄 강화는 궁극기 카드 위 줄로, 잠긴 탭은 해금 레벨을 둘째 줄로.
+<span class="roles"><span><i style="background:#7a66d0"></i>라벤더: 모든 판·칩 유리, 게이지 시작색</span><span><i style="background:#fbf7ef"></i>크림: 안내 말풍선(전투 중엔 최소)</span><span><i style="background:#c9a24e"></i>금: 헤어라인·숨결 버튼·준비된 궁극기 테</span></span></figcaption></figure>
+</div>
+
+<!-- 4-2 아이 목록 / 상세 -->
+<h3>② 아이들 목록 · 상세</h3>
+<div class="pair">
+<figure><p class="tag">지금</p><div class="vp"><img src="now/menu_heroes_1280x720.jpg" alt=""></div></figure>
+<figure><p class="tag">새 디자인 — 목록</p><div class="vp"><div class="scr">
+ <div style="position:absolute;inset:0;background:url(art/bg_sky.png) center/cover;filter:blur(6px) brightness(var(--bgb))"></div>
+ <div class="pn" style="left:20px;top:40px;width:1120px;height:640px"></div>
+ <div style="position:absolute;left:46px;top:58px;display:flex;align-items:baseline;gap:26px"><span style="font:600 28px/1 'Gowun Batang',serif">아이들</span><span class="tab on">목록</span><span class="tab" style="position:relative">성장 기록<i class="dot" style="right:-8px;top:2px"></i></span><span class="tab">장비</span></div>
+ <div class="chip" style="right:200px;top:52px"><svg><use href="#i-pearl"/></svg>200a</div><div class="chip" style="right:66px;top:52px"><svg><use href="#i-gem"/></svg>50,506</div>
+ <div class="hl" style="position:absolute;left:40px;right:180px;top:104px"></div>
+ <div class="port" style="position:absolute;left:40px;top:122px;width:440px;height:540px;border-radius:6px"><img src="art/yuna_cutin_cut.png" alt="" style="object-position:40% 20%">
+  <div style="position:absolute;left:0;right:0;bottom:0;height:240px;background:linear-gradient(transparent,rgba(20,14,48,.92))"></div>
+  <div style="position:absolute;left:22px;bottom:162px;display:flex;gap:6px"><span class="badge b-a">A</span><span class="badge b-el" style="color:#ece6ff">● 별</span><span class="badge b-el" style="color:#ece6ff">광역 딜러</span></div>
+  <div style="position:absolute;left:22px;bottom:126px;font:500 16px/1.4 Pretendard;color:#ece6ff"><span style="color:var(--gold-l);letter-spacing:2px">★★</span><span style="letter-spacing:2px">☆☆</span> 각성 0/4 · 성장 Lv.10/20</div>
+  <div style="position:absolute;left:22px;bottom:68px;font:600 44px/1 'Gowun Batang',serif;color:#fff">유나</div>
+  <span class="btn pri lean" style="position:absolute;right:18px;bottom:20px;height:44px">상세 보기</span>
+ </div>
+ <div style="position:absolute;left:510px;top:122px;display:flex;gap:18px"><span class="tab on">전체</span><span class="tab">불꽃</span><span class="tab">노을</span><span class="tab">빛</span><span class="tab">생명</span><span class="tab">물결</span><span class="tab">별</span></div>
+ <div class="cap" style="position:absolute;left:510px;top:166px;color:var(--acc)">갑판 위 · 4명</div>
+ <div style="position:absolute;left:510px;top:192px;display:flex;gap:10px">
+  <div class="port" style="width:96px;height:112px"><img src="art/p_aria.png" alt=""><span class="bd badge b-ss">SS</span><span class="nm">아리아 · 1</span></div>
+  <div class="port on" style="width:96px;height:112px"><img src="art/p_yuna.png" alt=""><span class="bd badge b-a">A</span><span class="nm">유나 · 2</span></div>
+  <div class="port" style="width:96px;height:112px"><img src="art/p_serena.png" alt=""><span class="bd badge b-s">S</span><span class="nm">세레나 · 3</span></div>
+  <div class="port" style="width:96px;height:112px"><img src="art/p_karen.png" alt=""><span class="bd badge b-s">S</span><span class="nm">카렌 · 4</span></div>
+ </div>
+ <div class="cap" style="position:absolute;left:510px;top:320px;color:var(--acc)">대기 · 19명 · 등급순</div>
+ <div style="position:absolute;left:510px;top:348px;display:grid;grid-template-columns:repeat(6,96px);gap:10px">
+  <div class="port" style="height:100px"><img src="art/p_arca.png" alt=""><span class="bd badge b-my">신화</span><span class="nm">아르카</span><i class="dot" style="right:5px;top:5px"></i></div>
+  <div class="port g-ss" style="height:100px"><img src="art/p_ignis.png" alt=""><span class="bd badge b-ss">SS</span><span class="nm">이그니</span></div>
+  <div class="port g-ss" style="height:100px"><img src="art/p_flora.png" alt=""><span class="bd badge b-ss">SS</span><span class="nm">플로라</span></div>
+  <div class="port" style="height:100px"><img src="art/p_lumi.png" alt=""><span class="bd badge b-s">S</span><span class="nm">루미</span></div>
+  <div class="port" style="height:100px"><img src="art/p_nox.png" alt=""><span class="bd badge b-s">S</span><span class="nm">녹스</span></div>
+  <div class="port" style="height:100px"><img src="art/p_sol.png" alt=""><span class="bd badge b-a">A</span><span class="nm">솔</span></div>
+  <div class="port" style="height:100px"><img src="art/p_marin.png" alt=""><span class="bd badge b-a">A</span><span class="nm">마린</span></div>
+  <div class="port" style="height:100px"><img src="art/p_mio.png" alt=""><span class="bd badge b-b">B</span><span class="nm">미오</span></div>
+ </div>
+</div></div>
+<figcaption>속성 필터는 알약 대신 글자 탭 + 금 밑줄, 이름·등급은 초상 안에 15px. 큰 초상은 배지 → 별 → 이름 순으로 왼쪽에 쌓고 「상세 보기」와 겹치지 않게 분리.
+<span class="roles"><span><i style="background:#7a66d0"></i>라벤더: 큰 판 유리·초상 바탕·S 배지</span><span><i style="background:#fbf7ef"></i>크림: 목록에는 쓰지 않음 (선택 후 상세 스탯 시트)</span><span><i style="background:#c9a24e"></i>금: 탭 밑줄·묶음 제목·SS 테·상세 보기</span></span></figcaption></figure>
+</div>
+<div class="pair" style="margin-top:12px">
+<figure><p class="tag">지금 — 상세</p><div class="vp"><img src="now/hero_info_yuna_1280x720.jpg" alt=""></div></figure>
+<figure><p class="tag">새 디자인 — 상세</p><div class="vp"><div class="scr">
+ <div style="position:absolute;inset:0;background:var(--deep)"></div>
+ <img src="art/yuna_cutin_cut.png" alt="" style="position:absolute;left:-40px;top:-20px;height:780px">
+ <div style="position:absolute;inset:0;background:var(--fade)"></div>
+ <div style="position:absolute;left:40px;top:36px;text-align:center"><div class="cap" style="letter-spacing:3px;color:var(--acc);text-shadow:var(--on-sh)">GROWTH</div><div style="font:600 46px/1 'Gowun Batang',serif;color:var(--on-bg);text-shadow:var(--on-sh)">10</div><div class="hl" style="width:80px;margin:6px auto 0"></div></div>
+ <div style="position:absolute;left:40px;bottom:132px;display:flex;gap:6px"><span class="badge b-a">A</span><span class="badge b-el" style="color:var(--on-bg2)">● 별</span><span class="badge b-el" style="color:var(--on-bg2)">광역 딜러</span></div>
+ <div style="position:absolute;left:40px;bottom:70px;font:600 50px/1 'Gowun Batang',serif;color:var(--on-bg);text-shadow:var(--on-sh)">유나</div>
+ <div style="position:absolute;left:40px;bottom:34px;font:500 16px/1 Pretendard;color:var(--on-bg2);text-shadow:var(--on-sh)"><span style="color:var(--acc)">★★</span><span>☆☆</span> 각성 0/4 · 성장 Lv.10/20 · 항해 Lv.1</div>
+ <div class="pn orn" style="right:30px;top:36px;width:480px;height:648px;padding:20px 24px">
+  <div style="display:flex;gap:26px;align-items:baseline"><span class="tab on">능력</span><span class="tab">스킬</span><span class="tab">장비</span><span style="margin-left:auto" class="cap">✕ 닫기</span></div>
+  <div class="hl" style="margin:10px 0 14px"></div>
+  <!-- 스탯 = 크림 시트 (A에서도 크림이 사는 자리) -->
+  <div class="sheet" style="position:relative;display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;padding:14px 18px">
+   <div><div class="cap">전투력</div><div style="font:600 32px/1.1 'Gowun Batang',serif;color:#8e6a22">8,057</div></div>
+   <div><div class="cap">공격력</div><div style="font:600 32px/1.1 'Gowun Batang',serif">805</div></div>
+   <div><div class="cap">공격 간격</div><div class="num" style="font-size:21px">2.2초</div></div>
+   <div><div class="cap">치명타</div><div class="num" style="font-size:21px">0%</div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:14px 2px;font:500 15px/1.3 Pretendard"><span class="cap">스킬</span><span>11.0초 · 궁극기 63.0초</span><span class="cap">보스</span><span>피해 +0% · 공격 대상 앞</span></div>
+  <div class="hl" style="margin:0 0 12px"></div>
+  <div style="display:flex;gap:10px">
+   <div class="port" style="width:62px;height:62px;display:grid;place-items:center"><svg style="width:38px;height:38px"><use href="#i-crys"/></svg></div>
+   <div class="port" style="width:62px;height:62px;display:grid;place-items:center"><svg style="width:38px;height:38px"><use href="#i-pearl"/></svg></div>
+   <div class="port" style="width:62px;height:62px;display:grid;place-items:center"><svg style="width:38px;height:38px"><use href="#i-wind"/></svg></div>
+   <div class="port" style="width:62px;height:62px;display:grid;place-items:center;position:relative"><svg style="width:38px;height:38px"><use href="#i-palette"/></svg><i class="dot" style="right:4px;top:4px"></i></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 0">
+   <div><div class="cap">Lv 10/20</div><div style="height:4px;background:var(--track);margin-top:6px"><i style="display:block;width:50%;height:100%;background:var(--gold)"></i></div></div>
+   <div><div class="cap">승급 ★2/4</div><div style="height:4px;background:var(--track);margin-top:6px"><i style="display:block;width:50%;height:100%;background:var(--lav)"></i></div></div>
+   <div><div class="cap">각성 ★4 뒤</div><div style="height:4px;background:var(--track);margin-top:6px"></div></div>
+  </div>
+  <div style="display:flex;gap:10px;position:absolute;left:24px;right:24px;bottom:50px">
+   <span class="btn pri lean" style="flex:1.4;height:60px;flex-direction:column;gap:5px">레벨 업<small>진주 7 · 공격 +8.6%</small><span class="sweep"></span></span>
+   <span class="btn sec" style="flex:1;height:60px;flex-direction:column;gap:5px">승급 ★3<small>200a / 78</small></span>
+   <span class="btn sec" style="width:72px;height:60px">장비</span>
+  </div>
+  <div class="cap" style="position:absolute;left:24px;bottom:18px;color:var(--ok)">레벨 업하면 공격 +8.6% · 전투력 +691</div>
+ </div>
+</div></div>
+<figcaption>36px 둥근 크림 카드 → 금 모서리 유리 판. 스탯은 판 안의 크림 시트(라벨 15px, 값 21~32px), 스킬 줄은 「항목 | 값」 두 줄로 나눠 한 줄 13px 압축을 없앰. 주 버튼 하나만 금 에나멜.
+<span class="roles"><span><i style="background:#7a66d0"></i>라벤더: 오른쪽 판 유리·바탕 번짐·승급 게이지</span><span><i style="background:#fbf7ef"></i>크림: 스탯 시트</span><span><i style="background:#c9a24e"></i>금: 모서리 L선·전투력 숫자·레벨 업</span></span></figcaption></figure>
+</div>
+
+<!-- 4-3 소환 + 결과 재화 그릇 -->
+<h3>③ 소환 + 10회 뒤 재화 그릇 <small class="note">(1280 / 1600)</small></h3>
+<div class="pair">
+<figure><p class="tag">지금</p><div class="vp wide"><img class="w12x" src="now/summon_pickup_1280x720.jpg" alt=""><img class="w16" src="now/summon_pickup_1600x720.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div></figure>
+<figure><p class="tag">새 디자인</p><div class="vp wide"><div class="scr">
+ <div style="position:absolute;inset:0;background:url(art/summon_bg.png) center/cover"></div>
+ <img src="art/ignis_cutin_cut.png" alt="" style="position:absolute;left:60px;top:-30px;height:800px">
+ <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,14,48,.75),transparent 25%,transparent 60%,rgba(20,14,48,.55))"></div>
+ <div style="position:absolute;left:28px;top:22px;font:600 26px/1 'Gowun Batang',serif">소환</div>
+ <!-- 배너 목록: 물방울 핀 → 기운 카드 -->
+ <div style="position:absolute;left:24px;top:84px;display:flex;flex-direction:column;gap:10px">
+  <div class="pn" style="position:relative;width:200px;height:70px;display:flex;align-items:center;gap:12px;padding:0 12px;box-shadow:var(--e2),inset 0 0 0 1px var(--gold-l)"><div class="port" style="width:48px;height:48px"><img src="art/p_ignis.png" alt=""></div><div><div style="font:600 17px/1.25 Pretendard">픽업</div><div class="cap">6일 남음</div></div></div>
+  <div class="pn" style="position:relative;width:200px;height:70px;display:flex;align-items:center;gap:12px;padding:0 12px"><div class="port" style="width:48px;height:48px;display:grid;place-items:center"><svg style="width:32px;height:32px"><use href="#i-gem"/></svg></div><div><div style="font:600 17px/1.25 Pretendard">상시</div><div class="cap">항상 열림</div></div></div>
+  <div class="pn" style="position:relative;width:200px;height:70px;display:flex;align-items:center;gap:12px;padding:0 12px"><div class="port" style="width:48px;height:48px;display:grid;place-items:center"><svg style="width:34px;height:34px"><use href="#i-dust"/></svg></div><div><div style="font:600 17px/1.25 Pretendard">교환소</div><div class="cap">별가루 2</div></div></div>
+ </div>
+ <div class="pn" style="right:20px;top:18px;height:46px;display:flex;align-items:center;gap:14px;padding:0 14px"><span style="display:flex;gap:6px;align-items:center" class="num"><svg style="width:26px;height:26px"><use href="#i-gem"/></svg>57,856</span><span class="hl" style="width:1px;height:22px;background:var(--pan-rim)"></span><span style="display:flex;gap:6px;align-items:center" class="num"><svg style="width:26px;height:26px"><use href="#i-dust"/></svg>2</span><span class="cap" style="color:var(--pan-ink)">확률</span></div>
+ <div class="cap" style="position:absolute;right:24px;top:74px;color:#fff">픽업 교체까지 6일 21시간</div>
+ <!-- 이름 띠: 끝이 사라지는 기운 띠 -->
+ <div style="position:absolute;left:-40px;width:760px;top:440px;height:120px;transform:skewY(-3deg);background:linear-gradient(90deg,rgba(120,24,40,.0),rgba(120,24,40,.82) 12%,rgba(80,16,34,.82) 80%,transparent)"></div>
+ <div class="hl" style="position:absolute;left:20px;width:640px;top:436px;transform:skewY(-3deg)"></div>
+ <div style="position:absolute;left:150px;top:404px;display:flex;gap:6px"><span class="badge b-ss">SS</span><span class="badge b-el" style="color:#ffd6c2">● 불꽃</span><span class="badge b-el" style="color:#ffd6c2">50% 픽업</span></div>
+ <div style="position:absolute;left:150px;top:452px;font:600 64px/1 'Gowun Batang',serif;color:#fff;text-shadow:0 2px 14px rgba(40,8,16,.6)">이그니</div>
+ <div style="position:absolute;left:152px;top:528px;font:500 16px/1 'Gowun Batang',serif;color:#ffe8dc">「재 속에서도, 나는 다시 타올라.」</div>
+ <!-- 천장 -->
+ <div class="pn" style="left:140px;bottom:28px;display:flex;align-items:center;gap:14px;padding:10px 20px 10px 12px"><div style="width:50px;height:50px;border-radius:50%;background:conic-gradient(var(--gold) 0 26deg,var(--track) 0);display:grid;place-items:center"><div style="width:42px;height:42px;border-radius:50%;background:var(--port-bg);display:grid;place-items:center;font-size:17px" class="num">11</div></div><div><div style="font:600 17px/1.3 Pretendard">기억 포인트 11 / 150</div><div class="cap">150점이면 이그니를 바로 데려와요</div></div></div>
+ <!-- 소환 규칙 · 신화 조각: 버튼 위 두 줄로 쌓아 겹침 없앰 -->
+ <div class="chip" style="right:30px;bottom:166px;border-radius:4px;padding:0 14px 0 8px;font:600 15px/1 Pretendard"><svg style="width:24px;height:24px"><use href="#i-myth"/></svg>10회 소환마다 신화 조각 1~3</div>
+ <div class="pn" style="right:30px;bottom:118px;height:38px;display:flex;align-items:center;padding:0 16px;font:500 15px/1 Pretendard">SS가 나오면 50% 이그니 · 놓치면 다음 SS 확정</div>
+ <span class="btn sec lean" style="position:absolute;right:300px;bottom:36px;width:190px;height:70px;flex-direction:column;gap:6px;backdrop-filter:blur(10px)">무료 1회<small>오늘 한 번</small></span>
+ <span class="btn pri lean" style="position:absolute;right:30px;bottom:36px;width:260px;height:70px;flex-direction:column;gap:6px;font-size:20px">10회 소환<small style="display:flex;gap:4px;align-items:center"><svg style="width:18px;height:18px"><use href="#i-gem"/></svg>1,600</small><span class="sweep"></span></span>
+</div></div>
+<figcaption>물방울 핀 배너 → 유리 카드(200×70, 이름 17px·남은 기간 15px), 자루 → 약병. 천장·소환 규칙은 판에 담아 그림 위에서도 15px로 읽힘. 이름 띠 양 끝은 투명으로 사라짐. 금 에나멜은 10회 소환 하나.
+<span class="roles"><span><i style="background:#7a66d0"></i>라벤더: 배너 카드·재화 판·천장 판 유리</span><span><i style="background:#fbf7ef"></i>크림: 「무료 1회」 보조 버튼 글자·이름 띠 대사 (B는 판 전체)</span><span><i style="background:#c9a24e"></i>금: 선택 배너 테·천장 링·10회 소환</span></span></figcaption></figure>
+</div>
+<div class="pair" style="margin-top:12px">
+<figure><p class="tag">지금 — 10회 결과 재화 통</p><div class="vp"><img src="now/gacha_ten_result_1280x720.jpg" alt=""></div></figure>
+<figure><p class="tag">새 디자인 — 결과 재화 그릇 (#21 흡수)</p>
+<div class="opts" style="margin:0 0 6px"><label><input type="radio" name="cont" value="vial" checked>그릇 a 「약병 선반」</label><label><input type="radio" name="cont" value="gauge">그릇 b 「금테 게이지」</label></div>
+<div class="vp"><div class="scr" id="tenres">
+ <div style="position:absolute;inset:0;background:var(--deep)"></div>
+ <div style="position:absolute;inset:0;background:repeating-linear-gradient(118deg,rgba(255,255,255,.025) 0 2px,transparent 2px 16px)"></div>
+ <div style="position:absolute;left:240px;top:30px;display:grid;grid-template-columns:repeat(5,148px);gap:14px 12px" id="cards"></div>
+ <div class="hl" style="position:absolute;left:120px;right:120px;top:470px"></div>
+ <!-- 요약 = 크림 시트 띠 -->
+ <div class="sheet" style="left:50%;top:486px;transform:translateX(-50%);display:flex;gap:16px;align-items:center;font:600 17px/1 Pretendard;padding:10px 22px;white-space:nowrap">새로 만난 아이 <b style="color:#8e6a22">5</b><i style="width:1px;height:20px;background:#c9a24e;opacity:.6"></i><svg style="width:26px;height:26px"><use href="#i-dust"/></svg>별가루 <b style="color:#8e6a22">+7</b><i style="width:1px;height:20px;background:#c9a24e;opacity:.6"></i><svg style="width:26px;height:26px"><use href="#i-myth"/></svg>신화 조각 <b style="color:#5e4bbf">+3</b></div>
+ <span class="btn sec" style="position:absolute;left:50%;transform:translateX(-50%);top:562px;width:180px">확인</span>
+ <!-- 그릇 a: 약병 -->
+ <div class="ca" style="position:absolute;left:60px;bottom:28px;text-align:center"><div style="position:relative;width:150px;height:150px"><svg style="width:150px;height:150px"><use href="#i-dust"/></svg><span style="position:absolute;right:-6px;top:20px;font:700 15px/1 Pretendard;color:var(--pri-ink);background:var(--pri);padding:4px 8px;border-radius:3px">+7</span></div><div style="font:600 16px/1 Pretendard">별가루 <b class="num" style="color:var(--acc)">9</b></div></div>
+ <div class="ca" style="position:absolute;right:60px;bottom:28px;text-align:center"><div style="position:relative;width:150px;height:150px"><svg style="width:150px;height:150px"><use href="#i-myth"/></svg><span style="position:absolute;left:-6px;top:20px;font:700 15px/1 Pretendard;color:#241c45;background:linear-gradient(110deg,#ffd9e6,#e5dcff,#cdeefa);padding:4px 8px;border-radius:3px">+3</span></div><div style="font:600 16px/1 Pretendard">신화 조각 <b class="num" style="color:var(--acc2)">43</b> <span class="cap">/ 60</span></div></div>
+ <!-- 그릇 b: 금테 게이지 -->
+ <div class="cb" style="display:none;position:absolute;left:40px;bottom:30px;width:300px" >
+  <div style="display:flex;align-items:center;gap:12px"><svg style="width:64px;height:64px"><use href="#i-dust"/></svg><div style="flex:1"><div style="display:flex;justify-content:space-between;font:600 15px/1 Pretendard">별가루<span class="num" style="font-size:17px;color:var(--acc)">9 <small style="font-size:15px">+7</small></span></div><div style="height:8px;margin-top:8px;border-radius:1px;background:var(--track);box-shadow:inset 0 0 0 1px var(--pan-rim)"><i style="display:block;width:45%;height:100%;background:linear-gradient(90deg,#9a7128,#f1dfa9)"></i></div><div class="cap" style="margin-top:6px">20개면 기억 결정 1개</div></div></div></div>
+ <div class="cb" style="display:none;position:absolute;right:40px;bottom:30px;width:300px">
+  <div style="display:flex;align-items:center;gap:12px"><svg style="width:64px;height:64px"><use href="#i-myth"/></svg><div style="flex:1"><div style="display:flex;justify-content:space-between;font:600 15px/1 Pretendard">신화 조각<span class="num" style="font-size:17px;color:var(--acc2)">43 <small style="font-size:15px">+3</small></span></div><div style="height:8px;margin-top:8px;border-radius:1px;background:var(--track);box-shadow:inset 0 0 0 1px var(--pan-rim)"><i style="display:block;width:72%;height:100%;background:linear-gradient(90deg,#ffb3c9,#c9b8ff,#9fd8ff,#ffe08a)"></i></div><div class="cap" style="margin-top:6px">60개면 신화 아이 교환</div></div></div></div>
+</div></div>
+<figcaption>단지·통 → 실제 아이콘(약병·프리즘)을 그릇으로 그대로 크게. 중복 = 쿠키 도장 대신 오른쪽 위 금 테 「중복」 꼬리표(15px) + 약병 아이콘. 점무늬 바탕 → 라벤더 번짐 + 사선 결. 카드 이름·꼬리표·요약 모두 15px 이상.
+<span class="roles"><span><i style="background:#7a66d0"></i>라벤더: 바탕 번짐·카드 바탕·신화 조각 수치</span><span><i style="background:#fbf7ef"></i>크림: 결과 요약 띠</span><span><i style="background:#c9a24e"></i>금: 헤어라인·중복 꼬리표·별가루 수치·SS 테</span></span></figcaption></figure>
+</div>
+
+<!-- 4-4 보상 팝업 -->
+<h3>④ 보상 팝업 (빛살 포함)</h3>
+<div class="pair">
+<figure><p class="tag">지금</p><div class="vp"><img src="now/reward_popup_1280x720.jpg" alt=""></div></figure>
+<figure><p class="tag">새 디자인</p><div class="vp"><div class="scr">
+ <img src="now/hud_mid_1280x720.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;filter:blur(3px)">
+ <div style="position:absolute;inset:0;background:var(--dim)"></div>
+ <div style="position:absolute;left:50%;top:300px;width:1500px;height:1500px;margin:-750px 0 0 -750px;background:repeating-conic-gradient(rgba(255,236,190,.10) 0 3deg,transparent 3deg 14deg);-webkit-mask:radial-gradient(circle,#000 5%,transparent 42%);mask:radial-gradient(circle,#000 5%,transparent 42%);animation:rot 120s linear infinite"></div>
+ <div style="position:absolute;left:0;right:0;top:110px;text-align:center"><div class="cap" style="letter-spacing:6px;color:var(--acc);text-shadow:var(--on-sh)">REWARD</div><div style="font:600 38px/1.2 'Gowun Batang',serif;color:var(--on-bg);text-shadow:var(--on-sh)">보상 받기</div><div class="hl" style="width:420px;margin:10px auto 0"></div></div>
+ <div style="position:absolute;left:50%;transform:translateX(-50%);top:226px;display:grid;grid-template-columns:repeat(5,128px);gap:14px" id="rw"></div>
+ <span class="btn pri lean" style="position:absolute;left:50%;transform:translateX(-50%);top:600px;width:250px;height:58px;font-size:20px">받기<span class="sweep"></span></span>
+</div></div>
+<figcaption>평평한 흰 카드 → 금 테 크림 시트 카드 + 아이콘 아래 은은한 등급빛, 수량은 고운바탕 숫자, 이름 15px. 빛살은 끝이 사라지는 원뿔(세로 기둥 없음). 버튼 금 에나멜 하나.
+<span class="roles"><span><i style="background:#7a66d0"></i>라벤더: 뒤 가림막 번짐·빛살 중심</span><span><i style="background:#fbf7ef"></i>크림: 보상 카드 전부</span><span><i style="background:#c9a24e"></i>금: 카드 테·제목 헤어라인·받기</span></span></figcaption></figure>
+</div>
+
+<!-- 4-5 스테이지 정화 -->
+<h3>⑤ 스테이지 정화 (#33 흡수)</h3>
+<div class="pair">
+<figure><p class="tag">지금</p><div class="vp"><img src="now/stage_clear_transition_f3_1280x720.jpg" alt=""></div></figure>
+<figure><p class="tag">새 디자인</p>
+<div class="opts" style="margin:0 0 6px"><label><input type="radio" name="pur" value="band" checked>정화 a 「기운 띠」</label><label><input type="radio" name="pur" value="seal">정화 b 「금 인장」</label></div>
+<div class="vp"><div class="scr" id="pur">
+ <div style="position:absolute;inset:0;background:url(art/bg_sky.png) center/cover"></div>
+ <img src="art/whale_v4.png" alt="" style="position:absolute;left:-120px;top:330px;width:900px">
+ <div style="position:absolute;left:640px;top:-200px;width:1200px;height:1200px;margin-left:-600px;background:repeating-conic-gradient(from 160deg,rgba(255,250,230,.16) 0 2deg,transparent 2deg 11deg);-webkit-mask:radial-gradient(circle at 50% 30%,#000 4%,transparent 40%);mask:radial-gradient(circle at 50% 30%,#000 4%,transparent 40%)"></div>
+ <div class="pa">
+  <div style="position:absolute;left:-40px;right:-40px;top:96px;height:96px;transform:skewY(-2deg);background:linear-gradient(90deg,transparent,var(--band) 22%,var(--band) 78%,transparent)"></div>
+  <div class="hl" style="position:absolute;left:180px;right:180px;top:100px;transform:skewY(-2deg)"></div><div class="hl" style="position:absolute;left:180px;right:180px;top:186px;transform:skewY(-2deg)"></div>
+  <div style="position:absolute;left:0;right:0;top:110px;display:flex;justify-content:center;align-items:center;gap:22px">
+   <div style="text-align:right"><div class="cap" style="letter-spacing:4px;color:var(--acc)">STAGE 34</div><div style="font:600 42px/1 'Gowun Batang',serif;color:var(--on-band)">정화</div></div>
+   <div style="width:1px;height:52px;background:linear-gradient(transparent,var(--gold),transparent)"></div>
+   <div><div class="cap" style="color:var(--on-band2)">이 섬에도 색이 돌아왔어요</div><div style="display:flex;align-items:center;gap:6px;font:600 17px/1.4 Pretendard;color:var(--on-band)"><svg style="width:26px;height:26px"><use href="#i-palette"/></svg>빛물감 +0.8</div></div>
+  </div>
+ </div>
+ <div class="pb" style="display:none">
+  <div style="position:absolute;left:50%;top:60px;width:200px;height:200px;margin-left:-100px;border-radius:50%;background:radial-gradient(circle,var(--band) 58%,transparent 60%);box-shadow:0 0 0 1px var(--gold) inset"></div>
+  <div style="position:absolute;left:50%;top:70px;width:180px;height:180px;margin-left:-90px;border-radius:50%;border:1px dashed rgba(241,223,169,.5)"></div>
+  <div style="position:absolute;left:0;right:0;top:112px;text-align:center"><div class="cap" style="letter-spacing:4px;color:var(--acc)">STAGE 34</div><div style="font:600 46px/1.1 'Gowun Batang',serif;color:var(--on-band)">정화</div><div style="font:600 16px/1.4 Pretendard;color:var(--on-band2)">빛물감 +0.8</div></div>
+ </div>
+ <div class="tip" style="left:230px;top:270px;--tx:40px;font-size:15px;padding:10px 14px">이 섬에도 색이 돌아왔어요!</div>
+</div></div>
+<figcaption>만화 해 + 크림 스티커 → 끝이 사라지는 띠 + 금선 두 줄(a), 또는 금 인장(b). 빛살은 유지하되 가늘게.
+<span class="roles"><span><i style="background:#7a66d0"></i>라벤더: 정화 띠·인장 (B는 크림 띠)</span><span><i style="background:#fbf7ef"></i>크림: 유나 말풍선</span><span><i style="background:#c9a24e"></i>금: 띠 위아래 헤어라인·STAGE 글자</span></span></figcaption></figure>
+</div>
+
+<!-- 4-6 상점 -->
+<h3>⑥ 메뉴 판 — 상점</h3>
+<div class="pair">
+<figure><p class="tag">지금</p><div class="vp"><img src="now/menu_shop_1280x720.jpg" alt=""></div></figure>
+<figure><p class="tag">새 디자인</p><div class="vp"><div class="scr">
+ <div style="position:absolute;inset:0;background:url(art/bg_festival.png) center/cover;filter:blur(8px) brightness(var(--bgb))"></div>
+ <div class="pn" style="left:20px;top:40px;width:1120px;height:640px"></div>
+ <div style="position:absolute;left:46px;top:58px;display:flex;align-items:baseline;gap:26px"><span style="font:600 28px/1 'Gowun Batang',serif">상점</span><span class="tab on">상점</span><span class="tab">신화 조각</span></div>
+ <div class="chip" style="right:200px;top:52px"><svg><use href="#i-pearl"/></svg>199a</div><div class="chip" style="right:66px;top:52px"><svg><use href="#i-gem"/></svg>57,856</div>
+ <div class="hl" style="position:absolute;left:40px;right:180px;top:104px"></div>
+ <div class="cap" style="position:absolute;left:46px;top:116px">가격과 지급량은 출시 전 가안이에요</div>
+ <div class="sheet" style="left:46px;top:146px;width:330px;height:236px;padding:20px">
+  <div style="font:700 19px/1.2 Pretendard">매일 무료 선물</div><div class="cap" style="color:#6a6090">하루 한 번 받을 수 있어요</div>
+  <div style="display:flex;align-items:center;gap:12px;margin:18px 0"><svg style="width:56px;height:56px"><use href="#i-gem"/></svg><span style="font:600 26px/1 'Gowun Batang',serif">채색석 30</span></div>
+  <span class="btn pri" style="width:100%;--pri:linear-gradient(180deg,#43357e,#2c2260);background:linear-gradient(180deg,#43357e,#2c2260);color:#f8eecd">받기</span>
+ </div>
+ <div class="sheet" style="left:46px;top:398px;width:330px;height:262px;padding:20px;background:var(--tex),linear-gradient(160deg,#fbf3dd,#efe6fb)">
+  <div style="font:700 19px/1.2 Pretendard">항해 일지 <span class="cap" style="color:#6a6090">월정액 30일</span></div>
+  <div style="font:600 15px/1.5 Pretendard;color:#8e6a22;margin-top:8px">구매 즉시 채색석 300</div>
+  <div class="cap" style="color:#6a6090">출석할 때마다 채색석 90 · 30일 동안<br>모두 받으면 채색석 3,000</div>
+  <span class="btn pri lean" style="position:absolute;left:20px;right:20px;bottom:20px;height:52px">₩4,900</span>
+ </div>
+ <div style="position:absolute;left:394px;top:146px;display:grid;grid-template-columns:repeat(3,236px);gap:16px" id="shopg"></div>
+</div></div>
+<figcaption>주황 젤리 8개 → 가격은 남색 에나멜(크림 시트 위), 「첫 구매」 빨간 알약 → 금 헤어라인 꼬리표(15px). 보석은 크기 대신 아래 받침 빛 세기로 단계 표현.
+<span class="roles"><span><i style="background:#7a66d0"></i>라벤더: 바깥 판 유리·재화 칩</span><span><i style="background:#fbf7ef"></i>크림: 상품 시트 8장</span><span><i style="background:#c9a24e"></i>금: 탭 밑줄·첫 구매 꼬리표·월정액 버튼</span></span></figcaption></figure>
+</div>
+
+<!-- ================= 5. 정리 ================= -->
+<h2 class="sec" id="s6">5. test1_visual 흡수 · 적용 범위</h2>
+<div class="card">
+<p class="note"><b>test1_visual(#21 재화 그릇 · #22 별가루/신화 아이콘 · #33 정화 UI)</b>: 작업 시점에 <code>design/mockups/feedback70/test1_visual/</code> 폴더가 아직 없어 내용을 읽지 못했다. 이 페이지의 ③ 그릇 a/b, 3장 아이콘, ⑤ 정화 a/b가 같은 세 항목을 이 체계로 다룬다. 충돌 시 이 체계가 우선: 항아리·자루·통 모양 금지, 굵은 외곽선 금지, 모서리 ≤10px, 금선 끝은 사라짐.</p>
+<h3>전 화면 적용 공수 (추정)</h3>
+<ul class="pts">
+<li><b>1단계 · 공용 부품 (2~3일)</b>: <code>UiSoft</code>(plate/button/card/juice/tag/pips), <code>HudSkin</code>(soft_button/plate/tag), <code>GradeStyle</code> 배지 색 — 모서리·재질·색·누름 반동만 바꾸면 메뉴 대부분이 따라온다. 셰이더 판 색 상수 교체.</li>
+<li><b>2단계 · 아이콘 (3~4일)</b>: 재화 6종 + 하단 탭 6 + 연구·장비 아이콘 약 30개를 같은 조명 규칙으로 다시 그림(SVG → PNG 임포트). 별가루·신화 조각 그릇 교체(gacha_show).</li>
+<li><b>3단계 · 화면별 손질 (4~6일)</b>: 전투 HUD(궁극기 카드·콤보 숫자), 소환 배너 목록, 10회 결과, 보상 팝업, 정화 띠, 상점·분교 머리띠 색, 오른쪽 깃발 탭 색 통일, 안내 손가락 커서.</li>
+<li><b>4단계 · 검증 (1~2일)</b>: feedback_capture 전체 다시 찍고 1280/1600 비교, 글자 ≥13px·터치 ≥44px 확인.</li>
+<li>합계 약 <b>10~15 작업일</b>(UI 1인). 게임 로직·수치·세이브 변경 없음. A/B 중 하나를 고르면 1단계 상수만 달라진다.</li>
+</ul>
+</div>
+</div>
+
+<script>
+const R=document.documentElement;
+document.querySelectorAll('.bar button').forEach(b=>b.onclick=()=>{const k=b.dataset.set;R.dataset[k]=b.dataset.val;document.querySelectorAll(`.bar button[data-set="${k}"]`).forEach(x=>x.setAttribute('aria-pressed',x===b));if(k==='v')document.querySelector(`input[name=vv][value=${b.dataset.val}]`).checked=true;fit()});
+document.querySelectorAll('input[name=vv]').forEach(r=>r.onchange=()=>document.querySelector(`.bar button[data-val="${r.value}"]`).click());
+document.querySelectorAll('input[name=cont]').forEach(r=>r.onchange=()=>{const a=r.value==='vial';document.querySelectorAll('#tenres .ca').forEach(e=>e.style.display=a?'':'none');document.querySelectorAll('#tenres .cb').forEach(e=>e.style.display=a?'none':'');measure()});
+document.querySelectorAll('input[name=pur]').forEach(r=>r.onchange=()=>{const a=r.value==='band';document.querySelector('#pur .pa').style.display=a?'':'none';document.querySelector('#pur .pb').style.display=a?'none':'';measure()});
+// 새 디자인 칸마다 보이는 글자의 크기를 게임 화면 좌표(CSS px, 축소 전)로 잰다
+function measure(){let tMin=1e9,tBad=0,tN=0;document.querySelectorAll('.vp').forEach(v=>{const s=v.querySelector('.scr');if(!s)return;const gw=(R.dataset.w==='1600'&&v.classList.contains('wide'))?1600:1280;let m=v.nextElementSibling;if(!m||!m.classList.contains('meas')){m=document.createElement('p');m.className='meas';v.after(m)}let min=1e9,bad=0,n=0;const low=[];s.querySelectorAll('*').forEach(e=>{if(![...e.childNodes].some(c=>c.nodeType===3&&c.textContent.trim()))return;if(!e.getClientRects().length)return;const f=parseFloat(getComputedStyle(e).fontSize);n++;if(f<min)min=f;if(f<13){bad++;low.push(e.textContent.trim().slice(0,12))}});tMin=Math.min(tMin,min);tBad+=bad;tN+=n;m.textContent=`글자 측정 (게임 ${gw}×720 좌표): 최소 ${min}px · 13px 미만 ${bad}개 · 글자 요소 ${n}개 · 지금 이 칸 표시 배율 ${(v.clientWidth/gw).toFixed(2)}`+(bad?` · 미달: ${low.join(', ')}`:'');m.classList.toggle('bad',bad>0)});const a=document.getElementById('measAll');a.textContent=`새 디자인 글자 최소 ${tMin}px · 13px 미만 ${tBad}개 / ${tN}`;a.classList.toggle('bad',tBad>0)}
+// 10회 결과 카드
+const P=['yuna','dust','dust','karen','aria','dust','flora','dust','serena','dust'],G=['B','A','B','S','A','B','SS','A','B','B'],N=['예슬','유나','비나','하윤','채원','비나','플로라','유나','예슬','비나'],Q=[0,2,1,0,0,1,0,2,0,1];
+const gc={SS:'b-ss',S:'b-s',A:'b-a',B:'b-b'};
+document.getElementById('cards').innerHTML=P.map((p,i)=>p==='dust'?`<div class="port" style="height:200px"><span class="bd badge ${gc[G[i]]}">${G[i]}</span><span style="position:absolute;right:4px;top:4px;font:600 15px/1 Pretendard;color:var(--acc);padding:4px 7px;box-shadow:inset 0 0 0 1px var(--gold);border-radius:2px">중복</span><svg style="position:absolute;left:34px;top:38px;width:80px;height:80px"><use href="#i-dust"/></svg><div style="position:absolute;left:0;right:0;top:124px;text-align:center;font:600 26px/1 'Gowun Batang',serif;color:var(--acc)">+${Q[i]}</div><span class="nm" style="text-align:center">${N[i]}</span></div>`:`<div class="port ${G[i]==='SS'?'g-ss':''}" style="height:200px"><img src="art/p_${p}.png" alt=""><span class="bd badge ${gc[G[i]]}">${G[i]}</span><span style="position:absolute;right:4px;top:4px;font:700 15px/1 Pretendard;color:#241c45;background:var(--gold-l);padding:3px 6px;border-radius:2px">NEW</span><span class="nm" style="text-align:center">${N[i]}</span></div>`).join('');
+// 보상 카드
+const RW=[['i-gem','+1,600','채색석','#d77fb8'],['i-pearl','+24','구름 진주','#9fb0ea'],['i-wind','+125a','바람 조각','#e3be62'],['i-crys','+30','기억 결정','#b8a6ff'],['i-dust','+120','별가루','#e9c46a'],['i-myth','+3','신화 조각','#f0a8c4'],['i-palette','+83','항해사 경험치','#c9a24e']];
+document.getElementById('rw').innerHTML=RW.map(r=>`<div class="sheet" style="position:relative;height:150px;text-align:center;padding-top:12px"><div style="position:absolute;left:24px;right:24px;top:18px;height:60px;border-radius:50%;background:radial-gradient(${r[3]}66,transparent 70%)"></div><svg style="position:relative;width:60px;height:60px"><use href="#${r[0]}"/></svg><div style="font:600 24px/1.2 'Gowun Batang',serif;margin-top:4px">${r[1]}</div><div class="cap">${r[2]}</div></div>`).join('')+`<div class="port" style="height:150px"><img src="art/p_mio.png" alt=""><span class="nm" style="text-align:center">미오 합류</span></div>`;
+// 상점 카드
+const SH=[[120,'1,200',.15],[630,'5,900',.25],[1320,'12,000',.35],[3800,'33,000',.5],[7000,'59,000',.65],[14700,'119,000',.85]];
+document.getElementById('shopg').innerHTML=SH.map(s=>`<div class="sheet" style="position:relative;height:248px;text-align:center;padding-top:16px"><div style="position:absolute;left:40px;right:40px;top:50px;height:70px;border-radius:50%;background:radial-gradient(rgba(201,162,78,${s[2]}),transparent 70%)"></div><svg style="position:relative;width:78px;height:78px"><use href="#i-gem"/></svg><div style="font:600 21px/1.3 'Gowun Batang',serif;margin-top:6px">채색석 ${s[0].toLocaleString()}</div><div style="display:inline-block;margin:6px 0 14px;font:600 15px/1 Pretendard;color:#8e6a22;padding:4px 10px;box-shadow:inset 0 -1px 0 #c9a24e">첫 구매 +${s[0].toLocaleString()}</div><span class="btn" style="position:absolute;left:18px;right:18px;bottom:16px;height:46px;background:linear-gradient(180deg,#43357e,#2c2260);color:#f8eecd;box-shadow:var(--e1)">₩${s[1]}</span></div>`).join('');
+// 1280 화면을 칸 폭에 맞춰 줄인다
+function fit(){document.querySelectorAll('.vp').forEach(v=>{const s=v.querySelector('.scr');if(!s)return;const w=(R.dataset.w==='1600'&&v.classList.contains('wide'))?1600:1280;s.style.transform=`scale(${v.clientWidth/w})`});measure()}
+addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>
