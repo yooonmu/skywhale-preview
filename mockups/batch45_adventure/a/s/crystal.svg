@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="280" viewBox="0 0 220 280">
+<defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eafff2"/><stop offset=".5" stop-color="#5fdc9a"/><stop offset="1" stop-color="#17704a"/></linearGradient>
+<linearGradient id="b" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bff5d6"/><stop offset="1" stop-color="#2bb673"/></linearGradient>
+<linearGradient id="c" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2bb673"/><stop offset="1" stop-color="#0e4a30"/></linearGradient></defs>
+<path d="M110,6 L198,72 L170,232 L110,274 L50,232 L22,72 Z" fill="url(#c)" stroke="#4a2b45" stroke-width="3.2" stroke-linejoin="round"/>
+<path d="M110,6 L22,72 L70,110 Z" fill="url(#a)"/><path d="M110,6 L198,72 L150,110 Z" fill="url(#b)"/>
+<path d="M110,6 L70,110 H150 Z" fill="#dffbea"/><path d="M70,110 L50,232 L110,274 Z" fill="url(#b)" opacity=".85"/><path d="M150,110 L170,232 L110,274 Z" fill="#1f8a58"/>
+<path d="M70,110 H150 L110,274 Z" fill="url(#a)" opacity=".7"/>
+<path d="M110,6 L22,72 L50,232 L110,274 L170,232 L198,72 Z M22,72 L70,110 H150 L198,72 M70,110 L110,274 L150,110 M70,110 L50,232 M150,110 L170,232" fill="none" stroke="#4a2b45" stroke-width="2" stroke-linejoin="round"/>
+<path d="M40,80 L74,104" stroke="#fff" stroke-width="4" stroke-linecap="round"/><polygon points="150,40 151.87,50.13 162,52 151.87,53.87 150,64 148.13,53.87 138,52 148.13,50.13" fill="#fff"/>
+</svg>

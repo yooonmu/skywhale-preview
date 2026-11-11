@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="40" viewBox="0 0 1000 40" preserveAspectRatio="none">
+<defs><linearGradient id="t" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffb3c7"/><stop offset=".25" stop-color="#ffd59a"/><stop offset=".45" stop-color="#fff0a0"/><stop offset=".65" stop-color="#ade4b8"/><stop offset=".82" stop-color="#a6cff5"/><stop offset="1" stop-color="#c6b2f4"/></linearGradient></defs>
+<path d="M0,10 C120,4 200,16 330,9 C460,2 560,16 690,9 C820,3 900,14 1000,9 V31 C900,36 820,25 690,31 C560,37 460,24 330,31 C200,37 120,26 0,31 Z" fill="url(#t)" stroke="#4a2b45" stroke-width="2.4" vector-effect="non-scaling-stroke"/>
+<path d="M0,14 C120,8 200,19 330,13 C460,7 560,19 690,13 C820,8 900,17 1000,13" stroke="#fff" stroke-opacity=".7" stroke-width="2.4" fill="none" vector-effect="non-scaling-stroke"/></svg>

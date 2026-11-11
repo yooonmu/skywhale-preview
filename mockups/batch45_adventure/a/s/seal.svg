@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="150" viewBox="0 0 120 150">
+<defs><radialGradient id="w" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#ff9fcf"/><stop offset=".5" stop-color="#d93a86"/><stop offset="1" stop-color="#8a1a50"/></radialGradient></defs>
+<path d="M44,96 L30,146 L48,136 L56,150 L62,100 Z M76,96 L90,146 L72,136 L64,150 L58,100 Z" fill="#9a6bff" stroke="#4a2b45" stroke-width="2"/>
+<path d="M60,8 L73.04,11.32 L87,13.23 L97.5,22.5 L106.77,33 L108.91,46.89 L114,60 L110.69,73.58 L106.77,87 L96.26,96.26 L87,106.77 L73.58,110.67 L60,114 L46.33,111.03 L33,106.77 L23.02,96.98 L13.23,87 L10.07,73.38 L6,60 L8.85,46.29 L13.23,33 L22.28,22.28 L33,13.23 L46.84,10.89 L60,6 Z" fill="url(#w)" stroke="#4a2b45" stroke-width="2.4" stroke-linejoin="round"/>
+<circle cx="60" cy="60" r="34" fill="none" stroke="#ffd0e8" stroke-width="2.4" stroke-dasharray="3 4"/>
+<polygon points="60,40 64.24,55.76 80,60 64.24,64.24 60,80 55.76,64.24 40,60 55.76,55.76" fill="#ffe3f0" stroke="#4a2b45" stroke-width="1.6"/>
+<path d="M30,34 C38,24 50,20 60,20" stroke="#fff" stroke-opacity=".6" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>
