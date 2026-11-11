@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="72" viewBox="0 0 420 72" preserveAspectRatio="none"><defs><linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5fae84"/><stop offset="1" stop-color="#2f7350"/></linearGradient><linearGradient id="d" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#265c40"/><stop offset="1" stop-color="#1a3f2c"/></linearGradient></defs>
+<path d="M2,22 H52 V62 H2 L18,42 Z" fill="url(#d)" stroke="#4a2b45" stroke-width="2.4" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+<path d="M418,22 H368 V62 H418 L402,42 Z" fill="url(#d)" stroke="#4a2b45" stroke-width="2.4" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+<path d="M36,8 C140,2 280,2 384,8 V52 C280,46 140,46 36,52 Z" fill="url(#b)" stroke="#4a2b45" stroke-width="2.6" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+<path d="M44,15 C140,9 280,9 376,15" stroke="#fff" stroke-opacity=".55" stroke-width="2" fill="none" vector-effect="non-scaling-stroke"/>
+<path d="M44,45 C140,39 280,39 376,45" stroke="#ffe7a6" stroke-opacity=".9" stroke-width="1.4" fill="none" vector-effect="non-scaling-stroke"/></svg>

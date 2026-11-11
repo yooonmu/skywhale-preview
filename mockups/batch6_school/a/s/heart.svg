@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="200" viewBox="0 0 220 200">
+<defs>
+<linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd6e2"/><stop offset=".45" stop-color="#ff6f92"/><stop offset="1" stop-color="#b8264e"/></linearGradient>
+<linearGradient id="b" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb3c7"/><stop offset="1" stop-color="#e0385f"/></linearGradient>
+<radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffc2d4" stop-opacity=".95"/><stop offset=".6" stop-color="#ff7fa0" stop-opacity=".35"/><stop offset="1" stop-color="#ff7fa0" stop-opacity="0"/></radialGradient></defs>
+<circle cx="110" cy="102" r="98" fill="url(#glow)"/>
+<path d="M110,176 C60,140 26,112 26,74 C26,46 46,30 70,30 C88,30 102,40 110,54 C118,40 132,30 150,30 C174,30 194,46 194,74 C194,112 160,140 110,176 Z" fill="url(#a)" stroke="#4a2b45" stroke-width="3.6" stroke-linejoin="round"/>
+<path d="M110,54 L84,96 L110,176 L136,96 Z" fill="url(#b)" opacity=".7"/>
+<path d="M26,74 L84,96 L110,54 M194,74 L136,96 L110,54 M84,96 H136" stroke="#4a2b45" stroke-opacity=".35" stroke-width="1.6" fill="none"/>
+<path d="M44,62 C48,46 60,40 72,40" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" opacity=".85"/>
+<polygon points="160,36 162.18,47.82 174,50 162.18,52.18 160,64 157.82,52.18 146,50 157.82,47.82" fill="#fff"/>
+</svg>

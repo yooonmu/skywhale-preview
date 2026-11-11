@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="90" height="200" viewBox="0 0 90 200">
+<defs><linearGradient id="c" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b9a2ff"/><stop offset="1" stop-color="#5b44c8"/></linearGradient><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6d2"/><stop offset=".3" stop-color="#ffd877"/><stop offset=".62" stop-color="#e4a63c"/><stop offset=".86" stop-color="#b8761c"/><stop offset="1" stop-color="#e9bd5c"/></linearGradient></defs>
+<path d="M46,190 C34,190 30,180 36,172 C42,166 52,170 50,178 M46,186 C52,150 54,110 52,70 C50,40 46,22 52,10 C62,22 66,44 60,62 C52,84 26,96 22,124 C18,150 40,166 60,160 C80,154 80,128 62,122 C44,116 32,132 42,146" fill="none" stroke="url(#c)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M52,10 C44,0 30,2 26,10 C36,10 44,14 52,18 C60,14 68,10 78,10 C74,2 60,0 52,10 Z" fill="url(#c)" stroke="#4a2b45" stroke-width="2"/>
+<polygon points="74,25 75.53,32.47 83,34 75.53,35.53 74,43 72.47,35.53 65,34 72.47,32.47" fill="url(#g)"/>
+</svg>
