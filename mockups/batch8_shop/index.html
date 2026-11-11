@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="ko" data-w="1280">
+<head>
+<meta charset="utf-8">
+<title>구름고래 분교 · 묶음 8 「상점 · 교환」 시안</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+@font-face{font-family:Gowun;src:url(a/GowunBatang-Bold.ttf)}
+@font-face{font-family:Pre;src:url(a/Pretendard-Bold.otf)}
+:root{--w:1280}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:radial-gradient(1200px 600px at 20% -10%,#3b2f6e,transparent),#1d1838;color:#efeaff;font:15px/1.6 Pre,"Malgun Gothic",system-ui,sans-serif}
+.page{max-width:1420px;margin:0 auto;padding:28px 28px 120px}
+h1{font:30px/1.3 Gowun,serif;margin:0 0 8px;color:#fff}
+h1 small{font:15px Pre;color:#c9bff0;margin-left:10px}
+.lead{color:#d6cff5;max-width:1200px;margin:0 0 14px}
+.lead b{color:#ffe7a6}
+.page>.bar{position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 0;background:linear-gradient(#1d1838 75%,rgba(29,24,56,0))}
+.bar button{font:14px Pre;border:1px solid #6d5fb5;background:#2c2558;color:#e9e3ff;border-radius:8px;padding:6px 12px;cursor:pointer}
+.bar button[aria-pressed=true]{background:#7b68e0;color:#fff;border-color:#b6a8ff}
+.bar .copy{background:linear-gradient(#ffd98a,#e9a94a);color:#3a2410;border-color:#ffe7b0}
+.toc{display:flex;gap:4px;flex-wrap:wrap;margin-left:8px}
+.toc a{color:#cfc5ff;text-decoration:none;font-size:13.5px;padding:4px 9px;border-radius:7px;background:#28224f}
+.toc a.cur{background:#4a3f94;color:#fff}
+.toc a i{font-style:normal;color:#ffd98a}
+.page>h3{font:24px Gowun,serif;margin:46px 0 4px;color:#fff;scroll-margin-top:70px}
+.page>h3 small{font:14px Pre;color:#bdb2ee;margin-left:8px}
+.sub{color:#cfc6f4;margin:0 0 10px;max-width:1200px}
+.states{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 12px}
+.states span{color:#bdb2ee;font-size:13px;align-self:center;margin-right:4px}
+.states button{font:13.5px Pre;border:1px solid #5d50a8;background:#251f4c;color:#e1dbff;border-radius:20px;padding:4px 13px;cursor:pointer}
+.states button[aria-pressed=true]{background:#efe6ff;color:#2a2058;border-color:#fff}
+.ref{display:grid;grid-template-columns:420px 1fr;gap:16px;align-items:start;background:#241e48;border-radius:14px;padding:12px;margin-bottom:14px}
+.ref h2{font:17px Gowun,serif;margin:0 0 4px;color:#ffe7a6}
+.ref img{width:100%;border-radius:8px;display:block}
+.ref .cap{margin:0;color:#d4ccf6;font-size:14px}
+.ref .refs{display:grid;gap:8px}
+.opt{position:relative;background:#262050;border:2px solid #3a3172;border-radius:16px;padding:12px 14px 14px;margin:0 0 16px;cursor:pointer;transition:border-color .2s}
+.opt:hover{border-color:#6f60c8}
+.opt.sel{border-color:#ffd98a;box-shadow:0 0 0 3px rgba(255,217,138,.25)}
+.opt.sel>h2::after{content:"고름";font:13px Pre;background:#ffd98a;color:#3a2410;border-radius:6px;padding:1px 8px;margin-left:8px}
+.opt>h2{font:19px Gowun,serif;margin:0 0 2px;color:#fff;display:flex;align-items:center;gap:8px}
+.rec{font:12.5px Pre;background:linear-gradient(90deg,#ff9fd0,#b49bff,#8fd8ff);color:#fff;border-radius:6px;padding:1px 8px;text-shadow:0 1px 0 rgba(60,30,90,.5)}
+.rp{margin-left:auto;font:13px Pre;background:#352d6c;color:#e9e3ff;border:1px solid #6d5fb5;border-radius:8px;padding:3px 10px;cursor:pointer}
+.cost{margin:0 0 4px;color:#d9d2fa;font-size:14px}
+.verdict{margin:0 0 10px;color:#a99ee0;font-size:13px}
+.vp{position:relative;width:100%;overflow:hidden;border-radius:10px;background:#000}
+.hid{display:none!important}
+#toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#2f2759;color:#fff;border:1px solid #8f78ee;border-radius:10px;padding:10px 18px;white-space:pre;font:13px/1.5 Pre;opacity:0;transition:opacity .3s;z-index:99;pointer-events:none}
+
+/* ================= 화면 공통 ================= */
+.scr{position:absolute;left:0;top:0;width:calc(var(--w)*1px);height:720px;transform-origin:0 0;overflow:hidden;font-family:Pre,sans-serif;color:#3a2f5c}
+.scr *{box-sizing:border-box}
+.scr img{display:block}
+.ab{position:absolute}
+.bk{position:absolute;inset:0;background:url(a/b/hud_1280.jpg) center/cover;filter:brightness(.5) saturate(.85) blur(1.5px)}
+html[data-w="1600"] .bk{background-image:url(a/b/hud_1600.jpg)}
+/* 상점 판 (hub_frame.gd · 상점 = 자두색 벨벳 머리줄) */
+.board{position:absolute;left:22px;top:44px;right:125px;bottom:44px;z-index:2;border-radius:15px;padding:2px;background:linear-gradient(135deg,#fff3c4,#e4a63c 30%,#b8761c 55%,#f6d98a 80%,#c48a2a);box-shadow:0 18px 40px rgba(16,8,44,.55),0 2px 0 rgba(255,255,255,.2)}
+.bi{position:absolute;inset:2px;border-radius:13px;overflow:hidden;background:#f6eef2}
+.hd{position:absolute;left:0;right:0;top:0;height:64px;z-index:6;background:linear-gradient(180deg,rgba(255,190,220,.16),rgba(40,0,20,.2)),url(a/s/tex_vel_plum.jpg) 0 30%/520px auto;box-shadow:inset 0 -12px 18px rgba(30,0,20,.35),inset 0 8px 14px rgba(255,220,235,.08)}
+.hd::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:3px;background:linear-gradient(90deg,#b8761c,#ffe7a6 22%,#e4a63c 50%,#fff3c4 78%,#b8761c);box-shadow:0 2px 5px rgba(40,10,30,.35)}
+.hd .t{position:absolute;left:28px;top:10px;font:31px Gowun,serif;color:#fff;letter-spacing:1px;text-shadow:0 2px 6px rgba(40,0,20,.5)}
+.hd .tabs{position:absolute;left:116px;top:18px;display:flex;gap:26px}
+.hd .tabs b{font:18px Pre;color:rgba(255,255,255,.66);position:relative;padding:0 2px}
+.hd .tabs b.on{color:#fff}
+.hd .tabs b.on::after{content:"";position:absolute;left:-6px;right:-6px;bottom:-9px;height:9px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M2,6 C20,2 50,3 98,4 C70,7 30,9 4,8 Z' fill='%23ff9fbf'/%3E%3C/svg%3E") 0 0/100% 100%}
+.hd .wal{position:absolute;right:22px;top:15px;display:flex;gap:8px}
+.wal span{position:relative;display:flex;align-items:center;gap:4px;height:32px;padding:0 13px 0 6px;border-radius:16px;background:rgba(30,6,24,.32);box-shadow:inset 0 0 0 1px rgba(255,220,235,.35),inset 0 1px 0 rgba(255,255,255,.18);color:#fff;font-size:16px}
+.wal img{width:28px;height:28px}
+.bd{position:absolute;left:0;right:0;top:64px;bottom:0;overflow:hidden}
+.cap8{position:absolute;z-index:4;font:12.5px Pre;color:rgba(74,43,69,.62)}
+/* 오른쪽 책갈피 (hub_frame.gd 그대로) */
+.mk{position:absolute;width:122px;height:80px;z-index:1;filter:drop-shadow(0 4px 4px rgba(20,8,40,.4))}
+.mk i{position:absolute;inset:0;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 50%,100% 100%,0 100%);background:linear-gradient(180deg,color-mix(in srgb,var(--c) 70%,#fff) 0,var(--c) 45%,color-mix(in srgb,var(--c) 78%,#000) 100%);box-shadow:inset 0 2px 0 rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.2)}
+.mk i::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 3px),repeating-linear-gradient(0deg,rgba(0,0,0,.05) 0 1px,transparent 1px 3px)}
+.mk img{position:absolute;left:38px;top:5px;width:46px;height:46px}
+.mk em{position:absolute;left:18px;right:22px;top:52px;text-align:center;font:15px Pre;font-style:normal;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.45)}
+.mk.on{z-index:4}
+.mk.on i{box-shadow:inset 0 2px 0 #fff2bf,inset 0 -2px 0 #e4a63c,inset 2px 0 0 #ffe08a}
+.cls{position:absolute;z-index:5;width:48px;height:48px;top:51px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff,#efe8f6);box-shadow:0 3px 8px rgba(0,0,0,.4),inset 0 0 0 1.5px #d9cdee;display:grid;place-items:center}
+.cls svg{width:24px;height:24px}
+.clsl{position:absolute;z-index:5;top:100px;width:60px;text-align:center;font:13px Pre;color:#fff;text-shadow:0 1px 3px #000}
+/* 소환 무대 (BARE 허브: 판 없이 무대 위 책갈피만) */
+.stg{position:absolute;left:0;top:0;bottom:0;right:122px;background:url(a/b/stage_flora.jpg) 30% 20%/cover}
+.scr[data-st=std] .stg{background-image:url(a/b/std.jpg)}
+.stg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(30,20,70,.5),rgba(12,8,34,.82))}
+.stt{position:absolute;left:44px;top:20px;z-index:3;font:26px Gowun,serif;color:#fff;padding-left:14px;text-shadow:0 2px 6px rgba(0,0,0,.5)}
+.stt::before{content:"";position:absolute;left:0;top:6px;width:4px;height:26px;border-radius:2px;background:#ffcf5a}
+.swal{position:absolute;right:146px;top:16px;z-index:3;display:flex;gap:8px;padding:6px 8px;border-radius:14px;background:rgba(30,20,60,.55);box-shadow:inset 0 0 0 1px rgba(255,231,166,.4)}
+.swal span{display:flex;align-items:center;gap:5px;height:32px;padding:0 12px 0 4px;color:#fff;font-size:17px}
+.swal img{width:30px;height:30px}
+.swal small{font-size:12px;opacity:.75}
+/* 행동 단추 (게임 주황 · 기울기) */
+.act{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:6px;height:40px;min-width:118px;padding:0 16px;border-radius:7px;transform:skewX(-11deg);background:linear-gradient(180deg,#ffc08a 0,#ff9466 48%,#f0734f 100%);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.75),inset 0 -2px 0 rgba(160,50,30,.25),0 0 0 1.5px #ffe3a0,0 4px 0 #c45a40,0 8px 14px rgba(80,30,40,.28);color:#fff;font:17px Pre;white-space:nowrap;overflow:hidden}
+.act>*{transform:skewX(11deg)}
+.act::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.5) 45%,transparent 60%);transform:translateX(-120%);animation:sweep 4.2s ease-in-out infinite}
+@keyframes sweep{0%,60%{transform:translateX(-120%)}88%,100%{transform:translateX(120%)}}
+.act span{text-shadow:0 1px 1px rgba(150,50,20,.55)}
+.act .c{display:inline-flex;align-items:center;gap:3px;font-size:16px}
+.act .c img{width:22px;height:22px;filter:drop-shadow(0 1px 1px rgba(0,0,0,.25))}
+.act.lav{background:linear-gradient(180deg,#c9b8ff,#9b84f0 50%,#7d63dc);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.7),0 0 0 1.5px #ffe3a0,0 4px 0 #5a44a8,0 8px 14px rgba(40,20,90,.3)}
+.act.lav span{text-shadow:0 1px 1px rgba(60,30,120,.6)}
+.act.sm{height:34px;min-width:96px;font-size:15px;padding:0 12px}
+.act.off,.scr[data-st=poor] .act.need{background:linear-gradient(180deg,#eeeaf5,#d4cde3);box-shadow:inset 0 1.5px 0 #fff,0 0 0 1.5px #d6cde6,0 4px 0 #9d94b4,0 6px 10px rgba(40,30,70,.2);color:#7a7196}
+.act.off span,.scr[data-st=poor] .act.need span{text-shadow:none}
+.act.off::after,.scr[data-st=poor] .act.need::after{display:none}
+.scr[data-st=poor] .act.need .c b{color:#e0445a}
+.act.wait{background:linear-gradient(180deg,#f5efff,#ddd2f6);color:#5b4a9a;box-shadow:inset 0 1.5px 0 #fff,0 0 0 1.5px #c9b8f4,0 4px 0 #a593d8}
+.act.wait span{text-shadow:none}.act.wait::after{display:none}
+.spin{width:16px;height:16px;border-radius:50%;border:2.5px solid rgba(91,74,154,.25);border-top-color:#7d63dc;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* 첫 구매 리본: 끝이 제비꼬리 */
+.fb{display:inline-flex;align-items:center;height:22px;padding:0 14px;font:12.5px Pre;color:#fff;white-space:nowrap;background:linear-gradient(180deg,#ff8aa0,#e0445a 60%,#c4304a);clip-path:polygon(0 0,100% 0,calc(100% - 7px) 50%,100% 100%,0 100%,7px 50%);text-shadow:0 1px 1px rgba(120,10,30,.5)}
+.fb b{color:#fff3c4;margin-left:4px}
+/* 잠금 (LockGate) */
+.lock{display:inline-flex;align-items:center;filter:drop-shadow(0 3px 5px rgba(30,20,60,.35))}
+.lock i{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 40% 30%,#6e5fb0,#2d2460);box-shadow:inset 0 0 0 2px #e4c27a,inset 0 0 0 4px #2d2460;display:grid;place-items:center;position:relative;z-index:1}
+.lock i::before{content:"";width:14px;height:11px;border-radius:2px;background:linear-gradient(#ffe7a6,#e4a63c);margin-top:6px;box-shadow:0 0 0 1px #6b4a12}
+.lock i::after{content:"";position:absolute;top:7px;width:9px;height:9px;border:2.5px solid #ffe7a6;border-bottom:0;border-radius:6px 6px 0 0}
+.lock b{margin-left:-8px;padding:2px 10px 2px 14px;border-radius:0 6px 6px 0;background:linear-gradient(#fff9ea,#f1e3c4);color:#5b3f12;font:13px Pre;box-shadow:inset 0 0 0 1px #e4c27a}
+/* 유나 알림 (YunaToast) */
+.yt{position:absolute;z-index:12;display:flex;align-items:center}
+.yt .f{width:64px;height:64px;border-radius:50%;background:url(a/c/yuna.webp) 50% 4%/190% auto no-repeat,#efe6ff;box-shadow:0 0 0 3px #fff,0 0 0 9px #8f78ee,0 6px 12px rgba(30,20,60,.4);position:relative;z-index:2;flex:none}
+.yt .m{position:relative;margin-left:22px;background:#fff;border-radius:16px;padding:9px 16px;box-shadow:0 0 0 3px #8f78ee,0 6px 14px rgba(30,20,60,.3);font:13px/1.45 Pre;color:#5a5078;white-space:nowrap}
+.yt .m b{display:block;font:17px Pre;color:#2f2654}
+.yt .m::before{content:"";position:absolute;left:-17px;top:50%;margin-top:-9px;border:9px solid transparent;border-right:16px solid #8f78ee;border-left:0}
+.yt .m::after{content:"";position:absolute;left:-11px;top:50%;margin-top:-6px;border:6px solid transparent;border-right:12px solid #fff;border-left:0}
+.yt.no .f{box-shadow:0 0 0 3px #fff,0 0 0 9px #a49cbc,0 6px 12px rgba(30,20,60,.4)}
+.yt.no .m{background:#f1eff6;box-shadow:0 0 0 3px #a49cbc,0 6px 14px rgba(30,20,60,.3)}
+.yt.no .m::before{border-right-color:#a49cbc}.yt.no .m::after{border-right-color:#f1eff6}
+.scr.go .yt{animation:ytin .5s cubic-bezier(.2,1.4,.4,1) both .5s}
+@keyframes ytin{from{opacity:0;transform:translateY(10px) scale(.9)}}
+/* 위 가운데 알림 판 */
+.nb{position:absolute;left:calc(50% - 250px);top:58px;width:500px;height:72px;z-index:20}
+.nb .pl{position:absolute;inset:0;border-radius:14px 4px 14px 4px;background:linear-gradient(180deg,#fffdf6,#f6eedd);box-shadow:0 0 0 1.5px #e4c27a,0 10px 20px rgba(30,20,80,.35)}
+.nb .ko{position:absolute;left:8px;top:2px;width:68px;height:68px;border-radius:50%;padding:5px;background:conic-gradient(#fff3c4,#ffd66e,#e4a63c,#fff3c4);box-shadow:0 0 0 1.5px #b8761c,0 6px 12px rgba(30,20,80,.4)}
+.nb .ko span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 38% 30%,#fff,#efe8ff 40%,#bfaee8);box-shadow:inset 0 -6px 12px rgba(80,50,150,.3)}
+.nb .ko img{width:70%}
+.nb .tt{position:absolute;left:90px;top:12px;right:16px}
+.nb .tt b{display:block;font:19px Gowun,serif;color:#2f2654}
+.nb .tt small{font:13px Pre;color:#776c98}
+.nb .ln{position:absolute;left:20px;right:20px;bottom:6px;height:2px;background:linear-gradient(90deg,#e4a63c,#ffe08a)}
+.scr.go .nb{animation:nbin .5s cubic-bezier(.2,1.3,.4,1) both var(--nd,.2s)}
+@keyframes nbin{from{opacity:0;transform:translateY(-24px)}}
+/* 반짝이 */
+.spk{position:absolute;width:26px;height:26px;background:url(a/i/sparkle4.png) center/contain no-repeat;pointer-events:none;animation:tw 2.6s ease-in-out infinite;z-index:8}
+@keyframes tw{0%,100%{opacity:.1;transform:scale(.45) rotate(0)}50%{opacity:1;transform:scale(1) rotate(45deg)}}
+.rise{opacity:1}
+.scr.go .rise{animation:rise .55s cubic-bezier(.2,1.2,.4,1) both;animation-delay:calc(var(--d,0) * 1s)}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}}
+/* 가이드 대상 표시 (tutorial.gd가 찾는 노드 이름 · 시안에서는 점선 이름표) */
+.nn{position:absolute;z-index:30;font:10.5px/1 Consolas,monospace;color:#fff;background:rgba(43,30,90,.78);padding:2px 5px;border-radius:4px;pointer-events:none;white-space:nowrap;opacity:0;transition:opacity .2s}
+.shownode .nn{opacity:1}
+
+/* =====================================================================
+   병 · 단지 (물감 병처럼 채색석이 담김) — 뒤판 · 액체(마스크) · 내용물 · 앞판(유리 · 마개)
+   ===================================================================== */
+.bt{position:relative;flex:none;width:calc(120px * var(--k,1) * var(--ks,1));height:calc(200px * var(--k,1) * var(--ks,1))}
+.bt.jar{width:calc(200px * var(--k,1) * var(--ks,1));height:calc(260px * var(--k,1) * var(--ks,1))}
+.bt>img,.bt>.lq{position:absolute;inset:0;width:100%;height:100%}
+.bt>.lq{-webkit-mask:url(a/s/bot_mask.svg) 0 0/100% 100%;mask:url(a/s/bot_mask.svg) 0 0/100% 100%;overflow:hidden}
+.bt.jar>.lq{-webkit-mask-image:url(a/s/jar_mask.svg);mask-image:url(a/s/jar_mask.svg)}
+.lq>i{position:absolute;left:0;right:0;bottom:0;height:var(--f,60%);background:var(--liq,linear-gradient(180deg,#ffd0ec,#ff8fc4 30%,#b58bff 72%,#7cc7ff));transition:height 1s}
+.lq>i::before{content:"";position:absolute;left:-10%;right:-10%;top:-7px;height:14px;border-radius:50%;background:rgba(255,255,255,.55);box-shadow:0 2px 0 rgba(255,255,255,.3)}
+.lq>i::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,.9) 0 1.5px,transparent 2.5px) 0 0/22px 26px,radial-gradient(circle,rgba(255,255,255,.6) 0 1px,transparent 2px) 9px 12px/16px 20px;animation:bub 5s linear infinite;opacity:.8}
+@keyframes bub{to{background-position:0 -52px,9px -28px}}
+.lq .gm{position:absolute;width:var(--g,34%);filter:drop-shadow(0 3px 3px rgba(60,20,80,.35))}
+.bt .lbl{position:absolute;left:50%;transform:translateX(-50%);top:var(--lt,40%);width:calc(100% + 6px);min-width:104px;height:34px;display:grid;place-items:center;background:url(a/s/label.svg) 0 0/100% 100%;font:14px Pre;color:#4a2b45;white-space:nowrap;z-index:2;filter:drop-shadow(0 2px 2px rgba(60,30,40,.25))}
+.bt.jar .lbl{--lt:28%;height:38px;font-size:15.5px}
+.bt::after{content:"";position:absolute;left:8%;right:8%;bottom:-6px;height:12px;border-radius:50%;background:radial-gradient(closest-side,rgba(50,20,10,.45),transparent);z-index:-1}
+.bt .glint{position:absolute;inset:0;-webkit-mask:url(a/s/bot_mask.svg) 0 0/100% 100%;mask:url(a/s/bot_mask.svg) 0 0/100% 100%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.7) 48%,transparent 56%) 0 0/300% 100% no-repeat;animation:gl 6s ease-in-out infinite;animation-delay:calc(var(--i,0) * .5s);pointer-events:none}
+.bt.jar .glint{-webkit-mask-image:url(a/s/jar_mask.svg);mask-image:url(a/s/jar_mask.svg)}
+@keyframes gl{0%,70%{background-position:130% 0}100%{background-position:-130% 0}}
+</style>
+<style>
+/* =====================================================================
+   D8-1 A · 화방 선반 — 벽지 + 차양 + 호두나무 선반 둘, 채색석이 물감 병
+   ===================================================================== */
+.s1a{background:radial-gradient(900px 420px at 18% -8%,rgba(255,244,220,.75),transparent 70%),radial-gradient(700px 380px at 92% 110%,rgba(200,170,230,.35),transparent 70%),url(a/s/tex_wall.jpg) 0 0/380px}
+.s1a::before{content:"";position:absolute;inset:0;background:linear-gradient(112deg,transparent 22%,rgba(255,250,232,.38) 30%,transparent 40%,transparent 52%,rgba(255,250,232,.24) 58%,transparent 66%);pointer-events:none}
+.awn{position:absolute;left:-10px;right:-10px;top:-4px;height:52px;z-index:3;filter:drop-shadow(0 6px 6px rgba(80,30,50,.3))}
+.awn img{width:100%;height:100%}
+.nic{position:absolute;left:18px;top:54px;width:300px;bottom:14px;border-radius:150px 150px 16px 16px/54px 54px 16px 16px;background:radial-gradient(260px 160px at 50% 0,rgba(255,255,255,.7),transparent),url(a/s/tex_linen.jpg) 0 0/260px,#efe6f6;box-shadow:inset 0 10px 22px rgba(90,60,120,.25),inset 0 -2px 0 rgba(255,255,255,.6),0 0 0 2px #fff,0 0 0 3.5px #e4c27a,0 8px 18px rgba(80,40,80,.22)}
+.nic h5{margin:0;position:absolute;left:0;right:0;top:14px;text-align:center;font:15px Gowun,serif;color:#8a5a7a;letter-spacing:2px}
+.nic h5::before,.nic h5::after{content:"✦";color:#e4a63c;margin:0 8px;font-size:11px}
+.shf{position:absolute;height:16px;border-radius:3px;background:linear-gradient(180deg,rgba(255,230,190,.5),transparent 30%,rgba(40,15,5,.35)),url(a/s/tex_walnut.jpg) 0 0/300px;box-shadow:inset 0 1px 0 rgba(255,236,200,.7),0 7px 9px rgba(40,15,5,.4),0 14px 22px rgba(60,30,40,.18);z-index:1}
+.shf::before{content:"";position:absolute;left:0;right:0;top:-5px;height:5px;background:linear-gradient(180deg,#d9a878,#9b6440);border-radius:3px 3px 0 0;opacity:.85}
+.shf .br{position:absolute;top:15px;width:34px;height:40px}
+.gift{position:absolute;width:150px;height:150px}
+.gift .bb{position:absolute;left:8px;bottom:0;width:130px}
+.gift .lid{position:absolute;left:0;bottom:84px;width:146px;transition:transform .6s}
+.gift .bow{position:absolute;left:38px;bottom:118px;width:72px}
+.scr[data-st=got] .gift .lid{transform:translate(28px,-20px) rotate(16deg)}
+.scr[data-st=got] .gift .bow{transform:translate(70px,-6px) rotate(26deg)}
+.stmp{position:absolute;width:96px;opacity:.88;z-index:5;transform:rotate(-14deg)}
+.scr.go .stmp{animation:stp .45s cubic-bezier(.3,1.6,.5,1) both .5s}
+@keyframes stp{from{opacity:0;transform:rotate(-14deg) scale(1.8)}}
+.tx1 b{display:block;font:19px Gowun,serif;color:#3a2547}
+.tx1 small{display:block;font:13px Pre;color:#7a6a8a;margin-top:2px}
+.tx1 em{display:flex;align-items:center;gap:4px;font:17px Pre;font-style:normal;color:#3a2547;margin-top:6px}
+.tx1 em img{width:30px;height:30px}
+.tx1 p{margin:4px 0 0;font:13px/1.5 Pre;color:#6a5a7a}
+.tx1 p u{text-decoration:none;color:#b8761c}
+/* 항해 일지 (월정액): 남색 벨벳 표지 + 금 모서리 + 책갈피 끈 */
+.book{position:absolute;width:104px;height:136px;border-radius:4px 10px 10px 4px;background:radial-gradient(70px 60px at 60% 34%,rgba(170,150,255,.35),transparent),url(a/s/tex_vel_navy.jpg) 0 0/200px;box-shadow:inset 6px 0 0 rgba(255,255,255,.08),inset 9px 0 0 rgba(0,0,0,.3),inset 0 0 0 2px rgba(228,194,122,.7),0 10px 16px rgba(30,15,40,.4);transform:rotate(-4deg)}
+.book::before{content:"";position:absolute;right:-5px;top:4px;bottom:4px;width:6px;border-radius:0 3px 3px 0;background:repeating-linear-gradient(0deg,#fffaf0 0 2px,#e9dcc4 2px 3px)}
+.book i{position:absolute;width:18px;height:18px;background:url(a/s/corner.svg) 0 0/100% 100%}
+.book .gm{position:absolute;left:28px;top:30px;width:52px;filter:drop-shadow(0 0 8px rgba(255,180,230,.8))}
+.book b{position:absolute;left:0;right:0;bottom:16px;text-align:center;font:13px Gowun,serif;color:#ffe7a6;letter-spacing:1px}
+.book s{position:absolute;left:66px;bottom:-22px;width:9px;height:34px;background:linear-gradient(#ff9fbf,#c94a85);clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%)}
+.dleft{position:absolute;z-index:4;padding:3px 12px 3px 10px;font:13px Pre;color:#4a2b45;background:linear-gradient(#fff6d6,#f1d79a);clip-path:polygon(0 0,100% 0,calc(100% - 8px) 50%,100% 100%,0 100%);box-shadow:0 2px 4px rgba(0,0,0,.2)}
+.s1a .rows{position:absolute;left:338px;right:12px;top:0;bottom:0}
+.prow{position:absolute;left:0;right:0;display:flex;height:270px}
+.pcol{flex:1;position:relative;display:flex;flex-direction:column;align-items:center}
+.pcol .bx{height:170px;display:flex;align-items:flex-end;justify-content:center;position:relative;z-index:2}
+.pcol .bx::before{content:"";position:absolute;left:50%;bottom:4px;width:200px;height:150px;margin-left:-100px;background:radial-gradient(ellipse 50% 60% at 50% 70%,rgba(255,236,250,.9),transparent 70%);z-index:-1}
+.pcol .fb{position:relative;z-index:3;margin-top:20px;transform:rotate(-2deg)}
+.pcol .act{margin-top:6px;min-width:150px}
+.prow .shf{left:-6px;right:-6px;top:170px}
+.prow{height:262px}
+html[data-w="1600"] .bt{--ks:1.1}
+.prow .shf .br.l{left:30px}.prow .shf .br.r{right:30px;transform:scaleX(-1)}
+.scr[data-st=got] .fb.first,.scr[data-st=month] .fb.first{}
+/* =====================================================================
+   D8-1 B · 가로 쇼케이스 — 장미 벨벳 벽 + 긴 유리 진열장 한 줄 (가로로 밀기)
+   ===================================================================== */
+.s1b{background:radial-gradient(600px 300px at 50% -40px,rgba(255,220,235,.45),transparent 70%),linear-gradient(180deg,rgba(60,10,40,.15),rgba(40,8,30,.45)),url(a/s/tex_vel_rose.jpg) 0 0/420px}
+.s1b .spot{position:absolute;top:-20px;width:220px;height:420px;background:radial-gradient(ellipse 50% 100% at 50% 0,rgba(255,246,225,.45),transparent 75%);clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);mix-blend-mode:screen;pointer-events:none;z-index:1}
+.s1b .top{position:absolute;left:26px;right:26px;top:14px;display:flex;align-items:center;gap:14px;z-index:3;color:#fff}
+.s1b .top h4{margin:0;font:22px Gowun,serif;text-shadow:0 2px 6px rgba(60,0,30,.5)}
+.s1b .top small{font:13px Pre;opacity:.8}
+.s1b .top .more{margin-left:auto;font:14px Pre;display:flex;align-items:center;gap:6px;background:rgba(40,0,25,.35);padding:4px 12px;border-radius:14px;box-shadow:inset 0 0 0 1px rgba(255,220,235,.4)}
+html[data-w="1600"] .s1b .top .more{display:none}
+.case{position:absolute;left:20px;right:20px;top:58px;height:348px;z-index:2}
+.case .back{position:absolute;inset:10px 10px 0;border-radius:10px 10px 0 0;background:linear-gradient(180deg,rgba(120,60,100,.28),rgba(255,255,255,0) 40%,rgba(150,80,120,.25)),url(a/s/tex_linen.jpg) 0 0/280px,#ead6e4;box-shadow:inset 0 16px 34px rgba(90,30,70,.4),inset 0 -50px 40px rgba(110,40,80,.25),inset 30px 0 40px rgba(90,30,70,.2),inset -30px 0 40px rgba(90,30,70,.2)}
+.slot::before{content:"";position:absolute;left:-10px;right:-10px;top:-12px;bottom:0;z-index:-1;background:radial-gradient(ellipse 46% 30% at 50% 80%,rgba(255,250,240,.75),rgba(255,240,248,.25) 55%,transparent 75%),linear-gradient(180deg,rgba(255,250,235,.4),transparent 60%);clip-path:polygon(40% 0,60% 0,100% 100%,0 100%);pointer-events:none}
+.slot .amt{position:absolute;top:34px;left:0;right:0;text-align:center;font:24px Gowun,serif;color:#5a2a4a;text-shadow:0 1px 0 #fff;z-index:3}
+.slot .amt small{display:block;font:12px Pre;color:#8a6a80;margin-top:-2px}
+.case .rim{position:absolute;inset:0 0 0;border-radius:14px 14px 0 0;box-shadow:inset 0 0 0 10px transparent;border:10px solid transparent;border-bottom:0;background:linear-gradient(#000,#000) padding-box,linear-gradient(180deg,#ffe7a6,#c48a2a 40%,#f6d98a 70%,#b8761c) border-box;-webkit-mask:linear-gradient(#000,#000) border-box,linear-gradient(#000,#000) padding-box;-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:8}
+.case .glass{position:absolute;inset:10px 10px 0;background:linear-gradient(105deg,transparent 8%,rgba(255,255,255,.3) 12%,transparent 17%,transparent 46%,rgba(255,255,255,.2) 50%,rgba(255,255,255,.06) 53%,transparent 56%,transparent 80%,rgba(255,255,255,.22) 84%,transparent 88%),linear-gradient(180deg,rgba(255,255,255,.3),transparent 14%);pointer-events:none;z-index:7}
+.case .glass::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.45) 48%,transparent 56%) 0 0/300% 100% no-repeat;animation:gl 7s ease-in-out infinite}
+.case .base{position:absolute;left:-12px;right:-12px;top:100%;height:58px;border-radius:0 0 10px 10px;background:linear-gradient(180deg,rgba(255,240,210,.35),transparent 20%,rgba(30,10,0,.35)),url(a/s/tex_maple.jpg) 0 0/300px;box-shadow:inset 0 3px 0 #f6d98a,inset 0 5px 0 #b8761c,0 14px 22px rgba(40,10,30,.45);z-index:5}
+.track{position:absolute;left:24px;top:22px;bottom:0;display:flex;gap:12px;z-index:6}
+.slot{position:relative;width:160px;height:100%;display:flex;flex-direction:column;align-items:center}
+.slot .fb{position:absolute;top:94px;z-index:4}
+.slot .stage{position:absolute;left:0;right:0;bottom:0;height:200px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:22px}
+.slot .stage::before{content:"";position:absolute;left:14px;right:14px;bottom:8px;height:40px;border-radius:50%;background:radial-gradient(ellipse at 50% 30%,#d56b98,#8a2d5c 70%);box-shadow:inset 0 3px 4px rgba(255,200,225,.6),0 6px 10px rgba(60,10,30,.4)}
+.slot .stage::after{content:"";position:absolute;left:30px;right:30px;bottom:24px;height:14px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,240,250,.6),transparent)}
+.pile{position:relative;z-index:2;display:flex;flex-wrap:wrap-reverse;justify-content:center;width:130px;gap:0}
+.pile img{width:var(--pg,58px);margin:0 -7px -14px;filter:drop-shadow(0 4px 4px rgba(80,20,60,.35))}
+.slot .plq{position:absolute;bottom:-50px;left:6px;right:6px;height:40px;background:url(a/s/plaque.svg) 0 0/100% 100%;display:grid;place-items:center;font:15px Pre;color:#4a2b45;z-index:6;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+.slot .act{position:absolute;bottom:-112px;min-width:142px;z-index:6}
+.slot .gift{position:relative;width:150px;height:150px;transform:scale(.95);transform-origin:50% 100%}
+.slot .book{position:relative;transform:rotate(-3deg) scale(1.08);transform-origin:50% 100%}
+.s1b .fade{position:absolute;top:58px;right:20px;width:120px;height:470px;z-index:6;background:linear-gradient(90deg,transparent,rgba(60,10,40,.75));pointer-events:none;border-radius:0 14px 0 0}
+.s1b .fade::after{content:"›";position:absolute;right:14px;top:150px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.92);color:#8a2d5c;font:28px/38px Pre;text-align:center;box-shadow:0 0 0 2px #e4c27a,0 4px 10px rgba(0,0,0,.35)}
+html[data-w="1600"] .s1b .fade{display:none}
+/* =====================================================================
+   D8-1 C · 계산대 + 추천 하나 크게 — 단풍나무 계산대 위 펼친 항해 일지, 오른쪽 가격표
+   ===================================================================== */
+.s1c{background:radial-gradient(800px 500px at 28% 20%,rgba(255,240,215,.9),transparent 70%),url(a/s/tex_wall.jpg) 0 0/380px}
+.s1c .win{position:absolute;left:34px;top:26px;width:300px;height:190px;border-radius:150px 150px 6px 6px/80px 80px 6px 6px;background:linear-gradient(180deg,#bfe0ff,#e9dcff 70%,#ffe6f0);box-shadow:inset 0 0 0 7px #fff8ee,inset 0 0 0 9px #e4c27a,0 6px 14px rgba(80,40,80,.2);overflow:hidden}
+.s1c .win img{position:absolute;left:-60px;bottom:-30px;width:440px;opacity:.95}
+.s1c .win::after{content:"";position:absolute;left:0;right:0;top:94px;height:8px;background:#fff8ee;box-shadow:0 0 0 1px #e4c27a}
+.cnt{position:absolute;left:0;bottom:0;height:150px;width:calc(100% - 430px);z-index:3;background:linear-gradient(180deg,rgba(255,230,190,.55),transparent 12%,rgba(40,15,0,.3)),url(a/s/tex_maple.jpg) 0 0/360px;box-shadow:inset 0 4px 0 #f6d98a,inset 0 6px 0 #9b6440,0 -6px 14px rgba(60,30,20,.2);clip-path:polygon(0 0,calc(100% - 30px) 0,100% 100%,0 100%)}
+.cnt::before{content:"";position:absolute;left:0;right:0;top:44px;height:2px;background:linear-gradient(90deg,transparent,#e4a63c 20%,#ffe7a6 50%,#e4a63c 80%,transparent)}
+.s1c .yu{position:absolute;left:14px;bottom:20px;height:350px;z-index:2;filter:drop-shadow(0 8px 10px rgba(60,30,60,.3))}
+.cnt::after{content:"";position:absolute;left:0;right:30px;top:0;height:14px;background:linear-gradient(180deg,#f6d9a8,#c89060);box-shadow:0 3px 4px rgba(60,30,10,.35)}
+.obook{position:absolute;left:224px;bottom:88px;width:430px;height:250px;z-index:4;transform:perspective(900px) rotateX(18deg);transform-origin:50% 100%}
+.obook .pg{position:absolute;top:0;bottom:0;width:50%;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.08)),url(a/s/tex_paper.jpg) 0 0/240px;box-shadow:inset 0 0 0 1px rgba(180,140,90,.35)}
+.obook .pg.l{left:0;border-radius:10px 2px 2px 10px;background:linear-gradient(90deg,rgba(0,0,0,0) 80%,rgba(60,30,10,.18)),url(a/s/tex_paper.jpg) 0 0/240px}
+.obook .pg.r{right:0;border-radius:2px 10px 10px 2px;background:linear-gradient(270deg,rgba(0,0,0,0) 80%,rgba(60,30,10,.18)),url(a/s/tex_paper.jpg) 0 0/240px}
+.obook .cv{position:absolute;inset:-8px -10px -10px;border-radius:12px;background:url(a/s/tex_vel_navy.jpg) 0 0/200px;box-shadow:inset 0 0 0 2px rgba(228,194,122,.8),0 16px 24px rgba(40,20,40,.45);z-index:-1}
+.obook .pg.l{padding:16px 18px}
+.obook .pg.l b{display:block;font:22px Gowun,serif;color:#3a2547}
+.obook .pg.l small{display:block;font:12.5px Pre;color:#8a6a5a;margin:2px 0 8px}
+.obook .pg.l p{margin:0 0 6px;font:13.5px/1.45 Pre;color:#5a4a5a;display:flex;align-items:center;gap:6px}
+.obook .pg.l p img{width:24px;height:24px}
+.obook .pg.l p u{text-decoration:none;color:#b8761c;font-size:15px}
+.cal{position:absolute;left:16px;right:14px;top:34px;display:grid;grid-template-columns:repeat(6,1fr);gap:6px 4px}
+.cal i{height:26px;border-radius:50%;border:1.5px dashed rgba(140,110,90,.45);display:grid;place-items:center;font:10px Pre;font-style:normal;color:rgba(120,90,70,.7)}
+.cal i.on{border:0;background:url(a/i/icon_gem.png) center/90% no-repeat;color:transparent}
+.obook .pg.r h6{position:absolute;left:16px;top:10px;margin:0;font:13px Gowun,serif;color:#8a5a7a}
+.rcm{position:absolute;z-index:6;left:200px;top:120px;padding:6px 20px 6px 16px;font:15px Gowun,serif;color:#fff;background:linear-gradient(180deg,#ffd877,#e4a63c 60%,#b8761c);clip-path:polygon(0 0,100% 0,calc(100% - 10px) 50%,100% 100%,0 100%);text-shadow:0 1px 1px rgba(120,60,0,.6);transform:rotate(-6deg);box-shadow:0 4px 6px rgba(0,0,0,.2)}
+.bub{position:absolute;z-index:7;background:#fff;border-radius:16px;padding:10px 16px;font:14px/1.5 Pre;color:#4a3a5a;box-shadow:0 0 0 2px #c9b8f4,0 6px 14px rgba(60,40,90,.25);white-space:nowrap}
+.bub b{color:#7d63dc}
+.bub::after{content:"";position:absolute;left:30px;bottom:-15px;width:22px;height:17px;background:#fff;clip-path:polygon(0 0,100% 0,10% 100%);filter:drop-shadow(0 2px 0 #c9b8f4)}
+.mbtn{position:absolute;z-index:6;left:330px;bottom:26px}
+.menu{position:absolute;right:20px;top:18px;bottom:18px;width:400px;z-index:4;padding:16px 20px 12px;border-radius:6px;background:radial-gradient(300px 200px at 30% 0,rgba(255,255,255,.8),transparent),url(a/s/tex_paper.jpg) 0 0/300px;box-shadow:0 0 0 6px #fff9ee,0 0 0 8px #c48a2a,0 0 0 10px #f6d98a,0 16px 30px rgba(60,30,40,.35);transform:rotate(.8deg)}
+.menu .cor{position:absolute;width:30px;height:30px;background:url(a/s/corner.svg) 0 0/100% 100%}
+.menu h5{margin:0 0 4px;text-align:center;font:22px Gowun,serif;color:#4a2b45}
+.menu h5 small{display:block;font:12px Pre;color:#8a7a8a}
+.mrow{display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:8px;height:59px;border-top:1.5px dashed rgba(150,110,80,.35)}
+.mrow img{width:46px;height:46px;justify-self:center;filter:drop-shadow(0 2px 3px rgba(80,20,60,.3))}
+.mrow b{font:17px Pre;color:#3a2547;display:block;line-height:1.2}
+.mrow .fb{height:19px;font-size:11.5px;margin-top:2px}
+.mrow .act{min-width:116px;height:36px;font-size:16px}
+.mrow.free b small{font:12px Pre;color:#8a7a8a;margin-left:6px}
+html[data-w="1600"] .menu{width:460px}
+html[data-w="1600"] .cnt{width:calc(100% - 490px)}
+html[data-w="1600"] .obook{left:300px;width:470px}
+html[data-w="1600"] .s1c .yu{left:60px}
+html[data-w="1600"] .mbtn{left:420px}
+html[data-w="1600"] .rcm{left:276px}
+</style>
+<style>
+/* =====================================================================
+   D8-2 · 무료 선물 · 구매 완료 (전투 화면 위)
+   ===================================================================== */
+.bk.bt0{filter:brightness(.62) saturate(.9)}
+.scrim{position:absolute;inset:0;background:radial-gradient(ellipse 70% 66% at 50% 50%,rgba(40,26,92,.4),rgba(13,8,36,.84))}
+.rays{position:absolute;left:50%;top:var(--ray-y,360px);width:1500px;height:1500px;margin:-750px 0 0 -750px;background:repeating-conic-gradient(from 0deg,rgba(255,236,190,.13) 0 4deg,transparent 4deg 15deg);-webkit-mask:radial-gradient(circle,#000 6%,transparent 44%);mask:radial-gradient(circle,#000 6%,transparent 44%);animation:spin 90s linear infinite}
+.motes{position:absolute;inset:0;background-image:radial-gradient(circle,#fff4cf 0 1.6px,transparent 2.6px),radial-gradient(circle,#dccfff 0 1.1px,transparent 2px),radial-gradient(circle,#ffd6ea 0 1px,transparent 1.8px);background-size:190px 170px,130px 150px,90px 110px;background-position:0 0,50px 70px,20px 30px;animation:drift 18s linear infinite;opacity:.7}
+@keyframes drift{to{background-position:0 -170px,50px -80px,20px -190px}}
+.ban{position:absolute;left:50%;width:440px;height:76px;margin-left:-220px;display:grid;place-items:center;padding-bottom:6px;font:28px Gowun,serif;color:#fff;letter-spacing:2px;text-shadow:0 2px 0 rgba(60,30,120,.5);z-index:6}
+.ban img{position:absolute;inset:0;width:100%;height:100%;z-index:-1;filter:drop-shadow(0 8px 10px rgba(10,5,30,.45))}
+.ban2{position:absolute;left:0;right:0;text-align:center;font:16px Pre;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7);z-index:6}
+/* 보상 카드 (reward_band.gd 카드와 같은 크림 카드 + 종류 색 띠 + 금 테) */
+.rcd{position:relative;flex:none;width:156px;height:206px;border-radius:11px;display:flex;flex-direction:column;align-items:center;padding-top:22px;transform:skewX(-6deg);background:linear-gradient(90deg,var(--c,#ff8fc4),var(--c2,#b58bff)) top/100% 8px no-repeat,radial-gradient(120% 60% at 50% 0,#fff,rgba(255,255,255,0) 70%),linear-gradient(175deg,#fffdf7,#f6f0ff 60%,var(--tint,#f8dcff));box-shadow:inset 0 0 0 1.5px rgba(201,149,42,.65),inset 0 0 0 4.5px #fff,inset 0 0 0 5.5px rgba(139,116,232,.22),0 14px 22px rgba(6,3,24,.45)}
+.rcd>*{transform:skewX(6deg)}
+.rcd::before{content:"";position:absolute;left:50%;top:70px;width:190px;height:190px;margin:-95px 0 0 -95px;border-radius:50%;background:radial-gradient(circle,var(--g,rgba(255,150,205,.6)) 0,transparent 58%),repeating-conic-gradient(var(--g,rgba(255,150,205,.6)) 0 5deg,transparent 5deg 18deg);-webkit-mask:radial-gradient(circle,#000 22%,transparent 68%);mask:radial-gradient(circle,#000 22%,transparent 68%);animation:spin 18s linear infinite}
+.rcd::after{content:"";position:absolute;inset:0;border-radius:11px;background:linear-gradient(112deg,transparent 40%,rgba(255,255,255,.8) 49%,rgba(255,255,255,0) 58%) 0 0/300% 100% no-repeat;animation:gl 6s ease-in-out infinite 1.4s}
+.rcd .ic{position:relative;width:100px;height:100px;filter:drop-shadow(0 6px 6px rgba(46,35,80,.28))}
+.rcd b{position:relative;margin-top:6px;font:900 34px Pre;color:#2f2654;letter-spacing:-.5px;text-shadow:0 2px 0 #fff}
+.rcd small{position:relative;font:14px Pre;color:#6a6290}
+.rcd .tg{position:absolute;left:12px;top:14px;font:11px Pre;color:#7a6aa8;letter-spacing:.5px;transform:skewX(6deg)}
+.rcd.gold{--c:#ffcc4d;--c2:#ffe7a6;--g:rgba(255,204,77,.6);--tint:#fff0c8}
+.rcd.cal{--c:#8f78ee;--c2:#c9b8ff;--g:rgba(165,139,255,.5);--tint:#e6dcff}
+.rcd .mini{position:relative;display:grid;grid-template-columns:repeat(6,12px);gap:4px;margin:10px 0 6px}
+.rcd .mini i{width:12px;height:12px;border-radius:50%;background:url(a/i/icon_gem.png) center/120% no-repeat;opacity:.9}
+.take{position:absolute;left:50%;bottom:44px;margin-left:-120px;z-index:8;filter:drop-shadow(0 0 14px rgba(255,231,166,.55)) drop-shadow(0 6px 8px rgba(8,4,28,.5))}
+.take span{display:grid;place-items:center;width:240px;height:64px;font:900 26px Pre;color:#2f2654;letter-spacing:2px;background:linear-gradient(90deg,#ffe7a6,#d9a52b) bottom/100% 5px no-repeat,linear-gradient(180deg,#fff,#efe8ff);clip-path:polygon(7% 0,100% 0,93% 100%,0 100%)}
+.scr.go .rcd{animation:cdin .6s cubic-bezier(.2,1.3,.4,1) both;animation-delay:calc(var(--d,0) * 1s)}
+@keyframes cdin{from{opacity:0;transform:skewX(-6deg) translateY(120px) scale(.4)}}
+/* A 선물 상자 */
+.g2a .box{position:absolute;left:50%;top:410px;width:300px;height:230px;margin-left:-150px;z-index:3}
+.g2a .box::before{content:"";position:absolute;left:-40px;right:-40px;bottom:-22px;height:44px;border-radius:50%;background:radial-gradient(closest-side,rgba(8,4,28,.6),transparent)}
+.g2a .box .bb{position:absolute;left:30px;bottom:0;width:240px}
+.g2a .box .lid{position:absolute;left:10px;top:40px;width:250px;transform-origin:0 100%;transform:translate(-170px,128px) rotate(-12deg)}
+.g2a .box .rl{position:absolute;left:170px;top:-6px;width:220px;transform:rotate(-8deg);opacity:.95}
+.scr.go .g2a .box .lid{animation:lidopen .8s cubic-bezier(.3,1.4,.5,1) both .1s}
+@keyframes lidopen{from{transform:none}}
+.scr.go .g2a .box .rl{animation:rlfly 1.1s ease-out both .2s}
+@keyframes rlfly{from{opacity:0;transform:translate(-120px,60px) rotate(30deg) scale(.6)}}
+.g2a .beam{position:absolute;left:50%;top:104px;width:420px;height:320px;margin-left:-210px;background:radial-gradient(ellipse 40% 60% at 50% 100%,rgba(255,240,200,.85),rgba(255,200,230,.25) 50%,transparent 75%);clip-path:polygon(30% 100%,70% 100%,100% 0,0 0);z-index:2;mix-blend-mode:screen}
+.g2a .cards{position:absolute;left:0;right:0;top:182px;display:flex;justify-content:center;gap:26px;z-index:5}
+/* B 영수증 */
+.g2b .slotbar{position:absolute;left:calc(50% - 400px);top:92px;width:380px;height:26px;border-radius:13px;background:linear-gradient(180deg,#2a1636,#5a3060 60%,#8a5a7a);box-shadow:inset 0 3px 6px rgba(0,0,0,.6),0 0 0 2px #e4c27a,0 6px 10px rgba(0,0,0,.4);z-index:4}
+.rct{position:absolute;left:calc(50% - 380px);top:104px;width:340px;height:470px;z-index:3;filter:drop-shadow(0 14px 20px rgba(10,5,30,.5))}
+.rct .pp{position:absolute;inset:0;padding:34px 30px 20px;-webkit-mask:url(a/s/receipt_mask.svg) 0 0/100% 100%;mask:url(a/s/receipt_mask.svg) 0 0/100% 100%;background:linear-gradient(180deg,rgba(120,80,40,.12),transparent 14%),url(a/s/tex_paper.jpg) 0 0/300px;font:14px/1.5 Pre;color:#4a3a4a}
+.scr.go .rct{animation:print 1.2s cubic-bezier(.3,.8,.4,1) both}
+@keyframes print{from{clip-path:inset(0 0 100% 0);transform:translateY(-30px)}to{clip-path:inset(0 0 -40px 0)}}
+.rct h5{margin:0;text-align:center;font:22px Gowun,serif;color:#4a2b45;letter-spacing:2px}
+.rct h5+small{display:block;text-align:center;font:12px Pre;color:#8a7a8a;margin-bottom:10px}
+.rct .ln{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1.5px dashed rgba(140,110,90,.35)}
+.rct .ln span{color:#7a6a7a}
+.rct .ln b{color:#3a2547}
+.rct .ln.pl b{color:#e0445a}
+.rct .tot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:8px;border-top:2.5px double #c48a2a;font:18px Pre;color:#3a2547}
+.rct .tot b{display:flex;align-items:center;gap:4px;font:900 30px Pre;color:#7d3a8a}
+.rct .tot b img{width:34px;height:34px}
+.rct .bar{margin:16px auto 0;width:200px;height:36px;background:repeating-linear-gradient(90deg,#3a2547 0 2px,transparent 2px 4px,#3a2547 4px 5px,transparent 5px 8px,#3a2547 8px 11px,transparent 11px 13px);opacity:.75}
+.rct .thx{text-align:center;font:13px Gowun,serif;color:#8a5a7a;margin-top:6px}
+.rct .stmp{left:180px;top:250px;width:130px;transform:rotate(-16deg)}
+.scr.go .rct .stmp{animation:stp .45s cubic-bezier(.3,1.6,.5,1) both 1.3s}
+.g2b .side{position:absolute;left:calc(50% + 10px);top:150px;width:380px;display:flex;flex-direction:column;align-items:center;gap:16px;z-index:5}
+.g2b .side h4{margin:0;font:30px Gowun,serif;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.g2b .side .cards{display:flex;gap:22px}
+.g2b .take{left:calc(50% + 200px);bottom:96px}
+/* C 창 없이 진열장 → 지갑 */
+.g2c .shopwrap{position:absolute;inset:0}
+.fly{position:absolute;z-index:30;width:52px;height:52px;pointer-events:none;offset-rotate:0deg;offset-distance:calc(34% + var(--i) * 16%);filter:drop-shadow(0 0 10px rgba(255,190,240,.9))}
+.fly img{width:100%;height:100%}
+.scr.go .fly{animation:flyto 1.5s cubic-bezier(.5,0,.4,1) both;animation-delay:calc(.6s + var(--i) * .12s)}
+@keyframes flyto{0%{offset-distance:0;opacity:0;transform:scale(.4)}10%{opacity:1;transform:scale(1.2)}85%{opacity:1;transform:scale(.9)}100%{offset-distance:100%;opacity:0;transform:scale(.5)}}
+.trail{position:absolute;inset:0;z-index:29;pointer-events:none}
+.trail path{fill:none;stroke:url(#trailg);stroke-width:5;stroke-linecap:round;stroke-dasharray:6 10;opacity:.9}
+.scr.go .trail path{animation:dash 1.8s linear both .5s}
+@keyframes dash{from{stroke-dashoffset:300;opacity:0}20%{opacity:.9}to{stroke-dashoffset:0;opacity:0}}
+.scr.go[data-fly] .gw{animation:wpulse .5s ease-out 2.1s both}
+@keyframes wpulse{40%{transform:scale(1.18);box-shadow:inset 0 0 0 1px rgba(255,220,235,.35),0 0 18px #ffd6f0}}
+.plus{position:absolute;z-index:31;font:900 22px Pre;color:#fff;text-shadow:0 0 6px #ff8fc4,0 2px 2px rgba(60,0,40,.6);opacity:0}
+.scr.go .plus{animation:plus 1.2s ease-out both 2.1s}
+@keyframes plus{0%{opacity:0;transform:translateY(10px)}25%{opacity:1}100%{opacity:0;transform:translateY(-26px)}}
+.ring{position:absolute;z-index:28;width:150px;height:150px;border-radius:50%;border:3px solid rgba(255,230,250,.9);opacity:0;pointer-events:none}
+.scr.go .ring{animation:ring .7s ease-out both .45s}
+@keyframes ring{from{opacity:1;transform:scale(.3)}to{opacity:0;transform:scale(1.3)}}
+</style>
+<style>
+.scr[data-fly][data-st=free] .gift .lid{transform:translate(28px,-20px) rotate(16deg)}
+.scr[data-fly][data-st=free] .gift .bow{transform:translate(70px,-6px) rotate(26deg)}
+/* =====================================================================
+   D8-3 · 신화 조각 상점 — 무지개 보석상 (남색 벨벳 · 놋쇠 · 유리)
+   ===================================================================== */
+.rbw{background:conic-gradient(from 200deg,#ff9fbf,#ffd66e,#a6f0a0,#8fd3ff,#b49bff,#ff9fbf)}
+.rbt{background:linear-gradient(90deg,#ff7fb0,#ffb84d,#7fd68a,#5fb8ff,#9b7cff);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+.shard{width:40px;height:54px}
+.hp{position:relative;width:86px;height:86px;border-radius:50%;padding:4px;background:conic-gradient(from 200deg,#ff9fbf,#ffd66e,#a6f0a0,#8fd3ff,#b49bff,#ff9fbf);box-shadow:0 0 16px rgba(220,180,255,.7)}
+.hp span{display:block;width:100%;height:100%;border-radius:50%;background:var(--pic) 50% 8%/180% auto no-repeat,radial-gradient(circle at 40% 30%,#fff,#e9defa)}
+.mbot{position:relative;width:52px;height:86px}
+.mbot img,.mbot .lq{position:absolute;inset:0;width:100%;height:100%}
+.mbot .lq{-webkit-mask:url(a/s/bot_mask.svg) 0 0/100% 100%;mask:url(a/s/bot_mask.svg) 0 0/100% 100%;overflow:hidden}
+.mbot .lq i{--liq:linear-gradient(180deg,#ff9fbf,#ffd66e 30%,#a6f0a0 50%,#8fd3ff 70%,#b49bff)}
+.mchip{display:inline-block;padding:1px 9px;border-radius:9px;font:12px Pre;white-space:nowrap}
+/* A 보석상 카운터 */
+.s3a{background:radial-gradient(700px 260px at 50% 0,rgba(150,130,255,.35),transparent 70%),linear-gradient(180deg,rgba(10,6,40,.1),rgba(10,6,40,.45)),url(a/s/tex_vel_navy.jpg) 0 0/360px;color:#f6efff}
+.s3a .top{position:absolute;left:18px;right:18px;top:12px;height:78px;display:flex;align-items:center;gap:16px;z-index:3}
+.s3a .top .cnt3{display:flex;align-items:center;gap:10px;padding:4px 22px 4px 10px;height:74px;border-radius:38px 12px 12px 38px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.03));box-shadow:inset 0 0 0 1.5px rgba(228,194,122,.8),inset 0 1px 0 rgba(255,255,255,.25)}
+.s3a .top .cnt3 b{font:900 38px Pre}
+.s3a .top .cnt3 small{display:block;font:13px Pre;color:#d9cff5;margin-bottom:-6px}
+.btag{display:flex;align-items:center;gap:8px;height:42px;padding:0 16px 0 22px;font:14px Pre;color:#4a2b10;background:linear-gradient(180deg,#fff3c4,#e4b25a 55%,#c48a2a);clip-path:polygon(12px 0,100% 0,100% 100%,12px 100%,0 50%);box-shadow:inset 0 1px 0 #fff}
+.btag b{font:20px Pre;color:#3a1f00}
+.btag::before{content:"";width:8px;height:8px;border-radius:50%;background:#4a2b10;margin-left:-8px;box-shadow:0 0 0 2px #fff3c4}
+.s3a .top .rule{margin-left:auto;font:12.5px/1.5 Pre;color:#cfc5f5;text-align:right}
+.gcase{position:absolute;left:16px;right:16px;top:100px;bottom:14px;border-radius:14px;padding:12px;background:linear-gradient(180deg,rgba(255,236,200,.3),transparent 6%,rgba(30,10,0,.3)),url(a/s/tex_walnut.jpg) 0 0/320px;box-shadow:inset 0 2px 0 rgba(255,236,200,.55),0 16px 26px rgba(5,2,20,.55)}
+.gcase .in{position:relative;height:100%;border-radius:8px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;background:radial-gradient(500px 220px at 50% 0,rgba(150,130,255,.28),transparent),url(a/s/tex_vel_navy.jpg) 30px 10px/300px;box-shadow:inset 0 0 0 2px #e4c27a,inset 0 0 0 4px rgba(20,10,40,.6),inset 0 18px 30px rgba(0,0,0,.45)}
+.gcase .in::after{content:"";position:absolute;inset:0;border-radius:8px;pointer-events:none;background:linear-gradient(100deg,transparent 10%,rgba(255,255,255,.14) 14%,transparent 20%,transparent 60%,rgba(255,255,255,.1) 64%,transparent 68%),linear-gradient(180deg,rgba(255,255,255,.12),transparent 30%)}
+.gcell{position:relative;display:grid;grid-template-columns:104px 1fr;grid-template-rows:auto 1fr auto;column-gap:10px;padding:16px 16px 14px 12px;border-right:1.5px solid rgba(228,194,122,.45);border-bottom:1.5px solid rgba(228,194,122,.45)}
+.gcell:nth-child(3n){border-right:0}.gcell:nth-child(n+4){border-bottom:0}
+.gcell .pil{grid-row:1/4;align-self:center;width:100px;height:100px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,rgba(180,160,255,.5),rgba(40,30,100,.2) 60%,transparent 70%)}
+.gcell .pil img{width:76px;height:76px;filter:drop-shadow(0 6px 8px rgba(0,0,0,.45))}
+.gcell h6{margin:0;font:18px Gowun,serif;color:#fff8e6}
+.gcell .mchip{background:rgba(228,194,122,.2);color:#ffe7a6;box-shadow:inset 0 0 0 1px rgba(228,194,122,.6);margin-top:3px}
+.gcell p{margin:4px 0 0;font:12.5px/1.45 Pre;color:#cfc5f0}
+.gcell .act{justify-self:end;align-self:end}
+.gcell.hero{background:radial-gradient(200px 140px at 20% 50%,rgba(255,200,240,.22),transparent)}
+.gcell.hero::before{content:"";position:absolute;inset:6px;border-radius:8px;padding:2px;background:linear-gradient(90deg,#ff9fbf,#ffd66e,#a6f0a0,#8fd3ff,#b49bff);-webkit-mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.85;pointer-events:none}
+.tray{position:absolute;left:30px;right:30px;bottom:20px;height:400px;z-index:8;border-radius:16px;padding:18px 22px;background:radial-gradient(600px 200px at 50% 0,rgba(150,130,255,.35),transparent),linear-gradient(180deg,#2a1e68,#160e3c);box-shadow:0 0 0 2px #e4c27a,0 0 0 5px rgba(20,10,40,.8),0 -10px 40px rgba(0,0,0,.6);color:#fff}
+.scr.go .tray{animation:trayin .55s cubic-bezier(.2,1.1,.3,1) both}
+@keyframes trayin{from{transform:translateY(60px);opacity:0}}
+.tray h5{margin:0;font:22px Gowun,serif;display:flex;align-items:baseline;gap:12px}
+.tray h5 small{font:13px Pre;color:#cfc5f0}
+.tray .row{display:flex;justify-content:center;gap:22px;margin-top:16px}
+.tray .ft{position:absolute;left:22px;right:22px;bottom:16px;display:flex;align-items:center;gap:14px;font:13px Pre;color:#cfc5f0}
+.tray .ft .act{margin-left:auto}
+/* 신화 아이 카드 (드롭다운 대신) */
+.mcard{position:relative;flex:none;width:230px;height:260px;border-radius:12px;padding:3px;transform:skewX(-5deg);background:linear-gradient(135deg,#ff9fbf,#ffd66e,#a6f0a0,#8fd3ff,#b49bff);box-shadow:0 12px 20px rgba(0,0,0,.45);filter:saturate(.75) brightness(.85)}
+.mcard.on{filter:none;transform:skewX(-5deg) translateY(-8px);box-shadow:0 0 0 3px #fff,0 0 26px rgba(255,220,250,.9),0 16px 24px rgba(0,0,0,.5)}
+.mcard .im{position:absolute;inset:3px;border-radius:10px;background:var(--pic) var(--px,30%) 30%/auto 130% no-repeat,radial-gradient(circle at 50% 30%,#fff,#e6dcff);overflow:hidden}
+.mcard .nm{position:absolute;left:3px;right:3px;bottom:3px;padding:26px 12px 8px;border-radius:0 0 10px 10px;background:linear-gradient(180deg,transparent,rgba(20,10,50,.88) 45%);transform:skewX(5deg)}
+.mcard .nm b{display:block;font:22px Gowun,serif;color:#fff}
+.mcard .nm small{font:12px Pre;color:#e6dcff}
+.mcard .ck{position:absolute;right:10px;top:10px;width:30px;height:30px;border-radius:50%;background:#fff;color:#7d63dc;font:900 18px/30px Pre;text-align:center;transform:skewX(5deg);box-shadow:0 0 0 2px #e4c27a}
+.mcard:not(.on) .ck{display:none}
+.ssc{position:relative;flex:none;width:138px;height:200px;border-radius:10px;padding:3px;background:var(--ec);transform:skewX(-5deg);box-shadow:0 10px 16px rgba(0,0,0,.4);filter:saturate(.75) brightness(.85)}
+.ssc.on{filter:none;transform:skewX(-5deg) translateY(-8px);box-shadow:0 0 0 3px #fff,0 0 20px color-mix(in srgb,var(--ec) 80%,#fff),0 14px 20px rgba(0,0,0,.45)}
+.ssc .im{position:absolute;inset:3px;border-radius:8px;background:url(a/c/x.webp) 50% 0/130% auto no-repeat,linear-gradient(180deg,#fff,color-mix(in srgb,var(--ec) 30%,#fff));background-image:var(--pic),linear-gradient(180deg,#fff,color-mix(in srgb,var(--ec) 30%,#fff))}
+.ssc .tg{position:absolute;left:8px;top:8px;padding:0 7px;border-radius:5px;background:var(--ec);color:#fff;font:12px Pre;transform:skewX(5deg);box-shadow:0 0 0 1.5px #fff}
+.ssc b{position:absolute;left:3px;right:3px;bottom:3px;padding:16px 0 6px;border-radius:0 0 8px 8px;text-align:center;font:16px Pre;color:#fff;background:linear-gradient(180deg,transparent,rgba(20,10,50,.85) 50%);transform:skewX(5deg)}
+.ssc small{position:absolute;right:8px;top:8px;font:11px Pre;color:#fff;background:rgba(20,10,50,.6);border-radius:5px;padding:0 5px;transform:skewX(5deg)}
+/* B 조각 병 + 장부 */
+.s3b{background:radial-gradient(520px 420px at 22% 46%,rgba(255,240,255,.95),transparent 70%),radial-gradient(800px 400px at 80% 100%,rgba(200,180,255,.4),transparent),linear-gradient(180deg,#efe6fb,#e2d6f6)}
+.s3b .halo{position:absolute;left:30px;top:30px;width:320px;height:420px;background:repeating-conic-gradient(from 0deg at 50% 55%,rgba(255,255,255,.55) 0 3deg,transparent 3deg 14deg);-webkit-mask:radial-gradient(circle at 50% 55%,#000 10%,transparent 62%);mask:radial-gradient(circle at 50% 55%,#000 10%,transparent 62%);animation:spin 60s linear infinite}
+.s3b .bigjar{position:absolute;left:58px;top:62px;--k:1.32}
+.s3b .bigjar .lq i{--liq:linear-gradient(180deg,rgba(255,200,230,.75),rgba(200,190,255,.75) 50%,rgba(150,210,255,.8))}
+.s3b .bigjar .sh{position:absolute;width:15%;filter:drop-shadow(0 2px 2px rgba(60,30,90,.35))}
+.s3b .jcount{position:absolute;left:30px;width:320px;top:420px;text-align:center}
+.s3b .jcount>b{display:block;width:max-content;margin:0 auto;font:900 46px/1 Pre}
+.s3b .jcount small{font:13px Pre;color:#6a5a8a}
+.s3b .jcount .mini3{display:flex;justify-content:center;gap:6px;margin-top:8px}
+.s3b .jcount .mini3 span{font:12.5px Pre;color:#4a3a6a;background:#fff;border-radius:10px;padding:2px 10px;box-shadow:0 0 0 1px #d9cdee}
+.ledger{position:absolute;left:380px;right:18px;top:16px;bottom:16px;border-radius:4px 14px 14px 4px;padding:14px 22px 10px 44px;background:repeating-linear-gradient(180deg,transparent 0 31px,rgba(140,120,200,.18) 31px 32px),linear-gradient(90deg,transparent 30px,rgba(255,120,160,.35) 30px 31.5px,transparent 31.5px),url(a/s/tex_paper.jpg) 0 0/300px;box-shadow:0 0 0 1.5px #d6c39a,0 12px 24px rgba(60,40,100,.25),inset 8px 0 12px rgba(120,90,60,.12)}
+.ledger::before{content:"";position:absolute;left:-14px;top:30px;bottom:30px;width:22px;background:radial-gradient(circle at 50% 50%,#8a7a9a 0 4px,transparent 5px) 0 0/22px 44px}
+.ledger h5{margin:0 0 4px;font:21px Gowun,serif;color:#3a2547;display:flex;align-items:baseline;gap:10px}
+.ledger h5 small{font:12.5px Pre;color:#8a7a8a}
+.lrow{position:relative;display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:12px;height:74px;border-bottom:1.5px dashed rgba(150,120,90,.4)}
+.lrow:last-child{border-bottom:0}
+.lrow .ic{width:58px;height:58px;display:grid;place-items:center}
+.lrow .ic img{max-width:56px;max-height:56px;filter:drop-shadow(0 3px 3px rgba(60,30,90,.3))}
+.lrow h6{margin:0;font:17px Pre;color:#3a2547;display:flex;align-items:center;gap:8px}
+.lrow .mchip{background:#efe6ff;color:#5b4a9a;box-shadow:inset 0 0 0 1px #c9b8f4}
+.lrow p{margin:2px 0 0;font:12.5px Pre;color:#7a6a8a}
+.ptag{position:relative;display:grid;place-items:center;width:112px;height:44px;background:url(a/s/tag.svg) 0 0/100% 100%;font:15px Pre;color:#4a2b45;padding-left:12px;margin-right:6px}
+.ptag img{position:absolute;left:22px;top:9px;width:18px}
+.lrow .acts{display:flex;align-items:center;gap:8px}
+.lrow.hero{background:linear-gradient(90deg,rgba(255,220,240,.5),rgba(220,240,255,.3) 60%,transparent)}
+.lrow.hero::before{content:"";position:absolute;left:-34px;top:8px;bottom:8px;width:5px;border-radius:3px;background:linear-gradient(180deg,#ff9fbf,#ffd66e,#a6f0a0,#8fd3ff,#b49bff)}
+.inl{display:flex;gap:10px;margin:6px 0 4px;padding:8px 0 6px}
+.inl .mcard{width:150px;height:150px}
+.inl .mcard .nm{padding:16px 10px 6px}.inl .mcard .nm b{font-size:17px}
+.inl .ssc{width:96px;height:118px}
+.inl .ssc b{font-size:13px;padding:10px 0 4px}
+/* C 신화 초상 갤러리 */
+.s3c{background:radial-gradient(900px 300px at 50% 0,rgba(255,255,255,.85),transparent 70%),url(a/s/tex_wall.jpg) 0 0/380px,#efe4f4}
+.s3c .mold{position:absolute;left:0;right:0;top:330px;height:14px;background:linear-gradient(180deg,#fff8ee,#e9dcc8);box-shadow:0 1px 0 #c48a2a,0 4px 8px rgba(80,50,30,.2)}
+.s3c .wain{position:absolute;left:0;right:0;top:344px;bottom:0;background:linear-gradient(180deg,rgba(60,40,100,.12),transparent 20%),url(a/s/tex_linen.jpg) 0 0/260px,#ddd0ee}
+.gal{position:absolute;left:24px;right:24px;top:18px;display:flex;justify-content:space-around;z-index:3}
+.frm{position:relative;width:296px;display:flex;flex-direction:column;align-items:center}
+.frm .fr{position:relative;width:296px;height:212px;padding:14px;border-radius:6px;background:linear-gradient(135deg,#fff3c4,#e4a63c 25%,#b8761c 50%,#f6d98a 75%,#c48a2a);box-shadow:inset 0 0 0 2px #fff6d6,inset 0 0 0 5px rgba(120,70,0,.35),0 14px 22px rgba(60,30,60,.35)}
+.frm .fr::before{content:"";position:absolute;inset:8px;border:1.5px solid rgba(255,250,230,.8);border-radius:3px;pointer-events:none;z-index:2}
+.frm .fr .im{width:100%;height:100%;border-radius:2px;background:var(--pic) var(--px,20%) 30%/auto 120% no-repeat,linear-gradient(180deg,#e9e0ff,#fff);box-shadow:inset 0 0 0 2px rgba(0,0,0,.2),inset 0 0 20px rgba(60,30,90,.3)}
+.frm .fr .cr{position:absolute;width:26px;height:26px;background:url(a/s/corner.svg) 0 0/100% 100%;z-index:3}
+.frm .lamp{position:absolute;top:-18px;left:50%;width:300px;height:220px;margin-left:-150px;background:radial-gradient(ellipse 50% 60% at 50% 0,rgba(255,250,225,.75),transparent 70%);pointer-events:none;z-index:-1}
+.frm .np{margin-top:10px;padding:4px 22px;font:19px Gowun,serif;color:#4a2b10;background:url(a/s/plaque.svg) 0 0/100% 100%;min-width:150px;text-align:center}
+.frm .np small{font:11.5px Pre;color:#6a4a20;display:block;margin-top:-3px}
+.frm .act{margin-top:8px}
+.scr[data-st=pick] .frm.pk .fr{box-shadow:inset 0 0 0 2px #fff6d6,inset 0 0 0 5px rgba(120,70,0,.35),0 0 0 4px #fff,0 0 0 7px transparent,0 0 30px rgba(255,200,250,.9),0 14px 22px rgba(60,30,60,.35)}
+.scr[data-st=pick] .frm.pk .fr::after{content:"";position:absolute;inset:-7px;border-radius:9px;padding:3px;background:linear-gradient(90deg,#ff9fbf,#ffd66e,#a6f0a0,#8fd3ff,#b49bff);-webkit-mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);-webkit-mask-composite:xor;mask-composite:exclude}
+.scr[data-st=pick] .frm:not(.pk){filter:saturate(.6) brightness(.92)}
+.s3c .shelf3{position:absolute;left:18px;right:18px;bottom:12px;height:170px;display:flex;gap:10px;z-index:3}
+.smc{position:relative;flex:1;border-radius:10px;padding:10px 10px 8px;display:flex;flex-direction:column;align-items:center;background:linear-gradient(180deg,#fffdf8,#f4ecfb);box-shadow:inset 0 0 0 1.5px rgba(201,149,42,.5),inset 0 0 0 4px #fff,0 8px 14px rgba(60,40,100,.2)}
+.smc img.i{width:56px;height:56px;filter:drop-shadow(0 3px 3px rgba(60,30,90,.3))}
+.smc h6{margin:2px 0 0;font:14.5px Pre;color:#3a2547;white-space:nowrap}
+.smc .mchip{background:#efe6ff;color:#5b4a9a;font-size:11px;margin-top:2px}
+.smc .act{margin-top:auto;min-width:0;width:100%;height:32px;font-size:14px}
+.s3c .ttl3{position:absolute;left:28px;top:352px;font:13px Pre;color:#6a5a8a;z-index:4}
+.s3c .cnt3c{position:absolute;right:20px;top:343px;display:flex;align-items:center;gap:8px;z-index:4;background:#fff;border-radius:18px;padding:2px 14px 2px 6px;box-shadow:0 0 0 1.5px #e4c27a,0 4px 8px rgba(60,40,100,.2);font:14px Pre;color:#4a3a6a}
+.s3c .cnt3c b{font:900 22px Pre}
+.s3c .cnt3c img{width:22px}
+</style>
+<style>
+.scr[data-st=poor] .lrow:has(.need) .ptag{color:#e0445a}
+/* =====================================================================
+   D8-4 · 별가루 교환소 (소환 무대 위) — 금빛 별 병
+   ===================================================================== */
+.dhd{position:absolute;left:44px;top:64px;z-index:5;display:flex;align-items:center;gap:12px;color:#fff}
+.dhd h4{margin:0;font:26px Gowun,serif;text-shadow:0 2px 6px rgba(0,0,0,.5)}
+.dhd small{font:13px Pre;color:#e6dcff}
+.dcl{position:absolute;right:150px;top:64px;z-index:5}
+.gjar .lq>i{--liq:linear-gradient(180deg,#fff2c0,#ffd66e 35%,#e4a63c 80%,#c48a2a)}
+.gjar .lq>i::after{background:radial-gradient(circle,#fff 0 1.6px,transparent 2.6px) 0 0/18px 22px,radial-gradient(circle,rgba(255,255,255,.8) 0 1px,transparent 2px) 7px 9px/14px 16px}
+.scr[data-st=poor] .gjar .lq>i{height:6%!important}
+.hcd{position:relative;flex:none;width:var(--hw,150px);height:var(--hh,196px);border-radius:10px;padding:3px;transform:skewX(-5deg);background:var(--ec);box-shadow:0 10px 16px rgba(0,0,0,.35);transition:transform .3s}
+.hcd .im{position:absolute;inset:3px;border-radius:8px;background:var(--pic) 50% 6%/150% auto no-repeat,linear-gradient(180deg,#fff,color-mix(in srgb,var(--ec) 28%,#fff))}
+.hcd .tg{position:absolute;left:8px;top:8px;padding:0 7px;border-radius:5px;background:var(--ec);color:#fff;font:12px Pre;transform:skewX(5deg);box-shadow:0 0 0 1.5px #fff}
+.hcd .pk{position:absolute;right:-6px;top:10px;padding:1px 10px 1px 8px;font:12px Pre;color:#fff;background:linear-gradient(#ff9fc8,#e0558f);clip-path:polygon(0 0,100% 0,calc(100% - 6px) 50%,100% 100%,0 100%);transform:skewX(5deg)}
+.hcd .nmb{position:absolute;left:3px;right:3px;bottom:3px;padding:18px 6px 6px;border-radius:0 0 8px 8px;text-align:center;background:linear-gradient(180deg,transparent,rgba(20,10,50,.86) 40%);transform:skewX(5deg)}
+.hcd .nmb b{display:block;font:15px Pre;color:#fff}
+.hcd .pr{display:inline-flex;align-items:center;gap:3px;margin-top:3px;padding:1px 10px 1px 4px;border-radius:10px;background:linear-gradient(#fff6d6,#f1d79a);font:13px Pre;color:#5b3f12}
+.hcd .pr img{width:18px;height:18px}
+.scr[data-st=poor] .hcd .pr{color:#e0445a}
+.hcd.on,.scr[data-st=pick] .hcd.pkc,.scr[data-st=ss] .hcd.mrc{transform:skewX(-5deg) translateY(-10px) scale(1.06);box-shadow:0 0 0 3px #fff,0 0 22px color-mix(in srgb,var(--ec) 70%,#fff),0 16px 22px rgba(0,0,0,.45);z-index:3}
+.dpick{position:absolute;z-index:7;display:flex;align-items:center;gap:14px;padding:10px 16px 10px 12px;border-radius:14px 4px 14px 4px;background:linear-gradient(180deg,#fffdf6,#f3ecdd);box-shadow:0 0 0 1.5px #e4c27a,0 10px 20px rgba(10,5,30,.45);color:#3a2547}
+.dpick .fc{width:54px;height:54px;border-radius:50%;background:var(--pic) 50% 6%/170% auto no-repeat,#fff;box-shadow:0 0 0 3px var(--ec)}
+.dpick b{display:block;font:17px Pre}
+.dpick small{font:12.5px Pre;color:#7a6a8a}
+/* A 서리 유리 판 */
+.d4a .glassp{position:absolute;left:30px;right:150px;top:110px;bottom:24px;border-radius:18px;background:linear-gradient(160deg,rgba(255,255,255,.26),rgba(255,255,255,.08) 40%,rgba(200,180,255,.12));-webkit-backdrop-filter:blur(8px) saturate(1.1);backdrop-filter:blur(8px) saturate(1.1);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.45),inset 0 1px 0 rgba(255,255,255,.7),0 0 0 2.5px rgba(228,194,122,.55),0 20px 40px rgba(5,2,20,.5);z-index:3}
+.d4a .left{position:absolute;left:52px;top:128px;width:270px;bottom:40px;z-index:4;display:flex;flex-direction:column;align-items:center;color:#fff}
+.d4a .ped{position:relative;margin-top:-10px;width:220px;height:28px;border-radius:50%;background:radial-gradient(ellipse at 50% 30%,#fff3c4,#e4a63c 50%,#8a5a14);box-shadow:0 8px 14px rgba(0,0,0,.45)}
+.d4a .left h5{margin:10px 0 0;font:19px Gowun,serif}
+.d4a .left p{margin:2px 0 8px;font:12.5px/1.45 Pre;color:#e9e1ff;text-align:center}
+.d4a .left .act{width:238px;margin-top:8px;height:38px}
+.d4a .left .cr{display:flex;align-items:center;gap:6px;font:13.5px Pre;color:#fff}
+.d4a .left .cr img{width:26px}
+.d4a .grid{position:absolute;left:350px;right:170px;top:160px;bottom:26px;padding-top:8px;overflow:hidden;-webkit-mask:linear-gradient(180deg,#000 82%,transparent);mask:linear-gradient(180deg,#000 82%,transparent);z-index:4;display:grid;grid-template-columns:repeat(4,1fr);gap:16px 14px;justify-items:center;align-content:start}
+.d4a h6{position:absolute;left:356px;top:124px;margin:0;z-index:5;font:16px Gowun,serif;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+html[data-w="1600"] .d4a .grid{grid-template-columns:repeat(5,1fr)}
+/* B 별자리 지도 */
+.d4b .sky{position:absolute;left:26px;right:146px;top:104px;bottom:22px;border-radius:14px;overflow:hidden;z-index:3;background:radial-gradient(500px 300px at 70% 30%,rgba(130,100,220,.4),transparent 70%),url(a/s/tex_night.jpg) center/cover;box-shadow:inset 0 0 0 1.5px rgba(228,194,122,.7),inset 0 0 60px rgba(0,0,20,.6),0 18px 36px rgba(0,0,0,.55)}
+.d4b .sky::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,#fff 0 1px,transparent 1.6px),radial-gradient(circle,#ffe7a6 0 1.2px,transparent 2px);background-size:90px 70px,150px 120px;background-position:10px 20px,60px 40px;opacity:.7}
+.d4b .sky svg{position:absolute;inset:0;width:100%;height:100%}
+.d4b .cl{stroke:rgba(255,236,190,.55);stroke-width:1.6;stroke-dasharray:4 5;fill:none}
+.d4b .cl.ss{stroke:rgba(255,236,190,.85);stroke-width:2;stroke-dasharray:none}
+.snd{position:absolute;width:var(--s,74px);height:var(--s,74px);margin:calc(var(--s,74px)/-2) 0 0 calc(var(--s,74px)/-2);z-index:2}
+.snd .st{position:absolute;inset:-34%;background:url(a/s/star_node.svg) center/contain no-repeat;opacity:.9}
+.snd .fc{position:absolute;inset:0;border-radius:50%;background:var(--pic) 50% 6%/170% auto no-repeat,radial-gradient(circle at 40% 30%,#fff,#e6dcff);box-shadow:0 0 0 3px var(--ec),0 0 0 5px rgba(255,255,255,.7),0 0 18px var(--ec)}
+.snd b{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:6px;white-space:nowrap;font:13px Pre;color:#fff;text-shadow:0 1px 3px #000}
+.snd b i{font-style:normal;color:#ffe08a;margin-left:4px}
+.scr[data-st=pick] .snd.pkc .fc,.scr[data-st=ss] .snd.mrc .fc{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--ec),0 0 30px #fff}
+.scr.go .snd{animation:pop .5s cubic-bezier(.2,1.6,.4,1) both;animation-delay:calc(var(--d,0) * 1s)}
+@keyframes pop{from{opacity:0;transform:scale(.3)}}
+.cname{position:absolute;font:14px Gowun,serif;color:rgba(255,236,190,.85);letter-spacing:3px;z-index:2}
+.moon{position:absolute;left:40px;top:28px;width:250px;z-index:4;padding:14px 16px 16px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.05));box-shadow:inset 0 0 0 1px rgba(255,236,190,.5);color:#fff}
+.moon h5{margin:0 0 4px;font:17px Gowun,serif;display:flex;align-items:center;gap:8px}
+.moon h5 img{width:26px}
+.moon p{margin:0 0 10px;font:12px/1.45 Pre;color:#d9cff5}
+.moon .act{width:100%;margin-top:6px;height:34px}
+.scr img[src$="icon_dust.png"]{filter:sepia(1) saturate(2.6) hue-rotate(-12deg) brightness(1.08)}
+/* C 두 칸 저울 */
+.d4c .stagep{position:absolute;left:26px;right:146px;top:104px;bottom:22px;border-radius:16px;z-index:3;background:radial-gradient(600px 300px at 50% 20%,rgba(255,250,235,.95),transparent 70%),url(a/s/tex_marble.jpg) 0 0/400px,#f6f0f8;box-shadow:inset 0 0 0 1.5px #e4c27a,inset 0 0 0 5px #fff,0 18px 36px rgba(0,0,0,.5)}
+.beam{position:absolute;left:50%;top:104px;width:660px;margin-left:-330px;z-index:5;transform-origin:50% 22%;transition:transform 1s}
+.beam img.b{width:100%}
+.scr:is([data-st=pick],[data-st=ss]) .beam{transform:rotate(3deg)}
+.pan{position:absolute;top:28px;width:250px;transform-origin:50% 0;transition:transform 1s}
+.pan.l{left:-60px}.pan.r{right:-60px}
+.scr:is([data-st=pick],[data-st=ss]) .pan{transform:rotate(-3deg)}
+.pan img.p{width:100%}
+.pan .load{position:absolute;left:0;right:0;bottom:30px;display:flex;justify-content:center;align-items:flex-end}
+.fulc{position:absolute;left:50%;top:0;margin-left:-70px;width:140px;height:150px;z-index:4;display:flex;flex-direction:column;align-items:center}
+.fulc .cord{width:4px;height:112px;background:linear-gradient(90deg,#b8761c,#ffe7a6,#b8761c)}
+.fulc .ring{position:static;width:24px;height:24px;border-radius:50%;border:4px solid #e4a63c;opacity:1;margin-top:-4px}
+.fulc .post{width:26px;height:186px;margin-top:-6px;border-radius:4px;background:linear-gradient(90deg,#b8761c,#ffe7a6 40%,#e4a63c 60%,#8a5a14);box-shadow:0 4px 8px rgba(60,30,0,.35)}
+.fulc .foot{width:180px;height:26px;border-radius:50% 50% 8px 8px;background:linear-gradient(180deg,#fff3c4,#e4a63c 50%,#8a5a14);box-shadow:0 8px 12px rgba(60,30,0,.35)}
+.fulc .dn{position:absolute;top:96px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:4px 14px;border-radius:14px;background:#fff;box-shadow:0 0 0 1.5px #e4c27a,0 4px 8px rgba(60,40,0,.25);font:15px Pre;color:#5b3f12;display:flex;align-items:center;gap:4px}
+.fulc .dn img{width:22px}
+.d4c .lbl2{position:absolute;z-index:6;font:17px Gowun,serif;color:#4a2b45;text-align:center;width:300px}
+.d4c .lbl2 small{display:block;font:12.5px Pre;color:#7a6a8a}
+.d4c .lbtns{position:absolute;z-index:6;display:flex;flex-direction:column;gap:10px;width:240px}
+.d4c .lbtns .act{width:100%;height:36px}
+.d4c .strip{position:absolute;z-index:6;display:flex;gap:10px;--hw:94px;--hh:122px}
+.d4c .strip .hcd .nmb{padding:10px 4px 4px}.d4c .strip .hcd .nmb b{font-size:13px}.d4c .strip .hcd .pr{font-size:11.5px;padding:0 6px 0 2px}.d4c .strip .hcd .pr img{width:14px;height:14px}
+</style>
+<style>
+/* =====================================================================
+   D8-5 · 소환 확률 정보 (공시표)
+   ===================================================================== */
+.tb{display:inline-grid;place-items:center;min-width:42px;height:26px;padding:0 8px;border-radius:6px;font:900 15px Pre;color:#fff;transform:skewX(-8deg);box-shadow:0 0 0 1.5px #fff,0 2px 4px rgba(0,0,0,.25)}
+.tb.SS{background:linear-gradient(90deg,#3fae6e,#3a86e0,#e0484a,#f08a34)}
+.tb.S{background:linear-gradient(#e8b04a,#c4862a)}
+.tb.A{background:linear-gradient(#a594ec,#7d63dc)}
+.tb.B{background:linear-gradient(#a7b0c8,#7f89a6)}
+.med{display:flex;align-items:center;gap:10px}
+.med img{width:64px;height:64px;flex:none;filter:drop-shadow(0 4px 6px rgba(60,30,60,.35))}
+.med b{display:block;font:16px Pre;color:#3a2547}
+.med small{display:block;font:12.5px/1.4 Pre;color:#6a5a7a}
+.chev{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#efe6ff;color:#7d63dc;font:14px Pre;margin-left:6px}
+.chl{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}
+.chl span{display:inline-flex;align-items:center;gap:5px;padding:2px 10px 2px 2px;border-radius:14px;background:#fff;box-shadow:0 0 0 1.5px var(--ec,#d9cdee);font:12.5px Pre;color:#3a2547}
+.chl span i{width:24px;height:24px;border-radius:50%;background:var(--pic) 50% 6%/170% auto,#f3eefc}
+.chl span.pu{box-shadow:0 0 0 2px #ff8fc4;background:#fff0f7}
+.ftx{font:13.5px/1.75 Pre;color:#4a3a5a}
+.ftx h6{margin:10px 0 2px;font:15px Gowun,serif;color:#5b3f8a}
+.ftx p{margin:0}
+/* A 공시 문서: 종이 + 남색 리본 머리 + 금 봉인 메달 */
+.r5a .doc{position:absolute;left:44px;right:160px;top:96px;bottom:22px;border-radius:6px;z-index:3;background:radial-gradient(600px 240px at 30% 0,rgba(255,255,255,.7),transparent),url(a/s/tex_paper.jpg) 0 0/320px;box-shadow:0 0 0 2px #fffaf0,0 0 0 4px #c48a2a,0 20px 40px rgba(0,0,0,.55)}
+.r5a .doc::before{content:"";position:absolute;inset:10px;border:1.5px solid rgba(196,138,42,.45);border-radius:3px;pointer-events:none}
+.r5a .ban{top:-20px;left:44px;margin:0;width:300px;height:56px;font-size:22px}
+.r5a .tbl{position:absolute;left:40px;top:56px;width:calc(62% - 40px)}
+.r5a .tr{display:grid;grid-template-columns:54px 92px 1fr;align-items:center;gap:10px;height:54px;border-bottom:1.5px dashed rgba(150,120,90,.35)}
+.r5a .tr .pc{font:900 22px Pre;color:#3a2547;text-align:right}
+.r5a .tr .bw{position:relative;height:14px;border-radius:7px;background:rgba(120,90,60,.12);box-shadow:inset 0 1px 2px rgba(0,0,0,.15)}
+.r5a .tr .bw i{position:absolute;left:0;top:0;bottom:0;border-radius:7px;width:var(--v);min-width:5px;background:var(--bc)}
+.r5a .tr .bw small{position:absolute;left:0;top:16px;font:12px Pre;color:#6a5a7a;white-space:nowrap}
+.scr.go .r5a .tr .bw i{animation:grow 1s cubic-bezier(.2,.9,.3,1) both .3s}
+@keyframes grow{from{width:0;min-width:0}}
+.r5a .side{position:absolute;right:30px;top:50px;width:calc(38% - 50px);display:flex;flex-direction:column;gap:4px}
+.r5a .side h6{margin:0;font:16px Gowun,serif;color:#5b3f8a}
+.r5a .sc{position:absolute;left:40px;right:30px;top:300px;bottom:66px;overflow:hidden;border-top:2px solid rgba(196,138,42,.4);padding-top:8px}
+.r5a .sc .ct{transition:transform .6s}
+.scr[data-st=end] .r5a .sc .ct{transform:translateY(calc(-100% + 262px))}
+.r5a .ok{position:absolute;right:30px;bottom:14px}
+.sbar{position:absolute;right:-14px;top:8px;bottom:0;width:6px;border-radius:3px;background:rgba(120,90,60,.12)}
+.sbar i{position:absolute;left:0;right:0;top:0;height:40%;border-radius:3px;background:#b8a4e8}
+.scr[data-st=end] .sbar i{top:60%}
+.scr[data-st=open] .sbar i{height:24%}
+/* B 등급 카드 넷 (판 없이 무대 위) */
+.r5b .cards4{position:absolute;left:44px;right:166px;top:104px;height:300px;display:flex;gap:16px;z-index:3}
+.r5b .gc{position:relative;flex:1;border-radius:14px;padding:16px 16px 12px;transform:skewX(-4deg);background:linear-gradient(180deg,#fffdf8,#f4ecfb);box-shadow:inset 0 0 0 1.5px rgba(201,149,42,.55),inset 0 0 0 5px #fff,0 16px 26px rgba(0,0,0,.45)}
+.r5b .gc>*{transform:skewX(4deg)}
+.r5b .gc::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;border-radius:14px 14px 0 0;background:var(--bc)}
+.r5b .gc .pc{display:block;margin-top:8px;font:900 46px/1 Pre;color:#2f2654;letter-spacing:-1px}
+.r5b .gc .pc small{font-size:22px}
+.r5b .gc .n{font:14px Pre;color:#6a5a7a;margin-top:4px}
+.r5b .gc .ea{margin-top:10px;padding-top:8px;border-top:1.5px dashed rgba(150,120,90,.35);font:13px/1.5 Pre;color:#4a3a5a}
+.r5b .gc .ea b{color:#d2477f}
+.r5b .gc .sp{display:flex;height:12px;border-radius:6px;overflow:hidden;margin:8px 0 4px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.r5b .gc .bs{font:12px Pre;color:#8a7a8a;margin-top:auto;position:absolute;left:16px;bottom:12px}
+.r5b .gc .faces{display:flex;margin-top:8px}
+.r5b .gc .faces i{width:30px;height:30px;border-radius:50%;margin-right:-8px;background:var(--pic) 50% 6%/170% auto,#fff;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--ec)}
+.r5b .meds{position:absolute;left:44px;right:166px;top:428px;height:96px;display:flex;gap:14px;z-index:3}
+.r5b .meds .med{flex:1;padding:8px 14px 8px 8px;border-radius:48px 14px 14px 48px;background:rgba(255,253,246,.94);box-shadow:0 0 0 1.5px #e4c27a,0 10px 18px rgba(0,0,0,.35)}
+.r5b .more{position:absolute;left:44px;right:166px;top:540px;bottom:22px;z-index:3;border-radius:12px;padding:10px 16px;background:rgba(255,253,246,.92);box-shadow:0 0 0 1.5px #e4c27a;overflow:hidden}
+.r5b .more .hdr{display:flex;align-items:center;gap:6px;font:15px Pre;color:#3a2547}
+.r5b .more .hdr .act{margin-left:auto}
+.scr:is([data-st=open],[data-st=end]) .r5b .cards4,.scr:is([data-st=open],[data-st=end]) .r5b .meds{display:none}
+.scr:is([data-st=open],[data-st=end]) .r5b .more{top:104px}
+.r5b .more .ct{transition:transform .6s}
+.scr[data-st=end] .r5b .more .ct{transform:translateY(calc(-100% + 480px))}
+/* C 요약 띠 위 + 전체 표기 두루마리 아래 */
+.r5c .sum{position:absolute;left:44px;right:166px;top:98px;height:168px;z-index:4;border-radius:16px 4px 16px 4px;padding:14px 22px;background:linear-gradient(180deg,rgba(255,255,255,.1),transparent),url(a/s/tex_vel_plum.jpg) 0 0/400px;box-shadow:inset 0 0 0 1.5px rgba(255,220,235,.4),0 0 0 2px #c48a2a,0 16px 30px rgba(0,0,0,.5);color:#fff}
+.r5c .sum h5{margin:0;font:20px Gowun,serif;display:flex;align-items:baseline;gap:10px}
+.r5c .sum h5 small{font:12.5px Pre;color:#f0dceb}
+.stack{display:flex;height:34px;margin:12px 200px 6px 0;border-radius:8px;overflow:hidden;box-shadow:0 0 0 2px rgba(255,255,255,.6)}
+.stack i{display:grid;place-items:center;font:13px Pre;font-style:normal;color:#fff;white-space:nowrap;overflow:hidden;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.stk-l{display:flex;gap:18px;font:13px Pre;color:#f6eaf2}
+.stk-l b{color:#fff}
+.r5c .sum .mc{position:absolute;right:20px;top:14px;display:flex;flex-direction:column;gap:4px}
+.r5c .sum .mc span{display:flex;align-items:center;gap:6px;font:12.5px Pre;color:#fff;background:rgba(30,6,24,.35);border-radius:16px;padding:2px 12px 2px 2px}
+.r5c .sum .mc img{width:30px;height:30px}
+.r5c .scroll{position:absolute;left:60px;right:182px;top:282px;bottom:22px;z-index:3;border-radius:4px;padding:16px 26px 50px;background:url(a/s/tex_paper.jpg) 0 0/300px;box-shadow:0 0 0 1.5px #d6c39a,0 16px 30px rgba(0,0,0,.45);overflow:hidden}
+.r5c .scroll::before,.r5c .scroll::after{content:"";position:absolute;left:-14px;right:-14px;height:16px;border-radius:8px;background:linear-gradient(180deg,#c89060,#8a5a34 60%,#5a3a1a);box-shadow:0 3px 5px rgba(0,0,0,.35);z-index:2}
+.r5c .scroll::before{top:-8px}.r5c .scroll::after{bottom:-8px}
+.r5c .scroll .ct{transition:transform .6s}
+.scr[data-st=end] .r5c .scroll .ct{transform:translateY(calc(-100% + 340px))}
+.r5c .ok{position:absolute;right:196px;bottom:30px;z-index:5}
+.scr:is([data-st=open],[data-st=end]) .r5c .sum{height:84px;overflow:hidden}
+.scr:is([data-st=open],[data-st=end]) .r5c .sum .stk-l,.scr:is([data-st=open],[data-st=end]) .r5c .sum .mc{display:none}
+.scr:is([data-st=open],[data-st=end]) .r5c .scroll{top:198px}
+</style>
+<!--CSS7-->
+</head>
+<body>
+<div class="page">
+<h1>묶음 8 · 상점 · 교환 <small>design/feedback70/ui_inventory.html #g8 · D8-1 ~ D8-5</small></h1>
+<p class="lead">화면마다 A · B · C 를 누르면 「고름」이 붙고, 맨 위 「결과 복사」로 한 번에 복사합니다. 화면 위 상태 단추로 카드에 적힌 상태를 바꿔 볼 수 있고, 주소에 <b>?w=1600</b> 을 붙이면 1600×720으로 열립니다. <b>묶음 규칙</b>: 상점 탭 = 화방(벽지 · 호두나무 선반 · 물감 병), 신화 조각 = 무지개 보석상(남색 벨벳 · 놋쇠), 소환 쪽 별가루 · 확률은 소환 무대 위에 얹는 판 — 같은 판 결을 두 화면에 쓰지 않습니다. 세 방향은 색이 아니라 <b>자세</b>가 다릅니다. <b>정해진 것은 그대로</b>: 오른쪽 책갈피 틀 · 자두색 벨벳 머리줄(hub_frame.gd), 지갑 진주 · 채색석, 보상은 리본 띠 카드 비행(reward_band.gd), 대답은 유나 알림(YunaToast), 위 가운데 알림 판, 잠금 배지 + 「Lv.N」, 등급색(SS = 속성색 · 신화 = 무지개 · 금은 가는 테만). <b>값은 게임 그대로</b>(economy.gd PRODUCTS · mythic_shop.gd · game_data.gd), 보유 수만 예시입니다. 가격은 늘 단추 위에 원화 그대로, 남은 시간 재촉 · 「한정!」 같은 말은 쓰지 않습니다. 단추 옆 <b>「노드 이름 보기」</b>는 가이드(tutorial.gd)가 찾는 이름이 어디 붙는지 보여 줍니다.</p>
+<div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button><button type="button" data-replay-all>▶ 등장 다시 보기</button><button type="button" data-nodes aria-pressed="false">노드 이름 보기</button><button type="button" class="copy" data-copy>결과 복사</button>
+<nav class="toc"><a href="#s-shop">D8-1 상점</a><a href="#s-gift">D8-2 선물 · 구매 완료</a><a href="#s-myth">D8-3 신화 조각</a><a href="#s-dust">D8-4 별가루 교환소</a><a href="#s-rates">D8-5 확률 정보</a></nav></div>
+
+<!-- ============================== D8-1 ============================== -->
+<h3 id="s-shop">D8-1 · 상점 <small>scripts/menus.gd _shop · _price_button · 방향 「화방 진열장」</small></h3>
+<p class="sub">채색석 묶음 6개(₩1,200 ~ ₩119,000) · 매일 무료 선물 30 · 항해 일지(월정액 ₩4,900: 즉시 300 + 30일 × 90). 첫 구매는 같은 양을 한 번 더(2배).</p>
+<div class="states" data-group="shop"><span>상태</span><button type="button" data-v="base" aria-pressed="true">무료 받기 · 첫 구매 2배</button><button type="button" data-v="got" aria-pressed="false">무료 받음</button><button type="button" data-v="month" aria-pressed="false">월정액 남은 24일</button><button type="button" data-v="pay" aria-pressed="false">결제 중</button></div>
+<section class="ref"><div class="refs"><img src="now/now_shop_1280x720.jpg" alt="지금 상점"></div><div><h2>지금</h2><p class="cap">자두색 머리줄 아래 흰 카드 8장. 채색석 그림이 크기만 다른 같은 보석이라 「묶음이 커진다」는 감이 약하고, 무료 선물 · 월정액 · 채색석이 모두 같은 카드라 무엇이 공짜이고 무엇이 정기 상품인지 한눈에 갈리지 않음.</p></div></section>
+
+<section class="opt" data-choice="shop_a" data-l="A" data-choice-group="shop" data-choice-label="A · 화방 선반 (물감 병 채색석)">
+<h2>A · 화방 선반 — 채색석이 물감 병처럼 두 선반에 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 병 · 단지 SVG 6종(액체 높이 · 보석 수만 바꿈) + 선반 · 벽감 질감. 상품이 늘면 선반 한 칸(3개)씩 늘려 세로로 밀어야 함.</p>
+<p class="verdict">정직한 평: 방향 「채색석이 물감 병처럼 선반에」를 가장 그대로 살림. 병이 커지며 담긴 보석이 늘어 묶음 크기가 그림으로 읽힘. 왼쪽 아치 벽감이 「공짜 · 정기」를 따로 묶어 줌. 약점: 병 라벨 글자가 15px라 작은 폰에서는 가격 단추 쪽을 먼저 읽게 됨.</p>
+<div class="vp"><div class="scr" data-hub="shop" data-tab="shop"><div class="bd s1a">
+ <div class="awn"><img src="a/s/awning.svg" alt=""></div>
+ <div class="nic"><h5>매일 · 정기</h5>
+  <div class="gift" style="left:14px;top:40px"><img class="bb" src="a/s/box_body.svg" alt=""><img class="lid" src="a/s/box_lid.svg" alt=""><img class="bow" src="a/s/bow.svg" alt=""></div>
+  <img class="stmp hid" data-on="got" src="a/s/stamp_paid.svg" alt="" style="left:44px;top:84px">
+  <div class="tx1 ab" style="left:168px;top:64px"><b>매일 무료 선물</b><small>하루 한 번 받아요</small><em><img src="a/i/icon_gem.png" alt="">채색석 30</em></div>
+  <div class="shf" style="left:10px;right:10px;top:188px"></div>
+  <div class="ab" style="left:22px;top:208px"><span class="act" style="width:256px" data-off="got"><span>받기</span></span><span class="act wait hid" data-on="got" style="width:256px"><span>내일 다시 · 13:24:10</span></span></div>
+  <i class="spk" style="left:120px;top:44px" data-off="got"></i>
+  <div class="book" style="left:26px;top:276px"><i style="left:3px;top:3px"></i><i style="right:3px;top:3px;transform:scaleX(-1)"></i><i style="left:3px;bottom:3px;transform:scaleY(-1)"></i><i style="right:3px;bottom:3px;transform:scale(-1)"></i><img class="gm" src="a/i/icon_gem.png" alt=""><b>항해 일지</b><s></s></div>
+  <span class="dleft hid" data-on="month" style="left:16px;top:262px">남은 24일</span>
+  <div class="tx1 ab" style="left:148px;top:268px;width:150px"><b>항해 일지</b><small>월정액 · 30일</small><p>구매 즉시 <u>300</u><br>출석마다 <u>90</u> · 30일<br>모두 받으면 <u>3,000</u></p></div>
+  <div class="shf" style="left:10px;right:10px;top:424px"></div>
+  <div class="ab" style="left:22px;top:442px"><span class="act" style="width:256px" data-off="month pay"><span>₩4,900</span></span><span class="act wait hid" data-on="month" style="width:256px"><span>오늘 몫 90 받음 ✓</span></span><span class="act off hid" data-on="pay" style="width:256px"><span>₩4,900</span></span></div>
+ </div>
+ <div class="rows" data-gen="shelfA"></div>
+ <div class="yt hid" data-on="pay" style="left:calc(50% - 60px);top:4px"><i class="f"></i><div class="m"><b>결제 창을 열었어요</b>스토어에서 마치면 채색석이 바로 들어와요</div></div>
+</div></div></div>
+</section>
+
+<section class="opt" data-choice="shop_b" data-l="B" data-choice-group="shop" data-choice-label="B · 가로 유리 쇼케이스 한 줄">
+<h2>B · 가로 쇼케이스 — 긴 유리 진열장 한 줄, 가로로 밀기 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 진열장 틀(CSS 유리 · 금테 · 단풍나무 받침) + 벨벳 방석 · 보석 무더기. 상품이 늘면 줄만 길어져 가장 늘리기 쉬움. 1280에서는 오른쪽 두 칸이 밀어야 보임.</p>
+<p class="verdict">정직한 평: 조명 · 유리 반사 덕에 셋 중 가장 「가게 진열장」답고 고급스러움. 대신 무료 · 월정액도 같은 줄에 서서 성격 구분은 방석 위 물건(상자 · 책)으로만 됨. 1280에서 마지막 묶음이 잘려 「밀어서 더 보기」가 필요.</p>
+<div class="vp"><div class="scr" data-hub="shop" data-tab="shop"><div class="bd s1b">
+ <div class="top"><h4>채색석 진열장</h4><small>가격과 지급량은 출시 전 가안이에요</small><span class="more">밀어서 더 보기 ›</span></div>
+ <div class="case"><div class="back"></div><div class="track" data-gen="caseB"></div><div class="glass"></div><div class="rim"></div><div class="base"></div></div>
+ <div class="fade"></div>
+ <div class="yt hid" data-on="pay" style="left:calc(50% - 160px);top:4px"><i class="f"></i><div class="m"><b>결제 창을 열었어요</b>스토어에서 마치면 채색석이 바로 들어와요</div></div>
+</div></div></div>
+</section>
+
+<section class="opt" data-choice="shop_c" data-l="C" data-choice-group="shop" data-choice-label="C · 계산대 + 항해 일지 크게 + 가격표">
+<h2>C · 계산대 — 추천 하나(항해 일지)를 크게, 나머지는 가격표 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 계산대 · 펼친 책(원근 기울임) + 가격표 종이 1장 + 유나 그림 재사용. 「추천」을 무엇으로 둘지 PD가 정해야 함(지금은 하루당 가장 알뜰한 월정액).</p>
+<p class="verdict">정직한 평: 가격표가 한 줄 한 줄 또렷해 「얼마에 무엇」이 가장 정직하게 읽힘. 유나가 가게를 지키는 장면이라 따뜻함. 약점: 채색석 묶음은 작은 아이콘이라 큰 묶음의 「많아 보임」이 약하고, 추천 하나가 화면 절반을 차지해 다른 상품을 사려는 사람에게는 멀게 느껴질 수 있음.</p>
+<div class="vp"><div class="scr" data-hub="shop" data-tab="shop"><div class="bd s1c">
+ <div class="win"><img src="a/b/cloud_far.png" alt=""></div>
+ <img class="yu" src="a/c/yuna.webp" alt="">
+ <div class="cnt"></div>
+ <div class="bub" data-off="pay" style="left:150px;top:22px">하루에 받는 채색석이 가장 많은 건 <b>항해 일지</b>예요<br><small style="color:#8a7a9a">₩4,900 · 30일 동안 모두 받으면 채색석 3,000</small></div>
+ <span class="rcm">추천 · 하루당 가장 알뜰</span>
+ <div class="obook"><div class="cv"></div><div class="pg l"><b>항해 일지</b><small>월정액 · 30일</small><p><img src="a/i/icon_gem.png" alt="">구매 즉시 <u>300</u></p><p><img src="a/i/icon_gem.png" alt="">출석마다 <u>90</u> · 30일</p><p><img src="a/i/icon_gem.png" alt="">모두 받으면 <u>3,000</u></p></div><div class="pg r"><h6 class="tx" data-x-month="출석 6 / 30 · 남은 24일">출석 도장 30칸</h6><div class="cal" data-gen="cal"></div></div></div>
+ <div class="mbtn"><span class="act" style="width:220px;height:46px;font-size:19px" data-off="month pay"><span>₩4,900</span></span><span class="act wait hid" data-on="month" style="width:220px;height:46px"><span>오늘 몫 90 받음 ✓</span></span><span class="act off hid" data-on="pay" style="width:220px;height:46px"><span>₩4,900</span></span></div>
+ <div class="menu" data-gen="menuC"></div>
+ <div class="yt hid" data-on="pay" style="left:40px;top:14px"><i class="f"></i><div class="m"><b>결제 창을 열었어요</b>스토어에서 마치면 채색석이 바로 들어와요</div></div>
+</div></div></div>
+</section>
+
+<!-- ============================== D8-2 ============================== -->
+<h3 id="s-gift">D8-2 · 무료 선물 · 구매 완료 <small>scripts/menus.gd _shop → RewardPopup 「매일 무료 선물」 · 「구매 완료」 · 방향 「포장 리본 풀기」</small></h3>
+<p class="sub">받은 뒤 카드는 정해진 리본 띠 비행(reward_band.gd)으로 지갑에 날아갑니다. 첫 구매는 「기본 + 같은 양 한 번 더」를 두 장으로 나눠 보여 줘 2배가 눈으로 셈 됩니다.</p>
+<div class="states" data-group="gift"><span>상태</span><button type="button" data-v="free" aria-pressed="true">무료 30</button><button type="button" data-v="first" aria-pressed="false">첫 구매 2배 (120 + 120)</button><button type="button" data-v="month" aria-pressed="false">월정액 구매</button></div>
+<section class="ref"><div class="refs"><img src="now/now_free_1280x720.jpg" alt="지금 무료 선물"><img src="now/now_paid_1280x720.jpg" alt="지금 구매 완료"></div><div><h2>지금</h2><p class="cap">흰 창 + 카드 한 장 + 받기. 무료 선물과 구매 완료가 제목만 다르고, 첫 구매 2배는 「+240」 한 숫자로 합쳐져 보너스가 들어왔는지 알기 어려움. 월정액은 「내일부터 매일 90」이 안 보임.</p></div></section>
+
+<section class="opt" data-choice="gift_a" data-l="A" data-choice-group="gift" data-choice-label="A · 선물 상자 리본 풀기">
+<h2>A · 선물 상자 — 리본이 풀리고 뚜껑이 열리며 카드가 떠오름 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 상자 몸통 · 뚜껑 · 리본 SVG 3장 + 뚜껑 열림 0.8초. 무료 · 구매 모두 같은 상자라 만들 것이 가장 적음. 하루 한 번 보는 연출이라 길이는 1초 안.</p>
+<p class="verdict">정직한 평: 방향 「포장 리본 풀기」 그대로이고 보상 카드가 정해진 리본 띠 카드와 같아 이어짐이 자연스러움. 첫 구매 두 장 · 월정액 「내일부터 90 × 30」 카드로 받는 것이 셈 됨. 약점: 상자 그림이 벡터 결이라 전투 바탕의 붓 그림보다 매끈함.</p>
+<div class="vp"><div class="scr" data-hub="battle"><div class="scrim"></div><div class="rays" style="--ray-y:330px"></div><div class="motes"></div><div class="g2a">
+ <div class="ban" style="top:56px"><img src="a/s/ban_lav.svg" alt=""><span class="tx" data-x-first="구매 완료" data-x-month="구매 완료">매일 무료 선물</span></div>
+ <div class="ban2 tx" style="top:136px" data-x-first="채색석 120 · 첫 구매라 같은 양을 한 번 더" data-x-month="항해 일지 (월정액 30일)">하루 한 번 · 내일 또 받을 수 있어요</div>
+ <div class="beam"></div>
+ <div class="cards">
+  <div class="rcd" style="--d:.45"><span class="tg">채색석</span><img class="ic" src="a/i/icon_gem.png" alt=""><b class="tx" data-x-first="+120" data-x-month="+300">+30</b><small class="tx" data-x-month="구매 즉시">채색석</small></div>
+  <div class="rcd gold hid" data-on="first" style="--d:.6"><span class="tg">첫 구매 2배</span><img class="ic" src="a/i/icon_gem.png" alt=""><b>+120</b><small>한 번 더</small></div>
+  <div class="rcd cal hid" data-on="month" style="--d:.6"><span class="tg">항해 일지</span><img class="ic" src="a/i/icon_gem.png" alt="" style="width:70px;height:70px"><b style="font-size:26px">90 × 30일</b><small>내일부터 출석할 때마다</small></div>
+ </div>
+ <div class="box"><img class="bb" src="a/s/box_body.svg" alt=""><img class="rl" src="a/s/ribbon_loose.svg" alt=""><img class="lid" src="a/s/box_lid.svg" alt=""></div>
+ <i class="spk" style="left:calc(50% - 190px);top:240px"></i><i class="spk" style="left:calc(50% + 170px);top:200px;animation-delay:.8s"></i><i class="spk" style="left:calc(50% + 120px);top:420px;animation-delay:1.4s"></i>
+ <div class="take" style="margin-left:250px;bottom:70px"><span>받기</span></div>
+</div></div></div>
+</section>
+
+<section class="opt" data-choice="gift_b" data-l="B" data-choice-group="gift" data-choice-label="B · 영수증 카드 + 받음 도장">
+<h2>B · 영수증 카드 — 줄줄이 찍혀 나오는 영수증 + 「받음」 도장 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 톱니 영수증 마스크 + 종이 결 + 도장 SVG. 줄 단위라 상품이 무엇이든 같은 틀(상품 · 기본 · 첫 구매 · 합계 · 결제 금액)로 찍힘.</p>
+<p class="verdict">정직한 평: 「얼마 내고 무엇을 받았나」가 셋 중 가장 정직하게 남아 상점 신뢰감이 큼. 대신 무료 선물에도 영수증이 나와 「선물」의 들뜸은 약하고, 화면이 왼쪽 종이 · 오른쪽 카드로 나뉘어 한눈에 모이지 않음.</p>
+<div class="vp"><div class="scr" data-hub="battle"><div class="scrim"></div><div class="rays" style="--ray-y:300px;left:calc(50% + 200px)"></div><div class="motes"></div><div class="g2b">
+ <div class="slotbar"></div>
+ <div class="rct"><div class="pp">
+  <h5>구름고래 화방</h5><small class="tx" data-x-first="구매 영수증 · 2026.06.12" data-x-month="구매 영수증 · 2026.06.12">선물 영수증 · 2026.06.12</small>
+  <div class="ln"><span>상품</span><b class="tx" data-x-first="채색석 120개" data-x-month="항해 일지 (월정액 30일)">매일 무료 선물</b></div>
+  <div class="ln"><span class="tx" data-x-month="구매 즉시">기본</span><b class="tx" data-x-first="채색석 120" data-x-month="채색석 300">채색석 30</b></div>
+  <div class="ln pl hid" data-on="first"><span>첫 구매 2배</span><b>+ 채색석 120</b></div>
+  <div class="ln hid" data-on="month"><span>내일부터 30일</span><b>출석마다 90</b></div>
+  <div class="ln"><span>결제 금액</span><b class="tx" data-x-first="₩1,200" data-x-month="₩4,900">₩0 (무료)</b></div>
+  <div class="tot"><span>지금 받는 것</span><b><img src="a/i/icon_gem.png" alt=""><span class="tx" data-x-first="240" data-x-month="300">30</span></b></div>
+  <div class="bar"></div><div class="thx tx" data-x-first="고마워요 · 좋은 항해 되세요" data-x-month="30일 동안 매일 들러 주세요">내일 또 들러 주세요</div>
+ </div><img class="stmp" src="a/s/stamp_paid.svg" alt=""></div>
+ <div class="side"><h4 class="tx" data-x-first="구매 완료" data-x-month="구매 완료">매일 무료 선물</h4><div class="cards">
+  <div class="rcd" style="--d:1.2"><span class="tg">채색석</span><img class="ic" src="a/i/icon_gem.png" alt=""><b class="tx" data-x-first="+120" data-x-month="+300">+30</b><small>채색석</small></div>
+  <div class="rcd gold hid" data-on="first" style="--d:1.35"><span class="tg">첫 구매 2배</span><img class="ic" src="a/i/icon_gem.png" alt=""><b>+120</b><small>한 번 더</small></div>
+ </div></div>
+ <div class="take"><span>받기</span></div>
+</div></div></div>
+</section>
+
+<section class="opt" data-choice="gift_c" data-l="C" data-choice-group="gift" data-choice-label="C · 창 없이 진열장에서 지갑으로 비행">
+<h2>C · 창 없음 — 진열장에서 지갑으로 날아감 + 위 가운데 알림 판 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 새 창 없음 — 보석 비행(경로 1개) + 지갑 숫자 튀김 + 정해진 위 가운데 알림 판. 상점 시안(D8-1)이 무엇이든 그 위에 얹힘. 여러 종류를 한 번에 받는 상품이 생기면 알림 판 한 줄이 모자람.</p>
+<p class="verdict">정직한 평: 가장 가볍고 빠름 — 사고 바로 다음 묶음을 볼 수 있음. 「구매가 됐다」는 확인이 알림 판과 지갑 튀김뿐이라 큰 금액(₩119,000)을 산 직후에는 너무 조용하게 느껴질 수 있음 → 큰 묶음만 A 상자로 보내는 섞어 쓰기도 가능.</p>
+<div class="vp"><div class="scr" data-hub="shop" data-tab="shop" data-fly><div class="bd s1a" data-clone="shop_a"></div>
+ <svg class="trail" width="100%" height="100%"><defs><linearGradient id="trailg" x1="0" x2="1"><stop offset="0" stop-color="#ffd6f0" stop-opacity="0"/><stop offset=".5" stop-color="#fff"/><stop offset="1" stop-color="#ffe7a6"/></linearGradient></defs><path d=""/></svg>
+ <i class="ring"></i>
+ <i class="fly" style="--i:0"><img src="a/i/icon_gem.png" alt=""></i><i class="fly" style="--i:1"><img src="a/i/icon_gem.png" alt=""></i><i class="fly" style="--i:2"><img src="a/i/icon_gem.png" alt=""></i><i class="fly" style="--i:3"><img src="a/i/icon_gem.png" alt=""></i>
+ <span class="plus tx" data-x-first="+240" data-x-month="+300">+30</span>
+ <div class="nb" style="--nd:1.9s;top:120px"><div class="pl"></div><div class="ko"><span><img src="a/i/icon_gem.png" alt=""></span></div><div class="tt"><b class="tx" data-x-first="채색석 120 + 첫 구매 120 받았어요" data-x-month="항해 일지 시작 · 채색석 300">매일 무료 선물 · 채색석 30</b><small class="tx" data-x-first="첫 구매 2배는 묶음마다 한 번이에요" data-x-month="내일부터 30일 동안 출석할 때마다 90">내일 이 시간에 다시 받을 수 있어요</small></div><div class="ln"></div></div>
+</div></div>
+</section>
+
+<!-- ============================== D8-3 ============================== -->
+<h3 id="s-myth">D8-3 · 신화 조각 상점 <small>scripts/mythic_shop.gd · 방향 「무지개 보석상」 — 신화 조각 병(소환 쪽 병과 같은 물건)</small></h3>
+<p class="sub">교환 6종 · 값 · 한도는 mythic_shop.gd 그대로(신화 아이 80 · SS 선택권 24 · 승격 재료 10 · 결정 묶음 5 · 잠금권 2 · 뽑기권 1). 신화 아이 고르기는 드롭다운 대신 카드. 가이드가 찾는 ShardProduct_* · Buy_* · MythicChoice · SSChoice · UseSSSelector 자리는 「노드 이름 보기」로.</p>
+<div class="states" data-group="myth"><span>상태</span><button type="button" data-v="base" aria-pressed="true">조각 40</button><button type="button" data-v="poor" aria-pressed="false">조각 부족 (12)</button><button type="button" data-v="ok" aria-pressed="false">교환 가능 (96)</button><button type="button" data-v="zero" aria-pressed="false">한도 0</button><button type="button" data-v="pick" aria-pressed="false">신화 아이 고르기</button><button type="button" data-v="ss" aria-pressed="false">SS 선택권 사용</button></div>
+<section class="ref"><div class="refs"><img src="now/now_mythic_1280x720.jpg" alt="지금 신화 조각"></div><div><h2>지금</h2><p class="cap">상점 탭과 같은 흰 카드 6장 + 위 숫자 띠. 신화 아이는 드롭다운(「아르카 ▾」)이라 누가 있는지 보이지 않고, SS 선택권 사용은 맨 아래 드롭다운 + 회색 단추로 떨어져 있음. 「무지개 보석상」 느낌은 신화 카드의 무지개 테뿐.</p></div></section>
+
+<section class="opt" data-choice="myth_a" data-l="A" data-choice-group="myth" data-choice-label="A · 보석상 유리 카운터 + 고르기 쟁반">
+<h2>A · 보석상 카운터 — 남색 벨벳 유리 진열대 6칸, 고르기는 쟁반이 올라옴 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 호두나무 테 + 벨벳 칸막이 진열대 1장(격자) + 놋쇠 꼬리표. 상품이 늘면 칸을 3개씩 한 줄 더(세로 밀기). 고르기 쟁반은 신화 · SS 두 벌.</p>
+<p class="verdict">정직한 평: 「보석상」 분위기와 상점 탭(밝은 화방)과의 구분이 가장 확실함. 어두운 바탕이라 무지개 신화 칸이 빛남. 약점: 6칸이 같은 무게라 신화 아이(80)가 다른 교환과 크기가 같고, 고르기를 열어야 신화 아이 셋 얼굴이 보임.</p>
+<div class="vp"><div class="scr" data-hub="shop" data-tab="myth"><div class="bd s3a">
+ <div class="top"><div class="cnt3"><span data-gen="mbot" style="display:contents"></span><div><small>신화 조각</small><b class="rbt tx" data-x-poor="12" data-x-ok="96" data-x-pick="96">40</b></div></div><span class="btag">뽑기권 <b class="tx" data-x-zero="3">0</b></span><span class="btag">잠금권 <b>0</b></span><span class="btag">승격 재료 <b class="tx" data-x-zero="1">0</b></span><span class="rule">10회 소환마다 1~3개<br>한도: 자정 / 월요일 / 매월 1일 초기화</span></div>
+ <div class="gcase"><div class="in" data-gen="myA"></div></div>
+</div></div></div>
+</section>
+
+<section class="opt" data-choice="myth_b" data-l="B" data-choice-group="myth" data-choice-label="B · 조각 병 + 교환 장부">
+<h2>B · 조각 병 + 교환 장부 — 왼쪽 큰 병에 쌓인 조각, 오른쪽 한 줄씩 교환 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 소환 쪽과 같은 단지 + 조각 SVG(양만큼 쌓기) + 줄 공책 장부. 상품이 늘면 장부 한 줄씩. 고르기는 그 줄 아래로 카드가 펼쳐짐(장부 안에서 끝남).</p>
+<p class="verdict">정직한 평: 병이 소환 결과의 「무지개 병」과 같은 물건이라 「조각이 모였다 → 바꾼다」가 한 장면에 이어짐. 한 줄에 이름 · 한도 · 값 꼬리표 · 단추가 가로로 있어 가장 빨리 읽힘. 약점: 장부 종이가 밝아 「보석상」의 화려함은 A보다 덜함.</p>
+<div class="vp"><div class="scr" data-hub="shop" data-tab="myth"><div class="bd s3b">
+ <div class="halo"></div>
+ <div class="bt jar bigjar" data-gen="mjar"></div>
+ <div class="jcount"><b class="rbt tx" data-x-poor="12" data-x-ok="96" data-x-pick="96">40</b><small>신화 조각 · 10회 소환마다 1~3개</small><div class="mini3"><span>뽑기권 <b class="tx" data-x-zero="3">0</b></span><span>잠금권 0</span><span>승격 재료 <b class="tx" data-x-zero="1">0</b></span></div></div>
+ <div class="ledger" data-gen="myB"></div>
+</div></div></div>
+</section>
+
+<section class="opt" data-choice="myth_c" data-l="C" data-choice-group="myth" data-choice-label="C · 신화 아이 초상 갤러리 + 아래 진열 줄">
+<h2>C · 신화 아이 초상 갤러리 — 셋이 액자로 걸리고, 다른 교환은 아래 한 줄 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 금 액자 3개 + 컷인 그림 재사용(새 그림 없음). 신화 아이가 늘면 액자를 가로로 밀어야 함. 아래 줄 5칸은 1280에서 글자가 빠듯함.</p>
+<p class="verdict">정직한 평: 「누구를 데려올 수 있나」가 첫눈에 보여 신화 아이를 고르는 재미는 가장 큼(드롭다운 완전히 사라짐). 대신 다른 5개 교환이 아래로 밀려 작아지고, 액자 단추 3개가 모두 「80」이라 한도(아이마다 한 번)를 잘못 읽을 수 있음.</p>
+<div class="vp"><div class="scr" data-hub="shop" data-tab="myth"><div class="bd s3c" data-gen="myC"></div></div></div>
+</section>
+
+<!-- ============================== D8-4 ============================== -->
+<h3 id="s-dust">D8-4 · 별가루 교환소 <small>scripts/ui/summon_page.gd dust_panel · 방향 「별 병 교환」 — 왼쪽 결정 바꾸기, 오른쪽 아이 데려오기</small></h3>
+<p class="sub">소환 무대(BARE 허브) 위에 얹힘. 별가루 병은 소환 결과에서 중복 아이가 바스러져 들어가는 그 금빛 병(gacha_show.gd dupes)과 같은 물건. 값은 game_data.gd 그대로(SS 500 · S 150 · A 40 · 2개 → 결정 1개). 여는 단추 DustExchange · Banner_dust는 소환 무대 쪽이라 이 판은 바꾸지 않음.</p>
+<div class="states" data-group="dust"><span>상태</span><button type="button" data-v="ok" aria-pressed="true">가능 (별가루 620)</button><button type="button" data-v="poor" aria-pressed="false">별가루 부족 (2)</button><button type="button" data-v="pick" aria-pressed="false">픽업 플로라 고름</button><button type="button" data-v="ss" aria-pressed="false">SS 카드 (마린) 고름</button></div>
+<section class="ref"><div class="refs"><img src="now/now_dust_1280x720.jpg" alt="지금 별가루 교환소"></div><div><h2>지금</h2><p class="cap">흰 판 두 칸: 왼쪽 결정 바꾸기 단추 둘, 오른쪽 아이 카드 격자. 병 · 별가루라는 물건이 보이지 않고 「별가루 2」가 제목 옆 작은 글자뿐. 값 단추가 모두 회색이라 살 수 있는지 한눈에 알기 어려움.</p></div></section>
+
+<section class="opt" data-choice="dust_a" data-l="A" data-choice-group="dust" data-choice-label="A · 별 병 + 교환 카드 (서리 유리 판)">
+<h2>A · 별 병 + 교환 카드 — 왼쪽 금빛 병 받침, 오른쪽 아이 카드 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 서리 유리 판(backdrop blur 대신 게임은 흐린 무대 텍스처 1장) + 금빛 병(소환 결과와 공용) + 보상 카드 결 재사용. 아이가 늘면 카드 줄만 세로로 밀림.</p>
+<p class="verdict">정직한 평: 방향 문장 그대로 「왼쪽 병 → 결정, 오른쪽 → 아이」. 무대가 유리 너머로 비쳐 소환 화면 안에 있다는 감이 살아 있음. 픽업 리본 · 속성색 테가 카드에서 바로 읽힘. 약점: 1280에서는 2줄(8명)만 보여 나머지는 밀어야 함.</p>
+<div class="vp"><div class="scr" data-hub="summon"><div class="d4a"><div class="dhd"><h4>별가루 교환소</h4><small>중복 아이는 별가루로 · 별가루로 결정이나 아이를</small></div><div data-gen="d4a"></div></div></div></div>
+</section>
+
+<section class="opt" data-choice="dust_b" data-l="B" data-choice-group="dust" data-choice-label="B · 별자리 지도">
+<h2>B · 별자리 지도 — 아직 못 만난 아이가 별, 등급마다 별자리 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 밤하늘 결 1장 + 별 받침 SVG + 선(SVG). 아이 자리를 손으로 정해야 해서 아이가 늘 때마다 지도 배치를 다시 짜야 함 — 셋 중 유지비가 가장 큼.</p>
+<p class="verdict">정직한 평: 그림으로서는 가장 낭만적이고 「아직 못 만난 아이」가 별로 남아 있는 은유가 좋음. 대신 값(✦500)이 이름 옆 작은 글자라 쇼핑 화면으로는 덜 정직하고, 결정 바꾸기가 귀퉁이 판으로 밀림.</p>
+<div class="vp"><div class="scr" data-hub="summon"><div class="d4b"><div class="dhd"><h4>별가루 교환소</h4><small>별을 누르면 그 아이를 데려올 수 있어요</small></div><div data-gen="d4b"></div></div></div></div>
+</section>
+
+<section class="opt" data-choice="dust_c" data-l="C" data-choice-group="dust" data-choice-label="C · 두 칸 저울">
+<h2>C · 두 칸 저울 — 왼쪽 접시 결정, 오른쪽 접시 아이, 가운데 별가루 병 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 저울대 · 접시 SVG(만든 부품) + 대리석 판. 저울은 걸이 끈에 매달려 기둥 없음. 아이 고르는 줄은 5명씩 가로로 밀기.</p>
+<p class="verdict">정직한 평: 「별가루를 어느 쪽에 쓸까」라는 선택이 그림 하나로 설명됨 — 고르면 저울이 기울어 재미있음. 약점: 저울 그림이 화면 위 절반을 차지해 아이 카드가 작고(94px), 한 번에 5명만 보임.</p>
+<div class="vp"><div class="scr" data-hub="summon"><div class="d4c"><div class="dhd"><h4>별가루 교환소</h4><small>어느 쪽에 쓸까요</small></div><div data-gen="d4c"></div></div></div></div>
+</section>
+
+<!-- ============================== D8-5 ============================== -->
+<h3 id="s-rates">D8-5 · 소환 확률 정보 <small>scripts/ui/summon_page.gd rates_panel · 방향 「공시표」 — 숫자 · 문구는 그대로</small></h3>
+<p class="sub">등급 막대 + 보장 세 개(50회 S 이상 · 10회 A 이상 · 천장 150점)를 메달로, 아이 목록은 접기. 아래 문구는 게임 문장을 한 글자도 바꾸지 않고 옮겼습니다. 여는 단추 SummonRates는 소환 무대 쪽.</p>
+<div class="states" data-group="rates"><span>상태</span><button type="button" data-v="pick" aria-pressed="true">픽업 출석부</button><button type="button" data-v="std" aria-pressed="false">상시 출석부</button><button type="button" data-v="open" aria-pressed="false">아이 목록 펼침</button><button type="button" data-v="end" aria-pressed="false">스크롤 끝</button></div>
+<section class="ref"><div class="refs"><img src="now/now_rates_1280x720.jpg" alt="지금 확률 픽업"><img src="now/now_rates_std_1280x720.jpg" alt="지금 확률 상시"></div><div><h2>지금</h2><p class="cap">14px 글이 판 가득한 긴 글 벽. 등급 차이 · 보장이 문장 속에 묻혀 있고, 별가루 · 신화 조각 공시는 한참 밀어야 나옴.</p></div></section>
+
+<section class="opt" data-choice="rates_a" data-l="A" data-choice-group="rates" data-choice-label="A · 공시 문서 (표 + 막대 + 보장 메달)">
+<h2>A · 표 + 막대 — 공시 문서 한 장, 오른쪽 보장 메달 셋 <span class="rec">추천</span><button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 종이 판 1장 + 메달 SVG 3개(만든 부품) + 막대. 막대는 실제 비율 그대로라 SS 막대는 아주 짧음(정직함 우선). 전체 문장은 아래 스크롤 칸에 그대로.</p>
+<p class="verdict">정직한 평: 「공시표」라는 말에 가장 가까운 정돈된 문서 — 위 절반만 봐도 핵심(등급 · 보장)이 끝남. 약점: 아래 스크롤 칸이 낮아(약 260px) 전체 표기를 읽으려면 여러 번 밀어야 함.</p>
+<div class="vp"><div class="scr" data-hub="summon"><div class="r5a" data-gen="r5a"></div></div></div>
+</section>
+
+<section class="opt" data-choice="rates_b" data-l="B" data-choice-group="rates" data-choice-label="B · 등급 카드 넷 + 보장 메달 띠">
+<h2>B · 등급 카드 넷 — 판 없이 무대 위에 카드 넷 + 메달 띠 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 카드 4장 + 메달 띠 3칸. 전체 표기는 「▾」로 펼치면 카드 자리를 덮고 올라옴. 큰 숫자가 46px라 가장 멀리서도 읽힘.</p>
+<p class="verdict">정직한 평: 소환 화면의 카드 결과 이어져 가장 「게임답게」 화려함. 대신 SS 1.13%와 B 59.56%가 같은 크기 카드라 비율 감각은 A 막대보다 약하고, 전체 문장은 한 번 더 눌러야 보임.</p>
+<div class="vp"><div class="scr" data-hub="summon"><div class="r5b" data-gen="r5b"></div></div></div>
+</section>
+
+<section class="opt" data-choice="rates_c" data-l="C" data-choice-group="rates" data-choice-label="C · 요약 띠 위 + 전체 표기 두루마리 아래">
+<h2>C · 요약 위 + 전체 표기 아래 — 벨벳 요약 띠 + 종이 두루마리 <button class="rp" type="button" data-replay>▶ 다시</button></h2>
+<p class="cost">비용: 요약 띠(쌓은 막대 1개) + 두루마리 판. 쌓은 막대는 SS · S가 너무 얇아 칸 폭을 최소 6%로 늘려 그림(숫자는 그대로) — 비율 그림이 정확하지 않은 것이 흠.</p>
+<p class="verdict">정직한 평: 지금 문장을 그대로 두고 위에 요약만 얹어 「숫자 · 문구 그대로」 조건에 가장 안전함. 대신 아래 두루마리는 결국 긴 글이라 지금 화면의 개선 폭이 셋 중 가장 작음.</p>
+<div class="vp"><div class="scr" data-hub="summon"><div class="r5c" data-gen="r5c"></div></div></div>
+</section>
+</div>
+<div id="toast"></div>
+<script>
+const fmt=n=>n.toLocaleString('en-US');
+// economy.gd PRODUCTS (가격 · 지급량 · 첫 구매 보너스 = 같은 양)
+const PK=[[120,1200],[630,5900],[1320,12000],[3800,33000],[7000,59000],[14700,119000]];
+const GEN={};
+const priceBtn=(i,p,extra='')=>`<span class="act${extra}" data-off="pay"><span>₩${fmt(p)}</span></span>`+(i===1?`<span class="act wait hid${extra}" data-on="pay"><i class="spin"></i><span>결제 중…</span></span>`:`<span class="act off hid${extra}" data-on="pay"><span>₩${fmt(p)}</span></span>`);
+const firstRib=g=>`<span class="fb">첫 구매 2배<b>+${fmt(g)}</b></span>`;
+// 병 안 보석 자리 [왼쪽 %, 아래 %]
+const GPOS={bot:[[[33,5]],[[18,4],[48,8]],[[14,3],[50,5],[32,17]]],jar:[[[16,4],[52,3],[34,15]],[[12,3],[40,4],[66,6],[30,16]],[[10,3],[36,2],[62,4],[22,15],[50,16],[36,27]]]};
+function bottle(i,g){const jar=i>=3,k=jar?[.56,.6,.64][i-3]:[.74,.79,.84][i],ps=GPOS[jar?'jar':'bot'][i%3],f=jar?[34,42,52][i-3]:[30,38,46][i];
+ return `<div class="bt${jar?' jar':''}" style="--k:${k};--i:${i}"><img src="a/s/${jar?'jar':'bot'}_back.svg" alt=""><div class="lq"><i style="--f:${f}%"></i>${ps.map(([l,b])=>`<img class="gm" src="a/i/icon_gem.png" alt="" style="left:${l}%;bottom:${b}%;--g:${jar?31:44}%">`).join('')}</div><img src="a/s/${jar?'jar_front_lav':'bot_front_rose'}.svg" alt=""><div class="glint"></div><span class="lbl">채색석 ${fmt(g)}</span></div>`}
+GEN.shelfA=()=>`<span class="cap8" style="right:6px;top:50px">가격과 지급량은 출시 전 가안이에요</span>`+[0,1].map(r=>`<div class="prow" style="top:${r?298:42}px"><div class="shf"><img class="br l" src="a/s/bracket.svg" alt=""><img class="br r" src="a/s/bracket.svg" alt=""></div>${PK.slice(r*3,r*3+3).map(([g,p],j)=>{const i=r*3+j;return `<div class="pcol rise" style="--d:${.1+i*.06}"><div class="bx">${bottle(i,g)}</div>${firstRib(g)}${priceBtn(i,p)}</div>`}).join('')}</div>`).join('')+`<i class="spk" style="left:60%;top:70px"></i><i class="spk" style="left:86%;top:330px;animation-delay:1.1s"></i><i class="spk" style="left:20%;top:360px;animation-delay:.5s"></i>`;
+const GIFT='<div class="gift"><img class="bb" src="a/s/box_body.svg" alt=""><img class="lid" src="a/s/box_lid.svg" alt=""><img class="bow" src="a/s/bow.svg" alt=""></div>';
+const BOOK='<div class="book"><i style="left:3px;top:3px"></i><i style="right:3px;top:3px;transform:scaleX(-1)"></i><i style="left:3px;bottom:3px;transform:scaleY(-1)"></i><i style="right:3px;bottom:3px;transform:scale(-1)"></i><img class="gm" src="a/i/icon_gem.png" alt=""><b>항해 일지</b><s></s></div>';
+GEN.caseB=()=>{const pile=[[1,84],[2,72],[3,64],[5,56],[7,50],[9,46]];
+ const free=`<div class="slot rise" style="--d:.05"><div class="amt">30<small>매일 무료 선물</small></div><span class="fb" style="background:linear-gradient(180deg,#b9a6ff,#7d63dc);text-shadow:none">하루 한 번 · 무료</span><div class="stage">${GIFT}<img class="stmp hid" data-on="got" src="a/s/stamp_paid.svg" alt="" style="left:34px;top:40px;width:96px"></div><div class="plq">무료 선물 · 채색석 30</div><span class="act" data-off="got" style="min-width:142px"><span>받기</span></span><span class="act wait hid" data-on="got" style="min-width:142px"><span>내일 13:24</span></span></div>`;
+ const mon=`<div class="slot rise" style="--d:.1"><div class="amt">3,000<small>30일 동안 모두 받으면</small></div><span class="fb" style="background:linear-gradient(180deg,#ffd877,#c48a2a);color:#4a2b10;text-shadow:none" data-off="month">즉시 300 · 출석마다 90 × 30일</span><span class="fb hid" data-on="month" style="background:linear-gradient(180deg,#ffd877,#c48a2a);color:#4a2b10;text-shadow:none">남은 24일 · 오늘 90 받음</span><div class="stage">${BOOK}</div><div class="plq">항해 일지 · 30일</div><span class="act" data-off="month pay" style="min-width:142px"><span>₩4,900</span></span><span class="act wait hid" data-on="month" style="min-width:142px"><span>받는 중 ✓</span></span><span class="act off hid" data-on="pay" style="min-width:142px"><span>₩4,900</span></span></div>`;
+ return free+mon+PK.map(([g,p],i)=>`<div class="slot rise" style="--d:${.15+i*.05}"><div class="amt">${fmt(g)}<small>채색석</small></div>${firstRib(g)}<div class="stage"><div class="pile" style="--pg:${pile[i][1]}px">${'<img src="a/i/icon_gem.png" alt="">'.repeat(pile[i][0])}</div></div><div class="plq">채색석 ${fmt(g)}</div>${priceBtn(i,p,'" style="min-width:142px')}</div>`).join('')};
+GEN.cal=()=>Array.from({length:30},(_,i)=>`<i${i<6?' data-mon':''}>${i+1}</i>`).join('');
+GEN.menuC=()=>`<i class="cor" style="left:6px;top:6px"></i><i class="cor" style="right:6px;top:6px;transform:scaleX(-1)"></i><i class="cor" style="left:6px;bottom:6px;transform:scaleY(-1)"></i><i class="cor" style="right:6px;bottom:6px;transform:scale(-1)"></i><h5>채색석 가격표<small>가격과 지급량은 출시 전 가안이에요</small></h5>
+<div class="mrow free rise" style="--d:.05"><img src="a/s/box_body.svg" alt="" style="width:44px;height:auto"><div><b>매일 무료 선물<small>하루 한 번</small></b><span style="font:13px Pre;color:#7a6a8a">채색석 30</span></div><span class="act" data-off="got"><span>받기</span></span><span class="act wait hid" data-on="got"><span>내일 13:24</span></span></div>`+PK.map(([g,p],i)=>`<div class="mrow rise" style="--d:${.1+i*.05}"><img src="a/i/icon_gem.png" alt="" style="width:${30+i*4}px;height:${30+i*4}px"><div><b>채색석 ${fmt(g)}</b>${firstRib(g)}</div>${priceBtn(i,p)}</div>`).join('');
+</script>
+<script>
+// mythic_shop.gd PRODUCTS · PERIOD_NAMES 그대로 (z = 한도 0일 때 단추 글)
+const MP=[{id:'hero',n:'신화 아이 선택',p:80,per:'아이마다',lim:1,d:'3명 중 선택 · 소환에서는 나오지 않아요'},
+{id:'ss',n:'원하는 SS 선택권',p:24,per:'매월',lim:1,d:'원하는 SS 아이 한 명'},
+{id:'material',n:'장비 신화 승격 재료',p:10,per:'매주 월요일',lim:1,d:'승격 재료 장비 1개를 대신해요',z:'다음 월요일'},
+{id:'crystals',n:'기억 결정 묶음',p:5,per:'매주 월요일',lim:3,d:'결정 56개 · 중복 약 30회분',z:'다음 월요일'},
+{id:'lock',n:'잠재 줄 잠금권',p:2,per:'매주 월요일',lim:5,d:'유료 덧칠 잠금 1줄 추가 비용 대납'},
+{id:'tickets',n:'뽑기권 3장',p:1,per:'매일',lim:1,d:'소환 1회를 채색석 없이',z:'내일 다시'}];
+const MH=[['arca','아르카','태초의 무지개 붓','18%'],['yunseul','윤슬','첫 약속의 고래 하프','14%'],['nox','녹스','속죄의 프리즘 창','22%']];
+const SSL=[['serena','세레나','#8f5fe8','보라'],['aria','아리아','#9aa8cc','하양'],['flora','플로라','#3fae6e','초록'],['ignis','이그니','#e0484a','빨강'],['marin','마린','#3a86e0','파랑'],['sol','솔','#f08a34','주황']];
+const MBOT='<div class="mbot"><img src="a/s/bot_back.svg" alt=""><div class="lq"><i style="--f:58%"></i></div><img src="a/s/bot_front_rose.svg" alt=""></div>';
+const MIC={hero:'<div class="hp" style="--pic:url(a/c/arca.webp);width:78px;height:78px"><span></span></div>',ss:'<img src="a/i/icon_ticket.png" alt="" style="filter:hue-rotate(40deg) saturate(1.3) drop-shadow(0 6px 8px rgba(0,0,0,.45))">',material:'<img src="a/i/gear_badge.png" alt="">',crystals:'<img src="a/i/icon_crystal.png" alt="">',lock:MBOT,tickets:'<img src="a/i/icon_ticket.png" alt="">'};
+const SHI='<img src="a/s/shard.svg" alt="" style="width:15px;height:20px">';
+const shardBtn=(m,cls='',lab='교환')=>`<span class="act sm${m.p>12?' need':''}${cls}"${m.z?' data-off="zero"':''}><span class="c">${SHI}<b>${m.p}</b></span><span>${lab}</span></span>`+(m.z?`<span class="act sm wait hid${cls}" data-on="zero"><span>${m.z}</span></span>`:'');
+const limTx=m=>`<span class="tx"${m.z?` data-x-zero="0 / ${m.lim}"`:''}>${m.lim} / ${m.lim}</span>`;
+const nn=(t,st='')=>`<i class="nn" style="${st}">${t}</i>`;
+const mcards=(on=0)=>MH.map(([id,n,w,px],i)=>`<div class="mcard${i===on?' on':''}" style="--pic:url(a/cut/${id}.webp);--px:${px}"><div class="im"></div><span class="ck">✓</span><div class="nm"><b>${n}</b><small>${w}</small></div></div>`).join('');
+const sscards=(on=4)=>SSL.map(([id,n,c,e],i)=>`<div class="ssc${i===on?' on':''}" style="--ec:${c};--pic:url(a/c/${id}.webp)"><div class="im" style="background-size:150% auto;background-position:50% 4%"></div><span class="tg">SS</span>${i===2?'<small>만남</small>':''}<b>${n}</b></div>`).join('');
+GEN.myA=()=>MP.map((m,i)=>`<div class="gcell rise${m.id==='hero'?' hero':''}" style="--d:${.08+i*.05}">${nn('ShardProduct_'+m.id+' › Buy_'+m.id,'left:8px;top:4px')}<div class="pil">${MIC[m.id]}</div><div><h6>${m.n}</h6><span class="mchip">${m.per} · 남은 ${limTx(m)}</span></div><p>${m.d}</p>${shardBtn(m,'','교환')}</div>`).join('')
+ +`<div class="tray hid" data-on="pick">${nn('MythicChoice','right:16px;top:8px')}<h5>신화 아이 고르기<small>드롭다운 대신 카드 · 고른 아이만 교환돼요</small></h5><div class="row">${mcards(0)}</div><div class="ft">아르카 · 광역 · 신화 아이는 소환에서 나오지 않아요 ${shardBtn(MP[0],'','아르카 교환')}</div></div>`
+ +`<div class="tray hid" data-on="ss">${nn('SSChoice › UseSSSelector','right:16px;top:8px')}<h5>원하는 SS 선택권 사용<small>가진 선택권 1장 · 이미 만난 SS는 별가루로 바뀌어요</small></h5><div class="row" style="gap:16px;margin-top:26px">${sscards(4)}</div><div class="ft">마린 · 파랑 · 광역<span class="act sm"><span>SS 선택권 사용 (1)</span></span></div></div>`;
+GEN.myB=()=>`<h5>교환 장부<small>한도: 자정 / 월요일 / 매월 1일 초기화</small></h5>`+MP.map((m,i)=>`<div class="lrow rise${m.id==='hero'?' hero':''}" style="--d:${.08+i*.05}"${i?' data-off="pick ss"':''}>${nn('ShardProduct_'+m.id,'left:-30px;top:2px')}<div class="ic">${m.id==='lock'?MBOT:MIC[m.id]}</div><div><h6>${m.n}<span class="mchip">${m.per} · 남은 ${limTx(m)}</span></h6><p>${m.d}</p></div><div class="acts"><span class="ptag">${SHI}${m.p}</span>${shardBtn(m,'','교환').replace(/<span class="c">.*?<\/span>/,'')}</div></div>`).join('')
+ +`<div class="hid" data-on="pick">${nn('MythicChoice','right:30px;top:120px')}<div class="inl">${mcards(0)}</div><p style="margin:0;font:13px Pre;color:#7a6a8a">고른 아이: <b style="color:#3a2547">아르카</b> · 「교환」을 누르면 이 아이만 데려와요</p></div>`
+ +`<div class="hid" data-on="ss"><div class="lrow" style="border-bottom:1.5px dashed rgba(150,120,90,.4)"><div class="ic">${MIC.ss}</div><div><h6>원하는 SS 선택권<span class="mchip">가진 선택권 1장</span></h6><p>이미 만난 SS는 별가루로 바뀌어요</p></div><div class="acts"><span class="act sm"><span>SS 선택권 사용 (1)</span></span></div></div>${nn('SSChoice › UseSSSelector','right:30px;top:150px')}<div class="inl" style="gap:12px">${sscards(4)}</div></div>`;
+GEN.myC=()=>`<div class="gal">${MH.map(([id,n,w,px],i)=>`<div class="frm rise${i===0?' pk':''}" style="--d:${.05+i*.08}">${i===0?nn('ShardProduct_hero › MythicChoice','left:0;top:-14px'):''}<i class="lamp"></i><div class="fr"><div class="im" style="--pic:url(a/cut/${id}.webp);--px:${px}"></div><i class="cr" style="left:2px;top:2px"></i><i class="cr" style="right:2px;top:2px;transform:scaleX(-1)"></i><i class="cr" style="left:2px;bottom:2px;transform:scaleY(-1)"></i><i class="cr" style="right:2px;bottom:2px;transform:scale(-1)"></i></div><div class="np">${n}<small>${w}</small></div>${shardBtn(MP[0],'',n+' 교환')}</div>`).join('')}</div>`
+ +`<div class="mold"></div><div class="wain"></div><span class="ttl3">신화 아이는 아이마다 한 번 · 소환에서는 나오지 않아요</span><span class="cnt3c"><img src="a/s/shard.svg" alt="">신화 조각 <b class="rbt tx" data-x-poor="12" data-x-ok="96" data-x-zero="40" data-x-pick="96" data-x-ss="40">40</b></span>`
+ +`<div class="shelf3" data-off="ss">${MP.slice(1).map((m,i)=>`<div class="smc rise" style="--d:${.3+i*.05}">${nn('ShardProduct_'+m.id,'left:4px;top:-8px')}${m.id==='lock'?MBOT.replace('class="mbot"','class="mbot" style="width:34px;height:56px"'):MIC[m.id].replace('<img ','<img class="i" ')}<h6>${m.n}</h6><span class="mchip">${m.per} · ${limTx(m)}</span>${shardBtn(m)}</div>`).join('')}</div>`
+ +`<div class="shelf3 hid" data-on="ss" style="align-items:center;justify-content:center;gap:14px;height:180px">${nn('SSChoice › UseSSSelector','left:4px;top:-6px')}<div style="display:flex;gap:12px;transform:scale(.82);transform-origin:50% 60%">${sscards(4)}</div><span class="act"><span>SS 선택권 사용 (1)</span></span></div>`;
+GEN.mbot=()=>MBOT;
+// 큰 조각 병: 줄(r0~r3)마다 조각을 쌓아 보유량만큼 보인다
+GEN.mjar=()=>{let h='';const rows=[[8,30,52,74,18,62],[14,40,64,26,52],[10,34,58,80,22,46],[16,42,68,30,56]];rows.forEach((r,ri)=>r.forEach((l,j)=>{h+=`<img class="sh r${ri}" src="a/s/shard.svg" alt="" style="left:${l}%;bottom:${3+ri*13+(j%2)*5}%;transform:rotate(${(j*37+ri*23)%60-30}deg)">`}));return `<img src="a/s/jar_back.svg" alt=""><div class="lq"><i style="--f:44%"></i>${h}</div><img src="a/s/jar_front_lav.svg" alt=""><div class="glint"></div><span class="lbl">신화 조각</span>`};
+</script>
+<style>
+.scr[data-st=poor] .bigjar .sh:is(.r1,.r2,.r3),.scr:is([data-st=base],[data-st=zero],[data-st=ss]) .bigjar .sh.r3{display:none}
+.scr[data-st=poor] .bigjar .lq>i{height:18%}
+.scr:is([data-st=ok],[data-st=pick]) .bigjar .lq>i{height:60%}
+.bigjar .lbl{--lt:14%}
+</style>
+<script>
+// 별가루 교환소: 아직 만나지 못한 아이 (등급 높은 순 · 픽업 맨 앞) · game_data.gd DUST_PRICE · DUST_PER_CRYSTAL
+const HL=[['flora','플로라','#3fae6e','SS',500,'pkc'],['marin','마린','#3a86e0','SS',500,'mrc'],['ignis','이그니','#e0484a','SS',500],['sol','솔','#f08a34','SS',500],['yeonwoo','연우','#d39a36','S',150],['siwoo','시우','#d39a36','S',150],['hayun','하윤','#d39a36','S',150],['noel','노엘','#d39a36','S',150],['miso','미소','#8a7ad0','A',40],['hana','하나','#8f9bb8','B',15]];
+const DI='<img src="a/i/icon_dust.png" alt="">';
+const hcd=([id,n,c,t,p,k],i)=>`<div class="hcd rise ${k||''}" style="--ec:${c};--pic:url(a/c/${id}.webp);--d:${.1+i*.04}"><div class="im"></div><span class="tg">${t}</span>${k==='pkc'?'<span class="pk">픽업</span>':''}<div class="nmb"><b>${n}</b><span class="pr">${DI}${p}</span></div></div>`;
+const dpick=(st='')=>`<div class="dpick hid" data-on="pick" style="${st}"><i class="fc" style="--pic:url(a/c/flora.webp);--ec:#3fae6e"></i><div><b>플로라 · 픽업 SS · 초록</b><small>별가루 500으로 바로 데려와요 (천장 150점과 따로)</small></div><span class="act sm need"><span class="c">${DI}<b>500</b></span><span>데려오기</span></span></div><div class="dpick hid" data-on="ss" style="${st}"><i class="fc" style="--pic:url(a/c/marin.webp);--ec:#3a86e0"></i><div><b>마린 · SS · 파랑 · 광역</b><small>아직 만나지 못한 아이만 여기 있어요</small></div><span class="act sm need"><span class="c">${DI}<b>500</b></span><span>데려오기</span></span></div>`;
+const conv=`<span class="act need" data-node="DustConvert1"><span>결정 1개 받기</span><span class="c">${DI}<b>2</b></span></span><span class="act need"><span>결정 10개 받기</span><span class="c">${DI}<b>20</b></span></span><span class="act" data-off="poor"><span>결정 310개 받기 (전부)</span></span>`;
+GEN.d4a=()=>`<div class="glassp"></div><div class="left"><div class="bt jar gjar" style="--k:.82"><img src="a/s/jar_back.svg" alt=""><div class="lq"><i style="--f:56%"></i></div><img src="a/s/jar_front_gold.svg" alt=""><div class="glint"></div><span class="lbl tx" data-x-poor="별가루 2">별가루 620</span></div><div class="ped"></div><h5>기억 결정 바꾸기</h5><p>별가루 2개가 기억 결정 1개가 돼요<br>결정은 승급 · 각성에 써요</p><span class="cr"><img src="a/i/icon_crystal.png" alt="">가진 기억 결정 200,000</span>${conv}</div><h6>아이 데려오기 · 아직 만나지 못한 아이</h6><div class="grid">${HL.map(hcd).join('')}</div>`+dpick('left:360px;bottom:44px');
+GEN.d4b=()=>{const P={flora:[56,24],marin:[70,13],ignis:[84,27],sol:[71,40],yeonwoo:[40,46],siwoo:[52,58],hayun:[64,66],noel:[78,56],miso:[90,70],hana:[28,64]};const L=[['flora','marin','ss'],['marin','ignis','ss'],['ignis','sol','ss'],['sol','flora','ss'],['yeonwoo','siwoo'],['siwoo','hayun'],['hayun','noel'],['sol','noel'],['noel','yeonwoo'],['noel','miso'],['hana','yeonwoo']];
+ return `<div class="sky"><svg viewBox="0 0 100 100" preserveAspectRatio="none">${L.map(([a,b,k])=>`<line class="cl ${k||''}" vector-effect="non-scaling-stroke" x1="${P[a][0]}" y1="${P[a][1]}" x2="${P[b][0]}" y2="${P[b][1]}"/>`).join('')}</svg>
+ <span class="cname" style="left:62%;top:4%">SS 별자리</span><span class="cname" style="left:34%;top:34%">S 별자리</span><span class="cname" style="left:18%;top:56%">B</span><span class="cname" style="left:86%;top:60%">A</span>
+ ${HL.map(([id,n,c,t,p,k],i)=>`<div class="snd ${k||''}" style="left:${P[id][0]}%;top:${P[id][1]}%;--ec:${c};--pic:url(a/c/${id}.webp);--s:${t==='SS'?82:t==='S'?66:56}px;--d:${.1+i*.06}"><i class="st"></i><i class="fc"></i><b>${n}<i>✦${p}</i></b></div>`).join('')}
+ <div class="moon"><h5><img src="a/i/icon_crystal.png" alt="">기억 결정 바꾸기</h5><p>별가루 2개 → 기억 결정 1개 · 가진 결정 200,000</p>${conv}</div>${dpick('left:24px;bottom:22px')}</div>`};
+GEN.d4c=()=>`<div class="stagep"><div class="fulc"><i class="cord"></i></div><div class="beam"><img class="b" src="a/s/scale_beam.svg" alt=""><div class="bt jar gjar" style="--k:.4;position:absolute;left:50%;top:-86px;margin-left:-40px"><img src="a/s/jar_back.svg" alt=""><div class="lq"><i style="--f:56%"></i></div><img src="a/s/jar_front_gold.svg" alt=""><div class="glint"></div></div>
+ <div class="pan l"><img class="p" src="a/s/scale_pan.svg" alt=""><div class="load" style="bottom:50px"><img src="a/i/icon_crystal.png" alt="" style="width:54px"><img src="a/i/icon_crystal.png" alt="" style="width:62px;margin:0 -16px"><img src="a/i/icon_crystal.png" alt="" style="width:50px"></div></div>
+ <div class="pan r"><img class="p" src="a/s/scale_pan.svg" alt=""><div class="load" style="bottom:46px"><span data-off="pick ss" style="font:40px Gowun,serif;color:rgba(120,90,150,.5)">?</span><i class="hid" data-on="pick" style="width:76px;height:76px;border-radius:50%;background:url(a/c/flora.webp) 50% 6%/170% auto,#fff;box-shadow:0 0 0 3px #3fae6e,0 0 16px #3fae6e"></i><i class="hid" data-on="ss" style="width:76px;height:76px;border-radius:50%;background:url(a/c/marin.webp) 50% 6%/170% auto,#fff;box-shadow:0 0 0 3px #3a86e0,0 0 16px #3a86e0"></i></div></div></div>
+ <div class="fulc" style="top:206px;height:auto"><span class="dn">${DI}별가루 <b class="tx" data-x-poor="2">620</b></span></div>
+ <div class="lbl2" style="left:calc(50% - 450px);top:300px">기억 결정 바꾸기<small>별가루 2개 → 결정 1개 · 가진 결정 200,000</small></div>
+ <div class="lbtns" style="left:calc(50% - 420px);top:360px">${conv}</div>
+ <div class="lbl2" style="left:calc(50% + 150px);top:300px">아이 데려오기<small>아직 만나지 못한 아이 · 고르면 오른쪽 접시에</small></div>
+ <div class="strip" style="left:calc(50% + 40px);top:360px">${HL.slice(0,5).map((h,i)=>hcd(h,i).replace(' rise','')).join('')}</div>
+ <div class="dpk" style="position:absolute;left:calc(50% + 40px);top:500px;z-index:6"><span class="act need" data-off="base ok poor"><span class="c">${DI}<b>500</b></span><span>데려오기</span></span><span class="act off" data-on="base ok poor"><span>아이를 먼저 골라요</span></span></div></div>`;
+</script>
+<script>
+// summon_page.gd rates_panel 문구 · 숫자 그대로 (픽업 출석부 = 플로라)
+const RT=[['SS','1.13','6명','픽업 플로라 0.75% 이상 · 그 외 SS 한 명당 0.06%','한 명당 0.18%','linear-gradient(90deg,#3fae6e,#3a86e0,#e0484a,#f08a34)'],['S','3.43','12명','한 명당 0.27%','','linear-gradient(90deg,#f2c46a,#c4862a)'],['A','35.76','15명','한 명당 2.37%','','linear-gradient(90deg,#b9a8ff,#7d63dc)'],['B','59.56','24명','한 명당 2.47%','','linear-gradient(90deg,#c3cadc,#7f89a6)']];
+const eaTx=r=>r[4]?`<span class="tx" data-x-std="${r[4]}">${r[3]}</span>`:r[3];
+const SSF=[['flora','플로라','#3fae6e'],['marin','마린','#3a86e0'],['ignis','이그니','#e0484a'],['sol','솔','#f08a34'],['serena','세레나','#8f5fe8'],['aria','아리아','#9aa8cc']];
+const SF=[['lumi','루미'],['noel','노엘'],['hayun','하윤'],['jiwoo','지우'],['rina','리나'],['haneul','하늘'],['karen','카렌'],['hongi','홍이'],['yeonwoo','연우'],['siwoo','시우'],['yeoreum','여름'],['juhee','주희']];
+const chips=(l,ec)=>`<div class="chl">${l.map(([id,n,c])=>`<span${id==='flora'?' class="pu"':''} style="--ec:${c||ec};--pic:url(a/c/${id}.webp)"><i></i>${n}${id==='flora'?' · 픽업':''}</span>`).join('')}</div>`;
+const LISTS=`<div class="hid" data-on="open"><h6>등급별 아이 목록 <span class="chev">▴</span></h6><p>SS 6명</p>${chips(SSF)}<p>S 12명</p>${chips(SF,'#e8b04a')}<p>A 15명 · B 24명 <span class="chev">▾</span></p></div>`;
+const FT=`<div class="ftx"><p>기본 확률은 SS 1 · S 3 · A 36 · B 60%이고, 아래 보장이 SS · S(10회 소환은 A도)를 올려 위 값이 돼요.</p><p>이야기로 합류하는 아이(카렌 · 노아 등)는 그 장 이야기를 본 뒤부터 소환에 나와요.</p><p data-off="std">픽업 출석부: SS가 나오면 50%는 픽업 아이 플로라, 놓치면 다음 SS는 픽업 확정이라 오래 뽑으면 SS의 약 2/3가 픽업이에요 (7일마다 바뀜)</p><p>표기 확률은 내림 값이며, 1회씩 뽑든 10회씩 뽑든 모든 등급의 실제 확률은 표기 이상이에요.</p>${LISTS}<h6>보장</h6><p>· S 이상: 50회 안에 꼭 만나요 (그 회까지 못 만나면 그 회는 S 이상 확정, SS · S 비율은 확률표대로)</p><p>· 10회 소환: A 이상 1명 이상</p><p>· 천장: 소환 1회마다 기억 포인트 1점, 150점이면 픽업 아이를 바로 데려와요</p><h6>별가루</h6><p>· 이미 만난 아이를 다시 만나면 별가루로 바뀌어요 (SS 120 · S 30 · A 2 · B 1)</p><p>· 별가루 교환소: 아직 없는 아이 데려오기 (SS 500 · S 150 · A 40 · B 15, 픽업 아이 포함)</p><p>· 별가루 2개 → 기억 결정 1개 (승급 · 각성에 써요)</p><h6>신화 조각</h6><p>신화 아이는 소환에서 나오지 않아요.</p><p>신화 조각: 10회 소환마다 1개 확정 + 각각 독립적으로 50% / 10% 확률로 1개씩 추가.</p><p>총 1/2/3개 확률 45%/50%/5% · 평균 1.6개 · 무료·유료 1회 소환은 0개.</p></div>`;
+const MEDS=[['medal_pity','S 이상 50회 안','그 회까지 못 만나면 그 회는 S 이상 확정'],['medal_ten','10회 소환','A 이상 1명 이상'],['medal_spark','천장 150점','소환 1회 = 기억 포인트 1점 · 150점이면 픽업 아이']];
+const med=([i,b,s])=>`<div class="med"><img src="a/s/${i}.svg" alt=""><div><b>${b}</b><small>${s}</small></div></div>`;
+const OK='<span class="act lav sm"><span>닫기</span></span>';
+GEN.r5a=()=>`<div class="doc"><div class="ban"><img src="a/s/ban_navy.svg" alt="">확률 공시표</div>${nn('SummonRates','right:20px;top:14px')}
+ <div class="tbl">${RT.map(r=>`<div class="tr"><span class="tb ${r[0]}">${r[0]}</span><span class="pc">${r[1]}%</span><div class="bw"><i style="--v:${r[1]}%;--bc:${r[5]}"></i><small>${r[2]} · ${eaTx(r)}</small></div></div>`).join('')}</div>
+ <div class="side"><h6>보장 셋</h6>${MEDS.map(med).join('')}</div>
+ <div class="sc"><div class="ct">${FT}</div><div class="sbar"><i></i></div></div>
+ <span class="ok">${OK}</span><span class="ab" style="left:40px;bottom:22px;font:13px Pre;color:#7d63dc">등급별 아이 목록 <span class="chev">▾</span></span></div>`;
+GEN.r5b=()=>`<div class="cards4">${RT.map((r,i)=>`<div class="gc rise" style="--bc:${r[5]};--d:${.1+i*.08}"><span class="tb ${r[0]}">${r[0]}</span><span class="pc">${r[1]}<small>%</small></span><div class="n">${r[2]}</div>${i===0?`<div class="sp" data-off="std"><i style="flex:2;background:#ff8fc4"></i><i style="flex:1;background:#b9a8ff"></i></div>`:''}<div class="ea">${i===0?'<span data-off="std"><b>픽업 플로라 0.75% 이상</b><br>그 외 SS 한 명당 0.06%</span><span class="hid" data-on="std">한 명당 0.18%</span>':r[3]}</div>${i===0?`<div class="faces">${SSF.map(([id,n,c])=>`<i style="--pic:url(a/c/${id}.webp);--ec:${c}"></i>`).join('')}</div>`:''}<span class="bs">기본 ${['1','3','36','60'][i]}% + 보장</span></div>`).join('')}</div>
+ <div class="meds">${MEDS.map(med).join('')}</div>
+ <div class="more">${nn('SummonRates','right:10px;top:4px')}<div class="hdr" data-off="open end">전체 표기 · 아이 목록 <span class="chev">▾</span>${OK}</div><p data-off="open end" style="margin:6px 0 0;font:13px/1.6 Pre;color:#5a4a6a">기본 확률은 SS 1 · S 3 · A 36 · B 60%이고, 아래 보장이 SS · S(10회 소환은 A도)를 올려 위 값이 돼요.<br>표기 확률은 내림 값이며, 1회씩 뽑든 10회씩 뽑든 모든 등급의 실제 확률은 표기 이상이에요.</p><div class="ct" data-on="open end">${FT}</div></div>`;
+GEN.r5c=()=>`<div class="sum">${nn('SummonRates','right:180px;top:6px')}<h5>한눈에 보기<small>1회 소환 등급 확률 (보장 포함 · 내림 표기)</small></h5><div class="stack">${RT.slice().reverse().map(r=>`<i style="flex:${Math.max(+r[1],6)};background:${r[5]}">${r[0]} ${r[1]}%</i>`).join('')}</div><div class="stk-l"><span>SS <b>6명</b> · <span class="tx" data-x-std="한 명당 0.18%">픽업 플로라 0.75% 이상</span></span><span>S <b>12명</b></span><span>A <b>15명</b></span><span>B <b>24명</b></span></div><div class="mc">${MEDS.map(([i,b])=>`<span><img src="a/s/${i}.svg" alt="">${b}</span>`).join('')}</div></div>
+ <div class="scroll"><div class="ct"><div class="ftx"><h6 style="margin-top:0">전체 표기</h6><p>소환은 매번 아이를 만나요. 한 번 소환할 때 등급 확률 (아래 보장 포함):</p>${RT.map(r=>`<p>${r[0]}  ${r[1]}%  (${r[2]}, ${eaTx(r)})</p>`).join('')}</div>${FT}</div><div class="sbar" style="right:8px"><i></i></div></div><span class="ok">${OK}</span>`;
+</script>
+<script>
+document.querySelectorAll('[data-gen]').forEach(e=>{e.innerHTML=GEN[e.dataset.gen](e)});
+document.querySelectorAll('[data-clone]').forEach(e=>{e.innerHTML=document.querySelector(`.opt[data-choice="${e.dataset.clone}"] .bd`).innerHTML});
+// C 비행 경로: 받은 자리(선물 상자 · 630 병 · 항해 일지) → 머리줄 지갑 채색석
+function flyPaths(){const w=+document.documentElement.dataset.w;document.querySelectorAll('.scr[data-fly]').forEach(s=>{const st=s.dataset.st||'free';const from={free:[126,262],first:[w===1600?911:751,262],month:[118,500]}[st];const to=[w-218,76];const mx=(from[0]+to[0])/2,my=Math.min(from[1],to[1])-90;const d=`M ${from[0]} ${from[1]} Q ${mx} ${my} ${to[0]} ${to[1]}`;s.querySelectorAll('.fly').forEach(f=>{f.style.offsetPath=`path('${d}')`;f.style.left='-26px';f.style.top='-26px'});s.querySelector('.trail path').setAttribute('d',d);const r=s.querySelector('.ring');r.style.left=from[0]-75+'px';r.style.top=from[1]-75+'px';const p=s.querySelector('.plus');p.style.left=to[0]-30+'px';p.style.top=to[1]+18+'px'})}
+const GROUPS={shop:'D8-1 상점',gift:'D8-2 무료 선물 · 구매 완료',myth:'D8-3 신화 조각 상점',dust:'D8-4 별가루 교환소',rates:'D8-5 소환 확률 정보'};
+const MKS=[['아이들','heroes','#c94a85'],['편성','formation','#5b44c8'],['소환','summon','#9a6a00'],['모험','adventure','#17706c'],['분교','school','#2f7350'],['상점','shop','#a8405a']];
+const X='<svg viewBox="0 0 24 24"><path d="M5,5 L19,19 M19,5 L5,19" stroke="#4a3f6e" stroke-width="2.6" stroke-linecap="round"/></svg>';
+const marks=(s,hub)=>s.insertAdjacentHTML('beforeend',MKS.map(([n,k,c],i)=>`<div class="mk${k===hub?' on':''}" style="--c:${c};top:${128+i*88}px;right:${k===hub?35:21}px"><i></i><img src="a/i/nav_${k}.png" alt=""><em>${n}</em></div>`).join('')+`<div class="cls" style="right:46px">${X}</div><div class="clsl" style="right:40px">닫기</div>`);
+document.querySelectorAll('.scr[data-hub]').forEach(s=>{
+  const hub=s.dataset.hub;
+  if(hub==='shop'){
+    const bd=s.querySelector('.bd'),board=document.createElement('div');board.className='board';board.innerHTML='<div class="bi"></div>';bd.before(board);board.firstChild.append(bd);
+    const t=s.dataset.tab;
+    board.firstChild.insertAdjacentHTML('afterbegin',`<div class="hd"><div class="t">상점</div><div class="tabs"><b class="${t==='shop'?'on':''}">상점</b><b class="${t==='myth'?'on':''}">신화 조각</b></div><div class="wal"><span><img src="a/i/icon_pearl.png" alt=""><b>200a</b></span><span class="gw"><img src="a/i/icon_gem.png" alt=""><b class="tx" data-x-got="50,030" data-x-done="50,030">50,000</b></span></div></div>`);
+    s.insertAdjacentHTML('afterbegin','<i class="bk"></i>');marks(s,'shop');
+  } else if(hub==='summon'){
+    s.insertAdjacentHTML('afterbegin',`<div class="stg"></div><div class="stt">소환</div><div class="swal"><span><img src="a/i/icon_gem.png" alt="">50,000</span><span><img src="a/i/icon_dust.png" alt=""><small>별가루</small><b class="tx" data-x-poor="2" data-x-ok="620" data-x-pick="620" data-x-ss="620">620</b></span></div>`);
+    marks(s,'summon');
+  } else if(hub==='battle'){
+    s.insertAdjacentHTML('afterbegin','<i class="bk bt0"></i>');
+  }
+});
+const fit=()=>document.querySelectorAll('.vp').forEach(v=>{const s=v.querySelector('.scr');const k=v.clientWidth/s.offsetWidth;s.style.transform=`scale(${k})`;v.style.height=s.offsetHeight*k+'px'});
+addEventListener('resize',fit);
+const setW=w=>{document.documentElement.style.setProperty('--w',w);document.documentElement.dataset.w=w;document.querySelectorAll('.bar [data-res]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.res===String(w)));fit();flyPaths()};
+document.querySelectorAll('.bar [data-res]').forEach(b=>b.addEventListener('click',()=>setW(b.dataset.res)));
+// 등장 연출은 누를 때만 (기본 화면은 연출 없이 끝 상태로 보인다). 애니메이션 시계가 멈춘 창에서도 5초 뒤 끝 상태로 돌아온다
+const play=s=>{clearTimeout(s._t);s.classList.remove('go');void s.offsetWidth;s.classList.add('go');s._t=setTimeout(()=>s.classList.remove('go'),5000)};
+document.querySelectorAll('[data-replay]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();b.closest('.opt').querySelectorAll('.scr').forEach(play)}));
+document.querySelector('[data-replay-all]').addEventListener('click',()=>document.querySelectorAll('.scr').forEach(play));
+document.querySelector('[data-nodes]').addEventListener('click',e=>{const on=document.body.classList.toggle('shownode');e.currentTarget.setAttribute('aria-pressed',on)});
+document.querySelectorAll('.tx').forEach(e=>e.dataset.x0=e.innerHTML);
+function setState(group,v,anim){document.querySelectorAll(`.opt[data-choice-group="${group}"] .scr`).forEach(s=>{s.dataset.st=v;s.querySelectorAll('[data-on]').forEach(e=>e.classList.toggle('hid',!e.dataset.on.split(' ').includes(v)));s.querySelectorAll('[data-off]').forEach(e=>e.classList.toggle('hid',e.dataset.off.split(' ').includes(v)));s.querySelectorAll('.tx').forEach(e=>{const t=e.getAttribute('data-x-'+v);e.innerHTML=t!==null?t:e.dataset.x0});if(anim)play(s)});flyPaths()}
+document.querySelectorAll('.states').forEach(bar=>{bar.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{bar.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));setState(bar.dataset.group,b.dataset.v,true)}));const p=bar.querySelector('button[aria-pressed=true]');setState(bar.dataset.group,p.dataset.v,false)});
+document.querySelectorAll('.opt[data-choice-group]').forEach(o=>o.addEventListener('click',()=>{const g=o.dataset.choiceGroup;document.querySelectorAll(`.opt[data-choice-group="${g}"]`).forEach(x=>x.classList.toggle('sel',x===o));updToc()}));
+function updToc(){document.querySelectorAll('.toc a').forEach(a=>{const g=a.getAttribute('href').slice(3);let i=a.querySelector('i');if(!i){i=document.createElement('i');a.appendChild(i)}const s=document.querySelector(`.opt.sel[data-choice-group="${g}"]`);i.textContent=s?' · '+s.dataset.l:' · ?'})}
+document.querySelector('[data-copy]').addEventListener('click',()=>{const lines=['[구름고래 분교 · 묶음 8 상점 · 교환 시안 선택]',...Object.keys(GROUPS).map(g=>{const s=document.querySelector(`.opt.sel[data-choice-group="${g}"]`);return `${GROUPS[g]}: ${s?s.dataset.choiceLabel+(s.querySelector('.rec')?' (추천안)':''):'(미선택)'}`})];const txt=lines.join('\n');const done=()=>{const t=document.getElementById('toast');t.textContent='복사했어요\n'+txt;t.style.opacity=1;setTimeout(()=>t.style.opacity=0,2600)};if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(done,()=>fb(txt,done))}else fb(txt,done)});
+function fb(txt,done){const ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}ta.remove();done()}
+const secs=[...document.querySelectorAll('.page>h3')];
+addEventListener('scroll',()=>{let cur=secs[0];secs.forEach(h=>{if(h.getBoundingClientRect().top<160)cur=h});document.querySelectorAll('.toc a').forEach(a=>a.classList.toggle('cur',a.getAttribute('href')==='#'+cur.id))},{passive:true});
+updToc();
+// ?w=1600 → 1600×720으로 열기 · ?cap=<data-choice>&st=<상태> → 화면 하나만 원래 크기로 (캡처용)
+const Q=new URLSearchParams(location.search);
+setW(Q.get('w')==='1600'?'1600':'1280');
+if(Q.get('cap')){const o=document.querySelector(`.opt[data-choice="${Q.get('cap')}"]`);if(Q.get('st'))setState(o.dataset.choiceGroup,Q.get('st'),false);const s=o.querySelector('.scr');document.body.innerHTML='';document.body.style.background='#000';document.body.appendChild(s);s.style.transform='none';if(Q.get('at')){s.classList.add('go');requestAnimationFrame(()=>document.getAnimations().forEach(a=>{a.currentTime=+Q.get('at');a.pause()}))}}
+</script>
+</body>
+</html>

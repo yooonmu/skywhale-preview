@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="200" viewBox="0 0 120 200">
+<defs>
+<linearGradient id="c" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b98552"/><stop offset=".4" stop-color="#e8c08a"/><stop offset="1" stop-color="#8a5a34"/></linearGradient>
+<linearGradient id="edge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".14" stop-color="#fff" stop-opacity=".1"/><stop offset=".86" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".6"/></linearGradient>
+<linearGradient id="r" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7d384"/><stop offset="1" stop-color="#c29228"/></linearGradient></defs>
+<path d="M18,96 C18,80 36,74 42,68 V56 H78 V68 C84,74 102,80 102,96 V178 C102,190 94,198 82,198 H38 C26,198 18,190 18,178 Z" fill="none" stroke="#5a4a86" stroke-opacity=".75" stroke-width="2.4"/>
+<path d="M18,96 C18,80 36,74 42,68 V56 H78 V68 C84,74 102,80 102,96 V178 C102,190 94,198 82,198 H38 C26,198 18,190 18,178 Z" fill="none" stroke="url(#edge)" stroke-width="6"/>
+<path d="M30,100 C30,92 34,88 38,86 V180 C33,178 30,174 30,168 Z" fill="#fff" opacity=".7"/>
+<path d="M40,30 C40,22 80,22 80,30 V58 C80,62 40,62 40,58 Z" fill="url(#c)" stroke="#4a2b45" stroke-width="2.4"/>
+<ellipse cx="60" cy="28" rx="20" ry="5" fill="#f2d4a4" stroke="#4a2b45" stroke-width="2"/>
+<circle cx="70.16" cy="48.7" r="1.2" fill="#6a4020" opacity=".5"/><circle cx="63.76" cy="46.32" r="1.2" fill="#6a4020" opacity=".5"/><circle cx="60.14" cy="49.78" r="1.2" fill="#6a4020" opacity=".5"/><circle cx="72.31" cy="43.93" r="1.2" fill="#6a4020" opacity=".5"/><circle cx="65.83" cy="41.02" r="1.2" fill="#6a4020" opacity=".5"/><circle cx="62.43" cy="43.01" r="1.2" fill="#6a4020" opacity=".5"/>
+<path d="M38,64 C50,70 70,70 82,64 L82,72 C70,78 50,78 38,72 Z" fill="url(#r)" stroke="#4a2b45" stroke-width="2"/>
+<path d="M60,70 C50,58 34,58 34,66 C34,74 50,74 60,70 Z M60,70 C70,58 86,58 86,66 C86,74 70,74 60,70 Z" fill="url(#r)" stroke="#4a2b45" stroke-width="2" stroke-linejoin="round"/>
+<path d="M57,72 L48,92 L53,89 L55,95 L61,74 Z M63,72 L72,92 L67,89 L65,95 L59,74 Z" fill="#daa42d" stroke="#4a2b45" stroke-width="1.6" stroke-linejoin="round"/>
+<circle cx="60" cy="70" r="5" fill="#f9db99" stroke="#4a2b45" stroke-width="1.8"/>
+<polygon points="92,96 93.36,102.64 100,104 93.36,105.36 92,112 90.64,105.36 84,104 90.64,102.64" fill="#fff"/>
+</svg>
