@@ -76,8 +76,8 @@ code{font-size:12.5px;background:#ebe5fb;padding:1px 5px;border-radius:4px}
 </main>
 <script>
 // [제목, 설명, 왼쪽 그림, 왼쪽 이름, 오른쪽 그림, 오른쪽 이름] — {W}는 1280 / 1600
-const G = "../../../../artifacts/feedback70/batch1_apply/game/", B = "../../../../artifacts/feedback70/batch1_apply/before/", A = "../../../../artifacts/feedback70/batch1_apply/after/";
-const HUBS = [["heroes", "아이들 · 수채 종이"], ["formation", "편성 · 짙은 갑판"], ["summon", "소환 · 밤 도서관 — 게임은 아직 책갈피 없음: summon_page.gd(fb-summon-impl)가 바깥 판을 감추고 화면 전체 무대를 씀"], ["adventure", "모험 · 항해도"], ["school", "분교 · 칠판"], ["shop", "상점 · 진열장"]];
+const G = "shots/game/", B = "shots/before/", A = "shots/after/";
+const HUBS = [["heroes", "아이들 · 수채 종이"], ["formation", "편성 · 짙은 갑판"], ["summon", "소환 · 밤 도서관 — 책갈피 줄은 소환 무대를 판 폭으로 줄인 뒤 붙였음(summon_apply 페이지 참고)"], ["adventure", "모험 · 항해도"], ["school", "분교 · 칠판"], ["shop", "상점 · 진열장"]];
 const SETS = {
   frame: [
     ...HUBS.map(([h, t]) => [t, "", `mock/frame_${h}_{W}x720.jpg`, "시안", `${G}frame_${h}_{W}x720.jpg`, "게임"]),
