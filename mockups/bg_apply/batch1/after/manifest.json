@@ -1,0 +1,126 @@
+{
+  "entries": [
+    {
+      "file": "ch1_1280x720.jpg",
+      "id": "ch1",
+      "items": [
+        "bg_batch1"
+      ],
+      "label": "배경 적용 · 1장",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "ch1_1600x720.jpg",
+      "id": "ch1",
+      "items": [
+        "bg_batch1"
+      ],
+      "label": "배경 적용 · 1장",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "ch2_1280x720.jpg",
+      "id": "ch2",
+      "items": [
+        "bg_batch1"
+      ],
+      "label": "배경 적용 · 2장",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "ch2_1600x720.jpg",
+      "id": "ch2",
+      "items": [
+        "bg_batch1"
+      ],
+      "label": "배경 적용 · 2장",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "ch3_1280x720.jpg",
+      "id": "ch3",
+      "items": [
+        "bg_batch1"
+      ],
+      "label": "배경 적용 · 3장",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "ch3_1600x720.jpg",
+      "id": "ch3",
+      "items": [
+        "bg_batch1"
+      ],
+      "label": "배경 적용 · 3장",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "ch4_1280x720.jpg",
+      "id": "ch4",
+      "items": [
+        "bg_batch1"
+      ],
+      "label": "배경 적용 · 4장",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "ch4_1600x720.jpg",
+      "id": "ch4",
+      "items": [
+        "bg_batch1"
+      ],
+      "label": "배경 적용 · 4장",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "ch5_1280x720.jpg",
+      "id": "ch5",
+      "items": [
+        "bg_batch1"
+      ],
+      "label": "배경 적용 · 5장",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "ch5_1600x720.jpg",
+      "id": "ch5",
+      "items": [
+        "bg_batch1"
+      ],
+      "label": "배경 적용 · 5장",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "ch6_1280x720.jpg",
+      "id": "ch6",
+      "items": [
+        "bg_batch1"
+      ],
+      "label": "배경 적용 · 6장",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "ch6_1600x720.jpg",
+      "id": "ch6",
+      "items": [
+        "bg_batch1"
+      ],
+      "label": "배경 적용 · 6장",
+      "phase": "late",
+      "resolution": "1600x720"
+    }
+  ],
+  "tool": "tools/feedback_capture.gd",
+  "updated": "2026-11-12T15:22:08"
+}
