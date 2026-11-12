@@ -4,7 +4,19 @@
 <style>
 :root{font-family:system-ui,sans-serif;color:#32294a;background:#f5f1fa}*{box-sizing:border-box}body{margin:0}header,main{max-width:1500px;margin:auto;padding:28px}header{padding-bottom:4px}h1{font-size:clamp(26px,4vw,42px);margin:8px 0}header p{color:#615572;line-height:1.6}.eyebrow{color:#805c9f;font-weight:800;letter-spacing:.12em}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px}.card{background:#fff;border:1px solid #e0d6eb;border-radius:18px;overflow:hidden;box-shadow:0 8px 25px #68528512}.card h2{font-size:20px;margin:14px 16px 2px}.meta{margin:0 16px 12px;color:#655973;font-size:14px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#e8dfef}.pair button{border:0;padding:0;background:#faf5eb;cursor:zoom-in;color:#4a3d59;font:inherit}.pair img{display:block;width:100%;height:270px;object-fit:contain}.pair span{display:block;background:#f2eafa;padding:8px;font-size:13px;font-weight:700}.pair button:focus-visible,.close:focus-visible{outline:3px solid #754b9d;outline-offset:-3px}dialog{border:0;border-radius:16px;padding:14px;max-width:min(95vw,900px);max-height:95vh;background:#fff;color:#32294a}dialog::backdrop{background:#21172bcf}dialog img{display:block;max-width:100%;max-height:78vh;margin:auto}.close{display:block;margin:8px 0 0 auto;min-width:64px;min-height:44px;border:0;border-radius:8px;background:#665078;color:white;cursor:pointer}
 </style></head><body><header><div class="eyebrow">RAINBOW ATELIER · ART STUDY</div><h1>아이들 비율 비교 시안</h1><p>기존 SD와 일반 비율을 나란히 비교합니다. 이미지를 누르면 확대됩니다.<br>새 이미지는 OpenAI Images · gpt-image-2로 생성한 AI 샘플이며 게임 적용본이 아닙니다. 일부 세부 표현은 검토가 필요합니다.</p></header>
-<main><div class="grid" id="grid"></div></main><dialog id="viewer" aria-label="이미지 확대"><img id="large" alt=""><button class="close" type="button">닫기</button></dialog>
+<main>
+<section id="round2" aria-labelledby="round2-title">
+<h2 id="round2-title">2차 · 등급별 퀄리티</h2>
+<p>등급은 장식의 양뿐 아니라 의상 실루엣 → 무기 재질 → 빛의 범위로 구분합니다. 아래 미오 비교는 실제 등급 변경이 아닌 가상 처리입니다.</p>
+<div class="grid" id="showcase"></div>
+<h3>같은 아이, 다섯 등급 · 미오</h3>
+<p>왼쪽부터 B · A · S · SS · 신화. 동일 인물의 의상·무기·효과 단계 비교입니다.</p>
+<div class="pair" style="display:block"><button style="width:100%" type="button" aria-label="미오 다섯 등급 비교 확대"><img style="height:auto" src="r2_mio_ladder.jpg" alt="미오 B A S SS 신화 순서의 전신 비교"><span>미오 · B → A → S → SS → 신화</span></button></div>
+<p>검토점: 비교판 SS의 금빛 광륜은 신화 전용 후광과 구분이 약합니다. 신화만 기호형 후광을 갖도록 다음 단계에서 정리할 항목입니다.</p>
+<details><summary style="min-height:44px;padding:12px 0;cursor:pointer">생성 기준 및 원본 크기</summary><p>OpenAI Images · gpt-image-2 생성 샘플. 대표 5명과 동일 인물 5등급 비교판 1장. 원본 PNG 보존, 페이지용 JPEG만 최대 1600px로 압축했습니다. 모델은 해상도 선택 제어를 제공하지 않아 최고 네이티브 해상도를 프롬프트로 요청했습니다. 반환 크기: 대표 1024×1536, 비교판 1774×887.</p><p>공통: 기존 정체성·머리·색·소품 유지, ② 일반 비율, 귀엽고 단정한 전신, 크림 배경, 정확한 손, 또렷한 선, 눈 디테일, 모발 광택, 셀 그림자 안의 부드러운 그라데이션과 옷 주름. B: 기본 교복·단순 무기·2단 음영. A: 개인 포인트 하나·무기 세공·3단 음영과 림라이트. S: 교복 레이어와 금장·보석 무기·소량 파티클. SS: 전용 의상 변형·자수·발광 무기·속성 오라와 극적 역광. 신화: 교복을 넘어선 고유 의상·무지개 림라이트·상징 후광·몸을 감싸는 마법.</p></details>
+</section>
+<h2 style="margin-top:56px">1차 · 63명 비율 비교</h2>
+<div class="grid" id="grid"></div></main><dialog id="viewer" aria-label="이미지 확대"><img id="large" alt=""><button class="close" type="button">닫기</button></dialog>
 <script>
 const rows=`arca 아르카 rainbow 신화
 yunseul 윤슬 rainbow 신화
@@ -72,6 +84,8 @@ gyeol 결 orange B`.split('\n').map(x=>x.split(' '));
 const elements={rainbow:'무지개',purple:'보라',white:'빛',green:'생명',red:'불',blue:'물',orange:'노을'};
 const grid=document.querySelector('#grid'),viewer=document.querySelector('#viewer'),large=document.querySelector('#large');
 for(const [id,name,el,tier] of rows){const card=document.createElement('article');card.className='card';card.innerHTML=`<h2>${name}</h2><p class="meta">${elements[el]} · ${tier}</p><div class="pair"><button type="button" aria-label="${name} 기존 이미지 확대"><img loading="lazy" src="${id}_current.jpg" alt="${name} 기존 SD"><span>기존 SD</span></button><button type="button" aria-label="${name} 시안 이미지 확대"><img loading="lazy" src="${id}.jpg" alt="${name} 일반 비율 시안"><span>일반 비율 · AI 시안</span></button></div>`;grid.append(card)}
-grid.addEventListener('click',e=>{const button=e.target.closest('button');if(!button)return;const image=button.querySelector('img');large.src=image.src;large.alt=image.alt;viewer.showModal()});
+const showcase=[['r2_mio_B','B · 미오','기본 교복 · 단순 방패 · 차분한 자세'],['r2_yuna_A','A · 유나','리본 포인트 · 책 세공 · 부드러운 림라이트'],['r2_karen_S','S · 카렌','축제 어깨 레이어 · 보석 새총 · 불꽃잎'],['r2_flora_SS_retry','SS · 플로라','자수 망토 · 꽃 지팡이 · 생명 오라'],['r2_arca_mythic','신화 · 아르카','고유 예복 · 무지개 붓 · 별 후광']];
+for(const [src,title,caption] of showcase){const card=document.createElement('article');card.className='card';card.innerHTML=`<h2>${title}</h2><p class="meta">${caption}</p><div class="pair" style="display:block"><button style="width:100%" type="button" aria-label="${title} 2차 시안 확대"><img style="height:390px" src="${src}.jpg" alt="${title} 2차 전신 시안"><span>확대해서 보기</span></button></div>`;document.querySelector('#showcase').append(card)}
+document.querySelector('main').addEventListener('click',e=>{const button=e.target.closest('button');if(!button)return;const image=button.querySelector('img');large.src=image.src;large.alt=image.alt;viewer.showModal()});
 document.querySelector('.close').addEventListener('click',()=>viewer.close());
 </script></body></html>
