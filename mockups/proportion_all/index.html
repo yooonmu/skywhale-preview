@@ -5,6 +5,19 @@
 :root{font-family:system-ui,sans-serif;color:#32294a;background:#f5f1fa}*{box-sizing:border-box}body{margin:0}header,main{max-width:1500px;margin:auto;padding:28px}header{padding-bottom:4px}h1{font-size:clamp(26px,4vw,42px);margin:8px 0}header p{color:#615572;line-height:1.6}.eyebrow{color:#805c9f;font-weight:800;letter-spacing:.12em}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px}.card{background:#fff;border:1px solid #e0d6eb;border-radius:18px;overflow:hidden;box-shadow:0 8px 25px #68528512}.card h2{font-size:20px;margin:14px 16px 2px}.meta{margin:0 16px 12px;color:#655973;font-size:14px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#e8dfef}.pair button{border:0;padding:0;background:#faf5eb;cursor:zoom-in;color:#4a3d59;font:inherit}.pair img{display:block;width:100%;height:270px;object-fit:contain}.pair span{display:block;background:#f2eafa;padding:8px;font-size:13px;font-weight:700}.pair button:focus-visible,.close:focus-visible{outline:3px solid #754b9d;outline-offset:-3px}dialog{border:0;border-radius:16px;padding:14px;max-width:min(95vw,900px);max-height:95vh;background:#fff;color:#32294a}dialog::backdrop{background:#21172bcf}dialog img{display:block;max-width:100%;max-height:78vh;margin:auto}.close{display:block;margin:8px 0 0 auto;min-width:64px;min-height:44px;border:0;border-radius:8px;background:#665078;color:white;cursor:pointer}
 </style></head><body><header><div class="eyebrow">RAINBOW ATELIER · ART STUDY</div><h1>아이들 비율 비교 시안</h1><p>기존 SD와 일반 비율을 나란히 비교합니다. 이미지를 누르면 확대됩니다.<br>새 이미지는 OpenAI Images · gpt-image-2로 생성한 AI 샘플이며 게임 적용본이 아닙니다. 일부 세부 표현은 검토가 필요합니다.</p></header>
 <main>
+<section id="flora-pose-gallery" aria-labelledby="flora-pose-title">
+<h2 id="flora-pose-title">플로라 · 다양한 자세</h2>
+<p>PD 선택 v4 기준 · 자세 5종. 모두 1024×1536, 흰 배경, 전신입니다. 얼굴·의상 색·부드러운 다리 표현을 기준 이미지와 비교했습니다.</p>
+<div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px">
+<figure style="margin:0;min-width:0"><figcaption>기준 v4</figcaption><img style="display:block;width:100%" src="flora_standing_v4_attempt1.png" alt="PD가 선택한 플로라 전신 v4 기준"></figure>
+<figure style="margin:0;min-width:0"><figcaption>1 · 시전</figcaption><img style="display:block;width:100%" src="flora_pose_casting.png" alt="꽃 지팡이를 높이 들고 다른 손을 펼친 플로라"></figure>
+<figure style="margin:0;min-width:0"><figcaption>2 · 돌아보기</figcaption><img style="display:block;width:100%" src="flora_pose_walking.png" alt="지팡이를 어깨에 얹고 걷다가 돌아보는 플로라"></figure>
+<figure style="margin:0;min-width:0"><figcaption>3 · 윙크</figcaption><img style="display:block;width:100%" src="flora_pose_leaning.png" alt="양손으로 지팡이를 잡고 기대어 윙크하는 플로라"></figure>
+<figure style="margin:0;min-width:0"><figcaption>4 · 앉기</figcaption><img style="display:block;width:100%" src="flora_pose_sitting.png" alt="이끼 낀 돌에 다리를 한쪽으로 모아 앉은 플로라"></figure>
+<figure style="margin:0;min-width:0"><figcaption>5 · 회전</figcaption><img style="display:block;width:100%" src="flora_pose_twirl.png" alt="팔을 펼치고 꽃잎 사이에서 가볍게 회전하는 플로라"></figure>
+</div>
+<p>AI 참조 편집: OpenAI Images · gpt-image-2 / 기본 옵션 / 각 이미지에 v4를 직접 참조. 공통 지시: 귀여운 둥근 얼굴·초록 눈·초록 땋은 머리·꽃 왕관·의상과 색·꽃 지팡이·성인 비율·부드러운 아이보리/분홍 다리 명암을 유지하고 자세만 변경. 시전은 높이 든 지팡이와 바람, 걷기는 어깨 지팡이와 뒤돌아보기, 기대기는 양손과 윙크, 앉기는 이끼 돌·꽃·한쪽으로 모은 다리, 회전은 작은 치마·숄 움직임과 꽃잎. 낮은 시점·치마 안 노출·추가 노출 금지. 게임 원본은 변경하지 않았습니다.</p>
+</section>
 <section id="legs-reference-v4" aria-labelledby="legs-reference-title">
 <h2 id="legs-reference-title">다리 · 참고 이미지 재현</h2>
 <p>추가 2·3차 생성 완료. v5는 종아리 연장과 가벼운 실루엣이 더 분명한 3차를 선택했습니다. 다만 길이 수치만으로는 2차가 참고에 더 가깝고, v5는 목표 48–50%를 조금 넘습니다. 완전 일치 판정은 아닙니다.</p>
