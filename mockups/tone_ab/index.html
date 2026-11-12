@@ -1,0 +1,55 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>톤 A/B — 전투 HUD · 아이 상세 (게임 안 시험 장면)</title>
+<style>
+:root{--ink:#2b2547;--sub:#6b6390;--lav:#e9e4fb;--cream:#fbf6ea;--gold:#c9a45c}
+*{box-sizing:border-box}body{margin:0;font:15px/1.6 "Pretendard","Noto Sans KR",system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,var(--lav),var(--cream))}
+header{padding:28px 32px 12px;border-bottom:1px solid var(--gold)}h1{margin:0 0 6px;font-size:26px}h2{font-size:20px;margin:28px 32px 8px}h3{font-size:15px;margin:0 0 8px;color:var(--sub)}
+.bar{position:sticky;top:0;z-index:2;display:flex;gap:8px;padding:10px 32px;background:rgba(251,246,234,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(201,164,92,.5)}
+.bar button{font:inherit;padding:6px 14px;min-height:32px;border:1px solid var(--gold);background:#fff;border-radius:6px;cursor:pointer;color:var(--ink)}.bar button.on{background:var(--ink);color:#fff}
+.row{margin:0 32px 26px}.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+figure{margin:0;background:#fff;border:1px solid rgba(201,164,92,.55);border-radius:6px;overflow:hidden}figure img,figure video{display:block;width:100%;height:auto;cursor:zoom-in}
+figcaption{padding:6px 10px;font-weight:700}.diff{margin:0 32px;display:grid;grid-template-columns:1fr 1fr;gap:12px}.diff div{background:#fff;border:1px solid rgba(201,164,92,.55);border-radius:6px;padding:12px 16px}
+body.one .trio{grid-template-columns:1fr}.zoom{position:fixed;inset:0;background:rgba(20,16,40,.88);display:none;align-items:center;justify-content:center;z-index:9}.zoom img{max-width:96vw;max-height:94vh}
+</style></head><body>
+<header><h1>톤 A/B — 전투 HUD · 아이 상세</h1>
+<p>게임 안 시험 장면(scenes/test/tone_ab/)을 실제 전투·실제 데이터·실제 글꼴로 찍었습니다. 구조는 지금과 같고 재질만 다릅니다. 이미지를 누르면 크게 봅니다.</p></header>
+<div class="bar"><button data-w="all" class="on">1280 · 1600</button><button data-w="1280">1280만</button><button data-w="1600">1600만</button><button id="one">한 줄에 하나</button></div>
+<h2>A와 B의 차이</h2>
+<div class="diff"><div><b>A 「유리·금선」</b><br>라벤더빛 반투명 유리 판, 잘린 귀퉁이와 1px 금선, 빛 훑기. 전투 화면이 판 너머로 비쳐 가볍고 날렵합니다.</div>
+<div><b>B 「종이·수채」</b><br>크림 종이 결 판, 가장자리 라벤더 수채 번짐, 짧은 종이 그림자. 화방 노트처럼 따뜻하고 손맛이 있습니다.</div></div>
+<h2>전투 HUD</h2>
+<section class="row" data-w="1280"><h3>전투 HUD · 1280×720</h3><div class="trio">
+<figure><img loading="lazy" src="img/hud_cur_1280x720.jpg" alt="지금"><figcaption>지금</figcaption></figure><figure><img loading="lazy" src="img/hud_A_1280x720.jpg" alt="A 「유리·금선」"><figcaption>A 「유리·금선」</figcaption></figure><figure><img loading="lazy" src="img/hud_B_1280x720.jpg" alt="B 「종이·수채」"><figcaption>B 「종이·수채」</figcaption></figure>
+</div></section>
+<section class="row" data-w="1600"><h3>전투 HUD · 1600×720</h3><div class="trio">
+<figure><img loading="lazy" src="img/hud_cur_1600x720.jpg" alt="지금"><figcaption>지금</figcaption></figure><figure><img loading="lazy" src="img/hud_A_1600x720.jpg" alt="A 「유리·금선」"><figcaption>A 「유리·금선」</figcaption></figure><figure><img loading="lazy" src="img/hud_B_1600x720.jpg" alt="B 「종이·수채」"><figcaption>B 「종이·수채」</figcaption></figure>
+</div></section><section class="row"><h3>전투 HUD (단위 스위치 · 궁극기 누름) · 영상 (1280, 5초)</h3><div class="trio">
+<figure><video src="video/hud_cur.mp4" muted loop playsinline controls preload="metadata"></video><figcaption>지금</figcaption></figure><figure><video src="video/hud_A.mp4" muted loop playsinline controls preload="metadata"></video><figcaption>A 「유리·금선」</figcaption></figure><figure><video src="video/hud_B.mp4" muted loop playsinline controls preload="metadata"></video><figcaption>B 「종이·수채」</figcaption></figure>
+</div></section>
+<h2>아이 상세</h2>
+<section class="row" data-w="1280"><h3>아이 상세 · 능력 · 1280×720</h3><div class="trio">
+<figure><img loading="lazy" src="img/detail_cur_1280x720.jpg" alt="지금"><figcaption>지금</figcaption></figure><figure><img loading="lazy" src="img/detail_A_1280x720.jpg" alt="A 「유리·금선」"><figcaption>A 「유리·금선」</figcaption></figure><figure><img loading="lazy" src="img/detail_B_1280x720.jpg" alt="B 「종이·수채」"><figcaption>B 「종이·수채」</figcaption></figure>
+</div></section>
+<section class="row" data-w="1600"><h3>아이 상세 · 능력 · 1600×720</h3><div class="trio">
+<figure><img loading="lazy" src="img/detail_cur_1600x720.jpg" alt="지금"><figcaption>지금</figcaption></figure><figure><img loading="lazy" src="img/detail_A_1600x720.jpg" alt="A 「유리·금선」"><figcaption>A 「유리·금선」</figcaption></figure><figure><img loading="lazy" src="img/detail_B_1600x720.jpg" alt="B 「종이·수채」"><figcaption>B 「종이·수채」</figcaption></figure>
+</div></section>
+<section class="row" data-w="1280"><h3>아이 상세 탭 · A 「유리·금선」 · 1280×720</h3><div class="trio">
+<figure><img loading="lazy" src="img/detail_A_1280x720.jpg" alt="능력"><figcaption>능력</figcaption></figure><figure><img loading="lazy" src="img/detail_A_tab1_1280x720.jpg" alt="스킬"><figcaption>스킬</figcaption></figure><figure><img loading="lazy" src="img/detail_A_tab2_1280x720.jpg" alt="장비"><figcaption>장비</figcaption></figure>
+</div></section>
+<section class="row" data-w="1280"><h3>아이 상세 탭 · B 「종이·수채」 · 1280×720</h3><div class="trio">
+<figure><img loading="lazy" src="img/detail_B_1280x720.jpg" alt="능력"><figcaption>능력</figcaption></figure><figure><img loading="lazy" src="img/detail_B_tab1_1280x720.jpg" alt="스킬"><figcaption>스킬</figcaption></figure><figure><img loading="lazy" src="img/detail_B_tab2_1280x720.jpg" alt="장비"><figcaption>장비</figcaption></figure>
+</div></section>
+<section class="row" data-w="1600"><h3>아이 상세 탭 · A 「유리·금선」 · 1600×720</h3><div class="trio">
+<figure><img loading="lazy" src="img/detail_A_1600x720.jpg" alt="능력"><figcaption>능력</figcaption></figure><figure><img loading="lazy" src="img/detail_A_tab1_1600x720.jpg" alt="스킬"><figcaption>스킬</figcaption></figure><figure><img loading="lazy" src="img/detail_A_tab2_1600x720.jpg" alt="장비"><figcaption>장비</figcaption></figure>
+</div></section>
+<section class="row" data-w="1600"><h3>아이 상세 탭 · B 「종이·수채」 · 1600×720</h3><div class="trio">
+<figure><img loading="lazy" src="img/detail_B_1600x720.jpg" alt="능력"><figcaption>능력</figcaption></figure><figure><img loading="lazy" src="img/detail_B_tab1_1600x720.jpg" alt="스킬"><figcaption>스킬</figcaption></figure><figure><img loading="lazy" src="img/detail_B_tab2_1600x720.jpg" alt="장비"><figcaption>장비</figcaption></figure>
+</div></section><section class="row"><h3>아이 상세 (탭 전환 · 레벨 업 누름) · 영상 (1280, 5초)</h3><div class="trio">
+<figure><video src="video/detail_cur.mp4" muted loop playsinline controls preload="metadata"></video><figcaption>지금</figcaption></figure><figure><video src="video/detail_A.mp4" muted loop playsinline controls preload="metadata"></video><figcaption>A 「유리·금선」</figcaption></figure><figure><video src="video/detail_B.mp4" muted loop playsinline controls preload="metadata"></video><figcaption>B 「종이·수채」</figcaption></figure>
+</div></section>
+<div class="zoom" id="z"><img alt=""></div>
+<script>
+const bs=[...document.querySelectorAll('.bar button[data-w]')];bs.forEach(b=>b.onclick=()=>{bs.forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.row[data-w]').forEach(r=>r.style.display=b.dataset.w==='all'||r.dataset.w===b.dataset.w?'':'none')});
+one.onclick=()=>{document.body.classList.toggle('one');one.classList.toggle('on')};
+const z=document.getElementById('z');document.querySelectorAll('figure img').forEach(i=>i.onclick=()=>{z.firstChild.src=i.src;z.style.display='flex'});z.onclick=()=>z.style.display='none';
+</script></body></html>
