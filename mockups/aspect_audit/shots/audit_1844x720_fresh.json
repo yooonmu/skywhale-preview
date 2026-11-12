@@ -1,0 +1,182 @@
+{
+ "corner": 36.0,
+ "inset": 44.0,
+ "phase": "fresh",
+ "res": "1844x720",
+ "shots": [
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "title_loading_f1_1844x720.jpg",
+   "id": "title_loading_f1",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#2/Control#0/Label#4",
+     "kind": "notch",
+     "rect": [
+      1684.0,
+      686.0,
+      140.0,
+      34.0
+     ],
+     "side": "right",
+     "text": "v0.6 프로토타입"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1844x720"
+  },
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "title_loading_f2_1844x720.jpg",
+   "id": "title_loading_f2",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#2/Control#0/Label#4",
+     "kind": "notch",
+     "rect": [
+      1684.0,
+      686.0,
+      140.0,
+      34.0
+     ],
+     "side": "right",
+     "text": "v0.6 프로토타입"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1844x720"
+  },
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "title_loading_f3_1844x720.jpg",
+   "id": "title_loading_f3",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#2/Control#0/Label#4",
+     "kind": "notch",
+     "rect": [
+      1684.0,
+      686.0,
+      140.0,
+      34.0
+     ],
+     "side": "right",
+     "text": "v0.6 프로토타입"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1844x720"
+  },
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "title_loading_f4_1844x720.jpg",
+   "id": "title_loading_f4",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#2/Control#0/Label#4",
+     "kind": "notch",
+     "rect": [
+      1684.0,
+      686.0,
+      140.0,
+      34.0
+     ],
+     "side": "right",
+     "text": "v0.6 프로토타입"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1844x720"
+  },
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "title_loading_f5_1844x720.jpg",
+   "id": "title_loading_f5",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#2/Control#0/Label#4",
+     "kind": "notch",
+     "rect": [
+      1684.0,
+      686.0,
+      140.0,
+      34.0
+     ],
+     "side": "right",
+     "text": "v0.6 프로토타입"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1844x720"
+  },
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "title_loading_f6_1844x720.jpg",
+   "id": "title_loading_f6",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#2/Control#0/Label#4",
+     "kind": "notch",
+     "rect": [
+      1684.0,
+      686.0,
+      140.0,
+      34.0
+     ],
+     "side": "right",
+     "text": "v0.6 프로토타입"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1844x720"
+  }
+ ]
+}

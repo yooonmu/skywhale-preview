@@ -1,0 +1,96 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Ti
+
+SCRIPT ERROR: Parse Error: Function "_idle()" not found in base self.
+   at: GDScript::reload (res://scripts/tutorial.gd:343)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/island_requests.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/ui/reward_band.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/reward_popup.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/back_nav.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/ui/awaken_sky.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/ui/hero_page.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/ui/hero_list.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/menus.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/mythic_shop.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/economy.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/game_data.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/quests.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/hud_stage_panel.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/hud_boss_panel.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/hud.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://scripts/ui/yuna_toast.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://tools/feedback_capture.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+   at: GDScript::reload (res://tools/aspect_audit_capture.gd:0)
+ERROR: Failed to load script "res://tools/aspect_audit_capture.gd" with error "Compilation failed".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+SHOT title_loading_f1_1844x720.jpg
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'GDScript'.
+   at: Hud._build_quest (res://scripts/hud.gd:492)
+   GDScript backtrace (most recent call first):
+       [0] _build_quest (res://scripts/hud.gd:492)
+       [1] setup (res://scripts/hud.gd:164)
+       [2] startup_slice (res://scripts/main.gd:606)
+SHOT title_loading_f2_1844x720.jpg
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'GDScript'.
+   at: setup (res://scripts/whale_breath_button.gd:81)
+   GDScript backtrace (most recent call first):
+       [0] setup (res://scripts/whale_breath_button.gd:81)
+       [1] _build_buttons (res://scripts/hud.gd:1403)
+       [2] setup (res://scripts/hud.gd:164)
+       [3] startup_slice (res://scripts/main.gd:606)
+SCRIPT ERROR: Invalid assignment of property or key 'visible' with value of type 'bool' on a base object of type 'Nil'.
+   at: refresh (res://scripts/whale_breath_button.gd:113)
+   GDScript backtrace (most recent call first):
+       [0] refresh (res://scripts/whale_breath_button.gd:113)
+       [1] refresh (res://scripts/hud.gd:1414)
+       [2] setup (res://scripts/hud.gd:173)
+       [3] startup_slice (res://scripts/main.gd:606)
+SHOT title_loading_f3_1844x720.jpg
+SCRIPT ERROR: Invalid access to property or key 'yuna' on a base object of type 'Dictionary'.
+   at: _prepare_formation (res://scripts/main.gd:2083)
+   GDScript backtrace (most recent call first):
+       [0] _prepare_formation (res://scripts/main.gd:2083)
+       [1] _initialize_game (res://scripts/main.gd:393)
+       [2] _startup_assets (res://scripts/main.gd:669)
+SHOT title_loading_f4_1844x720.jpg
+SHOT title_loading_f5_1844x720.jpg
+SCRIPT ERROR: Invalid access to property or key 'yuna' on a base object of type 'Dictionary'.
+   at: _prepare_formation (res://scripts/main.gd:2083)
+   GDScript backtrace (most recent call first):
+       [0] _prepare_formation (res://scripts/main.gd:2083)
+       [1] _refresh_party (res://scripts/main.gd:2095)
+       [2] _initialize_game (res://scripts/main.gd:414)
+       [3] _startup_assets (res://scripts/main.gd:669)
+       [4] startup_slice (res://scripts/main.gd:606)
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'GDScript'.
+   at: _initialize_game (res://scripts/main.gd:416)
+   GDScript backtrace (most recent call first):
+       [0] _initialize_game (res://scripts/main.gd:416)
+       [1] _startup_assets (res://scripts/main.gd:669)
+       [2] startup_slice (res://scripts/main.gd:606)
+ERROR: Startup aborted before completion
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] _run_startup (res://scripts/main.gd:640)
+       [1] _initialize_game (res://scripts/main.gd:416)
+       [2] _startup_assets (res://scripts/main.gd:669)
+       [3] startup_slice (res://scripts/main.gd:606)
+SHOT title_loading_f6_1844x720.jpg

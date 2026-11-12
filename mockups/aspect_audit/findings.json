@@ -1,0 +1,62 @@
+{
+  "sizes": [
+    {"res": "1280x720", "name": "16:9 기준", "device": "기준 · 1920×1080 등"},
+    {"res": "1600x720", "name": "20:9", "device": "Galaxy S · 2400×1080"},
+    {"res": "1760x720", "name": "22:9", "device": "Z Flip 가로 · 2640×1080"},
+    {"res": "1844x720", "name": "23:9", "device": "Z Fold 바깥 · 2316×904"},
+    {"res": "1280x800", "name": "16:10", "device": "태블릿 · 2560×1600"},
+    {"res": "1280x960", "name": "4:3", "device": "iPad · 1024×768"},
+    {"res": "1280x1025", "name": "≈5:4", "device": "Z Fold 안쪽 가로 · 2208×1768"}
+  ],
+  "mitigated": ["CanvasLayer#9/Control#0/(More|Dev|StagePanel|HBoxContainer#4|Button#1)"],
+  "lead": "설정: <b>canvas_items + aspect=expand, 기준 1280×720</b>. 그래서 넓은 화면은 가로가 늘고(1600–1844), 4:3 · 접는 폰 안쪽은 <b>세로가 늘어난다</b>(800–1025). 레터박스는 없다. 대신 <b>세로가 늘어날 때</b> 1280×720 고정 좌표로 짠 장면(소환 연출, 귀환 컷신, 이야기 재생, 전투 무대)이 위쪽에 붙고 아래가 비거나 배경이 끊긴다. 메뉴 틀(1140×638)은 가운데 고정이라 무너지지는 않지만 큰 화면에서 작아 보인다. safe-area(노치) 처리는 HUD 일부(Hud._fit_top · DuelHud)에만 있고, 메뉴 · 연출 · 팝업에는 없다. 21–23:9는 대부분 자연스럽다.",
+  "top": [
+    {"sev": "high", "title": "소환 연출이 1280×720 무대에 묶임", "body": "gacha_show.gd가 <b>stage.size = 1280×720</b>, 세로 위치 0 고정. 4:3 · 접는 폰에서 카드 · 이젤 · 병이 위로 몰리고 아래 240–300px가 빈 바닥 무늬로 남는다(10연 결과에서 바닥 경계선이 화면 가운데를 가로지름). 가로는 sx로 가운데 맞춤이 되어 21–23:9는 괜찮다.", "screens": "gacha_ten_cards · gacha_ten_result · gacha_reveal_* · gacha_paint_*"},
+    {"sev": "high", "title": "귀환 컷신 배경이 아래에서 끊김", "body": "return_voyage.gd가 H := 720 상수. 4:3에서 720 아래로 다른 구름 그림이 이어붙어 <b>뚜렷한 가로 이음매</b>가 생기고, 건너뛰기 버튼이 화면 가운데 높이에 뜬다.", "screens": "return_cutscene"},
+    {"sev": "mid", "title": "전투 무대가 위에 붙고 아래가 빈 구름", "body": "camera y=360 고정 + sky_layers W/H 1280×720 상수. 세로가 늘면 고래 · 적이 화면 위 절반에 있고 아래 300px가 구름뿐, 고래 보호막 바가 고래와 떨어져 떠 있다. 배경은 덮지만 구도가 무너진다. 이야기 재생 · 대결도 같다.", "screens": "hud_* · fever · duel_* · story_player*"},
+    {"sev": "mid", "title": "safe-area 미적용 (노치 · 둥근 모서리)", "body": "메뉴 오른쪽 탭 띠 · 닫기, 소환 건너뛰기, 이야기 건너뛰기, 색 지도 서랍의 칠하기 버튼, 보상 받기가 긴 변 끝 44px 안에 들어간다. HUD 위 · 아래 줄만 기기에서 safe_pad로 밀린다(점선 표시).", "screens": "모든 메뉴 · 연출 · 팝업"},
+    {"sev": "low", "title": "큰 화면에서 메뉴 틀이 작음", "body": "메뉴는 1140×638 고정. 4:3 · 접는 폰에서 위아래에 HUD가 그대로 보여 틀 뒤로 정보가 겹쳐 보이고(어둡게 깔지만 그대로 읽힘), 공간을 덜 쓴다. 기능상 문제는 없다.", "screens": "menu_* · adventure_hub · adv_*"},
+    {"sev": "low", "title": "21–23:9는 대체로 양호", "body": "HUD · 메뉴 · 연출 모두 가로 가운데 맞춤이 되어 있다. 배경은 sky_layers MARGIN 420으로 1844까지 덮는다. 남는 것은 노치 쪽 버튼과 HUD 양 끝 여백뿐.", "screens": ""}
+  ],
+  "approach": [
+    {"title": "1. 스트레치는 그대로 (canvas_items + expand)", "body": "레터박스 없이 화면을 다 쓰는 지금 방식이 맞다. 대신 <b>세로 기준을 화면 짧은 쪽으로</b>: 세로가 720보다 크면 연출 장면만 scale = min(vw/1280, vh/720)로 키우고 남는 쪽을 배경으로 채운다(Control 하나 '무대 틀'로 공통화)."},
+    {"title": "2. SafeArea 공통 컨테이너", "body": "DisplayServer.get_display_safe_area()를 읽는 autoload 하나(이미 Hud의 safe_pad 계산을 옮김) + MarginContainer형 SafeFrame. 메뉴 틀 · 탭 띠 · 닫기 · 건너뛰기 · 받기 · 서랍을 그 안에. 배경은 밖(전체)."},
+    {"title": "3. 배경은 항상 번지게 (bleed)", "body": "연출 배경은 FULL_RECT + 'cover' 배율(긴 쪽 기준), 1280×720 상수 대신 get_visible_rect() 사용. return_voyage · gacha_show 바닥 · story_player CG 이음매 제거."},
+    {"title": "4. 메뉴 틀 최대/최소 크기", "body": "틀 = clamp(화면 − safe − 여백, 1140×638, 1440×860)으로 늘리고, 안쪽은 이미 컨테이너 기반이라 대부분 따라온다. 4:3에서 위아래 HUD가 틀에 덮이도록."},
+    {"title": "5. HUD 고정 규칙", "body": "위 줄 = TOP 앵커 + safe 위, 아래 줄 = BOTTOM 앵커 + safe 아래, 좌 · 우 열 = safe 좌우. 고래 보호막 바는 고래 노드를 따라가게(지금은 화면 좌표). 전투 카메라는 세로가 늘면 zoom을 화면 짧은 쪽 기준으로 맞추거나 바다 쪽 아래를 넓힌다."}
+  ],
+  "fixlist": [
+    {"sev": "high", "screen": "소환 연출 (gacha_show.gd)", "problem": "4:3 · 접는 폰 아래 빈 바닥, 바닥선 화면 가운데", "cause": "stage 1280×720 고정, vh 미사용", "fix": "stage를 세로 가운데 + 무대 배율, 바닥 · 배경 FULL_RECT", "effort": "1일"},
+    {"sev": "high", "screen": "귀환 컷신 (return_voyage.gd)", "problem": "720 아래 이음매, 건너뛰기 위치", "cause": "H := 720 상수", "fix": "H를 화면 높이로, 구름 층 cover, 건너뛰기 BOTTOM_RIGHT+safe", "effort": "0.5일"},
+    {"sev": "mid", "screen": "전투 무대 · HUD (sky_layers · camera · hud)", "problem": "세로 늘면 고래가 위로, 보호막 바 분리", "cause": "camera y=360 · W/H 상수 · 보호막 화면 좌표", "fix": "카메라 zoom/offset을 세로에 맞춤, 보호막 바를 고래에 붙임", "effort": "1–1.5일"},
+    {"sev": "mid", "screen": "이야기 재생 (story_player.gd)", "problem": "CG pivot 640,360 고정, 대사 상자 아래 · 건너뛰기 노치", "cause": "고정 pivot", "fix": "pivot = 화면 가운데, SafeFrame", "effort": "0.5일"},
+    {"sev": "mid", "screen": "모든 메뉴 틀 (menus · 탭 띠)", "problem": "노치 쪽 탭 띠 · 닫기, 4:3에서 작은 틀", "cause": "1140×638 고정, safe 없음", "fix": "SafeFrame + clamp 크기", "effort": "1일"},
+    {"sev": "mid", "screen": "색 지도 서랍 (colormap_drawer.gd)", "problem": "칠하기 버튼 · 서랍 오른쪽 끝 노치", "cause": "오른쪽 끝 붙임", "fix": "safe 오른쪽만큼 안쪽", "effort": "0.25일"},
+    {"sev": "mid", "screen": "보상 띠 · 보상 팝업 (reward_band.gd)", "problem": "받기 버튼 노치 쪽", "cause": "가운데+370 고정", "fix": "safe 안으로 clamp", "effort": "0.25일"},
+    {"sev": "low", "screen": "대결 (duel_scene · DuelHud)", "problem": "세로 늘면 두 고래 위로", "cause": "전투 카메라와 같음", "fix": "전투 카메라 수정 따라감", "effort": "0.25일"},
+    {"sev": "low", "screen": "타이틀 · 가이드 말풍선 · 토스트", "problem": "대체로 양호, 오른쪽 아래 글자 노치", "cause": "—", "fix": "SafeFrame 안으로", "effort": "0.25일"},
+    {"sev": "low", "screen": "공통 SafeArea autoload + 점검 도구", "problem": "—", "cause": "—", "fix": "Hud safe_pad 로직 옮기기, tools/aspect_audit_* 로 재점검", "effort": "0.5일"}
+  ],
+  "groups": [
+    {"name": "타이틀 · 처음", "ids": ["title_ready", "title_loading_f3", "story_prologue", "tut_fresh_deck_0", "hud_fresh"]},
+    {"name": "전투 HUD", "ids": ["hud_late", "hud_mid", "hud_boss", "fever", "breath_ready", "ult_cutin", "quest_ready", "color_map", "color_restore", "requests_panel"]},
+    {"name": "대결", "ids": ["duel_rank_start", "duel_rank_mid", "duel_rank_end", "duel_soul_mid"]},
+    {"name": "메뉴", "ids": ["menu_heroes", "hero_info_tab0", "hero_awaken_steps", "hero_codex", "gear_list", "gear_detail", "formation", "menu_school", "menu_whale", "menu_shop", "mythic_shop"]},
+    {"name": "소환", "ids": ["summon_pickup", "gacha_paint_prompt", "gacha_reveal_SS_f4", "gacha_ten_cards", "gacha_ten_result"]},
+    {"name": "모험", "ids": ["adventure_hub", "adv_element", "adv_castle", "adv_rank", "adv_element_reward", "castle_reward"]},
+    {"name": "이야기 · 귀환 · 보상", "ids": ["story_menu", "story_player", "story_player_2", "return_ask", "return_cutscene", "return_reward", "reward_popup"]},
+    {"name": "설정 · 시스템 · 가이드", "ids": ["settings_game", "settings_account", "quit_confirm", "toast_top", "guide_summon_1", "guide_equip_1", "tut_deck", "tut_breath"]}
+  ],
+  "screens": {
+    "gacha_ten_result": {"title": "소환 10연 결과", "cells": {"1280x720": [{"sev": "ok", "note": "기준"}], "1844x720": [{"sev": "ok", "note": "가운데 정렬 양호"}], "1280x960": [{"sev": "high", "note": "카드 · 병이 위로, 아래 240px 빈 바닥 · 바닥선이 가운데"}], "1280x1025": [{"sev": "high", "note": "같음 (더 큼)"}], "1280x800": [{"sev": "mid", "note": "아래 80px 빈 바닥"}]}},
+    "gacha_paint_prompt": {"title": "소환 이젤", "cells": {"1280x960": [{"sev": "mid", "note": "이젤이 위에 붙음, 안내는 아래 · 사이 빈 공간"}], "1844x720": [{"sev": "ok", "note": "양호"}]}},
+    "return_cutscene": {"title": "귀환 컷신", "cells": {"1280x960": [{"sev": "high", "note": "y≈720 구름 이음매 · 건너뛰기 가운데 높이"}], "1844x720": [{"sev": "ok", "note": "양호"}]}},
+    "hud_late": {"title": "전투 HUD (후반)", "cells": {"1280x720": [{"sev": "ok", "note": "기준"}], "1844x720": [{"sev": "ok", "note": "양호 · 양 끝 노치는 기기 safe_pad로 밀림"}], "1280x800": [{"sev": "low", "note": "보호막 바가 고래 몸에 걸침"}], "1280x960": [{"sev": "mid", "note": "고래 · 적이 위 절반, 아래 구름만 · 보호막 바 분리"}]}},
+    "duel_rank_mid": {"title": "대결 중", "cells": {"1280x960": [{"sev": "mid", "note": "두 고래 위로 · 아래 빈 구름"}], "1844x720": [{"sev": "ok", "note": "양호"}]}},
+    "story_player": {"title": "이야기 재생", "cells": {"1280x960": [{"sev": "mid", "note": "무대 위 · 대사 상자만 아래 · 건너뛰기 오른쪽 끝 노치"}]}},
+    "color_map": {"title": "색 지도 서랍", "cells": {"1280x960": [{"sev": "low", "note": "서랍은 세로로 잘 늘어남 · 칠하기 버튼 오른쪽 아래 모서리 근처"}]}},
+    "menu_heroes": {"title": "아이들 목록", "cells": {"1844x720": [{"sev": "mid", "note": "탭 띠 · 닫기가 오른쪽 노치 띠 근처"}], "1280x960": [{"sev": "low", "note": "틀 가운데 · 위아래 HUD가 보임, 틀이 작음"}]}},
+    "adventure_hub": {"title": "모험", "cells": {"1280x960": [{"sev": "low", "note": "틀 작음 · 탭 띠 오른쪽 끝"}]}},
+    "title_ready": {"title": "타이틀", "cells": {"1280x1025": [{"sev": "ok", "note": "배경 cover로 자연스러움"}]}}
+  }
+}

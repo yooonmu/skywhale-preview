@@ -1,0 +1,5942 @@
+{
+  "entries": [
+    {
+      "file": "hud_mid_1280x720.jpg",
+      "id": "hud_mid",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (중반 · 잠긴 메뉴)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "quest_ready_1280x720.jpg",
+      "id": "quest_ready",
+      "items": [
+        70.0
+      ],
+      "label": "항해 퀘스트 완료 표시",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "locked_tap_mid_1280x720.jpg",
+      "id": "locked_tap_mid",
+      "items": [
+        11.0
+      ],
+      "label": "잠긴 메뉴(모험)를 눌렀을 때 · 알림",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "b2_attend_d1_1280x720.jpg",
+      "id": "b2_attend_d1",
+      "items": [
+        34.0
+      ],
+      "label": "출석 · 1일째 + 월정액",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "b2_log_3h_1280x720.jpg",
+      "id": "b2_log_3h",
+      "items": [
+        34.0
+      ],
+      "label": "항해일지 · 3시간 12분",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "b2_lv_c1_1280x720.jpg",
+      "id": "b2_lv_c1",
+      "items": [
+        34.0
+      ],
+      "label": "항해사 레벨 업 · 모험 열림",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "hud_late_1280x720.jpg",
+      "id": "hud_late",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (늦은 계정 · 모든 메뉴)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "hud_boss_1280x720.jpg",
+      "id": "hud_boss",
+      "items": [
+        35.0
+      ],
+      "label": "보스 스테이지 HUD",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "fever_1280x720.jpg",
+      "id": "fever",
+      "items": [
+        17.0
+      ],
+      "label": "채색 폭주 (FEVER)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "breath_ready_1280x720.jpg",
+      "id": "breath_ready",
+      "items": [
+        5.0
+      ],
+      "label": "고래 숨결 버튼 (준비됨)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "breath_cast_1280x720.jpg",
+      "id": "breath_cast",
+      "items": [
+        19.0
+      ],
+      "label": "고래 숨결 사용 연출",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "ult_cutin_1280x720.jpg",
+      "id": "ult_cutin",
+      "items": [
+        32.0
+      ],
+      "label": "궁극기 컷인 (SS)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "requests_panel_1280x720.jpg",
+      "id": "requests_panel",
+      "items": [
+        49.0
+      ],
+      "label": "섬 주민 의뢰 창",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "reward_popup_1280x720.jpg",
+      "id": "reward_popup",
+      "items": [
+        34.0,
+        58.0
+      ],
+      "label": "보상 팝업 (아이콘 모음)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "color_restore_1280x720.jpg",
+      "id": "color_restore",
+      "items": [
+        28.0
+      ],
+      "label": "색 지도 열기 · 복원 장면",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "color_map_1280x720.jpg",
+      "id": "color_map",
+      "items": [
+        28.0
+      ],
+      "label": "색 지도",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "story_menu_1280x720.jpg",
+      "id": "story_menu",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 목록",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "story_player_1280x720.jpg",
+      "id": "story_player",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (대사)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "story_player_2_1280x720.jpg",
+      "id": "story_player_2",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (몇 줄 뒤)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "menu_heroes_1280x720.jpg",
+      "id": "menu_heroes",
+      "items": [
+        43.0
+      ],
+      "label": "아이들 목록",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "hero_info_tab0_1280x720.jpg",
+      "id": "hero_info_tab0",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 능력 탭",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "hero_info_tab1_1280x720.jpg",
+      "id": "hero_info_tab1",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 스킬 탭",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "hero_info_tab2_1280x720.jpg",
+      "id": "hero_info_tab2",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 장비 탭",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "hero_awaken_steps_1280x720.jpg",
+      "id": "hero_awaken_steps",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 각성 단계 판",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "star_up_card_1280x720.jpg",
+      "id": "star_up_card",
+      "items": [
+        59.0
+      ],
+      "label": "승급 확인 카드",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "hero_codex_1280x720.jpg",
+      "id": "hero_codex",
+      "items": [
+        20.0
+      ],
+      "label": "성장 기록",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "gear_list_1280x720.jpg",
+      "id": "gear_list",
+      "items": [
+        51.0,
+        52.0,
+        53.0,
+        16.0
+      ],
+      "label": "장비 (가방 · 착용)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "gear_detail_1280x720.jpg",
+      "id": "gear_detail",
+      "items": [
+        52.0,
+        53.0,
+        51.0
+      ],
+      "label": "장비 상세 · 잠재 덧칠",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "gear_rainbow_1280x720.jpg",
+      "id": "gear_rainbow",
+      "items": [
+        52.0,
+        53.0
+      ],
+      "label": "장비 상세 · 잠금 + 무지개 덧칠",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "gear_repaint_result_1280x720.jpg",
+      "id": "gear_repaint_result",
+      "items": [
+        53.0,
+        52.0
+      ],
+      "label": "잠재 덧칠 누른 뒤",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "formation_1280x720.jpg",
+      "id": "formation",
+      "items": [
+        18.0,
+        37.0,
+        38.0,
+        68.0
+      ],
+      "label": "편성 (항해 덱)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "formation_pick_1280x720.jpg",
+      "id": "formation_pick",
+      "items": [
+        37.0,
+        38.0
+      ],
+      "label": "편성 · 아이를 고른 상태",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "formation_arena_atk_1280x720.jpg",
+      "id": "formation_arena_atk",
+      "items": [
+        60.0,
+        38.0
+      ],
+      "label": "편성 · 등급전 덱 (공격 · 방어 하나로)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "summon_pickup_1280x720.jpg",
+      "id": "summon_pickup",
+      "items": [
+        39.0,
+        40.0,
+        22.0
+      ],
+      "label": "소환 · 픽업 출석부",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "summon_standard_1280x720.jpg",
+      "id": "summon_standard",
+      "items": [
+        39.0,
+        40.0
+      ],
+      "label": "소환 · 상시 출석부",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "gacha_paint_prompt_1280x720.jpg",
+      "id": "gacha_paint_prompt",
+      "items": [
+        23.0
+      ],
+      "label": "소환 · 칠하기 안내 (잿빛 출석부)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "gacha_paint_f1_1280x720.jpg",
+      "frames": [
+        "gacha_paint_f1_1280x720.jpg",
+        "gacha_paint_f2_1280x720.jpg",
+        "gacha_paint_f3_1280x720.jpg"
+      ],
+      "id": "gacha_paint",
+      "items": [
+        23.0
+      ],
+      "label": "소환 · 손가락으로 칠하기",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "gacha_ten_deal_1280x720.jpg",
+      "id": "gacha_ten_deal",
+      "items": [
+        26.0
+      ],
+      "label": "10연 소환 · 카드 한 장씩",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "gacha_ten_cards_1280x720.jpg",
+      "id": "gacha_ten_cards",
+      "items": [
+        25.0,
+        26.0
+      ],
+      "label": "10연 소환 · 카드 펼침",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "gacha_ten_result_1280x720.jpg",
+      "id": "gacha_ten_result",
+      "items": [
+        25.0,
+        24.0
+      ],
+      "label": "10연 소환 결과 · 신화 조각",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "gacha_reveal_SS_f1_1280x720.jpg",
+      "frames": [
+        "gacha_reveal_SS_f1_1280x720.jpg",
+        "gacha_reveal_SS_f2_1280x720.jpg",
+        "gacha_reveal_SS_f3_1280x720.jpg",
+        "gacha_reveal_SS_f4_1280x720.jpg",
+        "gacha_reveal_SS_f5_1280x720.jpg",
+        "gacha_reveal_SS_f6_1280x720.jpg",
+        "gacha_reveal_SS_f7_1280x720.jpg"
+      ],
+      "id": "gacha_reveal_SS",
+      "items": [
+        26.0,
+        27.0
+      ],
+      "label": "소환 연출 · SS (새 아이)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "adventure_hub_1280x720.jpg",
+      "id": "adventure_hub",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0,
+        3.0
+      ],
+      "label": "모험 허브 (콘텐츠 카드)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "adv_element_1280x720.jpg",
+      "id": "adv_element",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0
+      ],
+      "label": "모험 · 원소 구름섬 페이지",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "adv_soul_1280x720.jpg",
+      "id": "adv_soul",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0
+      ],
+      "label": "모험 · 기억의 회랑 페이지",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "adv_castle_1280x720.jpg",
+      "id": "adv_castle",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        62.0
+      ],
+      "label": "모험 · 잿빛성 페이지",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "adv_temple_1280x720.jpg",
+      "id": "adv_temple",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0
+      ],
+      "label": "모험 · 신전 · 승급전 페이지",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "adv_rank_1280x720.jpg",
+      "id": "adv_rank",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        60.0
+      ],
+      "label": "모험 · 항해사 등급전 페이지",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "menu_school_1280x720.jpg",
+      "id": "menu_school",
+      "items": [
+        47.0
+      ],
+      "label": "분교",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "menu_whale_1280x720.jpg",
+      "id": "menu_whale",
+      "items": [
+        42.0,
+        41.0,
+        44.0
+      ],
+      "label": "고래 강화 (보호막)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "menu_shop_1280x720.jpg",
+      "id": "menu_shop",
+      "items": [
+        21.0
+      ],
+      "label": "상점",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "mythic_shop_1280x720.jpg",
+      "id": "mythic_shop",
+      "items": [
+        24.0
+      ],
+      "label": "신화 조각 상점",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "settings_game_1280x720.jpg",
+      "id": "settings_game",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 게임 탭",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "settings_power_1280x720.jpg",
+      "id": "settings_power",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 알림 · 절전 탭",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "settings_account_1280x720.jpg",
+      "id": "settings_account",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 계정 탭",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "settings_credits_1280x720.jpg",
+      "id": "settings_credits",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 만든 사람들",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "toast_lock_1280x720.jpg",
+      "id": "toast_lock",
+      "items": [
+        11.0
+      ],
+      "label": "시스템 알림 (잠김)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "toast_top_1280x720.jpg",
+      "id": "toast_top",
+      "items": [
+        70.0
+      ],
+      "label": "완료 알림 · 위쪽 (이야기 열림)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "quit_confirm_1280x720.jpg",
+      "id": "quit_confirm",
+      "items": [
+        "system"
+      ],
+      "label": "종료 확인 (뒤로 가기)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "return_ask_1280x720.jpg",
+      "id": "return_ask",
+      "items": [
+        50.0
+      ],
+      "label": "복귀 확인 창",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "tut_deck_1280x720.jpg",
+      "id": "tut_deck",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 갑판 소개",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "tut_upgrade_1280x720.jpg",
+      "id": "tut_upgrade",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 강화 버튼",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "tut_shield_1280x720.jpg",
+      "id": "tut_shield",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 보호막",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "tut_ult_1280x720.jpg",
+      "id": "tut_ult",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 궁극기 카드",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "tut_controls_1280x720.jpg",
+      "id": "tut_controls",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 전투 조작 (1)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "tut_breath_1280x720.jpg",
+      "id": "tut_breath",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 고래 숨결",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "tut_quest_1280x720.jpg",
+      "id": "tut_quest",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 퀘스트 받기",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "tut_whale_1280x720.jpg",
+      "id": "tut_whale",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 고래 강화",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "tut_formation_1280x720.jpg",
+      "id": "tut_formation",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 편성",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "guide_summon_1_1280x720.jpg",
+      "id": "guide_summon_1",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 소환 (채색석 1600) (1)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "guide_summon_2_1280x720.jpg",
+      "id": "guide_summon_2",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 소환 (채색석 1600) (2)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "guide_equip_1_1280x720.jpg",
+      "id": "guide_equip_1",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 장비 끼우기 (1)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "guide_equip_2_1280x720.jpg",
+      "id": "guide_equip_2",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 장비 끼우기 (2)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "guide_dungeon_1_1280x720.jpg",
+      "id": "guide_dungeon_1",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 모험 · 회랑 (1)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "guide_dungeon_2_1280x720.jpg",
+      "id": "guide_dungeon_2",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 모험 · 회랑 (2)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "duel_soul_start_1280x720.jpg",
+      "id": "duel_soul_start",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 시작",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "duel_soul_mid_1280x720.jpg",
+      "id": "duel_soul_mid",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 한가운데",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "duel_soul_end_1280x720.jpg",
+      "id": "duel_soul_end",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 끝",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "duel_rank_start_1280x720.jpg",
+      "id": "duel_rank_start",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 시작",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "duel_rank_mid_1280x720.jpg",
+      "id": "duel_rank_mid",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 한가운데",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "duel_rank_end_1280x720.jpg",
+      "id": "duel_rank_end",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 끝",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "adv_battle_element_1280x720.jpg",
+      "id": "adv_battle_element",
+      "items": [
+        61.0,
+        63.0,
+        56.0,
+        55.0
+      ],
+      "label": "모험 전투 HUD · 원소섬 (숨결 · 순풍)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "adv_battle_castle_1280x720.jpg",
+      "id": "adv_battle_castle",
+      "items": [
+        61.0,
+        62.0
+      ],
+      "label": "모험 전투 HUD · 잿빛성",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "return_cutscene_1280x720.jpg",
+      "id": "return_cutscene",
+      "items": [
+        67.0
+      ],
+      "label": "복귀 연출",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "return_reward_1280x720.jpg",
+      "id": "return_reward",
+      "items": [
+        67.0,
+        34.0
+      ],
+      "label": "귀환 보상",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "fold_hud_1280x1025.jpg",
+      "id": "fold_hud",
+      "items": [
+        "fold"
+      ],
+      "label": "펼침 직후 · 전투 HUD (창 크기 바뀜)",
+      "phase": "late",
+      "resolution": "1280x1025"
+    },
+    {
+      "file": "fold_menu_back_1280x720.jpg",
+      "id": "fold_menu_back",
+      "items": [
+        "fold"
+      ],
+      "label": "메뉴를 연 채 접음 (다시 원래 크기)",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "fold_settings_1280x1025.jpg",
+      "id": "fold_settings",
+      "items": [
+        "fold"
+      ],
+      "label": "설정을 연 채 펼침",
+      "phase": "late",
+      "resolution": "1280x1025"
+    },
+    {
+      "file": "fold_summon_1280x1025.jpg",
+      "id": "fold_summon",
+      "items": [
+        "fold"
+      ],
+      "label": "펼친 크기에서 소환 열기",
+      "phase": "late",
+      "resolution": "1280x1025"
+    },
+    {
+      "file": "title_loading_f1_1600x720.jpg",
+      "frames": [
+        "title_loading_f1_1600x720.jpg",
+        "title_loading_f2_1600x720.jpg",
+        "title_loading_f3_1600x720.jpg",
+        "title_loading_f4_1600x720.jpg",
+        "title_loading_f5_1600x720.jpg",
+        "title_loading_f6_1600x720.jpg"
+      ],
+      "id": "title_loading",
+      "items": [
+        1.0
+      ],
+      "label": "타이틀 · 로딩 막대",
+      "phase": "fresh",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "title_ready_1600x720.jpg",
+      "id": "title_ready",
+      "items": [
+        1.0
+      ],
+      "label": "타이틀 · 터치해서 시작",
+      "phase": "fresh",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "story_prologue_1600x720.jpg",
+      "id": "story_prologue",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (첫 세션)",
+      "phase": "fresh",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "tut_fresh_deck_0_1600x720.jpg",
+      "id": "tut_fresh_deck_0",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 갑판 소개",
+      "phase": "fresh",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "hud_fresh_1600x720.jpg",
+      "id": "hud_fresh",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (새 계정)",
+      "phase": "fresh",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "locked_tap_fresh_1600x720.jpg",
+      "id": "locked_tap_fresh",
+      "items": [
+        11.0
+      ],
+      "label": "잠긴 메뉴를 눌렀을 때 (새 계정)",
+      "phase": "fresh",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "title_loading_f1_1280x720.jpg",
+      "frames": [
+        "title_loading_f1_1280x720.jpg",
+        "title_loading_f2_1280x720.jpg",
+        "title_loading_f3_1280x720.jpg",
+        "title_loading_f4_1280x720.jpg",
+        "title_loading_f5_1280x720.jpg",
+        "title_loading_f6_1280x720.jpg"
+      ],
+      "id": "title_loading",
+      "items": [
+        1.0
+      ],
+      "label": "타이틀 · 로딩 막대",
+      "phase": "fresh",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "title_ready_1280x720.jpg",
+      "id": "title_ready",
+      "items": [
+        1.0
+      ],
+      "label": "타이틀 · 터치해서 시작",
+      "phase": "fresh",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "story_prologue_1280x720.jpg",
+      "id": "story_prologue",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (첫 세션)",
+      "phase": "fresh",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "tut_fresh_deck_0_1280x720.jpg",
+      "id": "tut_fresh_deck_0",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 갑판 소개",
+      "phase": "fresh",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "hud_fresh_1280x720.jpg",
+      "id": "hud_fresh",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (새 계정)",
+      "phase": "fresh",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "locked_tap_fresh_1280x720.jpg",
+      "id": "locked_tap_fresh",
+      "items": [
+        11.0
+      ],
+      "label": "잠긴 메뉴를 눌렀을 때 (새 계정)",
+      "phase": "fresh",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "title_loading_f1_1760x720.jpg",
+      "frames": [
+        "title_loading_f1_1760x720.jpg",
+        "title_loading_f2_1760x720.jpg",
+        "title_loading_f3_1760x720.jpg",
+        "title_loading_f4_1760x720.jpg",
+        "title_loading_f5_1760x720.jpg",
+        "title_loading_f6_1760x720.jpg"
+      ],
+      "id": "title_loading",
+      "items": [
+        1.0
+      ],
+      "label": "타이틀 · 로딩 막대",
+      "phase": "fresh",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "title_ready_1760x720.jpg",
+      "id": "title_ready",
+      "items": [
+        1.0
+      ],
+      "label": "타이틀 · 터치해서 시작",
+      "phase": "fresh",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "story_prologue_1760x720.jpg",
+      "id": "story_prologue",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (첫 세션)",
+      "phase": "fresh",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "tut_fresh_deck_0_1760x720.jpg",
+      "id": "tut_fresh_deck_0",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 갑판 소개",
+      "phase": "fresh",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "hud_fresh_1760x720.jpg",
+      "id": "hud_fresh",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (새 계정)",
+      "phase": "fresh",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "locked_tap_fresh_1760x720.jpg",
+      "id": "locked_tap_fresh",
+      "items": [
+        11.0
+      ],
+      "label": "잠긴 메뉴를 눌렀을 때 (새 계정)",
+      "phase": "fresh",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "title_loading_f1_1844x720.jpg",
+      "frames": [
+        "title_loading_f1_1844x720.jpg",
+        "title_loading_f2_1844x720.jpg",
+        "title_loading_f3_1844x720.jpg",
+        "title_loading_f4_1844x720.jpg",
+        "title_loading_f5_1844x720.jpg",
+        "title_loading_f6_1844x720.jpg"
+      ],
+      "id": "title_loading",
+      "items": [
+        1.0
+      ],
+      "label": "타이틀 · 로딩 막대",
+      "phase": "fresh",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "hud_mid_1600x720.jpg",
+      "id": "hud_mid",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (중반 · 잠긴 메뉴)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "quest_ready_1600x720.jpg",
+      "id": "quest_ready",
+      "items": [
+        70.0
+      ],
+      "label": "항해 퀘스트 완료 표시",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "locked_tap_mid_1600x720.jpg",
+      "id": "locked_tap_mid",
+      "items": [
+        11.0
+      ],
+      "label": "잠긴 메뉴(모험)를 눌렀을 때 · 알림",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "b2_attend_d1_1600x720.jpg",
+      "id": "b2_attend_d1",
+      "items": [
+        34.0
+      ],
+      "label": "출석 · 1일째 + 월정액",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "b2_log_3h_1600x720.jpg",
+      "id": "b2_log_3h",
+      "items": [
+        34.0
+      ],
+      "label": "항해일지 · 3시간 12분",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "b2_lv_c1_1600x720.jpg",
+      "id": "b2_lv_c1",
+      "items": [
+        34.0
+      ],
+      "label": "항해사 레벨 업 · 모험 열림",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "hud_late_1600x720.jpg",
+      "id": "hud_late",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (늦은 계정 · 모든 메뉴)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "hud_boss_1600x720.jpg",
+      "id": "hud_boss",
+      "items": [
+        35.0
+      ],
+      "label": "보스 스테이지 HUD",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "fever_1600x720.jpg",
+      "id": "fever",
+      "items": [
+        17.0
+      ],
+      "label": "채색 폭주 (FEVER)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "breath_ready_1600x720.jpg",
+      "id": "breath_ready",
+      "items": [
+        5.0
+      ],
+      "label": "고래 숨결 버튼 (준비됨)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "breath_cast_1600x720.jpg",
+      "id": "breath_cast",
+      "items": [
+        19.0
+      ],
+      "label": "고래 숨결 사용 연출",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "ult_cutin_1600x720.jpg",
+      "id": "ult_cutin",
+      "items": [
+        32.0
+      ],
+      "label": "궁극기 컷인 (SS)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "requests_panel_1600x720.jpg",
+      "id": "requests_panel",
+      "items": [
+        49.0
+      ],
+      "label": "섬 주민 의뢰 창",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "reward_popup_1600x720.jpg",
+      "id": "reward_popup",
+      "items": [
+        34.0,
+        58.0
+      ],
+      "label": "보상 팝업 (아이콘 모음)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "color_restore_1600x720.jpg",
+      "id": "color_restore",
+      "items": [
+        28.0
+      ],
+      "label": "색 지도 열기 · 복원 장면",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "color_map_1600x720.jpg",
+      "id": "color_map",
+      "items": [
+        28.0
+      ],
+      "label": "색 지도",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "story_menu_1600x720.jpg",
+      "id": "story_menu",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 목록",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "story_player_1600x720.jpg",
+      "id": "story_player",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (대사)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "story_player_2_1600x720.jpg",
+      "id": "story_player_2",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (몇 줄 뒤)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "menu_heroes_1600x720.jpg",
+      "id": "menu_heroes",
+      "items": [
+        43.0
+      ],
+      "label": "아이들 목록",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "hero_info_tab0_1600x720.jpg",
+      "id": "hero_info_tab0",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 능력 탭",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "hero_info_tab1_1600x720.jpg",
+      "id": "hero_info_tab1",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 스킬 탭",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "hero_info_tab2_1600x720.jpg",
+      "id": "hero_info_tab2",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 장비 탭",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "hero_awaken_steps_1600x720.jpg",
+      "id": "hero_awaken_steps",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 각성 단계 판",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "star_up_card_1600x720.jpg",
+      "id": "star_up_card",
+      "items": [
+        59.0
+      ],
+      "label": "승급 확인 카드",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "hero_codex_1600x720.jpg",
+      "id": "hero_codex",
+      "items": [
+        20.0
+      ],
+      "label": "성장 기록",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "gear_list_1600x720.jpg",
+      "id": "gear_list",
+      "items": [
+        51.0,
+        52.0,
+        53.0,
+        16.0
+      ],
+      "label": "장비 (가방 · 착용)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "gear_detail_1600x720.jpg",
+      "id": "gear_detail",
+      "items": [
+        52.0,
+        53.0,
+        51.0
+      ],
+      "label": "장비 상세 · 잠재 덧칠",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "gear_rainbow_1600x720.jpg",
+      "id": "gear_rainbow",
+      "items": [
+        52.0,
+        53.0
+      ],
+      "label": "장비 상세 · 잠금 + 무지개 덧칠",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "gear_repaint_result_1600x720.jpg",
+      "id": "gear_repaint_result",
+      "items": [
+        53.0,
+        52.0
+      ],
+      "label": "잠재 덧칠 누른 뒤",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "formation_1600x720.jpg",
+      "id": "formation",
+      "items": [
+        18.0,
+        37.0,
+        38.0,
+        68.0
+      ],
+      "label": "편성 (항해 덱)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "formation_pick_1600x720.jpg",
+      "id": "formation_pick",
+      "items": [
+        37.0,
+        38.0
+      ],
+      "label": "편성 · 아이를 고른 상태",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "formation_arena_atk_1600x720.jpg",
+      "id": "formation_arena_atk",
+      "items": [
+        60.0,
+        38.0
+      ],
+      "label": "편성 · 등급전 덱 (공격 · 방어 하나로)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "summon_pickup_1600x720.jpg",
+      "id": "summon_pickup",
+      "items": [
+        39.0,
+        40.0,
+        22.0
+      ],
+      "label": "소환 · 픽업 출석부",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "summon_standard_1600x720.jpg",
+      "id": "summon_standard",
+      "items": [
+        39.0,
+        40.0
+      ],
+      "label": "소환 · 상시 출석부",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "gacha_paint_prompt_1600x720.jpg",
+      "id": "gacha_paint_prompt",
+      "items": [
+        23.0
+      ],
+      "label": "소환 · 칠하기 안내 (잿빛 출석부)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "gacha_paint_f1_1600x720.jpg",
+      "frames": [
+        "gacha_paint_f1_1600x720.jpg",
+        "gacha_paint_f2_1600x720.jpg",
+        "gacha_paint_f3_1600x720.jpg"
+      ],
+      "id": "gacha_paint",
+      "items": [
+        23.0
+      ],
+      "label": "소환 · 손가락으로 칠하기",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "gacha_ten_deal_1600x720.jpg",
+      "id": "gacha_ten_deal",
+      "items": [
+        26.0
+      ],
+      "label": "10연 소환 · 카드 한 장씩",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "gacha_ten_cards_1600x720.jpg",
+      "id": "gacha_ten_cards",
+      "items": [
+        25.0,
+        26.0
+      ],
+      "label": "10연 소환 · 카드 펼침",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "gacha_ten_result_1600x720.jpg",
+      "id": "gacha_ten_result",
+      "items": [
+        25.0,
+        24.0
+      ],
+      "label": "10연 소환 결과 · 신화 조각",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "gacha_reveal_SS_f1_1600x720.jpg",
+      "frames": [
+        "gacha_reveal_SS_f1_1600x720.jpg",
+        "gacha_reveal_SS_f2_1600x720.jpg",
+        "gacha_reveal_SS_f3_1600x720.jpg",
+        "gacha_reveal_SS_f4_1600x720.jpg",
+        "gacha_reveal_SS_f5_1600x720.jpg",
+        "gacha_reveal_SS_f6_1600x720.jpg",
+        "gacha_reveal_SS_f7_1600x720.jpg"
+      ],
+      "id": "gacha_reveal_SS",
+      "items": [
+        26.0,
+        27.0
+      ],
+      "label": "소환 연출 · SS (새 아이)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "adventure_hub_1600x720.jpg",
+      "id": "adventure_hub",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0,
+        3.0
+      ],
+      "label": "모험 허브 (콘텐츠 카드)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "adv_element_1600x720.jpg",
+      "id": "adv_element",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0
+      ],
+      "label": "모험 · 원소 구름섬 페이지",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "adv_soul_1600x720.jpg",
+      "id": "adv_soul",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0
+      ],
+      "label": "모험 · 기억의 회랑 페이지",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "adv_castle_1600x720.jpg",
+      "id": "adv_castle",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        62.0
+      ],
+      "label": "모험 · 잿빛성 페이지",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "adv_temple_1600x720.jpg",
+      "id": "adv_temple",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0
+      ],
+      "label": "모험 · 신전 · 승급전 페이지",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "adv_rank_1600x720.jpg",
+      "id": "adv_rank",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        60.0
+      ],
+      "label": "모험 · 항해사 등급전 페이지",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "menu_school_1600x720.jpg",
+      "id": "menu_school",
+      "items": [
+        47.0
+      ],
+      "label": "분교",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "menu_whale_1600x720.jpg",
+      "id": "menu_whale",
+      "items": [
+        42.0,
+        41.0,
+        44.0
+      ],
+      "label": "고래 강화 (보호막)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "menu_shop_1600x720.jpg",
+      "id": "menu_shop",
+      "items": [
+        21.0
+      ],
+      "label": "상점",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "mythic_shop_1600x720.jpg",
+      "id": "mythic_shop",
+      "items": [
+        24.0
+      ],
+      "label": "신화 조각 상점",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "settings_game_1600x720.jpg",
+      "id": "settings_game",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 게임 탭",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "settings_power_1600x720.jpg",
+      "id": "settings_power",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 알림 · 절전 탭",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "settings_account_1600x720.jpg",
+      "id": "settings_account",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 계정 탭",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "settings_credits_1600x720.jpg",
+      "id": "settings_credits",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 만든 사람들",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "toast_lock_1600x720.jpg",
+      "id": "toast_lock",
+      "items": [
+        11.0
+      ],
+      "label": "시스템 알림 (잠김)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "toast_top_1600x720.jpg",
+      "id": "toast_top",
+      "items": [
+        70.0
+      ],
+      "label": "완료 알림 · 위쪽 (이야기 열림)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "quit_confirm_1600x720.jpg",
+      "id": "quit_confirm",
+      "items": [
+        "system"
+      ],
+      "label": "종료 확인 (뒤로 가기)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "return_ask_1600x720.jpg",
+      "id": "return_ask",
+      "items": [
+        50.0
+      ],
+      "label": "복귀 확인 창",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "tut_deck_1600x720.jpg",
+      "id": "tut_deck",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 갑판 소개",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "tut_upgrade_1600x720.jpg",
+      "id": "tut_upgrade",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 강화 버튼",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "tut_shield_1600x720.jpg",
+      "id": "tut_shield",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 보호막",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "tut_ult_1600x720.jpg",
+      "id": "tut_ult",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 궁극기 카드",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "tut_controls_1600x720.jpg",
+      "id": "tut_controls",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 전투 조작 (1)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "tut_breath_1600x720.jpg",
+      "id": "tut_breath",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 고래 숨결",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "tut_quest_1600x720.jpg",
+      "id": "tut_quest",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 퀘스트 받기",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "tut_whale_1600x720.jpg",
+      "id": "tut_whale",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 고래 강화",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "tut_formation_1600x720.jpg",
+      "id": "tut_formation",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 편성",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "guide_summon_1_1600x720.jpg",
+      "id": "guide_summon_1",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 소환 (채색석 1600) (1)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "guide_summon_2_1600x720.jpg",
+      "id": "guide_summon_2",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 소환 (채색석 1600) (2)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "guide_equip_1_1600x720.jpg",
+      "id": "guide_equip_1",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 장비 끼우기 (1)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "guide_equip_2_1600x720.jpg",
+      "id": "guide_equip_2",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 장비 끼우기 (2)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "guide_dungeon_1_1600x720.jpg",
+      "id": "guide_dungeon_1",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 모험 · 회랑 (1)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "guide_dungeon_2_1600x720.jpg",
+      "id": "guide_dungeon_2",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 모험 · 회랑 (2)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "duel_soul_start_1600x720.jpg",
+      "id": "duel_soul_start",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 시작",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "duel_soul_mid_1600x720.jpg",
+      "id": "duel_soul_mid",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 한가운데",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "duel_soul_end_1600x720.jpg",
+      "id": "duel_soul_end",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 끝",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "duel_rank_start_1600x720.jpg",
+      "id": "duel_rank_start",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 시작",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "duel_rank_mid_1600x720.jpg",
+      "id": "duel_rank_mid",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 한가운데",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "duel_rank_end_1600x720.jpg",
+      "id": "duel_rank_end",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 끝",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "adv_battle_element_1600x720.jpg",
+      "id": "adv_battle_element",
+      "items": [
+        61.0,
+        63.0,
+        56.0,
+        55.0
+      ],
+      "label": "모험 전투 HUD · 원소섬 (숨결 · 순풍)",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "adv_battle_castle_1600x720.jpg",
+      "id": "adv_battle_castle",
+      "items": [
+        61.0,
+        62.0
+      ],
+      "label": "모험 전투 HUD · 잿빛성",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "castle_reward_1600x720.jpg",
+      "id": "castle_reward",
+      "items": [
+        62.0,
+        34.0
+      ],
+      "label": "잿빛성 보상 창",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "return_cutscene_1600x720.jpg",
+      "id": "return_cutscene",
+      "items": [
+        67.0
+      ],
+      "label": "복귀 연출",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "return_reward_1600x720.jpg",
+      "id": "return_reward",
+      "items": [
+        67.0,
+        34.0
+      ],
+      "label": "귀환 보상",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "title_loading_f1_1280x800.jpg",
+      "frames": [
+        "title_loading_f1_1280x800.jpg",
+        "title_loading_f2_1280x800.jpg",
+        "title_loading_f3_1280x800.jpg",
+        "title_loading_f4_1280x800.jpg",
+        "title_loading_f5_1280x800.jpg",
+        "title_loading_f6_1280x800.jpg"
+      ],
+      "id": "title_loading",
+      "items": [
+        1.0
+      ],
+      "label": "타이틀 · 로딩 막대",
+      "phase": "fresh",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "title_ready_1280x800.jpg",
+      "id": "title_ready",
+      "items": [
+        1.0
+      ],
+      "label": "타이틀 · 터치해서 시작",
+      "phase": "fresh",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "story_prologue_1280x800.jpg",
+      "id": "story_prologue",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (첫 세션)",
+      "phase": "fresh",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "tut_fresh_deck_0_1280x800.jpg",
+      "id": "tut_fresh_deck_0",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 갑판 소개",
+      "phase": "fresh",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "hud_fresh_1280x800.jpg",
+      "id": "hud_fresh",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (새 계정)",
+      "phase": "fresh",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "locked_tap_fresh_1280x800.jpg",
+      "id": "locked_tap_fresh",
+      "items": [
+        11.0
+      ],
+      "label": "잠긴 메뉴를 눌렀을 때 (새 계정)",
+      "phase": "fresh",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "title_loading_f1_1280x960.jpg",
+      "frames": [
+        "title_loading_f1_1280x960.jpg",
+        "title_loading_f2_1280x960.jpg",
+        "title_loading_f3_1280x960.jpg",
+        "title_loading_f4_1280x960.jpg",
+        "title_loading_f5_1280x960.jpg"
+      ],
+      "id": "title_loading",
+      "items": [
+        1.0
+      ],
+      "label": "타이틀 · 로딩 막대",
+      "phase": "fresh",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "title_ready_1280x960.jpg",
+      "id": "title_ready",
+      "items": [
+        1.0
+      ],
+      "label": "타이틀 · 터치해서 시작",
+      "phase": "fresh",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "story_prologue_1280x960.jpg",
+      "id": "story_prologue",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (첫 세션)",
+      "phase": "fresh",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "tut_fresh_deck_0_1280x960.jpg",
+      "id": "tut_fresh_deck_0",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 갑판 소개",
+      "phase": "fresh",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "hud_fresh_1280x960.jpg",
+      "id": "hud_fresh",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (새 계정)",
+      "phase": "fresh",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "locked_tap_fresh_1280x960.jpg",
+      "id": "locked_tap_fresh",
+      "items": [
+        11.0
+      ],
+      "label": "잠긴 메뉴를 눌렀을 때 (새 계정)",
+      "phase": "fresh",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "title_loading_f1_1280x1025.jpg",
+      "frames": [
+        "title_loading_f1_1280x1025.jpg",
+        "title_loading_f2_1280x1025.jpg",
+        "title_loading_f3_1280x1025.jpg",
+        "title_loading_f4_1280x1025.jpg",
+        "title_loading_f5_1280x1025.jpg",
+        "title_loading_f6_1280x1025.jpg"
+      ],
+      "id": "title_loading",
+      "items": [
+        1.0
+      ],
+      "label": "타이틀 · 로딩 막대",
+      "phase": "fresh",
+      "resolution": "1280x1025"
+    },
+    {
+      "file": "title_ready_1280x1025.jpg",
+      "id": "title_ready",
+      "items": [
+        1.0
+      ],
+      "label": "타이틀 · 터치해서 시작",
+      "phase": "fresh",
+      "resolution": "1280x1025"
+    },
+    {
+      "file": "story_prologue_1280x1025.jpg",
+      "id": "story_prologue",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (첫 세션)",
+      "phase": "fresh",
+      "resolution": "1280x1025"
+    },
+    {
+      "file": "tut_fresh_deck_0_1280x1025.jpg",
+      "id": "tut_fresh_deck_0",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 갑판 소개",
+      "phase": "fresh",
+      "resolution": "1280x1025"
+    },
+    {
+      "file": "hud_fresh_1280x1025.jpg",
+      "id": "hud_fresh",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (새 계정)",
+      "phase": "fresh",
+      "resolution": "1280x1025"
+    },
+    {
+      "file": "locked_tap_fresh_1280x1025.jpg",
+      "id": "locked_tap_fresh",
+      "items": [
+        11.0
+      ],
+      "label": "잠긴 메뉴를 눌렀을 때 (새 계정)",
+      "phase": "fresh",
+      "resolution": "1280x1025"
+    },
+    {
+      "file": "start_popup_1_1844x720.jpg",
+      "id": "start_popup_1",
+      "items": [
+        34.0
+      ],
+      "label": "접속 보상 팝업 · 출석 보상",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "hud_mid_1844x720.jpg",
+      "id": "hud_mid",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (중반 · 잠긴 메뉴)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "quest_ready_1844x720.jpg",
+      "id": "quest_ready",
+      "items": [
+        70.0
+      ],
+      "label": "항해 퀘스트 완료 표시",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "locked_tap_mid_1844x720.jpg",
+      "id": "locked_tap_mid",
+      "items": [
+        11.0
+      ],
+      "label": "잠긴 메뉴(모험)를 눌렀을 때 · 알림",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "b2_attend_d1_1844x720.jpg",
+      "id": "b2_attend_d1",
+      "items": [
+        34.0
+      ],
+      "label": "출석 · 1일째 + 월정액",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "b2_log_3h_1844x720.jpg",
+      "id": "b2_log_3h",
+      "items": [
+        34.0
+      ],
+      "label": "항해일지 · 3시간 12분",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "b2_lv_c1_1844x720.jpg",
+      "id": "b2_lv_c1",
+      "items": [
+        34.0
+      ],
+      "label": "항해사 레벨 업 · 모험 열림",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "hud_late_1844x720.jpg",
+      "id": "hud_late",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (늦은 계정 · 모든 메뉴)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "hud_boss_1844x720.jpg",
+      "id": "hud_boss",
+      "items": [
+        35.0
+      ],
+      "label": "보스 스테이지 HUD",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "fever_1844x720.jpg",
+      "id": "fever",
+      "items": [
+        17.0
+      ],
+      "label": "채색 폭주 (FEVER)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "breath_ready_1844x720.jpg",
+      "id": "breath_ready",
+      "items": [
+        5.0
+      ],
+      "label": "고래 숨결 버튼 (준비됨)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "breath_cast_1844x720.jpg",
+      "id": "breath_cast",
+      "items": [
+        19.0
+      ],
+      "label": "고래 숨결 사용 연출",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "ult_cutin_1844x720.jpg",
+      "id": "ult_cutin",
+      "items": [
+        32.0
+      ],
+      "label": "궁극기 컷인 (SS)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "requests_panel_1844x720.jpg",
+      "id": "requests_panel",
+      "items": [
+        49.0
+      ],
+      "label": "섬 주민 의뢰 창",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "reward_popup_1844x720.jpg",
+      "id": "reward_popup",
+      "items": [
+        34.0,
+        58.0
+      ],
+      "label": "보상 팝업 (아이콘 모음)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "color_restore_1844x720.jpg",
+      "id": "color_restore",
+      "items": [
+        28.0
+      ],
+      "label": "색 지도 열기 · 복원 장면",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "color_map_1844x720.jpg",
+      "id": "color_map",
+      "items": [
+        28.0
+      ],
+      "label": "색 지도",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "story_menu_1844x720.jpg",
+      "id": "story_menu",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 목록",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "story_player_1844x720.jpg",
+      "id": "story_player",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (대사)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "story_player_2_1844x720.jpg",
+      "id": "story_player_2",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (몇 줄 뒤)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "menu_heroes_1844x720.jpg",
+      "id": "menu_heroes",
+      "items": [
+        43.0
+      ],
+      "label": "아이들 목록",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "hero_info_tab0_1844x720.jpg",
+      "id": "hero_info_tab0",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 능력 탭",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "hero_info_tab1_1844x720.jpg",
+      "id": "hero_info_tab1",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 스킬 탭",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "hero_info_tab2_1844x720.jpg",
+      "id": "hero_info_tab2",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 장비 탭",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "hero_awaken_steps_1844x720.jpg",
+      "id": "hero_awaken_steps",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 각성 단계 판",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "star_up_card_1844x720.jpg",
+      "id": "star_up_card",
+      "items": [
+        59.0
+      ],
+      "label": "승급 확인 카드",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "hero_codex_1844x720.jpg",
+      "id": "hero_codex",
+      "items": [
+        20.0
+      ],
+      "label": "성장 기록",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "gear_list_1844x720.jpg",
+      "id": "gear_list",
+      "items": [
+        51.0,
+        52.0,
+        53.0,
+        16.0
+      ],
+      "label": "장비 (가방 · 착용)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "gear_detail_1844x720.jpg",
+      "id": "gear_detail",
+      "items": [
+        52.0,
+        53.0,
+        51.0
+      ],
+      "label": "장비 상세 · 잠재 덧칠",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "gear_rainbow_1844x720.jpg",
+      "id": "gear_rainbow",
+      "items": [
+        52.0,
+        53.0
+      ],
+      "label": "장비 상세 · 잠금 + 무지개 덧칠",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "gear_repaint_result_1844x720.jpg",
+      "id": "gear_repaint_result",
+      "items": [
+        53.0,
+        52.0
+      ],
+      "label": "잠재 덧칠 누른 뒤",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "formation_1844x720.jpg",
+      "id": "formation",
+      "items": [
+        18.0,
+        37.0,
+        38.0,
+        68.0
+      ],
+      "label": "편성 (항해 덱)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "formation_pick_1844x720.jpg",
+      "id": "formation_pick",
+      "items": [
+        37.0,
+        38.0
+      ],
+      "label": "편성 · 아이를 고른 상태",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "formation_arena_atk_1844x720.jpg",
+      "id": "formation_arena_atk",
+      "items": [
+        60.0,
+        38.0
+      ],
+      "label": "편성 · 등급전 덱 (공격 · 방어 하나로)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "summon_pickup_1844x720.jpg",
+      "id": "summon_pickup",
+      "items": [
+        39.0,
+        40.0,
+        22.0
+      ],
+      "label": "소환 · 픽업 출석부",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "summon_standard_1844x720.jpg",
+      "id": "summon_standard",
+      "items": [
+        39.0,
+        40.0
+      ],
+      "label": "소환 · 상시 출석부",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "gacha_paint_prompt_1844x720.jpg",
+      "id": "gacha_paint_prompt",
+      "items": [
+        23.0
+      ],
+      "label": "소환 · 칠하기 안내 (잿빛 출석부)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "gacha_paint_f1_1844x720.jpg",
+      "frames": [
+        "gacha_paint_f1_1844x720.jpg",
+        "gacha_paint_f2_1844x720.jpg",
+        "gacha_paint_f3_1844x720.jpg"
+      ],
+      "id": "gacha_paint",
+      "items": [
+        23.0
+      ],
+      "label": "소환 · 손가락으로 칠하기",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "gacha_ten_deal_1844x720.jpg",
+      "id": "gacha_ten_deal",
+      "items": [
+        26.0
+      ],
+      "label": "10연 소환 · 카드 한 장씩",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "gacha_ten_cards_1844x720.jpg",
+      "id": "gacha_ten_cards",
+      "items": [
+        25.0,
+        26.0
+      ],
+      "label": "10연 소환 · 카드 펼침",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "gacha_ten_result_1844x720.jpg",
+      "id": "gacha_ten_result",
+      "items": [
+        25.0,
+        24.0
+      ],
+      "label": "10연 소환 결과 · 신화 조각",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "gacha_reveal_SS_f1_1844x720.jpg",
+      "frames": [
+        "gacha_reveal_SS_f1_1844x720.jpg",
+        "gacha_reveal_SS_f2_1844x720.jpg",
+        "gacha_reveal_SS_f3_1844x720.jpg",
+        "gacha_reveal_SS_f4_1844x720.jpg",
+        "gacha_reveal_SS_f5_1844x720.jpg",
+        "gacha_reveal_SS_f6_1844x720.jpg",
+        "gacha_reveal_SS_f7_1844x720.jpg"
+      ],
+      "id": "gacha_reveal_SS",
+      "items": [
+        26.0,
+        27.0
+      ],
+      "label": "소환 연출 · SS (새 아이)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "adventure_hub_1844x720.jpg",
+      "id": "adventure_hub",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0,
+        3.0
+      ],
+      "label": "모험 허브 (콘텐츠 카드)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "adv_element_1844x720.jpg",
+      "id": "adv_element",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0
+      ],
+      "label": "모험 · 원소 구름섬 페이지",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "adv_soul_1844x720.jpg",
+      "id": "adv_soul",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0
+      ],
+      "label": "모험 · 기억의 회랑 페이지",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "adv_castle_1844x720.jpg",
+      "id": "adv_castle",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        62.0
+      ],
+      "label": "모험 · 잿빛성 페이지",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "adv_temple_1844x720.jpg",
+      "id": "adv_temple",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0
+      ],
+      "label": "모험 · 신전 · 승급전 페이지",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "adv_rank_1844x720.jpg",
+      "id": "adv_rank",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        60.0
+      ],
+      "label": "모험 · 항해사 등급전 페이지",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "menu_school_1844x720.jpg",
+      "id": "menu_school",
+      "items": [
+        47.0
+      ],
+      "label": "분교",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "menu_whale_1844x720.jpg",
+      "id": "menu_whale",
+      "items": [
+        42.0,
+        41.0,
+        44.0
+      ],
+      "label": "고래 강화 (보호막)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "menu_shop_1844x720.jpg",
+      "id": "menu_shop",
+      "items": [
+        21.0
+      ],
+      "label": "상점",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "mythic_shop_1844x720.jpg",
+      "id": "mythic_shop",
+      "items": [
+        24.0
+      ],
+      "label": "신화 조각 상점",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "settings_game_1844x720.jpg",
+      "id": "settings_game",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 게임 탭",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "settings_power_1844x720.jpg",
+      "id": "settings_power",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 알림 · 절전 탭",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "settings_account_1844x720.jpg",
+      "id": "settings_account",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 계정 탭",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "settings_credits_1844x720.jpg",
+      "id": "settings_credits",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 만든 사람들",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "toast_lock_1844x720.jpg",
+      "id": "toast_lock",
+      "items": [
+        11.0
+      ],
+      "label": "시스템 알림 (잠김)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "toast_top_1844x720.jpg",
+      "id": "toast_top",
+      "items": [
+        70.0
+      ],
+      "label": "완료 알림 · 위쪽 (이야기 열림)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "quit_confirm_1844x720.jpg",
+      "id": "quit_confirm",
+      "items": [
+        "system"
+      ],
+      "label": "종료 확인 (뒤로 가기)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "return_ask_1844x720.jpg",
+      "id": "return_ask",
+      "items": [
+        50.0
+      ],
+      "label": "복귀 확인 창",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "tut_deck_1844x720.jpg",
+      "id": "tut_deck",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 갑판 소개",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "tut_upgrade_1844x720.jpg",
+      "id": "tut_upgrade",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 강화 버튼",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "tut_shield_1844x720.jpg",
+      "id": "tut_shield",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 보호막",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "tut_ult_1844x720.jpg",
+      "id": "tut_ult",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 궁극기 카드",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "tut_controls_1844x720.jpg",
+      "id": "tut_controls",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 전투 조작 (1)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "tut_breath_1844x720.jpg",
+      "id": "tut_breath",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 고래 숨결",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "tut_quest_1844x720.jpg",
+      "id": "tut_quest",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 퀘스트 받기",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "tut_whale_1844x720.jpg",
+      "id": "tut_whale",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 고래 강화",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "tut_formation_1844x720.jpg",
+      "id": "tut_formation",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 편성",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "guide_summon_1_1844x720.jpg",
+      "id": "guide_summon_1",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 소환 (채색석 1600) (1)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "guide_summon_2_1844x720.jpg",
+      "id": "guide_summon_2",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 소환 (채색석 1600) (2)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "guide_equip_1_1844x720.jpg",
+      "id": "guide_equip_1",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 장비 끼우기 (1)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "guide_equip_2_1844x720.jpg",
+      "id": "guide_equip_2",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 장비 끼우기 (2)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "guide_dungeon_1_1844x720.jpg",
+      "id": "guide_dungeon_1",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 모험 · 회랑 (1)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "guide_dungeon_2_1844x720.jpg",
+      "id": "guide_dungeon_2",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 모험 · 회랑 (2)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "duel_soul_start_1844x720.jpg",
+      "id": "duel_soul_start",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 시작",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "duel_soul_mid_1844x720.jpg",
+      "id": "duel_soul_mid",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 한가운데",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "duel_soul_end_1844x720.jpg",
+      "id": "duel_soul_end",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 끝",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "duel_rank_start_1844x720.jpg",
+      "id": "duel_rank_start",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 시작",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "duel_rank_mid_1844x720.jpg",
+      "id": "duel_rank_mid",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 한가운데",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "duel_rank_end_1844x720.jpg",
+      "id": "duel_rank_end",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 끝",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "adv_battle_element_1844x720.jpg",
+      "id": "adv_battle_element",
+      "items": [
+        61.0,
+        63.0,
+        56.0,
+        55.0
+      ],
+      "label": "모험 전투 HUD · 원소섬 (숨결 · 순풍)",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "adv_element_reward_1844x720.jpg",
+      "id": "adv_element_reward",
+      "items": [
+        34.0,
+        58.0
+      ],
+      "label": "원소섬 보상 팝업",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "adv_battle_castle_1844x720.jpg",
+      "id": "adv_battle_castle",
+      "items": [
+        61.0,
+        62.0
+      ],
+      "label": "모험 전투 HUD · 잿빛성",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "castle_reward_1844x720.jpg",
+      "id": "castle_reward",
+      "items": [
+        62.0,
+        34.0
+      ],
+      "label": "잿빛성 보상 창",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "return_cutscene_1844x720.jpg",
+      "id": "return_cutscene",
+      "items": [
+        67.0
+      ],
+      "label": "복귀 연출",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "return_reward_1844x720.jpg",
+      "id": "return_reward",
+      "items": [
+        67.0,
+        34.0
+      ],
+      "label": "귀환 보상",
+      "phase": "late",
+      "resolution": "1844x720"
+    },
+    {
+      "file": "start_popup_1_1760x720.jpg",
+      "id": "start_popup_1",
+      "items": [
+        34.0
+      ],
+      "label": "접속 보상 팝업 · 출석 보상",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "hud_mid_1760x720.jpg",
+      "id": "hud_mid",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (중반 · 잠긴 메뉴)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "quest_ready_1760x720.jpg",
+      "id": "quest_ready",
+      "items": [
+        70.0
+      ],
+      "label": "항해 퀘스트 완료 표시",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "locked_tap_mid_1760x720.jpg",
+      "id": "locked_tap_mid",
+      "items": [
+        11.0
+      ],
+      "label": "잠긴 메뉴(모험)를 눌렀을 때 · 알림",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "b2_attend_d1_1760x720.jpg",
+      "id": "b2_attend_d1",
+      "items": [
+        34.0
+      ],
+      "label": "출석 · 1일째 + 월정액",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "b2_log_3h_1760x720.jpg",
+      "id": "b2_log_3h",
+      "items": [
+        34.0
+      ],
+      "label": "항해일지 · 3시간 12분",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "b2_lv_c1_1760x720.jpg",
+      "id": "b2_lv_c1",
+      "items": [
+        34.0
+      ],
+      "label": "항해사 레벨 업 · 모험 열림",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "hud_late_1760x720.jpg",
+      "id": "hud_late",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (늦은 계정 · 모든 메뉴)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "hud_boss_1760x720.jpg",
+      "id": "hud_boss",
+      "items": [
+        35.0
+      ],
+      "label": "보스 스테이지 HUD",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "fever_1760x720.jpg",
+      "id": "fever",
+      "items": [
+        17.0
+      ],
+      "label": "채색 폭주 (FEVER)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "breath_ready_1760x720.jpg",
+      "id": "breath_ready",
+      "items": [
+        5.0
+      ],
+      "label": "고래 숨결 버튼 (준비됨)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "breath_cast_1760x720.jpg",
+      "id": "breath_cast",
+      "items": [
+        19.0
+      ],
+      "label": "고래 숨결 사용 연출",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "ult_cutin_1760x720.jpg",
+      "id": "ult_cutin",
+      "items": [
+        32.0
+      ],
+      "label": "궁극기 컷인 (SS)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "requests_panel_1760x720.jpg",
+      "id": "requests_panel",
+      "items": [
+        49.0
+      ],
+      "label": "섬 주민 의뢰 창",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "reward_popup_1760x720.jpg",
+      "id": "reward_popup",
+      "items": [
+        34.0,
+        58.0
+      ],
+      "label": "보상 팝업 (아이콘 모음)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "color_restore_1760x720.jpg",
+      "id": "color_restore",
+      "items": [
+        28.0
+      ],
+      "label": "색 지도 열기 · 복원 장면",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "color_map_1760x720.jpg",
+      "id": "color_map",
+      "items": [
+        28.0
+      ],
+      "label": "색 지도",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "story_menu_1760x720.jpg",
+      "id": "story_menu",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 목록",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "story_player_1760x720.jpg",
+      "id": "story_player",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (대사)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "story_player_2_1760x720.jpg",
+      "id": "story_player_2",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (몇 줄 뒤)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "menu_heroes_1760x720.jpg",
+      "id": "menu_heroes",
+      "items": [
+        43.0
+      ],
+      "label": "아이들 목록",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "hero_info_tab0_1760x720.jpg",
+      "id": "hero_info_tab0",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 능력 탭",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "hero_info_tab1_1760x720.jpg",
+      "id": "hero_info_tab1",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 스킬 탭",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "hero_info_tab2_1760x720.jpg",
+      "id": "hero_info_tab2",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 장비 탭",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "hero_awaken_steps_1760x720.jpg",
+      "id": "hero_awaken_steps",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 각성 단계 판",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "star_up_card_1760x720.jpg",
+      "id": "star_up_card",
+      "items": [
+        59.0
+      ],
+      "label": "승급 확인 카드",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "hero_codex_1760x720.jpg",
+      "id": "hero_codex",
+      "items": [
+        20.0
+      ],
+      "label": "성장 기록",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "gear_list_1760x720.jpg",
+      "id": "gear_list",
+      "items": [
+        51.0,
+        52.0,
+        53.0,
+        16.0
+      ],
+      "label": "장비 (가방 · 착용)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "gear_detail_1760x720.jpg",
+      "id": "gear_detail",
+      "items": [
+        52.0,
+        53.0,
+        51.0
+      ],
+      "label": "장비 상세 · 잠재 덧칠",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "gear_rainbow_1760x720.jpg",
+      "id": "gear_rainbow",
+      "items": [
+        52.0,
+        53.0
+      ],
+      "label": "장비 상세 · 잠금 + 무지개 덧칠",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "gear_repaint_result_1760x720.jpg",
+      "id": "gear_repaint_result",
+      "items": [
+        53.0,
+        52.0
+      ],
+      "label": "잠재 덧칠 누른 뒤",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "formation_1760x720.jpg",
+      "id": "formation",
+      "items": [
+        18.0,
+        37.0,
+        38.0,
+        68.0
+      ],
+      "label": "편성 (항해 덱)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "formation_pick_1760x720.jpg",
+      "id": "formation_pick",
+      "items": [
+        37.0,
+        38.0
+      ],
+      "label": "편성 · 아이를 고른 상태",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "formation_arena_atk_1760x720.jpg",
+      "id": "formation_arena_atk",
+      "items": [
+        60.0,
+        38.0
+      ],
+      "label": "편성 · 등급전 덱 (공격 · 방어 하나로)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "summon_pickup_1760x720.jpg",
+      "id": "summon_pickup",
+      "items": [
+        39.0,
+        40.0,
+        22.0
+      ],
+      "label": "소환 · 픽업 출석부",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "summon_standard_1760x720.jpg",
+      "id": "summon_standard",
+      "items": [
+        39.0,
+        40.0
+      ],
+      "label": "소환 · 상시 출석부",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "gacha_paint_prompt_1760x720.jpg",
+      "id": "gacha_paint_prompt",
+      "items": [
+        23.0
+      ],
+      "label": "소환 · 칠하기 안내 (잿빛 출석부)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "gacha_paint_f1_1760x720.jpg",
+      "frames": [
+        "gacha_paint_f1_1760x720.jpg",
+        "gacha_paint_f2_1760x720.jpg",
+        "gacha_paint_f3_1760x720.jpg"
+      ],
+      "id": "gacha_paint",
+      "items": [
+        23.0
+      ],
+      "label": "소환 · 손가락으로 칠하기",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "gacha_ten_deal_1760x720.jpg",
+      "id": "gacha_ten_deal",
+      "items": [
+        26.0
+      ],
+      "label": "10연 소환 · 카드 한 장씩",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "gacha_ten_cards_1760x720.jpg",
+      "id": "gacha_ten_cards",
+      "items": [
+        25.0,
+        26.0
+      ],
+      "label": "10연 소환 · 카드 펼침",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "gacha_ten_result_1760x720.jpg",
+      "id": "gacha_ten_result",
+      "items": [
+        25.0,
+        24.0
+      ],
+      "label": "10연 소환 결과 · 신화 조각",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "gacha_reveal_SS_f1_1760x720.jpg",
+      "frames": [
+        "gacha_reveal_SS_f1_1760x720.jpg",
+        "gacha_reveal_SS_f2_1760x720.jpg",
+        "gacha_reveal_SS_f3_1760x720.jpg",
+        "gacha_reveal_SS_f4_1760x720.jpg",
+        "gacha_reveal_SS_f5_1760x720.jpg",
+        "gacha_reveal_SS_f6_1760x720.jpg",
+        "gacha_reveal_SS_f7_1760x720.jpg"
+      ],
+      "id": "gacha_reveal_SS",
+      "items": [
+        26.0,
+        27.0
+      ],
+      "label": "소환 연출 · SS (새 아이)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "adventure_hub_1760x720.jpg",
+      "id": "adventure_hub",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0,
+        3.0
+      ],
+      "label": "모험 허브 (콘텐츠 카드)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "adv_element_1760x720.jpg",
+      "id": "adv_element",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0
+      ],
+      "label": "모험 · 원소 구름섬 페이지",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "adv_soul_1760x720.jpg",
+      "id": "adv_soul",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0
+      ],
+      "label": "모험 · 기억의 회랑 페이지",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "adv_castle_1760x720.jpg",
+      "id": "adv_castle",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        62.0
+      ],
+      "label": "모험 · 잿빛성 페이지",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "adv_temple_1760x720.jpg",
+      "id": "adv_temple",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0
+      ],
+      "label": "모험 · 신전 · 승급전 페이지",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "adv_rank_1760x720.jpg",
+      "id": "adv_rank",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        60.0
+      ],
+      "label": "모험 · 항해사 등급전 페이지",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "menu_school_1760x720.jpg",
+      "id": "menu_school",
+      "items": [
+        47.0
+      ],
+      "label": "분교",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "menu_whale_1760x720.jpg",
+      "id": "menu_whale",
+      "items": [
+        42.0,
+        41.0,
+        44.0
+      ],
+      "label": "고래 강화 (보호막)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "menu_shop_1760x720.jpg",
+      "id": "menu_shop",
+      "items": [
+        21.0
+      ],
+      "label": "상점",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "mythic_shop_1760x720.jpg",
+      "id": "mythic_shop",
+      "items": [
+        24.0
+      ],
+      "label": "신화 조각 상점",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "settings_game_1760x720.jpg",
+      "id": "settings_game",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 게임 탭",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "settings_power_1760x720.jpg",
+      "id": "settings_power",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 알림 · 절전 탭",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "settings_account_1760x720.jpg",
+      "id": "settings_account",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 계정 탭",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "settings_credits_1760x720.jpg",
+      "id": "settings_credits",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 만든 사람들",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "toast_lock_1760x720.jpg",
+      "id": "toast_lock",
+      "items": [
+        11.0
+      ],
+      "label": "시스템 알림 (잠김)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "toast_top_1760x720.jpg",
+      "id": "toast_top",
+      "items": [
+        70.0
+      ],
+      "label": "완료 알림 · 위쪽 (이야기 열림)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "quit_confirm_1760x720.jpg",
+      "id": "quit_confirm",
+      "items": [
+        "system"
+      ],
+      "label": "종료 확인 (뒤로 가기)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "return_ask_1760x720.jpg",
+      "id": "return_ask",
+      "items": [
+        50.0
+      ],
+      "label": "복귀 확인 창",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "tut_deck_1760x720.jpg",
+      "id": "tut_deck",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 갑판 소개",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "tut_upgrade_1760x720.jpg",
+      "id": "tut_upgrade",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 강화 버튼",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "tut_shield_1760x720.jpg",
+      "id": "tut_shield",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 보호막",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "tut_ult_1760x720.jpg",
+      "id": "tut_ult",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 궁극기 카드",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "tut_controls_1760x720.jpg",
+      "id": "tut_controls",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 전투 조작 (1)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "tut_breath_1760x720.jpg",
+      "id": "tut_breath",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 고래 숨결",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "tut_quest_1760x720.jpg",
+      "id": "tut_quest",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 퀘스트 받기",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "tut_whale_1760x720.jpg",
+      "id": "tut_whale",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 고래 강화",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "tut_formation_1760x720.jpg",
+      "id": "tut_formation",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 편성",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "guide_summon_1_1760x720.jpg",
+      "id": "guide_summon_1",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 소환 (채색석 1600) (1)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "guide_summon_2_1760x720.jpg",
+      "id": "guide_summon_2",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 소환 (채색석 1600) (2)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "guide_equip_1_1760x720.jpg",
+      "id": "guide_equip_1",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 장비 끼우기 (1)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "guide_dungeon_1_1760x720.jpg",
+      "id": "guide_dungeon_1",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 모험 · 회랑 (1)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "guide_dungeon_2_1760x720.jpg",
+      "id": "guide_dungeon_2",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 모험 · 회랑 (2)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "duel_soul_start_1760x720.jpg",
+      "id": "duel_soul_start",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 시작",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "duel_soul_mid_1760x720.jpg",
+      "id": "duel_soul_mid",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 한가운데",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "duel_soul_end_1760x720.jpg",
+      "id": "duel_soul_end",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 끝",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "duel_rank_start_1760x720.jpg",
+      "id": "duel_rank_start",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 시작",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "duel_rank_mid_1760x720.jpg",
+      "id": "duel_rank_mid",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 한가운데",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "duel_rank_end_1760x720.jpg",
+      "id": "duel_rank_end",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 끝",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "adv_battle_element_1760x720.jpg",
+      "id": "adv_battle_element",
+      "items": [
+        61.0,
+        63.0,
+        56.0,
+        55.0
+      ],
+      "label": "모험 전투 HUD · 원소섬 (숨결 · 순풍)",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "adv_element_reward_1760x720.jpg",
+      "id": "adv_element_reward",
+      "items": [
+        34.0,
+        58.0
+      ],
+      "label": "원소섬 보상 팝업",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "adv_battle_castle_1760x720.jpg",
+      "id": "adv_battle_castle",
+      "items": [
+        61.0,
+        62.0
+      ],
+      "label": "모험 전투 HUD · 잿빛성",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "return_cutscene_1760x720.jpg",
+      "id": "return_cutscene",
+      "items": [
+        67.0
+      ],
+      "label": "복귀 연출",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "return_reward_1760x720.jpg",
+      "id": "return_reward",
+      "items": [
+        67.0,
+        34.0
+      ],
+      "label": "귀환 보상",
+      "phase": "late",
+      "resolution": "1760x720"
+    },
+    {
+      "file": "start_popup_1_1280x960.jpg",
+      "id": "start_popup_1",
+      "items": [
+        34.0
+      ],
+      "label": "접속 보상 팝업 · 출석 보상",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "hud_mid_1280x960.jpg",
+      "id": "hud_mid",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (중반 · 잠긴 메뉴)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "quest_ready_1280x960.jpg",
+      "id": "quest_ready",
+      "items": [
+        70.0
+      ],
+      "label": "항해 퀘스트 완료 표시",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "locked_tap_mid_1280x960.jpg",
+      "id": "locked_tap_mid",
+      "items": [
+        11.0
+      ],
+      "label": "잠긴 메뉴(모험)를 눌렀을 때 · 알림",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "b2_attend_d1_1280x960.jpg",
+      "id": "b2_attend_d1",
+      "items": [
+        34.0
+      ],
+      "label": "출석 · 1일째 + 월정액",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "b2_log_3h_1280x960.jpg",
+      "id": "b2_log_3h",
+      "items": [
+        34.0
+      ],
+      "label": "항해일지 · 3시간 12분",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "b2_lv_c1_1280x960.jpg",
+      "id": "b2_lv_c1",
+      "items": [
+        34.0
+      ],
+      "label": "항해사 레벨 업 · 모험 열림",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "hud_late_1280x960.jpg",
+      "id": "hud_late",
+      "items": [
+        3.0
+      ],
+      "label": "전투 HUD (늦은 계정 · 모든 메뉴)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "hud_boss_1280x960.jpg",
+      "id": "hud_boss",
+      "items": [
+        35.0
+      ],
+      "label": "보스 스테이지 HUD",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "fever_1280x960.jpg",
+      "id": "fever",
+      "items": [
+        17.0
+      ],
+      "label": "채색 폭주 (FEVER)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "breath_ready_1280x960.jpg",
+      "id": "breath_ready",
+      "items": [
+        5.0
+      ],
+      "label": "고래 숨결 버튼 (준비됨)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "breath_cast_1280x960.jpg",
+      "id": "breath_cast",
+      "items": [
+        19.0
+      ],
+      "label": "고래 숨결 사용 연출",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "ult_cutin_1280x960.jpg",
+      "id": "ult_cutin",
+      "items": [
+        32.0
+      ],
+      "label": "궁극기 컷인 (SS)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "requests_panel_1280x960.jpg",
+      "id": "requests_panel",
+      "items": [
+        49.0
+      ],
+      "label": "섬 주민 의뢰 창",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "reward_popup_1280x960.jpg",
+      "id": "reward_popup",
+      "items": [
+        34.0,
+        58.0
+      ],
+      "label": "보상 팝업 (아이콘 모음)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "color_restore_1280x960.jpg",
+      "id": "color_restore",
+      "items": [
+        28.0
+      ],
+      "label": "색 지도 열기 · 복원 장면",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "color_map_1280x960.jpg",
+      "id": "color_map",
+      "items": [
+        28.0
+      ],
+      "label": "색 지도",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "story_menu_1280x960.jpg",
+      "id": "story_menu",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 목록",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "story_player_1280x960.jpg",
+      "id": "story_player",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (대사)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "story_player_2_1280x960.jpg",
+      "id": "story_player_2",
+      "items": [
+        36.0
+      ],
+      "label": "이야기 장면 (몇 줄 뒤)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "menu_heroes_1280x960.jpg",
+      "id": "menu_heroes",
+      "items": [
+        43.0
+      ],
+      "label": "아이들 목록",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "hero_info_tab0_1280x960.jpg",
+      "id": "hero_info_tab0",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 능력 탭",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "hero_info_tab1_1280x960.jpg",
+      "id": "hero_info_tab1",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 스킬 탭",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "hero_info_tab2_1280x960.jpg",
+      "id": "hero_info_tab2",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 장비 탭",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "hero_awaken_steps_1280x960.jpg",
+      "id": "hero_awaken_steps",
+      "items": [
+        43.0
+      ],
+      "label": "아이 상세 · 각성 단계 판",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "star_up_card_1280x960.jpg",
+      "id": "star_up_card",
+      "items": [
+        59.0
+      ],
+      "label": "승급 확인 카드",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "hero_codex_1280x960.jpg",
+      "id": "hero_codex",
+      "items": [
+        20.0
+      ],
+      "label": "성장 기록",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "gear_list_1280x960.jpg",
+      "id": "gear_list",
+      "items": [
+        51.0,
+        52.0,
+        53.0,
+        16.0
+      ],
+      "label": "장비 (가방 · 착용)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "gear_detail_1280x960.jpg",
+      "id": "gear_detail",
+      "items": [
+        52.0,
+        53.0,
+        51.0
+      ],
+      "label": "장비 상세 · 잠재 덧칠",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "gear_rainbow_1280x960.jpg",
+      "id": "gear_rainbow",
+      "items": [
+        52.0,
+        53.0
+      ],
+      "label": "장비 상세 · 잠금 + 무지개 덧칠",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "gear_repaint_result_1280x960.jpg",
+      "id": "gear_repaint_result",
+      "items": [
+        53.0,
+        52.0
+      ],
+      "label": "잠재 덧칠 누른 뒤",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "formation_1280x960.jpg",
+      "id": "formation",
+      "items": [
+        18.0,
+        37.0,
+        38.0,
+        68.0
+      ],
+      "label": "편성 (항해 덱)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "formation_pick_1280x960.jpg",
+      "id": "formation_pick",
+      "items": [
+        37.0,
+        38.0
+      ],
+      "label": "편성 · 아이를 고른 상태",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "formation_arena_atk_1280x960.jpg",
+      "id": "formation_arena_atk",
+      "items": [
+        60.0,
+        38.0
+      ],
+      "label": "편성 · 등급전 덱 (공격 · 방어 하나로)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "summon_pickup_1280x960.jpg",
+      "id": "summon_pickup",
+      "items": [
+        39.0,
+        40.0,
+        22.0
+      ],
+      "label": "소환 · 픽업 출석부",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "summon_standard_1280x960.jpg",
+      "id": "summon_standard",
+      "items": [
+        39.0,
+        40.0
+      ],
+      "label": "소환 · 상시 출석부",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "gacha_paint_prompt_1280x960.jpg",
+      "id": "gacha_paint_prompt",
+      "items": [
+        23.0
+      ],
+      "label": "소환 · 칠하기 안내 (잿빛 출석부)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "gacha_paint_f1_1280x960.jpg",
+      "frames": [
+        "gacha_paint_f1_1280x960.jpg",
+        "gacha_paint_f2_1280x960.jpg",
+        "gacha_paint_f3_1280x960.jpg"
+      ],
+      "id": "gacha_paint",
+      "items": [
+        23.0
+      ],
+      "label": "소환 · 손가락으로 칠하기",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "gacha_ten_deal_1280x960.jpg",
+      "id": "gacha_ten_deal",
+      "items": [
+        26.0
+      ],
+      "label": "10연 소환 · 카드 한 장씩",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "gacha_ten_cards_1280x960.jpg",
+      "id": "gacha_ten_cards",
+      "items": [
+        25.0,
+        26.0
+      ],
+      "label": "10연 소환 · 카드 펼침",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "gacha_ten_result_1280x960.jpg",
+      "id": "gacha_ten_result",
+      "items": [
+        25.0,
+        24.0
+      ],
+      "label": "10연 소환 결과 · 신화 조각",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "gacha_reveal_SS_f1_1280x960.jpg",
+      "frames": [
+        "gacha_reveal_SS_f1_1280x960.jpg",
+        "gacha_reveal_SS_f2_1280x960.jpg",
+        "gacha_reveal_SS_f3_1280x960.jpg",
+        "gacha_reveal_SS_f4_1280x960.jpg",
+        "gacha_reveal_SS_f5_1280x960.jpg",
+        "gacha_reveal_SS_f6_1280x960.jpg",
+        "gacha_reveal_SS_f7_1280x960.jpg"
+      ],
+      "id": "gacha_reveal_SS",
+      "items": [
+        26.0,
+        27.0
+      ],
+      "label": "소환 연출 · SS (새 아이)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "adventure_hub_1280x960.jpg",
+      "id": "adventure_hub",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0,
+        3.0
+      ],
+      "label": "모험 허브 (콘텐츠 카드)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "adv_element_1280x960.jpg",
+      "id": "adv_element",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0
+      ],
+      "label": "모험 · 원소 구름섬 페이지",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "adv_soul_1280x960.jpg",
+      "id": "adv_soul",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0
+      ],
+      "label": "모험 · 기억의 회랑 페이지",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "adv_castle_1280x960.jpg",
+      "id": "adv_castle",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        62.0
+      ],
+      "label": "모험 · 잿빛성 페이지",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "adv_temple_1280x960.jpg",
+      "id": "adv_temple",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        69.0
+      ],
+      "label": "모험 · 신전 · 승급전 페이지",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "adv_rank_1280x960.jpg",
+      "id": "adv_rank",
+      "items": [
+        54.0,
+        55.0,
+        56.0,
+        60.0
+      ],
+      "label": "모험 · 항해사 등급전 페이지",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "menu_school_1280x960.jpg",
+      "id": "menu_school",
+      "items": [
+        47.0
+      ],
+      "label": "분교",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "menu_whale_1280x960.jpg",
+      "id": "menu_whale",
+      "items": [
+        42.0,
+        41.0,
+        44.0
+      ],
+      "label": "고래 강화 (보호막)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "menu_shop_1280x960.jpg",
+      "id": "menu_shop",
+      "items": [
+        21.0
+      ],
+      "label": "상점",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "mythic_shop_1280x960.jpg",
+      "id": "mythic_shop",
+      "items": [
+        24.0
+      ],
+      "label": "신화 조각 상점",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "settings_game_1280x960.jpg",
+      "id": "settings_game",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 게임 탭",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "settings_power_1280x960.jpg",
+      "id": "settings_power",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 알림 · 절전 탭",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "settings_account_1280x960.jpg",
+      "id": "settings_account",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 계정 탭",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "settings_credits_1280x960.jpg",
+      "id": "settings_credits",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 만든 사람들",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "toast_lock_1280x960.jpg",
+      "id": "toast_lock",
+      "items": [
+        11.0
+      ],
+      "label": "시스템 알림 (잠김)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "toast_top_1280x960.jpg",
+      "id": "toast_top",
+      "items": [
+        70.0
+      ],
+      "label": "완료 알림 · 위쪽 (이야기 열림)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "quit_confirm_1280x960.jpg",
+      "id": "quit_confirm",
+      "items": [
+        "system"
+      ],
+      "label": "종료 확인 (뒤로 가기)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "return_ask_1280x960.jpg",
+      "id": "return_ask",
+      "items": [
+        50.0
+      ],
+      "label": "복귀 확인 창",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "tut_deck_1280x960.jpg",
+      "id": "tut_deck",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 갑판 소개",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "tut_upgrade_1280x960.jpg",
+      "id": "tut_upgrade",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 강화 버튼",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "tut_shield_1280x960.jpg",
+      "id": "tut_shield",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 보호막",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "tut_ult_1280x960.jpg",
+      "id": "tut_ult",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 궁극기 카드",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "tut_breath_1280x960.jpg",
+      "id": "tut_breath",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 고래 숨결",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "tut_quest_1280x960.jpg",
+      "id": "tut_quest",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 퀘스트 받기",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "tut_whale_1280x960.jpg",
+      "id": "tut_whale",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 고래 강화",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "tut_formation_1280x960.jpg",
+      "id": "tut_formation",
+      "items": [
+        9.0
+      ],
+      "label": "안내 · 편성",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "guide_summon_1_1280x960.jpg",
+      "id": "guide_summon_1",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 소환 (채색석 1600) (1)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "guide_summon_2_1280x960.jpg",
+      "id": "guide_summon_2",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 소환 (채색석 1600) (2)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "guide_equip_1_1280x960.jpg",
+      "id": "guide_equip_1",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 장비 끼우기 (1)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "guide_dungeon_1_1280x960.jpg",
+      "id": "guide_dungeon_1",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 모험 · 회랑 (1)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "guide_dungeon_2_1280x960.jpg",
+      "id": "guide_dungeon_2",
+      "items": [
+        9.0
+      ],
+      "label": "손가락 안내 · 모험 · 회랑 (2)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "duel_soul_start_1280x960.jpg",
+      "id": "duel_soul_start",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 시작",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "duel_soul_mid_1280x960.jpg",
+      "id": "duel_soul_mid",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 한가운데",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "duel_soul_end_1280x960.jpg",
+      "id": "duel_soul_end",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 끝",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "duel_rank_start_1280x960.jpg",
+      "id": "duel_rank_start",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 시작",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "duel_rank_mid_1280x960.jpg",
+      "id": "duel_rank_mid",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 한가운데",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "duel_rank_end_1280x960.jpg",
+      "id": "duel_rank_end",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 끝",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "adv_battle_element_1280x960.jpg",
+      "id": "adv_battle_element",
+      "items": [
+        61.0,
+        63.0,
+        56.0,
+        55.0
+      ],
+      "label": "모험 전투 HUD · 원소섬 (숨결 · 순풍)",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "adv_element_reward_1280x960.jpg",
+      "id": "adv_element_reward",
+      "items": [
+        34.0,
+        58.0
+      ],
+      "label": "원소섬 보상 팝업",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "adv_battle_castle_1280x960.jpg",
+      "id": "adv_battle_castle",
+      "items": [
+        61.0,
+        62.0
+      ],
+      "label": "모험 전투 HUD · 잿빛성",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "castle_reward_1280x960.jpg",
+      "id": "castle_reward",
+      "items": [
+        62.0,
+        34.0
+      ],
+      "label": "잿빛성 보상 창",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "return_cutscene_1280x960.jpg",
+      "id": "return_cutscene",
+      "items": [
+        67.0
+      ],
+      "label": "복귀 연출",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "return_reward_1280x960.jpg",
+      "id": "return_reward",
+      "items": [
+        67.0,
+        34.0
+      ],
+      "label": "귀환 보상",
+      "phase": "late",
+      "resolution": "1280x960"
+    },
+    {
+      "file": "start_popup_1_1280x800.jpg",
+      "id": "start_popup_1",
+      "items": [
+        34
+      ],
+      "label": "접속 보상 팝업 · 출석 보상",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "hud_mid_1280x800.jpg",
+      "id": "hud_mid",
+      "items": [
+        3
+      ],
+      "label": "전투 HUD (중반 · 잠긴 메뉴)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "quest_ready_1280x800.jpg",
+      "id": "quest_ready",
+      "items": [
+        70
+      ],
+      "label": "항해 퀘스트 완료 표시",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "locked_tap_mid_1280x800.jpg",
+      "id": "locked_tap_mid",
+      "items": [
+        11
+      ],
+      "label": "잠긴 메뉴(모험)를 눌렀을 때 · 알림",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "b2_attend_d1_1280x800.jpg",
+      "id": "b2_attend_d1",
+      "items": [
+        34
+      ],
+      "label": "출석 · 1일째 + 월정액",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "b2_log_3h_1280x800.jpg",
+      "id": "b2_log_3h",
+      "items": [
+        34
+      ],
+      "label": "항해일지 · 3시간 12분",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "b2_lv_c1_1280x800.jpg",
+      "id": "b2_lv_c1",
+      "items": [
+        34
+      ],
+      "label": "항해사 레벨 업 · 모험 열림",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "hud_late_1280x800.jpg",
+      "id": "hud_late",
+      "items": [
+        3
+      ],
+      "label": "전투 HUD (늦은 계정 · 모든 메뉴)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "hud_boss_1280x800.jpg",
+      "id": "hud_boss",
+      "items": [
+        35
+      ],
+      "label": "보스 스테이지 HUD",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "fever_1280x800.jpg",
+      "id": "fever",
+      "items": [
+        17
+      ],
+      "label": "채색 폭주 (FEVER)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "breath_ready_1280x800.jpg",
+      "id": "breath_ready",
+      "items": [
+        5
+      ],
+      "label": "고래 숨결 버튼 (준비됨)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "breath_cast_1280x800.jpg",
+      "id": "breath_cast",
+      "items": [
+        19
+      ],
+      "label": "고래 숨결 사용 연출",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "ult_cutin_1280x800.jpg",
+      "id": "ult_cutin",
+      "items": [
+        32
+      ],
+      "label": "궁극기 컷인 (SS)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "requests_panel_1280x800.jpg",
+      "id": "requests_panel",
+      "items": [
+        49
+      ],
+      "label": "섬 주민 의뢰 창",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "reward_popup_1280x800.jpg",
+      "id": "reward_popup",
+      "items": [
+        34,
+        58
+      ],
+      "label": "보상 팝업 (아이콘 모음)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "color_restore_1280x800.jpg",
+      "id": "color_restore",
+      "items": [
+        28
+      ],
+      "label": "색 지도 열기 · 복원 장면",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "color_map_1280x800.jpg",
+      "id": "color_map",
+      "items": [
+        28
+      ],
+      "label": "색 지도",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "story_menu_1280x800.jpg",
+      "id": "story_menu",
+      "items": [
+        36
+      ],
+      "label": "이야기 목록",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "story_player_1280x800.jpg",
+      "id": "story_player",
+      "items": [
+        36
+      ],
+      "label": "이야기 장면 (대사)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "story_player_2_1280x800.jpg",
+      "id": "story_player_2",
+      "items": [
+        36
+      ],
+      "label": "이야기 장면 (몇 줄 뒤)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "menu_heroes_1280x800.jpg",
+      "id": "menu_heroes",
+      "items": [
+        43
+      ],
+      "label": "아이들 목록",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "hero_info_tab0_1280x800.jpg",
+      "id": "hero_info_tab0",
+      "items": [
+        43
+      ],
+      "label": "아이 상세 · 능력 탭",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "hero_info_tab1_1280x800.jpg",
+      "id": "hero_info_tab1",
+      "items": [
+        43
+      ],
+      "label": "아이 상세 · 스킬 탭",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "hero_info_tab2_1280x800.jpg",
+      "id": "hero_info_tab2",
+      "items": [
+        43
+      ],
+      "label": "아이 상세 · 장비 탭",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "hero_awaken_steps_1280x800.jpg",
+      "id": "hero_awaken_steps",
+      "items": [
+        43
+      ],
+      "label": "아이 상세 · 각성 단계 판",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "star_up_card_1280x800.jpg",
+      "id": "star_up_card",
+      "items": [
+        59
+      ],
+      "label": "승급 확인 카드",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "hero_codex_1280x800.jpg",
+      "id": "hero_codex",
+      "items": [
+        20
+      ],
+      "label": "성장 기록",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "gear_list_1280x800.jpg",
+      "id": "gear_list",
+      "items": [
+        51,
+        52,
+        53,
+        16
+      ],
+      "label": "장비 (가방 · 착용)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "gear_detail_1280x800.jpg",
+      "id": "gear_detail",
+      "items": [
+        52,
+        53,
+        51
+      ],
+      "label": "장비 상세 · 잠재 덧칠",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "gear_rainbow_1280x800.jpg",
+      "id": "gear_rainbow",
+      "items": [
+        52,
+        53
+      ],
+      "label": "장비 상세 · 잠금 + 무지개 덧칠",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "gear_repaint_result_1280x800.jpg",
+      "id": "gear_repaint_result",
+      "items": [
+        53,
+        52
+      ],
+      "label": "잠재 덧칠 누른 뒤",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "formation_1280x800.jpg",
+      "id": "formation",
+      "items": [
+        18,
+        37,
+        38,
+        68
+      ],
+      "label": "편성 (항해 덱)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "formation_pick_1280x800.jpg",
+      "id": "formation_pick",
+      "items": [
+        37,
+        38
+      ],
+      "label": "편성 · 아이를 고른 상태",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "formation_arena_atk_1280x800.jpg",
+      "id": "formation_arena_atk",
+      "items": [
+        60,
+        38
+      ],
+      "label": "편성 · 등급전 덱 (공격 · 방어 하나로)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "summon_pickup_1280x800.jpg",
+      "id": "summon_pickup",
+      "items": [
+        39,
+        40,
+        22
+      ],
+      "label": "소환 · 픽업 출석부",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "summon_standard_1280x800.jpg",
+      "id": "summon_standard",
+      "items": [
+        39,
+        40
+      ],
+      "label": "소환 · 상시 출석부",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "gacha_paint_prompt_1280x800.jpg",
+      "id": "gacha_paint_prompt",
+      "items": [
+        23
+      ],
+      "label": "소환 · 칠하기 안내 (잿빛 출석부)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "gacha_paint_f1_1280x800.jpg",
+      "frames": [
+        "gacha_paint_f1_1280x800.jpg",
+        "gacha_paint_f2_1280x800.jpg",
+        "gacha_paint_f3_1280x800.jpg"
+      ],
+      "id": "gacha_paint",
+      "items": [
+        23
+      ],
+      "label": "소환 · 손가락으로 칠하기",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "gacha_ten_deal_1280x800.jpg",
+      "id": "gacha_ten_deal",
+      "items": [
+        26
+      ],
+      "label": "10연 소환 · 카드 한 장씩",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "gacha_ten_cards_1280x800.jpg",
+      "id": "gacha_ten_cards",
+      "items": [
+        25,
+        26
+      ],
+      "label": "10연 소환 · 카드 펼침",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "gacha_ten_result_1280x800.jpg",
+      "id": "gacha_ten_result",
+      "items": [
+        25,
+        24
+      ],
+      "label": "10연 소환 결과 · 신화 조각",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "gacha_reveal_SS_f1_1280x800.jpg",
+      "frames": [
+        "gacha_reveal_SS_f1_1280x800.jpg",
+        "gacha_reveal_SS_f2_1280x800.jpg",
+        "gacha_reveal_SS_f3_1280x800.jpg",
+        "gacha_reveal_SS_f4_1280x800.jpg",
+        "gacha_reveal_SS_f5_1280x800.jpg",
+        "gacha_reveal_SS_f6_1280x800.jpg",
+        "gacha_reveal_SS_f7_1280x800.jpg"
+      ],
+      "id": "gacha_reveal_SS",
+      "items": [
+        26,
+        27
+      ],
+      "label": "소환 연출 · SS (새 아이)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "adventure_hub_1280x800.jpg",
+      "id": "adventure_hub",
+      "items": [
+        54,
+        55,
+        56,
+        69,
+        3
+      ],
+      "label": "모험 허브 (콘텐츠 카드)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "adv_element_1280x800.jpg",
+      "id": "adv_element",
+      "items": [
+        54,
+        55,
+        56,
+        69
+      ],
+      "label": "모험 · 원소 구름섬 페이지",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "adv_soul_1280x800.jpg",
+      "id": "adv_soul",
+      "items": [
+        54,
+        55,
+        56,
+        69
+      ],
+      "label": "모험 · 기억의 회랑 페이지",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "adv_castle_1280x800.jpg",
+      "id": "adv_castle",
+      "items": [
+        54,
+        55,
+        56,
+        62
+      ],
+      "label": "모험 · 잿빛성 페이지",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "adv_temple_1280x800.jpg",
+      "id": "adv_temple",
+      "items": [
+        54,
+        55,
+        56,
+        69
+      ],
+      "label": "모험 · 신전 · 승급전 페이지",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "adv_rank_1280x800.jpg",
+      "id": "adv_rank",
+      "items": [
+        54,
+        55,
+        56,
+        60
+      ],
+      "label": "모험 · 항해사 등급전 페이지",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "menu_school_1280x800.jpg",
+      "id": "menu_school",
+      "items": [
+        47
+      ],
+      "label": "분교",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "menu_whale_1280x800.jpg",
+      "id": "menu_whale",
+      "items": [
+        42,
+        41,
+        44
+      ],
+      "label": "고래 강화 (보호막)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "menu_shop_1280x800.jpg",
+      "id": "menu_shop",
+      "items": [
+        21
+      ],
+      "label": "상점",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "mythic_shop_1280x800.jpg",
+      "id": "mythic_shop",
+      "items": [
+        24
+      ],
+      "label": "신화 조각 상점",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "settings_game_1280x800.jpg",
+      "id": "settings_game",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 게임 탭",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "settings_power_1280x800.jpg",
+      "id": "settings_power",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 알림 · 절전 탭",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "settings_account_1280x800.jpg",
+      "id": "settings_account",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 계정 탭",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "settings_credits_1280x800.jpg",
+      "id": "settings_credits",
+      "items": [
+        "settings"
+      ],
+      "label": "설정 · 만든 사람들",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "toast_lock_1280x800.jpg",
+      "id": "toast_lock",
+      "items": [
+        11
+      ],
+      "label": "시스템 알림 (잠김)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "toast_top_1280x800.jpg",
+      "id": "toast_top",
+      "items": [
+        70
+      ],
+      "label": "완료 알림 · 위쪽 (이야기 열림)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "quit_confirm_1280x800.jpg",
+      "id": "quit_confirm",
+      "items": [
+        "system"
+      ],
+      "label": "종료 확인 (뒤로 가기)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "return_ask_1280x800.jpg",
+      "id": "return_ask",
+      "items": [
+        50
+      ],
+      "label": "복귀 확인 창",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "tut_upgrade_1280x800.jpg",
+      "id": "tut_upgrade",
+      "items": [
+        9
+      ],
+      "label": "안내 · 강화 버튼",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "tut_shield_1280x800.jpg",
+      "id": "tut_shield",
+      "items": [
+        9
+      ],
+      "label": "안내 · 보호막",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "tut_ult_1280x800.jpg",
+      "id": "tut_ult",
+      "items": [
+        9
+      ],
+      "label": "안내 · 궁극기 카드",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "tut_controls_1280x800.jpg",
+      "id": "tut_controls",
+      "items": [
+        9
+      ],
+      "label": "안내 · 전투 조작 (1)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "tut_breath_1280x800.jpg",
+      "id": "tut_breath",
+      "items": [
+        9
+      ],
+      "label": "안내 · 고래 숨결",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "tut_quest_1280x800.jpg",
+      "id": "tut_quest",
+      "items": [
+        9
+      ],
+      "label": "안내 · 퀘스트 받기",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "tut_whale_1280x800.jpg",
+      "id": "tut_whale",
+      "items": [
+        9
+      ],
+      "label": "안내 · 고래 강화",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "tut_formation_1280x800.jpg",
+      "id": "tut_formation",
+      "items": [
+        9
+      ],
+      "label": "안내 · 편성",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "guide_summon_1_1280x800.jpg",
+      "id": "guide_summon_1",
+      "items": [
+        9
+      ],
+      "label": "손가락 안내 · 소환 (채색석 1600) (1)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "guide_summon_2_1280x800.jpg",
+      "id": "guide_summon_2",
+      "items": [
+        9
+      ],
+      "label": "손가락 안내 · 소환 (채색석 1600) (2)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "guide_equip_1_1280x800.jpg",
+      "id": "guide_equip_1",
+      "items": [
+        9
+      ],
+      "label": "손가락 안내 · 장비 끼우기 (1)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "guide_equip_2_1280x800.jpg",
+      "id": "guide_equip_2",
+      "items": [
+        9
+      ],
+      "label": "손가락 안내 · 장비 끼우기 (2)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "guide_dungeon_1_1280x800.jpg",
+      "id": "guide_dungeon_1",
+      "items": [
+        9
+      ],
+      "label": "손가락 안내 · 모험 · 회랑 (1)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "guide_dungeon_2_1280x800.jpg",
+      "id": "guide_dungeon_2",
+      "items": [
+        9
+      ],
+      "label": "손가락 안내 · 모험 · 회랑 (2)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "duel_soul_start_1280x800.jpg",
+      "id": "duel_soul_start",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 시작",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "duel_soul_mid_1280x800.jpg",
+      "id": "duel_soul_mid",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 한가운데",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "duel_soul_end_1280x800.jpg",
+      "id": "duel_soul_end",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · soul 끝",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "duel_rank_start_1280x800.jpg",
+      "id": "duel_rank_start",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 시작",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "duel_rank_mid_1280x800.jpg",
+      "id": "duel_rank_mid",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 한가운데",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "duel_rank_end_1280x800.jpg",
+      "id": "duel_rank_end",
+      "items": [
+        "duel"
+      ],
+      "label": "대결 · rank 끝",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "adv_battle_element_1280x800.jpg",
+      "id": "adv_battle_element",
+      "items": [
+        61,
+        63,
+        56,
+        55
+      ],
+      "label": "모험 전투 HUD · 원소섬 (숨결 · 순풍)",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "adv_element_reward_1280x800.jpg",
+      "id": "adv_element_reward",
+      "items": [
+        34,
+        58
+      ],
+      "label": "원소섬 보상 팝업",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "adv_battle_castle_1280x800.jpg",
+      "id": "adv_battle_castle",
+      "items": [
+        61,
+        62
+      ],
+      "label": "모험 전투 HUD · 잿빛성",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "return_cutscene_1280x800.jpg",
+      "id": "return_cutscene",
+      "items": [
+        67
+      ],
+      "label": "복귀 연출",
+      "phase": "late",
+      "resolution": "1280x800"
+    },
+    {
+      "file": "return_reward_1280x800.jpg",
+      "id": "return_reward",
+      "items": [
+        67,
+        34
+      ],
+      "label": "귀환 보상",
+      "phase": "late",
+      "resolution": "1280x800"
+    }
+  ],
+  "tool": "tools/feedback_capture.gd",
+  "updated": "2026-11-12T02:38:40"
+}

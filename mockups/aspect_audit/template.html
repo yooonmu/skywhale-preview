@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>구름고래 분교 · #4 화면비 점검</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:radial-gradient(1200px 600px at 20% -10%,#3b2f6e,transparent),#1d1838;color:#efeaff;font:15px/1.6 "Pretendard","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif}
+.page{max-width:1760px;margin:0 auto;padding:28px 28px 120px}
+h1{font:30px/1.3 "Gowun Batang","Malgun Gothic",serif;margin:0 0 8px;color:#fff}
+h1 small{font-size:15px;color:#c9bff0;margin-left:10px}
+h2{font:24px "Gowun Batang","Malgun Gothic",serif;margin:44px 0 10px;color:#ffe7a6;scroll-margin-top:64px}
+h3{font:20px "Gowun Batang","Malgun Gothic",serif;margin:34px 0 8px;color:#fff;scroll-margin-top:64px}
+.lead{color:#d6cff5;max-width:1300px}
+.lead b,.card b,td b{color:#ffe7a6}
+.bar{position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 0;background:linear-gradient(#1d1838 75%,rgba(29,24,56,0))}
+.bar button,.bar a{font:13.5px inherit;font-family:inherit;border:1px solid #6d5fb5;background:#2c2558;color:#e9e3ff;border-radius:8px;padding:5px 11px;cursor:pointer;text-decoration:none}
+.bar button[aria-pressed=true]{background:#7b68e0;color:#fff;border-color:#b6a8ff}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:#d4ccf6;margin:6px 0}
+.legend i{display:inline-block;width:14px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:12px}
+.card{background:#262050;border:1px solid #3a3172;border-radius:14px;padding:12px 16px}
+.card h4{margin:0 0 4px;font-size:16px;color:#fff;display:flex;gap:8px;align-items:center}
+.card p{margin:4px 0;color:#d4ccf6;font-size:14px}
+.sev{font-size:12px;border-radius:6px;padding:0 7px;font-weight:700;white-space:nowrap}
+.sev.high{background:#ff6b8a;color:#fff}.sev.mid{background:#ffc35a;color:#3a2410}.sev.low{background:#8fd8ff;color:#123}.sev.ok{background:#5fd39a;color:#0f2a1c}
+table{border-collapse:collapse;width:100%;background:#241e48;border-radius:12px;overflow:hidden;font-size:14px}
+th,td{padding:7px 10px;border-bottom:1px solid #3a3172;text-align:left;vertical-align:top}
+th{background:#30286a;color:#ffe7a6;font-weight:600}
+td.e{white-space:nowrap;color:#ffe7a6}
+.row{background:#241e48;border-radius:14px;padding:10px 12px;margin:0 0 12px}
+.row>header{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.row>header b{font-size:16px;color:#fff}
+.row>header code{color:#a99be6;font-size:12px}
+.row>header .note{color:#d4ccf6;font-size:13.5px}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:start}
+.cell{position:relative;cursor:zoom-in}
+.cell .shot{position:relative;border-radius:6px;overflow:hidden;background:#000;outline:2px solid transparent}
+.cell.bad-high .shot{outline-color:#ff6b8a}.cell.bad-mid .shot{outline-color:#ffc35a}.cell.bad-low .shot{outline-color:#8fd8ff}.cell.good .shot{outline-color:#3d8a68}
+.cell img{display:block;width:100%}
+.cell svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.cell .res{font-size:11.5px;color:#bdb2ee;margin-top:3px;display:flex;justify-content:space-between;gap:4px}
+.cell ul{margin:3px 0 0;padding:0;list-style:none;font-size:12px;line-height:1.4;color:#e6e0ff}
+.cell li{margin:2px 0}
+.cell .miss{aspect-ratio:16/9;display:grid;place-items:center;color:#776ca8;font-size:12px;border:1px dashed #4a3f94;border-radius:6px}
+.colhead{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;position:sticky;top:46px;z-index:40;background:#1d1838;padding:4px 0;font-size:12.5px;color:#ffe7a6}
+.colhead small{display:block;color:#a99be6}
+.hideauto .auto{display:none}.hidenotch .nb{display:none}
+.onlybad .row.clean{display:none}
+#lb{position:fixed;inset:0;background:rgba(10,8,24,.92);z-index:99;display:none;align-items:center;justify-content:center;flex-direction:column;gap:8px}
+#lb.on{display:flex}
+#lb .wrap{position:relative;max-width:96vw;max-height:84vh}
+#lb img{display:block;max-width:96vw;max-height:84vh}
+#lb svg{position:absolute;inset:0;width:100%;height:100%}
+#lb p{margin:0;color:#e6e0ff;max-width:1200px;font-size:14px}
+</style>
+</head>
+<body>
+<div class="page" id="page">
+<h1>#4 화면비 점검 <small>접는 폰 · 21–23:9 · 태블릿 · 노치 — 1단계 (읽기 전용 감사)</small></h1>
+<p class="lead" id="lead"></p>
+<div class="bar">
+  <button data-t="hideauto" aria-pressed="false">자동 표시 숨기기</button>
+  <button data-t="hidenotch" aria-pressed="false">노치 띠 숨기기</button>
+  <button data-t="onlybad" aria-pressed="false">문제 있는 화면만</button>
+  <a href="#top">핵심 문제</a><a href="#approach">고치는 방향</a><a href="#fix">화면별 수정 목록</a><a href="#screens">화면 × 비율</a>
+</div>
+<div class="legend" id="legend"></div>
+<h2 id="top">핵심 문제</h2>
+<div class="cards" id="topcards"></div>
+<h2 id="approach">고치는 방향 (제안)</h2>
+<div class="cards" id="appr"></div>
+<h2 id="fix">화면별 수정 목록 · 작업량</h2>
+<table id="fixtab"><thead><tr><th>화면</th><th>문제 (비율)</th><th>원인</th><th>고칠 것</th><th>작업량</th></tr></thead><tbody></tbody></table>
+<h2 id="screens">화면 × 비율</h2>
+<p class="lead">칸마다 같은 장면을 같은 상태로 찍었다 (창을 논리 크기로: canvas_items + expand에서 물리 해상도와 배치가 같다). 테두리 색 = 사람이 본 판정의 가장 높은 심각도, 초록 = 이상 없음.
+옅은 분홍 띠 = 노치 · 펀치홀 가정(긴 변 양끝 44px, 가로 모드는 어느 쪽으로든 돌 수 있음), 모서리 사분원 = 둥근 모서리 36px. 상자 = 자동 판정 (기준 1280×720에 없던 것만, 노치 · 모서리는 버튼만).</p>
+<div class="colhead" id="colhead"></div>
+<div id="rows"></div>
+</div>
+<div id="lb"><div class="wrap"><img alt=""><svg></svg></div><p></p></div>
+<script>
+const D = /*DATA*/null;
+const KIND = {cut:['#ff4d6d','잘림 (화면 밖으로)'],off:['#9b8cff','화면 밖 버튼 (누를 수 없음)'],notch:['#ff8fd0','노치 띠 안의 버튼'],corner:['#ffd166','둥근 모서리 안의 버튼'],overlap:['#ff9f43','버튼 겹침 (새로 생김)'],clip:['#4dd4ff','글자 잘림 (새로 생김)'],band:['#7cf0b0','가장자리 단색 띠 (배경 모자람)']};
+const SEVN = {high:'높음',mid:'중간',low:'낮음',ok:'이상 없음'};
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+$('#lead').innerHTML = D.lead;
+$('#legend').innerHTML = Object.entries(KIND).map(([k,[c,t]]) => `<span><i style="background:${c}"></i>${t}</span>`).join('') + ['high','mid','low'].map(s => `<span><span class="sev ${s}">${SEVN[s]}</span></span>`).join('');
+$('#topcards').innerHTML = D.top.map(t => `<div class="card"><h4><span class="sev ${t.sev}">${SEVN[t.sev]}</span>${esc(t.title)}</h4><p>${t.body}</p>${t.screens ? `<p style="color:#a99be6;font-size:13px">${esc(t.screens)}</p>` : ''}</div>`).join('');
+$('#appr').innerHTML = D.approach.map(a => `<div class="card"><h4>${esc(a.title)}</h4><p>${a.body}</p></div>`).join('');
+$('#fixtab tbody').innerHTML = D.fixlist.map(f => `<tr><td><span class="sev ${f.sev}">${SEVN[f.sev]}</span> <b>${esc(f.screen)}</b></td><td>${f.problem}</td><td>${f.cause}</td><td>${f.fix}</td><td class="e">${esc(f.effort)}</td></tr>`).join('');
+$('#colhead').innerHTML = D.sizes.map(s => `<div>${s.res.replace('x','×')} · ${esc(s.name)}<small>${esc(s.device)}</small></div>`).join('');
+
+function overlay(res, cell, big) {
+  const [w,h] = res.split('x').map(Number), I = D.inset, C = D.corner;
+  let s = `<g class="nb"><rect x="0" y="0" width="${I}" height="${h}" fill="#ff5fae" opacity=".16"/><rect x="${w-I}" y="0" width="${I}" height="${h}" fill="#ff5fae" opacity=".16"/>`;
+  for (const [x,y,sx,sy] of [[0,0,1,1],[w,0,-1,1],[0,h,1,-1],[w,h,-1,-1]]) s += `<path d="M${x} ${y} h${sx*C} A${C} ${C} 0 0 ${sx*sy>0?0:1} ${x} ${y+sy*C} Z" fill="#000" opacity=".55"/>`;
+  s += '</g><g class="auto">';
+  for (const i of cell.issues) {
+    const [x,y,rw,rh] = i.r, c = KIND[i.k][0];
+    s += `<rect x="${x}" y="${y}" width="${rw}" height="${rh}" fill="${c}" fill-opacity="${i.m ? .05 : .18}" stroke="${c}" stroke-width="${big?3:6}" ${i.m ? 'stroke-dasharray="10 8"' : ''}><title>${esc(KIND[i.k][1])}${i.m?' (기기에서는 safe_pad로 밀림)':''} · ${esc(i.key)} ${esc(i.t)}${i.w?' ↔ '+esc(i.w):''}</title></rect>`;
+  }
+  for (const [side,n] of cell.bands) {
+    const r = side==='top'?[0,0,w,n]:side==='bottom'?[0,h-n,w,n]:side==='left'?[0,0,n,h]:[w-n,0,n,h];
+    s += `<rect x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}" fill="none" stroke="${KIND.band[0]}" stroke-width="6" stroke-dasharray="16 10"/>`;
+  }
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">${s}</g></svg>`;
+}
+const rank = {high:3,mid:2,low:1,ok:0};
+let html = '';
+for (const g of D.groups) {
+  if (!g.ids.length) continue;
+  html += `<h3>${esc(g.name)}</h3>`;
+  for (const id of g.ids) {
+    const sc = D.data[id]; if (!sc) continue;
+    const f = D.screens[id] || {};
+    let worst = 0;
+    const cells = D.sizes.map(({res}) => {
+      const c = sc.cells[res];
+      if (!c) return `<div class="cell"><div class="miss">찍지 못함</div><div class="res">${res}</div></div>`;
+      const notes = (f.cells || {})[res] || [];
+      const top = notes.reduce((a,n) => Math.max(a, rank[n.sev]), 0);
+      worst = Math.max(worst, top);
+      const cls = notes.length ? (top ? 'bad-' + Object.keys(rank).find(k => rank[k] === top) : 'good') : '';
+      const auto = c.issues.filter(i => !i.m).length;
+      return `<div class="cell ${cls}" data-res="${res}" data-id="${id}"><div class="shot"><img loading="lazy" src="shots/${c.file}" alt="">${overlay(res, c, false)}</div>
+        <div class="res"><span>${res.replace('x','×')}</span><span class="auto">${auto ? '자동 ' + auto : ''}${c.bands.length ? ' · 띠' : ''}</span></div>
+        <ul>${notes.map(n => `<li><span class="sev ${n.sev}">${SEVN[n.sev]}</span> ${n.note}</li>`).join('')}</ul></div>`;
+    }).join('');
+    html += `<div class="row ${worst ? '' : 'clean'}" id="s-${id}"><header><b>${esc(f.title || sc.label)}</b><code>${id}</code><span class="note">${f.note || ''}</span></header><div class="grid">${cells}</div></div>`;
+  }
+}
+$('#rows').innerHTML = html;
+for (const b of document.querySelectorAll('.bar button')) b.onclick = () => {
+  const on = b.getAttribute('aria-pressed') !== 'true';
+  b.setAttribute('aria-pressed', on); $('#page').classList.toggle(b.dataset.t, on); $('#lb').classList.toggle(b.dataset.t, on);
+};
+document.addEventListener('click', e => {
+  const c = e.target.closest('.cell[data-res]');
+  if (c) {
+    const sc = D.data[c.dataset.id], cell = sc.cells[c.dataset.res], notes = ((D.screens[c.dataset.id] || {}).cells || {})[c.dataset.res] || [];
+    $('#lb img').src = 'shots/' + cell.file;
+    $('#lb svg').outerHTML = overlay(c.dataset.res, cell, true);
+    $('#lb p').innerHTML = `<b>${esc(sc.label)}</b> · ${c.dataset.res} — ` + (notes.map(n => `<span class="sev ${n.sev}">${SEVN[n.sev]}</span> ${n.note}`).join(' · ') || '사람 판정 없음') + (cell.issues.length ? `<br><span style="color:#a99be6">자동: ${cell.issues.map(i => esc(KIND[i.k][1].split(' ')[0] + ' ' + (i.t || i.key))).slice(0, 14).join(' · ')}</span>` : '');
+    $('#lb').classList.add('on');
+  } else if (e.target.closest('#lb')) $('#lb').classList.remove('on');
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') $('#lb').classList.remove('on'); });
+</script>
+</body>
+</html>

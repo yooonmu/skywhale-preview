@@ -1,0 +1,1276 @@
+{
+ "corner": 36.0,
+ "inset": 44.0,
+ "phase": "fresh",
+ "res": "1280x800",
+ "shots": [
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "title_loading_f1_1280x800.jpg",
+   "id": "title_loading_f1",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#2/Control#0/Label#4",
+     "kind": "notch",
+     "rect": [
+      1120.0,
+      766.0,
+      140.0,
+      34.0
+     ],
+     "side": "right",
+     "text": "v0.6 프로토타입"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1280x800"
+  },
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "title_loading_f2_1280x800.jpg",
+   "id": "title_loading_f2",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#2/Control#0/Label#4",
+     "kind": "notch",
+     "rect": [
+      1120.0,
+      766.0,
+      140.0,
+      34.0
+     ],
+     "side": "right",
+     "text": "v0.6 프로토타입"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1280x800"
+  },
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "title_loading_f3_1280x800.jpg",
+   "id": "title_loading_f3",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#2/Control#0/Label#4",
+     "kind": "notch",
+     "rect": [
+      1120.0,
+      766.0,
+      140.0,
+      34.0
+     ],
+     "side": "right",
+     "text": "v0.6 프로토타입"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1280x800"
+  },
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "title_loading_f4_1280x800.jpg",
+   "id": "title_loading_f4",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#2/Control#0/Label#4",
+     "kind": "notch",
+     "rect": [
+      1120.0,
+      766.0,
+      140.0,
+      34.0
+     ],
+     "side": "right",
+     "text": "v0.6 프로토타입"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1280x800"
+  },
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "title_loading_f5_1280x800.jpg",
+   "id": "title_loading_f5",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#2/Control#0/Label#4",
+     "kind": "notch",
+     "rect": [
+      1120.0,
+      766.0,
+      140.0,
+      34.0
+     ],
+     "side": "right",
+     "text": "v0.6 프로토타입"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1280x800"
+  },
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "title_loading_f6_1280x800.jpg",
+   "id": "title_loading_f6",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#2/Control#0/Label#4",
+     "kind": "notch",
+     "rect": [
+      1120.0,
+      766.0,
+      140.0,
+      34.0
+     ],
+     "side": "right",
+     "text": "v0.6 프로토타입"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1280x800"
+  },
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "title_ready_1280x800.jpg",
+   "id": "title_ready",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#2/Control#0/Label#4",
+     "kind": "notch",
+     "rect": [
+      1120.0,
+      766.0,
+      140.0,
+      34.0
+     ],
+     "side": "right",
+     "text": "v0.6 프로토타입"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1280x800"
+  },
+  {
+   "bands": {
+    "bottom": 13,
+    "left": 0,
+    "right": 0,
+    "top": 5
+   },
+   "file": "story_prologue_1280x800.jpg",
+   "id": "story_prologue",
+   "issues": [
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 20.0,
+     "key": "Node2D#0/CanvasLayer#17/Control#0/Button#5",
+     "kind": "notch",
+     "rect": [
+      1102.0,
+      24.0,
+      154.0,
+      50.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "key": "Node2D#0/CanvasLayer#17/Control#0/Button#5",
+     "kind": "corner",
+     "rect": [
+      1102.0,
+      24.0,
+      154.0,
+      50.0
+     ],
+     "text": ""
+    }
+   ],
+   "phase": "fresh",
+   "res": "1280x800"
+  },
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "tut_fresh_deck_0_1280x800.jpg",
+   "id": "tut_fresh_deck_0",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 9.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/StagePanelB/Control#5/Label#0",
+     "kind": "notch",
+     "rect": [
+      35.0,
+      73.0,
+      48.0,
+      19.0
+     ],
+     "side": "left",
+     "text": "다음 열림"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 28.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/Button#2",
+     "kind": "notch",
+     "rect": [
+      16.0,
+      106.0,
+      384.0,
+      50.0
+     ],
+     "side": "left",
+     "text": ""
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#0",
+     "kind": "notch",
+     "rect": [
+      20.0,
+      718.0,
+      71.0,
+      72.0
+     ],
+     "side": "left",
+     "text": ""
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#0",
+     "kind": "corner",
+     "rect": [
+      20.0,
+      718.0,
+      71.0,
+      72.0
+     ],
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#0/name",
+     "kind": "notch",
+     "rect": [
+      20.0,
+      765.0,
+      71.0,
+      29.0
+     ],
+     "side": "left",
+     "text": "아이들"
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#1/LockLv/Label#0",
+     "kind": "cut",
+     "rect": [
+      116.0,
+      782.0,
+      21.0,
+      19.0
+     ],
+     "shown": 0.95,
+     "text": "Lv.2"
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#2/LockLv/Label#0",
+     "kind": "cut",
+     "rect": [
+      187.0,
+      782.0,
+      21.0,
+      19.0
+     ],
+     "shown": 0.95,
+     "text": "Lv.2"
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#3/LockLv/Label#0",
+     "kind": "cut",
+     "rect": [
+      258.0,
+      782.0,
+      21.0,
+      19.0
+     ],
+     "shown": 0.95,
+     "text": "Lv.7"
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#4/LockLv/Label#0",
+     "kind": "cut",
+     "rect": [
+      329.0,
+      782.0,
+      22.0,
+      19.0
+     ],
+     "shown": 0.95,
+     "text": "Lv.5"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#6/Chip_colormap",
+     "kind": "notch",
+     "rect": [
+      20.0,
+      182.0,
+      116.0,
+      38.0
+     ],
+     "side": "left",
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 14.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#6/Chip_colormap/ColormapHudBadge/ColorRect#1/Label#0",
+     "kind": "notch",
+     "rect": [
+      30.0,
+      214.0,
+      29.0,
+      18.0
+     ],
+     "side": "left",
+     "text": "0%"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 26.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/More",
+     "kind": "notch",
+     "rect": [
+      1208.0,
+      6.0,
+      54.0,
+      54.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/More",
+     "kind": "corner",
+     "rect": [
+      1208.0,
+      6.0,
+      54.0,
+      54.0
+     ],
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 21.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/More/name_tag/Label#0",
+     "kind": "notch",
+     "rect": [
+      1213.0,
+      38.0,
+      43.0,
+      29.0
+     ],
+     "side": "right",
+     "text": "설정"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 19.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/Dev",
+     "kind": "notch",
+     "rect": [
+      1215.0,
+      66.0,
+      40.0,
+      40.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 19.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/Dev/Label#2",
+     "kind": "notch",
+     "rect": [
+      1215.0,
+      86.0,
+      40.0,
+      29.0
+     ],
+     "side": "right",
+     "text": "개발"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 20.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#13/Control#0/Up",
+     "kind": "notch",
+     "rect": [
+      1180.0,
+      646.0,
+      76.0,
+      30.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 5.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#13/Control#0/Up/HBoxContainer#2/Label#3",
+     "kind": "notch",
+     "rect": [
+      1226.0,
+      649.0,
+      15.0,
+      23.0
+     ],
+     "side": "right",
+     "text": "12"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 18.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#13/Control#0/Card",
+     "kind": "notch",
+     "rect": [
+      1182.0,
+      686.0,
+      72.0,
+      72.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 18.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#13/Control#0/Card/Label#2",
+     "kind": "notch",
+     "rect": [
+      1182.0,
+      686.0,
+      72.0,
+      72.0
+     ],
+     "side": "right",
+     "text": "4"
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 12.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#13/Control#0/Control#2/Label#1",
+     "kind": "notch",
+     "rect": [
+      1184.0,
+      752.0,
+      64.0,
+      29.0
+     ],
+     "side": "right",
+     "text": "항해 Lv.1"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 20.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#14/BuyUnit",
+     "kind": "notch",
+     "rect": [
+      1120.0,
+      606.0,
+      136.0,
+      36.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 11.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#14/BuyUnit/Label#4",
+     "kind": "notch",
+     "rect": [
+      1208.0,
+      611.0,
+      39.0,
+      29.0
+     ],
+     "side": "right",
+     "text": "MAX"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1280x800"
+  },
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "hud_fresh_1280x800.jpg",
+   "id": "hud_fresh",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 9.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/StagePanelB/Control#5/Label#0",
+     "kind": "notch",
+     "rect": [
+      35.0,
+      73.0,
+      48.0,
+      19.0
+     ],
+     "side": "left",
+     "text": "다음 열림"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 28.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/Button#2",
+     "kind": "notch",
+     "rect": [
+      16.0,
+      106.0,
+      384.0,
+      50.0
+     ],
+     "side": "left",
+     "text": ""
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#0",
+     "kind": "notch",
+     "rect": [
+      20.0,
+      718.0,
+      71.0,
+      72.0
+     ],
+     "side": "left",
+     "text": ""
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#0",
+     "kind": "corner",
+     "rect": [
+      20.0,
+      718.0,
+      71.0,
+      72.0
+     ],
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#0/name",
+     "kind": "notch",
+     "rect": [
+      20.0,
+      765.0,
+      71.0,
+      29.0
+     ],
+     "side": "left",
+     "text": "아이들"
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#1/LockLv/Label#0",
+     "kind": "cut",
+     "rect": [
+      116.0,
+      782.0,
+      21.0,
+      19.0
+     ],
+     "shown": 0.95,
+     "text": "Lv.2"
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#2/LockLv/Label#0",
+     "kind": "cut",
+     "rect": [
+      187.0,
+      782.0,
+      21.0,
+      19.0
+     ],
+     "shown": 0.95,
+     "text": "Lv.2"
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#3/LockLv/Label#0",
+     "kind": "cut",
+     "rect": [
+      258.0,
+      782.0,
+      21.0,
+      19.0
+     ],
+     "shown": 0.95,
+     "text": "Lv.7"
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#4/LockLv/Label#0",
+     "kind": "cut",
+     "rect": [
+      329.0,
+      782.0,
+      22.0,
+      19.0
+     ],
+     "shown": 0.95,
+     "text": "Lv.5"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#6/Chip_colormap",
+     "kind": "notch",
+     "rect": [
+      20.0,
+      182.0,
+      116.0,
+      38.0
+     ],
+     "side": "left",
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 14.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#6/Chip_colormap/ColormapHudBadge/ColorRect#1/Label#0",
+     "kind": "notch",
+     "rect": [
+      30.0,
+      214.0,
+      29.0,
+      18.0
+     ],
+     "side": "left",
+     "text": "0%"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 26.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/More",
+     "kind": "notch",
+     "rect": [
+      1208.0,
+      6.0,
+      54.0,
+      54.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/More",
+     "kind": "corner",
+     "rect": [
+      1208.0,
+      6.0,
+      54.0,
+      54.0
+     ],
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 21.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/More/name_tag/Label#0",
+     "kind": "notch",
+     "rect": [
+      1213.0,
+      38.0,
+      43.0,
+      29.0
+     ],
+     "side": "right",
+     "text": "설정"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 19.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/Dev",
+     "kind": "notch",
+     "rect": [
+      1215.0,
+      66.0,
+      40.0,
+      40.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 19.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/Dev/Label#2",
+     "kind": "notch",
+     "rect": [
+      1215.0,
+      86.0,
+      40.0,
+      29.0
+     ],
+     "side": "right",
+     "text": "개발"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 20.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#13/Control#0/Up",
+     "kind": "notch",
+     "rect": [
+      1180.0,
+      646.0,
+      76.0,
+      30.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 5.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#13/Control#0/Up/HBoxContainer#2/Label#3",
+     "kind": "notch",
+     "rect": [
+      1226.0,
+      649.0,
+      15.0,
+      23.0
+     ],
+     "side": "right",
+     "text": "12"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 18.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#13/Control#0/Card",
+     "kind": "notch",
+     "rect": [
+      1182.0,
+      686.0,
+      72.0,
+      72.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 12.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#13/Control#0/Control#2/Label#1",
+     "kind": "notch",
+     "rect": [
+      1184.0,
+      752.0,
+      64.0,
+      29.0
+     ],
+     "side": "right",
+     "text": "항해 Lv.1"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 20.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#14/BuyUnit",
+     "kind": "notch",
+     "rect": [
+      1120.0,
+      606.0,
+      136.0,
+      36.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 11.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#14/BuyUnit/Label#4",
+     "kind": "notch",
+     "rect": [
+      1208.0,
+      611.0,
+      39.0,
+      29.0
+     ],
+     "side": "right",
+     "text": "MAX"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1280x800"
+  },
+  {
+   "bands": {
+    "bottom": 0,
+    "left": 0,
+    "right": 0,
+    "top": 0
+   },
+   "file": "locked_tap_fresh_1280x800.jpg",
+   "id": "locked_tap_fresh",
+   "issues": [
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 9.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/StagePanelB/Control#5/Label#0",
+     "kind": "notch",
+     "rect": [
+      35.0,
+      73.0,
+      48.0,
+      19.0
+     ],
+     "side": "left",
+     "text": "다음 열림"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 28.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/Button#2",
+     "kind": "notch",
+     "rect": [
+      16.0,
+      106.0,
+      384.0,
+      50.0
+     ],
+     "side": "left",
+     "text": ""
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#0",
+     "kind": "notch",
+     "rect": [
+      20.0,
+      718.0,
+      71.0,
+      72.0
+     ],
+     "side": "left",
+     "text": ""
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#0",
+     "kind": "corner",
+     "rect": [
+      20.0,
+      718.0,
+      71.0,
+      72.0
+     ],
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#0/name",
+     "kind": "notch",
+     "rect": [
+      20.0,
+      765.0,
+      71.0,
+      29.0
+     ],
+     "side": "left",
+     "text": "아이들"
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#1/LockLv/Label#0",
+     "kind": "cut",
+     "rect": [
+      116.0,
+      782.0,
+      21.0,
+      19.0
+     ],
+     "shown": 0.95,
+     "text": "Lv.2"
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#2/LockLv/Label#0",
+     "kind": "cut",
+     "rect": [
+      187.0,
+      782.0,
+      21.0,
+      19.0
+     ],
+     "shown": 0.95,
+     "text": "Lv.2"
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#3/LockLv/Label#0",
+     "kind": "cut",
+     "rect": [
+      258.0,
+      782.0,
+      21.0,
+      19.0
+     ],
+     "shown": 0.95,
+     "text": "Lv.7"
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#5/Button#4/LockLv/Label#0",
+     "kind": "cut",
+     "rect": [
+      329.0,
+      782.0,
+      22.0,
+      19.0
+     ],
+     "shown": 0.95,
+     "text": "Lv.5"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 24.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#6/Chip_colormap",
+     "kind": "notch",
+     "rect": [
+      20.0,
+      182.0,
+      116.0,
+      38.0
+     ],
+     "side": "left",
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 14.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#6/Chip_colormap/ColormapHudBadge/ColorRect#1/Label#0",
+     "kind": "notch",
+     "rect": [
+      30.0,
+      214.0,
+      29.0,
+      18.0
+     ],
+     "side": "left",
+     "text": "0%"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 26.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/More",
+     "kind": "notch",
+     "rect": [
+      1208.0,
+      6.0,
+      54.0,
+      54.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "key": "Node2D#0/CanvasLayer#9/Control#0/More",
+     "kind": "corner",
+     "rect": [
+      1208.0,
+      6.0,
+      54.0,
+      54.0
+     ],
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 21.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/More/name_tag/Label#0",
+     "kind": "notch",
+     "rect": [
+      1213.0,
+      38.0,
+      43.0,
+      29.0
+     ],
+     "side": "right",
+     "text": "설정"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 19.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/Dev",
+     "kind": "notch",
+     "rect": [
+      1215.0,
+      66.0,
+      40.0,
+      40.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 19.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/Dev/Label#2",
+     "kind": "notch",
+     "rect": [
+      1215.0,
+      86.0,
+      40.0,
+      29.0
+     ],
+     "side": "right",
+     "text": "개발"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 20.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#13/Control#0/Up",
+     "kind": "notch",
+     "rect": [
+      1180.0,
+      646.0,
+      76.0,
+      30.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 5.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#13/Control#0/Up/HBoxContainer#2/Label#3",
+     "kind": "notch",
+     "rect": [
+      1226.0,
+      649.0,
+      15.0,
+      23.0
+     ],
+     "side": "right",
+     "text": "12"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 18.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#13/Control#0/Card",
+     "kind": "notch",
+     "rect": [
+      1182.0,
+      686.0,
+      72.0,
+      72.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 12.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#13/Control#0/Control#2/Label#1",
+     "kind": "notch",
+     "rect": [
+      1184.0,
+      752.0,
+      64.0,
+      29.0
+     ],
+     "side": "right",
+     "text": "항해 Lv.1"
+    },
+    {
+     "btn": true,
+     "cls": "Button",
+     "depth": 20.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#14/BuyUnit",
+     "kind": "notch",
+     "rect": [
+      1120.0,
+      606.0,
+      136.0,
+      36.0
+     ],
+     "side": "right",
+     "text": ""
+    },
+    {
+     "btn": false,
+     "cls": "Label",
+     "depth": 11.0,
+     "key": "Node2D#0/CanvasLayer#9/Control#0/HBoxContainer#14/BuyUnit/Label#4",
+     "kind": "notch",
+     "rect": [
+      1208.0,
+      611.0,
+      39.0,
+      29.0
+     ],
+     "side": "right",
+     "text": "MAX"
+    }
+   ],
+   "phase": "fresh",
+   "res": "1280x800"
+  }
+ ]
+}

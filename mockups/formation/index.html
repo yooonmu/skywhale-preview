@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>레인보우 아틀리에 시안 · 편성 (#37 #38 #68)</title>
+<style>
+:root{--navy:#2e2350;--lav:#8b74e8;--gold:#d9a52b;--cream:#fff8ec;--line:#e2dbf5;--w:1280}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#f3f0fa;color:var(--navy);font-family:"Pretendard","Noto Sans KR","Malgun Gothic","Apple SD Gothic Neo",sans-serif;line-height:1.45}
+.page{max-width:1180px;margin:0 auto;padding:20px 16px 64px}
+.page>h1{font-size:22px;margin:0 0 4px}
+.page>h3{font-size:18px;margin:28px 0 8px}
+.lead{margin:0 0 14px;font-size:14px;color:#5a5180}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 16px;font-size:13px}
+.bar button{font:inherit;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #c9bff0;background:#fff;color:var(--navy);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.ref,.opt{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin:0 0 18px}
+.opt{cursor:pointer}
+.opt[data-choice-selected],.opt.sel{outline:3px solid var(--lav);outline-offset:2px}
+.opt h2,.ref h2{font-size:17px;margin:0 0 2px}
+.cap{margin:0 0 10px;font-size:14px;color:#4c4374}
+.vp{position:relative;width:100%;overflow:hidden;border-radius:8px;background:#1d1838}
+.scr{position:absolute;left:0;top:0;width:calc(var(--w)*1px);height:720px;transform-origin:0 0;overflow:hidden;font-size:16px}
+.scr.mini{height:300px}
+.refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.refs figure{margin:0}.refs img{width:100%;display:block;border-radius:8px}.refs figcaption{overflow-wrap:anywhere;font-size:12px;color:#6a6290;margin-top:4px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* 공통: 메뉴 뒤에서 도는 전투 */
+.bgcap{position:absolute;inset:-20px;background:url(../../../../artifacts/polish/after/stage_boss_1280x720.png) center/cover;filter:blur(6px) brightness(.55) saturate(.9)}
+.top{position:absolute;left:0;right:0;top:0;height:58px;display:flex;align-items:center;gap:14px;padding:0 20px;color:#fff}
+.top .back{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;font-size:26px;font-weight:700}
+.top h4{margin:0;font-size:24px;font-weight:800;letter-spacing:1px}
+.top .cur{margin-left:auto;display:flex;gap:16px;font-size:16px;font-weight:700}
+.top .cur span{background:rgba(0,0,0,.25);padding:6px 14px;border-radius:16px}
+.q{width:40px;height:40px;border-radius:50%;background:#fff;color:var(--navy);display:grid;place-items:center;font-weight:800;box-shadow:0 2px 0 #b9aef0}
+.pf{background-repeat:no-repeat;background-size:175% auto;background-position:50% 6%}
+.h-karen{background-image:url(../../../../assets/brand/title_karen.png)}
+.h-ciel{background-image:url(../../../../assets/brand/title_ciel.png)}
+.h-yuna{background-image:url(../../../../assets/brand/title_yuna.png)}
+.h-mio{background-image:url(../../../../assets/brand/title_mio.png)}
+.h-serena{background-image:url(../../../../assets/chars/serena_idle.png)}
+.h-aria{background-image:url(../../../../assets/chars/aria_idle.png)}
+.el{display:inline-block;width:14px;height:14px;border-radius:50%;box-shadow:0 0 0 2px #fff;vertical-align:middle}
+.e-red{background:#ff5f4f}.e-green{background:#4fd18b}.e-purple{background:#9a6bff}.e-white{background:#ffd75e}
+.gr{display:inline-grid;place-items:center;min-width:26px;height:22px;padding:0 5px;border-radius:5px;font-size:13px;font-weight:900;color:#fff}
+.g-SS{background:linear-gradient(90deg,#d6246a,#7a3fd6)}.g-S{background:#a86200}.g-A{background:#5b44c4}.g-B{background:#1767ad}
+.vp{contain:paint}
+
+/* ---------- A 갑판 배치 ---------- */
+.A .tabs{position:absolute;left:24px;top:66px;display:flex;gap:6px}
+.A .tabs b{min-height:44px;padding:0 18px;display:grid;place-items:center;font-size:16px;color:#fff;background:rgba(255,255,255,.14);border-radius:22px;font-weight:700}
+.A .tabs b.on{background:#fff;color:var(--navy)}
+.A .stage{position:absolute;left:24px;top:120px;width:calc(var(--w)*1px - 500px);height:580px;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,#8fb8ff 0%,#c9c2ff 55%,#ffd9e6 100%);box-shadow:0 0 0 3px rgba(255,231,166,.9),0 20px 40px rgba(0,0,0,.35)}
+.A .stage .wh{position:absolute;width:1904px;left:calc(100% - 1680px);top:100px}
+.A .kid{position:absolute;height:170px;filter:drop-shadow(0 6px 4px rgba(46,35,80,.3))}
+.A .spot{position:absolute;width:140px;height:40px;border-radius:50%;background:radial-gradient(ellipse,rgba(255,240,180,.95),rgba(255,214,107,.3) 55%,transparent 72%);animation:glow 2.4s ease-in-out infinite}
+@keyframes glow{50%{opacity:.55}}
+.A .num{position:absolute;width:34px;height:34px;border-radius:50%;background:var(--navy);color:#ffe7a6;font-weight:900;display:grid;place-items:center;box-shadow:0 0 0 3px #ffe7a6}
+.A .row{position:absolute;top:22px;padding:6px 14px;border-radius:16px;font-weight:800;font-size:15px;color:#fff}
+.A .pow{position:absolute;right:22px;top:16px;text-align:right;color:var(--navy)}
+.A .pow small{display:block;font-size:14px;font-weight:700;opacity:.75}
+.A .pow b{font-size:44px;font-weight:900;letter-spacing:-1px;text-shadow:0 2px 0 #fff}
+.A .bond{position:absolute;left:18px;bottom:16px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.92);padding:8px 16px;border-radius:20px;font-weight:700;font-size:15px}
+.A .bond .ok{color:#14714f}
+.A .ros{position:absolute;right:24px;top:66px;width:440px;bottom:20px;background:var(--cream);border-radius:18px;padding:14px;box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.A .ros h5{margin:0 0 4px;font-size:19px;display:flex;align-items:center;gap:8px}
+.A .ros h5 .q{margin-left:auto}
+.A .ros .hint{font-size:14px;color:#6a6290;margin:0 0 10px}
+.A .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.A .cd{position:relative;height:166px;border-radius:12px;overflow:hidden;background:#eee8ff;box-shadow:0 2px 0 #d9d0f3}
+.A .cd .pf{position:absolute;inset:0 0 40px 0}
+.A .cd .nm{position:absolute;left:0;right:0;bottom:0;height:40px;background:#fff;padding:3px 8px;font-size:15px;font-weight:800;display:flex;align-items:center;gap:6px}
+.A .cd .gr{position:absolute;left:6px;top:6px}
+.A .cd.in{box-shadow:0 0 0 3px var(--gold),0 4px 0 #b88a1c}
+.A .cd.in .badge{position:absolute;right:6px;top:6px;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#ffe7a6;font-weight:900;display:grid;place-items:center;box-shadow:0 0 0 2px #ffe7a6}
+.A .cd.in .nm{background:linear-gradient(90deg,#fff3cf,#fff)}
+.A .cd.pick{transform:translateY(-6px);box-shadow:0 0 0 3px #8b74e8,0 10px 18px rgba(139,116,232,.45)}
+.A .reco{position:absolute;right:14px;bottom:14px;min-height:52px;padding:0 24px;border-radius:26px;background:linear-gradient(90deg,#ffb36b,#ff8a5c);color:#fff;font-weight:800;font-size:18px;display:flex;align-items:center;gap:8px;box-shadow:0 3px 0 #c95f2f}
+
+/* ---------- B 라인업 ---------- */
+.B .side{position:absolute;left:20px;top:72px;width:132px;display:flex;flex-direction:column;gap:8px}
+.B .side b{min-height:52px;display:flex;align-items:center;padding:0 14px;color:#fff;font-size:16px;border-left:4px solid transparent;background:rgba(255,255,255,.1);transform:skewX(-8deg)}
+.B .side b span{transform:skewX(8deg)}
+.B .side b.on{background:#fff;color:var(--navy);border-color:var(--gold)}
+.B .line{position:absolute;left:176px;top:76px;display:flex;gap:18px}
+.B .sl{position:relative;width:186px;height:390px;transform:skewX(-7deg);overflow:hidden;border-radius:6px;background:linear-gradient(180deg,#ffffff,#e9e2ff);box-shadow:0 0 0 3px #fff,0 16px 30px rgba(0,0,0,.4)}
+.B .sl .art{position:absolute;inset:-10px 0 60px;transform:skewX(7deg);background-size:cover;background-position:50% 10%}
+.B .sl .foot{position:absolute;left:0;right:0;bottom:0;height:72px;background:var(--navy);color:#fff;padding:8px 20px;transform:none}
+.B .sl .foot b{display:block;font-size:20px;transform:skewX(7deg)}
+.B .sl .foot small{display:block;font-size:14px;opacity:.85;transform:skewX(7deg)}
+.B .sl .no{position:absolute;left:14px;top:8px;font-size:52px;font-weight:900;color:#fff;-webkit-text-stroke:2px var(--navy);transform:skewX(7deg)}
+.B .sl .pos{position:absolute;right:10px;top:14px;padding:4px 10px;border-radius:12px;font-size:14px;font-weight:800;color:#fff;transform:skewX(7deg)}
+.B .sl.front{box-shadow:0 0 0 3px #ffe7a6,0 16px 30px rgba(0,0,0,.4)}
+.B .info{position:absolute;right:24px;top:76px;width:calc(var(--w)*1px - 1068px - 24px);min-width:190px;height:390px;background:var(--cream);border-radius:14px;padding:16px}
+.B .info small{font-size:14px;color:#6a6290;font-weight:700}
+.B .info .p{font-size:40px;font-weight:900;line-height:1.1;margin-bottom:14px}
+.B .info .bd{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:700;margin:8px 0}
+.B .info .bd .ok{margin-left:auto;color:#14714f}
+.B .info .q{position:absolute;right:12px;top:12px}
+.B .strip{position:absolute;left:176px;right:24px;bottom:22px;height:200px;background:rgba(255,248,236,.96);border-radius:16px;padding:14px;display:flex;gap:12px;align-items:flex-end}
+.B .strip .cd{position:relative;width:118px;height:168px;border-radius:10px;overflow:hidden;background:#eee8ff;flex:none}
+.B .strip .cd .pf{position:absolute;inset:0}
+.B .strip .cd .gr{position:absolute;left:5px;top:5px}
+.B .strip .cd .nm{position:absolute;left:0;right:0;bottom:0;padding:4px 6px;background:rgba(255,255,255,.95);font-weight:800;font-size:15px}
+.B .strip .cd.in::after{content:attr(data-n);position:absolute;inset:0;background:rgba(46,35,80,.55);color:#ffe7a6;font-size:46px;font-weight:900;display:grid;place-items:center}
+.B .strip .cd.in .nm{z-index:1}
+.B .strip .reco{margin-left:auto;align-self:center;min-height:60px;padding:0 26px;border-radius:30px;background:linear-gradient(90deg,#ffb36b,#ff8a5c);color:#fff;font-weight:800;font-size:18px;box-shadow:0 3px 0 #c95f2f;display:grid;place-items:center}
+
+/* ---------- C 작전 노트 ---------- */
+.C .nb{position:absolute;left:22px;right:70px;top:66px;bottom:16px;border-radius:10px;background:repeating-linear-gradient(180deg,transparent 0 41px,rgba(139,116,232,.18) 41px 42px),#fffaf0;box-shadow:0 20px 40px rgba(0,0,0,.35)}
+.C .nb::after{content:"";position:absolute;left:420px;top:0;bottom:0;width:24px;background:linear-gradient(90deg,rgba(46,35,80,.12),transparent 40%,transparent 60%,rgba(46,35,80,.12))}
+.C .list{position:absolute;left:22px;top:18px;width:380px}
+.C .list h5{margin:0 0 6px;font-size:19px;display:flex;align-items:center;gap:8px}
+.C .list h5 .q{margin-left:auto}
+.C .it{display:flex;align-items:center;gap:12px;height:72px;padding:0 10px;border-radius:12px;margin-bottom:6px}
+.C .it .pf{width:58px;height:58px;border-radius:50%;box-shadow:0 0 0 3px #fff,0 0 0 5px #e2dbf5;flex:none;background-color:#eee8ff}
+.C .it b{font-size:18px}
+.C .it .rl{font-size:14px;color:#6a6290}
+.C .it .on{margin-left:auto;padding:4px 12px;border-radius:12px;background:var(--navy);color:#ffe7a6;font-weight:800;font-size:14px}
+.C .it.in{background:rgba(255,231,166,.45)}
+.C .it.in .pf{box-shadow:0 0 0 3px #fff,0 0 0 5px var(--gold)}
+.C .it.pick{background:#ece7ff;box-shadow:inset 0 0 0 2px var(--lav)}
+.C .board{position:absolute;left:470px;right:20px;top:14px;bottom:14px}
+.C .board .ttl{font-size:30px;font-weight:900;font-style:italic;color:#4c3aa8}
+.C .board .ttl small{font-size:16px;font-style:normal;color:#6a6290;margin-left:10px}
+.C .pol{position:absolute;width:190px;height:226px;background:#fff;padding:10px 10px 0;box-shadow:0 8px 16px rgba(46,35,80,.25)}
+.C .pol .pf{height:166px;background-color:#e9e2ff}
+.C .pol p{margin:4px 0 0;font-weight:800;font-size:17px;display:flex;align-items:center;gap:6px}
+.C .pol p small{margin-left:auto;font-size:13px;color:#6a6290;font-weight:700}
+.C .pol::before{content:"";position:absolute;left:60px;top:-12px;width:70px;height:24px;background:rgba(255,186,210,.75);transform:rotate(-4deg)}
+.C .pol .pos{position:absolute;right:-14px;top:30px;padding:3px 10px;border-radius:10px;background:var(--navy);color:#ffe7a6;font-size:14px;font-weight:800}
+.C .stamp{position:absolute;width:150px;height:150px;border-radius:50%;border:4px dashed #e05a7a;color:#e05a7a;display:grid;place-items:center;text-align:center;font-weight:900;font-size:17px;line-height:1.25;transform:rotate(-10deg);background:rgba(255,255,255,.7)}
+.C .pw{position:absolute;right:10px;bottom:6px;text-align:right}
+.C .pw b{font-size:42px;font-weight:900;color:var(--navy)}
+.C .pw small{display:block;font-size:14px;color:#6a6290;font-weight:700}
+.C .reco{position:absolute;left:24px;bottom:16px;min-height:52px;padding:0 22px;border-radius:26px;background:linear-gradient(90deg,#ffb36b,#ff8a5c);color:#fff;font-weight:800;font-size:17px;display:grid;place-items:center;box-shadow:0 3px 0 #c95f2f}
+.C .idx{position:absolute;right:16px;top:90px;display:flex;flex-direction:column;gap:6px}
+.C .idx b{width:60px;min-height:84px;border-radius:0 12px 12px 0;writing-mode:vertical-rl;display:grid;place-items:center;color:#fff;font-size:15px;letter-spacing:2px;box-shadow:2px 2px 0 rgba(0,0,0,.15)}
+.C .idx b.on{width:70px;margin-left:-10px}
+
+/* ---------- 아이들 목록 표시 (#68) ---------- */
+.L{background:#fbf8ff}
+.L .cards{position:absolute;left:30px;right:30px;top:54px;display:flex;gap:16px}
+.L .lt{position:absolute;left:30px;top:14px;font-size:18px;font-weight:800}
+.L .cd{position:relative;width:150px;height:210px;border-radius:12px;overflow:hidden;background:#eee8ff;flex:none;box-shadow:0 2px 0 #d9d0f3}
+.L .cd .pf{position:absolute;inset:0 0 46px}
+.L .cd .nm{position:absolute;left:0;right:0;bottom:0;height:46px;background:#fff;padding:4px 10px;font-weight:800;font-size:17px;display:flex;align-items:center;gap:6px}
+.L .cd .gr{position:absolute;left:6px;top:6px}
+.L1 .cd.in{box-shadow:0 0 0 3px var(--gold),0 4px 0 #b88a1c}
+.L1 .cd.in::after{content:attr(data-n);position:absolute;right:6px;top:6px;width:32px;height:32px;border-radius:50%;background:var(--navy);color:#ffe7a6;font-weight:900;display:grid;place-items:center;box-shadow:0 0 0 2px #ffe7a6}
+.L2 .cd .rib{position:absolute;left:-30px;top:20px;width:130px;transform:rotate(-35deg);text-align:center;font-size:13px;font-weight:800;color:#fff;padding:2px 0}
+.L2 .cd .dots{position:absolute;right:6px;top:6px;display:flex;gap:3px}
+.L2 .cd .dots i{width:12px;height:12px;border-radius:50%;box-shadow:0 0 0 2px #fff}
+.L3 .grp{position:absolute;top:44px;font-size:15px;font-weight:800;color:#6a6290}
+.L3 .deckbg{position:absolute;left:18px;top:40px;width:690px;height:244px;border-radius:16px;background:linear-gradient(90deg,#fff3cf,#fffaf0);box-shadow:inset 0 0 0 2px #f1d58a}
+.L3 .cards{top:70px}
+</style>
+</head>
+<body>
+<main class="page">
+<h1>편성 (#37 · #38) + 아이들 목록의 편성 표시 (#68)</h1>
+<p class="lead">글자를 크게 줄이고(숫자 · 아이콘 · 짧은 낱말), 편성 화면만의 생김새를 줍니다. 세 시안은 <b>무엇을 보며 편성하는지</b>가 다릅니다 — 갑판 위 자리 / 팀 얼굴 / 작전 노트. 덱 탭은 PD 결정(#60)대로 「등급전」 하나입니다. 수치는 예시입니다.</p>
+<div class="bar"><button type="button" data-res="1280" aria-pressed="true">1280×720</button><button type="button" data-res="1600" aria-pressed="false">1600×720</button></div>
+
+<section class="ref">
+  <h2>지금 게임</h2>
+  <p class="cap">빈 칸마다 「아이를 고른 뒤 눌러요」 같은 문장이 반복되고, 패널 · 버튼 모양이 다른 메뉴와 같습니다. 아이들 목록에는 누가 편성됐는지 표시가 없습니다.</p>
+  <div class="refs">
+    <figure><img src="../../../../artifacts/deck_ux/01_formation_lv3_voyage_only_1280x720.png" alt="지금 편성 화면"><figcaption>artifacts/deck_ux/01_formation_lv3_voyage_only_1280x720.png</figcaption></figure>
+    <figure><img src="../../../../artifacts/qa/playtest/cap/menus_1280x720/heroes.png" alt="지금 아이들 목록"><figcaption>artifacts/qa/playtest/cap/menus_1280x720/heroes.png</figcaption></figure>
+  </div>
+</section>
+
+<!-- A -->
+<section class="opt" data-choice="form_a" data-choice-group="formation" data-choice-label="A · 갑판 위 배치">
+  <h2>A · 갑판 위 배치 — 실제 자리를 보며</h2>
+  <p class="cap">고래 갑판 그림 위에 아이들이 서 있고, 빛나는 자리를 눌러 바꿉니다; 설명 대신 「선두 ⚔ / 후열 ⏱」 표지만 둡니다.</p>
+  <div class="vp"><div class="scr A">
+    <div class="bgcap"></div>
+    <div class="top"><div class="back">‹</div><h4>편성</h4><div class="cur"><span>☁ 1,000</span><span>◆ 5,000</span></div></div>
+    <div class="tabs"><b class="on">항해</b><b>원소섬</b><b>잿빛성</b><b>신전</b><b>등급전</b></div>
+    <div class="stage">
+      <img class="wh" src="../../../../assets/world/whale_giant.png" alt="">
+      <div class="row" style="left:60px;background:#4562b8">⏱ 후열 · 쿨 −15%</div>
+      <div class="row" style="left:330px;background:#b8501f">⚔ 선두 · 공격 +15%</div>
+      <div class="pow"><small>전투력</small><b>3,821</b></div>
+      <div class="spot" style="left:70px;top:395px"></div><div class="spot" style="left:220px;top:420px"></div>
+      <div class="spot" style="left:380px;top:390px"></div><div class="spot" style="left:540px;top:410px"></div>
+      <img class="kid" src="../../../../assets/chars/ciel_idle.png" alt="시엘" style="left:80px;top:245px">
+      <img class="kid" src="../../../../assets/chars/mio_idle.png" alt="미오" style="left:232px;top:270px">
+      <img class="kid" src="../../../../assets/chars/yuna_idle.png" alt="유나" style="left:392px;top:240px">
+      <img class="kid" src="../../../../assets/chars/karen_idle.png" alt="카렌" style="left:548px;top:262px">
+      <div class="num" style="left:122px;top:440px">3</div><div class="num" style="left:274px;top:465px">4</div>
+      <div class="num" style="left:432px;top:435px">1</div><div class="num" style="left:592px;top:455px">2</div>
+      <div class="bond"><span>결속</span><span class="el e-purple"></span><span class="el e-red"></span>딜러 2 · <span class="el e-white"></span>수호 · <span class="el e-green"></span>지원 <span class="ok">✓ 공격 +8%</span></div>
+    </div>
+    <div class="ros">
+      <h5>아이들 <span class="gr g-A">6</span><span class="q">?</span></h5>
+      <p class="hint">아이 → 빛나는 자리</p>
+      <div class="grid">
+        <div class="cd in"><div class="pf h-yuna"></div><span class="gr g-A">A</span><span class="badge">1</span><div class="nm"><span class="el e-purple"></span>유나</div></div>
+        <div class="cd in"><div class="pf h-karen"></div><span class="gr g-S">S</span><span class="badge">2</span><div class="nm"><span class="el e-red"></span>카렌</div></div>
+        <div class="cd in"><div class="pf h-ciel"></div><span class="gr g-A">A</span><span class="badge">3</span><div class="nm"><span class="el e-green"></span>시엘</div></div>
+        <div class="cd in"><div class="pf h-mio"></div><span class="gr g-B">B</span><span class="badge">4</span><div class="nm"><span class="el e-white"></span>미오</div></div>
+        <div class="cd pick"><div class="pf h-serena"></div><span class="gr g-SS">SS</span><div class="nm"><span class="el e-purple"></span>세레나</div></div>
+        <div class="cd"><div class="pf h-aria"></div><span class="gr g-SS">SS</span><div class="nm"><span class="el e-white"></span>아리아</div></div>
+      </div>
+      <div class="reco">✦ 추천</div>
+    </div>
+  </div></div>
+</section>
+
+<!-- B -->
+<section class="opt" data-choice="form_b" data-choice-group="formation" data-choice-label="B · 팀 라인업 카드">
+  <h2>B · 팀 라인업 — 얼굴이 크게</h2>
+  <p class="cap">기울어진 세로 카드 4장으로 「우리 팀」을 크게 보여 주고, 아래 띠에서 편성된 아이는 번호로 덮여 바로 구분됩니다.</p>
+  <div class="vp"><div class="scr B">
+    <div class="bgcap"></div>
+    <div class="top"><div class="back">‹</div><h4>편성</h4><div class="cur"><span>☁ 1,000</span><span>◆ 5,000</span></div></div>
+    <div class="side"><b class="on"><span>항해</span></b><b><span>원소섬</span></b><b><span>잿빛성</span></b><b><span>신전</span></b><b><span>등급전</span></b></div>
+    <div class="line">
+      <div class="sl front"><div class="art h-yuna"></div><div class="no">1</div><div class="pos" style="background:#b8501f">⚔ 선두</div><div class="foot"><b>유나</b><small><span class="el e-purple"></span> 광역 딜러</small></div></div>
+      <div class="sl front"><div class="art h-karen"></div><div class="no">2</div><div class="pos" style="background:#b8501f">⚔ 선두</div><div class="foot"><b>카렌</b><small><span class="el e-red"></span> 단일 딜러</small></div></div>
+      <div class="sl"><div class="art h-ciel"></div><div class="no">3</div><div class="pos" style="background:#4562b8">⏱ 후열</div><div class="foot"><b>시엘</b><small><span class="el e-green"></span> 지원</small></div></div>
+      <div class="sl"><div class="art h-mio"></div><div class="no">4</div><div class="pos" style="background:#4562b8">⏱ 후열</div><div class="foot"><b>미오</b><small><span class="el e-white"></span> 수호</small></div></div>
+    </div>
+    <div class="info"><span class="q">?</span><small>전투력</small><div class="p">3,821</div>
+      <small>결속</small>
+      <div class="bd">⚔ 딜러 2 <span class="ok">✓</span></div>
+      <div class="bd">🛡 수호 1 <span class="ok">✓</span></div>
+      <div class="bd">✚ 지원 1 <span class="ok">✓</span></div>
+      <div class="bd" style="color:#14714f">공격 +8%</div>
+    </div>
+    <div class="strip">
+      <div class="cd in" data-n="1"><div class="pf h-yuna"></div><span class="gr g-A">A</span><div class="nm">유나</div></div>
+      <div class="cd in" data-n="2"><div class="pf h-karen"></div><span class="gr g-S">S</span><div class="nm">카렌</div></div>
+      <div class="cd in" data-n="3"><div class="pf h-ciel"></div><span class="gr g-A">A</span><div class="nm">시엘</div></div>
+      <div class="cd in" data-n="4"><div class="pf h-mio"></div><span class="gr g-B">B</span><div class="nm">미오</div></div>
+      <div class="cd"><div class="pf h-serena"></div><span class="gr g-SS">SS</span><div class="nm">세레나</div></div>
+      <div class="cd"><div class="pf h-aria"></div><span class="gr g-SS">SS</span><div class="nm">아리아</div></div>
+      <div class="reco">✦ 추천</div>
+    </div>
+  </div></div>
+</section>
+
+<!-- C -->
+<section class="opt" data-choice="form_c" data-choice-group="formation" data-choice-label="C · 작전 노트">
+  <h2>C · 작전 노트 — 「아틀리에」다운 스케치 판</h2>
+  <p class="cap">노트 한 쪽은 아이 목록, 다른 쪽은 사진 4장을 붙인 작전판; 결속은 도장 하나, 덱은 노트 옆 색인 탭입니다.</p>
+  <div class="vp"><div class="scr C">
+    <div class="bgcap"></div>
+    <div class="top"><div class="back">‹</div><h4>편성</h4><div class="cur"><span>☁ 1,000</span><span>◆ 5,000</span></div></div>
+    <div class="nb">
+      <div class="list"><h5>아이들 6 <span class="q">?</span></h5>
+        <div class="it in"><div class="pf h-yuna"></div><div><b>유나</b><div class="rl"><span class="el e-purple"></span> 광역 딜러</div></div><span class="on">1</span></div>
+        <div class="it in"><div class="pf h-karen"></div><div><b>카렌</b><div class="rl"><span class="el e-red"></span> 단일 딜러</div></div><span class="on">2</span></div>
+        <div class="it in"><div class="pf h-ciel"></div><div><b>시엘</b><div class="rl"><span class="el e-green"></span> 지원</div></div><span class="on">3</span></div>
+        <div class="it in"><div class="pf h-mio"></div><div><b>미오</b><div class="rl"><span class="el e-white"></span> 수호</div></div><span class="on">4</span></div>
+        <div class="it pick"><div class="pf h-serena"></div><div><b>세레나</b><div class="rl"><span class="el e-purple"></span> 광역 딜러</div></div></div>
+        <div class="it"><div class="pf h-aria"></div><div><b>아리아</b><div class="rl"><span class="el e-white"></span> 수호</div></div></div>
+      </div>
+      <div class="board">
+        <div class="ttl">항해 작전<small>사진을 눌러 바꾸기</small></div>
+        <div class="pol" style="left:300px;top:66px;transform:rotate(3deg)"><div class="pf h-yuna"></div><p><span class="el e-purple"></span>유나<small>Lv.12</small></p><span class="pos">⚔ 선두</span></div>
+        <div class="pol" style="left:530px;top:84px;transform:rotate(-4deg)"><div class="pf h-karen"></div><p><span class="el e-red"></span>카렌<small>Lv.15</small></p><span class="pos">⚔ 선두</span></div>
+        <div class="pol" style="left:40px;top:80px;transform:rotate(-3deg)"><div class="pf h-ciel"></div><p><span class="el e-green"></span>시엘<small>Lv.11</small></p><span class="pos" style="background:#4562b8;color:#fff">⏱ 후열</span></div>
+        <div class="pol" style="left:120px;top:330px;transform:rotate(4deg)"><div class="pf h-mio"></div><p><span class="el e-white"></span>미오<small>Lv.9</small></p><span class="pos" style="background:#4562b8;color:#fff">⏱ 후열</span></div>
+        <div class="stamp" style="left:420px;top:360px">결속 완성<br>공격 +8%</div>
+        <div class="reco">✦ 추천 편성</div>
+        <div class="pw"><small>전투력</small><b>3,821</b></div>
+      </div>
+    </div>
+    <div class="idx"><b class="on" style="background:#b8501f">항해</b><b style="background:#237a6c">원소섬</b><b style="background:#5f5a78">잿빛성</b><b style="background:#8a6a12">신전</b><b style="background:#5b44c4">등급전</b></div>
+  </div></div>
+</section>
+
+<h3>「아이들」 목록에서 편성된 아이 표시 (#68)</h3>
+<p class="lead">편성 시안과 따로 고릅니다. 같은 아이 6명, 앞의 4명이 항해 덱에 있습니다.</p>
+
+<section class="opt" data-choice="list_a" data-choice-group="hero_list" data-choice-label="1 · 금테 + 번호">
+  <h2>1 · 금테 + 자리 번호</h2>
+  <p class="cap">지금 보고 있는 덱(항해)에 든 아이만 금테와 자리 번호 — 가장 조용하고 확실합니다.</p>
+  <div class="vp"><div class="scr mini L L1"><div class="lt">아이들 6</div><div class="cards">
+    <div class="cd in" data-n="1"><div class="pf h-yuna"></div><span class="gr g-A">A</span><div class="nm"><span class="el e-purple"></span>유나</div></div>
+    <div class="cd in" data-n="2"><div class="pf h-karen"></div><span class="gr g-S">S</span><div class="nm"><span class="el e-red"></span>카렌</div></div>
+    <div class="cd in" data-n="3"><div class="pf h-ciel"></div><span class="gr g-A">A</span><div class="nm"><span class="el e-green"></span>시엘</div></div>
+    <div class="cd in" data-n="4"><div class="pf h-mio"></div><span class="gr g-B">B</span><div class="nm"><span class="el e-white"></span>미오</div></div>
+    <div class="cd"><div class="pf h-serena"></div><span class="gr g-SS">SS</span><div class="nm"><span class="el e-purple"></span>세레나</div></div>
+    <div class="cd"><div class="pf h-aria"></div><span class="gr g-SS">SS</span><div class="nm"><span class="el e-white"></span>아리아</div></div>
+  </div></div></div>
+</section>
+<section class="opt" data-choice="list_b" data-choice-group="hero_list" data-choice-label="2 · 리본 + 덱 색 점">
+  <h2>2 · 「항해」 리본 + 다른 덱 색 점</h2>
+  <p class="cap">모서리 리본으로 항해 덱을, 오른쪽 위 작은 색 점으로 다른 덱(원소섬 · 잿빛성 …)에도 들었는지 함께 보여 줍니다.</p>
+  <div class="vp"><div class="scr mini L L2"><div class="lt">아이들 6</div><div class="cards">
+    <div class="cd"><div class="pf h-yuna"></div><span class="rib" style="background:#b8501f">항해</span><span class="dots"><i style="background:#237a6c"></i><i style="background:#8b74e8"></i></span><div class="nm"><span class="el e-purple"></span>유나</div></div>
+    <div class="cd"><div class="pf h-karen"></div><span class="rib" style="background:#b8501f">항해</span><span class="dots"><i style="background:#5f5a78"></i></span><div class="nm"><span class="el e-red"></span>카렌</div></div>
+    <div class="cd"><div class="pf h-ciel"></div><span class="rib" style="background:#b8501f">항해</span><div class="nm"><span class="el e-green"></span>시엘</div></div>
+    <div class="cd"><div class="pf h-mio"></div><span class="rib" style="background:#b8501f">항해</span><div class="nm"><span class="el e-white"></span>미오</div></div>
+    <div class="cd"><div class="pf h-serena"></div><span class="dots"><i style="background:#8b74e8"></i></span><span class="gr g-SS" style="position:absolute;left:6px;top:6px">SS</span><div class="nm"><span class="el e-purple"></span>세레나</div></div>
+    <div class="cd"><div class="pf h-aria"></div><span class="gr g-SS" style="position:absolute;left:6px;top:6px">SS</span><div class="nm"><span class="el e-white"></span>아리아</div></div>
+  </div></div></div>
+</section>
+<section class="opt" data-choice="list_c" data-choice-group="hero_list" data-choice-label="3 · 갑판 위 묶음">
+  <h2>3 · 「갑판 위」 묶음을 맨 앞에</h2>
+  <p class="cap">편성된 4명을 크림색 띠 한 칸에 모아 맨 앞에 두고, 나머지 아이는 뒤에 이어 놓습니다.</p>
+  <div class="vp"><div class="scr mini L L3"><div class="lt">아이들 6</div><div class="deckbg"></div><div class="grp" style="left:36px">⚓ 갑판 위</div><div class="grp" style="left:740px">대기</div><div class="cards">
+    <div class="cd"><div class="pf h-yuna"></div><span class="gr g-A">A</span><div class="nm"><span class="el e-purple"></span>유나</div></div>
+    <div class="cd"><div class="pf h-karen"></div><span class="gr g-S">S</span><div class="nm"><span class="el e-red"></span>카렌</div></div>
+    <div class="cd"><div class="pf h-ciel"></div><span class="gr g-A">A</span><div class="nm"><span class="el e-green"></span>시엘</div></div>
+    <div class="cd"><div class="pf h-mio"></div><span class="gr g-B">B</span><div class="nm"><span class="el e-white"></span>미오</div></div>
+    <div class="cd" style="margin-left:40px"><div class="pf h-serena"></div><span class="gr g-SS">SS</span><div class="nm"><span class="el e-purple"></span>세레나</div></div>
+    <div class="cd"><div class="pf h-aria"></div><span class="gr g-SS">SS</span><div class="nm"><span class="el e-white"></span>아리아</div></div>
+  </div></div></div>
+</section>
+</main>
+<script>
+const fit=()=>document.querySelectorAll('.vp').forEach(v=>{const s=v.querySelector('.scr');const k=v.clientWidth/s.offsetWidth;s.style.transform=`scale(${k})`;v.style.height=s.offsetHeight*k+'px'});
+let lastW=0;new ResizeObserver(()=>{const w=document.body.clientWidth;if(w!==lastW){lastW=w;requestAnimationFrame(fit)}}).observe(document.body);
+document.querySelectorAll('.bar [data-res]').forEach(b=>b.addEventListener('click',()=>{document.documentElement.style.setProperty('--w',b.dataset.res);document.querySelectorAll('.bar [data-res]').forEach(x=>x.setAttribute('aria-pressed',x===b));fit()}));
+document.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>document.querySelectorAll(`.opt[data-choice-group="${o.dataset.choiceGroup}"]`).forEach(x=>x.classList.toggle('sel',x===o))));
+fit();
+</script>
+</body>
+</html>

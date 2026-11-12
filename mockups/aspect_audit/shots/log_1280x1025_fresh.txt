@@ -1,0 +1,16 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Ti
+
+SHOT title_loading_f1_1280x1025.jpg
+SHOT title_loading_f2_1280x1025.jpg
+SHOT title_loading_f3_1280x1025.jpg
+SHOT title_loading_f4_1280x1025.jpg
+SHOT title_loading_f5_1280x1025.jpg
+SHOT title_loading_f6_1280x1025.jpg
+SHOT title_ready_1280x1025.jpg
+SECTION fresh_flow
+SHOT story_prologue_1280x1025.jpg
+SHOT tut_fresh_deck_0_1280x1025.jpg
+SHOT hud_fresh_1280x1025.jpg
+SHOT locked_tap_fresh_1280x1025.jpg
+FEEDBACK_DONE phase=fresh entries=6 failures=[]
