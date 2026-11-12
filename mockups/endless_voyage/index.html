@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>무한 항로 · 성장 예산 제안</title>
+<style>
+:root{--paper:#faf6ec;--ink:#253b42;--muted:#52636a;--sea:#17666a;--sun:#97501b;--rose:#963e54;--line:#d3d7cf}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 "Malgun Gothic",sans-serif}
+main{max-width:1120px;margin:auto;padding:32px 24px}h1{font-size:32px;line-height:1.3;margin:8px 0 14px}h2{font-size:20px;margin:20px 0 8px}
+p{max-width:78ch;margin:8px 0}.muted{color:var(--muted)}.legend{display:flex;gap:24px;flex-wrap:wrap}.legend b:nth-child(1){color:var(--sea)}.legend b:nth-child(2){color:var(--sun)}.legend b:nth-child(3){color:var(--rose)}
+svg{width:100%;height:auto;display:block}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}th,td{padding:8px 4px;border-bottom:1px solid var(--line);text-align:right}th:first-child,td:first-child{text-align:left}aside{border-top:2px solid var(--ink);margin-top:24px;padding-top:12px}small{font-size:14px}
+@media(max-width:500px){main{padding:20px 14px}h1{font-size:25px}table{font-size:14px}.legend{gap:14px}}
+</style>
+<main>
+<p class="muted">레인보우 아틀리에 · PD 검토안 · 게임 미적용</p>
+<h1>결제하면 쭉쭉 돌파.<br>더 높은 곳에서 다시 천천히.</h1>
+<p>적의 한 칸 성장률은 유지하고, 영구 레벨과 항로 전용 생산 연구를 함께 늘립니다. 아래는 <strong>성장 예산 시뮬레이션</strong>이며 Godot 전투 실측이 아닙니다.</p>
+<div class="legend"><b>● F2P 성실</b><b>● 소액 5회 구매</b><b>● 고액 5회 구매</b></div>
+<p>확정 성장 예산: 패스 ×1.5 → +22칸 / 소형 ×3 → +60칸 / 대형 ×10 → +126칸 / 최상위 ×30 → +186칸. 구매 직후의 상승선은 실제 6~16분 돌파를 일 단위 축에 압축했습니다.</p>
+<p><strong>첫 3분 돌파 예산: +15 / +22 / +61 / +91칸.</strong><br>실제 육성 적용 후 전투력 old → new를 0.8초 카운트업하고 ▲증가량을 표시합니다. 항해가 재개되면 실제 정화마다 「돌파 +N」을 누적하고, 가속 종료 시 새 목표를 남깁니다.</p>
+<svg id="chart" viewBox="0 0 1000 340" role="img" aria-label="세 프로필이 1일부터 365일까지 계속 상승하는 항로 예산 곡선"></svg>
+<table><thead><tr><th>시점</th><th>F2P</th><th>소액</th><th>고액</th></tr></thead><tbody id="rows"></tbody></table>
+<aside><h2>한 칸은 그대로, 구매 기회는 계속</h2>
+<p>1~200칸: HP +3.79%/칸 · 이후: +1.84%/칸 · 10칸 보스 유지.<br>이야기 1~600칸 고정 · 601칸부터 여섯 지역 순환 · 최종 스테이지 없음.</p>
+<p>제안식: S(d)=⌊200+(d−1)+A·ln(1+(d−1)/τ)⌋. 속도는 감소하되, 구매를 계속하는 계정은 하루 최소 +1칸을 보장합니다.</p>
+<small class="muted">승인 포인트: “적 성장 우위”는 항로 수입만의 성장 기울기에 적용합니다. 총 전투력이 영원히 뒤처진다는 뜻이면 매일 상승 보장과 양립하지 않습니다. 첫날·30분은 목표 앵커이며, 구매 상한·연구 비용은 승인 후 전투 시뮬레이션으로 맞춥니다.</small></aside>
+</main>
+<script>
+const ps=[{c:'#17666a',e:[]},{c:'#97501b',e:[[2,1.5],[7,3],[30,1.5],[90,3],[180,3]]},{c:'#963e54',e:[[2,10],[7,30],[30,30],[90,30],[180,30]]}];
+const st=(d,p)=>Math.floor(200+d-1+600*Math.log1p((d-1)/30))+Math.floor(p.e.filter(([t])=>t<=d).reduce((s,[,j])=>s+Math.log(j)/(Math.log(1.2)/10),0));
+const svg=document.querySelector('#chart'),ns='http://www.w3.org/2000/svg';
+function el(tag,attrs,text){let e=document.createElementNS(ns,tag);for(const [k,v]of Object.entries(attrs))e.setAttribute(k,v);if(text)e.textContent=text;svg.append(e)}
+for(let s=0;s<=5000;s+=1000){let y=300-s/5000*270;el('line',{x1:65,x2:970,y1:y,y2:y,stroke:'#d3d7cf'});el('text',{x:55,y:y+5,'text-anchor':'end',fill:'#52636a','font-size':16},s.toLocaleString())}
+for(const d of [1,90,180,365])el('text',{x:65+(d-1)/364*905,y:330,'text-anchor':'middle',fill:'#52636a','font-size':16},d+'일');
+for(const p of ps){let points=[];for(let i=0;i<365;i++){let d=i+1,x=65+i/364*905;if(p.e.some(([t])=>t===d))points.push(`${x},${300-st(d-.001,p)/5000*270}`);points.push(`${x},${300-st(d,p)/5000*270}`)}el('polyline',{points:points.join(' '),fill:'none',stroke:p.c,'stroke-width':3});for(const [d,j]of p.e)el('circle',{cx:65+(d-1)/364*905,cy:300-st(d,p)/5000*270,r:5,fill:p.c})}
+el('text',{x:250,y:40,fill:'#52636a','font-size':16},'● 구매일 2 · 7 · 30 · 90 · 180일');
+document.querySelector('#rows').innerHTML='<tr><td>30분</td><td>50</td><td>50</td><td>50</td></tr>'+[1,7,30,90,180,365].map(d=>'<tr><td>'+d+'일</td>'+ps.map(p=>'<td>'+st(d,p).toLocaleString()+'</td>').join('')+'</tr>').join('');
+</script></html>
