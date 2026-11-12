@@ -1,0 +1,15 @@
+{
+  "id": "lumi",
+  "name": "루미",
+  "tier": "S",
+  "element": "purple",
+  "role": "약점 정밀 사격",
+  "main_story": false,
+  "archetype": "cool / boyish",
+  "expression": "focused confident half-smile",
+  "pose": "three-quarter telescope-crossbow aiming pivot with diagonal forward step",
+  "legwear": "plain charcoal thigh-high socks with thin bands and brown loafers",
+  "leg_appeal": "Long slender straight leg lines and a precise diagonal stance emphasize the cool sharpshooter silhouette.",
+  "status": "done",
+  "notes": "Uniform reform: rolled-sleeve cropped pink cardigan, fitted navy vest, loosened purple tie, layered purple plaid skort. OpenAI Images / gpt-image-2, default controls. Prompt brief: preserve lilac bob, goggles, violet eyes and brass telescope crossbow; Flora-style adult cel proportions and cool precision-shooter character. Existing game cut-in absent; ultimate composition follows attack pose with astronomical observatory. Green matte removed from pickup, black effect mattes removed, SD resized to original canvases, face cropped from detail. Game assets unchanged."
+}

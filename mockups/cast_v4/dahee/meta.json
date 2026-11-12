@@ -1,0 +1,15 @@
+{
+  "id": "dahee",
+  "name": "다희",
+  "tier": "A",
+  "element": "purple",
+  "role": "지원",
+  "main_story": false,
+  "archetype": "cute · 귀여움",
+  "expression": "졸린 눈으로 하품하는 표정",
+  "pose": "별 베개를 안고 한 발을 살짝 든 흔들리는 스텝",
+  "legwear": "흰 프릴 앵클삭스",
+  "leg_appeal": "부드러운 다리선과 가벼운 한 발 들기",
+  "status": "done",
+  "notes": "크림 프릴 소매·리본·겹치마로 귀여운 교복 리폼. 9종 규격과 어두운 배경 알파 검수 완료. 기존 컷인 부재로 공격 스프라이트의 베개 마법 구도를 확장. OpenAI Images / gpt-image-2. Prompts: lavender sleepy dreamer identity, nightcap and star pillow preserved; Flora cel style, adult full-body yawning pickup, gentle standing, original SD poses, waist-up pillow magic, light lavender moon aura and sparse stars. Transparent character output; black-key effects."
+}

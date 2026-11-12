@@ -1,0 +1,15 @@
+{
+  "id": "seoa",
+  "name": "서아",
+  "tier": "A",
+  "element": "white",
+  "role": "지원",
+  "main_story": false,
+  "archetype": "pure/gentle · 청순",
+  "expression": "다정하고 환한 미소",
+  "pose": "깃털 펜으로 축복을 그리며 손을 내미는 가벼운 전진",
+  "legwear": "차콜 니삭스와 브라운 로퍼",
+  "leg_appeal": "부드러운 무릎선과 간결한 전진 스텝",
+  "status": "done",
+  "notes": "라벤더 리본과 스캘럽 커프스로 교복 리폼. 9종 규격·어두운 배경 알파 검수 완료. OpenAI Images / gpt-image-2, transparent character layers and cyan-key detail/SD, black-key effects. Prompt: preserve champagne waves, amber eyes, feather flower clip and golden quill; gentle adult blessing step, relaxed standing, original SD poses, quill-writing cutin, light gold feather sigil and sparse sparkles."
+}

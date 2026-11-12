@@ -1,0 +1,15 @@
+{
+  "id": "noel",
+  "name": "노엘",
+  "tier": "S",
+  "element": "purple",
+  "role": "보호",
+  "main_story": false,
+  "archetype": "mysterious / elegant",
+  "expression": "serene knowing smile with softly half-lidded eyes",
+  "pose": "protective shield lift and reassuring open hand with a graceful crossed-foot pivot",
+  "legwear": "sheer charcoal tights and brown low-heel loafers",
+  "leg_appeal": "Softly curved long legs and pointed diagonal foot line beneath a short asymmetric hem.",
+  "status": "done",
+  "notes": "Uniform reform: pink moon-trimmed capelet, navy vest, lavender ribbon and short asymmetric purple plaid skirt. OpenAI Images / gpt-image-2, default controls. Prompt brief: preserve twin buns, crescent pins, sleepy violet eyes and crescent shield; mysterious elegant adult guardian in Flora-approved cel style. Corrected pickup hair length and skirt coverage. Existing game cut-in absent; composition based on attack shield thrust. Green key and black effect mattes removed; SD resized to original canvas sizes; face derived from detail. Game assets unchanged."
+}

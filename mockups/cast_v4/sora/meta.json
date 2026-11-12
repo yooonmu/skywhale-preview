@@ -1,0 +1,15 @@
+{
+  "id": "sora",
+  "name": "소라",
+  "tier": "A",
+  "element": "purple",
+  "role": "단일 딜러",
+  "main_story": false,
+  "archetype": "playful/mischievous · 장난",
+  "expression": "윙크와 장난스러운 활짝 웃음",
+  "pose": "상체 앞에서 별 요요 트릭을 하며 한 발 들기",
+  "legwear": "차콜 앵클삭스",
+  "leg_appeal": "간결한 맨다리 실루엣과 가벼운 장난스러운 스텝",
+  "status": "done",
+  "notes": "크롭 카디건·롤업 소매·느슨한 타이로 교복 리폼. 9종 규격과 어두운 배경 알파 검수 완료. 기존 컷인 부재로 요요 공격 구도를 확장. OpenAI Images / gpt-image-2. Prompts: preserve plum ponytail, bow, cheek star and star yo-yo; playful adult pickup, gentle standing, original SD poses, waist-up yo-yo attack, light violet star orbit and sparse particles. Transparent characters, black-key effects."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "chaewon",
+  "name": "채원",
+  "tier": "A",
+  "element": "white",
+  "role": "탱커",
+  "main_story": false,
+  "archetype": "boyish · 보이시",
+  "expression": "당당한 웃음과 전투 함성",
+  "pose": "방패를 들고 전진하는 준비 자세",
+  "legwear": "차콜 니삭스와 브라운 로퍼",
+  "leg_appeal": "건강한 다리선과 안정적인 넓은 스텝",
+  "status": "done",
+  "notes": "롤업 소매·짧은 타이·쇼츠형 스코트 리폼. 원본 컷인 부재로 방패 돌진 구도 확장. 9종 규격과 어두운 배경 알파 검수 완료. OpenAI Images / gpt-image-2; cyan-key characters, black-key effects. Prompt: preserve blonde bun, ribbon, amber eyes, nose bandage and bell shield; brave adult shield step, gentle standing, original SD poses, charging cutin, light white gold shield sigil and sparse sparks."
+}

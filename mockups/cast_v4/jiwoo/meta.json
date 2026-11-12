@@ -1,0 +1,15 @@
+{
+  "id": "jiwoo",
+  "name": "지우",
+  "tier": "S",
+  "element": "white",
+  "role": "단일 딜러",
+  "main_story": false,
+  "archetype": "sporty / confident",
+  "expression": "focused confident grin",
+  "pose": "full longbow draw in a grounded wide side-lunge",
+  "legwear": "plain navy below-knee socks and brown loafers",
+  "leg_appeal": "Athletic thighs and defined calves, one bent knee and a strongly extended opposite leg.",
+  "status": "done",
+  "notes": "Uniform reform: white short sleeves, fitted navy vest, purple tie, pink cardigan tied at waist and purple plaid athletic skort. OpenAI Images / gpt-image-2, default controls. Brief: preserve golden bob, striped headband, golden eyes and golden longbow; sporty adult archer in Flora-approved cel style. Existing game cut-in absent; composition follows attack bow draw with noon archery courtyard. Green cut-in matte and black effect mattes removed, SD resized to original canvases, face cropped from detail. Game assets unchanged."
+}

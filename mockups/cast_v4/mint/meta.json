@@ -1,0 +1,15 @@
+{
+  "id": "mint",
+  "name": "민트",
+  "tier": "A",
+  "element": "green",
+  "role": "탱커",
+  "main_story": false,
+  "archetype": "laid-back cute · 느긋한 귀여움",
+  "expression": "졸린 듯 느긋한 윙크",
+  "pose": "거북 방패를 들고 엄지를 세우며 한 발 균형 잡기",
+  "legwear": "얇은 밴드의 차콜 오버니삭스",
+  "leg_appeal": "부드러운 다리선과 편안한 교차 스텝",
+  "status": "partial",
+  "notes": "오프숄더 카디건·리본·레이어드 스커트 리폼. 9종 규격 및 알파 확인. 머리카락 안쪽 일부 자홍 잔색 추가 보정 필요. 원본 컷인 부재로 방패 공격 확장. OpenAI Images / gpt-image-2; magenta-key characters, black-key effects. Prompt: preserve mint bob, green eyes, turtle clip and shield; relaxed adult balancing pose, gentle standing, original SD poses, shield-push cutin, light green shell sigil and sparse particles."
+}

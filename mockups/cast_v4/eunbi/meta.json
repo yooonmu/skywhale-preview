@@ -1,0 +1,15 @@
+{
+  "id": "eunbi",
+  "name": "은비",
+  "tier": "A",
+  "element": "white",
+  "role": "지원",
+  "main_story": false,
+  "archetype": "sporty/energetic · 활발",
+  "expression": "신나는 윙크와 활짝 웃음",
+  "pose": "탬버린을 높이 들고 한 발을 접는 댄스 스텝",
+  "legwear": "얇은 노랑 커프스의 흰 앵클삭스",
+  "leg_appeal": "경쾌한 맨다리 곡선과 리듬감 있는 스텝",
+  "status": "done",
+  "notes": "크롭 롤업 카디건과 작은 리본으로 교복 리폼. 원본 컷인 부재로 탬버린 공격 확장. 9종 규격·알파 검수 및 컷인 색 번짐 보정 완료. OpenAI Images / gpt-image-2; cyan-key characters and black-key effects. Prompt: preserve golden twin tails, yellow scrunchies, amber eyes and sun tambourine; energetic adult dance step, gentle standing, original SD poses, tambourine-shaking cutin, light sunshine ring and sparse sparks."
+}

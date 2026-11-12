@@ -1,0 +1,15 @@
+{
+  "id": "rina",
+  "name": "리나",
+  "tier": "S",
+  "element": "green",
+  "role": "단일 딜러",
+  "main_story": false,
+  "archetype": "playful / mischievous",
+  "expression": "sly toothy grin and raised brow",
+  "pose": "sideways skipping step while drawing branch bow upward",
+  "legwear": "olive over-knee socks with thin tops and brown loafers",
+  "leg_appeal": "Compact athletic legs with rounded thighs and springy calves, one foot lifted behind.",
+  "status": "done",
+  "notes": "Uniform reform: rolled leaf-trim pink cardigan, navy vest, loose purple ribbon, plaid wrap skort and acorn utility belt. OpenAI Images / gpt-image-2, default controls. Prompt: preserve green bob, leaf hairpin, green eyes, acorn pouch and branch bow; playful adult forest scout in Flora cel style. Blue portrait mattes and black effect mattes removed; SD resized and face cropped from detail. Cut-in follows bow attack composition. Game assets unchanged."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "hayun",
+  "name": "하윤",
+  "tier": "S",
+  "element": "white",
+  "role": "광역 딜러",
+  "main_story": false,
+  "archetype": "pure / gentle",
+  "expression": "bright welcoming open smile",
+  "pose": "guiding lantern raised overhead with an open hand and light lifted-heel step",
+  "legwear": "cream folded ankle socks and brown loafers",
+  "leg_appeal": "Softly fuller thighs and balanced bare calves form a warm, buoyant stepping silhouette.",
+  "status": "done",
+  "notes": "Uniform reform: scalloped pink cardigan, cream collar ribbon and cream-trim layered purple plaid skirt over the navy vest. OpenAI Images / gpt-image-2, default controls. Brief: preserve honey-blonde low ponytail, flower, coral bow, amber eyes and lighthouse lantern with anchor charm; gentle adult guide in Flora-style clean cel rendering. Existing game cut-in absent; composition follows attack lantern thrust with dawn harbor. Green detail matte and black effect mattes removed, SD resized to original canvases, face cropped from detail. Game assets unchanged."
+}

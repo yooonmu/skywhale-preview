@@ -1,0 +1,15 @@
+{
+  "id": "harin",
+  "name": "하린",
+  "tier": "A",
+  "element": "blue",
+  "role": "수호",
+  "main_story": true,
+  "archetype": "sporty/energetic · 활발",
+  "expression": "든든하고 자신감 있는 미소",
+  "pose": "조개 방패를 들고 동료를 부르는 넓은 방어 스탠스",
+  "legwear": "얇은 밴드와 은은한 광택의 차콜 니삭스",
+  "leg_appeal": "탄탄한 허벅지와 종아리, 안정적인 넓은 스탠스",
+  "status": "done",
+  "notes": "롤업 소매·느슨한 타이·파란 포켓 파이핑으로 활동형 교복 리폼. 9종 규격 및 어두운 배경 알파 검수 완료. 기존 harin_cutin.png가 없어 공격 스프라이트의 방패 밀기 구도를 컷인으로 확장. OpenAI Images / gpt-image-2; prompts: preserve blue-haired shell-shield identity, Flora cel style, athletic adult proportions; protective pickup, gentle standing detail, original SD poses, waist-up shield wave cut-in, light aqua shell sigil and sparse drops. Transparent generation; detail background removed by targeted edit."
+}

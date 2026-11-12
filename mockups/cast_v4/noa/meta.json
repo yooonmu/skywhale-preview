@@ -1,0 +1,15 @@
+{
+  "id": "noa",
+  "name": "노아",
+  "tier": "A",
+  "element": "orange",
+  "role": "단일 딜러",
+  "main_story": true,
+  "archetype": "cool · 쿨",
+  "expression": "침착하고 자신감 있는 반미소",
+  "pose": "화살을 놓은 직후 활을 든 긴 보폭",
+  "legwear": "은은한 광택의 밀착 시어 블랙 타이츠",
+  "leg_appeal": "길고 가는 다리와 부드러운 무릎선, 긴 교차 보폭",
+  "status": "done",
+  "notes": "어깨에 걸친 카디건·피트 베스트·레이어드 체크 스커트로 쿨 타입 교복 리폼. 9종 규격 및 어두운 배경 알파 검수 완료. 기존 noa_cutin.png 부재로 공격 스프라이트의 활 당기기 구도를 컷인으로 확장. OpenAI Images / gpt-image-2. Prompts: original copper-braid sunset archer identity, Flora cel style, cool adult long-legged silhouette, post-shot pickup, gentle standing, original SD poses, waist-up arrow cut-in, light orange sun sigil and sparse arrow sparks. Transparent output; pickup/detail backgrounds removed by targeted edits."
+}
