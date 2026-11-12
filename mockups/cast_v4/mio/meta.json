@@ -1,0 +1,14 @@
+{
+  "id": "mio",
+  "name": "미오",
+  "tier": "B",
+  "element": "white",
+  "role": "수호",
+  "main_story": true,
+  "expression": "밝은 웃음과 윙크",
+  "pose": "종 방패를 옆에 들고 손을 흔들며 한쪽 다리를 뒤로 굽힌 인사",
+  "legwear": "라벤더 테두리의 크림색 프릴 발목 양말과 갈색 로퍼",
+  "leg_appeal": "아담한 성인 체형에 길고 균형 잡힌 다리와 경쾌한 굽힘 동작",
+  "status": "partial",
+  "notes": "pickup.png와 detail.png만 제작됨. FX, cutin, cutin_cut, SD 2종, face 미제작. OpenAI Images / gpt-image-2 생성 후 cyan 키 제거. 원본 키 이미지 보존. 생성 지시: 기존 미오의 금발 단발·호박색 눈·분홍 카디건·보라 체크 치마·종 방패를 유지하고 Flora의 셀 채색 스타일, 성인 7등신, 프릴 발목 양말을 적용. pickup은 윙크하며 손 흔들기, detail은 양발을 딛고 온화한 미소. 최초 키 제거는 Math.Clamp 미지원으로 실패하여 중단; Math.Min/Max로 수정한 처리 성공."
+}
