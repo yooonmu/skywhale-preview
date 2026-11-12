@@ -1,0 +1,14 @@
+{
+  "id": "ciel",
+  "name": "시엘",
+  "tier": "A",
+  "element": "green",
+  "role": "회복·지원",
+  "main_story": true,
+  "expression": "환하게 웃는 들뜬 표정",
+  "pose": "물뿌리개 지팡이를 들고 옆으로 춤추는 스텝",
+  "legwear": "얇은 연보라 밴드의 흰 니삭스",
+  "leg_appeal": "아담한 성인 체형과 가는 종아리, 옆으로 뻗은 발끝",
+  "status": "done",
+  "notes": "9종 PNG 규격과 어두운 배경 알파 검수 완료. OpenAI Images / gpt-image-2. Prompts: preserve original Ciel lavender twin-tail identity and watering-can staff; Flora cel style; adult full-body dancing pickup and gentle standing detail; original waist-up cut-in and SD battle poses; light green clover sigil and sparse leaf particles. Transparent output; detail and idle background artifacts removed by targeted rekey edits."
+}
