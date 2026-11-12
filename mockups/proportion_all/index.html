@@ -8,16 +8,16 @@
 <section id="legwear-detail" aria-labelledby="legwear-title">
 <h2 id="legwear-title">다리 · 양말 디테일 보완</h2>
 <section id="yuna-thigh-test" aria-labelledby="yuna-thigh-title">
-<h3 id="yuna-thigh-title">유나만 먼저 · 블랙 사이하이와 허벅지 볼륨</h3>
-<p>기존 별 니삭스 이미지를 기준으로 검정 사이하이와 눈에 보이는 부드러운 윗허벅지 볼륨을 적용했습니다. 치마와 밴드 사이에는 짧은 피부 간격을 두고 무릎·종아리·발목은 가늘게 유지했습니다. 아래 5인 적용본은 교체하지 않았습니다.</p>
+<h3 id="yuna-thigh-title">유나 · v3 / v4 밀착감 보완</h3>
+<p>v3보다 허벅지 볼륨을 조금 줄이고 원래 니삭스 기준과의 중간 정도를 목표로 조정했습니다. 검정 사이하이의 밴드 높이와 가는 하체는 유지하면서 밀착감·곡선을 따르는 광택·자연스러운 밴드 접촉을 보완했습니다. 아래 5인 적용본은 교체하지 않았습니다.</p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:800px">
-<figure style="margin:0;min-width:0"><figcaption>이전 · 별 니삭스</figcaption><img style="display:block;width:100%" src="legwear_yuna.png" alt="유나 허벅지 볼륨 변경 전"><canvas id="yuna-thigh-before" width="370" height="400" role="img" aria-label="이전 허벅지부터 무릎까지 확대" style="display:block;width:100%"></canvas></figure>
-<figure style="margin:0;min-width:0"><figcaption>테스트 · 블랙 사이하이 / 볼륨 보완</figcaption><img style="display:block;width:100%" src="legwear_yuna_black_thighhigh_v3.png" alt="검정 사이하이와 더 둥글고 부드러운 윗허벅지의 유나"><canvas id="yuna-thigh-after" width="370" height="400" role="img" aria-label="보완 허벅지부터 무릎까지 확대" style="display:block;width:100%"></canvas></figure>
+<figure style="margin:0;min-width:0"><figcaption>v3 · 이전</figcaption><img style="display:block;width:100%" src="legwear_yuna_black_thighhigh_v3.png" alt="유나 검정 사이하이 v3"><canvas id="yuna-thigh-before" width="370" height="400" role="img" aria-label="v3 허벅지부터 무릎까지 확대" style="display:block;width:100%"></canvas></figure>
+<figure style="margin:0;min-width:0"><figcaption>v4 · 볼륨 절제 / 밀착감 보완</figcaption><img style="display:block;width:100%" src="legwear_yuna_black_thighhigh_v4_snug.png" alt="허벅지를 조금 줄이고 검정 사이하이 밀착감과 광택을 보완한 유나"><canvas id="yuna-thigh-after" width="370" height="400" role="img" aria-label="v4 허벅지부터 무릎까지 확대" style="display:block;width:100%"></canvas></figure>
 </div>
-<p>OpenAI Images · gpt-image-2, 기본 옵션. 입력: legwear_yuna.png. 편집 지시: 윗허벅지는 이전보다 분명히 둥글고 부드럽게, 밴드 접촉은 자연스럽게, 가는 무릎·종아리·발목 유지. 검정 사이하이는 허벅지 중상단의 얇은 골지 밴드·작은 별·매끈한 무광과 약한 정강이 광택. 상체·얼굴·책·치마 길이·자세·신발 고정, 과장·노출·강조 구도 금지. 새 업로드: legwear_yuna_black_thighhigh_v3.png. 다른 캐릭터는 미변경입니다.</p>
+<p>OpenAI Images · gpt-image-2, 기본 옵션. 입력: 검정 사이하이 v3와 원래 legwear_yuna.png. 편집 지시: 윗허벅지 볼륨을 두 기준의 중간 정도로 줄이고, 밴드는 같은 높이에서 아주 부드럽게 밀착. 검정 원단은 허벅지·무릎·종아리에 붙는 핏과 곡선을 따르는 약간 더 선명한 광택. 얼굴·머리·책·상체·치마·자세·신발·가는 무릎 아래 유지. 과장·노출·강조 구도 금지. 새 업로드: legwear_yuna_black_thighhigh_v4_snug.png. 다른 캐릭터는 미변경입니다.</p>
 </section>
 <script>
-for(const [id,src] of [['yuna-thigh-before','legwear_yuna.png'],['yuna-thigh-after','legwear_yuna_black_thighhigh_v3.png']]){
+for(const [id,src] of [['yuna-thigh-before','legwear_yuna_black_thighhigh_v3.png'],['yuna-thigh-after','legwear_yuna_black_thighhigh_v4_snug.png']]){
  const image=new Image();image.onload=()=>document.getElementById(id).getContext('2d').drawImage(image,340,735,370,400,0,0,370,400);image.src=src;
 }
 </script>
