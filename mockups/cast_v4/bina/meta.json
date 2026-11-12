@@ -1,0 +1,14 @@
+{
+  "id": "bina",
+  "name": "비나",
+  "tier": "B",
+  "element": "purple",
+  "role": "",
+  "main_story": false,
+  "expression": "별사탕을 권하는 밝은 미소",
+  "pose": "병을 안고 한 손으로 별사탕을 내밀며 한쪽 무릎을 굽힘",
+  "legwear": "차콜 무릎 양말과 갈색 로퍼",
+  "leg_appeal": "부드러운 다리 곡선과 단정한 무릎 양말",
+  "status": "partial",
+  "notes": "pickup만 제작. 다른 8개 PNG 미제작. assets/cutin/bina_cutin.png가 없어 기존 컷인 구도 확인 불가. role 미확인. OpenAI Images / gpt-image-2 생성 후 cyan 키 제거. 생성 지시: 기존 자두색 곱슬 단발, 사탕 머리핀, 보라색 눈, 분홍 카디건, 보라 체크 치마, 별사탕 병 유지; Flora 셀 채색 스타일의 성인 7등신, 사탕을 권하는 미소와 무릎 양말."
+}
