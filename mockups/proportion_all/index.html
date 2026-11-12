@@ -5,6 +5,18 @@
 :root{font-family:system-ui,sans-serif;color:#32294a;background:#f5f1fa}*{box-sizing:border-box}body{margin:0}header,main{max-width:1500px;margin:auto;padding:28px}header{padding-bottom:4px}h1{font-size:clamp(26px,4vw,42px);margin:8px 0}header p{color:#615572;line-height:1.6}.eyebrow{color:#805c9f;font-weight:800;letter-spacing:.12em}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px}.card{background:#fff;border:1px solid #e0d6eb;border-radius:18px;overflow:hidden;box-shadow:0 8px 25px #68528512}.card h2{font-size:20px;margin:14px 16px 2px}.meta{margin:0 16px 12px;color:#655973;font-size:14px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#e8dfef}.pair button{border:0;padding:0;background:#faf5eb;cursor:zoom-in;color:#4a3d59;font:inherit}.pair img{display:block;width:100%;height:270px;object-fit:contain}.pair span{display:block;background:#f2eafa;padding:8px;font-size:13px;font-weight:700}.pair button:focus-visible,.close:focus-visible{outline:3px solid #754b9d;outline-offset:-3px}dialog{border:0;border-radius:16px;padding:14px;max-width:min(95vw,900px);max-height:95vh;background:#fff;color:#32294a}dialog::backdrop{background:#21172bcf}dialog img{display:block;max-width:100%;max-height:78vh;margin:auto}.close{display:block;margin:8px 0 0 auto;min-width:64px;min-height:44px;border:0;border-radius:8px;background:#665078;color:white;cursor:pointer}
 </style></head><body><header><div class="eyebrow">RAINBOW ATELIER · ART STUDY</div><h1>아이들 비율 비교 시안</h1><p>기존 SD와 일반 비율을 나란히 비교합니다. 이미지를 누르면 확대됩니다.<br>새 이미지는 OpenAI Images · gpt-image-2로 생성한 AI 샘플이며 게임 적용본이 아닙니다. 일부 세부 표현은 검토가 필요합니다.</p></header>
 <main>
+<section id="original-style-legs" aria-labelledby="original-legs-title">
+<h2 id="original-legs-title">원래 그림체 · 다리 라인 보완</h2>
+<p>교체 지정한 두 명의 유나 참고 이미지에서 다리 곡선·체중 이동·펼쳐진 치마 실루엣만 반영했습니다. 얼굴·의상·굵은 선·셀 채색은 플로라 v2 기준입니다.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+<figure style="margin:0;min-width:0"><figcaption>전신 v2</figcaption><img style="width:100%;height:clamp(240px,65vw,720px);object-fit:contain;background:white" src="flora_original_style_standing_v2.png" alt="플로라 전신 v2"></figure>
+<figure style="margin:0;min-width:0"><figcaption>전신 v3 · 교체 참고 반영</figcaption><img style="width:100%;height:clamp(240px,65vw,720px);object-fit:contain;background:white" src="flora_original_style_standing_v3_revised.png" alt="부드러운 다리 곡선과 안쪽으로 기울인 무릎, 펼쳐진 주름치마의 플로라 v3"></figure>
+<figure style="margin:0;min-width:0"><figcaption>컷인 v2</figcaption><img style="width:100%;display:block" src="flora_original_style_cutin_v2.png" alt="플로라 컷인 v2"></figure>
+<figure style="margin:0;min-width:0"><figcaption>컷인 v3</figcaption><img style="width:100%;display:block" src="flora_original_style_cutin_v3.png" alt="치마와 보이는 허벅지 라인을 보완하고 얼굴 뒤 바람 궤적을 정돈한 컷인 v3"></figure>
+</div>
+<p>전신 1024×1536 / 컷인 1672×941. 컷인은 기존 크롭을 유지하므로 무릎·종아리 비교는 전신에서 확인합니다. 이전 단독 유나 참고로 먼저 생성된 파일은 채택하지 않았습니다.</p>
+<p>AI 편집: OpenAI Images · gpt-image-2 / 기본 옵션. 전신은 v2와 두 인물 참고, 컷인은 v2·수정 전신·두 인물 참고를 사용했습니다. 편집 지시: 길고 부드럽게 둥근 성인 다리, 자연스러운 허벅지→무릎→종아리 곡선, 한쪽 무릎 안쪽 자세와 체중 이동, 밝은 아이보리 피부에 절제된 분홍 그림자·하이라이트, 종아리에 붙는 기존 니삭스, 허벅지 중상단의 풍성한 주름치마. 고정: 플로라 얼굴·팔레트·의상·굵은 선·그림자 한 톤과 하이라이트 한 톤의 셀 표현. 유나 얼굴·파스텔 화풍·반실사 표현 금지. 컷인은 얼굴 뒤 꽃과 바람 궤적 정돈. 게임 원본은 미변경입니다.</p>
+</section>
 <section id="original-style-quality" aria-labelledby="original-quality-title">
 <h2 id="original-quality-title">원래 그림체 · 퀄리티 보완</h2>
 <p>승인된 v1 그림체를 유지하며 선·셀 명암·의상 핏을 정리했습니다. 전신은 한쪽 다리에 무게를 싣고 반대 무릎을 굽힌 자세로, 컷인은 얼굴 주변과 꽃·바람 궤적을 정돈했습니다.</p>
