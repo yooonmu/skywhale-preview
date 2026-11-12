@@ -1,0 +1,186 @@
+[
+  {
+    "id": "mass_0_0",
+    "file": "cloud_split/pieces/mass_0_0.png",
+    "plane": 1,
+    "x": 0,
+    "y": 60,
+    "width": 700
+  },
+  {
+    "id": "mass_0_1",
+    "file": "cloud_split/pieces/mass_0_1.png",
+    "plane": 1,
+    "x": 580,
+    "y": 60,
+    "width": 700
+  },
+  {
+    "id": "mass_0_2",
+    "file": "cloud_split/pieces/mass_0_2.png",
+    "plane": 1,
+    "x": 1130,
+    "y": 60,
+    "width": 700
+  },
+  {
+    "id": "mass_1_0",
+    "file": "cloud_split/pieces/mass_1_0.png",
+    "plane": 2,
+    "x": 0,
+    "y": 250,
+    "width": 760
+  },
+  {
+    "id": "mass_1_1",
+    "file": "cloud_split/pieces/mass_1_1.png",
+    "plane": 2,
+    "x": 580,
+    "y": 250,
+    "width": 760
+  },
+  {
+    "id": "mass_1_2",
+    "file": "cloud_split/pieces/mass_1_2.png",
+    "plane": 2,
+    "x": 1130,
+    "y": 250,
+    "width": 760
+  },
+  {
+    "id": "mass_2_0",
+    "file": "cloud_split/pieces/mass_2_0.png",
+    "plane": 4,
+    "x": 0,
+    "y": 220,
+    "width": 650
+  },
+  {
+    "id": "mass_2_1",
+    "file": "cloud_split/pieces/mass_2_1.png",
+    "plane": 4,
+    "x": 580,
+    "y": 220,
+    "width": 650
+  },
+  {
+    "id": "mass_2_2",
+    "file": "cloud_split/pieces/mass_2_2.png",
+    "plane": 4,
+    "x": 1130,
+    "y": 220,
+    "width": 650
+  },
+  {
+    "id": "mass_3_0",
+    "file": "cloud_split/pieces/mass_3_0.png",
+    "plane": 5,
+    "x": 0,
+    "y": 480,
+    "width": 650
+  },
+  {
+    "id": "mass_3_1",
+    "file": "cloud_split/pieces/mass_3_1.png",
+    "plane": 5,
+    "x": 580,
+    "y": 480,
+    "width": 650
+  },
+  {
+    "id": "mass_3_2",
+    "file": "cloud_split/pieces/mass_3_2.png",
+    "plane": 6,
+    "x": 1130,
+    "y": 480,
+    "width": 650
+  },
+  {
+    "id": "high_0",
+    "file": "cloud_split/cleaned/battle_high_left.png",
+    "plane": 3,
+    "x": 0,
+    "y": 0,
+    "width": 1600
+  },
+  {
+    "id": "high_1",
+    "file": "cloud_split/cleaned/battle_high_center.png",
+    "plane": 3,
+    "x": 0,
+    "y": 0,
+    "width": 1600
+  },
+  {
+    "id": "high_2",
+    "file": "cloud_split/cleaned/battle_high_right.png",
+    "plane": 3,
+    "x": 0,
+    "y": 0,
+    "width": 1600
+  },
+  {
+    "id": "far_cloud_sea_0",
+    "file": "cloud_split/pieces/far_cloud_sea_0.png",
+    "plane": 2,
+    "x": -120,
+    "y": 0,
+    "width": 640
+  },
+  {
+    "id": "far_cloud_sea_1",
+    "file": "cloud_split/pieces/far_cloud_sea_1.png",
+    "plane": 2,
+    "x": 280,
+    "y": 0,
+    "width": 640
+  },
+  {
+    "id": "far_cloud_sea_2",
+    "file": "cloud_split/pieces/far_cloud_sea_2.png",
+    "plane": 2,
+    "x": 680,
+    "y": 0,
+    "width": 640
+  },
+  {
+    "id": "far_cloud_sea_3",
+    "file": "cloud_split/pieces/far_cloud_sea_3.png",
+    "plane": 2,
+    "x": 1080,
+    "y": 0,
+    "width": 640
+  },
+  {
+    "id": "near_cloud_bank_0",
+    "file": "cloud_split/pieces/near_cloud_bank_0.png",
+    "plane": 5,
+    "x": -120,
+    "y": 0,
+    "width": 640
+  },
+  {
+    "id": "near_cloud_bank_1",
+    "file": "cloud_split/pieces/near_cloud_bank_1.png",
+    "plane": 5,
+    "x": 280,
+    "y": 0,
+    "width": 640
+  },
+  {
+    "id": "near_cloud_bank_2",
+    "file": "cloud_split/pieces/near_cloud_bank_2.png",
+    "plane": 5,
+    "x": 680,
+    "y": 0,
+    "width": 640
+  },
+  {
+    "id": "near_cloud_bank_3",
+    "file": "cloud_split/pieces/near_cloud_bank_3.png",
+    "plane": 5,
+    "x": 1080,
+    "y": 0,
+    "width": 640
+  }
+]

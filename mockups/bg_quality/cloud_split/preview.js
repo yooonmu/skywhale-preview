@@ -1,0 +1,20 @@
+(()=>{
+const section=document.createElement('section');section.innerHTML=`<h2>2차 · 구름 분리</h2><p>23개 독립 구름 조각 / 6개 깊이 평면. 먼 안개 → 먼 구름바다 → 고층운 → 중경 적운 → 가까운 둑 → 갑판 앞 안개 순으로 분리했습니다. 신규 12개 덩어리와 기존 고층운 3개, 부드러운 겹침 창으로 분리한 구름바다/둑 8개입니다. 각 PNG에 실제 alpha가 있으며 직선 절단 가장자리는 페더 처리했습니다.</p><div class="controls"><button id="cloud-pause">구름 멈추기</button><button id="cloud-hud">HUD 숨기기</button><a href="cloud_split/pieces.json">배치 JSON</a></div><canvas id="cloud-canvas" width="1600" height="720" style="width:100%;height:auto;display:block" aria-label="6평면 구름 겹침과 갑판 앞 안개 미리보기"></canvas><p>서로 다른 속도로 연속 드리프트하고 프레임 밖에서 투명 여백을 두고 재진입합니다. 근경만 ±1.2% 가로 호흡·±2px 세로 변형을 줍니다. 섬 앞뒤로 구름이 겹치며 마지막 안개는 HUD/갑판 뒤가 아니라 갑판 가장자리 앞에 그립니다.</p><details><summary>구름 조각별 PNG / 경계 확인</summary><div class="layers" id="cloud-gallery"></div></details><p class="note">Godot 대응: Sprite2D 위치를 평면별 속도로 이동시키고 texture 폭+여백을 주기로 재순환. canvas_item 셰이더에서 UV.x += sin(UV.y*6.28 + TIME*0.35)*0.002, UV.y += sin(UV.x*4.0 + TIME*0.28)*0.0015 정도의 작은 변위를 alpha에도 동일 적용합니다. 패딩 영역으로 UV clamp가 드러나지 않게 하고, 먼 구름은 변형하지 않습니다. 기존 레이어의 프린지는 <code>cloud_split/cleaned/</code> 23장에 별도 저장했습니다. 원본 R2는 비교용으로 보존했습니다.</p><p>AI 생성 · OpenAI Images / gpt-image-2. 신규 소스는 12개 다른 실루엣을 한 장에서 생성 후 분리했습니다. 회화적 광원·원근·무의미한 디테일을 직접 확인했습니다. PNG 조각의 재조합 경계는 부드럽지만 최종 양산용 무한 띠 전체의 좌우 색/명도 매칭과 실제 Godot 셰이더 검수는 남아 있습니다.</p>`;
+document.querySelector('main>.controls').before(section);
+section.insertAdjacentHTML('beforeend','<p class="note">남은 결함: 일부 근경 조각을 겹칠 때 직선에 가까운 명도 경계가 아직 보입니다. 자동 키 제거·페더링으로 줄였지만 완전한 무봉제/경계 클린업 기준에는 미달합니다. 원화 수작업 경계 리페인트와 전체 루프 검수가 필요한 검토판입니다.</p>');
+const canvas=section.querySelector('canvas'),ctx=canvas.getContext('2d'),load=s=>new Promise((r,j)=>{let i=new Image;i.onload=()=>r(i);i.onerror=()=>j(Error(s));i.src=s+'?cloud=3'}),pieces=window.cloudPieces;
+pieces.forEach(s=>{if(s.id.startsWith('mass_'))s.y=s.plane===1?60:s.plane===2?250:s.plane===4?220:s.plane===6?300:480});
+document.querySelectorAll('img[src^="r2/layers/"]').forEach(i=>i.src=i.getAttribute('src').replace('r2/layers/','cloud_split/cleaned/'));
+for(let s of pieces){let f=document.createElement('figure');f.innerHTML=`<img src="${s.file}" alt="${s.id} 투명 구름"><figcaption>${s.id} · 깊이 ${s.plane}<br><a href="${s.file}" download>개별 PNG</a></figcaption>`;section.querySelector('#cloud-gallery').append(f)}
+let stop=false,showHud=true;section.querySelector('#cloud-pause').onclick=e=>{stop=!stop;e.target.textContent=stop?'구름 재생':'구름 멈추기'};section.querySelector('#cloud-hud').onclick=e=>{showHud=!showHud;e.target.textContent=showHud?'HUD 숨기기':'HUD 보이기'};
+Promise.all([load('cloud_split/cleaned/battle_sky.png'),load('cloud_split/cleaned/battle_sun.png'),load('r2/hud_cutout.png'),...['far_island_left','far_island_bell','far_island_falls','mid_garden','mid_aqueduct'].map(s=>load('cloud_split/cleaned/battle_'+s+'.png')),...pieces.map(s=>load(s.file))]).then(images=>{
+let time=0,last=0;const speed=[0,2,5,9,15,28,48];
+function drawPlane(plane){pieces.forEach((s,n)=>{
+if(s.plane!==plane)return;
+let im=images[n+8],w=s.width,h=im.height/im.width*w,period=1900,x=((s.x-time*(speed[plane]+n%3)+period*100)%period)-250,breath=plane>=5?Math.sin(time*.35+n)*.012:0;
+ctx.globalAlpha=plane===1?.22:plane===2?.5:plane===3?.28:plane===6?.32:.70;
+for(let shift of [-period,0,period])ctx.drawImage(im,x+shift-w*breath*.5,s.y+(plane>=5?Math.sin(time*.28+n)*2:0),w*(1+breath),h);
+})}
+function tick(now){if(!stop&&!matchMedia('(prefers-reduced-motion: reduce)').matches)time+=Math.min(.05,(now-last)/1000||0);last=now;ctx.globalAlpha=1;ctx.drawImage(images[0],0,0);ctx.globalAlpha=.45;ctx.drawImage(images[1],0,0);drawPlane(1);for(let i=3;i<6;i++){ctx.globalAlpha=.48;ctx.drawImage(images[i],0,0)}drawPlane(2);drawPlane(3);for(let i=6;i<8;i++){ctx.globalAlpha=.72;ctx.drawImage(images[i],0,0)}drawPlane(4);drawPlane(5);if(showHud){ctx.globalAlpha=1;ctx.drawImage(images[2],0,0)}drawPlane(6);canvas.dataset.time=time.toFixed(3);requestAnimationFrame(tick)}requestAnimationFrame(tick)
+}).catch(console.error);
+})();
