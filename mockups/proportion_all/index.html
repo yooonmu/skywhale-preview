@@ -5,6 +5,36 @@
 :root{font-family:system-ui,sans-serif;color:#32294a;background:#f5f1fa}*{box-sizing:border-box}body{margin:0}header,main{max-width:1500px;margin:auto;padding:28px}header{padding-bottom:4px}h1{font-size:clamp(26px,4vw,42px);margin:8px 0}header p{color:#615572;line-height:1.6}.eyebrow{color:#805c9f;font-weight:800;letter-spacing:.12em}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px}.card{background:#fff;border:1px solid #e0d6eb;border-radius:18px;overflow:hidden;box-shadow:0 8px 25px #68528512}.card h2{font-size:20px;margin:14px 16px 2px}.meta{margin:0 16px 12px;color:#655973;font-size:14px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#e8dfef}.pair button{border:0;padding:0;background:#faf5eb;cursor:zoom-in;color:#4a3d59;font:inherit}.pair img{display:block;width:100%;height:270px;object-fit:contain}.pair span{display:block;background:#f2eafa;padding:8px;font-size:13px;font-weight:700}.pair button:focus-visible,.close:focus-visible{outline:3px solid #754b9d;outline-offset:-3px}dialog{border:0;border-radius:16px;padding:14px;max-width:min(95vw,900px);max-height:95vh;background:#fff;color:#32294a}dialog::backdrop{background:#21172bcf}dialog img{display:block;max-width:100%;max-height:78vh;margin:auto}.close{display:block;margin:8px 0 0 auto;min-width:64px;min-height:44px;border:0;border-radius:8px;background:#665078;color:white;cursor:pointer}
 </style></head><body><header><div class="eyebrow">RAINBOW ATELIER · ART STUDY</div><h1>아이들 비율 비교 시안</h1><p>기존 SD와 일반 비율을 나란히 비교합니다. 이미지를 누르면 확대됩니다.<br>새 이미지는 OpenAI Images · gpt-image-2로 생성한 AI 샘플이며 게임 적용본이 아닙니다. 일부 세부 표현은 검토가 필요합니다.</p></header>
 <main>
+<section id="legwear-detail" aria-labelledby="legwear-title">
+<h2 id="legwear-title">다리 · 양말 디테일 보완</h2>
+<p>상체·얼굴·자세는 유지하고 하체 재질을 보완했습니다. 최신 PD 지시에 따라 캐릭터별 레그웨어를 다르게 선택했습니다. 각 열은 이전 / 보완 순서입니다.</p>
+<div id="legwear-pairs" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px"></div>
+<h3>무릎–신발 확대 · 보완본</h3>
+<div id="legwear-crops" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px"></div>
+<p>플로라: 잎 문양의 밝은 시어 타이츠. 유나: 별 자수 짙은 니삭스. 미오: 라벤더 테두리 프릴 발목 양말. 카렌: 로즈색 두 줄의 스포티 니삭스. 아르카: 무지개 별 포인트 사이하이. 새 문양과 길이 변경은 이번 추가 지시를 반영한 시안이며 기존 게임 원본의 장식이라고 주장하지 않습니다.</p>
+<p>AI 참조 편집: OpenAI Images · gpt-image-2 / 기본 옵션 / 각 이전 전신과 PD 유나 2인 참고 사용. 공통 지시: 하체만 수정, 양말의 골지 밴드·미세 세로 니트·무광 종아리 명암·발목 주름·자연스러운 접촉면, 부드러운 아이보리→분홍 피부·무릎 볼륨·넓은 하이라이트·얇은 피부선, 약간 작은 로퍼와 가죽 광택. 얼굴·머리·상체 의상·소품·자세·비율·흰 배경 유지. 강조 구도·추가 노출 금지. 타이츠에는 불필요한 골지 밴드를 넣지 않았습니다. 전신은 모두 1024×1536, 게임 원본 미변경입니다.</p>
+</section>
+<script>
+(()=>{
+const entries=[
+['flora','플로라 · 시어 타이츠','flora_standing_v4_attempt1.png'],
+['yuna','유나 · 별 니삭스','grade_v4_yuna.png'],
+['mio','미오 · 프릴 발목','grade_v4_mio.png'],
+['karen','카렌 · 줄무늬 니삭스','grade_v4_karen.png'],
+['arca','아르카 · 사이하이','grade_v4_arca.png']];
+for(const [id,label,before] of entries){
+ const f=document.createElement('figure');f.style.cssText='margin:0;min-width:0';
+ const caption=document.createElement('figcaption');caption.textContent=label;f.append(caption);
+ for(const [src,alt] of [[before,'이전'],['legwear_'+id+'.png','보완']]){
+ const img=document.createElement('img');img.src=src;img.alt=label+' '+alt;img.style.cssText='display:block;width:100%;background:white';f.append(img);
+ }document.getElementById('legwear-pairs').append(f);
+ const zoom=document.createElement('figure');zoom.style.cssText='margin:0;min-width:0';
+ const c=document.createElement('figcaption');c.textContent=label;zoom.append(c);
+ const frame=document.createElement('canvas');frame.width=760;frame.height=620;frame.style.cssText='display:block;width:100%;background:white';frame.setAttribute('role','img');frame.setAttribute('aria-label',label+' 무릎부터 신발까지 확대');
+ const im=new Image();im.onload=()=>frame.getContext('2d').drawImage(im,120,916,760,620,0,0,760,620);im.src='legwear_'+id+'.png';zoom.append(frame);document.getElementById('legwear-crops').append(zoom);
+}
+})();
+</script>
 <section id="grade-v4-gallery" aria-labelledby="grade-v4-title">
 <h2 id="grade-v4-title">4차 그림체 · 캐릭터 4종</h2>
 <p>플로라 v4 기준 · 모든 등급 비교. 새 전신 4장은 1024×1536 흰 배경이며, 각 이미지 아래는 현재 게임의 원본입니다.</p>
