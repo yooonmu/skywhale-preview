@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>보스 특성 연출 — 구름고래 분교</title>
+<style>
+  body { margin: 0; font-family: "Pretendard", "Malgun Gothic", sans-serif; background: #f6f2ff; color: #2b2346; }
+  header { padding: 28px 36px 8px; }
+  h1 { margin: 0 0 6px; font-size: 26px; }
+  header p { margin: 4px 0; color: #5d5280; font-size: 14px; }
+  section { margin: 18px 36px 30px; padding: 18px 22px; background: #fff; border-radius: 16px; box-shadow: 0 4px 18px rgba(80, 60, 140, .08); }
+  h2 { margin: 0 0 4px; font-size: 20px; }
+  .what { margin: 2px 0 12px; color: #5d5280; font-size: 14px; line-height: 1.55; }
+  .pair { display: grid; grid-template-columns: 1fr 1.25fr; gap: 14px; align-items: start; }
+  figure { margin: 0; }
+  video { width: 100%; border-radius: 10px; background: #000; display: block; }
+  figcaption { font-size: 12px; color: #7a6f9c; margin-top: 4px; }
+  code { background: #efe9ff; padding: 1px 6px; border-radius: 6px; font-size: 13px; }
+  table { border-collapse: collapse; font-size: 13px; margin-top: 6px; }
+  td, th { border-bottom: 1px solid #ece6fb; padding: 5px 10px; text-align: left; }
+</style>
+</head>
+<body>
+<header>
+  <h1>보스 특성 연출 (docs/보스특성_파견_설계안.md §1)</h1>
+  <p>실제 전투 화면(50칸 보스)에서 특성 규칙(BossTraits)이 내는 <code>main.boss_trait_fx</code> 신호를 <code>BossTraitVfx.play</code>로 이어 그대로 찍었습니다. 1280×720 · 1600×720, 30fps.</p>
+  <p>모양은 셰이더 하나(<code>vfx/shaders/boss_trait.gdshader</code>, 모드로 고름) + 공용 입자 처리 셰이더(<code>vfx_particle_process</code>)만 씁니다. 녹화 도구: <code>tools/boss_traits_fx_capture.gd</code></p>
+</header>
+
+<section>
+  <h2>두꺼운 색갑옷</h2>
+  <p class="what">빼앗은 색으로 된 세 겹 육각 판 껍질 — 보스는 비쳐 보이고 가장자리로 갈수록 판이 두껍습니다. 남은 몫이 줄면 바깥 겹부터 판이 하나씩 달아올랐다 빠지고, 맞은 자리에서 잔물결. 파쇄 스킬은 그 자리에서 금이 뻗고 조각이 튀며(짧은 멈칫), 파쇄 궁극기로 깨지면 껍질이 부풀어 무지개 조각으로 흩어지고 충격파 둘 → 5초 동안 분홍 노출 테(받는 피해 +10%).</p>
+  <div class="pair">
+    <figure><video preload="none" src="clips/barrier_1280.webm" poster="clips/barrier_1280.jpg" controls loop muted playsinline></video><figcaption>1280×720</figcaption></figure>
+    <figure><video preload="none" src="clips/barrier_1600.webm" poster="clips/barrier_1600.jpg" controls loop muted playsinline></video><figcaption>1600×720</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>방어 태세 · 무력화 · 노출</h2>
+  <p class="what">예고 2초: 몸 가장자리에서 보랏빛 윤곽 잔물결이 번지고 접힌 방패가 떠오릅니다. 태세: 방패가 펼쳐지며 금빛으로 굳고(몸에 금 테 · 비스듬한 금 결), 방패 아래 「−50%/−60%」, 방패 둘레 호가 무력화 게이지 — 무적이 아니라 「막는 중」으로 읽힙니다. 게이지가 찰 때마다 방패에서 금 불티. 무력화: 멈칫 · 흔들림 · 방패가 금을 따라 갈라져 조각, 충격파, 「무력화!」, 보스가 휘청 → 4초 노출(분홍 테가 숨 쉬고 머리 위로 별 셋).</p>
+  <div class="pair">
+    <figure><video preload="none" src="clips/stance_1280.webm" poster="clips/stance_1280.jpg" controls loop muted playsinline></video><figcaption>1280×720</figcaption></figure>
+    <figure><video preload="none" src="clips/stance_1600.webm" poster="clips/stance_1600.jpg" controls loop muted playsinline></video><figcaption>1600×720</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>감속 (수호 스킬 명중)</h2>
+  <p class="what">몸 가장자리 · 아래쪽에 옅은 서리와 하늘빛 테, 몸 뒤로 끌리듯 늘어지는 하늘빛 결과 눈가루. 3초 뒤 스스로 걷힙니다. (녹화는 돌진 보스에 건 감속)</p>
+  <div class="pair">
+    <figure><video preload="none" src="clips/slow_1280.webm" poster="clips/slow_1280.jpg" controls loop muted playsinline></video><figcaption>1280×720</figcaption></figure>
+    <figure><video preload="none" src="clips/slow_1600.webm" poster="clips/slow_1600.jpg" controls loop muted playsinline></video><figcaption>1600×720</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>성난 돌진</h2>
+  <p class="what">날아드는 동안 몸 뒤로 붉은 주홍 속도 결과 불티, 몸에는 빠르게 뛰는 붉은 테. 자리에 닿은 뒤에는 테만 낮게 남고, 들이받을 때마다 앞쪽으로 짧은 결 셋과 작은 고리.</p>
+  <div class="pair">
+    <figure><video preload="none" src="clips/charge_1280.webm" poster="clips/charge_1280.jpg" controls loop muted playsinline></video><figcaption>1280×720</figcaption></figure>
+    <figure><video preload="none" src="clips/charge_1600.webm" poster="clips/charge_1600.jpg" controls loop muted playsinline></video><figcaption>1600×720</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>고래 집착</h2>
+  <p class="what">공격 0.9초 전 보스 앞에서 고래 갑판까지 잿빛 보라 점선 조준이 자라고 조준 고리가 조여듭니다. 공격 순간 잿빛 줄기가 물결치며 날아가 보호막 돔을 가로질러 부딪힙니다(돔 번쩍 + 고리 + 재 불티 + 흔들림). 아이들의 밝은 색 연출과 달리 어두운 잿빛 몸통이라 적의 공격으로 읽힙니다.</p>
+  <div class="pair">
+    <figure><video preload="none" src="clips/focus_1280.webm" poster="clips/focus_1280.jpg" controls loop muted playsinline></video><figcaption>1280×720</figcaption></figure>
+    <figure><video preload="none" src="clips/focus_1600.webm" poster="clips/focus_1600.jpg" controls loop muted playsinline></video><figcaption>1600×720</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>쌍둥이 파수꾼 등장</h2>
+  <p class="what">둘이 자리에 들어서면 두 몸에 라벤더 · 금빛 테가 함께 켜지고, 둘 사이에 양 끝이 가늘어진 빛 끈이 물결치며 이어졌다 걷히고, 두 자리에서 고리가 같은 박자로 두 번 퍼집니다 (1.9초).</p>
+  <div class="pair">
+    <figure><video preload="none" src="clips/twins_1280.webm" poster="clips/twins_1280.jpg" controls loop muted playsinline></video><figcaption>1280×720</figcaption></figure>
+    <figure><video preload="none" src="clips/twins_1600.webm" poster="clips/twins_1600.jpg" controls loop muted playsinline></video><figcaption>1600×720</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2>비용 (이 PC, GL Compatibility)</h2>
+  <table>
+    <tr><th>항목</th><th>1280×720</th><th>1600×720</th></tr>
+    <tr><td>껍질 한 겹 (보스 키 400px)</td><td>0.033ms</td><td>0.012ms</td></tr>
+    <tr><td>윤곽 빛 · 금 결 (방어 태세 · 돌진 · 노출)</td><td>0.092ms</td><td>0.034ms</td></tr>
+    <tr><td>윤곽 빛 · 서리 (감속)</td><td>0.176ms</td><td>0.101ms</td></tr>
+    <tr><td>줄기 · 결 · 고리 · 방패</td><td>≤0.021ms</td><td>≤0.010ms</td></tr>
+    <tr><td>셰이더 콜드 첫 그리기 (빈 캐시, 3회)</td><td colspan="2">+78~84ms 한 번 — 셰이더 하나라 컴파일도 한 번. 부트 예열 목록(vfx/shaders)과 ShaderWarm 「boss_traits」 작업이 탭 전·배경에서 미리 끝냅니다. 캐시가 있으면 +0ms</td></tr>
+  </table>
+  <p class="what">측정: <code>tools/boss_traits_cost.gd</code>(같은 겹 16장 평균), <code>tools/boss_traits_cold.gd</code>(빈 APPDATA · 드라이버 셰이더 캐시).</p>
+</section>
+</body>
+</html>
