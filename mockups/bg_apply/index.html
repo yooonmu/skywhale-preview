@@ -13,4 +13,4 @@
 const regions=['벚꽃 군도','등불 해협','서리 고원','온실 군도','물안개 암초','노을 성층'];let width=1600;
 function render(){let root=document.getElementById('regions');root.replaceChildren();regions.forEach((name,n)=>{let s=document.createElement('section');s.innerHTML='<h2>'+(n+1)+'장 · '+name+'</h2><div class="pair">'+['before','after'].map(kind=>'<figure><img src="batch1/'+kind+'/ch'+(n+1)+'_'+width+'x720.jpg" alt="'+name+' '+(kind==='before'?'적용 전':'적용 후')+' '+width+'"><figcaption>'+(kind==='before'?'적용 전':'A 적용 후')+' · '+width+'×720</figcaption></figure>').join('')+'</div>';root.append(s)})}
 document.querySelectorAll('button').forEach(b=>b.onclick=()=>{width=+b.dataset.width;document.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));render()});render();
-</script><script src="ch1_revision/show.js?v=2"></script></html>
+</script><script src="ch1_revision/show.js?v=2"></script><script src="restored/show.js?v=2"></script></html>

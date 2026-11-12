@@ -1,0 +1,26 @@
+{
+  "entries": [
+    {
+      "file": "ch1_restored_1600x720.jpg",
+      "id": "ch1_restored",
+      "items": [
+        "battle_restore"
+      ],
+      "label": "전투 배경 복원 · 1장",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "ch4_restored_1600x720.jpg",
+      "id": "ch4_restored",
+      "items": [
+        "battle_restore"
+      ],
+      "label": "전투 배경 복원 · 4장",
+      "phase": "late",
+      "resolution": "1600x720"
+    }
+  ],
+  "tool": "tools/feedback_capture.gd",
+  "updated": "2026-11-12T17:51:04"
+}
