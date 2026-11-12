@@ -1,0 +1,32 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>탐험 파견 실제 적용 — A2 유리·금선</title>
+<style>
+:root{--ink:#251e4a;--sub:#5a5285;--gold:#c9a45c}*{box-sizing:border-box}
+body{margin:0;font:15px/1.6 "Pretendard","Noto Sans KR",system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,#e9e4fb,#fbf6ea)}
+header{padding:26px 32px 10px;border-bottom:1px solid var(--gold)}h1{margin:0 0 6px;font-size:25px}h2{font-size:20px;margin:26px 32px 8px}h3{font-size:15px;margin:0 0 8px;color:var(--sub)}
+.bar{position:sticky;top:0;z-index:2;display:flex;gap:8px;padding:10px 32px;background:rgba(251,246,234,.93);border-bottom:1px solid rgba(201,164,92,.5)}
+.bar button{font:inherit;min-height:36px;padding:6px 14px;border:1px solid var(--gold);background:#fff;border-radius:4px;cursor:pointer;color:var(--ink)}.bar button.on{background:var(--ink);color:#fff}
+.row{margin:0 32px 24px}.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+figure{margin:0;background:#fff;border:1px solid rgba(201,164,92,.55);border-radius:4px;overflow:hidden}figure img{display:block;width:100%;height:auto}
+figcaption{padding:6px 10px;font-weight:700}.box{margin:0 32px;background:#fff;border:1px solid rgba(201,164,92,.55);border-radius:4px;padding:12px 18px}
+ul{margin:0;padding-left:20px}li{margin:4px 0}@media(max-width:900px){.g2{grid-template-columns:1fr}}
+</style></head><body>
+<header><h1>탐험 파견 — 실제 게임 화면 (A2 「유리·금선」)</h1>
+<p>라이브 게임 화면을 1280×720 · 1600×720에서 같은 상태로 찍었습니다(tools/expedition_capture.gd). 흐름: 장소 → 4명 → 시간 → 예상 보상·귀환 시각 → 출발 → 귀환 → 받기·다시 보내기.</p></header>
+<div class="bar"><button data-w="all" class="on">1280 · 1600</button><button data-w="1280">1280만</button><button data-w="1600">1600만</button></div>
+<h2>들어가는 곳</h2>
+<div class="box"><ul>
+<li><b>모험 허브의 둘째 탭 「탐험 파견」</b> — 파견은 모험 콘텐츠의 하나이고, 허브 머리줄 탭이라 섬 여섯 개의 지도를 흩뜨리지 않습니다. 분교 · 고래 강화와 같은 규칙이라 배울 것이 없습니다.</li>
+<li>2일차 첫 로그인 + 모험 안내(기억의 회랑) 뒤에 탭이 나타납니다(그전에는 자물쇠 탭도 두지 않음). 받을 보상이 있으면 하단 「모험」 · 「탐험 파견」 탭에 장밋빛 점.</li>
+<li>앱이 앞에 있을 때 귀환하면 시스템 알림 대신 게임 안 배너 1회 → 누르면 그 탐사선의 보상 화면.</li>
+</ul></div>
+<h2>화면</h2>
+<div id="shots"></div>
+<div style="height:40px"></div>
+<script>
+const S=[["hub_tab","모험 허브 · 둘째 탭"],["01_place_empty","01 장소 (고르기 전)"],["01_place","01 장소 · 물결 난파선"],["02_team","02 4명 · 무지개 ×1.5 · 전투 덱 아이"],["03_time","03 시간 · 난도"],["04_review","04 확인 · 예상 보상 · 귀환 시각"],["05_notify_ask","처음 출발 · 귀환 알림 물음"],["06_away","탐사 중"],["07_second_ship","두 번째 탐사선 (영구 상품 자리)"],["08_cancel_ask","그만두기 확인"],["09_returned","돌아옴 · 받기"],["10_claimed_resend","받은 뒤 · 다시 보내기"],["11_rainbow","무지개 아이 등록 (수집 보너스)"],["12_return_banner","전경 귀환 배너"]];
+const box=document.getElementById('shots');
+for(const w of [1280,1600]){for(const [k,t] of S){const s=document.createElement('section');s.className='row';s.dataset.w=w;s.innerHTML=`<h3>${t} · ${w}×720</h3><figure><img loading="lazy" src="img/${k}_${w}x720.jpg" alt="${t}"></figure>`;box.appendChild(s)}}
+const bs=[...document.querySelectorAll('.bar button')];bs.forEach(b=>b.onclick=()=>{bs.forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.row[data-w]').forEach(r=>r.style.display=b.dataset.w==='all'||r.dataset.w===b.dataset.w?'':'none')});
+</script>
+</body></html>
