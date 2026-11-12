@@ -7,7 +7,19 @@
 <main>
 <section id="legs-reference-v4" aria-labelledby="legs-reference-title">
 <h2 id="legs-reference-title">다리 · 참고 이미지 재현</h2>
-<p>이번에는 참고 이미지의 하체를 우선했습니다. 길고 가는 다리·긴 종아리·얇은 발목과 작은 신발, 부드러운 아이보리→분홍 피부 명암을 적용했습니다. 전신 1차 생성 후 비교를 통과한 시안입니다.</p>
+<p>추가 2·3차 생성 완료. v5는 종아리 연장과 가벼운 실루엣이 더 분명한 3차를 선택했습니다. 다만 길이 수치만으로는 2차가 참고에 더 가깝고, v5는 목표 48–50%를 조금 넘습니다. 완전 일치 판정은 아닙니다.</p>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
+<figure style="margin:0"><figcaption>참고 · 왼쪽 인물</figcaption><img style="width:100%;display:block" src="pd_reference.webp" alt="하체 기준 유나 참고 이미지"></figure>
+<figure style="margin:0"><figcaption>v4 · 1차</figcaption><img style="width:100%;display:block" src="flora_standing_v4_attempt1.png" alt="플로라 v4 전신"></figure>
+<figure style="margin:0"><figcaption>v5 · 3차 선택</figcaption><img style="width:100%;display:block" src="flora_standing_attempt3_v5.png" alt="더 긴 종아리와 가는 발목의 플로라 v5"></figure>
+</div>
+<p>동일 정의의 수동 랜드마크 측정(약 ±1–2%p): 정수리→가장 낮은 밑창을 전신 높이로, 앞쪽 치마 밑단→밑창을 하체로 계산했습니다. 참고 49.2% / v4 48.9% / 2차 49.0% / 3차(v5) 51.3%. 무릎→발목 수직 길이/전신 높이: 참고 25.6% / v4 26.1% / 2차 26.5% / v5 28.6%. 사용자 추정 v4 44%와는 기준점 차이가 있으며, 이 수치를 정확한 해부학적 다리 길이로 해석하면 안 됩니다.</p>
+<p>계산에 사용한 표시 이미지 y좌표(높이 1316 기준, 정수리/앞 밑단/밑창/무릎/발목): 참고 10/665/1300/850/1180, v4 15/670/1297/845/1180, 2차 15/669/1297/840/1180, v5 16/638/1294/815/1180. 골반은 가려져 허벅지 전체 길이와의 정확한 비율은 측정하지 않았습니다. 발목·신발 크기와 피부선·명암은 육안 비교입니다.</p>
+<h3>2차 시도 · 비교 보존</h3>
+<img style="display:block;width:min(100%,360px)" src="flora_standing_attempt2_v5.png" alt="참고와 길이 비율은 가깝지만 종아리 연장 효과가 작은 2차 시도">
+<h3>컷인 v5 · 선택 전신 반영</h3>
+<img style="display:block;width:100%" src="flora_cutin_v5.png" alt="선택한 v5의 가는 허벅지와 부드러운 명암을 반영한 컷인">
+<p>OpenAI Images · gpt-image-2, 기본 옵션. 추가 편집 지시: 종아리 연장·허벅지와 발목 축소·작은 로퍼·얇은 피부선·부드러운 분홍 명암·안쪽 무릎 자세 유지. 3차는 상체 점유 높이를 줄여 긴 하체 공간 확보. 얼굴·머리·왕관·의상·지팡이 유지. 컷인은 선택 전신을 참조해 보이는 하체만 같은 방향으로 수정했습니다.</p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
 <figure style="margin:0;min-width:0"><figcaption>참고 · 왼쪽 인물 하체 기준</figcaption><img style="width:100%;height:clamp(300px,70vw,900px);object-fit:contain;background:white" src="pd_reference.webp" alt="하체 비율과 부드러운 명암을 참고한 두 유나 인물"></figure>
 <figure style="margin:0;min-width:0"><figcaption>플로라 v4 · 1024×1536</figcaption><img style="width:100%;height:clamp(300px,70vw,900px);object-fit:contain;background:white" src="flora_standing_v4_attempt1.png" alt="길고 가는 다리와 부드러운 분홍 피부 명암의 플로라 v4"></figure>
