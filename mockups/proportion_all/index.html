@@ -7,13 +7,13 @@
 <main>
 <section id="round3" aria-labelledby="round3-title">
 <h2 id="round3-title">3차 · 서로 다른 세계</h2>
-<p>가안 · 스토리팀 확인 전. 서로 다른 세계 출신이지만 교복 스커트를 기본으로 합니다. 고향은 머리 장식·소품·작은 트림으로만 표현합니다. 키는 100을 기준으로 한 상대값이며 실제 cm가 아닙니다. 등급과 키는 무관합니다.</p>
+<p>가안 · 스토리팀 확인 전. 전원 같은 분홍 카디건·남색 조끼·보라 체크 스커트 교복을 입습니다. 고향은 머리 장식·소품·작은 트림으로만 표현합니다. 샘플 키는 85~112의 상대값이며 실제 cm가 아닙니다. 등급과 키는 무관합니다.</p>
 <p>B도 A와 같은 선·채색 완성도를 유지하며 의상 구조만 단순하게 합니다. SS는 속성색 비원형 오라, 후광·무지개는 신화 전용입니다.</p>
-<p>8명 교복 수정본 · 과도한 겹옷을 제거했습니다. 신화만 무지개·후광을 사용합니다.</p>
+<p>8명 공통 교복 재수정본 · 스커트는 허벅지 중간~무릎 위의 단정한 길이와 단순한 주름으로 통일했습니다. 부드러운 분홍 기운의 피부와 간결한 셀 음영, 중립 전신·눈높이 시점을 적용했습니다. 신화만 무지개·후광을 사용합니다.</p>
 <div class="grid" id="round3-samples"></div>
 <h3>상대 키 라인업 · 가안</h3>
 <p>동일 원화를 종횡비 유지해 상대 키에 맞춘 비교입니다. 자세·머리 장식·신발에 따른 시각 차이가 있어 실측 신장표는 아닙니다.</p>
-<div class="pair" style="display:block"><button style="width:100%" aria-label="8명 키 라인업 확대"><img style="height:auto" src="r3u_lineup.png" alt="미오 유리 유나 카렌 하린 아르카 솔 플로라 상대 키 라인업"><span>94 · 95 · 98 · 98 · 100 · 102 · 104 · 105</span></button></div>
+<div class="pair" style="display:block"><button style="width:100%" aria-label="8명 키 라인업 확대"><img style="height:auto" src="r3w_lineup.png" alt="미오 유리 카렌 유나 하린 아르카 솔 플로라 공통 교복 상대 키 라인업"><span>85 · 90 · 94 · 96 · 102 · 105 · 108 · 112</span></button></div>
 <p>OpenAI Images · gpt-image-2 생성 샘플. 8장 모두 정체성·손·소품·전신을 육안 확인했습니다. 라인업은 새로 생성하지 않고 같은 원화로 합성했습니다.</p>
 <h3>63명 출신 세계 · 상대 키 가안</h3>
 <p>근거: Roster의 속성·전투 키트·무기·대사·외형, 본편과 SS 이야기. 새 세계명과 복식은 제안이며 기존 확정 설정이 아닙니다. 카렌과 이그니의 같은 축제 섬 인연, 시엘과 플로라의 가지 연결은 세계 간 방문·전승으로 조정할지 스토리팀 확인이 필요합니다.</p>
@@ -97,8 +97,10 @@ dabin 다빈 orange B
 ina 이나 orange B
 gyeol 결 orange B`.split('\n').map(x=>x.split(' '));
 const elements={rainbow:'무지개',purple:'보라',white:'빛',green:'생명',red:'불',blue:'물',orange:'노을'};
-document.querySelector('#world-table').innerHTML=worlds.map(([id,height,concept],i)=>{const r=rows.find(x=>x[0]===id);return `<article style="padding:12px 0;border-bottom:1px solid #d9cfe3"><strong>${r[1]} · ${r[3]} · ${elements[r[2]]} · 키 ${height}</strong><div role="img" aria-label="상대 키 ${height}" style="height:8px;background:#d7c6e7;width:${(height/106)*100}%"></div><p>가안 · ${concept.split(';')[0]} · 교복 포인트: ${accents[i]}</p></article>`}).join('');
-for(const id of ['mio','yuna','karen','flora','arca','harin','sol','yuri']){const r=rows.find(x=>x[0]===id),w=worlds.find(x=>x[0]===id);const card=document.createElement('article');card.className='card';card.innerHTML=`<h3>${r[1]} · ${r[3]} · 상대 키 ${w[1]}</h3><p class="meta">${accents[worlds.indexOf(w)]}</p><div class="pair" style="display:block"><button style="width:100%" aria-label="3차 ${r[1]} 확대"><img style="height:390px" src="r3u_${id}.jpg" alt="${r[1]} 교복 스커트 수정 시안"><span>교복 수정본 · 확대</span></button></div>`;document.querySelector('#round3-samples').append(card)}
+const sampleHeights={mio:85,yuri:90,karen:94,yuna:96,harin:102,arca:105,sol:108,flora:112};
+for(const w of worlds){if(w[0] in sampleHeights)w[1]=sampleHeights[w[0]]}
+document.querySelector('#world-table').innerHTML=worlds.map(([id,height,concept],i)=>{const r=rows.find(x=>x[0]===id);return `<article style="padding:12px 0;border-bottom:1px solid #d9cfe3"><strong>${r[1]} · ${r[3]} · ${elements[r[2]]} · 키 ${height}</strong><div role="img" aria-label="상대 키 ${height}" style="height:8px;background:#d7c6e7;width:${(height/112)*100}%"></div><p>가안 · ${concept.split(';')[0]} · 교복 포인트: ${accents[i]}</p></article>`}).join('');
+for(const id of ['mio','yuna','karen','flora','arca','harin','sol','yuri']){const r=rows.find(x=>x[0]===id),w=worlds.find(x=>x[0]===id);const card=document.createElement('article');card.className='card';card.innerHTML=`<h3>${r[1]} · ${r[3]} · 상대 키 ${w[1]}</h3><p class="meta">${accents[worlds.indexOf(w)]}</p><div class="pair" style="display:block"><button style="width:100%" aria-label="3차 ${r[1]} 확대"><img style="height:390px" src="r3w_${id}.jpg" alt="${r[1]} 공통 교복 짧은 스커트 수정 시안"><span>공통 교복 수정본 · 확대</span></button></div>`;document.querySelector('#round3-samples').append(card)}
 const grid=document.querySelector('#grid'),viewer=document.querySelector('#viewer'),large=document.querySelector('#large');
 for(const [id,name,el,tier] of rows){const card=document.createElement('article');card.className='card';card.innerHTML=`<h2>${name}</h2><p class="meta">${elements[el]} · ${tier}</p><div class="pair"><button type="button" aria-label="${name} 기존 이미지 확대"><img loading="lazy" src="${id}_current.jpg" alt="${name} 기존 SD"><span>기존 SD</span></button><button type="button" aria-label="${name} 시안 이미지 확대"><img loading="lazy" src="${id}.jpg" alt="${name} 일반 비율 시안"><span>일반 비율 · AI 시안</span></button></div>`;grid.append(card)}
 const showcase=[['r2_mio_B','B · 미오','기본 교복 · 단순 방패 · 차분한 자세'],['r2_yuna_A','A · 유나','리본 포인트 · 책 세공 · 부드러운 림라이트'],['r2_karen_S','S · 카렌','축제 어깨 레이어 · 보석 새총 · 불꽃잎'],['r2_flora_SS_retry','SS · 플로라','자수 망토 · 꽃 지팡이 · 생명 오라'],['r2_arca_mythic','신화 · 아르카','고유 예복 · 무지개 붓 · 별 후광']];
