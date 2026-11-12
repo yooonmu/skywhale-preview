@@ -1,0 +1,46 @@
+{
+  "entries": [
+    {
+      "file": "current_1600x720.jpg",
+      "id": "current",
+      "items": [
+        "ch1_revision"
+      ],
+      "label": "현재 배치1 · 장1",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "old_1600x720.jpg",
+      "id": "old",
+      "items": [
+        "ch1_revision"
+      ],
+      "label": "구 배경 · 장1",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "A_1600x720.jpg",
+      "id": "A",
+      "items": [
+        "ch1_revision"
+      ],
+      "label": "1차 수정 · 장1 A",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "B_1600x720.jpg",
+      "id": "B",
+      "items": [
+        "ch1_revision"
+      ],
+      "label": "1차 수정 · 장1 B",
+      "phase": "late",
+      "resolution": "1600x720"
+    }
+  ],
+  "tool": "tools/feedback_capture.gd",
+  "updated": "2026-11-12T16:14:50"
+}
