@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>보상 카드 이름 잘림 확인</title>
+<style>
+body{margin:0;background:#f6f2fb;color:#2b2550;font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.55}
+main{max-width:1320px;margin:0 auto;padding:24px 20px 48px}
+h1{font-size:22px;margin:0 0 6px}
+.lead{margin:0 0 20px;color:#4a4370}
+h2{font-size:17px;margin:28px 0 10px}
+.zoom{width:100%;aspect-ratio:1280/230;background:url(cards_1280.jpg) no-repeat;background-size:100% auto;background-position:0 51%;border-radius:6px;border:1px solid #d9cfee}
+figure{margin:0}
+figcaption{font-size:14px;color:#5a527f;margin-top:6px}
+img{width:100%;height:auto;border-radius:6px;border:1px solid #d9cfee;display:block}
+table{border-collapse:collapse;width:100%;font-size:15px;background:#fff;border-radius:6px;overflow:hidden}
+th,td{padding:8px 10px;border-bottom:1px solid #ece6f7;text-align:left}
+th{background:#ece6f7}
+.ask{margin-top:24px;padding:14px 16px;background:#fff;border-left:3px solid #8a63d2;border-radius:4px}
+</style></head>
+<body><main>
+<h1>보상 카드 이름 잘림 확인 (1280×720, 카드 10장)</h1>
+<p class="lead">QA가 일부러 아주 긴 이름 10개를 넣어 찍은 화면입니다. 실제 게임 이름(채색석, 바람 조각, 「희귀 은하수 리본 2단계」 등)은 잘리지 않습니다.</p>
+
+<h2>카드 부분 확대</h2>
+<figure><div class="zoom" role="img" aria-label="보상 카드 10장 확대 화면"></div>
+<figcaption>수량 숫자가 있는 카드는 이름이 한 줄만 보이고 끝이 「…」로 잘립니다. 수량이 없는 카드(「희귀 은하수 리본 2단계」, 맨 오른쪽)는 두 줄까지 보입니다.</figcaption></figure>
+
+<h2>전체 화면</h2>
+<figure><img src="cards_1280.jpg" alt="잿빛성 결과 화면, 보상 카드 10장"><figcaption>잿빛성 180초 결과 · 카드 10장 · 1280×720</figcaption></figure>
+
+<div class="ask"><b>정하실 것:</b> ① 이대로 둔다(아주 긴 이름만 「…」로 잘림) ② 카드가 많을 때는 이름을 두 줄로 보이게 하고 숫자를 작게 한다 ③ 카드를 두 줄로 나눠 배치해 카드를 키운다</div>
+</main></body></html>
