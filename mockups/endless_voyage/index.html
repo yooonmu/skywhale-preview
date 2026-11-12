@@ -8,9 +8,18 @@ main{max-width:1120px;margin:auto;padding:32px 24px}h1{font-size:32px;line-heigh
 p{max-width:78ch;margin:8px 0}.muted{color:var(--muted)}.legend{display:flex;gap:24px;flex-wrap:wrap}.legend b:nth-child(1){color:var(--sea)}.legend b:nth-child(2){color:var(--sun)}.legend b:nth-child(3){color:var(--rose)}
 svg{width:100%;height:auto;display:block}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}th,td{padding:8px 4px;border-bottom:1px solid var(--line);text-align:right}th:first-child,td:first-child{text-align:left}aside{border-top:2px solid var(--ink);margin-top:24px;padding-top:12px}small{font-size:14px}
 @media(max-width:500px){main{padding:20px 14px}h1{font-size:25px}table{font-size:14px}.legend{gap:14px}}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:28px}.compare article{min-width:0;border-top:3px solid var(--ink);padding-top:12px}.compare h2{font-size:26px}.compare h3{font-size:18px;margin:18px 0 6px}.compare table{font-size:13px}.compare th,.compare td{padding:7px 2px}.compare ul{padding-left:20px}.compare .lead{font-size:20px;font-weight:bold}.compare [data-choice-selected]{outline:3px solid var(--sea);outline-offset:6px}
+.jump{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.jump a{color:var(--ink);border:1px solid var(--line);padding:12px;text-decoration:none;min-height:44px}.jump a:hover{background:#eee8d9}.jump a:focus-visible{outline:3px solid var(--sea)}.jump strong{display:block}
+@media(max-width:850px){.compare{grid-template-columns:1fr;gap:32px}}
 </style>
 <main>
 <p class="muted">레인보우 아틀리에 · PD 검토안 · 게임 미적용</p>
+<h1>두 가지 30일안, 나란히 비교</h1>
+<p>같은 월 지출과 즉시 성장팩에서 <strong>누적 연구 성장만 다르게</strong> 잡았습니다. 어느 쪽도 게임 적용 전입니다. 아래 숫자는 목표 역산 예산이지 실기 전투 보장이 아닙니다.</p>
+<nav class="jump" aria-label="비교안 바로가기"><a href="#pd"><strong>PD안</strong>1,500 / 3,000<br>6,000 / 8,000</a><a href="#alternative"><strong>담당 대안</strong>1,500 / 2,500<br>4,000 / 5,000</a></nav>
+<div class="compare" id="comparison"></div>
+<p>공통: 6장×100칸 뒤 끝없는 항해 · 한 칸 적 성장 유지 · 구매 전 계정별 예상 표시 · 결제 즉시 자동 적용. 첫 패스/초보/고급/초월은 첫30초 각각23/34/56/56칸 돌파 예산입니다. 공용 소환·모험·등급전·회랑·장비·도감에는 유료 항로 배율이 들어가지 않습니다. 모험은2일차, 무료 진주는62일 약4,800의 별도 날짜 예산입니다.</p>
+<h2>이하: PD안 상세와 1차·2차 보관</h2>
 <h1>3차 · 30일에 1,500 / 3,000 / 6,000 / 8,000칸</h1>
 <p>PD 검토 주안. 첫 패스 ×6 · 초보 ×30 · 고급 ×300 · 최상위 ×3000의 즉시 성장에, 하루 최대 1 / 3 / 4칸의 항로 연구 충전을 더합니다. 무료도 매일 상승하고, 연구 복리가 과금 격차의 대부분을 만듭니다. 게임 수치는 미변경입니다.</p>
 <p>월 바구니: 소액 <strong>40,000원</strong> / 고액 <strong>290,000원</strong> / 초고과금 기준 <strong>1,000,000원</strong>. 패스·연구·엔진 묶음은1일, 초보팩은3일 구매합니다. 100만원은 결제 상한이 아닌 소프트캡입니다.</p>
@@ -41,6 +50,32 @@ svg{width:100%;height:auto;display:block}table{border-collapse:collapse;width:10
 <small class="muted">승인 포인트: “적 성장 우위”는 항로 수입만의 성장 기울기에 적용합니다. 총 전투력이 영원히 뒤처진다는 뜻이면 매일 상승 보장과 양립하지 않습니다. 첫날·30분은 목표 앵커이며, 구매 상한·연구 비용은 승인 후 전투 시뮬레이션으로 맞춥니다.</small></aside>
 </main>
 <script>
+(()=>{
+const h=Math.log(1.2)/10,a=1213/Math.log(2.45),days=[1,3,7,14,30,90,365],money=[0,40000,290000,1000000],names=['무료','소액 <5만원','고액 <30만원','100만원 기준'],colors=['#17666a','#97501b','#963e54','#344777'];
+const es=[[],[[1,6],[3,30]],[[1,6],[1,300],[3,30]],[[1,6],[1,300],[1,3000],[3,30]]];
+const base=d=>200+3*(d-1)+a*Math.log1p((d-1)/20),ins=(d,i)=>es[i].filter(([t])=>t<=d).reduce((s,[,j])=>s+Math.log(j)/h,0);
+const options=[{id:'pd',label:'PD안',targets:[1500,3000,6000,8000],amp:200,cost:'고액94일·100만원56일',hp:'무료27.01년 / 소액18.35년 / 고액5.83년 / 100만원2.75년',risk:'빠른 성장·큰 유료 격차를 위해 항로 전용 연구·비용 단위·재화 흐름 재설계가 먼저 필요합니다. 기존 비용식을 그대로 쓰면 두세 달 안에 경고선입니다.'},{id:'alternative',label:'담당 대안',targets:[1500,2500,4000,5000],amp:100,cost:'고액263일·100만원166일',hp:'무료27.01년 / 소액21.64년 / 고액14.05년 / 100만원10.90년',risk:'무료 속도·한 칸 HP·즉시 성장팩·월 바구니·float64 저장과 표기는 유지합니다. 연구 보너스만 낮춰 격차를 줄입니다. 다만 비용 재설계가 완전히 없어지는 안은 아닙니다. 100만원 계정은 약5.5개월 뒤 비용 경고선입니다.'}];
+window.comparisonValues={};
+const row=(cells,head=false)=>'<tr>'+cells.map(v=>`<${head?'th':'td'}>${v}</${head?'th':'td'}>`).join('')+'</tr>';
+const table=(heads,rows)=>'<table><thead>'+row(heads,true)+'</thead><tbody>'+rows.map(r=>row(r)).join('')+'</tbody></table>';
+for(const o of options){
+const bs=o.targets.map((v,i)=>(v-base(30)-ins(30,i))/Math.log1p(29/30)),st=(d,i)=>Math.floor(base(d)+ins(d,i)+bs[i]*Math.log1p((d-1)/30)+1e-9);
+window.comparisonValues[o.id]=days.map(d=>es.map((_,i)=>st(d,i)));
+const panel=document.createElement('article');panel.id=o.id;panel.dataset.choice=o.id;panel.dataset.choiceLabel=o.label;
+panel.innerHTML=`<h2>${o.label}</h2><p class="lead">${o.targets.map(v=>v.toLocaleString()).join(' / ')}칸</p><p>순서: 무료 / 소액 / 고액 / 월100만원.</p><p>${names.map((v,i)=>`<span style="color:${colors[i]}">● ${v}</span>`).join(' · ')}</p><svg viewBox="0 0 560 250" role="img" aria-label="${o.label} 네 프로필 1년 성장 곡선"></svg><h3>요청 체크포인트</h3>${table(['날짜','무료','소액','고액','100만원'],days.map(d=>[d+'일',...es.map((_,i)=>st(d,i).toLocaleString())]))}<h3>월 바구니 · 두 안 모두 같은 가격</h3><ul><li>무료: 구매 없음,0원.</li><li>소액: 패스1만+초보1만+기본 연구2만 = <strong>4만원</strong>.</li><li>고액: 소액 구성+고급 엔진5만+우선 연구10만+지원권2.5만×4 = <strong>29만원</strong>.</li><li>100만원: 고액 구성+초월 엔진30만+물류20만+성장권7만×3 = <strong>100만원</strong>.</li></ul><p>1일 월 묶음,3일 초보팩. 연구는매일1/3/4칸 자동투입. 월 갱신은연구 권리만 유지하고 첫 배율은 재지급하지 않습니다. 배타적 묶음이므로 중복 결제하지 않고 업그레이드는 차액만 냅니다.</p><h3>추가 칸 / 1만원</h3>${table(['프로필','월 지출','무료 대비','칸/1만원'],[1,2,3].map(i=>[names[i],(money[i]/10000)+'만원','+'+(o.targets[i]-1500).toLocaleString(),((o.targets[i]-1500)/money[i]*10000).toFixed(2)]))}<p>무료1,500칸을 제외한 평균 효율입니다. 과금할수록 원당 효율은 낮아집니다.</p><h3>100만원 이후: 결제벽 없이 급격한 감쇠</h3>${table(['월 지출','30일 칸','100만원보다'],[1000000,1500000,2000000,3000000].map(s=>{const n=Math.floor(o.targets[3]+o.amp*Math.log1p((s-1000000)/500000));return[s/10000+'만원',n.toLocaleString(),'+'+(n-o.targets[3])]}))}<p>추가 칸=${o.amp}·ln(1+초과액/50만원). 5만원 과충전권은하루2개·주기60개 재고만 제한합니다. 10% 즉시 적용·90% 자동 연구, 추가 구매를 해도 성장 속도는 거의 늘지 않습니다. 다른 SKU도 같은 누적 감쇠를 공유해야 합니다.</p><h3>이야기600칸 · 어느 날 끝나나?</h3><p><strong>무료8일 / 소액3일 / 고액1일 / 100만원1일</strong>. 순간팩이 같아서 대안도 유료의 첫날 이야기 소진을 막지 못합니다. 고정 이야기 연출과 실제 전투 시간은 별도 검증해야 합니다.</p><h3>필요한 작업과 위험</h3><p>${o.risk}</p><p>정규화 성장비용이1e308이 되는 시점: <strong>${o.cost}</strong>. 실제 골드 잔액이 넘치는 날짜와는 다릅니다.</p><p>HP/관문 전투력의1e308 외삽: ${o.hp}. 1년 HP는 두 안 모두float64 안에 있지만, 비용과 중간 곱셈은 따로 검사해야 합니다.</p><p>항로 순위는 지출 격차를 그대로 보여줍니다. 무료 공정 순위/지출 구간 리그와 분리하고, 유료 항로 재화를 모험 재화로 바꾸지 않아야 합니다.</p>`;
+document.querySelector('#comparison').append(panel);
+const soft=document.createElementNS('http://www.w3.org/2000/svg','svg');soft.setAttribute('viewBox','0 0 560 145');soft.setAttribute('role','img');soft.setAttribute('aria-label',o.label+' 100만원 초과 지출의 추가 칸 곡선');panel.querySelectorAll('h3')[4].before(soft);
+const sn='http://www.w3.org/2000/svg',se=(t,at,text)=>{const n=document.createElementNS(sn,t);for(const[k,v]of Object.entries(at))n.setAttribute(k,v);if(text)n.textContent=text;soft.append(n)};
+for(const v of[0,100,200,300]){const y=115-v/350*90;se('line',{x1:52,x2:545,y1:y,y2:y,stroke:'#d3d7cf'});se('text',{x:48,y:y+4,'text-anchor':'end',fill:'#52636a','font-size':12},'+'+v)}
+se('polyline',{points:Array.from({length:101},(_,i)=>`${52+i/100*493},${115-o.amp*Math.log1p(i/100*2000000/500000)/350*90}`).join(' '),fill:'none',stroke:'#17666a','stroke-width':2.5});
+for(const [label,x]of[['100만원',52],['200만원',298],['300만원',545]])se('text',{x,y:138,'text-anchor':'middle',fill:'#52636a','font-size':12},label);
+se('text',{x:60,y:15,fill:'#52636a','font-size':12},'100만원 기준에서 추가되는 칸');
+const svg=panel.querySelector('svg'),ns='http://www.w3.org/2000/svg',el=(tag,attrs,text)=>{const n=document.createElementNS(ns,tag);for(const[k,v]of Object.entries(attrs))n.setAttribute(k,v);if(text)n.textContent=text;svg.append(n)};
+for(const v of[0,10000,20000,30000]){const y=210-v/30000*185;el('line',{x1:52,x2:545,y1:y,y2:y,stroke:'#d3d7cf'});el('text',{x:48,y:y+4,'text-anchor':'end','font-size':12,fill:'#52636a'},v.toLocaleString())}
+for(const d of[1,90,365])el('text',{x:52+(d-1)/364*493,y:237,'text-anchor':'middle','font-size':12,fill:'#52636a'},d+'일');
+es.forEach((e,i)=>{let pts=[];for(let d=1;d<=365;d++){const x=52+(d-1)/364*493;if(e.some(([t])=>t===d)&&d>1)pts.push(`${x},${210-st(d-.001,i)/30000*185}`);pts.push(`${x},${210-st(d,i)/30000*185}`)}el('polyline',{points:pts.join(' '),fill:'none',stroke:colors[i],'stroke-width':2.5});for(const d of[1,3])if(e.some(([t])=>t===d))el('circle',{cx:52+(d-1)/364*493,cy:210-st(d,i)/30000*185,r:3,fill:colors[i]})});
+}
+})();
 (()=>{
 const h=Math.log(1.2)/10,a=1213/Math.log(2.45),colors=['#17666a','#97501b','#963e54','#344777'];
 const events=[[],[[1,6],[3,30]],[[1,6],[1,300],[3,30]],[[1,6],[1,300],[1,3000],[3,30]]];
