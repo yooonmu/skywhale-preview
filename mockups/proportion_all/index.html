@@ -8,16 +8,16 @@
 <section id="legwear-detail" aria-labelledby="legwear-title">
 <h2 id="legwear-title">다리 · 양말 디테일 보완</h2>
 <section id="yuna-thigh-test" aria-labelledby="yuna-thigh-title">
-<h3 id="yuna-thigh-title">유나만 먼저 · 허벅지 볼륨 소폭 테스트</h3>
-<p>허벅지 윗부분만 조금 더 부드럽게 보완한 검토용 시안입니다. 무릎·종아리·발목과 별 니삭스, 상체·자세는 유지했습니다. 아래 5인 적용본은 교체하지 않았습니다.</p>
+<h3 id="yuna-thigh-title">유나만 먼저 · 블랙 사이하이와 허벅지 볼륨</h3>
+<p>기존 별 니삭스 이미지를 기준으로 검정 사이하이와 눈에 보이는 부드러운 윗허벅지 볼륨을 적용했습니다. 치마와 밴드 사이에는 짧은 피부 간격을 두고 무릎·종아리·발목은 가늘게 유지했습니다. 아래 5인 적용본은 교체하지 않았습니다.</p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:800px">
 <figure style="margin:0;min-width:0"><figcaption>이전 · 별 니삭스</figcaption><img style="display:block;width:100%" src="legwear_yuna.png" alt="유나 허벅지 볼륨 변경 전"><canvas id="yuna-thigh-before" width="370" height="400" role="img" aria-label="이전 허벅지부터 무릎까지 확대" style="display:block;width:100%"></canvas></figure>
-<figure style="margin:0;min-width:0"><figcaption>테스트 · 소폭 보완</figcaption><img style="display:block;width:100%" src="legwear_yuna_thigh_test_v2.png" alt="유나 허벅지 윗부분을 소폭 부드럽게 보완"><canvas id="yuna-thigh-after" width="370" height="400" role="img" aria-label="보완 허벅지부터 무릎까지 확대" style="display:block;width:100%"></canvas></figure>
+<figure style="margin:0;min-width:0"><figcaption>테스트 · 블랙 사이하이 / 볼륨 보완</figcaption><img style="display:block;width:100%" src="legwear_yuna_black_thighhigh_v3.png" alt="검정 사이하이와 더 둥글고 부드러운 윗허벅지의 유나"><canvas id="yuna-thigh-after" width="370" height="400" role="img" aria-label="보완 허벅지부터 무릎까지 확대" style="display:block;width:100%"></canvas></figure>
 </div>
-<p>OpenAI Images · gpt-image-2, 기본 옵션. 입력: 현재 유나 별 니삭스 이미지. 편집 지시: 치마 아래 허벅지 윗부분에 절제된 자연스러운 볼륨과 부드러운 명암을 더하고 가는 무릎으로 이어지게 함. 상체·얼굴·소품·치마 길이·자세·다리 길이·니삭스·신발 유지, 과장·노출·강조 구도 금지. 아르카는 범위 변경 전에 생성된 미적용 파일만 남았으며 카렌은 생성하지 않았습니다.</p>
+<p>OpenAI Images · gpt-image-2, 기본 옵션. 입력: legwear_yuna.png. 편집 지시: 윗허벅지는 이전보다 분명히 둥글고 부드럽게, 밴드 접촉은 자연스럽게, 가는 무릎·종아리·발목 유지. 검정 사이하이는 허벅지 중상단의 얇은 골지 밴드·작은 별·매끈한 무광과 약한 정강이 광택. 상체·얼굴·책·치마 길이·자세·신발 고정, 과장·노출·강조 구도 금지. 새 업로드: legwear_yuna_black_thighhigh_v3.png. 다른 캐릭터는 미변경입니다.</p>
 </section>
 <script>
-for(const [id,src] of [['yuna-thigh-before','legwear_yuna.png'],['yuna-thigh-after','legwear_yuna_thigh_test_v2.png']]){
+for(const [id,src] of [['yuna-thigh-before','legwear_yuna.png'],['yuna-thigh-after','legwear_yuna_black_thighhigh_v3.png']]){
  const image=new Image();image.onload=()=>document.getElementById(id).getContext('2d').drawImage(image,340,735,370,400,0,0,370,400);image.src=src;
 }
 </script>
