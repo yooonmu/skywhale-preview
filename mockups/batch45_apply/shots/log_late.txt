@@ -1,0 +1,63 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 610.88 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Ti
+
+SECTION go_late
+SECTION pages_1280
+SHOT after_hub_1280x720.jpg
+SHOT after_element_1280x720.jpg
+SHOT after_rank_1280x720.jpg
+SHOT after_rank_rules_1280x720.jpg
+SHOT after_soul_1280x720.jpg
+SHOT after_soul_rules_1280x720.jpg
+SHOT after_castle_1280x720.jpg
+SHOT after_temple_1280x720.jpg
+SHOT after_element_empty_1280x720.jpg
+SHOT after_soul_empty_1280x720.jpg
+SHOT after_temple_mid_1280x720.jpg
+SECTION results_1280
+SHOT after_r_element_1280x720.jpg
+SHOT after_r_castle_1280x720.jpg
+SHOT after_r_castle_full_1280x720.jpg
+SHOT after_r_temple_1280x720.jpg
+SHOT after_r_temple_fail_1280x720.jpg
+SHOT after_r_soul_win_1280x720.jpg
+SHOT after_r_soul_lose_1280x720.jpg
+SHOT after_r_rank_1280x720.jpg
+SHOT after_r_week_1280x720.jpg
+SECTION pages_1600
+SHOT after_hub_1600x720.jpg
+SHOT after_element_1600x720.jpg
+SHOT after_rank_1600x720.jpg
+SHOT after_rank_rules_1600x720.jpg
+SHOT after_soul_1600x720.jpg
+SHOT after_soul_rules_1600x720.jpg
+SHOT after_castle_1600x720.jpg
+SHOT after_temple_1600x720.jpg
+SHOT after_element_empty_1600x720.jpg
+SHOT after_soul_empty_1600x720.jpg
+SHOT after_temple_mid_1600x720.jpg
+SECTION results_1600
+SHOT after_r_element_1600x720.jpg
+SHOT after_r_castle_1600x720.jpg
+SHOT after_r_castle_full_1600x720.jpg
+SHOT after_r_temple_1600x720.jpg
+SHOT after_r_temple_fail_1600x720.jpg
+SHOT after_r_soul_win_1600x720.jpg
+SHOT after_r_soul_lose_1600x720.jpg
+SHOT after_r_rank_1600x720.jpg
+SHOT after_r_week_1600x720.jpg
+SECTION video
+VIDEO after_hub_1280 frames=188
+VIDEO after_page_element_1280 frames=121
+VIDEO after_page_rank_1280 frames=117
+VIDEO after_page_soul_1280 frames=118
+VIDEO after_page_castle_1280 frames=119
+VIDEO after_page_temple_1280 frames=123
+VIDEO after_r_element_1280 frames=169
+VIDEO after_r_castle_1280 frames=198
+VIDEO after_r_temple_1280 frames=182
+VIDEO after_r_soul_win_1280 frames=192
+VIDEO after_r_soul_lose_1280 frames=188
+VIDEO after_r_week_1280 frames=154
+B45_GUIDE {"=도전>@1280":true,"=도전>@1600":true,"=입장>@1280":true,"=입장>@1600":true,"기억의 회랑>열기@1280":true,"기억의 회랑>열기@1600":true,"도전>@1280":true,"도전>@1600":true,"신전 · 승급전>열기@1280":true,"신전 · 승급전>열기@1600":true,"원소 구름섬>열기@1280":true,"원소 구름섬>열기@1600":true,"잿빛성>열기@1280":true,"잿빛성>열기@1600":true,"항해사 등급전>열기@1280":true,"항해사 등급전>열기@1600":true}
+FEEDBACK_DONE phase=late entries=40 failures=[]

@@ -1,0 +1,766 @@
+{
+  "entries": [
+    {
+      "file": "before_hub_1280x720.jpg",
+      "id": "before_hub",
+      "items": [
+        "D4-1"
+      ],
+      "label": "모험 허브 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_element_1280x720.jpg",
+      "id": "before_element",
+      "items": [
+        "D4"
+      ],
+      "label": "원소 구름섬 페이지 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_rank_1280x720.jpg",
+      "id": "before_rank",
+      "items": [
+        "D4"
+      ],
+      "label": "항해사 등급전 페이지 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_soul_1280x720.jpg",
+      "id": "before_soul",
+      "items": [
+        "D4"
+      ],
+      "label": "기억의 회랑 페이지 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_castle_1280x720.jpg",
+      "id": "before_castle",
+      "items": [
+        "D4"
+      ],
+      "label": "잿빛성 페이지 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_temple_1280x720.jpg",
+      "id": "before_temple",
+      "items": [
+        "D4"
+      ],
+      "label": "신전 · 승급전 페이지 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_element_empty_1280x720.jpg",
+      "id": "before_element_empty",
+      "items": [
+        "D4-2"
+      ],
+      "label": "원소섬 · 오늘 입장 0 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_soul_empty_1280x720.jpg",
+      "id": "before_soul_empty",
+      "items": [
+        "D4-4"
+      ],
+      "label": "회랑 · 도전 0 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_temple_mid_1280x720.jpg",
+      "id": "before_temple_mid",
+      "items": [
+        "D4-6"
+      ],
+      "label": "신전 · 부선장 도전 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_r_element_1280x720.jpg",
+      "id": "before_r_element",
+      "items": [
+        "D5-2"
+      ],
+      "label": "원소섬 결과 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_r_castle_1280x720.jpg",
+      "id": "before_r_castle",
+      "items": [
+        "D5-1"
+      ],
+      "label": "잿빛성 결과 95초 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_r_castle_full_1280x720.jpg",
+      "id": "before_r_castle_full",
+      "items": [
+        "D5-1"
+      ],
+      "label": "잿빛성 결과 3분 완주 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_r_temple_1280x720.jpg",
+      "id": "before_r_temple",
+      "items": [
+        "D5-3"
+      ],
+      "label": "신전 승급 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_r_temple_fail_1280x720.jpg",
+      "id": "before_r_temple_fail",
+      "items": [
+        "D5-3"
+      ],
+      "label": "신전 실패 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_r_soul_win_1280x720.jpg",
+      "id": "before_r_soul_win",
+      "items": [
+        "D5-4"
+      ],
+      "label": "회랑 결과 승리 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_r_soul_lose_1280x720.jpg",
+      "id": "before_r_soul_lose",
+      "items": [
+        "D5-4"
+      ],
+      "label": "회랑 결과 패배 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_r_rank_1280x720.jpg",
+      "id": "before_r_rank",
+      "items": [
+        "D5-4"
+      ],
+      "label": "등급전 결과 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_r_week_1280x720.jpg",
+      "id": "before_r_week",
+      "items": [
+        "D5-5"
+      ],
+      "label": "주간 정산 before",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "before_hub_1600x720.jpg",
+      "id": "before_hub",
+      "items": [
+        "D4-1"
+      ],
+      "label": "모험 허브 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_element_1600x720.jpg",
+      "id": "before_element",
+      "items": [
+        "D4"
+      ],
+      "label": "원소 구름섬 페이지 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_rank_1600x720.jpg",
+      "id": "before_rank",
+      "items": [
+        "D4"
+      ],
+      "label": "항해사 등급전 페이지 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_soul_1600x720.jpg",
+      "id": "before_soul",
+      "items": [
+        "D4"
+      ],
+      "label": "기억의 회랑 페이지 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_castle_1600x720.jpg",
+      "id": "before_castle",
+      "items": [
+        "D4"
+      ],
+      "label": "잿빛성 페이지 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_temple_1600x720.jpg",
+      "id": "before_temple",
+      "items": [
+        "D4"
+      ],
+      "label": "신전 · 승급전 페이지 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_element_empty_1600x720.jpg",
+      "id": "before_element_empty",
+      "items": [
+        "D4-2"
+      ],
+      "label": "원소섬 · 오늘 입장 0 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_soul_empty_1600x720.jpg",
+      "id": "before_soul_empty",
+      "items": [
+        "D4-4"
+      ],
+      "label": "회랑 · 도전 0 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_temple_mid_1600x720.jpg",
+      "id": "before_temple_mid",
+      "items": [
+        "D4-6"
+      ],
+      "label": "신전 · 부선장 도전 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_r_element_1600x720.jpg",
+      "id": "before_r_element",
+      "items": [
+        "D5-2"
+      ],
+      "label": "원소섬 결과 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_r_castle_1600x720.jpg",
+      "id": "before_r_castle",
+      "items": [
+        "D5-1"
+      ],
+      "label": "잿빛성 결과 95초 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_r_castle_full_1600x720.jpg",
+      "id": "before_r_castle_full",
+      "items": [
+        "D5-1"
+      ],
+      "label": "잿빛성 결과 3분 완주 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_r_temple_1600x720.jpg",
+      "id": "before_r_temple",
+      "items": [
+        "D5-3"
+      ],
+      "label": "신전 승급 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_r_temple_fail_1600x720.jpg",
+      "id": "before_r_temple_fail",
+      "items": [
+        "D5-3"
+      ],
+      "label": "신전 실패 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_r_soul_win_1600x720.jpg",
+      "id": "before_r_soul_win",
+      "items": [
+        "D5-4"
+      ],
+      "label": "회랑 결과 승리 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_r_soul_lose_1600x720.jpg",
+      "id": "before_r_soul_lose",
+      "items": [
+        "D5-4"
+      ],
+      "label": "회랑 결과 패배 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_r_rank_1600x720.jpg",
+      "id": "before_r_rank",
+      "items": [
+        "D5-4"
+      ],
+      "label": "등급전 결과 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "before_r_week_1600x720.jpg",
+      "id": "before_r_week",
+      "items": [
+        "D5-5"
+      ],
+      "label": "주간 정산 before",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_hub_1280x720.jpg",
+      "id": "after_hub",
+      "items": [
+        "D4-1"
+      ],
+      "label": "모험 허브 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_element_1280x720.jpg",
+      "id": "after_element",
+      "items": [
+        "D4"
+      ],
+      "label": "원소 구름섬 페이지 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_rank_1280x720.jpg",
+      "id": "after_rank",
+      "items": [
+        "D4"
+      ],
+      "label": "항해사 등급전 페이지 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_rank_rules_1280x720.jpg",
+      "id": "after_rank_rules",
+      "items": [
+        "#56"
+      ],
+      "label": "항해사 등급전 규칙 말풍선 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_soul_1280x720.jpg",
+      "id": "after_soul",
+      "items": [
+        "D4"
+      ],
+      "label": "기억의 회랑 페이지 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_soul_rules_1280x720.jpg",
+      "id": "after_soul_rules",
+      "items": [
+        "#56"
+      ],
+      "label": "기억의 회랑 규칙 말풍선 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_castle_1280x720.jpg",
+      "id": "after_castle",
+      "items": [
+        "D4"
+      ],
+      "label": "잿빛성 페이지 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_temple_1280x720.jpg",
+      "id": "after_temple",
+      "items": [
+        "D4"
+      ],
+      "label": "신전 · 승급전 페이지 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_element_empty_1280x720.jpg",
+      "id": "after_element_empty",
+      "items": [
+        "D4-2"
+      ],
+      "label": "원소섬 · 오늘 입장 0 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_soul_empty_1280x720.jpg",
+      "id": "after_soul_empty",
+      "items": [
+        "D4-4"
+      ],
+      "label": "회랑 · 도전 0 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_temple_mid_1280x720.jpg",
+      "id": "after_temple_mid",
+      "items": [
+        "D4-6"
+      ],
+      "label": "신전 · 부선장 도전 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_r_element_1280x720.jpg",
+      "id": "after_r_element",
+      "items": [
+        "D5-2"
+      ],
+      "label": "원소섬 결과 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_r_castle_1280x720.jpg",
+      "id": "after_r_castle",
+      "items": [
+        "D5-1"
+      ],
+      "label": "잿빛성 결과 95초 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_r_castle_full_1280x720.jpg",
+      "id": "after_r_castle_full",
+      "items": [
+        "D5-1"
+      ],
+      "label": "잿빛성 결과 3분 완주 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_r_temple_1280x720.jpg",
+      "id": "after_r_temple",
+      "items": [
+        "D5-3"
+      ],
+      "label": "신전 승급 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_r_temple_fail_1280x720.jpg",
+      "id": "after_r_temple_fail",
+      "items": [
+        "D5-3"
+      ],
+      "label": "신전 실패 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_r_soul_win_1280x720.jpg",
+      "id": "after_r_soul_win",
+      "items": [
+        "D5-4"
+      ],
+      "label": "회랑 결과 승리 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_r_soul_lose_1280x720.jpg",
+      "id": "after_r_soul_lose",
+      "items": [
+        "D5-4"
+      ],
+      "label": "회랑 결과 패배 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_r_rank_1280x720.jpg",
+      "id": "after_r_rank",
+      "items": [
+        "D5-4"
+      ],
+      "label": "등급전 결과 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_r_week_1280x720.jpg",
+      "id": "after_r_week",
+      "items": [
+        "D5-5"
+      ],
+      "label": "주간 정산 after",
+      "phase": "late",
+      "resolution": "1280x720"
+    },
+    {
+      "file": "after_hub_1600x720.jpg",
+      "id": "after_hub",
+      "items": [
+        "D4-1"
+      ],
+      "label": "모험 허브 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_element_1600x720.jpg",
+      "id": "after_element",
+      "items": [
+        "D4"
+      ],
+      "label": "원소 구름섬 페이지 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_rank_1600x720.jpg",
+      "id": "after_rank",
+      "items": [
+        "D4"
+      ],
+      "label": "항해사 등급전 페이지 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_rank_rules_1600x720.jpg",
+      "id": "after_rank_rules",
+      "items": [
+        "#56"
+      ],
+      "label": "항해사 등급전 규칙 말풍선 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_soul_1600x720.jpg",
+      "id": "after_soul",
+      "items": [
+        "D4"
+      ],
+      "label": "기억의 회랑 페이지 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_soul_rules_1600x720.jpg",
+      "id": "after_soul_rules",
+      "items": [
+        "#56"
+      ],
+      "label": "기억의 회랑 규칙 말풍선 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_castle_1600x720.jpg",
+      "id": "after_castle",
+      "items": [
+        "D4"
+      ],
+      "label": "잿빛성 페이지 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_temple_1600x720.jpg",
+      "id": "after_temple",
+      "items": [
+        "D4"
+      ],
+      "label": "신전 · 승급전 페이지 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_element_empty_1600x720.jpg",
+      "id": "after_element_empty",
+      "items": [
+        "D4-2"
+      ],
+      "label": "원소섬 · 오늘 입장 0 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_soul_empty_1600x720.jpg",
+      "id": "after_soul_empty",
+      "items": [
+        "D4-4"
+      ],
+      "label": "회랑 · 도전 0 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_temple_mid_1600x720.jpg",
+      "id": "after_temple_mid",
+      "items": [
+        "D4-6"
+      ],
+      "label": "신전 · 부선장 도전 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_r_element_1600x720.jpg",
+      "id": "after_r_element",
+      "items": [
+        "D5-2"
+      ],
+      "label": "원소섬 결과 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_r_castle_1600x720.jpg",
+      "id": "after_r_castle",
+      "items": [
+        "D5-1"
+      ],
+      "label": "잿빛성 결과 95초 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_r_castle_full_1600x720.jpg",
+      "id": "after_r_castle_full",
+      "items": [
+        "D5-1"
+      ],
+      "label": "잿빛성 결과 3분 완주 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_r_temple_1600x720.jpg",
+      "id": "after_r_temple",
+      "items": [
+        "D5-3"
+      ],
+      "label": "신전 승급 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_r_temple_fail_1600x720.jpg",
+      "id": "after_r_temple_fail",
+      "items": [
+        "D5-3"
+      ],
+      "label": "신전 실패 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_r_soul_win_1600x720.jpg",
+      "id": "after_r_soul_win",
+      "items": [
+        "D5-4"
+      ],
+      "label": "회랑 결과 승리 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_r_soul_lose_1600x720.jpg",
+      "id": "after_r_soul_lose",
+      "items": [
+        "D5-4"
+      ],
+      "label": "회랑 결과 패배 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_r_rank_1600x720.jpg",
+      "id": "after_r_rank",
+      "items": [
+        "D5-4"
+      ],
+      "label": "등급전 결과 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    },
+    {
+      "file": "after_r_week_1600x720.jpg",
+      "id": "after_r_week",
+      "items": [
+        "D5-5"
+      ],
+      "label": "주간 정산 after",
+      "phase": "late",
+      "resolution": "1600x720"
+    }
+  ],
+  "tool": "tools/feedback_capture.gd",
+  "updated": "2026-11-12T10:44:58"
+}
