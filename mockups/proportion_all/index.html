@@ -11,20 +11,20 @@
 <div id="legwear-pairs" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px"></div>
 <h3>무릎–신발 확대 · 보완본</h3>
 <div id="legwear-crops" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px"></div>
-<p>플로라: 피부가 은은하게 비치는 30–40데니어 느낌의 시어 블랙 타이츠, 어두운 외곽·발목과 부드러운 정강이 광택. 아르카: 얇은 밴드와 미세 니트, 무지개 별 포인트의 밝은 라벤더 사이하이. 두 캐릭터는 직전 레그웨어를 이전으로 표시합니다. 유나·미오·카렌은 이전 보완 결과 그대로입니다. 새 문양과 길이 변경은 PD 지시를 반영한 시안입니다.</p>
-<p>이번 국소 편집도 OpenAI Images · gpt-image-2 기본 옵션 사용. 플로라는 검정 시어 원단의 투과감과 얇은 윤곽, 아르카는 밝은 라벤더·얇은 골지 밴드·미세 니트·밀착된 가는 실루엣·약한 광택을 지시했습니다. 얼굴·머리·상체·자세·배경 고정. 새 업로드 파일: legwear_flora_black_v2.png, legwear_arca_lavender_v2.png. 확대는 해당 이미지에서 페이지가 직접 그립니다.</p>
+<p>플로라: 블랙 색과 어두운 가장자리·광택은 유지하고 피부 투과감을 아주 조금 높인 v3(20–30데니어 느낌 목표). 차이는 미세하며 실제 데니어 측정값이 아닙니다. 아르카: 배지·봉제선·니트 결을 제거한 매끈한 라벤더 새틴 피니시 사이하이, 얇은 상단 가장자리와 은은한 반사광. 두 캐릭터는 v2→v3 비교이며 다른 세 캐릭터는 그대로입니다.</p>
+<p>OpenAI Images · gpt-image-2 기본 옵션. 아르카 편집 지시: 스타 배지를 연속된 라벤더 원단으로 대체, 절개선·골지 결 제거, 밀착된 얇은 새틴 피니시와 허벅지·정강이의 부드러운 광택, 의상의 다른 별 장식 유지. 플로라 편집 지시: 무릎·정강이·허벅지 앞면의 피부 투과감만 소폭 증가, 검정 색·어두운 외곽·광택 유지. 공통: 하체 외 얼굴·머리·상체·자세·배경 고정. 새 업로드 파일: legwear_flora_black_v3.png, legwear_arca_lavender_v3.png. 확대는 해당 이미지에서 페이지가 직접 그립니다.</p>
 <p>AI 참조 편집: OpenAI Images · gpt-image-2 / 기본 옵션 / 각 이전 전신과 PD 유나 2인 참고 사용. 공통 지시: 하체만 수정, 양말의 골지 밴드·미세 세로 니트·무광 종아리 명암·발목 주름·자연스러운 접촉면, 부드러운 아이보리→분홍 피부·무릎 볼륨·넓은 하이라이트·얇은 피부선, 약간 작은 로퍼와 가죽 광택. 얼굴·머리·상체 의상·소품·자세·비율·흰 배경 유지. 강조 구도·추가 노출 금지. 타이츠에는 불필요한 골지 밴드를 넣지 않았습니다. 전신은 모두 1024×1536, 게임 원본 미변경입니다.</p>
 </section>
 <script>
 (()=>{
 const entries=[
-['flora','플로라 · 블랙 타이츠','legwear_flora.png'],
+['flora','플로라 · 블랙 타이츠','legwear_flora_black_v2.png'],
 ['yuna','유나 · 별 니삭스','grade_v4_yuna.png'],
 ['mio','미오 · 프릴 발목','grade_v4_mio.png'],
 ['karen','카렌 · 줄무늬 니삭스','grade_v4_karen.png'],
-['arca','아르카 · 라벤더 사이하이','legwear_arca.png']];
+['arca','아르카 · 새틴 사이하이','legwear_arca_lavender_v2.png']];
 for(const [id,label,before] of entries){
- const after=id==='flora'?'legwear_flora_black_v2.png':id==='arca'?'legwear_arca_lavender_v2.png':'legwear_'+id+'.png';
+ const after=id==='flora'?'legwear_flora_black_v3.png':id==='arca'?'legwear_arca_lavender_v3.png':'legwear_'+id+'.png';
  const f=document.createElement('figure');f.style.cssText='margin:0;min-width:0';
  const caption=document.createElement('figcaption');caption.textContent=label;f.append(caption);
  for(const [src,alt] of [[before,'이전'],[after,'보완']]){
