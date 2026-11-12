@@ -823,6 +823,37 @@
     ]
   },
   {
+    "id": "ina",
+    "name": "이나",
+    "tier": "B",
+    "element": "orange",
+    "role": "냄비뚜껑 수호자",
+    "main_story": false,
+    "archetype": "장난",
+    "expression": "윙크하며 활짝 웃음",
+    "pose": "국자를 높이 들고 한쪽 발을 접는 스텝",
+    "legwear": "짙은 보라 니삭스",
+    "leg_appeal": "자연스러운 무릎 굴곡과 밀착 니삭스",
+    "status": "done",
+    "notes": "걷은 소매·작은 옆 앞치마 리폼. SD 앞치마 위치와 크기는 약간 다름. 원본 공격 기반 신규 컷인. OpenAI Images gpt-image-2.",
+    "files": [
+      "cutin.png",
+      "cutin_bg.png",
+      "cutin_cut.png",
+      "detail.png",
+      "face.png",
+      "fx_back.png",
+      "fx_back_key.png",
+      "fx_front.png",
+      "fx_front_key.png",
+      "game_attack.png",
+      "game_idle.png",
+      "pickup.png",
+      "sd_attack.png",
+      "sd_idle.png"
+    ]
+  },
+  {
     "id": "jia",
     "name": "지아",
     "tier": "A",
@@ -1466,6 +1497,39 @@
       "sd_idle.png",
       "sd_idle_dark_check.png",
       "sd_idle_source.png"
+    ]
+  },
+  {
+    "id": "seol",
+    "name": "설",
+    "tier": "B",
+    "element": "red",
+    "role": "북",
+    "main_story": false,
+    "archetype": "활발 · 축제 응원대장",
+    "expression": "밝고 힘찬 열린 웃음",
+    "pose": "한 무릎을 들어 올리고 북채를 높이 든 행진 춤",
+    "legwear": "얇은 빨간 줄의 흰 종아리 양말과 갈색 스포티 슈즈",
+    "leg_appeal": "탄탄한 맨다리와 한쪽 무릎을 든 경쾌한 행진 실루엣",
+    "status": "done",
+    "notes": "OpenAI Images / gpt-image-2 생성. 적갈색 포니테일·흰 머리띠·붉은 눈·꽃무늬 붉은 북과 북채 유지. 교복 리폼: 허리에 묶은 분홍 카디건, 걷은 흰 셔츠 소매, 네이비 조끼, 빨간 리본, 보라 체크 스코트. 원본 북 공격 기반 축제 교정 컷인 신규 제작. 분리본은 생성 편집으로 픽셀 불일치 가능. FX는 상단의 최소 적주황 소리 반원과 빛점. SD 원본 크기 적용, 얼굴 detail 추출.",
+    "files": [
+      "cutin.png",
+      "cutin_cut.png",
+      "cutin_cut_key.png",
+      "detail.png",
+      "detail_key.png",
+      "face.png",
+      "fx_back.png",
+      "fx_back_black.png",
+      "fx_front.png",
+      "fx_front_black.png",
+      "pickup.png",
+      "pickup_key.png",
+      "sd_attack.png",
+      "sd_attack_key.png",
+      "sd_idle.png",
+      "sd_idle_key.png"
     ]
   },
   {
