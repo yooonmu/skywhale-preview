@@ -1,0 +1,15 @@
+{
+  "id": "suah",
+  "name": "수아",
+  "tier": "A",
+  "element": "red",
+  "role": "지원",
+  "main_story": false,
+  "archetype": "warm/gentle · 다정한 언니",
+  "expression": "따뜻하게 권하는 밝은 미소",
+  "pose": "냄비를 내밀며 나무 숟가락을 드는 사이드 스텝",
+  "legwear": "은은한 광택의 시어 차콜 타이츠",
+  "leg_appeal": "자연스러운 긴 다리선과 부드러운 체중 이동",
+  "status": "done",
+  "notes": "롤업 소매·빨간 리본·짧은 꽃무늬 앞치마 리폼. 9종 규격 및 어두운 배경 알파 검수 완료. 원본 컷인 부재로 냄비 권하기 공격 확장. OpenAI Images / gpt-image-2; cyan-key characters, black-key effects. Prompt: preserve red ponytail, red eyes, floral bandana apron and stew pot; warm adult offering pose, gentle standing, original SD poses, pot-offering cutin, light hearth sigil and sparse embers."
+}

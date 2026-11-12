@@ -1,0 +1,15 @@
+{
+  "id": "garam",
+  "name": "가람",
+  "tier": "A",
+  "element": "red",
+  "role": "딜러",
+  "main_story": false,
+  "archetype": "boyish · 자신만만한 대장장이",
+  "expression": "이를 드러내는 자신만만한 웃음",
+  "pose": "망치를 어깨에 메고 무릎을 굽힌 힘찬 스텝",
+  "legwear": "차콜 발목 양말과 튼튼한 갈색 로퍼",
+  "leg_appeal": "힘 있는 넓은 보폭과 건강한 맨다리선",
+  "status": "done",
+  "notes": "롤업 카디건·느슨한 타이·레이어드 스코트 리폼. 9종 규격과 어두운 배경 알파 검수 완료. 원본 컷인 부재로 공격 구도 확장. SD 공격 양말 길이는 원본에 가까움. OpenAI Images / gpt-image-2, opaque cyan-key characters and black-key effects. Prompt: preserve messy red hair, red eyes, soot cheek, work gloves and anvil hammer; boyish shoulder-hammer step, gentle standing, original SD poses, hammer-sweep cutin, modest forge sigil and sparse sparks."
+}

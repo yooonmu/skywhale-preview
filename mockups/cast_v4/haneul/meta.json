@@ -1,0 +1,15 @@
+{
+  "id": "haneul",
+  "name": "하늘",
+  "tier": "S",
+  "element": "green",
+  "role": "지원",
+  "main_story": false,
+  "archetype": "pure / gentle",
+  "expression": "tender delighted smile",
+  "pose": "turning in a breeze, dandelion over shoulder and open palm near lips",
+  "legwear": "cream frill ankle socks and brown loafers",
+  "leg_appeal": "Long softly tapered bare legs, one gently curved knee and lifted heel.",
+  "status": "done",
+  "notes": "Uniform reform: scalloped pink cardigan, fitted navy vest, lavender ribbon and flowing layered purple plaid skirt. OpenAI Images / gpt-image-2 default controls. Prompt: preserve sage floral side braid, cream bow, green eyes and giant dandelion staff; gentle adult woman in Flora cel style. Cut-in follows original attack because original cut-in absent. Blue mattes and dark effect halos removed; SD resized to original canvases; face cropped from detail. Game assets unchanged."
+}

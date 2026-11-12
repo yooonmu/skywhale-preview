@@ -1,0 +1,15 @@
+{
+  "id": "miso",
+  "name": "미소",
+  "tier": "A",
+  "element": "orange",
+  "role": "지원",
+  "main_story": false,
+  "archetype": "pure/gentle · 다정한 소풍 친구",
+  "expression": "귤을 권하는 밝은 미소",
+  "pose": "바구니를 팔에 걸고 귤을 내미는 회전 스텝",
+  "legwear": "크림 니삭스와 갈색 로퍼",
+  "leg_appeal": "부드러운 교차 스텝과 밝은 양말의 긴 다리선",
+  "status": "done",
+  "notes": "스캘럽 카디건·라벤더 리본·레이어드 스커트 리폼. 9종 규격 및 알파 검수 완료. 컷인 잔색은 궤적 없는 재생성으로 해결. 원본 컷인 부재로 공격 구도 확장. OpenAI Images / gpt-image-2; opaque cyan-key characters and black-key effects. Prompt: preserve orange bob, amber eyes, leaf flower hairband and tangerine basket; gentle offering turn, natural standing, original SD poses, fruit-toss cutin without trails, modest citrus sigil and sparse sparks."
+}

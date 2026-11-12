@@ -1,0 +1,15 @@
+{
+  "id": "hongi",
+  "name": "홍이",
+  "tier": "S",
+  "element": "red",
+  "role": "딜러",
+  "main_story": false,
+  "archetype": "energetic / festival martial artist",
+  "expression": "toothy grin and wink",
+  "pose": "wide grounded festival dance stance with dragon lantern raised and open martial palm",
+  "legwear": "plain charcoal mid-calf socks and brown loafers",
+  "leg_appeal": "Powerful dancer thighs and firm calves emphasized by grounded bent-knee stance.",
+  "status": "done",
+  "notes": "Uniform reform: rolled cropped pink cardigan with gold knots, fitted navy vest, red bow and purple plaid athletic wrap skort. OpenAI Images / gpt-image-2 default controls. Prompt: preserve crimson twin buns, gold floral pins, red tassels, red eyes and dragon lantern; energetic adult in Flora cel style. Original cut-in absent, new composition follows attack. Blue portrait mattes and dark effect halos removed, SD resized to original dimensions, face cropped from detail. Game assets unchanged."
+}

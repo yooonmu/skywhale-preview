@@ -1,0 +1,15 @@
+{
+  "id": "gaeul",
+  "name": "가을",
+  "tier": "A",
+  "element": "blue",
+  "role": "딜러",
+  "main_story": false,
+  "archetype": "cute · 쾌활한 비구름 소녀",
+  "expression": "신나는 윙크",
+  "pose": "비구름 병을 열어 내밀며 한 발을 접는 스킵",
+  "legwear": "흰 프릴 발목 양말과 갈색 로퍼",
+  "leg_appeal": "밝고 경쾌한 맨다리선과 접힌 발끝",
+  "status": "done",
+  "notes": "노란 우비와 기본 교복 유지, 프릴 발목 양말 리폼. 9종 규격과 어두운 배경 알파 검수 완료. 원본 컷인 부재로 공격 구도 확장. OpenAI Images / gpt-image-2; opaque green-key characters and black-key effects. Prompt: preserve blue pigtails eyes, yellow raincoat bows and raincloud bottle; cheerful skipping wink, gentle standing, original SD poses, bottle-pouring cutin, modest raincloud sigil and sparse drops."
+}

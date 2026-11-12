@@ -1,0 +1,15 @@
+{
+  "id": "jia",
+  "name": "지아",
+  "tier": "A",
+  "element": "red",
+  "role": "딜러",
+  "main_story": false,
+  "archetype": "sporty/energetic · 활발한 리본 체조",
+  "expression": "환하게 웃는 신나는 표정",
+  "pose": "불꽃 리본을 높이 돌리며 발끝을 뻗는 댄스 스텝",
+  "legwear": "차콜 니삭스와 갈색 로퍼",
+  "leg_appeal": "긴 다리의 교차 스텝과 경쾌한 발끝",
+  "status": "done",
+  "notes": "흰 반소매·허리에 묶은 핑크 카디건 리폼. 9종 규격 및 어두운 배경 알파 검수 완료. 원본 공격 구도 확장 컷인. OpenAI Images / gpt-image-2, opaque cyan-key characters and black-key effects. Prompt: preserve scarlet ponytail, red eyes, flower bow and flame ribbon baton; sporty dance pickup, gentle standing, original SD poses, ribbon-sweep cutin, modest red flame sigil and sparse sparks."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "doa",
+  "name": "도아",
+  "tier": "A",
+  "element": "green",
+  "role": "지원",
+  "main_story": false,
+  "archetype": "rustic cute · 소박한 귀여움",
+  "expression": "주근깨가 돋보이는 환한 웃음",
+  "pose": "씨앗을 뿌리며 가볍게 전진",
+  "legwear": "크림 스캘럽 앵클삭스",
+  "leg_appeal": "부드러운 맨다리선과 산뜻한 교차 스텝",
+  "status": "done",
+  "notes": "롤업 소매·크림 리본·스캘럽 스커트 리폼. 9종 규격 및 어두운 배경 알파 검수 완료. 원본 컷인 부재로 씨앗 공격 확장. OpenAI Images / gpt-image-2, blue-key characters and black-key effects. Prompt: preserve green twin tails, freckles, sunflower straw hat and seed pouch; cheerful adult seed-toss step, gentle standing, original SD poses, seed-toss cutin, light sprout sigil and sparse particles."
+}
