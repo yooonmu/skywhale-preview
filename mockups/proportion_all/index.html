@@ -5,6 +5,25 @@
 :root{font-family:system-ui,sans-serif;color:#32294a;background:#f5f1fa}*{box-sizing:border-box}body{margin:0}header,main{max-width:1500px;margin:auto;padding:28px}header{padding-bottom:4px}h1{font-size:clamp(26px,4vw,42px);margin:8px 0}header p{color:#615572;line-height:1.6}.eyebrow{color:#805c9f;font-weight:800;letter-spacing:.12em}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px}.card{background:#fff;border:1px solid #e0d6eb;border-radius:18px;overflow:hidden;box-shadow:0 8px 25px #68528512}.card h2{font-size:20px;margin:14px 16px 2px}.meta{margin:0 16px 12px;color:#655973;font-size:14px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#e8dfef}.pair button{border:0;padding:0;background:#faf5eb;cursor:zoom-in;color:#4a3d59;font:inherit}.pair img{display:block;width:100%;height:270px;object-fit:contain}.pair span{display:block;background:#f2eafa;padding:8px;font-size:13px;font-weight:700}.pair button:focus-visible,.close:focus-visible{outline:3px solid #754b9d;outline-offset:-3px}dialog{border:0;border-radius:16px;padding:14px;max-width:min(95vw,900px);max-height:95vh;background:#fff;color:#32294a}dialog::backdrop{background:#21172bcf}dialog img{display:block;max-width:100%;max-height:78vh;margin:auto}.close{display:block;margin:8px 0 0 auto;min-width:64px;min-height:44px;border:0;border-radius:8px;background:#665078;color:white;cursor:pointer}
 </style></head><body><header><div class="eyebrow">RAINBOW ATELIER · ART STUDY</div><h1>아이들 비율 비교 시안</h1><p>기존 SD와 일반 비율을 나란히 비교합니다. 이미지를 누르면 확대됩니다.<br>새 이미지는 OpenAI Images · gpt-image-2로 생성한 AI 샘플이며 게임 적용본이 아닙니다. 일부 세부 표현은 검토가 필요합니다.</p></header>
 <main>
+<section id="yuna-sd-test" aria-labelledby="yuna-sd-title">
+<h2 id="yuna-sd-title">유나 SD · 새 그림체 테스트</h2>
+<p>전투용 2.5–3등신 유지 · 기존 자세에 새 일러스트의 얼굴·색·의상·블랙 사이하이를 연결한 시안입니다. 게임 에셋은 교체하지 않았습니다.</p>
+<h3>전투 크기 · 이미지 높이 130px</h3>
+<div style="display:flex;align-items:end;gap:16px;flex-wrap:wrap;background:white;padding:12px">
+<figure style="margin:0"><figcaption>기존 대기</figcaption><img style="display:block;height:130px;width:auto" src="grade_v4_yuna_source.png" alt="130픽셀 기존 유나 대기"></figure>
+<figure style="margin:0"><figcaption>기존 공격</figcaption><img style="display:block;height:130px;width:auto" src="yuna_sd_attack_original.png" alt="130픽셀 기존 유나 공격"></figure>
+<figure style="margin:0"><figcaption>신규 대기</figcaption><img style="display:block;height:130px;width:auto" src="yuna_sd_idle_final.png" alt="130픽셀 신규 유나 대기"></figure>
+<figure style="margin:0"><figcaption>신규 공격</figcaption><img style="display:block;height:130px;width:auto" src="yuna_sd_attack_final.png" alt="130픽셀 신규 유나 공격"></figure>
+<figure style="margin:0"><figcaption>7등신 스타일 기준</figcaption><img style="display:block;height:130px;width:auto" src="legwear_yuna_black_thighhigh_v4_snug.png" alt="새 그림체 7등신 유나 기준"></figure>
+</div>
+<p>130px에서는 큰 보라 눈·빨간 리본·책·보라 별 탄환이 구분됩니다. 별 자수와 작은 체크선은 축소 시 약해집니다. 실제 갑판 합성이나 게임 내 테스트가 아닌 흰 배경 크기 비교입니다.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+<figure style="margin:0;min-width:0"><figcaption>신규 대기 · 553×698</figcaption><img style="width:100%;max-height:560px;object-fit:contain;background:white" src="yuna_sd_idle_final.png" alt="신규 유나 SD 대기 상세"></figure>
+<figure style="margin:0;min-width:0"><figcaption>신규 공격 · 988×709</figcaption><img style="width:100%;max-height:560px;object-fit:contain;background:white" src="yuna_sd_attack_final.png" alt="신규 유나 SD 공격 상세"></figure>
+</div>
+<p>실제 원본 파일 크기 기준으로 맞췄습니다: 대기 553×698, 공격 988×709. 생성 원화는 더 크게 출력되어 고품질 축소했습니다. 흰 배경이며 알파 투명화는 아직 하지 않았습니다. 탄환 광원 가장자리는 추후 배경 제거 시 별도 확인이 필요합니다.</p>
+<p>OpenAI Images · gpt-image-2 / 기본 옵션. 입력: 기존 대기·공격과 legwear_yuna_black_thighhigh_v4_snug.png, 공격은 신규 대기도 참조. 프롬프트: 기존 구도·포즈·2.5–3등신 고정, 새 얼굴·자주색 땋은 머리·빨간 리본·교복·검정 사이하이·선과 셀 채색 반영, 작은 전투 크기에서 읽히도록 형태 단순화. 대기는 책과 열린 손, 공격은 책을 든 채 반대 손으로 보라 별 탄환 발사. 흰 배경·전신·노출 금지.</p>
+</section>
 <section id="legwear-detail" aria-labelledby="legwear-title">
 <h2 id="legwear-title">다리 · 양말 디테일 보완</h2>
 <section id="yuna-thigh-test" aria-labelledby="yuna-thigh-title">
