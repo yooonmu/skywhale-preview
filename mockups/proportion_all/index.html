@@ -5,6 +5,20 @@
 :root{font-family:system-ui,sans-serif;color:#32294a;background:#f5f1fa}*{box-sizing:border-box}body{margin:0}header,main{max-width:1500px;margin:auto;padding:28px}header{padding-bottom:4px}h1{font-size:clamp(26px,4vw,42px);margin:8px 0}header p{color:#615572;line-height:1.6}.eyebrow{color:#805c9f;font-weight:800;letter-spacing:.12em}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px}.card{background:#fff;border:1px solid #e0d6eb;border-radius:18px;overflow:hidden;box-shadow:0 8px 25px #68528512}.card h2{font-size:20px;margin:14px 16px 2px}.meta{margin:0 16px 12px;color:#655973;font-size:14px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#e8dfef}.pair button{border:0;padding:0;background:#faf5eb;cursor:zoom-in;color:#4a3d59;font:inherit}.pair img{display:block;width:100%;height:270px;object-fit:contain}.pair span{display:block;background:#f2eafa;padding:8px;font-size:13px;font-weight:700}.pair button:focus-visible,.close:focus-visible{outline:3px solid #754b9d;outline-offset:-3px}dialog{border:0;border-radius:16px;padding:14px;max-width:min(95vw,900px);max-height:95vh;background:#fff;color:#32294a}dialog::backdrop{background:#21172bcf}dialog img{display:block;max-width:100%;max-height:78vh;margin:auto}.close{display:block;margin:8px 0 0 auto;min-width:64px;min-height:44px;border:0;border-radius:8px;background:#665078;color:white;cursor:pointer}
 </style></head><body><header><div class="eyebrow">RAINBOW ATELIER · ART STUDY</div><h1>아이들 비율 비교 시안</h1><p>기존 SD와 일반 비율을 나란히 비교합니다. 이미지를 누르면 확대됩니다.<br>새 이미지는 OpenAI Images · gpt-image-2로 생성한 AI 샘플이며 게임 적용본이 아닙니다. 일부 세부 표현은 검토가 필요합니다.</p></header>
 <main>
+<section id="round3" aria-labelledby="round3-title">
+<h2 id="round3-title">3차 · 서로 다른 세계</h2>
+<p>가안 · 스토리팀 확인 전. 서로 다른 세계 출신이지만 교복 스커트를 기본으로 합니다. 고향은 머리 장식·소품·작은 트림으로만 표현합니다. 키는 100을 기준으로 한 상대값이며 실제 cm가 아닙니다. 등급과 키는 무관합니다.</p>
+<p>B도 A와 같은 선·채색 완성도를 유지하며 의상 구조만 단순하게 합니다. SS는 속성색 비원형 오라, 후광·무지개는 신화 전용입니다.</p>
+<p>8명 교복 수정본 · 과도한 겹옷을 제거했습니다. 신화만 무지개·후광을 사용합니다.</p>
+<div class="grid" id="round3-samples"></div>
+<h3>상대 키 라인업 · 가안</h3>
+<p>동일 원화를 종횡비 유지해 상대 키에 맞춘 비교입니다. 자세·머리 장식·신발에 따른 시각 차이가 있어 실측 신장표는 아닙니다.</p>
+<div class="pair" style="display:block"><button style="width:100%" aria-label="8명 키 라인업 확대"><img style="height:auto" src="r3u_lineup.png" alt="미오 유리 유나 카렌 하린 아르카 솔 플로라 상대 키 라인업"><span>94 · 95 · 98 · 98 · 100 · 102 · 104 · 105</span></button></div>
+<p>OpenAI Images · gpt-image-2 생성 샘플. 8장 모두 정체성·손·소품·전신을 육안 확인했습니다. 라인업은 새로 생성하지 않고 같은 원화로 합성했습니다.</p>
+<h3>63명 출신 세계 · 상대 키 가안</h3>
+<p>근거: Roster의 속성·전투 키트·무기·대사·외형, 본편과 SS 이야기. 새 세계명과 복식은 제안이며 기존 확정 설정이 아닙니다. 카렌과 이그니의 같은 축제 섬 인연, 시엘과 플로라의 가지 연결은 세계 간 방문·전승으로 조정할지 스토리팀 확인이 필요합니다.</p>
+<div id="world-table"></div>
+</section>
 <section id="round2" aria-labelledby="round2-title">
 <h2 id="round2-title">2차 · 등급별 퀄리티</h2>
 <p>등급은 장식의 양뿐 아니라 의상 실루엣 → 무기 재질 → 빛의 범위로 구분합니다. 아래 미오 비교는 실제 등급 변경이 아닌 가상 처리입니다.</p>
@@ -17,6 +31,7 @@
 </section>
 <h2 style="margin-top:56px">1차 · 63명 비율 비교</h2>
 <div class="grid" id="grid"></div></main><dialog id="viewer" aria-label="이미지 확대"><img id="large" alt=""><button class="close" type="button">닫기</button></dialog>
+<script src="worlds.js"></script>
 <script>
 const rows=`arca 아르카 rainbow 신화
 yunseul 윤슬 rainbow 신화
@@ -82,6 +97,8 @@ dabin 다빈 orange B
 ina 이나 orange B
 gyeol 결 orange B`.split('\n').map(x=>x.split(' '));
 const elements={rainbow:'무지개',purple:'보라',white:'빛',green:'생명',red:'불',blue:'물',orange:'노을'};
+document.querySelector('#world-table').innerHTML=worlds.map(([id,height,concept],i)=>{const r=rows.find(x=>x[0]===id);return `<article style="padding:12px 0;border-bottom:1px solid #d9cfe3"><strong>${r[1]} · ${r[3]} · ${elements[r[2]]} · 키 ${height}</strong><div role="img" aria-label="상대 키 ${height}" style="height:8px;background:#d7c6e7;width:${(height/106)*100}%"></div><p>가안 · ${concept.split(';')[0]} · 교복 포인트: ${accents[i]}</p></article>`}).join('');
+for(const id of ['mio','yuna','karen','flora','arca','harin','sol','yuri']){const r=rows.find(x=>x[0]===id),w=worlds.find(x=>x[0]===id);const card=document.createElement('article');card.className='card';card.innerHTML=`<h3>${r[1]} · ${r[3]} · 상대 키 ${w[1]}</h3><p class="meta">${accents[worlds.indexOf(w)]}</p><div class="pair" style="display:block"><button style="width:100%" aria-label="3차 ${r[1]} 확대"><img style="height:390px" src="r3u_${id}.jpg" alt="${r[1]} 교복 스커트 수정 시안"><span>교복 수정본 · 확대</span></button></div>`;document.querySelector('#round3-samples').append(card)}
 const grid=document.querySelector('#grid'),viewer=document.querySelector('#viewer'),large=document.querySelector('#large');
 for(const [id,name,el,tier] of rows){const card=document.createElement('article');card.className='card';card.innerHTML=`<h2>${name}</h2><p class="meta">${elements[el]} · ${tier}</p><div class="pair"><button type="button" aria-label="${name} 기존 이미지 확대"><img loading="lazy" src="${id}_current.jpg" alt="${name} 기존 SD"><span>기존 SD</span></button><button type="button" aria-label="${name} 시안 이미지 확대"><img loading="lazy" src="${id}.jpg" alt="${name} 일반 비율 시안"><span>일반 비율 · AI 시안</span></button></div>`;grid.append(card)}
 const showcase=[['r2_mio_B','B · 미오','기본 교복 · 단순 방패 · 차분한 자세'],['r2_yuna_A','A · 유나','리본 포인트 · 책 세공 · 부드러운 림라이트'],['r2_karen_S','S · 카렌','축제 어깨 레이어 · 보석 새총 · 불꽃잎'],['r2_flora_SS_retry','SS · 플로라','자수 망토 · 꽃 지팡이 · 생명 오라'],['r2_arca_mythic','신화 · 아르카','고유 예복 · 무지개 붓 · 별 후광']];

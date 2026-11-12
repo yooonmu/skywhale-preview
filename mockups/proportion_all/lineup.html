@@ -1,0 +1,10 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><title>상대 키 가안</title><style>body{margin:0;background:#fcf5e9;font-family:system-ui;color:#43344e}.line{display:flex;align-items:flex-end;padding:30px 0 0;gap:0}.kid{width:12.5%;text-align:center}.kid img{display:block;width:100%;height:auto}.kid p{font-size:12px;min-height:32px;margin:0}.kid:nth-child(1){padding-top:40px}.kid:nth-child(2){padding-top:35px}</style><div class="line">
+<div class="kid"><img src="r3u_mio.jpg" alt="미오"><p>미오 · 94</p></div>
+<div class="kid"><img src="r3u_yuri.jpg" alt="유리"><p>유리 · 95</p></div>
+<div class="kid"><img src="r3u_yuna.jpg" alt="유나"><p>유나 · 98</p></div>
+<div class="kid"><img src="r3u_karen.jpg" alt="카렌"><p>카렌 · 98</p></div>
+<div class="kid"><img src="r3u_harin.jpg" alt="하린"><p>하린 · 100</p></div>
+<div class="kid"><img src="r3u_arca.jpg" alt="아르카"><p>아르카 · 102</p></div>
+<div class="kid"><img src="r3u_sol.jpg" alt="솔"><p>솔 · 104</p></div>
+<div class="kid"><img src="r3u_flora.jpg" alt="플로라"><p>플로라 · 105</p></div>
+</div><script>const h=[94,95,98,98,100,102,104,105];const headTop=[24,8,18,38,24,134,34,24],sole=[1493,1493,1493,1493,1493,1498,1493,1493];document.querySelectorAll('.kid').forEach((d,i)=>{const im=d.querySelector('img');im.style.width=(h[i]/(sole[i]-headTop[i])*1400)+'%';im.style.maxWidth='none';im.style.marginLeft=((100-parseFloat(im.style.width))/2)+'%';d.style.paddingTop='0'});</script></html>
