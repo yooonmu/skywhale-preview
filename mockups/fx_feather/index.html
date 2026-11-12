@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>깃털과 음표 움직임 비교</title>
+<style>
+body{margin:0;background:#f5f2fb;color:#302451;font:16px/1.6 "Malgun Gothic",sans-serif}main{max-width:1300px;margin:auto;padding:28px}h1,h2{color:#504087}section{background:white;border:1px solid #ded5f2;border-radius:18px;padding:20px;margin:20px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}figure{margin:0}figcaption{font-weight:bold;margin-bottom:8px}video{width:100%;border-radius:10px;background:#241c40}p{color:#5b5374}table{border-collapse:collapse;width:100%;font-size:14px}th,td{border-bottom:1px solid #e3dcf5;padding:6px 8px;text-align:left}th{background:#f7f4ff}td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}code{background:#f3effc;border-radius:5px;padding:0 5px;font-size:13px}@media(max-width:700px){.grid{grid-template-columns:1fr}}
+</style></head><body><main>
+<h1>깃털과 음표 · 움직임 비교</h1>
+<p>같은 조건 비교입니다. 한 화면 안에서 왼쪽 = 전(fx_cold 영상 오른쪽과 같은 재질 · 같은 공용 셰이더 코드), 오른쪽 = 후(지금 저장소). 같은 씬 · 같은 흰 속성 색 · 같은 고정 입자 seed · 같은 하늘, 60fps로 시뮬레이션해 30fps로 저장. 1280×720과 1600×720 창에서 각각 녹화했습니다.</p>
+<section><h2>음표 터짐 · motif_white</h2><p>전: 터진 자리에서 작게 뭉쳐 일렁임 → 후: 위로 넓게 퍼지며 하나하나 따로 좌우로 흔들리며 떠오름.</p><div class="grid">
+<figure><figcaption>1280×720</figcaption><video controls loop muted playsinline src="clips/motif_white_1280.mp4" poster="clips/motif_white_1280.jpg"></video></figure>
+<figure><figcaption>1600×720</figcaption><video controls loop muted playsinline src="clips/motif_white_1600.mp4" poster="clips/motif_white_1600.jpg"></video></figure>
+</div></section>
+<section><h2>흰 착탄 · impact_white</h2><p>전: 깃털 · 음표가 가운데 한 덩어리 → 후: 깃털은 아래 · 옆으로 넓게 흔들리며 내려앉고, 음표는 위로 떠오름.</p><div class="grid">
+<figure><figcaption>1280×720</figcaption><video controls loop muted playsinline src="clips/impact_white_1280.mp4" poster="clips/impact_white_1280.jpg"></video></figure>
+<figure><figcaption>1600×720</figcaption><video controls loop muted playsinline src="clips/impact_white_1600.mp4" poster="clips/impact_white_1600.jpg"></video></figure>
+</div></section>
+<section><h2>숫자</h2>
+<p>큰 터짐 300개(배율 1.6, 장면과 같은 수명)를 0.2초마다 잰 효과 픽셀 질량. 가로 폭 = 좌우 표준편차, 중심 = 터진 자리 기준 위아래(+ 아래).</p>
+<table>
+<tr><th>재질</th><th>시각</th><th class="n">전 가로 폭</th><th class="n">후 가로 폭</th><th class="n">전 중심</th><th class="n">후 중심</th></tr>
+<tr><td>깃털 feather</td><td>0.2 → 1.0초</td><td class="n">17.7 → 18.2px</td><td class="n">31.5 → 145.7px</td><td class="n">+9.8 → +9.3px</td><td class="n">+17.0 → +81.6px (내려앉음)</td></tr>
+<tr><td>음표 float_up</td><td>0.2 → 0.8초</td><td class="n">20.9 → 25.5px</td><td class="n">29.9 → 110.7px</td><td class="n">−7.5 → −11.3px</td><td class="n">−28.2 → −103.6px (떠오름)</td></tr>
+</table>
+<p>다른 재질 30개: 설정값이 fx_cold 때와 모두 같고, 같은 seed로 나란히 그린 화면 차이가 「fx_cold끼리 나란히 그린 대조군」과 소수 여섯째 자리까지 같음 = 그림 그대로. 콜드 첫 그리기(새 사용자 폴더 + 드라이버 캐시 끔): 32개 합 0.81초, 컴파일 0.28초(fx_cold 0.31~0.32초), 깃털 · 음표 각 16.6ms = 따로 컴파일 없음. 난류는 꺼져 있고 흔들림은 입자마다 사인 한 번.</p>
+<p>검토 중 고친 것: 흔들림 위상을 입자 회전각에서 가져와, 회전 범위가 ±20°뿐인 음표는 다 같이 같은 박자로 흔들렸다 → 위상 · 빠르기(±25%)를 입자 번호 해시로 따로 정함 (<code>vfx/shaders/vfx_particle_process.gdshader</code>).</p>
+</section></main></body></html>
