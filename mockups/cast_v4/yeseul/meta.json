@@ -10,7 +10,8 @@
   "pose": "오르골을 내밀며 한쪽 다리를 뒤로 접은 가벼운 왈츠",
   "legwear": "시어 플럼 타이츠와 갈색 메리제인",
   "leg_appeal": "춤추는 듯 굽힌 다리와 은은한 플럼색 타이츠",
-  "revision": "sexy_v3",
+  "revision": "fb1",
+  "fb1_notes": "OpenAI Images gpt-image-2 transparent. Both SD edited from existing with pickup reference: tiered gold-trim plaid skirt, purple neck bow, plum opaque tights and brown gold-buckle Mary Janes. Chibi shoulders remain covered. Face, eyes, ponytail, music box and rightward poses preserved. Hands, legs, shoes and props visually checked. 497x700 and 816x700 RGBA; backups prev_fb1. No new refusal; historical refusal below retained. Adult assets unchanged.",
   "status": "partial",
   "notes": "OpenAI Images / gpt-image-2 rejected v3 adult barefoot pickup, safety_violations=[sexual], request ID 00704af5-6d2f-404c-a953-5d431a5003eb. No rewording or retry. Adult pickup/cutin/cutin_cut and FX restored as copies of prev; detail reframed knee-up and face recropped. Barefoot design not achieved. New fully covered SD pair: lavender side ponytail, purple-cream ribbon, star music box, buttoned blouse and solid plum tights; default model controls. Prev untouched."
 }

@@ -8,10 +8,11 @@
   "archetype": "섹시 · 따뜻한 성인 수호자",
   "expression": "confident friendly smile",
   "pose": "crossed-knee welcoming pickup; calm standing detail; original shield-bash cutin",
-  "legwear": "sheer brown thigh-highs with ribbon clips and heeled loafers",
+  "legwear": "SD 기준 불투명 브라운 타이츠, 로퍼, 닫힌 흰 셔츠, 허리 카디건, 플리츠 스커트. pickup/detail/cutin 재작업.",
   "leg_appeal": "Long adult leg line with understated brown ribbon stockings.",
   "uniform_reform": "Adult tailored navy waistcoat, collarbone-only open shirt collar, pink cardigan tied at waist, purple plaid skirt.",
-  "revision": "sexy_v4",
+  "revision": "fb1",
   "status": "done",
-  "notes": "OpenAI Images / gpt-image-2, default controls. Image-edited prev/detail and prev/pickup, with prev/face as explicit identity reference. Preserved approved round cheeks, large amber eye shapes/highlights, blush, bold outlines and flat cel shading; no body or bust enlargement. New white-sleeve/navy-vest outfit, cardigan at waist, brown ribbon stocking connectors and crossed-knee pickup; cutin edited from original composition. Face cropped from new detail. Fully covered SD and orange FX retained. No refusals. Cutout may have small generative differences; prev untouched."
+  "notes": "SD 기준 불투명 브라운 타이츠, 로퍼, 닫힌 흰 셔츠, 허리 카디건, 플리츠 스커트. pickup/detail/cutin 재작업. OpenAI Images / gpt-image-2, background:transparent. 기존 이미지 편집; 승인 얼굴·눈 하이라이트·블러시·손·무기·포즈 유지 지시. 다리 분기/융합, 무릎/발목, 손가락, 무기, 액세서리, 배경 잔여물 육안 확인. 이번 작업 거절 없음. 교체 원본은 prev_fb1 보존; prev 및 SD/FX 미변경. face는 수정 detail에서 크롭; cutin은 동일 cutin_cut와 기존 fx_back 합성.",
+  "fb1_refusals": []
 }

@@ -11,7 +11,8 @@
   "legwear": "SD: opaque charcoal diamond-pattern tights; adult finals retain previous sheer tights",
   "leg_appeal": "Adult fashion revision blocked by image service.",
   "uniform_reform": "SD retains fully covered pink cardigan and navy vest; adult revision not applied.",
-  "revision": "sexy_v3",
+  "revision": "fb1",
+  "fb1_notes": "OpenAI Images gpt-image-2 transparent. Both SD edited from existing with pickup reference: plain warm charcoal-brown tights, gold-trim plaid skirt and flower clasp, brown loafers, pink cardigan and gold-trim vest. Face, eyes, hair, pose, sparklers preserved. Checked hands, legs, shoes and props visually; 437x700 and 1157x700 RGBA. Backups prev_fb1. No new refusal; historical refusal below retained. Adult assets unchanged.",
   "status": "partial",
   "notes": "OpenAI Images / gpt-image-2 previously rejected adult pickup with safety_violations=[sexual], request ID 2d540935-8661-4896-b42a-6e9ac92a2c03. Not re-requested or reworded. Matching previous adult pickup/cutin/cutin_cut retained; detail reframed knee-up and face recropped. V2 non-sexual SD and effects retained. Adult v3 fashion not achieved; previous sheer tights remain. SD prompt: fully covered chibi festival mascot, orange ponytail, burgundy ribbon, sparklers and opaque diamond tights. Effects prompt: light orange festival arcs and sparse gold sparks. Prev untouched."
 }

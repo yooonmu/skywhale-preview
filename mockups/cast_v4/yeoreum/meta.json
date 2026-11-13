@@ -1,5 +1,6 @@
 {
   "id": "yeoreum",
+  "revision": "fb1",
   "name": "여름",
   "tier": "S",
   "element": "orange",
@@ -7,9 +8,9 @@
   "main_story": false,
   "archetype": "sunny / cute powerhouse",
   "expression": "exuberant open smile",
-  "pose": "buoyant victory step with sunflower mallet across shoulders and thumbs-up",
-  "legwear": "plain white ankle socks and brown loafers",
-  "leg_appeal": "Soft fuller thighs and sturdy rounded calves, one knee lifted in a buoyant victory step.",
+  "pose": "confident separated forward stride, sunflower mallet across shoulder and free hand on hip; two-handed cut-in swing",
+  "legwear": "matching cream knee socks with twin gold vertical stripes and scalloped gold cuffs; brown sunflower ankle boots",
+  "leg_appeal": "Slimmer elongated adult legs, clean knees and ankles, separated feet and symmetric sock details.",
   "status": "done",
-  "notes": "Uniform reform: waist-tied short pink cardigan, navy vest, lavender ribbon and yellow-trim purple plaid pleated skort. OpenAI Images / gpt-image-2 default controls. Prompt: preserve orange wavy bob, sunflower pin, amber eyes and sunflower mallet; sunny adult powerhouse in Flora cel style. Original cut-in absent; follows attack. Blue mattes and black effect halos removed; SD resized to original canvases, face cropped from detail. Game assets unchanged."
+  "notes": "fb1: tailored pink sunflower-embroidered jacket, gold petal cuffs, navy gold-piped vest, opaque white blouse, lavender sunflower brooch, gold-hem plaid skort. OpenAI Images / gpt-image-2; transparent background control. Prompt: preserve approved rounded face, amber highlighted eyes, blush, orange bob and sunflower mallet; slim adult legs, confident stride, symmetric cream gold-striped socks and sunflower boots; match this outfit in right-facing cute nonsexual SD and two-handed cut-in. Detail and face cropped from pickup to enforce consistency. Cut-in is the exact cutout composited over warm cream; existing FX retained. Visual checks: legs, knees, socks, shoes, hands and continuous weapon handle; no obvious extra limbs. Backups in prev_fb1. No refusals."
 }

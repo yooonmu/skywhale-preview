@@ -1,5 +1,10 @@
 {
   "id": "harin",
+  "revision": "fb1",
+  "fb1_status": "refused_original_images_retained",
+  "fb1_refusal_request_id": "1a285668-4b79-4365-9a2b-ea0e75b7e2b7",
+  "fb1_refusal_job_id": "9f2b7bf3-1038-4e5b-b900-243fc0459e56",
+  "fb1_notes": "OpenAI Images / gpt-image-2 refused the cut-in with safety_violations=[sexual]. No retry or rewording. To avoid mixing new costume with retained cut-in, all original images and original pose/legwear retained. Pickup and SD candidates were not applied. Original metadata backed up in prev_fb1.",
   "name": "하린",
   "tier": "A",
   "element": "blue",

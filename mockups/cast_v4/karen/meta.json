@@ -1,5 +1,10 @@
 {
   "id": "karen",
+  "revision": "fb1",
+  "fb1_status": "refused_original_images_retained",
+  "fb1_refusal_request_id": "45a8c9ad-0a31-4016-96e2-1524d9cc465a",
+  "fb1_refusal_job_id": "9b26afdd-68cf-4802-9343-3c161c6a716b",
+  "fb1_notes": "OpenAI Images / gpt-image-2 refused full-body redesign with safety_violations=[sexual]. No retry or rewording; original complete set and existing pose/legwear retained. Original metadata backed up in prev_fb1.",
   "name": "카렌",
   "tier": "S",
   "element": "red",

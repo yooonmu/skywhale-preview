@@ -1,5 +1,6 @@
 {
   "id": "hongi",
+  "revision": "fb1",
   "name": "홍이",
   "tier": "S",
   "element": "red",
@@ -7,9 +8,9 @@
   "main_story": false,
   "archetype": "energetic / festival martial artist",
   "expression": "toothy grin and wink",
-  "pose": "wide grounded festival dance stance with dragon lantern raised and open martial palm",
-  "legwear": "plain charcoal mid-calf socks and brown loafers",
-  "leg_appeal": "Powerful dancer thighs and firm calves emphasized by grounded bent-knee stance.",
+  "pose": "upright festival pivot with dragon lantern beside shoulder and confident open martial palm",
+  "legwear": "matching charcoal knee socks with red-gold cloud cuffs and red side stripe; red-brown gold-knot ankle boots",
+  "leg_appeal": "Slim long adult legs with clean knees and ankles, equal leg lengths and separated feet.",
   "status": "done",
-  "notes": "Uniform reform: rolled cropped pink cardigan with gold knots, fitted navy vest, red bow and purple plaid athletic wrap skort. OpenAI Images / gpt-image-2 default controls. Prompt: preserve crimson twin buns, gold floral pins, red tassels, red eyes and dragon lantern; energetic adult in Flora cel style. Original cut-in absent, new composition follows attack. Blue portrait mattes and dark effect halos removed, SD resized to original dimensions, face cropped from detail. Game assets unchanged."
+  "notes": "fb1: premium cloud-embroidered pink jacket with gold frog clasps, navy gold-piped vest, opaque blouse, red bow and red-gold wrap skort. OpenAI Images / gpt-image-2; transparent control. Prompt: preserve crimson twin buns, floral pins, tassels, highlighted red eyes rounded face blush and dragon lantern; slim adult legs, upright festival pivot, matching cloud-cuff socks and knot boots; identical costume on right-facing nonsexual SD and staff-sweep cut-in. Detail derived from pickup and face from detail. Opaque cut-in composites exact cutout on pale coral. Existing FX retained. No refusals. Backups in prev_fb1."
 }

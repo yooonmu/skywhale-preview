@@ -1,5 +1,10 @@
 {
   "id": "rina",
+  "revision": "fb1",
+  "fb1_status": "refused_original_images_retained",
+  "fb1_refusal_request_id": "ad95211b-46e4-4612-8fd2-816bca0abf75",
+  "fb1_refusal_job_id": "4ae4fa88-ad21-4ccf-962c-fd5f8b2e054b",
+  "fb1_notes": "OpenAI Images / gpt-image-2 rejected the full-body redesign with safety_violations=[sexual]. No retry or rewording. All original images and their existing pose/legwear description retained for consistency. Original metadata backed up in prev_fb1.",
   "name": "리나",
   "tier": "S",
   "element": "green",

@@ -8,10 +8,11 @@
   "archetype": "섹시 · 신비로운 달빛",
   "expression": "serene knowing smile with softly half-lidded eyes",
   "pose": "crossed-knee protective pivot, shield raised and gloved hand extended; knee-up standing detail",
-  "legwear": "plum lace-top thigh-high stockings with discreet garter straps and heeled Mary Janes",
+  "legwear": "SD 기준 불투명 플럼 타이츠, 버클 슈즈, 핑크 카디건, 이중 버클 벨트. pickup/detail/cutin 재작업.",
   "leg_appeal": "Long crossed legs, lace bands and tailored short wrap-skirt silhouette.",
   "uniform_reform": "collarbone opening without cleavage, loose lavender ribbon, navy vest, pink moon capelet, corset waist belt and short purple plaid wrap skirt",
-  "revision": "sexy_v3",
+  "revision": "fb1",
   "status": "done",
-  "notes": "OpenAI Images gpt-image-2, transparent option. Final producer correction: edit prev images preserving approved round cute face, violet eye shape/highlights, blush, original adult body and bust size, bold flat cel style. Earlier mature-face drafts replaced. Short wrap skirt, lace-top plum stockings, discreet straps, lace gloves and corset belt. SD fully covered solid plum tights, height 700; simplified cardigan omits adult capelet. Detail background artifact removed once. FX retained. Cutin uses exact cutin_cut; face cropped from corrected detail. No refusals. prev untouched."
+  "notes": "SD 기준 불투명 플럼 타이츠, 버클 슈즈, 핑크 카디건, 이중 버클 벨트. pickup/detail/cutin 재작업. OpenAI Images / gpt-image-2, background:transparent. 기존 이미지 편집; 승인 얼굴·눈 하이라이트·블러시·손·무기·포즈 유지 지시. 다리 분기/융합, 무릎/발목, 손가락, 무기, 액세서리, 배경 잔여물 육안 확인. 이번 작업 거절 없음. 교체 원본은 prev_fb1 보존; prev 및 SD/FX 미변경. face는 수정 detail에서 크롭; cutin은 동일 cutin_cut와 기존 fx_back 합성.",
+  "fb1_refusals": []
 }

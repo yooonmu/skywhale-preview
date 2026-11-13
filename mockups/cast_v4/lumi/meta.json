@@ -1,5 +1,10 @@
 {
   "id": "lumi",
+  "revision": "fb1",
+  "fb1_status": "refused_original_images_retained",
+  "fb1_refusal_request_id": "301ed0e1-b213-43fc-be00-87727a343eda",
+  "fb1_refusal_job_id": "8535fb50-c3ab-47c7-9e46-c5c68da99621",
+  "fb1_notes": "OpenAI Images / gpt-image-2 refused full-body redesign with safety_violations=[sexual]. No retry or rewording; original complete set and existing pose/legwear retained. Original metadata backed up in prev_fb1.",
   "name": "루미",
   "tier": "S",
   "element": "purple",

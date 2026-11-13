@@ -8,10 +8,10 @@
   "archetype": "섹시 · 맨발의 물결",
   "expression": "serene delighted smile",
   "pose": "graceful turning step while plucking water lyre",
-  "legwear": "bare legs, black thigh band with teardrop charm, gold anklet and bare feet; SD opaque lavender tights and ballet flats",
+  "legwear": "bare legs, black thigh band with teardrop charm, gold anklet and bare feet; SD matches pickup without garter straps",
   "leg_appeal": "Long slender legs with a straight supporting leg and lightly pointed crossing step.",
-  "revision": "sexy_v3",
+  "revision": "fb1",
   "status": "done",
   "uniform_reform": "white collarbone opening without cleavage, navy vest, pink wave-trim cardigan, short purple plaid wrap skirt",
-  "notes": "OpenAI Images gpt-image-2; transparent character outputs. Final producer correction applied by editing prev pickup/detail/cutin_cut: preserve approved round cute face, eye shape and highlights, blush, bold lines and original adult body proportions, no bust enlargement. Earlier mature-face drafts replaced. Barefoot pickup, knee-up detail, face cropped from detail, fully covered color-only SD height 700. SD skirt retains simplified ruffles. Original blue FX retained; new moonlit courtyard composited with exact cutin_cut. No refusals. Original nine files and metadata copied to prev before edits; prev unchanged thereafter."
+  "notes": "fb1: OpenAI Images gpt-image-2, background transparent. Edited both existing SD sprites using pickup costume reference: bare feet, black teardrop thigh band and gold anklet, purple plaid wrap skirt with two buttons and necktie. Locked rounded face, blue eye highlights, blush, lavender hair, lyre, pink sleeves, navy vest and rightward idle/playing poses. No garter straps. Visually checked hands, toes, leg symmetry and lyre geometry. Outputs 421x700 and 492x700 RGBA. SD and metadata backed up in prev_fb1. Adult art and FX unchanged. No refusals. Asset IDs 31cf9c8c-7455-4894-8d52-9023283938c9 and 2abb4fb1-d823-4fd9-a672-4617992df4da."
 }

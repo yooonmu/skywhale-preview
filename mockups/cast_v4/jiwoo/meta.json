@@ -1,5 +1,10 @@
 {
   "id": "jiwoo",
+  "revision": "fb1",
+  "fb1_status": "refused_original_images_retained",
+  "fb1_refusal_request_id": "f7bfa609-2dd2-464c-98e9-c70f930f890d",
+  "fb1_refusal_job_id": "58830901-b35f-4b30-8bc2-c520f4137d70",
+  "fb1_notes": "OpenAI Images / gpt-image-2 refused full-body redesign with safety_violations=[sexual]. No retry or rewording; original complete set and existing pose/legwear retained. Original metadata backed up in prev_fb1.",
   "name": "지우",
   "tier": "S",
   "element": "white",

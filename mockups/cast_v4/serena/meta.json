@@ -1,1 +1,18 @@
-{"id":"serena","name":"세레나","tier":"SS","element":"purple","role":"은하 마법사","main_story":false,"archetype":"섹시 · 은하의 우아함","expression":"차분하고 자신 있는 미소","pose":"은하 지팡이를 세운 스탠딩·detail 무릎 위 구도","legwear":"레이스톱 블랙 스타킹·가터 클립·포인티드 힐","leg_appeal":"긴 다리와 정돈된 레이스 밴드 라인","uniform_reform":"크롭 핑크 카디건·네이비 베스트·쇄골 칼라·스타 초커·슬릿 플래드 스커트","revision":"sexy_v3","status":"partial","notes":"pickup은 이전 안전 거절로 원본 유지, 재시도 없음(request ID 1a6cbca2-3d81-4ebb-b419-24d93fdefc63, sexual). pickup 의상이 다른 8종과 다름. 최종 PD 수정에 따라 prev detail/cutin_cut 직접 편집으로 승인 얼굴·큰 눈과 하이라이트·둥근 윤곽·블러시·원래 체형 보존, 가슴 확대 없음. OpenAI Images gpt-image-2, transparent 옵션. SD는 비성적 단색 스타킹, 높이 700. cutin은 동일 cutin_cut 합성, face는 수정 detail 크롭. prev 변경 없음."}
+{
+  "id": "serena",
+  "name": "세레나",
+  "tier": "SS",
+  "element": "purple",
+  "role": "은하 마법사",
+  "main_story": false,
+  "archetype": "섹시 · 은하의 우아함",
+  "expression": "차분하고 자신 있는 미소",
+  "pose": "은하 지팡이를 세운 스탠딩·detail 무릎 위 구도",
+  "legwear": "pickup 기준 연속 블랙 스타킹. detail/cutin 가터 제거, 플리츠 스커트와 카디건 통일.",
+  "leg_appeal": "긴 다리와 정돈된 레이스 밴드 라인",
+  "uniform_reform": "크롭 핑크 카디건·네이비 베스트·쇄골 칼라·스타 초커·슬릿 플래드 스커트",
+  "revision": "fb1",
+  "status": "done",
+  "notes": "pickup 기준 연속 블랙 스타킹. detail/cutin 가터 제거, 플리츠 스커트와 카디건 통일. OpenAI Images / gpt-image-2, background:transparent. 기존 이미지 편집; 승인 얼굴·눈 하이라이트·블러시·손·무기·포즈 유지 지시. 다리 분기/융합, 무릎/발목, 손가락, 무기, 액세서리, 배경 잔여물 육안 확인. 이번 작업 거절 없음. 교체 원본은 prev_fb1 보존; prev 및 SD/FX 미변경. face는 수정 detail에서 크롭; cutin은 동일 cutin_cut와 기존 fx_back 합성.",
+  "fb1_refusals": []
+}
