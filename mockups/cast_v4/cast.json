@@ -13,6 +13,8 @@
     "leg_appeal": "경쾌하게 굽힌 무릎과 건강한 다리선",
     "status": "done",
     "notes": "걷은 소매·느슨한 넥타이·체크 스커트 리폼. 원본 공격 포즈 기반 신규 컷인. OpenAI Images gpt-image-2.",
+    "group": "활발",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_bg.png",
@@ -41,6 +43,8 @@
     "leg_appeal": "가늘고 긴 교차 다리와 부드러운 광택",
     "status": "done",
     "notes": "OpenAI Images gpt-image-2. 게임 원본 정체성·새 성인 비율 적용. 컷인 분리 레이어는 생성 편집으로 미세한 차이가 있음.",
+    "group": "유형 미정",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -70,6 +74,8 @@
     "leg_appeal": "부드러운 허벅지와 가는 종아리의 따뜻한 곡선",
     "status": "done",
     "notes": "교복 리폼: 흰 리본·스캘럽 커프스·레이어 치마. OpenAI Images gpt-image-2. SD 양말 금색 줄 수에 소폭 차이 있음.",
+    "group": "청순",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -99,6 +105,8 @@
     "archetype": "귀여움 · 다정한 사탕 나눔",
     "status": "done",
     "notes": "OpenAI Images / gpt-image-2 생성. 교복 리폼: 별사탕 금빛과 맞춘 조끼 금색 파이핑, 허리선 맞춤 조끼와 짧은 카디건, 사탕 머리핀·병 리본 강조. 기존 자두색 곱슬 단발, 보라색 눈, 분홍 카디건, 보라 체크 치마, 별사탕 병 유지; Flora 셀 채색 스타일의 성인 7등신과 무릎 양말. 기존 컷인이 없어 공격 스프라이트의 사탕 투척 동작으로 보라 별빛 배경의 새 컷인 제작. 분리본은 생성 편집이므로 픽셀 단위 불일치 가능. FX는 상단 보라 아치와 외곽의 작은 입자. SD는 원본 포즈와 캔버스 크기 유지. face는 detail 얼굴 추출. role은 원본 roster에 명시되지 않아 공란.",
+    "group": "큐티",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -132,6 +140,8 @@
     "leg_appeal": "부드럽게 굽힌 무릎과 자연스럽고 둥근 다리 선",
     "status": "done",
     "notes": "OpenAI Images / gpt-image-2 생성. 연녹색 땋은 머리·녹색 눈·자수 머릿수건·약초 바구니 유지. 교복 리폼: 크림 스캘럽 소매 분홍 카디건, 네이비 조끼, 라벤더 리본, 잎 자수 크림 앞치마와 보라 체크 겹치마. 원본 공격 포즈 기반 약초 정원 컷인 신규 제작. 분리본은 생성 편집으로 픽셀 불일치 가능. FX는 상단의 최소 녹색 찻김과 캐모마일 빛점. SD 원본 크기 적용, 얼굴 detail 추출.",
+    "group": "청순",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -165,6 +175,8 @@
     "leg_appeal": "건강한 다리선과 안정적인 넓은 스텝",
     "status": "done",
     "notes": "롤업 소매·짧은 타이·쇼츠형 스코트 리폼. 원본 컷인 부재로 방패 돌진 구도 확장. 9종 규격과 어두운 배경 알파 검수 완료. OpenAI Images / gpt-image-2; cyan-key characters, black-key effects. Prompt: preserve blonde bun, ribbon, amber eyes, nose bandage and bell shield; brave adult shield step, gentle standing, original SD poses, charging cutin, light white gold shield sigil and sparse sparks.",
+    "group": "쿨·보이시",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -204,6 +216,8 @@
     "revision": "sexy_v3",
     "status": "partial",
     "notes": "OpenAI Images / gpt-image-2 previously rejected adult pickup with safety_violations=[sexual], request ID 2d540935-8661-4896-b42a-6e9ac92a2c03. Not re-requested or reworded. Matching previous adult pickup/cutin/cutin_cut retained; detail reframed knee-up and face recropped. V2 non-sexual SD and effects retained. Adult v3 fashion not achieved; previous sheer tights remain. SD prompt: fully covered chibi festival mascot, orange ponytail, burgundy ribbon, sparklers and opaque diamond tights. Effects prompt: light orange festival arcs and sparse gold sparks. Prev untouched.",
+    "group": "섹시",
+    "updated": true,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -242,6 +256,8 @@
     "leg_appeal": "아담한 성인 체형과 가는 종아리, 옆으로 뻗은 발끝",
     "status": "done",
     "notes": "9종 PNG 규격과 어두운 배경 알파 검수 완료. OpenAI Images / gpt-image-2. Prompts: preserve original Ciel lavender twin-tail identity and watering-can staff; Flora cel style; adult full-body dancing pickup and gentle standing detail; original waist-up cut-in and SD battle poses; light green clover sigil and sparse leaf particles. Transparent output; detail and idle background artifacts removed by targeted rekey edits.",
+    "group": "큐티",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -280,6 +296,8 @@
     "leg_appeal": "부드럽게 접힌 다리와 은은한 갈색 광택",
     "status": "done",
     "notes": "크림 리본·긴 커프스·피트 베스트 리폼. 원본 공격 포즈 기반 신규 컷인. OpenAI Images gpt-image-2.",
+    "group": "우아·신비",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_bg.png",
@@ -311,6 +329,8 @@
     "leg_appeal": "부드러운 다리선과 가벼운 한 발 들기",
     "status": "done",
     "notes": "크림 프릴 소매·리본·겹치마로 귀여운 교복 리폼. 9종 규격과 어두운 배경 알파 검수 완료. 기존 컷인 부재로 공격 스프라이트의 베개 마법 구도를 확장. OpenAI Images / gpt-image-2. Prompts: lavender sleepy dreamer identity, nightcap and star pillow preserved; Flora cel style, adult full-body yawning pickup, gentle standing, original SD poses, waist-up pillow magic, light lavender moon aura and sparse stars. Transparent character output; black-key effects.",
+    "group": "큐티",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -347,6 +367,8 @@
     "leg_appeal": "탄탄하고 자연스러운 맨다리 선과 눈에 띄는 무릎 반창고",
     "status": "done",
     "notes": "OpenAI Images / gpt-image-2 생성. 교복 리폼: 허리에 묶은 분홍 카디건, 걷은 흰 셔츠 소매, 크롭 네이비 조끼, 느슨한 라벤더 타이, 보라 체크 스코트. 원본 금발 헝클어진 단발·빨간 핀·호박색 눈·반창고·금단추 새총 유지. 컷인 부재로 공격 새총 동작과 따뜻한 교정 배경 신규 제작. 분리 컷인은 생성 편집으로 픽셀 불일치 가능. FX는 상단 금빛 궤적과 외곽 빛점. SD 원본 포즈 및 크기 유지, 얼굴은 detail 추출.",
+    "group": "쿨·보이시",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -382,6 +404,8 @@
     "revision": "sexy_v3",
     "status": "partial",
     "notes": "OpenAI Images / gpt-image-2 previously rejected detail, safety_violations=[sexual], request ID a66cf834-3374-474b-baae-25c5e1d252ca. No rewording or replacement request for rejected adult revision. Matching pre-rework adult pickup/detail/cutin/cutin_cut retained for identity and consistency; detail reframed knee-up and face recropped. V2 fully covered SD and minimal red effects retained. Adult v3 fashion not achieved. Prev untouched.",
+    "group": "섹시",
+    "updated": true,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -415,6 +439,8 @@
     "leg_appeal": "부드러운 맨다리선과 산뜻한 교차 스텝",
     "status": "done",
     "notes": "롤업 소매·크림 리본·스캘럽 스커트 리폼. 9종 규격 및 어두운 배경 알파 검수 완료. 원본 컷인 부재로 씨앗 공격 확장. OpenAI Images / gpt-image-2, blue-key characters and black-key effects. Prompt: preserve green twin tails, freckles, sunflower straw hat and seed pouch; cheerful adult seed-toss step, gentle standing, original SD poses, seed-toss cutin, light sprout sigil and sparse particles.",
+    "group": "큐티",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -452,6 +478,8 @@
     "leg_appeal": "굽힌 무릎과 길게 뻗은 다리의 리듬",
     "status": "done",
     "notes": "롤업 카디건·느슨한 타이·사이하이 리폼. 9종 규격 및 어두운 배경 알파 검수 완료. 원본 컷인 부재로 공격 구도 확장. OpenAI Images / gpt-image-2; opaque green-key characters and black-key effects. Prompt: preserve cobalt ponytail, blue eyes, white scrunchie, star clip and colorful water gun; playful dodge step, gentle standing, original SD poses, water-gun cutin, modest water star sigil and sparse drops.",
+    "group": "장난",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -489,6 +517,8 @@
     "leg_appeal": "경쾌한 맨다리 곡선과 리듬감 있는 스텝",
     "status": "done",
     "notes": "크롭 롤업 카디건과 작은 리본으로 교복 리폼. 원본 컷인 부재로 탬버린 공격 확장. 9종 규격·알파 검수 및 컷인 색 번짐 보정 완료. OpenAI Images / gpt-image-2; cyan-key characters and black-key effects. Prompt: preserve golden twin tails, yellow scrunchies, amber eyes and sun tambourine; energetic adult dance step, gentle standing, original SD poses, tambourine-shaking cutin, light sunshine ring and sparse sparks.",
+    "group": "활발",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -526,6 +556,8 @@
     "leg_appeal": "부드러운 명암의 긴 다리와 뒤로 접은 한쪽 다리",
     "status": "done",
     "notes": "PD 승인 파일 복사. OpenAI Images gpt-image-2 생성 원화.",
+    "group": "유형 미정",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -555,6 +587,8 @@
     "leg_appeal": "밝고 경쾌한 맨다리선과 접힌 발끝",
     "status": "done",
     "notes": "노란 우비와 기본 교복 유지, 프릴 발목 양말 리폼. 9종 규격과 어두운 배경 알파 검수 완료. 원본 컷인 부재로 공격 구도 확장. OpenAI Images / gpt-image-2; opaque green-key characters and black-key effects. Prompt: preserve blue pigtails eyes, yellow raincoat bows and raincloud bottle; cheerful skipping wink, gentle standing, original SD poses, bottle-pouring cutin, modest raincloud sigil and sparse drops.",
+    "group": "큐티",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -592,6 +626,8 @@
     "leg_appeal": "힘 있는 넓은 보폭과 건강한 맨다리선",
     "status": "done",
     "notes": "롤업 카디건·느슨한 타이·레이어드 스코트 리폼. 9종 규격과 어두운 배경 알파 검수 완료. 원본 컷인 부재로 공격 구도 확장. SD 공격 양말 길이는 원본에 가까움. OpenAI Images / gpt-image-2, opaque cyan-key characters and black-key effects. Prompt: preserve messy red hair, red eyes, soot cheek, work gloves and anvil hammer; boyish shoulder-hammer step, gentle standing, original SD poses, hammer-sweep cutin, modest forge sigil and sparse sparks.",
+    "group": "쿨·보이시",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -629,6 +665,8 @@
     "leg_appeal": "가벼운 발끝과 길고 부드러운 종아리선",
     "status": "done",
     "notes": "금빛 테두리 짧은 케이프 리폼. SD 대기는 원본보다 연이 아래에 위치. 원본 공격 기반 신규 컷인. OpenAI Images gpt-image-2.",
+    "group": "우아·신비",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_bg.png",
@@ -660,6 +698,8 @@
     "leg_appeal": "부드러운 무릎 곡선과 경쾌한 발끝",
     "status": "done",
     "notes": "퍼프 소매·겹 프릴 체크 치마 리폼. 원본 공격 동작 기반 신규 컷인. OpenAI Images gpt-image-2.",
+    "group": "큐티",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_bg.png",
@@ -692,6 +732,8 @@
     "leg_appeal": "차분한 타이츠와 비대칭 걸음이 만드는 길고 부드러운 다리 선",
     "status": "done",
     "notes": "OpenAI Images / gpt-image-2 생성. 교복 리폼: 금빛 테두리의 분홍 케이플릿, 네이비 맞춤 조끼, 라벤더 리본, 옆트임의 흐르는 보라 체크 스커트. 원본의 라벤더 옆땋기·보라 눈·천구 우산 유지. 기존 컷인 부재로 공격 포즈의 우산 방어 동작과 보라 빗속 배경으로 신규 제작. 컷인 분리본은 생성 편집으로 픽셀 불일치 가능. SD 대기 비율은 1회 수정. FX는 상단 별자리 반원과 외곽의 빗방울 입자. 얼굴은 detail 추출. 컷인 생성 높이 940은 요구 규격 941로 정규화.",
+    "group": "우아·신비",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -726,6 +768,8 @@
     "leg_appeal": "Long softly tapered bare legs, one gently curved knee and lifted heel.",
     "status": "done",
     "notes": "Uniform reform: scalloped pink cardigan, fitted navy vest, lavender ribbon and flowing layered purple plaid skirt. OpenAI Images / gpt-image-2 default controls. Prompt: preserve sage floral side braid, cream bow, green eyes and giant dandelion staff; gentle adult woman in Flora cel style. Cut-in follows original attack because original cut-in absent. Blue mattes and dark effect halos removed; SD resized to original canvases; face cropped from detail. Game assets unchanged.",
+    "group": "청순",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -752,6 +796,8 @@
     "leg_appeal": "탄탄한 허벅지와 종아리, 안정적인 넓은 스탠스",
     "status": "done",
     "notes": "롤업 소매·느슨한 타이·파란 포켓 파이핑으로 활동형 교복 리폼. 9종 규격 및 어두운 배경 알파 검수 완료. 기존 harin_cutin.png가 없어 공격 스프라이트의 방패 밀기 구도를 컷인으로 확장. OpenAI Images / gpt-image-2; prompts: preserve blue-haired shell-shield identity, Flora cel style, athletic adult proportions; protective pickup, gentle standing detail, original SD poses, waist-up shield wave cut-in, light aqua shell sigil and sparse drops. Transparent generation; detail background removed by targeted edit.",
+    "group": "활발",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -790,6 +836,8 @@
     "leg_appeal": "Softly fuller thighs and balanced bare calves form a warm, buoyant stepping silhouette.",
     "status": "done",
     "notes": "Uniform reform: scalloped pink cardigan, cream collar ribbon and cream-trim layered purple plaid skirt over the navy vest. OpenAI Images / gpt-image-2, default controls. Brief: preserve honey-blonde low ponytail, flower, coral bow, amber eyes and lighthouse lantern with anchor charm; gentle adult guide in Flora-style clean cel rendering. Existing game cut-in absent; composition follows attack lantern thrust with dawn harbor. Green detail matte and black effect mattes removed, SD resized to original canvases, face cropped from detail. Game assets unchanged.",
+    "group": "청순",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -816,6 +864,8 @@
     "leg_appeal": "Powerful dancer thighs and firm calves emphasized by grounded bent-knee stance.",
     "status": "done",
     "notes": "Uniform reform: rolled cropped pink cardigan with gold knots, fitted navy vest, red bow and purple plaid athletic wrap skort. OpenAI Images / gpt-image-2 default controls. Prompt: preserve crimson twin buns, gold floral pins, red tassels, red eyes and dragon lantern; energetic adult in Flora cel style. Original cut-in absent, new composition follows attack. Blue portrait mattes and dark effect halos removed, SD resized to original dimensions, face cropped from detail. Game assets unchanged.",
+    "group": "활발",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -842,6 +892,8 @@
     "leg_appeal": "탄탄한 허벅지·긴 맨종아리의 운동감",
     "status": "done",
     "notes": "교복 리폼: 크롭 재킷·걷은 소매·느슨한 타이·스포티 플리츠. OpenAI Images gpt-image-2. SD 공격 소매는 대기보다 길게 표현됨.",
+    "group": "활발",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -871,6 +923,8 @@
     "leg_appeal": "자연스러운 무릎 굴곡과 밀착 니삭스",
     "status": "done",
     "notes": "걷은 소매·작은 옆 앞치마 리폼. SD 앞치마 위치와 크기는 약간 다름. 원본 공격 기반 신규 컷인. OpenAI Images gpt-image-2.",
+    "group": "장난",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_bg.png",
@@ -902,6 +956,8 @@
     "leg_appeal": "긴 다리의 교차 스텝과 경쾌한 발끝",
     "status": "done",
     "notes": "흰 반소매·허리에 묶은 핑크 카디건 리폼. 9종 규격 및 어두운 배경 알파 검수 완료. 원본 공격 구도 확장 컷인. OpenAI Images / gpt-image-2, opaque cyan-key characters and black-key effects. Prompt: preserve scarlet ponytail, red eyes, flower bow and flame ribbon baton; sporty dance pickup, gentle standing, original SD poses, ribbon-sweep cutin, modest red flame sigil and sparse sparks.",
+    "group": "활발",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -939,6 +995,8 @@
     "leg_appeal": "Athletic thighs and defined calves, one bent knee and a strongly extended opposite leg.",
     "status": "done",
     "notes": "Uniform reform: white short sleeves, fitted navy vest, purple tie, pink cardigan tied at waist and purple plaid athletic skort. OpenAI Images / gpt-image-2, default controls. Brief: preserve golden bob, striped headband, golden eyes and golden longbow; sporty adult archer in Flora-approved cel style. Existing game cut-in absent; composition follows attack bow draw with noon archery courtyard. Green cut-in matte and black effect mattes removed, SD resized to original canvases, face cropped from detail. Game assets unchanged.",
+    "group": "활발",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -967,6 +1025,8 @@
     "revision": "sexy_v4",
     "status": "done",
     "notes": "OpenAI Images / gpt-image-2, default controls. Image-edited prev/detail and prev/pickup, with prev/face as explicit identity reference. Preserved approved round cheeks, large amber eye shapes/highlights, blush, bold outlines and flat cel shading; no body or bust enlargement. New white-sleeve/navy-vest outfit, cardigan at waist, brown ribbon stocking connectors and crossed-knee pickup; cutin edited from original composition. Face cropped from new detail. Fully covered SD and orange FX retained. No refusals. Cutout may have small generative differences; prev untouched.",
+    "group": "섹시",
+    "updated": true,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -993,6 +1053,8 @@
     "leg_appeal": "Sporty toned thighs, bare knees and an energetic bent-knee stance contrast with long clean sock lines.",
     "status": "done",
     "notes": "Uniform reform: fitted cable-knit pink cardigan with blossom trim and oversized red ribbon, retaining navy vest and purple plaid. Generated with OpenAI Images / gpt-image-2, default controls. Brief: preserve Karen's game identity and festival weapon; Flora-approved cute cel style, adult proportions, full visible legs, expressive pickup, gentle standing detail, original cut-in and SD compositions. Face derived from detail; SD resized to original canvas sizes; green key and black effect mattes removed. Game assets unchanged.",
+    "group": "활발",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1020,6 +1082,8 @@
     "leg_appeal": "Long slender straight leg lines and a precise diagonal stance emphasize the cool sharpshooter silhouette.",
     "status": "done",
     "notes": "Uniform reform: rolled-sleeve cropped pink cardigan, fitted navy vest, loosened purple tie, layered purple plaid skort. OpenAI Images / gpt-image-2, default controls. Prompt brief: preserve lilac bob, goggles, violet eyes and brass telescope crossbow; Flora-style adult cel proportions and cool precision-shooter character. Existing game cut-in absent; ultimate composition follows attack pose with astronomical observatory. Green matte removed from pickup, black effect mattes removed, SD resized to original canvases, face cropped from detail. Game assets unchanged.",
+    "group": "쿨·보이시",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1048,6 +1112,8 @@
     "status": "partial",
     "notes": "sexy_v2 수정 생성이 OpenAI Images gpt-image-2 안전 시스템에서 거절됨(safety_violations=[sexual], request ID 12e2297a-aa57-467d-b01b-c9951636b12d). 우회 재작성하지 않음. 현재 이미지는 이전 버전이며 원본 9종과 meta.json은 prev/에 보존. 상체 추가 지시 포함 신규 수정본은 생성되지 않음.",
     "requested_revision": "sexy_v2",
+    "group": "섹시",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1077,6 +1143,8 @@
     "leg_appeal": "부드러운 다리선과 편안한 교차 스텝",
     "status": "done",
     "notes": "오프숄더 카디건·리본·레이어드 스커트 리폼. 순청색 배경으로 5종 재생성 후 재키잉하여 자홍 잔색 해결, 어두운 배경 검수 완료. 원본 컷인 부재로 방패 공격 확장. OpenAI Images / gpt-image-2; blue-key characters, black-key effects. Prompt: preserve mint bob, green eyes, turtle clip, shield, pose and reformed uniform; replace magenta background and hair fringe with pure blue, no floor shadow or glow.",
+    "group": "큐티",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_blue_source.png",
@@ -1123,6 +1191,8 @@
     "leg_appeal": "아담한 성인 체형에 길고 균형 잡힌 다리와 경쾌한 굽힘 동작",
     "status": "done",
     "notes": "OpenAI Images / gpt-image-2 생성. 원본 키 이미지 보존. 생성 지시: 기존 미오의 금발 단발·호박색 눈·분홍 카디건·보라 체크 치마·종 방패를 유지하고 Flora의 셀 채색 스타일, 성인 7등신, 프릴 발목 양말을 적용. pickup은 윙크하며 손 흔들기, detail은 양발을 딛고 온화한 미소. cutin은 기존 왼쪽 인물·들어 올린 방패·오른쪽 황금빛 동심원 구도를 유지. cutin_cut은 배경을 제거하는 생성 편집이라 원본과 픽셀 단위 일치하지 않음. SD는 기존 대기/방패 돌진 포즈, 원본 캔버스 크기로 축소. 얼굴은 detail에서 추출. FX는 작은 흰색/금빛 종 문양과 외곽 상단의 6개 입자. 최초 FX의 회색 헤이즈는 검정 키 재생성 후 제거. 최초 cyan 키 제거는 Math.Clamp 미지원으로 중단; Math.Min/Max 수정 후 성공.",
+    "group": "유형 미정",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1156,6 +1226,8 @@
     "leg_appeal": "부드러운 교차 스텝과 밝은 양말의 긴 다리선",
     "status": "done",
     "notes": "스캘럽 카디건·라벤더 리본·레이어드 스커트 리폼. 9종 규격 및 알파 검수 완료. 컷인 잔색은 궤적 없는 재생성으로 해결. 원본 컷인 부재로 공격 구도 확장. OpenAI Images / gpt-image-2; opaque cyan-key characters and black-key effects. Prompt: preserve orange bob, amber eyes, leaf flower hairband and tangerine basket; gentle offering turn, natural standing, original SD poses, fruit-toss cutin without trails, modest citrus sigil and sparse sparks.",
+    "group": "청순",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_clean_source.png",
@@ -1194,6 +1266,8 @@
     "leg_appeal": "길고 매끈한 다리 선과 발끝을 뻗은 우아한 리듬",
     "status": "done",
     "notes": "OpenAI Images / gpt-image-2 생성. 긴 연금발·일자 앞머리·호박색 눈·꽃 매듭 장식·금빛 풍경 방울 유지. 교복 리폼: 꽃 자수 분홍 케이프 카디건, 피트 네이비 조끼, 라벤더 타이, 비대칭 슬릿 보라 체크 스커트. 원본 공격 포즈로 교정 배경 컷인 신규 제작. 분리본은 생성 편집으로 픽셀 불일치 가능. FX는 외곽의 최소 백금색 바람 궤적과 꽃잎. SD 원본 캔버스 크기 적용, 얼굴은 detail 추출.",
+    "group": "우아·신비",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1227,6 +1301,8 @@
     "leg_appeal": "탄탄한 맨다리와 넓고 안정적인 스텝",
     "status": "done",
     "notes": "OpenAI Images / gpt-image-2 생성. 진녹색 포니테일·크림 스크런치·녹색 눈·나이테 나무 방패 유지. 교복 리폼: 걷은 분홍 카디건 소매, 네이비 조끼, 라벤더 타이, 보라 체크 스코트, 갈색 벨트. 원본 방패 공격 기반 숲길 컷인 신규 제작. 분리본은 생성 편집으로 픽셀 불일치 가능. FX는 상단의 최소 녹색 보호 반원과 잎 빛점. SD 원본 크기 적용, 얼굴 detail 추출.",
+    "group": "활발",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1260,6 +1336,8 @@
     "leg_appeal": "길고 가는 다리와 부드러운 무릎선, 긴 교차 보폭",
     "status": "done",
     "notes": "어깨에 걸친 카디건·피트 베스트·레이어드 체크 스커트로 쿨 타입 교복 리폼. 9종 규격 및 어두운 배경 알파 검수 완료. 기존 noa_cutin.png 부재로 공격 스프라이트의 활 당기기 구도를 컷인으로 확장. OpenAI Images / gpt-image-2. Prompts: original copper-braid sunset archer identity, Flora cel style, cool adult long-legged silhouette, post-shot pickup, gentle standing, original SD poses, waist-up arrow cut-in, light orange sun sigil and sparse arrow sparks. Transparent output; pickup/detail backgrounds removed by targeted edits.",
+    "group": "쿨·보이시",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1300,6 +1378,8 @@
     "revision": "sexy_v3",
     "status": "done",
     "notes": "OpenAI Images gpt-image-2, transparent option. Final producer correction: edit prev images preserving approved round cute face, violet eye shape/highlights, blush, original adult body and bust size, bold flat cel style. Earlier mature-face drafts replaced. Short wrap skirt, lace-top plum stockings, discreet straps, lace gloves and corset belt. SD fully covered solid plum tights, height 700; simplified cardigan omits adult capelet. Detail background artifact removed once. FX retained. Cutin uses exact cutin_cut; face cropped from corrected detail. No refusals. prev untouched.",
+    "group": "섹시",
+    "updated": true,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1330,6 +1410,8 @@
     "revision": "sexy_v3",
     "status": "done",
     "notes": "OpenAI Images gpt-image-2, transparent 옵션. 최종 PD 수정: prev 이미지를 편집하여 승인된 둥근 얼굴·눈 크기와 하이라이트·블러시·원래 성인 체형과 가슴 크기 보존. 성숙한 얼굴 초안 교체. SD는 비성적 단색 차콜 타이츠, 높이 700. 기존 수정 FX 유지. cutin은 동일 cutin_cut 합성, face는 수정 detail 크롭. 컷인 눈은 prev 컷인처럼 보라색 강조가 강하며 체인/버클 세부 차이가 있음. 거절 없음. prev 변경 없음.",
+    "group": "섹시",
+    "updated": true,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1360,6 +1442,8 @@
     "leg_appeal": "포근한 양말 위로 보이는 자연스러운 무릎과 부드러운 다리 곡선",
     "status": "done",
     "notes": "OpenAI Images / gpt-image-2 생성. 풍성한 적발·붉은 눈·꽃 귀마개·긴 니트 목도리·붉은 꽃 손난로 유지. 교복 리폼: 크림 니트 커프스 분홍 롱 카디건, 네이비 조끼, 라벤더 리본, 크림 테두리 보라 체크 A라인 치마. 원본 공격 포즈 기반 눈 덮인 교정 컷인 신규 제작. 분리본은 생성 편집으로 픽셀 불일치 가능. FX는 상단의 최소 적주황 온기와 금빛 빛점. SD 원본 크기 적용, 얼굴 detail 추출.",
+    "group": "청순",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1393,6 +1477,8 @@
     "leg_appeal": "넓은 사선 스탠스와 단정한 오버니 라인",
     "status": "done",
     "notes": "OpenAI Images / gpt-image-2 생성. 교복 리폼: 팔꿈치까지 걷은 분홍 카디건, 맞춤 네이비 조끼, 느슨한 라벤더 타이, 쇼츠형 안단의 보라 체크 스코트. 원본 쌍땋기·빨간 리본·둥근 안경·연필 장식·꽃무늬 종이별 유지. 기존 컷인이 없어 공격 투척 포즈를 교실 황혼 배경으로 재구성. 컷인 분리본은 생성 편집으로 픽셀 불일치 가능. FX는 상단 사선 궤적과 외곽 별빛. SD는 원본 포즈 및 캔버스 크기, 얼굴은 detail 추출.",
+    "group": "쿨·보이시",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1426,6 +1512,8 @@
     "leg_appeal": "Compact athletic legs with rounded thighs and springy calves, one foot lifted behind.",
     "status": "done",
     "notes": "Uniform reform: rolled leaf-trim pink cardigan, navy vest, loose purple ribbon, plaid wrap skort and acorn utility belt. OpenAI Images / gpt-image-2, default controls. Prompt: preserve green bob, leaf hairpin, green eyes, acorn pouch and branch bow; playful adult forest scout in Flora cel style. Blue portrait mattes and black effect mattes removed; SD resized and face cropped from detail. Cut-in follows bow attack composition. Game assets unchanged.",
+    "group": "장난",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1454,6 +1542,8 @@
     "revision": "sexy_v4",
     "status": "done",
     "notes": "OpenAI Images / gpt-image-2, default controls. Image-edited approved prev/detail and prev/pickup with prev/face identity reference. Preserved rounded cheeks, original large green eye shape/highlights, blush, bold outlines and flat cel shading; no bust/body enlargement. New embroidered pink capelet, opaque white sleeves and collarbone-only collar, frilled plaid skirt, lavender ribbon stocking connectors and crossed-knee pickup. Cutin edited from original composition; face cropped from new detail. Fully covered SD and minimal green/pink FX retained. No refusals. Generated cutout may have small differences; prev untouched.",
+    "group": "섹시",
+    "updated": true,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1487,6 +1577,8 @@
     "leg_appeal": "건강하고 긴 다리선과 경쾌한 발끝",
     "status": "done",
     "notes": "걷은 소매·느슨한 넥타이 리폼. 픽업 치마는 노출 방지 재생성 적용. 원본 공격 기반 신규 컷인. OpenAI Images gpt-image-2.",
+    "group": "쿨·보이시",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_bg.png",
@@ -1519,6 +1611,8 @@
     "leg_appeal": "부드러운 무릎선과 간결한 전진 스텝",
     "status": "done",
     "notes": "라벤더 리본과 스캘럽 커프스로 교복 리폼. 9종 규격·어두운 배경 알파 검수 완료. OpenAI Images / gpt-image-2, transparent character layers and cyan-key detail/SD, black-key effects. Prompt: preserve champagne waves, amber eyes, feather flower clip and golden quill; gentle adult blessing step, relaxed standing, original SD poses, quill-writing cutin, light gold feather sigil and sparse sparkles.",
+    "group": "청순",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1557,6 +1651,8 @@
     "leg_appeal": "탄탄한 맨다리와 한쪽 무릎을 든 경쾌한 행진 실루엣",
     "status": "done",
     "notes": "OpenAI Images / gpt-image-2 생성. 적갈색 포니테일·흰 머리띠·붉은 눈·꽃무늬 붉은 북과 북채 유지. 교복 리폼: 허리에 묶은 분홍 카디건, 걷은 흰 셔츠 소매, 네이비 조끼, 빨간 리본, 보라 체크 스코트. 원본 북 공격 기반 축제 교정 컷인 신규 제작. 분리본은 생성 편집으로 픽셀 불일치 가능. FX는 상단의 최소 적주황 소리 반원과 빛점. SD 원본 크기 적용, 얼굴 detail 추출.",
+    "group": "활발",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1590,6 +1686,8 @@
     "leg_appeal": "부드러운 다리 곡선과 가는 발목",
     "status": "done",
     "notes": "하늘색 리본·겹 체크 치마 리폼. 원본 컷인 파일이 없어 금붕어 등불 기반 신규 연출. 컷인 분리 레이어에 미세한 재생성 차이. SD 프릴 세부 차이. OpenAI Images gpt-image-2 생성.",
+    "group": "청순",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1620,6 +1718,8 @@
     "revision": "sexy_v3",
     "status": "partial",
     "notes": "pickup은 이전 안전 거절로 원본 유지, 재시도 없음(request ID 1a6cbca2-3d81-4ebb-b419-24d93fdefc63, sexual). pickup 의상이 다른 8종과 다름. 최종 PD 수정에 따라 prev detail/cutin_cut 직접 편집으로 승인 얼굴·큰 눈과 하이라이트·둥근 윤곽·블러시·원래 체형 보존, 가슴 확대 없음. OpenAI Images gpt-image-2, transparent 옵션. SD는 비성적 단색 스타킹, 높이 700. cutin은 동일 cutin_cut 합성, face는 수정 detail 크롭. prev 변경 없음.",
+    "group": "섹시",
+    "updated": true,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1652,6 +1752,8 @@
     "status": "done",
     "uniform_reform": "white collarbone opening without cleavage, navy vest, pink wave-trim cardigan, short purple plaid wrap skirt",
     "notes": "OpenAI Images gpt-image-2; transparent character outputs. Final producer correction applied by editing prev pickup/detail/cutin_cut: preserve approved round cute face, eye shape and highlights, blush, bold lines and original adult body proportions, no bust enlargement. Earlier mature-face drafts replaced. Barefoot pickup, knee-up detail, face cropped from detail, fully covered color-only SD height 700. SD skirt retains simplified ruffles. Original blue FX retained; new moonlit courtyard composited with exact cutin_cut. No refusals. Original nine files and metadata copied to prev before edits; prev unchanged thereafter.",
+    "group": "섹시",
+    "updated": true,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1678,6 +1780,8 @@
     "leg_appeal": "부드럽고 살짝 풍성한 허벅지·가는 발목의 경쾌한 대비",
     "status": "done",
     "notes": "교복 리폼: 퍼프 소매·보라 리본·태양 커프스·스캘럽 치마. OpenAI Images gpt-image-2. SD 프릴 세부는 약간 다름.",
+    "group": "큐티",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1707,6 +1811,8 @@
     "leg_appeal": "간결한 맨다리 실루엣과 가벼운 장난스러운 스텝",
     "status": "done",
     "notes": "크롭 카디건·롤업 소매·느슨한 타이로 교복 리폼. 9종 규격과 어두운 배경 알파 검수 완료. 기존 컷인 부재로 요요 공격 구도를 확장. OpenAI Images / gpt-image-2. Prompts: preserve plum ponytail, bow, cheek star and star yo-yo; playful adult pickup, gentle standing, original SD poses, waist-up yo-yo attack, light violet star orbit and sparse particles. Transparent characters, black-key effects.",
+    "group": "장난",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1743,6 +1849,8 @@
     "leg_appeal": "자연스러운 긴 다리선과 부드러운 체중 이동",
     "status": "done",
     "notes": "롤업 소매·빨간 리본·짧은 꽃무늬 앞치마 리폼. 9종 규격 및 어두운 배경 알파 검수 완료. 원본 컷인 부재로 냄비 권하기 공격 확장. OpenAI Images / gpt-image-2; cyan-key characters, black-key effects. Prompt: preserve red ponytail, red eyes, floral bandana apron and stew pot; warm adult offering pose, gentle standing, original SD poses, pot-offering cutin, light hearth sigil and sparse embers.",
+    "group": "청순",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1780,6 +1888,8 @@
     "leg_appeal": "길고 가는 교차 다리선과 은은한 광택",
     "status": "done",
     "notes": "짧은 카디건·피트 베스트 리폼. 원본 공격 포즈 기반 신규 컷인. OpenAI Images gpt-image-2.",
+    "group": "쿨·보이시",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_bg.png",
@@ -1811,6 +1921,8 @@
     "leg_appeal": "Lean straight runner legs and narrow ankles in an extended forward stride.",
     "status": "done",
     "notes": "Uniform reform: pink cardigan over shoulders, rolled white sleeves, navy fitted vest, loosened lavender tie and purple plaid tailored shorts skort. OpenAI Images / gpt-image-2 default controls. Prompt: preserve midnight-blue bob, blue eyes, goggles and navy-white-gold harpoon pistol with rope spool; cool adult marine sharpshooter in Flora cel style. Original cut-in absent; follows original attack. Green mattes and black effect halos removed; SD resized to original canvases, face cropped from detail. Game assets unchanged.",
+    "group": "쿨·보이시",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1838,6 +1950,8 @@
     "leg_appeal": "Soft fuller thighs and sturdy rounded calves, one knee lifted in a buoyant victory step.",
     "status": "done",
     "notes": "Uniform reform: waist-tied short pink cardigan, navy vest, lavender ribbon and yellow-trim purple plaid pleated skort. OpenAI Images / gpt-image-2 default controls. Prompt: preserve orange wavy bob, sunflower pin, amber eyes and sunflower mallet; sunny adult powerhouse in Flora cel style. Original cut-in absent; follows attack. Blue mattes and black effect halos removed; SD resized to original canvases, face cropped from detail. Game assets unchanged.",
+    "group": "큐티",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1864,6 +1978,8 @@
     "leg_appeal": "부드럽고 자연스러운 다리 곡선과 살짝 굽힌 무릎의 온화한 리듬",
     "status": "done",
     "notes": "OpenAI Images / gpt-image-2 생성. 금발 웨이브 단발, 호박색 눈, 꽃과 장미색 리본, 흰색 금장 찻주전자 유지. 교복 리폼: 스캘럽 분홍 카디건, 네이비 조끼, 라벤더 리본, 크림 프릴 보라 체크 스커트. 공격 포즈 기반 찻잔 치유 컷인 신규 제작. 분리본은 생성 편집으로 픽셀 불일치 가능. FX는 상단의 최소한의 백색 찻김과 외곽 금빛 입자. SD는 원본 캔버스 크기로 조정, 얼굴은 detail 추출.",
+    "group": "청순",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1898,6 +2014,8 @@
     "revision": "sexy_v3",
     "status": "partial",
     "notes": "OpenAI Images / gpt-image-2 rejected v3 adult barefoot pickup, safety_violations=[sexual], request ID 00704af5-6d2f-404c-a953-5d431a5003eb. No rewording or retry. Adult pickup/cutin/cutin_cut and FX restored as copies of prev; detail reframed knee-up and face recropped. Barefoot design not achieved. New fully covered SD pair: lavender side ponytail, purple-cream ribbon, star music box, buttoned blouse and solid plum tights; default model controls. Prev untouched.",
+    "group": "우아·신비",
+    "updated": true,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1931,6 +2049,8 @@
     "leg_appeal": "부드러운 맨다리 곡선과 가볍게 접힌 무릎의 생동감",
     "status": "done",
     "notes": "OpenAI Images / gpt-image-2 생성. 적발 단발·붉은 눈·고추 핀·빨간 리본 고추 폭탄 바구니 유지. 교복 리폼: 빨간 소매 리본 분홍 카디건, 네이비 조끼, 라벤더 리본, 크림 프릴 보라 체크 스코트. 원본 투척 공격 기반 요리 정원 컷인 신규 제작. 분리본은 생성 편집으로 픽셀 불일치 가능. FX는 상단의 최소 적주황 불꽃과 금빛 불씨. SD 원본 크기 적용, 얼굴 detail 추출.",
+    "group": "큐티",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1963,6 +2083,8 @@
     "leg_appeal": "부드러운 허벅지 실루엣과 긴 종아리, 비대칭 교차 스텝",
     "status": "done",
     "notes": "9종 PNG 규격 확인. 승인된 상세·SD 기반. 청록 번짐과 흰 매트 재분리 후 어두운 배경에서 검수 완료. OpenAI Images / gpt-image-2. Pickup prompt: approved Yuna identity; Flora cel style; welcoming spellcasting, wink, full-body crossing step, snug black thigh-highs. Cut-in prompt: approved identity, original left-side waist-up casting composition. Effects prompt: light violet constellation sigil and six sparse stars. Rekey edit prompt: remove cyan/white matte only; preserve identity, costume, pose and violet glow; transparent output.",
+    "group": "유형 미정",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -1999,6 +2121,8 @@
     "leg_appeal": "부드러운 허벅지와 긴 종아리의 무용수 곡선",
     "status": "done",
     "notes": "OpenAI Images gpt-image-2. 원본 정체성 비교 완료. 컷인은 원본보다 전신이 더 보이는 구도이며 분리 레이어에는 생성 편집의 미세 차이가 있음.",
+    "group": "유형 미정",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
@@ -2028,6 +2152,8 @@
     "leg_appeal": "탄탄한 자연스러운 다리 선과 여유로운 교차 스텝",
     "status": "done",
     "notes": "OpenAI Images / gpt-image-2 생성. 올리브 숏헤어·녹색 눈·선인장 꽃 핀·선인장 다트총 유지. 교복 리폼: 걷은 분홍 카디건 소매, 열린 흰 칼라와 느슨한 라벤더 타이, 네이비 조끼, 보라 체크 스코트. 공격 포즈 기반 온실 컷인 신규 제작. 분리본은 생성 편집으로 픽셀 불일치 가능. detail 배경 노이즈는 단색 키 편집으로 수정. FX는 외곽의 최소 녹색 궤적과 꽃잎. SD 원본 크기로 조정, 얼굴 detail 추출.",
+    "group": "쿨·보이시",
+    "updated": false,
     "files": [
       "cutin.png",
       "cutin_cut.png",
