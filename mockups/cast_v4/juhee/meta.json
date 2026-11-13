@@ -5,11 +5,13 @@
   "element": "orange",
   "role": "탱커",
   "main_story": false,
-  "archetype": "warm / confident guardian",
-  "expression": "confident reassuring smile",
-  "pose": "protective sweeping step with pumpkin shield at side and beckoning free hand",
-  "legwear": "sheer brown thigh-high stockings with thin plain tops and brown loafers",
-  "leg_appeal": "Softly curved thighs and long tapering calves in a steady diagonal protective lunge.",
+  "archetype": "섹시 · 따뜻한 성인 수호자",
+  "expression": "confident friendly smile",
+  "pose": "crossed-knee welcoming pickup; calm standing detail; original shield-bash cutin",
+  "legwear": "sheer brown thigh-highs with ribbon clips and heeled loafers",
+  "leg_appeal": "Long adult leg line with understated brown ribbon stockings.",
+  "uniform_reform": "Adult tailored navy waistcoat, collarbone-only open shirt collar, pink cardigan tied at waist, purple plaid skirt.",
+  "revision": "sexy_v4",
   "status": "done",
-  "notes": "Uniform reform: fitted open pink cardigan, navy vest, loose lavender tie, brown belt and purple plaid wrap skirt with modest slit. OpenAI Images / gpt-image-2 default controls. Prompt: preserve copper twin braids, brown bows, maple pin, amber eyes and pumpkin shield; warm adult autumn guardian in Flora cel style. Original cut-in absent; follows original attack. Blue mattes and dark effect halos removed; SD resized to original canvases, face cropped from detail. Game assets unchanged."
+  "notes": "OpenAI Images / gpt-image-2, default controls. Image-edited prev/detail and prev/pickup, with prev/face as explicit identity reference. Preserved approved round cheeks, large amber eye shapes/highlights, blush, bold outlines and flat cel shading; no body or bust enlargement. New white-sleeve/navy-vest outfit, cardigan at waist, brown ribbon stocking connectors and crossed-knee pickup; cutin edited from original composition. Face cropped from new detail. Fully covered SD and orange FX retained. No refusals. Cutout may have small generative differences; prev untouched."
 }

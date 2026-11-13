@@ -5,11 +5,13 @@
   "element": "blue",
   "role": "지원",
   "main_story": false,
-  "archetype": "elegant",
+  "archetype": "섹시 · 맨발의 물결",
   "expression": "serene delighted smile",
   "pose": "graceful turning step while plucking water lyre",
-  "legwear": "sheer charcoal tights and brown low-heel loafers",
+  "legwear": "bare legs, black thigh band with teardrop charm, gold anklet and bare feet; SD opaque lavender tights and ballet flats",
   "leg_appeal": "Long slender legs with a straight supporting leg and lightly pointed crossing step.",
+  "revision": "sexy_v3",
   "status": "done",
-  "notes": "Uniform reform: pink capelet cardigan, navy fitted vest, narrow lavender ribbon and asymmetric purple plaid skirt with modest side slit. OpenAI Images / gpt-image-2 default controls. Prompt: preserve long periwinkle hair, violet-blue eyes, teardrop hairpin and gold water lyre; elegant adult musician in Flora cel style. Original cut-in absent; follows attack. Green mattes and dark effect halos removed; SD resized to original dimensions, cutout width normalized, face cropped from detail. Game assets unchanged."
+  "uniform_reform": "white collarbone opening without cleavage, navy vest, pink wave-trim cardigan, short purple plaid wrap skirt",
+  "notes": "OpenAI Images gpt-image-2; transparent character outputs. Final producer correction applied by editing prev pickup/detail/cutin_cut: preserve approved round cute face, eye shape and highlights, blush, bold lines and original adult body proportions, no bust enlargement. Earlier mature-face drafts replaced. Barefoot pickup, knee-up detail, face cropped from detail, fully covered color-only SD height 700. SD skirt retains simplified ruffles. Original blue FX retained; new moonlit courtyard composited with exact cutin_cut. No refusals. Original nine files and metadata copied to prev before edits; prev unchanged thereafter."
 }

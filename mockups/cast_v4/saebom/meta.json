@@ -5,11 +5,13 @@
   "element": "green",
   "role": "꽃잎 부채",
   "main_story": false,
-  "archetype": "장난 · 자신 있는 봄 공연자",
-  "expression": "장난스러운 윙크와 환한 미소",
-  "pose": "부채를 얼굴 옆에 펼치고 한 발을 들어 올린 경쾌한 춤",
-  "legwear": "얇은 밴드의 시어 블랙 사이하이와 갈색 낮은 굽 로퍼",
-  "leg_appeal": "자연스러운 허벅지 곡선과 가볍게 굽힌 다리의 경쾌한 선",
+  "archetype": "섹시 · 우아하고 장난스러운 봄 공연자",
+  "expression": "playful wink; gentle standing smile",
+  "pose": "crossed-knee hip tilt with fan and playful wink",
+  "legwear": "sheer black thigh-highs with lavender ribbon garter connectors and low heels",
+  "leg_appeal": "Long adult leg line with small ribbon accents.",
+  "uniform_reform": "Pink performer capelet, opaque open-collar blouse, fitted navy vest and short frilled purple plaid skirt.",
+  "revision": "sexy_v4",
   "status": "done",
-  "notes": "OpenAI Images / gpt-image-2 생성. 연녹색 반묶음·분홍 머리끝·녹색 눈·벚꽃 장식·꽃잎 부채 유지. 교복 리폼: 오프숄더 분홍 카디건, 흰 블라우스와 네이비 조끼, 라벤더 리본, 보라 체크 랩 스코트. 원본 공격 포즈로 벚꽃 교정 컷인 신규 제작. 분리본은 생성 편집으로 픽셀 불일치 가능. FX는 상단의 최소 녹색 봄바람과 분홍 꽃잎. SD 원본 크기 적용, 얼굴 detail 추출."
+  "notes": "OpenAI Images / gpt-image-2, default controls. Image-edited approved prev/detail and prev/pickup with prev/face identity reference. Preserved rounded cheeks, original large green eye shape/highlights, blush, bold outlines and flat cel shading; no bust/body enlargement. New embroidered pink capelet, opaque white sleeves and collarbone-only collar, frilled plaid skirt, lavender ribbon stocking connectors and crossed-knee pickup. Cutin edited from original composition; face cropped from new detail. Fully covered SD and minimal green/pink FX retained. No refusals. Generated cutout may have small differences; prev untouched."
 }

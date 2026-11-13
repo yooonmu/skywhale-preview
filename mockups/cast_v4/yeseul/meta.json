@@ -10,6 +10,7 @@
   "pose": "오르골을 내밀며 한쪽 다리를 뒤로 접은 가벼운 왈츠",
   "legwear": "시어 플럼 타이츠와 갈색 메리제인",
   "leg_appeal": "춤추는 듯 굽힌 다리와 은은한 플럼색 타이츠",
-  "status": "done",
-  "notes": "OpenAI Images / gpt-image-2 생성. 교복 리폼: 오프숄더 분홍 카디건, 네이비 조끼와 흰 블라우스, 라벤더 리본 초커, 금빛 테두리의 비대칭 보라 체크 레이어드 스커트. 원본 연보라 사이드 포니테일·큰 리본·보라 눈·별빛 오르골 유지. 컷인 부재로 원본 공격 동작을 달빛 연주실 배경으로 신규 제작. 컷인 분리본은 생성 편집으로 픽셀 불일치 가능. FX는 상단 선율과 외곽 음표. SD 원본 포즈/크기 유지, 얼굴은 detail 추출."
+  "revision": "sexy_v3",
+  "status": "partial",
+  "notes": "OpenAI Images / gpt-image-2 rejected v3 adult barefoot pickup, safety_violations=[sexual], request ID 00704af5-6d2f-404c-a953-5d431a5003eb. No rewording or retry. Adult pickup/cutin/cutin_cut and FX restored as copies of prev; detail reframed knee-up and face recropped. Barefoot design not achieved. New fully covered SD pair: lavender side ponytail, purple-cream ribbon, star music box, buttoned blouse and solid plum tights; default model controls. Prev untouched."
 }

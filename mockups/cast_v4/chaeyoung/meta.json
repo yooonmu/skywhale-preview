@@ -5,11 +5,13 @@
   "element": "orange",
   "role": "딜러",
   "main_story": false,
-  "archetype": "elegant · 아련한 축제의 소원",
-  "expression": "불꽃을 바라보는 밝고 아련한 미소",
-  "pose": "불꽃 막대를 높이 들고 치맛자락을 살짝 잡는 회전 스텝",
-  "legwear": "은은한 광택의 시어 차콜 타이츠",
-  "leg_appeal": "우아한 교차 다리선과 살짝 든 뒤꿈치",
-  "status": "done",
-  "notes": "금테 스커트·작은 슬릿·축제 리본 장식 리폼. 다리 가시성을 위해 스커트 길이 수정. 9종 규격 및 알파 검수 완료, 별빛 청록 잔색 제거. 원본 컷인 부재로 공격 구도 확장. OpenAI Images / gpt-image-2; opaque cyan-key characters and black-key effects. Prompt: preserve orange side ponytail, amber eyes, burgundy gold ribbon and sparkler bundle; elegant turning pose, gentle standing, original SD poses, extended-sparkler cutin, modest festival arcs and sparse sparks."
+  "archetype": "섹시 · 세련된 축제 패션 (미적용)",
+  "expression": "bright festival smile",
+  "pose": "sparkler flourish",
+  "legwear": "SD: opaque charcoal diamond-pattern tights; adult finals retain previous sheer tights",
+  "leg_appeal": "Adult fashion revision blocked by image service.",
+  "uniform_reform": "SD retains fully covered pink cardigan and navy vest; adult revision not applied.",
+  "revision": "sexy_v3",
+  "status": "partial",
+  "notes": "OpenAI Images / gpt-image-2 previously rejected adult pickup with safety_violations=[sexual], request ID 2d540935-8661-4896-b42a-6e9ac92a2c03. Not re-requested or reworded. Matching previous adult pickup/cutin/cutin_cut retained; detail reframed knee-up and face recropped. V2 non-sexual SD and effects retained. Adult v3 fashion not achieved; previous sheer tights remain. SD prompt: fully covered chibi festival mascot, orange ponytail, burgundy ribbon, sparklers and opaque diamond tights. Effects prompt: light orange festival arcs and sparse gold sparks. Prev untouched."
 }

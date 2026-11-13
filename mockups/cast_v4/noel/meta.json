@@ -5,11 +5,13 @@
   "element": "purple",
   "role": "보호",
   "main_story": false,
-  "archetype": "mysterious / elegant",
+  "archetype": "섹시 · 신비로운 달빛",
   "expression": "serene knowing smile with softly half-lidded eyes",
-  "pose": "protective shield lift and reassuring open hand with a graceful crossed-foot pivot",
-  "legwear": "sheer charcoal tights and brown low-heel loafers",
-  "leg_appeal": "Softly curved long legs and pointed diagonal foot line beneath a short asymmetric hem.",
+  "pose": "crossed-knee protective pivot, shield raised and gloved hand extended; knee-up standing detail",
+  "legwear": "plum lace-top thigh-high stockings with discreet garter straps and heeled Mary Janes",
+  "leg_appeal": "Long crossed legs, lace bands and tailored short wrap-skirt silhouette.",
+  "uniform_reform": "collarbone opening without cleavage, loose lavender ribbon, navy vest, pink moon capelet, corset waist belt and short purple plaid wrap skirt",
+  "revision": "sexy_v3",
   "status": "done",
-  "notes": "Uniform reform: pink moon-trimmed capelet, navy vest, lavender ribbon and short asymmetric purple plaid skirt. OpenAI Images / gpt-image-2, default controls. Prompt brief: preserve twin buns, crescent pins, sleepy violet eyes and crescent shield; mysterious elegant adult guardian in Flora-approved cel style. Corrected pickup hair length and skirt coverage. Existing game cut-in absent; composition based on attack shield thrust. Green key and black effect mattes removed; SD resized to original canvas sizes; face derived from detail. Game assets unchanged."
+  "notes": "OpenAI Images gpt-image-2, transparent option. Final producer correction: edit prev images preserving approved round cute face, violet eye shape/highlights, blush, original adult body and bust size, bold flat cel style. Earlier mature-face drafts replaced. Short wrap skirt, lace-top plum stockings, discreet straps, lace gloves and corset belt. SD fully covered solid plum tights, height 700; simplified cardigan omits adult capelet. Detail background artifact removed once. FX retained. Cutin uses exact cutin_cut; face cropped from corrected detail. No refusals. prev untouched."
 }
